@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Activity" representedClassName="TimeSlowerKit.Activity" syncable="YES">
+        <attribute name="basis" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="busyDays" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="activities" inverseEntity="Profile" syncable="YES"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DayResults" inverseName="activity" inverseEntity="DayResults" syncable="YES"/>
+        <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stats" inverseName="activity" inverseEntity="Stats" syncable="YES"/>
+        <relationship name="timing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timing" inverseName="activity" inverseEntity="Timing" syncable="YES"/>
+    </entity>
+    <entity name="DayResults" representedClassName="TimeSlowerKit.DayResults" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="factDuration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="factFinishTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="factSavedTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="factStartTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="factSuccess" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="raughDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="results" inverseEntity="Activity" syncable="YES"/>
+    </entity>
+    <entity name="Profile" representedClassName="TimeSlowerKit.Profile" syncable="YES">
+        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateOfDeath" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="1" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="profile" inverseEntity="Activity" syncable="YES"/>
+    </entity>
+    <entity name="Stats" representedClassName="TimeSlowerKit.Stats" syncable="YES">
+        <attribute name="averageSuccess" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summDays" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summHours" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summMonths" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summYears" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="stats" inverseEntity="Activity" syncable="YES"/>
+    </entity>
+    <entity name="Timing" representedClassName="TimeSlowerKit.Timing" syncable="YES">
+        <attribute name="alarmTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="finishTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="manuallyStarted" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeToSave" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="timing" inverseEntity="Activity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="-216" positionY="72" width="128" height="165"/>
+        <element name="DayResults" positionX="16" positionY="-79" width="128" height="165"/>
+        <element name="Profile" positionX="-434" positionY="162" width="128" height="150"/>
+        <element name="Stats" positionX="16" positionY="72" width="128" height="135"/>
+        <element name="Timing" positionX="16" positionY="225" width="128" height="150"/>
+    </elements>
+</model>

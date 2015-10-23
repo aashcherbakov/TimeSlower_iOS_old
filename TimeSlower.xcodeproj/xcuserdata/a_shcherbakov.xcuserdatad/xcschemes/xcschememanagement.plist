@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TimeSlowerKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -23,6 +28,21 @@
 			<true/>
 		</dict>
 		<key>F009AE741BD9C5F8007F38A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F009AE8B1BD9CBA2007F38A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F009AE941BD9CBA2007F38A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F009AED21BD9CEA4007F38A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

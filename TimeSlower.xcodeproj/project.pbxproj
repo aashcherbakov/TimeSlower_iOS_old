@@ -15,6 +15,55 @@
 		F009AE641BD9C5F8007F38A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AE621BD9C5F8007F38A9 /* LaunchScreen.storyboard */; };
 		F009AE6F1BD9C5F8007F38A9 /* TimeSlowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE6E1BD9C5F8007F38A9 /* TimeSlowerTests.swift */; };
 		F009AE7A1BD9C5F8007F38A9 /* TimeSlowerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE791BD9C5F8007F38A9 /* TimeSlowerUITests.swift */; };
+		F009AE8F1BD9CBA2007F38A9 /* TimeSlowerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
+		F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F009AEB61BD9CC86007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBE1BD9CC86007F38A9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB21BD9CC86007F38A9 /* Stats.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB31BD9CC86007F38A9 /* StatsManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB41BD9CC86007F38A9 /* Timing.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEC11BD9CC86007F38A9 /* TimingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB51BD9CC86007F38A9 /* TimingManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AECB1BD9CD49007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; settings = {ASSET_TAGS = (); }; };
+		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; settings = {ASSET_TAGS = (); }; };
+		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		F009AED61BD9CEA4007F38A9 /* TimeSlowerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */; };
+		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ASSET_TAGS = (); }; };
+		F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF01BD9CF21007F38A9 /* TimeSlowerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF41BD9CF4A007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF51BD9CF4A007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF61BD9CF4A007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF71BD9CF4A007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF81BD9CF4A007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEF91BD9CF4A007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFA1BD9CF4A007F38A9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB21BD9CC86007F38A9 /* Stats.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFB1BD9CF4A007F38A9 /* StatsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB31BD9CC86007F38A9 /* StatsManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFC1BD9CF4A007F38A9 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB41BD9CC86007F38A9 /* Timing.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFD1BD9CF4A007F38A9 /* TimingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB51BD9CC86007F38A9 /* TimingManage.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFE1BD9CF53007F38A9 /* LazyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AEFF1BD9CF53007F38A9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
+		F009AF001BD9CF57007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; settings = {ASSET_TAGS = (); }; };
+		F009AF011BD9CF57007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; settings = {ASSET_TAGS = (); }; };
+		F009AF021BD9CF5B007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +81,35 @@
 			remoteGlobalIDString = F009AE521BD9C5F8007F38A9;
 			remoteInfo = TimeSlower;
 		};
+		F009AE9F1BD9CBA2007F38A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F009AE8B1BD9CBA2007F38A9;
+			remoteInfo = TimeSlowerKit;
+		};
+		F009AED91BD9CEA4007F38A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F009AE8B1BD9CBA2007F38A9;
+			remoteInfo = TimeSlowerKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F009AEA61BD9CBA2007F38A9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F009AE531BD9C5F8007F38A9 /* TimeSlower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlower.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +126,39 @@
 		F009AE751BD9C5F8007F38A9 /* TimeSlowerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE791BD9C5F8007F38A9 /* TimeSlowerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlowerUITests.swift; sourceTree = "<group>"; };
 		F009AE7B1BD9C5F8007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimeSlowerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeSlowerKit.h; sourceTree = "<group>"; };
+		F009AE901BD9CBA2007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F009AEAA1BD9CC86007F38A9 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityManage.swift; sourceTree = "<group>"; };
+		F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityNotifications.swift; sourceTree = "<group>"; };
+		F009AEAD1BD9CC86007F38A9 /* DayResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResults.swift; sourceTree = "<group>"; };
+		F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManage.swift; sourceTree = "<group>"; };
+		F009AEAF1BD9CC86007F38A9 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageActivities.swift; sourceTree = "<group>"; };
+		F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStats.swift; sourceTree = "<group>"; };
+		F009AEB21BD9CC86007F38A9 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		F009AEB31BD9CC86007F38A9 /* StatsManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManage.swift; sourceTree = "<group>"; };
+		F009AEB41BD9CC86007F38A9 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
+		F009AEB51BD9CC86007F38A9 /* TimingManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingManage.swift; sourceTree = "<group>"; };
+		F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyCalendar.swift; sourceTree = "<group>"; };
+		F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ISOCodes.txt; sourceTree = "<group>"; };
+		F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LifeExpacity2013.txt; sourceTree = "<group>"; };
+		F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeSlower2.xcdatamodel; sourceTree = "<group>"; };
+		F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlowerKitTests.swift; sourceTree = "<group>"; };
+		F009AED71BD9CEA4007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityManageTest.swift; sourceTree = "<group>"; };
+		F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManageTest.swift; sourceTree = "<group>"; };
+		F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyCalendarTests.swift; sourceTree = "<group>"; };
+		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageActivitiesTest.swift; sourceTree = "<group>"; };
+		F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStatsTest.swift; sourceTree = "<group>"; };
+		F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManageTest.swift; sourceTree = "<group>"; };
+		F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
+		F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlowerKitTests.swift; sourceTree = "<group>"; };
+		F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingManageTest.swift; sourceTree = "<group>"; };
+		F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,15 +184,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F009AE881BD9CBA2007F38A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F009AED01BD9CEA4007F38A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		F009AE4A1BD9C5F8007F38A9 = {
 			isa = PBXGroup;
 			children = (
+				F009AE8D1BD9CBA2007F38A9 /* TimeSlowerKit */,
 				F009AE551BD9C5F8007F38A9 /* TimeSlower */,
 				F009AE6D1BD9C5F8007F38A9 /* TimeSlowerTests */,
 				F009AE781BD9C5F8007F38A9 /* TimeSlowerUITests */,
+				F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */,
 				F009AE541BD9C5F8007F38A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +220,8 @@
 				F009AE531BD9C5F8007F38A9 /* TimeSlower.app */,
 				F009AE6A1BD9C5F8007F38A9 /* TimeSlowerTests.xctest */,
 				F009AE751BD9C5F8007F38A9 /* TimeSlowerUITests.xctest */,
+				F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */,
+				F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,7 +258,71 @@
 			path = TimeSlowerUITests;
 			sourceTree = "<group>";
 		};
+		F009AE8D1BD9CBA2007F38A9 /* TimeSlowerKit */ = {
+			isa = PBXGroup;
+			children = (
+				F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */,
+				F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */,
+				F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */,
+				F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */,
+				F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */,
+				F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */,
+				F009AEC21BD9CC9A007F38A9 /* Model */,
+				F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */,
+				F009AE901BD9CBA2007F38A9 /* Info.plist */,
+			);
+			path = TimeSlowerKit;
+			sourceTree = "<group>";
+		};
+		F009AEC21BD9CC9A007F38A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F009AEAA1BD9CC86007F38A9 /* Activity.swift */,
+				F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */,
+				F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */,
+				F009AEAD1BD9CC86007F38A9 /* DayResults.swift */,
+				F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */,
+				F009AEAF1BD9CC86007F38A9 /* Profile.swift */,
+				F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */,
+				F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */,
+				F009AEB21BD9CC86007F38A9 /* Stats.swift */,
+				F009AEB31BD9CC86007F38A9 /* StatsManage.swift */,
+				F009AEB41BD9CC86007F38A9 /* Timing.swift */,
+				F009AEB51BD9CC86007F38A9 /* TimingManage.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */,
+				F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */,
+				F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */,
+				F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */,
+				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
+				F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */,
+				F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */,
+				F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */,
+				F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */,
+				F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */,
+				F009AED71BD9CEA4007F38A9 /* Info.plist */,
+			);
+			path = TimeSlowerKitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F009AE891BD9CBA2007F38A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AE8F1BD9CBA2007F38A9 /* TimeSlowerKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		F009AE521BD9C5F8007F38A9 /* TimeSlower */ = {
@@ -138,10 +332,12 @@
 				F009AE4F1BD9C5F8007F38A9 /* Sources */,
 				F009AE501BD9C5F8007F38A9 /* Frameworks */,
 				F009AE511BD9C5F8007F38A9 /* Resources */,
+				F009AEA61BD9CBA2007F38A9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F009AEA01BD9CBA2007F38A9 /* PBXTargetDependency */,
 			);
 			name = TimeSlower;
 			productName = TimeSlower;
@@ -184,12 +380,50 @@
 			productReference = F009AE751BD9C5F8007F38A9 /* TimeSlowerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		F009AE8B1BD9CBA2007F38A9 /* TimeSlowerKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F009AEA31BD9CBA2007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKit" */;
+			buildPhases = (
+				F009AE871BD9CBA2007F38A9 /* Sources */,
+				F009AE881BD9CBA2007F38A9 /* Frameworks */,
+				F009AE891BD9CBA2007F38A9 /* Headers */,
+				F009AE8A1BD9CBA2007F38A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeSlowerKit;
+			productName = TimeSlowerKit;
+			productReference = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F009AED21BD9CEA4007F38A9 /* TimeSlowerKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F009AEDB1BD9CEA4007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKitTests" */;
+			buildPhases = (
+				F009AECF1BD9CEA4007F38A9 /* Sources */,
+				F009AED01BD9CEA4007F38A9 /* Frameworks */,
+				F009AED11BD9CEA4007F38A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F009AEDA1BD9CEA4007F38A9 /* PBXTargetDependency */,
+			);
+			name = TimeSlowerKitTests;
+			productName = TimeSlowerKitTests;
+			productReference = F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		F009AE4B1BD9C5F8007F38A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Oleksandr Shcherbakov";
 				TargetAttributes = {
@@ -203,6 +437,12 @@
 					F009AE741BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
 						TestTargetID = F009AE521BD9C5F8007F38A9;
+					};
+					F009AE8B1BD9CBA2007F38A9 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					F009AED21BD9CEA4007F38A9 = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
 				};
 			};
@@ -222,6 +462,8 @@
 				F009AE521BD9C5F8007F38A9 /* TimeSlower */,
 				F009AE691BD9C5F8007F38A9 /* TimeSlowerTests */,
 				F009AE741BD9C5F8007F38A9 /* TimeSlowerUITests */,
+				F009AE8B1BD9CBA2007F38A9 /* TimeSlowerKit */,
+				F009AED21BD9CEA4007F38A9 /* TimeSlowerKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +490,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F009AE8A1BD9CBA2007F38A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AECB1BD9CD49007F38A9 /* ISOCodes.txt in Resources */,
+				F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F009AED11BD9CEA4007F38A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AF001BD9CF57007F38A9 /* ISOCodes.txt in Resources */,
+				F009AF011BD9CF57007F38A9 /* LifeExpacity2013.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +540,61 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F009AE871BD9CBA2007F38A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AEB61BD9CC86007F38A9 /* Activity.swift in Sources */,
+				F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */,
+				F009AEBE1BD9CC86007F38A9 /* Stats.swift in Sources */,
+				F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */,
+				F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */,
+				F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */,
+				F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */,
+				F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */,
+				F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */,
+				F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */,
+				F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */,
+				F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */,
+				F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */,
+				F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */,
+				F009AEC11BD9CC86007F38A9 /* TimingManage.swift in Sources */,
+				F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F009AECF1BD9CEA4007F38A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F009AED61BD9CEA4007F38A9 /* TimeSlowerKitTests.swift in Sources */,
+				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
+				F009AEF61BD9CF4A007F38A9 /* DayResultsManage.swift in Sources */,
+				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
+				F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */,
+				F009AEF81BD9CF4A007F38A9 /* ProfileManageActivities.swift in Sources */,
+				F009AEFA1BD9CF4A007F38A9 /* Stats.swift in Sources */,
+				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
+				F009AEFE1BD9CF53007F38A9 /* LazyCalendar.swift in Sources */,
+				F009AEF41BD9CF4A007F38A9 /* ActivityNotifications.swift in Sources */,
+				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
+				F009AF021BD9CF5B007F38A9 /* TimeSlower2.xcdatamodeld in Sources */,
+				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
+				F009AEF71BD9CF4A007F38A9 /* Profile.swift in Sources */,
+				F009AEFB1BD9CF4A007F38A9 /* StatsManage.swift in Sources */,
+				F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */,
+				F009AEFF1BD9CF53007F38A9 /* CoreDataStack.swift in Sources */,
+				F009AEF91BD9CF4A007F38A9 /* ProfileManageStats.swift in Sources */,
+				F009AEF01BD9CF21007F38A9 /* TimeSlowerKitTests.swift in Sources */,
+				F009AEFC1BD9CF4A007F38A9 /* Timing.swift in Sources */,
+				F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */,
+				F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */,
+				F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */,
+				F009AEFD1BD9CF4A007F38A9 /* TimingManage.swift in Sources */,
+				F009AEF51BD9CF4A007F38A9 /* DayResults.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -292,6 +607,16 @@
 			isa = PBXTargetDependency;
 			target = F009AE521BD9C5F8007F38A9 /* TimeSlower */;
 			targetProxy = F009AE761BD9C5F8007F38A9 /* PBXContainerItemProxy */;
+		};
+		F009AEA01BD9CBA2007F38A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F009AE8B1BD9CBA2007F38A9 /* TimeSlowerKit */;
+			targetProxy = F009AE9F1BD9CBA2007F38A9 /* PBXContainerItemProxy */;
+		};
+		F009AEDA1BD9CEA4007F38A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F009AE8B1BD9CBA2007F38A9 /* TimeSlowerKit */;
+			targetProxy = F009AED91BD9CEA4007F38A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -402,6 +727,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
@@ -413,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
@@ -468,6 +795,67 @@
 			};
 			name = Release;
 		};
+		F009AEA41BD9CBA2007F38A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TimeSlowerKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F009AEA51BD9CBA2007F38A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TimeSlowerKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F009AEDC1BD9CEA4007F38A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TimeSlowerKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F009AEDD1BD9CEA4007F38A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TimeSlowerKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -504,6 +892,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
+		F009AEA31BD9CBA2007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F009AEA41BD9CBA2007F38A9 /* Debug */,
+				F009AEA51BD9CBA2007F38A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F009AEDB1BD9CEA4007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F009AEDC1BD9CEA4007F38A9 /* Debug */,
+				F009AEDD1BD9CEA4007F38A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -514,6 +918,16 @@
 			);
 			currentVersion = F009AE5E1BD9C5F8007F38A9 /* TimeSlower.xcdatamodel */;
 			path = TimeSlower.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */,
+			);
+			currentVersion = F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */;
+			path = TimeSlower2.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
