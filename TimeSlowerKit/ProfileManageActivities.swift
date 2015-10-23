@@ -9,26 +9,12 @@
 import Foundation
 import CoreData
 
+
 extension Profile {
-    
-    enum DayOfWeek: Int {
-        case Sunday = 1
-        case Monday
-        case Tuesday
-        case Wednesdey
-        case Thursday
-        case Friday
-        case Saturday
-        
-        static func dayName(givenNumber: Int) -> DayOfWeek {
-            let dayOfWeek = (givenNumber + 7 - NSCalendar.currentCalendar().firstWeekday) % 7 + 1
-            return DayOfWeek(rawValue: dayOfWeek)!
-        }
-    }
     
     //MARK: - Activities in general
     
-    func allActivities() -> [Activity] {
+    public func allActivities() -> [Activity] {
         var activitiesArray = [Activity]()
         for activity in activities {
             if let checkedActivity = activity as? Activity {
@@ -38,27 +24,20 @@ extension Profile {
         return activitiesArray
     }
     
-    func activitiesForToday() -> [Activity] {
-        let todaysDayNumber = NSCalendar.currentCalendar().component(.Weekday, fromDate: NSDate())
-        let dayOfWeek = DayOfWeek.dayName(todaysDayNumber)
-        return activitiesForWeekday(dayOfWeek)
+    public func activityForName(passedName: String) -> Activity? {
+        let matchingActivities = allActivities().filter({ $0.name == passedName })
+        if matchingActivities.count > 0 { return matchingActivities[0] }
+        return nil
     }
     
-    func doesActivityHappenToday(activity: Activity) -> Bool {
-        let todaysDayNumber = NSCalendar.currentCalendar().component(.Weekday, fromDate: NSDate())
-        let today = DayOfWeek.dayName(todaysDayNumber)
-        
-        switch activity.activityBasis() {
-        case .Daily:
-            return true
-        case .Workdays:
-            return (today != .Sunday && today != .Saturday) ? true : false
-        case .Weekends:
-            return today == .Sunday || today == .Saturday ? true : false
-        }
+    public func activitiesForDate(date: NSDate) -> [Activity] {
+        let dayOfWeek = LazyCalendar.DayName(rawValue: LazyCalendar.correctWeekdayFromDate(date))
+        return sortActivitiesByTime(activitiesForWeekday(dayOfWeek!))
     }
     
-    func activitiesForWeekday(weekday: DayOfWeek) -> [Activity] {
+    
+    
+    func activitiesForWeekday(weekday: LazyCalendar.DayName) -> [Activity] {
         var resultArray = [Activity]()
         if weekday == .Saturday || weekday == .Sunday {
             for activity in allActivities() {
@@ -76,47 +55,47 @@ extension Profile {
         return resultArray
     }
     
-    func isTimeIntervalFree(startTime start: NSDate, finish: NSDate, basis: ActivityBasis) -> (Activity?) {
+    
+    public func isTimeIntervalFree(startTime start: NSDate, finish: NSDate, basis: ActivityBasis) -> Activity? {
+        var preventing: Activity?
         for activity in allActivities() {
-            if activity.activityBasis() == basis || activity.activityBasis() == .Daily {
-                // finishTime of tested activity to given startTime
-                if activity.updatedFinishTime().earlierDate(start) != activity.updatedFinishTime() {
-                    // startTime of tested activity to given finishTime
-                    if activity.updatedStartTime().earlierDate(finish) != finish {
-                        return activity
-                    }
+            if basis == .Daily {
+                preventing = checkTimeIntervalForActivity(activity, testedStart: start, testedFinish: finish)
+            } else {
+                if activity.activityBasis() == basis || activity.activityBasis() == .Daily {
+                    preventing = checkTimeIntervalForActivity(activity, testedStart: start, testedFinish: finish)
                 }
             }
         }
-        return nil
+        return preventing
     }
     
-    func activityHasUniqueTimeInterval(activityToTest: Activity) -> Activity? {
-        // delete tested activity
-        var activitiesToTest: Set<Activity> = NSSet(array: activitiesForToday()) as! Set<Activity>
-        activitiesToTest.remove(activityToTest)
-        for activity in activitiesToTest {
-            if let preventingActivity = isTimeIntervalFree(startTime: activity.updatedStartTime(),
-                finish: activity.updatedFinishTime(),
-                basis: activity.activityBasis()) {
-                    return preventingActivity
+    
+    /// Should not be called directly (public for testing reasons)
+    public func checkTimeIntervalForActivity(activity: Activity, testedStart: NSDate, testedFinish: NSDate) -> Activity? {
+        let start = Timing.updateTimeForToday(testedStart)
+        let finish = Timing.updateTimeForToday(testedFinish)
+        
+        if start < (activity.updatedFinishTime()) {
+            if activity.updatedStartTime() < (finish) {
+                return activity
             }
         }
         return nil
     }
     
-    func sortActivitiesByTime(arrayOfActivities: [Activity]) -> [Activity] {
+    public func sortActivitiesByTime(arrayOfActivities: [Activity]) -> [Activity] {
         let arrayToSort = arrayOfActivities
-        let sortedArray: [Activity] = sorted(arrayToSort, sortByNextActionTime)
+        let sortedArray: [Activity] = arrayToSort.sort(sortByNextActionTime)
         return sortedArray
     }
     
-    private func sortByNextActionTime(activity1: Activity, activity2: Activity) -> Bool {
-        return activity1.timing.nextActionTime() < activity2.timing.nextActionTime()
+    public func sortByNextActionTime(activity1: Activity, activity2: Activity) -> Bool {
+        return activity1.timing.nextActionTime() < (activity2.timing.nextActionTime())
     }
     
-    func findCurrentActivity() -> Activity {
-        for activity in activitiesForToday() {
+    public func findCurrentActivity() -> Activity? {
+        for activity in activitiesForDate(NSDate()) {
             if activity.isGoingNow() {
                 return activity
             }
@@ -124,37 +103,45 @@ extension Profile {
         return nextClosestActivity()
     }
     
-    func nextClosestActivity() -> Activity {
-        let currentDate = NSDate()
-        var closestStartTime = currentDate.dateByAddingTimeInterval(60*60*24)
+    /// Searches for closest activity today and if there are none, gives first activity of tomorrow
+    public func nextClosestActivity() -> Activity? {
+        if let nextActivityToday = findNextActivityForToday() {
+            return nextActivityToday
+        } else {
+            return findNextActivityInTomorrowList()
+        }
+    }
+    
+    public func findNextActivityForToday() -> Activity? {
+        var closestStartTime = NSDate().dateByAddingTimeInterval(60*60*24)
         var nextActivity: Activity!
         
-        for activity in activitiesForToday() {
-            var startTimeToCheck = activity.updatedStartTime()
-            
-            // maybe all activities are past due so the next one will be on next day only
-            if activity.updatedFinishTime() < currentDate || activity.isDoneForToday() {
-                startTimeToCheck = startTimeToCheck.dateByAddingTimeInterval(60*60*24)
-            }
-
-            if startTimeToCheck < closestStartTime {
-                closestStartTime = startTimeToCheck
-                nextActivity = activity
+        for activity in activitiesForDate(NSDate()) {
+            if !activity.isDoneForToday() && !activity.isPassedDueForToday() {
+                if activity.updatedStartTime() < (closestStartTime) {
+                    closestStartTime = activity.updatedStartTime()
+                    nextActivity = activity
+                }
             }
         }
         return nextActivity
     }
     
+    public func findNextActivityInTomorrowList() -> Activity? {
+        let tomorrowActivities = activitiesForDate(NSDate().dateByAddingTimeInterval(60*60*24))
+        return (tomorrowActivities.count > 0) ? sortActivitiesByTime(tomorrowActivities).first! : nil
+    }
+    
     //MARK: - Goals
     
-    func hasGoals() -> Bool {
+    public func hasGoals() -> Bool {
         for activity in allActivities() {
             if !activity.isRoutine() { return true }
         }
         return false
     }
     
-    func goalsForToday() -> [Activity] {
+    public func goalsForToday() -> [Activity] {
         var goals = [Activity]()
         for activity in allActivities() {
             if !activity.isRoutine() { goals.append(activity) }
@@ -162,9 +149,6 @@ extension Profile {
         return goals
     }
     
-    
-    //MARK: - Routines
-
 }
 
 

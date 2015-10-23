@@ -11,19 +11,20 @@ import CoreData
 
 extension Timing {
     
-    class func newTimingForActivity(activity givenActivity: Activity) -> Timing {
+    public class func newTimingForActivity(activity givenActivity: Activity) -> Timing {
         let entity = NSEntityDescription.entityForName("Timing", inManagedObjectContext: givenActivity.managedObjectContext!)
         let timing = Timing(entity: entity!, insertIntoManagedObjectContext: givenActivity.managedObjectContext)
         timing.activity = givenActivity
         
         var error: NSError?
-        if !givenActivity.managedObjectContext!.save(&error) { print("Could not save: \(error)") }
-        print("New timing created: \(timing)")
-
+        do {
+            try givenActivity.managedObjectContext!.save()
+        } catch let error1 as NSError { error = error1; print("Could not save: \(error)") }
+        
         return timing
     }
     
-    func updateDuration() {
+    public func updateDuration() {
         var totalDuration = finishTime.timeIntervalSinceDate(startTime) / 60.0
         if totalDuration < 0 {
             totalDuration = totalDuration * -1
@@ -31,92 +32,133 @@ extension Timing {
         duration = NSNumber(double: totalDuration)
     }
     
-    func updateAlarmTime() {
+    public func updateAlarmTime() {
         alarmTime = updatedAlarmTime()
+    }
+    
+    public func isPassedDueForToday() -> Bool {
+        let nowDate = NSDate(), finishTime = updatedFinishTime()
+        let earlierDate = nowDate.earlierDate(finishTime)
+        return (earlierDate == finishTime) ? true : false
+    }
+    
+    public func isGoingNow() -> Bool {
+        let startTime = updatedStartTime(), finishTime = updatedFinishTime()
+        if finishTime < NSDate() {
+            return false
+        } else if isDoneForToday() {
+            return false
+        }
+        
+        
+        if startTime == startTime.earlierDate(NSDate()) && finishTime == finishTime.laterDate(NSDate()) {
+            return true
+        }
+        return false
+    }
+    
+    public func isDoneForToday() -> Bool {
+        if let _ = DayResults.fetchResultWithDate(NSDate(), forActivity: self.activity) {
+            return true
+        }
+        return false
     }
     
     
     //MARK: - Timing of activity
     
-    func updatedStartTime() -> NSDate {
-        return (manuallyStarted != nil) ? manuallyStarted! : updateTimeForToday(startTime)!
+    public func updatedStartTime() -> NSDate {
+        return (manuallyStarted != nil) ? manuallyStarted! : Timing.updateTimeForToday(startTime)
     }
     
-    func updatedFinishTime() -> NSDate {
+    public func updatedFinishTime() -> NSDate {
         var newTime: NSDate?
         if let userStarted = manuallyStarted {
             newTime = NSDate(timeInterval: duration.doubleValue * 60, sinceDate: userStarted)
         } else {
-            newTime = updateTimeForToday(finishTime)
+            newTime = Timing.updateTimeForToday(finishTime)
+            if finishTimeIsNextDay() {
+                newTime = newTime?.dateByAddingTimeInterval(60*60*24)
+            }
         }
         return newTime!
     }
     
+    public func finishTimeIsNextDay() -> Bool {
+        
+        let calendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone.localTimeZone()
+        let startTimeDayComponent = calendar.components(.Day, fromDate: startTime)
+        let dateAfterAddingActivityDuration = startTime.dateByAddingTimeInterval(duration.doubleValue * 60)
+        let finishTimeDayComponent = calendar.components(.Day, fromDate: dateAfterAddingActivityDuration)
+        return (startTimeDayComponent.day == finishTimeDayComponent.day) ? false : true
+    }
+    
+    
     // Based on assumption that alarm time for routine is only one - for saving time
-    func updatedAlarmTime() -> NSDate {
+    public func updatedAlarmTime() -> NSDate {
         let timeIntervalForRoutineAlarm = (duration.doubleValue - timeToSave.doubleValue) * 60
-        let alarmForManuallyStarted = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: manuallyStarted!)
-        let alarmForRegulerRoutine = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: startTime)
-        
-        let alarmForRoutine = (manuallyStarted != nil) ? alarmForManuallyStarted : alarmForRegulerRoutine
-        return (activity.isRoutine()) ? alarmForRoutine : updatedStartTime()
+        let alarmForRoutine = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: manuallyStarted!)
+        return (activity.isRoutine()) ? alarmForRoutine : updatedFinishTime()
     }
     
-    func updateTimeForToday(oldTime: NSDate?) -> NSDate? {
-        var updatedDate: NSDate?
-        if let timeToUpdate = oldTime {
-            let unitFlags: NSCalendarUnit = .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitYear
-            let oldDate = NSCalendar.currentCalendar().components(unitFlags, fromDate: timeToUpdate)
-            let nowDate = NSCalendar.currentCalendar().components(unitFlags, fromDate: NSDate())
-            
-            var componentsToAdd = NSDateComponents()
-            componentsToAdd.setValue(nowDate.month - oldDate.month, forComponent: .CalendarUnitMonth)
-            componentsToAdd.setValue(nowDate.day - oldDate.day, forComponent: .CalendarUnitDay)
-            componentsToAdd.setValue(nowDate.year - oldDate.year, forComponent: .CalendarUnitYear)
-            
-            updatedDate = NSCalendar.currentCalendar().dateByAddingComponents(componentsToAdd, toDate: timeToUpdate, options: nil)
-            
-        } else { print("Error: updateTimeForToday: nil insted of NSDate") }
+    public class func updateTimeForToday(oldTime: NSDate) -> NSDate {
+        let oldDateComponents = NSCalendar.currentCalendar().components([.Hour, .Minute], fromDate: oldTime)
+        let newDateComponents = NSCalendar.currentCalendar().components([.Month, .Day, .Year], fromDate: NSDate())
+        let finalComponents = NSDateComponents()
+        finalComponents.year = newDateComponents.year
+        finalComponents.month = newDateComponents.month
+        finalComponents.day = newDateComponents.day
+        finalComponents.hour = oldDateComponents.hour
+        finalComponents.minute = oldDateComponents.minute
         
-        return updatedDate
+        let newDate = NSCalendar.currentCalendar().dateFromComponents(finalComponents)!
+        return newDate
     }
     
-    func nextActionTime() -> NSDate {
-        var nextActionTime: NSDate!
+    public func nextActionTime() -> NSDate {
         if activity.isDoneForToday() || activity.isPassedDueForToday() {
-            nextActionTime = NSDate(timeInterval: 60*60*24, sinceDate: updatedStartTime())
+            return nextActionDate()
         } else {
-            let startTime = updatedStartTime()
-            nextActionTime = (startTime.earlierDate(NSDate()) == startTime) ? updatedFinishTime() : updatedStartTime()
-        }
-        return nextActionTime!
-    }
-    
-    func timeIntervalTillRegularEndOfActivity() -> NSTimeInterval? {
-        if let regularFinishTime = updateTimeForToday(finishTime) {
-            return regularFinishTime.timeIntervalSinceNow
-        }
-        return nil
-    }
-    
-    func checkIfManuallyStartedToday() -> Bool {
-        let todayDay = NSCalendar.currentCalendar().component(.CalendarUnitDay, fromDate: NSDate())
-        let manuallyDay = NSCalendar.currentCalendar().component(.CalendarUnitDay, fromDate: manuallyStarted!)
-
-        if todayDay != manuallyDay {
-            forceFinishManuallyStartedActivity()
-        }
-        return true
-    }
-    
-    func forceFinishManuallyStartedActivity() {        
-        if manuallyStarted != nil {
-            manuallyStarted = nil
+            return updatedStartTime() < (NSDate()) ? updatedFinishTime() : updatedStartTime()
         }
     }
     
+    public func nextActionDate() -> NSDate {
+        switch activity.activityBasis() {
+        case .Daily: return nextDayFromStartTime()
+        case .Weekends: return nextWeekendDayFromDate(NSDate())
+        case .Workdays: return nextWorkdayFromDate(NSDate())
+        }
+    }
+    
+    public func nextWeekendDayFromDate(date: NSDate) -> NSDate {
+        let dayName = LazyCalendar.dayNameForDate(date)
+        if dayName == .Saturday {
+            return nextDayFromStartTime()
+        } else {
+            return LazyCalendar.nextDayWithName(.Saturday, fromDate: date)
+        }
+    }
+    
+    public func nextWorkdayFromDate(date: NSDate) -> NSDate {
+        let dayName = LazyCalendar.dayNameForDate(date)
+        if dayName == .Friday || dayName == .Saturday {
+            return LazyCalendar.nextDayWithName(.Monday, fromDate: date)
+        } else {
+            return nextDayFromStartTime()
+        }
+    }
     
     
+    public func timeIntervalTillRegularEndOfActivity() -> NSTimeInterval {
+        return Timing.updateTimeForToday(finishTime).timeIntervalSinceNow
+    }
+    
+    
+    func nextDayFromStartTime() -> NSDate {
+        return NSDate(timeInterval: 60*60*24, sinceDate: updatedStartTime())
+    }
     
     
     

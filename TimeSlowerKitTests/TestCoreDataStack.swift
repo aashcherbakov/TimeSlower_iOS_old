@@ -67,10 +67,10 @@ public class TestCoreDataStack: CoreDataStack {
     /// - Time to save: 10 min
     /// - Start time: 10:15 AM
     /// - Finish time: 10:45 AM
-    public func fakeActivityWithProfile(profile: Profile, type: Activity.ActivityType, basis: Activity.ActivityBasis) -> Activity {
+    public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: ActivityBasis) -> Activity {
         let fakeActivity = Activity.newActivityForProfile(profile, ofType: type)
         fakeActivity.basis = Activity.basisWithEnum(basis)
-        fakeActivity.busyDays = Activity.defaultBusyDaysForBasis(Activity.ActivityBasis(rawValue: fakeActivity.basis.integerValue)!)
+        fakeActivity.busyDays = Activity.defaultBusyDaysForBasis(ActivityBasis(rawValue: fakeActivity.basis.integerValue)!)
         fakeActivity.name = "Morning shower"
         fakeActivity.timing = fakeTimingForActivity(fakeActivity)
         return fakeActivity

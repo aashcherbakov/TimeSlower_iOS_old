@@ -68,7 +68,7 @@ class ActivityManageTest: XCTestCase {
         XCTAssertNotNil(testActivity, "Activity should not be nil")
         XCTAssertNotNil(testActivityStats, "Timing should not be nil")
         XCTAssertNotNil(testActivityTiming, "Stats should not be nil")
-        XCTAssertEqual(testActivity.activityType(), Activity.ActivityType.Routine, "Activity type should be routine")
+        XCTAssertEqual(testActivity.activityType(), ActivityType.Routine, "Activity type should be routine")
         XCTAssertEqual(testActivity.profile, testProfile, "Profiles not the same")
         XCTAssertEqual(testActivity.name, "Morning shower", "Name should be Morning shower")
         XCTAssertGreaterThan(fakeFetchRequest().count, 0, "Fetch request failed")
@@ -107,12 +107,12 @@ class ActivityManageTest: XCTestCase {
     
     func testSetTypeWithEnum() {
         testActivity.basis = Activity.basisWithEnum(.Weekends)
-        XCTAssertEqual(testActivity.basis.integerValue, Activity.ActivityBasis.Weekends.rawValue, "Basis should be Weekends")
+        XCTAssertEqual(testActivity.basis.integerValue, ActivityBasis.Weekends.rawValue, "Basis should be Weekends")
     }
     
     func testSetBasisWithEnum() {
         testActivity.type = Activity.typeWithEnum(.Goal)
-        XCTAssertEqual(testActivity.type.integerValue, Activity.ActivityType.Goal.rawValue, "Basis should be Weekends")
+        XCTAssertEqual(testActivity.type.integerValue, ActivityType.Goal.rawValue, "Basis should be Weekends")
     }
     
     func testActivityBasisDescription() {

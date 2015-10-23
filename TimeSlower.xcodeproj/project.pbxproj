@@ -35,7 +35,6 @@
 		F009AECB1BD9CD49007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; settings = {ASSET_TAGS = (); }; };
 		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; settings = {ASSET_TAGS = (); }; };
 		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		F009AED61BD9CEA4007F38A9 /* TimeSlowerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */; };
 		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ASSET_TAGS = (); }; };
 		F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
@@ -44,7 +43,6 @@
 		F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF01BD9CF21007F38A9 /* TimeSlowerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; settings = {ASSET_TAGS = (); }; };
 		F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; settings = {ASSET_TAGS = (); }; };
@@ -147,7 +145,6 @@
 		F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LifeExpacity2013.txt; sourceTree = "<group>"; };
 		F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeSlower2.xcdatamodel; sourceTree = "<group>"; };
 		F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlowerKitTests.swift; sourceTree = "<group>"; };
 		F009AED71BD9CEA4007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityManageTest.swift; sourceTree = "<group>"; };
 		F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManageTest.swift; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 		F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStatsTest.swift; sourceTree = "<group>"; };
 		F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManageTest.swift; sourceTree = "<group>"; };
 		F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
-		F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlowerKitTests.swift; sourceTree = "<group>"; };
 		F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingManageTest.swift; sourceTree = "<group>"; };
 		F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -303,9 +299,7 @@
 				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
 				F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */,
 				F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */,
-				F009AEE81BD9CF21007F38A9 /* TimeSlowerKitTests.swift */,
 				F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */,
-				F009AED51BD9CEA4007F38A9 /* TimeSlowerKitTests.swift */,
 				F009AED71BD9CEA4007F38A9 /* Info.plist */,
 			);
 			path = TimeSlowerKitTests;
@@ -567,7 +561,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F009AED61BD9CEA4007F38A9 /* TimeSlowerKitTests.swift in Sources */,
 				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
 				F009AEF61BD9CF4A007F38A9 /* DayResultsManage.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
@@ -585,7 +578,6 @@
 				F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */,
 				F009AEFF1BD9CF53007F38A9 /* CoreDataStack.swift in Sources */,
 				F009AEF91BD9CF4A007F38A9 /* ProfileManageStats.swift in Sources */,
-				F009AEF01BD9CF21007F38A9 /* TimeSlowerKitTests.swift in Sources */,
 				F009AEFC1BD9CF4A007F38A9 /* Timing.swift in Sources */,
 				F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */,
 				F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */,

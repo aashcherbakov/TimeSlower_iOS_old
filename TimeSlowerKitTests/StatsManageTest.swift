@@ -9,6 +9,7 @@
 import UIKit
 import XCTest
 import CoreData
+import TimeSlowerKit
 
 class StatsManageTest: XCTestCase {
 

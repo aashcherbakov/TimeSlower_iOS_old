@@ -9,15 +9,33 @@
 import Foundation
 import CoreData
 
+
+
+
+
 extension Profile {
     
-    enum Gender: Int {
+    public enum Gender: Int {
         case Male = 0
         case Female = 1
     }
     
-    // MARK: - Creation
-    class func userProfileInManagedContext(context: NSManagedObjectContext!) -> Profile {
+    public struct LifeTime {
+        public var years: Double
+        public var months: Double
+        public var days: Double
+        public var hours: Double
+    }
+    
+    public struct DailyStats {
+        public var factSaved: Double
+        public var factSpent: Double
+        public var plannedToSave: Double
+        public var plannedToSpend: Double
+    }
+    
+    // MARK: - Creation and fetching
+    public class func userProfileInManagedContext(context: NSManagedObjectContext!) -> Profile {
         
         let entity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: context)
         let profile = Profile(entity: entity!, insertIntoManagedObjectContext: context)
@@ -25,82 +43,198 @@ extension Profile {
         profile.country = defaultCountry()!
         profile.gender = 0
         profile.dateOfDeath = profile.dateOfApproximateLifeEnd()
-    
+        
         profile.saveChangesToCoreData()
         
         return profile
     }
     
-    func saveChangesToCoreData() {
-        var error: NSError?
-        if !managedObjectContext!.save(&error) { print("Could not save: \(error)") }
+    /// Don't use in XCTest !
+    public class func fetchProfile() -> Profile? {
+        return CoreDataStack.sharedInstance.fetchProfile()
     }
     
-    func userAge() -> Double {
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitYear,
-            fromDate: birthday, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+    public func saveChangesToCoreData() {
+        var error: NSError?
+        do {
+            try managedObjectContext!.save()
+        } catch let error1 as NSError { error = error1; print("Profile error: could not save: \(error)") }
+    }
+    
+    //MARK: - User Properties
+    
+    public func userAge() -> Double {
+        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Year,
+            fromDate: birthday, toDate: NSDate(), options: NSCalendarOptions())
         return Double(components.year)
     }
     
-    func userGender() -> Gender {
+    public func userGender() -> Gender {
         return Gender(rawValue: gender.integerValue)!
     }
     
-    func userGenderString() -> String {
+    public func userGenderString() -> String {
         return (gender.integerValue == 0) ? "Male" : "Female"
     }
     
-    func genderWithEnum(gender: Gender) -> NSNumber {
+    public class func genderWithEnum(gender: Gender) -> NSNumber {
         return NSNumber(integer: gender.rawValue)
     }
     
-    func yearsLeftForProfile() -> Double {
+    
+    //MARK: - Life expacity stats
+    
+    public func yearsLeftForProfile() -> Double {
+        return maxYearsForProfile() - userAge()
+    }
+    
+    public func maxYearsForProfile() -> Double {
         let lifeInContries = Profile.lifeExpacityDictionary()
-        var keyForTopDictionary = country.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
-        var keyForInnerDictionary = userGenderString()
-        var maxYears = lifeInContries[keyForTopDictionary]![keyForInnerDictionary]!
-        return (maxYears as NSString).doubleValue - userAge()
+        let keyForTopDictionary = country.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil)
+        let keyForInnerDictionary = userGenderString()
+        return (lifeInContries[keyForTopDictionary]![keyForInnerDictionary]! as NSString).doubleValue
     }
     
-    func dateOfApproximateLifeEnd() -> NSDate {
+    public func dateOfApproximateLifeEnd() -> NSDate {
         let components = NSDateComponents()
-        components.setValue(Int(yearsLeftForProfile()), forComponent: .CalendarUnitYear)
-        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: nil)!
+        components.setValue(Int(maxYearsForProfile()), forComponent: .Year)
+        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: birthday, options: [])!
     }
     
-    func totalTimeSaved() -> Int {
-        var totalSaved: Int = 0
+    
+    //MARK: - Timing stats
+    
+    
+    
+    //TODO: move to profile
+    /// Returns $0 - saved, $1 - spent
+    public func factTimingForPeriod(period: LazyCalendar.Period) -> (Double, Double) {
+        var summSaved = 0.0
+        var summSpent = 0.0
+        for activity in allActivities() {
+            for result in activity.stats.allResultsForPeriod(period) {
+                if activity.isRoutine() {
+                    summSaved += result.factSavedTime!.doubleValue
+                } else {
+                    summSpent += result.factDuration.doubleValue
+                }
+            }
+        }
+        return (summSaved, summSpent)
+    }
+    
+    //TODO: move to profile
+    /// Returns $0 - saved, $1 - spent in minutes
+    public func plannedTimingInPeriod(period: LazyCalendar.Period, sinceDate date: NSDate) -> (Double, Double) {
+        var toSave = 0.0;
+        var toSpend = 0.0;
         
         for activity in allActivities() {
+            let numberOfDays = activity.stats.busyDaysForPeriod(period, sinceDate: date)
             if activity.isRoutine() {
-                totalSaved += activity.timing.timeToSave.integerValue
+                toSave += activity.timing.timeToSave.doubleValue * Double(numberOfDays)
+            } else {
+                toSpend += activity.timing.duration.doubleValue * Double(numberOfDays)
             }
         }
-        return totalSaved
+        return (abs(toSave), abs(toSpend)) // minutes
     }
     
-    func totalTimeUsed() -> Int {
-        var totalUsed: Int = 0
-        for activity in allActivities() {
-            if !activity.isRoutine() {
-                totalUsed += activity.timing.duration.integerValue
-            }
-        }
-        return totalUsed
+    public func timeStatsForPeriod(period: LazyCalendar.Period) -> DailyStats {
+        let fact = factTimingForPeriod(period)
+        let planned = plannedTimingInPeriod(period, sinceDate: NSDate())
+        return DailyStats(factSaved: fact.0, factSpent: fact.1, plannedToSave: planned.0, plannedToSpend: planned.1)
     }
     
+    //    public func timeStatsForToday() -> DailyStats {
+    //        let fact = factTimingForToday()
+    //        let planned = plannedTimingForToday()
+    //        return DailyStats(factSaved: fact.0, factSpent: fact.1, plannedToSave: planned.0, plannedToSpend: planned.1)
+    //    }
     
-    class func defaultBirthday() -> NSDate {
-        var components = NSDateComponents()
-        components.setValue(28, forComponent: .CalendarUnitDay)
-        components.setValue(3, forComponent: .CalendarUnitMonth)
-        components.setValue(1987, forComponent: .CalendarUnitYear)
+    
+    //    /// Returns tuple: $0 = Saved, $1 = Spent
+    //    public func factTimingForToday() -> (Double, Double) {
+    //        var savedToday = 0.0
+    //        var spentToday = 0.0
+    //        let allResultsForToday = DayResults.fetchResultsWithDate(NSDate(), inContext: managedObjectContext!)
+    //        for result in allResultsForToday {
+    //            if result.activity.isRoutine() {
+    //                savedToday += result.factSavedTime!.doubleValue
+    //            } else {
+    //                spentToday += result.factSpentTime()
+    //            }
+    //        }
+    //        return (savedToday, spentToday)
+    //    }
+    
+    //    /// Returns tuple: $0 = toSave, $1 = toSpend
+    //    public func plannedTimingForToday() -> (Double, Double) {
+    //        var toSpendToday = 0.0
+    //        var toSaveToday = 0.0
+    //
+    //        for activity in activitiesForDate(NSDate()) {
+    //            if activity.isRoutine() {
+    //                toSaveToday += activity.timing.timeToSave.doubleValue
+    //            } else {
+    //                toSpendToday += activity.timing.duration.doubleValue
+    //            }
+    //        }
+    //        return (toSaveToday, toSpendToday)
+    //    }
+    
+    
+    
+    //    public func totalTimePlannedToSave() -> Int {
+    //        var totalSaved: Int = 0
+    //
+    //        for activity in allActivities() {
+    //            if activity.isRoutine() {
+    //                totalSaved += activity.timing.timeToSave.integerValue
+    //            }
+    //        }
+    //        return totalSaved
+    //    }
+    //
+    //    public func totalTimePlannedToUse() -> Int {
+    //        var totalUsed: Int = 0
+    //        for activity in allActivities() {
+    //            if !activity.isRoutine() {
+    //                totalUsed += activity.timing.duration.integerValue
+    //            }
+    //        }
+    //        return totalUsed
+    //    }
+    
+    
+    public func totalTimeForDailyMinutes(minutes: Double) -> LifeTime {
+        let minutes = Double(minutes)
+        let daysLeft = Double(numberOfDaysTillEndOfLifeSinceDate(NSDate()))
         
-        let birthday = NSCalendar.currentCalendar().dateFromComponents(components)
-        return birthday!
+        let hours = minutes * daysLeft / 60.0
+        let days = hours / 24
+        let months = days / 30
+        let years = months / 12
+        return LifeTime(years: years, months: months, days: days, hours: hours)
     }
     
-    class func defaultCountry() -> String? {
+    public func numberOfDaysTillEndOfLifeSinceDate(date: NSDate) -> Int {
+        let components = NSCalendar.currentCalendar().components(.Day,
+            fromDate: date,
+            toDate: dateOfApproximateLifeEnd(),
+            options: [])
+        return components.day
+    }
+    
+    
+    
+    //MARK: - Default settings
+    
+    public class func defaultBirthday() -> NSDate {
+        return DayResults.standardDateFormatter().dateFromString("3/28/87")!
+    }
+    
+    public class func defaultCountry() -> String? {
         let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as! String
         let codesForCountries = countryCodesDictionary()
         if let defaultCode = codesForCountries[countryCode] {
@@ -113,15 +247,17 @@ extension Profile {
     
     
     class func countryCodesDictionary() -> [String:String] {
-        let path = NSBundle.mainBundle().pathForResource("ISOCodes", ofType: "txt")
-        var error: NSError?
-        let ISOCodes = NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error)
+        let path = NSBundle(identifier: "oneLastDay.TimeSlowerKit")!.pathForResource("ISOCodes", ofType: "txt")
+        let ISOCodes: NSString?
+        do {
+            ISOCodes = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+        } catch _ as NSError {
+            ISOCodes = nil
+        }
         
         var dictionary = [String:String]()
-        let components = ISOCodes?.componentsSeparatedByString("\r") as! [String]
+        let components = ISOCodes!.componentsSeparatedByString("\r")
         
-        var countryName: String!
-        var countryCode: String!
         for str in components {
             let countryData = str.componentsSeparatedByString("/")
             dictionary[countryData[1]] = countryData[0]
@@ -131,11 +267,16 @@ extension Profile {
     }
     
     class func lifeExpacityDictionary() -> [String:[String:String]] {
-        let path = NSBundle.mainBundle().pathForResource("LifeExpacity2013", ofType: "txt")
-        var error: NSError?
-        let contentsOfFile = NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error)
-        let countryLines = contentsOfFile?.componentsSeparatedByString("\n") as! [String]!
-
+        let bundle = NSBundle(identifier: "oneLastDay.TimeSlowerKit")
+        let path = bundle!.pathForResource("LifeExpacity2013", ofType: "txt")
+        let contentsOfFile: NSString?
+        do {
+            contentsOfFile = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+        } catch _ as NSError {
+            contentsOfFile = nil
+        }
+        let countryLines = contentsOfFile?.componentsSeparatedByString("\n") as [String]!
+        
         var allCountries = [String:[String:String]]()
         for string in countryLines {
             if string != "" {

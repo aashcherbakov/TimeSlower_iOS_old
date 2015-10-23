@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-enum ActivityType: Int {
+public enum ActivityType: Int {
     case Routine
     case Goal
 }
 
-enum ActivityBasis: Int {
+public enum ActivityBasis: Int {
     case Daily
     case Workdays
     case Weekends
@@ -22,49 +22,66 @@ enum ActivityBasis: Int {
 
 extension Activity {
     
-
+    public class func defaultBusyDaysForBasis(basis: ActivityBasis) -> String {
+        switch basis {
+        case .Daily: return "Mon Tue Wed Thu Fri Sat Sun"
+        case .Workdays: return "Mon Tue Wed Thu Fri"
+        case .Weekends: return "Sat Sun"
+        }
+    }
     
-    class func newActivityForProfile(userProfile: Profile, ofType: ActivityType) -> Activity {
+    public class func dayNamesForBasis(basis: ActivityBasis) -> [String] {
+        return defaultBusyDaysForBasis(basis).componentsSeparatedByString(" ")
+    }
+    
+    public class func newActivityForProfile(userProfile: Profile, ofType: ActivityType) -> Activity {
         let entity = NSEntityDescription.entityForName("Activity", inManagedObjectContext: userProfile.managedObjectContext!)
         let activity = Activity(entity: entity!, insertIntoManagedObjectContext: userProfile.managedObjectContext)
-        activity.type = activity.typeWithEnum(ofType)
+        activity.type = Activity.typeWithEnum(ofType)
         activity.profile = userProfile
         activity.stats = Stats.newStatsForActivity(activity: activity)
         activity.timing = Timing.newTimingForActivity(activity: activity)
         
         var error: NSError?
-        if !userProfile.managedObjectContext!.save(&error) { print("Could not save: \(error)") }
+        do {
+            try userProfile.managedObjectContext!.save()
+        } catch let error1 as NSError { error = error1; print("Could not save activity: \(error)") }
         
-        print("New activity created: \(activity)")
         return activity
     }
     
-    func typeWithEnum(type: ActivityType) -> NSNumber {
+    public func userInfoForActivity() -> [NSObject : AnyObject] {
+        return ["activityName" : name]
+    }
+    
+    // MARK: - Convenience setters
+    public class func typeWithEnum(type: ActivityType) -> NSNumber {
         return NSNumber(integer: type.rawValue)
     }
     
-    func basisWithEnum(basis: ActivityBasis) -> NSNumber {
+    public class func basisWithEnum(basis: ActivityBasis) -> NSNumber {
         return NSNumber(integer: basis.rawValue)
     }
     
-    //WARNING: workaround with passing uriData may be bad
-    func userInfoForActivity() -> [NSObject : AnyObject] {
-        let uri = objectID.URIRepresentation()
-        let uriData = NSKeyedArchiver.archivedDataWithRootObject(uri)
-        return ["Name":name, "Activity":uriData]
+    public func startActivity() {
+        timing.manuallyStarted = NSDate()
     }
     
-    //MARK: - Property convenience
     
-    func isRoutine() -> Bool {
+    // MARK: - Property convenience
+    public func isRoutine() -> Bool {
         return (type.integerValue == 0) ? true : false
     }
     
-    func activityBasis() -> ActivityBasis {
+    public func activityType() -> ActivityType {
+        return ActivityType(rawValue: self.type.integerValue)!
+    }
+    
+    public func activityBasis() -> ActivityBasis {
         return ActivityBasis(rawValue: self.basis.integerValue)!
     }
     
-    func activityBasisDescription() -> String {
+    public func activityBasisDescription() -> String {
         var stringBasis = ""
         switch activityBasis() {
         case .Daily: stringBasis = "Daily"
@@ -74,92 +91,53 @@ extension Activity {
         return stringBasis
     }
     
-    func activityType() -> ActivityType {
-        return ActivityType(rawValue: self.type.integerValue)!
+    // MARK: - Results for activity
+    public func finishWithResult() {
+        DayResults.newResultWithDate(NSDate(), forActivity: self)
     }
     
-    func isDoneForToday() -> Bool {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
-        let todaysDate = dateFormatter.stringFromDate(NSDate())
-        
-        let resultsForDate = fetchResultsWithDate(todaysDate)
-        //println("Results for date \(todaysDate) for activity \(name): \(resultsForDate?.count)")
-        
-        if let results = resultsForDate {
-            if results.count > 0 {
-                return true
-            }
-        }
-        return false
+    public func lastWeekResults() -> [DayResults] {
+        return DayResults.lastWeekResultsForActivity(self)
     }
     
-    func fetchResultsWithDate(date: String) -> [DayResults]? {
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        let activityNamePredicate = NSPredicate(format: "activity.name == %@", name)
-        let dayOfResultPredicate = NSPredicate(format: "date == %@", date)
-        let compoundPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([activityNamePredicate, dayOfResultPredicate])
-        fetchRequest.predicate = compoundPredicate
-        
-        var error: NSError?
-        var results = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [DayResults]
-        
-        if let readyResults = results {
-            return readyResults
+    
+    //MARK: - Timing convenience
+    public func isPassedDueForToday() -> Bool { return timing.isPassedDueForToday() }
+    public func isGoingNow() -> Bool { return timing.isGoingNow() }
+    public func isDoneForToday() -> Bool { return timing.isDoneForToday() }
+    public func isManuallyStarted() -> Bool { return timing.manuallyStarted != nil }
+    public func updatedStartTime() -> NSDate { return timing.updatedStartTime() }
+    public func updatedFinishTime() -> NSDate { return timing.updatedFinishTime() }
+    public func updatedAlarmTime() -> NSDate { return timing.updatedAlarmTime() }
+    
+    //MARK: - Data for notifications
+    public func startTimerNotificationMessage() -> String {
+        var message = ""
+        if isRoutine() {
+            message = "Your goal: save \(timing.timeToSave) min. (or months \(stats.summMonths) of your lifetime"
         } else {
-            print("Error when fetching DayResults: \(error!)")
+            message = "Your goal: spend \(timing.duration) min."
         }
-        return nil
+        return message
     }
     
-    func isPassedDueForToday() -> Bool {
-        let nowDate = NSDate(), finishTime = timing.updatedFinishTime()
-        let earlierDate = nowDate.earlierDate(finishTime)
-        return (earlierDate == finishTime) ? true : false
+    /// Can't be assigned to a Goal (no snooze for a Goal)
+    public func finishTimeNotificationMessage() -> String {
+        return "\(timing.timeToSave) min. left till the end. In order to save \(stats.summMonths) month of your lifetime, you have to finish it now"
     }
     
-    func isGoingNow() -> Bool {
-        let startTime = updatedStartTime(), finishTime = updatedFinishTime()
-        
-        if finishTime.earlierDate(NSDate()) == finishTime {
-            return false
-        } else if isDoneForToday() {
-            return false
-        }
-        
-        if startTime.earlierDate(NSDate()) == startTime
-            && finishTime.laterDate(NSDate()) == finishTime {
-            return true
-        }
-        return false
+    public func lastCallNotificationMessage() -> String {
+        return isRoutine() ? "There is no time lest to save on this activity. Try to finish earlier next time." : "Time's up for today! You can finish now"
     }
     
-    func isManuallyStarted() -> Bool { return timing.manuallyStarted != nil }
-    func updatedStartTime() -> NSDate { return timing.updatedStartTime() }
-    func updatedFinishTime() -> NSDate { return timing.updatedFinishTime() }
-    func updatedAlarmTime() -> NSDate { return timing.updatedAlarmTime() }
     
-    
-    func lastWeekResults() -> [DayResults] {
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: "compareDateRepresentationOfString:")
-        var sortedArray = results.sortedArrayUsingDescriptors([sortDescriptor])
-        if sortedArray.count > 7 {
-            if sortedArray.count > 0 {
-                let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7
-                sortedArray.removeRange(0..<(sortedArray.count - lastResultsNumber))
-            }
-        }
-        return sortedArray as! [DayResults]
-    }
-    
+    // MARK: - Comparing activities
     func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
         let thisDate = timing.nextActionTime()
         let otherDate = otherActivity.timing.nextActionTime()
         return thisDate.compare(otherDate)
     }
 }
-
 
 extension NSString {
     func compareDateRepresentationOfString(otherString: String) -> NSComparisonResult {
@@ -170,32 +148,5 @@ extension NSString {
         let firstDate = dateFormatter.dateFromString(self as String)
         let secondDate = dateFormatter.dateFromString(otherString)
         return firstDate!.compare(secondDate!)
-    }
-}
-
-extension NSManagedObjectContext {
-    func objectWithURI(uri: NSURL) -> NSManagedObject? {
-        let objectID = persistentStoreCoordinator?.managedObjectIDForURIRepresentation(uri)
-        if objectID == nil { return nil }
-        
-        let objectForID = objectWithID(objectID!)
-        if !objectForID.fault { return objectForID }
-        
-        let request = NSFetchRequest()
-        request.entity = objectID?.entity
-        
-        let predicate = NSComparisonPredicate(
-            leftExpression: NSExpression.expressionForEvaluatedObject(),
-            rightExpression: NSExpression(forConstantValue: objectForID),
-            modifier: .DirectPredicateModifier,
-            type: .EqualToPredicateOperatorType,
-            options: nil)
-        request.predicate = predicate
-        
-        let results = executeFetchRequest(request, error: nil)
-        if results?.count > 0 {
-            return results?.first as? NSManagedObject
-        }
-        return nil
     }
 }

@@ -21,6 +21,7 @@ public class LazyCalendar {
     }
     
     public enum Period: Int {
+        case Today
         case LastMonth
         case LastYear
         case Lifetime
@@ -31,12 +32,21 @@ public class LazyCalendar {
         return DayName(rawValue: startingDayNameString)!
     }
     
+    public class func stringForPeriod(period: Period) -> String {
+        switch period {
+        case .Today: return "Today"
+        case .LastMonth: return "Last month"
+        case .LastYear: return "Last year"
+        case .Lifetime: return "Lifetime"
+        }
+    }
+    
     public class func nextDayWithName(dayName: DayName, fromDate date: NSDate) -> NSDate {
         let referenceDate = LazyCalendar.correctWeekdayFromDate(date)
-        let arrayOfDaynames = DayResults.standardDateFormatter().shortWeekdaySymbols as! [String]
+        let arrayOfDaynames = DayResults.standardDateFormatter().shortWeekdaySymbols as [String]
         
-        let referenceDateIndex = find(arrayOfDaynames, referenceDate)!
-        let searchedDayNameIndex = find(arrayOfDaynames, dayName.rawValue)!
+        let referenceDateIndex = arrayOfDaynames.indexOf(referenceDate)!
+        let searchedDayNameIndex = arrayOfDaynames.indexOf(dayName.rawValue)!
         
         var difference: Double!
         if searchedDayNameIndex < referenceDateIndex {
@@ -54,16 +64,27 @@ public class LazyCalendar {
     
     /// Returns string from array ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     public class func correctWeekdayFromDate(date: NSDate) -> String {
-        let weekdayNames = DayResults.standardDateFormatter().shortWeekdaySymbols as! [String]
-        let currentDay = NSCalendar.currentCalendar().component(.CalendarUnitWeekday, fromDate: date)
+        let weekdayNames = DayResults.standardDateFormatter().shortWeekdaySymbols as [String]
+        let currentDay = NSCalendar.currentCalendar().component(.Weekday, fromDate: date)
         let weekdayNumber = (currentDay - 1) % 7
         return weekdayNames[weekdayNumber]
     }
     
-
+    public class func shortDayNameForDate(date: NSDate) -> String {
+        let dateFormatter = DayResults.standardDateFormatter()
+        let daySymbols = dateFormatter.shortWeekdaySymbols
+        
+        let weekday = NSCalendar.currentCalendar().component(.Weekday, fromDate: date)
+        let weekdayNumberForArray = (weekday - 1) % 7
+        let dayName: String = daySymbols[weekdayNumberForArray]
+        
+        return dayName
+    }
+    
     public class func startDateForPeriod(period: Period, sinceDate date: NSDate) -> NSDate {
-        var componentsFromToday = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+        let componentsFromToday = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: date)
         switch period {
+        case .Today: break
         case .LastMonth: componentsFromToday.month = componentsFromToday.month - 1
         case .LastYear: componentsFromToday.year = componentsFromToday.year - 1
         case .Lifetime: break
@@ -74,7 +95,7 @@ public class LazyCalendar {
     
     public class func numberOfDaysInPeriod(period: Period, fromDate date: NSDate) -> Int {
         let startDate = startDateForPeriod(period, sinceDate: date)
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitDay, fromDate: date, toDate: startDate, options: nil)
+        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: date, toDate: startDate, options: [])
         return (period == .Lifetime) ? Profile.fetchProfile()!.numberOfDaysTillEndOfLifeSinceDate(date) : abs(components.day)
     }
     
@@ -83,7 +104,7 @@ public class LazyCalendar {
         let startDate = LazyCalendar.startDateForPeriod(forPeriod, sinceDate: sinceDate)
         var lastDate = LazyCalendar.nextDayWithName(dayName, fromDate: startDate)
         
-        while lastDate <= sinceDate {
+        while lastDate == lastDate.earlierDate(sinceDate) || lastDate.isEqualToDate(sinceDate) {
             numberOfWeekdays++
             lastDate = LazyCalendar.nextDayWithName(dayName, fromDate: lastDate)
         }
