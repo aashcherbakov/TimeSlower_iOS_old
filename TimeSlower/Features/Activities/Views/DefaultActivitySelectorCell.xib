@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DefaultActivitySelectorCell" id="90g-de-Vo9" customClass="DefaultActivitySelectorCell" customModule="TimeSlower2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="134" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="134" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgb-uR-J6d" userLabel="background circle">
+                        <rect key="frame" x="41" y="0.0" width="53" height="53"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7fJ-v1-g1u">
+                                <rect key="frame" x="0.0" y="0.0" width="53" height="53"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Zgb-uR-J6d" secondAttribute="height" multiplier="1:1" id="NoP-5O-VeH"/>
+                            <constraint firstAttribute="height" constant="53" id="XZm-Ro-vZO"/>
+                            <constraint firstAttribute="centerX" secondItem="7fJ-v1-g1u" secondAttribute="centerX" id="dwX-45-kSs"/>
+                            <constraint firstAttribute="height" secondItem="7fJ-v1-g1u" secondAttribute="height" id="h2W-8n-bsn"/>
+                            <constraint firstAttribute="width" secondItem="7fJ-v1-g1u" secondAttribute="width" id="hoa-Mh-0fb"/>
+                            <constraint firstAttribute="centerY" secondItem="7fJ-v1-g1u" secondAttribute="centerY" id="pWy-cd-KWc"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Learn Chinese" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5IR-zY-pu2">
+                        <rect key="frame" x="30" y="79" width="77" height="17"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                        <color key="textColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <animations/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <animations/>
+            <constraints>
+                <constraint firstItem="Zgb-uR-J6d" firstAttribute="top" secondItem="90g-de-Vo9" secondAttribute="top" id="8rk-jx-sCS"/>
+                <constraint firstAttribute="bottom" secondItem="5IR-zY-pu2" secondAttribute="bottom" constant="20" id="B9a-ew-UDK"/>
+                <constraint firstItem="Zgb-uR-J6d" firstAttribute="width" secondItem="Zgb-uR-J6d" secondAttribute="height" multiplier="1:1" id="Pkh-XX-NHp"/>
+                <constraint firstItem="5IR-zY-pu2" firstAttribute="centerX" secondItem="7fJ-v1-g1u" secondAttribute="centerX" id="RCP-9X-cvP"/>
+                <constraint firstItem="5IR-zY-pu2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Zgb-uR-J6d" secondAttribute="bottom" constant="8" id="tQh-RK-GnF"/>
+                <constraint firstAttribute="centerX" secondItem="Zgb-uR-J6d" secondAttribute="centerX" id="vfv-C0-s4g"/>
+            </constraints>
+            <size key="customSize" width="134" height="115"/>
+            <connections>
+                <outlet property="backgroundCircle" destination="Zgb-uR-J6d" id="1uL-kC-fVK"/>
+                <outlet property="imageView" destination="7fJ-v1-g1u" id="axE-dm-wjN"/>
+                <outlet property="imageViewHeight" destination="XZm-Ro-vZO" id="r9m-Vf-38d"/>
+                <outlet property="nameLabel" destination="5IR-zY-pu2" id="IDe-Xo-ZSv"/>
+            </connections>
+            <point key="canvasLocation" x="453" y="311.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

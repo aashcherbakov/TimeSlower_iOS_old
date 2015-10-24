@@ -12,7 +12,7 @@ import CoreData
 
 public class CoreDataStack {
 
-    let sharedAppGroup: String = "group.com.1lastday.timeslower2.documents"
+    let sharedAppGroup: String = "group.com.1lastday.timeslower.documents"
     
     public class var sharedInstance: CoreDataStack {
         struct Static {

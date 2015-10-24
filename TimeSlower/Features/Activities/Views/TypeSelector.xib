@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Light.ttf">
+            <string>SourceSansPro-Light</string>
+            <string>SourceSansPro-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TypeSelector" customModule="TimeSlower2" customModuleProvider="target">
+            <connections>
+                <outlet property="goalsButton" destination="G7Q-Va-gNg" id="Bit-KE-Hpb"/>
+                <outlet property="goalsButtonLabel" destination="6UP-AW-yfS" id="Kc1-iA-NGL"/>
+                <outlet property="goalsOffset" destination="zsr-6d-ZHz" id="bIM-kD-tT7"/>
+                <outlet property="routinesButton" destination="Djv-Im-dvT" id="OCg-h5-ggr"/>
+                <outlet property="routinesButtonLabel" destination="Slo-FJ-g9X" id="HkV-oS-27A"/>
+                <outlet property="routinesOffset" destination="p9y-lD-BJZ" id="3Ur-7I-ytA"/>
+                <outlet property="separatorHeight" destination="pWG-Ff-RYv" id="0B1-tf-Hq3"/>
+                <outlet property="view" destination="iN0-l3-epB" id="eg4-sU-eSk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="336" height="88"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nX5-3j-ZaZ" userLabel="Separator">
+                    <rect key="frame" x="167" y="0.0" width="2" height="50"/>
+                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="pWG-Ff-RYv"/>
+                        <constraint firstAttribute="width" constant="2" id="xOY-en-JRw"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7Q-Va-gNg">
+                    <rect key="frame" x="238" y="3" width="20" height="22"/>
+                    <state key="normal" image="goalIconGray">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-AW-yfS">
+                    <rect key="frame" x="232" y="25" width="32" height="18"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="14"/>
+                    <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djv-Im-dvT">
+                    <rect key="frame" x="78" y="3" width="20" height="22"/>
+                    <state key="normal" image="routineIconGray">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Routines" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slo-FJ-g9X">
+                    <rect key="frame" x="64" y="25" width="50" height="18"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="14"/>
+                    <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" none="YES" staticText="YES"/>
+            </accessibility>
+            <constraints>
+                <constraint firstItem="Slo-FJ-g9X" firstAttribute="top" secondItem="Djv-Im-dvT" secondAttribute="bottom" id="1ul-Ef-WlM"/>
+                <constraint firstItem="G7Q-Va-gNg" firstAttribute="bottom" secondItem="nX5-3j-ZaZ" secondAttribute="centerY" id="34S-hV-INx"/>
+                <constraint firstItem="G7Q-Va-gNg" firstAttribute="centerX" secondItem="6UP-AW-yfS" secondAttribute="centerX" id="3wc-2C-CMO"/>
+                <constraint firstItem="Slo-FJ-g9X" firstAttribute="centerX" secondItem="Djv-Im-dvT" secondAttribute="centerX" constant="0.5" id="5S6-RD-R5w"/>
+                <constraint firstAttribute="centerX" secondItem="nX5-3j-ZaZ" secondAttribute="centerX" id="6Vg-dF-X9Z"/>
+                <constraint firstItem="Djv-Im-dvT" firstAttribute="bottom" secondItem="nX5-3j-ZaZ" secondAttribute="centerY" id="Qnj-0N-uaw"/>
+                <constraint firstItem="6UP-AW-yfS" firstAttribute="top" secondItem="G7Q-Va-gNg" secondAttribute="bottom" id="aRd-2Z-aB1"/>
+                <constraint firstAttribute="centerY" secondItem="nX5-3j-ZaZ" secondAttribute="centerY" constant="0.5" id="jCr-o3-Td1"/>
+                <constraint firstItem="Djv-Im-dvT" firstAttribute="centerX" secondItem="nX5-3j-ZaZ" secondAttribute="centerX" constant="-80" id="p9y-lD-BJZ"/>
+                <constraint firstItem="nX5-3j-ZaZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="x5s-CK-VHA"/>
+                <constraint firstItem="G7Q-Va-gNg" firstAttribute="centerX" secondItem="nX5-3j-ZaZ" secondAttribute="centerX" constant="80" id="zsr-6d-ZHz"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="jCr-o3-Td1"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="403" y="214"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="goalIconGray" width="20" height="20"/>
+        <image name="routineIconGray" width="20" height="21"/>
+    </resources>
+</document>

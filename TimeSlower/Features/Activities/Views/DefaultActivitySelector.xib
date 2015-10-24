@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultActivitySelector" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="P2M-B0-1pU" id="a2c-xG-UnM"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Cxc-al-M1P"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="511"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="P2M-B0-1pU">
+                    <rect key="frame" x="0.0" y="50" width="600" height="461"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="50W-te-b6S">
+                        <size key="itemSize" width="172" height="172"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="FoH-iO-dl5"/>
+                        <outlet property="delegate" destination="-1" id="sC8-k8-Bhy"/>
+                    </connections>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or select one of the suggested" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82n-hM-lba">
+                    <rect key="frame" x="213" y="14" width="174" height="18"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                    <color key="textColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1X-Hb-MvY">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="DKd-Hc-Ygw"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="P2M-B0-1pU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6N9-Mf-neR"/>
+                <constraint firstItem="82n-hM-lba" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="8B4-W8-70h"/>
+                <constraint firstAttribute="trailing" secondItem="P2M-B0-1pU" secondAttribute="trailing" id="Gcn-ce-WBI"/>
+                <constraint firstAttribute="bottom" secondItem="P2M-B0-1pU" secondAttribute="bottom" id="QR4-8k-1as"/>
+                <constraint firstItem="T1X-Hb-MvY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eCs-8P-goN"/>
+                <constraint firstAttribute="centerX" secondItem="82n-hM-lba" secondAttribute="centerX" id="iKc-vb-1aR"/>
+                <constraint firstItem="P2M-B0-1pU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="m4u-9J-Jn3"/>
+                <constraint firstAttribute="trailing" secondItem="T1X-Hb-MvY" secondAttribute="trailing" id="oaB-eL-lCV"/>
+                <constraint firstItem="T1X-Hb-MvY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tmu-Vi-QLv"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="540" y="540.5"/>
+        </view>
+    </objects>
+</document>

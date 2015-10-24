@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DaySelector" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="kaq-Jx-P6G"/>
+                <outletCollection property="dayButtons" destination="AAn-gP-tIo" collectionClass="NSMutableArray" id="Ynr-0Y-itE"/>
+                <outletCollection property="dayButtons" destination="bd5-1r-wiI" collectionClass="NSMutableArray" id="xyJ-5H-uR2"/>
+                <outletCollection property="dayButtons" destination="zSw-Mh-gg6" collectionClass="NSMutableArray" id="NIf-vb-IXK"/>
+                <outletCollection property="dayButtons" destination="Sgd-i3-1ca" collectionClass="NSMutableArray" id="P1o-GA-XGX"/>
+                <outletCollection property="dayButtons" destination="ROr-qo-8PK" collectionClass="NSMutableArray" id="gY9-Qf-eCT"/>
+                <outletCollection property="dayButtons" destination="uYW-Qf-EBo" collectionClass="NSMutableArray" id="uld-Md-o4E"/>
+                <outletCollection property="dayButtons" destination="e3f-TQ-3B4" collectionClass="NSMutableArray" id="pDt-Bx-NkU"/>
+                <outletCollection property="buttonsWidths" destination="jMC-dH-wwK" collectionClass="NSMutableArray" id="c7H-Hi-j1J"/>
+                <outletCollection property="buttonsWidths" destination="VVv-mK-WCE" collectionClass="NSMutableArray" id="MDw-wN-taL"/>
+                <outletCollection property="buttonsWidths" destination="ehR-MO-u9i" collectionClass="NSMutableArray" id="64h-zN-rlC"/>
+                <outletCollection property="buttonsWidths" destination="0UF-4P-go5" collectionClass="NSMutableArray" id="Mx0-qd-V1t"/>
+                <outletCollection property="buttonsWidths" destination="L2y-lA-PGi" collectionClass="NSMutableArray" id="euN-zk-oNU"/>
+                <outletCollection property="buttonsWidths" destination="wFS-bQ-ars" collectionClass="NSMutableArray" id="Y44-Hv-4tj"/>
+                <outletCollection property="buttonsWidths" destination="789-BH-uro" collectionClass="NSMutableArray" id="ZYt-6B-HuJ"/>
+                <outletCollection property="fiveLastButtonsWidths" destination="789-BH-uro" collectionClass="NSMutableArray" id="WVz-t3-MxZ"/>
+                <outletCollection property="fiveLastButtonsWidths" destination="wFS-bQ-ars" collectionClass="NSMutableArray" id="1ue-I7-nld"/>
+                <outletCollection property="fiveLastButtonsWidths" destination="L2y-lA-PGi" collectionClass="NSMutableArray" id="1XG-Z2-pb1"/>
+                <outletCollection property="fiveLastButtonsWidths" destination="0UF-4P-go5" collectionClass="NSMutableArray" id="GZ2-yi-xNW"/>
+                <outletCollection property="fiveLastButtonsWidths" destination="ehR-MO-u9i" collectionClass="NSMutableArray" id="lQj-yk-ocY"/>
+                <outletCollection property="twoLastButtonsWidths" destination="789-BH-uro" collectionClass="NSMutableArray" id="LIW-fe-QGC"/>
+                <outletCollection property="twoLastButtonsWidths" destination="wFS-bQ-ars" collectionClass="NSMutableArray" id="kjJ-Rx-dvD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="312" height="67"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-ja-6gy" userLabel="backButton">
+                    <rect key="frame" x="0.0" y="0.0" width="28" height="67"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="HeH-Fb-Uqu"/>
+                    </constraints>
+                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="backIconGray">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="returnToBasisSelection" destination="-1" eventType="touchUpInside" id="Rgh-rP-Q0P"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAn-gP-tIo">
+                    <rect key="frame" x="36" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="AAn-gP-tIo" secondAttribute="height" multiplier="1:1" id="CWT-gL-ipX"/>
+                        <constraint firstAttribute="width" constant="28" id="jMC-dH-wwK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="wMP-AT-nvk"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bd5-1r-wiI">
+                    <rect key="frame" x="72" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="VVv-mK-WCE"/>
+                        <constraint firstAttribute="width" secondItem="bd5-1r-wiI" secondAttribute="height" multiplier="1:1" id="yUf-ws-DH4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="b7G-jH-DfJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-Mh-gg6">
+                    <rect key="frame" x="108" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="zSw-Mh-gg6" secondAttribute="height" multiplier="1:1" id="Dxj-io-eaz"/>
+                        <constraint firstAttribute="width" constant="28" id="ehR-MO-u9i"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="uMe-Ig-WEe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-i3-1ca">
+                    <rect key="frame" x="144" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="0UF-4P-go5"/>
+                        <constraint firstAttribute="width" secondItem="Sgd-i3-1ca" secondAttribute="height" multiplier="1:1" id="tz8-sN-uST"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="V8s-By-7cg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROr-qo-8PK">
+                    <rect key="frame" x="180" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="L2y-lA-PGi"/>
+                        <constraint firstAttribute="width" secondItem="ROr-qo-8PK" secondAttribute="height" multiplier="1:1" id="ib3-B7-Cme"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="HyE-ff-cjB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-Qf-EBo">
+                    <rect key="frame" x="216" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="uYW-Qf-EBo" secondAttribute="height" multiplier="1:1" id="OHZ-Yd-y8g"/>
+                        <constraint firstAttribute="width" constant="28" id="wFS-bQ-ars"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="Xgh-eP-jei"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-TQ-3B4">
+                    <rect key="frame" x="252" y="20" width="28" height="28"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="789-BH-uro"/>
+                        <constraint firstAttribute="width" secondItem="e3f-TQ-3B4" secondAttribute="height" multiplier="1:1" id="eMc-UR-3KF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="Jha-3h-1rm"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="e3f-TQ-3B4" firstAttribute="leading" secondItem="uYW-Qf-EBo" secondAttribute="trailing" constant="8" id="0pu-TT-rpm"/>
+                <constraint firstItem="zSw-Mh-gg6" firstAttribute="leading" secondItem="bd5-1r-wiI" secondAttribute="trailing" constant="8" id="Ak3-Y8-gOt"/>
+                <constraint firstItem="AAn-gP-tIo" firstAttribute="centerY" secondItem="8hd-ja-6gy" secondAttribute="centerY" constant="0.5" id="BDz-Zy-rA1"/>
+                <constraint firstItem="uYW-Qf-EBo" firstAttribute="centerY" secondItem="ROr-qo-8PK" secondAttribute="centerY" id="Es2-ZM-DGu"/>
+                <constraint firstItem="Sgd-i3-1ca" firstAttribute="centerY" secondItem="zSw-Mh-gg6" secondAttribute="centerY" id="N79-Ch-btc"/>
+                <constraint firstItem="Sgd-i3-1ca" firstAttribute="leading" secondItem="zSw-Mh-gg6" secondAttribute="trailing" constant="8" id="Tj0-Tv-q5k"/>
+                <constraint firstItem="ROr-qo-8PK" firstAttribute="leading" secondItem="Sgd-i3-1ca" secondAttribute="trailing" constant="8" id="Tv1-gH-juK"/>
+                <constraint firstItem="8hd-ja-6gy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c1h-4b-6A9"/>
+                <constraint firstAttribute="bottom" secondItem="8hd-ja-6gy" secondAttribute="bottom" id="dYs-F3-5YN"/>
+                <constraint firstItem="uYW-Qf-EBo" firstAttribute="leading" secondItem="ROr-qo-8PK" secondAttribute="trailing" constant="8" id="eEA-Jj-pJn"/>
+                <constraint firstItem="uYW-Qf-EBo" firstAttribute="centerY" secondItem="e3f-TQ-3B4" secondAttribute="centerY" id="eEN-7e-iEK"/>
+                <constraint firstItem="AAn-gP-tIo" firstAttribute="leading" secondItem="8hd-ja-6gy" secondAttribute="trailing" constant="8" id="gfB-rp-cmz"/>
+                <constraint firstItem="zSw-Mh-gg6" firstAttribute="centerY" secondItem="bd5-1r-wiI" secondAttribute="centerY" id="hhu-Da-nPs"/>
+                <constraint firstItem="8hd-ja-6gy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oAV-Xr-MOn"/>
+                <constraint firstItem="Sgd-i3-1ca" firstAttribute="centerY" secondItem="ROr-qo-8PK" secondAttribute="centerY" id="odq-X4-hEw"/>
+                <constraint firstItem="bd5-1r-wiI" firstAttribute="leading" secondItem="AAn-gP-tIo" secondAttribute="trailing" constant="8" id="p2U-fm-VgI"/>
+                <constraint firstItem="bd5-1r-wiI" firstAttribute="centerY" secondItem="AAn-gP-tIo" secondAttribute="centerY" id="yQr-d0-c1b"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="396" y="588.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backIconGray" width="9" height="16"/>
+    </resources>
+</document>
