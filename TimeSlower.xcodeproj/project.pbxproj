@@ -16,109 +16,97 @@
 		F009AE8F1BD9CBA2007F38A9 /* TimeSlowerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
 		F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F009AEB61BD9CC86007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBE1BD9CC86007F38A9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB21BD9CC86007F38A9 /* Stats.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB31BD9CC86007F38A9 /* StatsManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB41BD9CC86007F38A9 /* Timing.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEC11BD9CC86007F38A9 /* TimingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB51BD9CC86007F38A9 /* TimingManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AECB1BD9CD49007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; settings = {ASSET_TAGS = (); }; };
-		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; settings = {ASSET_TAGS = (); }; };
-		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ASSET_TAGS = (); }; };
-		F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF41BD9CF4A007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF51BD9CF4A007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF61BD9CF4A007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF71BD9CF4A007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF81BD9CF4A007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEF91BD9CF4A007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFA1BD9CF4A007F38A9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB21BD9CC86007F38A9 /* Stats.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFB1BD9CF4A007F38A9 /* StatsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB31BD9CC86007F38A9 /* StatsManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFC1BD9CF4A007F38A9 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB41BD9CC86007F38A9 /* Timing.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFD1BD9CF4A007F38A9 /* TimingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB51BD9CC86007F38A9 /* TimingManage.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFE1BD9CF53007F38A9 /* LazyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AEFF1BD9CF53007F38A9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF001BD9CF57007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; settings = {ASSET_TAGS = (); }; };
-		F009AF011BD9CF57007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; settings = {ASSET_TAGS = (); }; };
-		F009AF021BD9CF5B007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF131BDADE19007F38A9 /* SourceSansPro-Black.ttf */; settings = {ASSET_TAGS = (); }; };
-		F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF141BDADE19007F38A9 /* SourceSansPro-Bold.ttf */; settings = {ASSET_TAGS = (); }; };
-		F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */; settings = {ASSET_TAGS = (); }; };
-		F009AF1B1BDADE19007F38A9 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
-		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; settings = {ASSET_TAGS = (); }; };
-		F009AF201BDADED8007F38A9 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF1F1BDADED8007F38A9 /* Menu.storyboard */; settings = {ASSET_TAGS = (); }; };
-		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF231BDAE4BE007F38A9 /* Stats.storyboard */; settings = {ASSET_TAGS = (); }; };
-		F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF2A1BDAE571007F38A9 /* MainScreenContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF271BDAE571007F38A9 /* MainScreenVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF361BDB0F45007F38A9 /* Activities.storyboard */; settings = {ASSET_TAGS = (); }; };
-		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
-		F009AF441BDB1061007F38A9 /* ActivityMotivationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF4A1BDB1061007F38A9 /* EditActivityVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF431BDB1061007F38A9 /* ShareVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF581BDB123A007F38A9 /* Motivator.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF5F1BDB12D9007F38A9 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F009AF5C1BDB12D9007F38A9 /* CountryPicker.bundle */; settings = {ASSET_TAGS = (); }; };
-		F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */; settings = {ASSET_TAGS = (); }; };
-		F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF641BDB13E5007F38A9 /* CircularTimer.m */; settings = {ASSET_TAGS = (); }; };
-		F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */; settings = {ASSET_TAGS = (); }; };
-		F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6E1BDB1935007F38A9 /* ChartView.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6F1BDB1935007F38A9 /* ChartView.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF701BDB1935007F38A9 /* CircleProgress.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF711BDB1935007F38A9 /* DaySelector.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF861BDB1935007F38A9 /* DaySelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF721BDB1935007F38A9 /* DaySelector.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF881BDB1935007F38A9 /* DefaultActivitySelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF751BDB1935007F38A9 /* DefaultActivitySelectorCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF8A1BDB1935007F38A9 /* DefaultActivitySelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF761BDB1935007F38A9 /* DefaultActivitySelectorCell.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF8C1BDB1935007F38A9 /* ListTypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF791BDB1935007F38A9 /* StandardActivityCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF8E1BDB1935007F38A9 /* StandardActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF911BDB1935007F38A9 /* TimeSaver.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */; settings = {ASSET_TAGS = (); }; };
-		F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */; settings = {ASSET_TAGS = (); }; };
-		F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */; settings = {ASSET_TAGS = (); }; };
+		F009AEB61BD9CC86007F38A9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAA1BD9CC86007F38A9 /* Activity.swift */; };
+		F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; };
+		F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; };
+		F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; };
+		F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; };
+		F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; };
+		F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; };
+		F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; };
+		F009AEBE1BD9CC86007F38A9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB21BD9CC86007F38A9 /* Stats.swift */; };
+		F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB31BD9CC86007F38A9 /* StatsManage.swift */; };
+		F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB41BD9CC86007F38A9 /* Timing.swift */; };
+		F009AEC11BD9CC86007F38A9 /* TimingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB51BD9CC86007F38A9 /* TimingManage.swift */; };
+		F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */; };
+		F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */; };
+		F009AECB1BD9CD49007F38A9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; };
+		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; };
+		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; };
+		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
+		F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */; };
+		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; };
+		F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */; };
+		F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */; };
+		F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */; };
+		F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */; };
+		F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */; };
+		F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */; };
+		F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */; };
+		F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF131BDADE19007F38A9 /* SourceSansPro-Black.ttf */; };
+		F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF141BDADE19007F38A9 /* SourceSansPro-Bold.ttf */; };
+		F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */; };
+		F009AF1B1BDADE19007F38A9 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */; };
+		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; };
+		F009AF201BDADED8007F38A9 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF1F1BDADED8007F38A9 /* Menu.storyboard */; };
+		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; };
+		F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF231BDAE4BE007F38A9 /* Stats.storyboard */; };
+		F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */; };
+		F009AF2A1BDAE571007F38A9 /* MainScreenContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */; };
+		F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF271BDAE571007F38A9 /* MainScreenVC.swift */; };
+		F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */; };
+		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
+		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; };
+		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; };
+		F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */; };
+		F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF361BDB0F45007F38A9 /* Activities.storyboard */; };
+		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; };
+		F009AF441BDB1061007F38A9 /* ActivityMotivationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */; };
+		F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */; };
+		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
+		F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */; };
+		F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */; };
+		F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */; };
+		F009AF4A1BDB1061007F38A9 /* EditActivityVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */; };
+		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; };
+		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; };
+		F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF431BDB1061007F38A9 /* ShareVC.swift */; };
+		F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */; };
+		F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */; };
+		F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */; };
+		F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */; };
+		F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */; };
+		F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF581BDB123A007F38A9 /* Motivator.swift */; };
+		F009AF5F1BDB12D9007F38A9 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F009AF5C1BDB12D9007F38A9 /* CountryPicker.bundle */; };
+		F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */; };
+		F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF641BDB13E5007F38A9 /* CircularTimer.m */; };
+		F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */; };
+		F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */; };
+		F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */; };
+		F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */; };
+		F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6E1BDB1935007F38A9 /* ChartView.swift */; };
+		F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6F1BDB1935007F38A9 /* ChartView.xib */; };
+		F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF701BDB1935007F38A9 /* CircleProgress.swift */; };
+		F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF711BDB1935007F38A9 /* DaySelector.swift */; };
+		F009AF861BDB1935007F38A9 /* DaySelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF721BDB1935007F38A9 /* DaySelector.xib */; };
+		F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */; };
+		F009AF881BDB1935007F38A9 /* DefaultActivitySelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */; };
+		F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF751BDB1935007F38A9 /* DefaultActivitySelectorCell.swift */; };
+		F009AF8A1BDB1935007F38A9 /* DefaultActivitySelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF761BDB1935007F38A9 /* DefaultActivitySelectorCell.xib */; };
+		F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */; };
+		F009AF8C1BDB1935007F38A9 /* ListTypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */; };
+		F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF791BDB1935007F38A9 /* StandardActivityCell.swift */; };
+		F009AF8E1BDB1935007F38A9 /* StandardActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */; };
+		F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */; };
+		F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */; };
+		F009AF911BDB1935007F38A9 /* TimeSaver.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */; };
+		F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */; };
+		F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */; };
+		F02131251C151E8C00C9B02E /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131221C151E8C00C9B02E /* RxBlocking.framework */; };
+		F02131261C151E8C00C9B02E /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131231C151E8C00C9B02E /* RxCocoa.framework */; };
+		F02131271C151E8C00C9B02E /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131241C151E8C00C9B02E /* RxSwift.framework */; };
+		F0CB18EE1BED8CAA008B1198 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */; };
+		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +150,15 @@
 				F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0EB7BB11BEFBA1F00173D5D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -273,6 +270,11 @@
 		F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimeSaver.xib; path = Features/Activities/Views/TimeSaver.xib; sourceTree = "<group>"; };
 		F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelector.swift; path = Features/Activities/Views/TypeSelector.swift; sourceTree = "<group>"; };
 		F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TypeSelector.xib; path = Features/Activities/Views/TypeSelector.xib; sourceTree = "<group>"; };
+		F02131221C151E8C00C9B02E /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		F02131231C151E8C00C9B02E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainNavigationController.swift; path = Features/MainNavigationController.swift; sourceTree = "<group>"; };
+		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */,
+				F02131251C151E8C00C9B02E /* RxBlocking.framework in Frameworks */,
+				F02131261C151E8C00C9B02E /* RxCocoa.framework in Frameworks */,
+				F02131271C151E8C00C9B02E /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +330,9 @@
 				F009AE781BD9C5F8007F38A9 /* TimeSlowerUITests */,
 				F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */,
 				F009AE541BD9C5F8007F38A9 /* Products */,
+				F02131221C151E8C00C9B02E /* RxBlocking.framework */,
+				F02131231C151E8C00C9B02E /* RxCocoa.framework */,
+				F02131241C151E8C00C9B02E /* RxSwift.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,15 +352,11 @@
 			isa = PBXGroup;
 			children = (
 				F009AF0D1BDAD6C5007F38A9 /* Features */,
-				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF5B1BDB12D8007F38A9 /* TimeSlower-Bridging-Header.h */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF581BDB123A007F38A9 /* Motivator.swift */,
-				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
-				F009AE621BD9C5F8007F38A9 /* LaunchScreen.storyboard */,
-				F009AE651BD9C5F8007F38A9 /* Info.plist */,
 				F009AF121BDADDEC007F38A9 /* Resourses */,
 			);
 			path = TimeSlower;
@@ -473,6 +477,9 @@
 		F009AF0D1BDAD6C5007F38A9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
+				F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */,
+				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F009AF621BDB13A4007F38A9 /* Shared */,
 				F009AF111BDAD6E6007F38A9 /* Menu */,
 				F009AF101BDAD6DF007F38A9 /* Stats */,
@@ -533,6 +540,8 @@
 		F009AF121BDADDEC007F38A9 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				F009AE651BD9C5F8007F38A9 /* Info.plist */,
+				F009AE621BD9C5F8007F38A9 /* LaunchScreen.storyboard */,
 				F009AE601BD9C5F8007F38A9 /* Assets.xcassets */,
 				F009AF131BDADE19007F38A9 /* SourceSansPro-Black.ttf */,
 				F009AF141BDADE19007F38A9 /* SourceSansPro-Bold.ttf */,
@@ -567,10 +576,8 @@
 		F009AF611BDB1339007F38A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
-				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
-				F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */,
-				F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */,
+				F0EB7BE01BEFCB2200173D5D /* Edit Profile */,
+				F0EB7BDF1BEFCB1700173D5D /* Profile Stats */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -620,6 +627,25 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		F0EB7BDF1BEFCB1700173D5D /* Profile Stats */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */,
+				F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */,
+			);
+			name = "Profile Stats";
+			sourceTree = "<group>";
+		};
+		F0EB7BE01BEFCB2200173D5D /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
+				F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */,
+				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
+			);
+			name = "Edit Profile";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -642,6 +668,8 @@
 				F009AE501BD9C5F8007F38A9 /* Frameworks */,
 				F009AE511BD9C5F8007F38A9 /* Resources */,
 				F009AEA61BD9CBA2007F38A9 /* Embed Frameworks */,
+				F0EB7BB01BEFB95600173D5D /* ShellScript */,
+				F0EB7BB11BEFBA1F00173D5D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -834,12 +862,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F009AF001BD9CF57007F38A9 /* ISOCodes.txt in Resources */,
-				F009AF011BD9CF57007F38A9 /* LifeExpacity2013.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F0EB7BB01BEFB95600173D5D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F009AE4F1BD9C5F8007F38A9 /* Sources */ = {
@@ -863,6 +908,7 @@
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
+				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
@@ -870,6 +916,7 @@
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
+				F0CB18EE1BED8CAA008B1198 /* MainNavigationController.swift in Sources */,
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
 				F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */,
@@ -934,28 +981,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
-				F009AEF61BD9CF4A007F38A9 /* DayResultsManage.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
 				F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */,
-				F009AEF81BD9CF4A007F38A9 /* ProfileManageActivities.swift in Sources */,
-				F009AEFA1BD9CF4A007F38A9 /* Stats.swift in Sources */,
 				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
-				F009AEFE1BD9CF53007F38A9 /* LazyCalendar.swift in Sources */,
-				F009AEF41BD9CF4A007F38A9 /* ActivityNotifications.swift in Sources */,
 				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
-				F009AF021BD9CF5B007F38A9 /* TimeSlower2.xcdatamodeld in Sources */,
 				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
-				F009AEF71BD9CF4A007F38A9 /* Profile.swift in Sources */,
-				F009AEFB1BD9CF4A007F38A9 /* StatsManage.swift in Sources */,
 				F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */,
-				F009AEFF1BD9CF53007F38A9 /* CoreDataStack.swift in Sources */,
-				F009AEF91BD9CF4A007F38A9 /* ProfileManageStats.swift in Sources */,
-				F009AEFC1BD9CF4A007F38A9 /* Timing.swift in Sources */,
-				F009AEF31BD9CF4A007F38A9 /* ActivityManage.swift in Sources */,
-				F009AEF21BD9CF4A007F38A9 /* Activity.swift in Sources */,
 				F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */,
-				F009AEFD1BD9CF4A007F38A9 /* TimingManage.swift in Sources */,
-				F009AEF51BD9CF4A007F38A9 /* DayResults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,6 +1125,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
@@ -1108,6 +1145,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
@@ -1244,6 +1286,7 @@
 				F009AE801BD9C5F8007F38A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F009AE811BD9C5F8007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerTests" */ = {
 			isa = XCConfigurationList;
@@ -1252,6 +1295,7 @@
 				F009AE831BD9C5F8007F38A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F009AE841BD9C5F8007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerUITests" */ = {
 			isa = XCConfigurationList;
@@ -1260,6 +1304,7 @@
 				F009AE861BD9C5F8007F38A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F009AEA31BD9CBA2007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKit" */ = {
 			isa = XCConfigurationList;
@@ -1268,6 +1313,7 @@
 				F009AEA51BD9CBA2007F38A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F009AEDB1BD9CEA4007F38A9 /* Build configuration list for PBXNativeTarget "TimeSlowerKitTests" */ = {
 			isa = XCConfigurationList;
@@ -1276,6 +1322,7 @@
 				F009AEDD1BD9CEA4007F38A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

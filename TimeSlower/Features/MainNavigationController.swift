@@ -8,28 +8,24 @@
 
 import UIKit
 
+/// Root class responsible for loading first view of application
 class MainNavigationController: UINavigationController {
 
+    private lazy var mainStatsViewController: MainScreenVC? = {
+        return self.statsStoryboard.instantiateViewControllerWithIdentifier("MainScreenVC") as? MainScreenVC
+    }()
+    
+    private lazy var statsStoryboard: UIStoryboard = {
+        return UIStoryboard(name: "Stats", bundle: nil)
+    }()
+    
+    // MARK: - ViewController Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let mainStatsVC = self.mainStatsViewController {
+            self.viewControllers = [mainStatsVC]
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

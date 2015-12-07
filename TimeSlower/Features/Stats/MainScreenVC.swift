@@ -236,7 +236,7 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func presentVCtoCreateNewProfile() {
-        let createProfileVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier(Constants.createProfileStoryboardID) as! ProfileEditingVC
+        let createProfileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewControllerWithIdentifier(Constants.createProfileStoryboardID) as! ProfileEditingVC
         presentViewController(createProfileVC, animated: false, completion: nil)
     }
     

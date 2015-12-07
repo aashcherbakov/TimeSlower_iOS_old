@@ -38,6 +38,8 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBOutlet weak var birthdayIcon: UIImageView!
     @IBOutlet weak var countryIcon: UIImageView!
     
+    var viewModel: ProfileEditingViewModel?
+    
     var userProfile: Profile! {
         didSet {
             
@@ -68,6 +70,10 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
         setup()
+    }
+    
+    private func bindViewModel() {
+
     }
     
     //MARK: - ACTIONS

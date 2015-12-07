@@ -40,12 +40,15 @@ public class CoreDataStack {
     
     public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         var error: NSError? = nil
-        let sharedContainerURL: NSURL? = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(self.sharedAppGroup)
+        let sharedContainerURL: NSURL? = NSFileManager.defaultManager()
+            .containerURLForSecurityApplicationGroupIdentifier(self.sharedAppGroup)
         if let sharedConteinerURL = sharedContainerURL {
             let storeURL = sharedContainerURL?.URLByAppendingPathComponent("TimeSlower2")
-            var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+            var coordinator: NSPersistentStoreCoordinator? =
+                NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
             do {
-                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil,
+                    URL: storeURL, options: nil)
             } catch var error1 as NSError {
                 error = error1
                 var dict = [String: AnyObject]()
@@ -54,7 +57,8 @@ public class CoreDataStack {
                 dict[NSUnderlyingErrorKey] = error
                 error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
                 // Replace this with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // abort() causes the application to generate a crash log and terminate. You should not use this 
+                // function in a shipping application, although it may be useful during development.
                 print("Unresolved error \(error), \(error!.userInfo)")
                 abort()
             } catch {
