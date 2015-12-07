@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="81" id="KGk-i7-Jjw" customClass="ProfileEditingTableViewCell" customModule="TimeSlower" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="81"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="328" height="80.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cXn-9m-MhJ">
+                        <rect key="frame" x="8" y="35" width="11" height="12"/>
+                        <animations/>
+                    </imageView>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-Wh-jay" customClass="JVFloatLabeledTextField">
+                        <rect key="frame" x="41" y="33" width="279" height="17"/>
+                        <animations/>
+                        <color key="textColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <animations/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="leading" secondItem="cXn-9m-MhJ" secondAttribute="trailing" constant="22" id="0tK-pF-yg7"/>
+                    <constraint firstAttribute="trailing" secondItem="PAJ-Wh-jay" secondAttribute="trailing" constant="8" id="7Bp-FP-sL8"/>
+                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="centerY" secondItem="cXn-9m-MhJ" secondAttribute="centerY" id="7dH-Dy-gLz"/>
+                    <constraint firstItem="cXn-9m-MhJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="TLy-iK-yAx"/>
+                    <constraint firstItem="cXn-9m-MhJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y3t-aT-YSh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="iconImageView" destination="cXn-9m-MhJ" id="3o2-bJ-6gT"/>
+                <outlet property="textField" destination="PAJ-Wh-jay" id="sfW-dA-5nC"/>
+            </connections>
+            <point key="canvasLocation" x="536" y="513.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="nameIcon" width="11" height="12"/>
+    </resources>
+</document>

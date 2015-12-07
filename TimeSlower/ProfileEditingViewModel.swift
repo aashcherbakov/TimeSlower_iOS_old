@@ -16,4 +16,6 @@ class ProfileEditingViewModel {
     var userBirthday: NSDate?
     var userCountry: String?
     
+    
+    
 }

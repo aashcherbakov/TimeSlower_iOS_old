@@ -105,6 +105,10 @@
 		F02131251C151E8C00C9B02E /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131221C151E8C00C9B02E /* RxBlocking.framework */; };
 		F02131261C151E8C00C9B02E /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131231C151E8C00C9B02E /* RxCocoa.framework */; };
 		F02131271C151E8C00C9B02E /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131241C151E8C00C9B02E /* RxSwift.framework */; };
+		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
+		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F0B748921C152A97005D67AB /* JVFloatLabeledText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */; };
+		F0B748931C152A97005D67AB /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B748911C152A97005D67AB /* PureLayout.framework */; };
 		F0CB18EE1BED8CAA008B1198 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -273,6 +277,10 @@
 		F02131221C151E8C00C9B02E /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		F02131231C151E8C00C9B02E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
+		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
+		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
+		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainNavigationController.swift; path = Features/MainNavigationController.swift; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +290,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0B748921C152A97005D67AB /* JVFloatLabeledText.framework in Frameworks */,
+				F0B748931C152A97005D67AB /* PureLayout.framework in Frameworks */,
 				F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */,
 				F02131251C151E8C00C9B02E /* RxBlocking.framework in Frameworks */,
 				F02131261C151E8C00C9B02E /* RxCocoa.framework in Frameworks */,
@@ -330,9 +340,7 @@
 				F009AE781BD9C5F8007F38A9 /* TimeSlowerUITests */,
 				F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */,
 				F009AE541BD9C5F8007F38A9 /* Products */,
-				F02131221C151E8C00C9B02E /* RxBlocking.framework */,
-				F02131231C151E8C00C9B02E /* RxCocoa.framework */,
-				F02131241C151E8C00C9B02E /* RxSwift.framework */,
+				F0B748941C152E95005D67AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -493,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				F009AF5A1BDB12C5007F38A9 /* Views */,
-				F009AF381BDB0FEA007F38A9 /* Profile.storyboard */,
 				F009AF611BDB1339007F38A9 /* ViewControllers */,
 			);
 			name = Profile;
@@ -566,9 +573,9 @@
 		F009AF5A1BDB12C5007F38A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF5C1BDB12D9007F38A9 /* CountryPicker.bundle */,
-				F009AF5D1BDB12D9007F38A9 /* CountryPicker.h */,
-				F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */,
+				F009AF381BDB0FEA007F38A9 /* Profile.storyboard */,
+				F02131281C1524CD00C9B02E /* CountryPicker */,
+				F021312D1C15276E00C9B02E /* Cells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -625,6 +632,37 @@
 				F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		F02131281C1524CD00C9B02E /* CountryPicker */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF5C1BDB12D9007F38A9 /* CountryPicker.bundle */,
+				F009AF5D1BDB12D9007F38A9 /* CountryPicker.h */,
+				F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */,
+			);
+			name = CountryPicker;
+			sourceTree = "<group>";
+		};
+		F021312D1C15276E00C9B02E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */,
+				F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F0B748941C152E95005D67AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */,
+				F0B748911C152A97005D67AB /* PureLayout.framework */,
+				F02131221C151E8C00C9B02E /* RxBlocking.framework */,
+				F02131231C151E8C00C9B02E /* RxCocoa.framework */,
+				F02131241C151E8C00C9B02E /* RxSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F0EB7BDF1BEFCB1700173D5D /* Profile Stats */ = {
@@ -819,6 +857,7 @@
 				F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */,
 				F009AE641BD9C5F8007F38A9 /* LaunchScreen.storyboard in Resources */,
 				F009AF201BDADED8007F38A9 /* Menu.storyboard in Resources */,
+				F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */,
 				F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */,
 				F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */,
 				F009AF5F1BDB12D9007F38A9 /* CountryPicker.bundle in Resources */,
@@ -877,6 +916,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JVFloatLabeledText.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PureLayout.framework",
 			);
 			outputPaths = (
 			);
@@ -913,6 +954,7 @@
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
+				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,

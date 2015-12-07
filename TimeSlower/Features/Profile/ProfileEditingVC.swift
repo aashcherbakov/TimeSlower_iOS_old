@@ -40,11 +40,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     
     var viewModel: ProfileEditingViewModel?
     
-    var userProfile: Profile! {
-        didSet {
-            
-        }
-    }
+    var userProfile: Profile! 
     var selectedGender: Profile.Gender!
     var selectedBirthday: NSDate! {
         didSet {
