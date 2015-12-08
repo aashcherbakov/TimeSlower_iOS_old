@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TKS-7w-fhK">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--Fake Controller With Table View-->
+        <scene sceneID="QU8-pM-4ta">
+            <objects>
+                <viewController storyboardIdentifier="FakeStoryboard" id="TKS-7w-fhK" customClass="FakeControllerWithTableView" customModule="TimeSlowerTests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U5X-gJ-oZF"/>
+                        <viewControllerLayoutGuide type="bottom" id="iSV-DA-SfC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NTT-uZ-Icm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WFU-kO-CV5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WFU-kO-CV5" firstAttribute="top" secondItem="NTT-uZ-Icm" secondAttribute="top" id="Iw5-Uw-sjG"/>
+                            <constraint firstAttribute="trailing" secondItem="WFU-kO-CV5" secondAttribute="trailing" id="J2k-NN-B3K"/>
+                            <constraint firstItem="iSV-DA-SfC" firstAttribute="top" secondItem="WFU-kO-CV5" secondAttribute="bottom" id="kdB-Ye-kFp"/>
+                            <constraint firstItem="WFU-kO-CV5" firstAttribute="leading" secondItem="NTT-uZ-Icm" secondAttribute="leading" id="l6R-xZ-3DG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="WFU-kO-CV5" id="ENq-3k-asH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QfJ-pk-PFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="481"/>
+        </scene>
+    </scenes>
+</document>

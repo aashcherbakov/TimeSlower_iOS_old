@@ -1,0 +1,796 @@
+BCSymbolMap Version: 1.0
+-[JVFloatLabeledTextField initWithFrame:]
+-[JVFloatLabeledTextField initWithCoder:]
+-[JVFloatLabeledTextField commonInit]
+-[JVFloatLabeledTextField defaultFloatingLabelFont]
+-[JVFloatLabeledTextField updateDefaultFloatingLabelFont]
+-[JVFloatLabeledTextField labelActiveColor]
+-[JVFloatLabeledTextField setFloatingLabelFont:]
+-[JVFloatLabeledTextField showFloatingLabel:]
+__45-[JVFloatLabeledTextField showFloatingLabel:]_block_invoke
+__copy_helper_block_
+__destroy_helper_block_
+-[JVFloatLabeledTextField hideFloatingLabel:]
+__45-[JVFloatLabeledTextField hideFloatingLabel:]_block_invoke
+__copy_helper_block_62
+__destroy_helper_block_63
+-[JVFloatLabeledTextField setLabelOriginForTextAlignment]
+-[JVFloatLabeledTextField setFloatingLabelText:]
+-[JVFloatLabeledTextField setFont:]
+-[JVFloatLabeledTextField setAttributedText:]
+-[JVFloatLabeledTextField intrinsicContentSize]
+-[JVFloatLabeledTextField setPlaceholder:]
+-[JVFloatLabeledTextField setAttributedPlaceholder:]
+-[JVFloatLabeledTextField setPlaceholder:floatingTitle:]
+-[JVFloatLabeledTextField textRectForBounds:]
+-[JVFloatLabeledTextField editingRectForBounds:]
+-[JVFloatLabeledTextField insetRectForBounds:]
+-[JVFloatLabeledTextField clearButtonRectForBounds:]
+-[JVFloatLabeledTextField maxTopInset]
+-[JVFloatLabeledTextField setTextAlignment:]
+-[JVFloatLabeledTextField layoutSubviews]
+-[JVFloatLabeledTextField floatingLabel]
+-[JVFloatLabeledTextField floatingLabelYPadding]
+-[JVFloatLabeledTextField setFloatingLabelYPadding:]
+-[JVFloatLabeledTextField floatingLabelXPadding]
+-[JVFloatLabeledTextField setFloatingLabelXPadding:]
+-[JVFloatLabeledTextField placeholderYPadding]
+-[JVFloatLabeledTextField setPlaceholderYPadding:]
+-[JVFloatLabeledTextField floatingLabelFont]
+-[JVFloatLabeledTextField floatingLabelTextColor]
+-[JVFloatLabeledTextField setFloatingLabelTextColor:]
+-[JVFloatLabeledTextField floatingLabelActiveTextColor]
+-[JVFloatLabeledTextField setFloatingLabelActiveTextColor:]
+-[JVFloatLabeledTextField animateEvenIfNotFirstResponder]
+-[JVFloatLabeledTextField setAnimateEvenIfNotFirstResponder:]
+-[JVFloatLabeledTextField floatingLabelShowAnimationDuration]
+-[JVFloatLabeledTextField setFloatingLabelShowAnimationDuration:]
+-[JVFloatLabeledTextField floatingLabelHideAnimationDuration]
+-[JVFloatLabeledTextField setFloatingLabelHideAnimationDuration:]
+-[JVFloatLabeledTextField adjustsClearButtonRect]
+-[JVFloatLabeledTextField setAdjustsClearButtonRect:]
+-[JVFloatLabeledTextField keepBaseline]
+-[JVFloatLabeledTextField setKeepBaseline:]
+-[JVFloatLabeledTextField .cxx_destruct]
+OBJC_CLASSLIST_SUP_REFS_$_
+OBJC_METH_VAR_NAME_
+OBJC_SELECTOR_REFERENCES_
+OBJC_METH_VAR_NAME_1
+OBJC_SELECTOR_REFERENCES_2
+OBJC_METH_VAR_NAME_3
+OBJC_SELECTOR_REFERENCES_4
+OBJC_CLASSLIST_REFERENCES_$_
+OBJC_METH_VAR_NAME_5
+OBJC_SELECTOR_REFERENCES_6
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabel
+OBJC_METH_VAR_NAME_7
+OBJC_SELECTOR_REFERENCES_8
+OBJC_METH_VAR_NAME_9
+OBJC_SELECTOR_REFERENCES_10
+OBJC_METH_VAR_NAME_11
+OBJC_SELECTOR_REFERENCES_12
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelFont
+OBJC_METH_VAR_NAME_13
+OBJC_SELECTOR_REFERENCES_14
+OBJC_CLASSLIST_REFERENCES_$_15
+OBJC_METH_VAR_NAME_16
+OBJC_SELECTOR_REFERENCES_17
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelTextColor
+OBJC_METH_VAR_NAME_18
+OBJC_SELECTOR_REFERENCES_19
+OBJC_IVAR_$_JVFloatLabeledTextField._animateEvenIfNotFirstResponder
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelShowAnimationDuration
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelHideAnimationDuration
+OBJC_METH_VAR_NAME_20
+OBJC_SELECTOR_REFERENCES_21
+OBJC_METH_VAR_NAME_22
+OBJC_SELECTOR_REFERENCES_23
+OBJC_IVAR_$_JVFloatLabeledTextField._adjustsClearButtonRect
+OBJC_IVAR_$_JVFloatLabeledTextField._isFloatingLabelFontDefault
+OBJC_METH_VAR_NAME_24
+OBJC_SELECTOR_REFERENCES_25
+OBJC_METH_VAR_NAME_26
+OBJC_SELECTOR_REFERENCES_27
+OBJC_METH_VAR_NAME_28
+OBJC_SELECTOR_REFERENCES_29
+OBJC_METH_VAR_NAME_30
+OBJC_SELECTOR_REFERENCES_31
+OBJC_METH_VAR_NAME_32
+OBJC_SELECTOR_REFERENCES_33
+OBJC_CLASSLIST_REFERENCES_$_34
+OBJC_METH_VAR_NAME_35
+OBJC_SELECTOR_REFERENCES_36
+OBJC_METH_VAR_NAME_37
+OBJC_SELECTOR_REFERENCES_38
+OBJC_METH_VAR_NAME_39
+OBJC_SELECTOR_REFERENCES_40
+OBJC_METH_VAR_NAME_41
+OBJC_SELECTOR_REFERENCES_42
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelActiveTextColor
+OBJC_METH_VAR_NAME_43
+OBJC_SELECTOR_REFERENCES_44
+OBJC_METH_VAR_NAME_45
+OBJC_SELECTOR_REFERENCES_46
+OBJC_METH_VAR_NAME_47
+OBJC_SELECTOR_REFERENCES_48
+OBJC_METH_VAR_NAME_49
+OBJC_SELECTOR_REFERENCES_50
+OBJC_METH_VAR_NAME_51
+OBJC_SELECTOR_REFERENCES_52
+OBJC_METH_VAR_NAME_53
+OBJC_SELECTOR_REFERENCES_54
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelYPadding
+OBJC_METH_VAR_NAME_55
+OBJC_SELECTOR_REFERENCES_56
+.str
+__block_descriptor_tmp
+OBJC_CLASSLIST_REFERENCES_$_57
+OBJC_METH_VAR_NAME_58
+OBJC_SELECTOR_REFERENCES_59
+OBJC_METH_VAR_NAME_60
+OBJC_SELECTOR_REFERENCES_61
+OBJC_IVAR_$_JVFloatLabeledTextField._placeholderYPadding
+__block_descriptor_tmp64
+OBJC_METH_VAR_NAME_65
+OBJC_SELECTOR_REFERENCES_66
+OBJC_METH_VAR_NAME_67
+OBJC_SELECTOR_REFERENCES_68
+OBJC_METH_VAR_NAME_69
+OBJC_SELECTOR_REFERENCES_70
+OBJC_METH_VAR_NAME_71
+OBJC_SELECTOR_REFERENCES_72
+OBJC_METH_VAR_NAME_73
+OBJC_SELECTOR_REFERENCES_74
+OBJC_IVAR_$_JVFloatLabeledTextField._floatingLabelXPadding
+OBJC_METH_VAR_NAME_75
+OBJC_SELECTOR_REFERENCES_76
+OBJC_METH_VAR_NAME_77
+OBJC_SELECTOR_REFERENCES_78
+OBJC_METH_VAR_NAME_79
+OBJC_SELECTOR_REFERENCES_80
+OBJC_METH_VAR_NAME_81
+OBJC_SELECTOR_REFERENCES_82
+OBJC_METH_VAR_NAME_83
+OBJC_SELECTOR_REFERENCES_84
+OBJC_METH_VAR_NAME_85
+OBJC_SELECTOR_REFERENCES_86
+OBJC_METH_VAR_NAME_87
+OBJC_SELECTOR_REFERENCES_88
+OBJC_METH_VAR_NAME_89
+OBJC_SELECTOR_REFERENCES_90
+OBJC_METH_VAR_NAME_91
+OBJC_SELECTOR_REFERENCES_92
+OBJC_METH_VAR_NAME_93
+OBJC_SELECTOR_REFERENCES_94
+OBJC_METH_VAR_NAME_95
+OBJC_SELECTOR_REFERENCES_96
+OBJC_METH_VAR_NAME_97
+OBJC_SELECTOR_REFERENCES_98
+OBJC_METH_VAR_NAME_99
+OBJC_SELECTOR_REFERENCES_100
+OBJC_METH_VAR_NAME_101
+OBJC_SELECTOR_REFERENCES_102
+OBJC_METH_VAR_NAME_103
+OBJC_SELECTOR_REFERENCES_104
+OBJC_METH_VAR_NAME_105
+OBJC_SELECTOR_REFERENCES_106
+OBJC_METH_VAR_NAME_107
+OBJC_SELECTOR_REFERENCES_108
+OBJC_METH_VAR_NAME_109
+OBJC_SELECTOR_REFERENCES_110
+OBJC_METH_VAR_NAME_111
+OBJC_SELECTOR_REFERENCES_112
+OBJC_METH_VAR_NAME_113
+OBJC_SELECTOR_REFERENCES_114
+OBJC_METH_VAR_NAME_115
+OBJC_SELECTOR_REFERENCES_116
+OBJC_METH_VAR_NAME_117
+OBJC_SELECTOR_REFERENCES_118
+OBJC_METH_VAR_NAME_119
+OBJC_SELECTOR_REFERENCES_120
+OBJC_METH_VAR_NAME_121
+OBJC_SELECTOR_REFERENCES_122
+OBJC_METH_VAR_NAME_123
+OBJC_SELECTOR_REFERENCES_124
+OBJC_IVAR_$_JVFloatLabeledTextField._keepBaseline
+OBJC_CLASS_NAME_
+l_OBJC_METACLASS_RO_$_JVFloatLabeledTextField
+OBJC_CLASS_NAME_125
+OBJC_METH_VAR_TYPE_
+OBJC_METH_VAR_TYPE_126
+OBJC_METH_VAR_TYPE_127
+OBJC_METH_VAR_TYPE_128
+OBJC_METH_VAR_TYPE_129
+OBJC_METH_VAR_TYPE_130
+OBJC_METH_VAR_TYPE_131
+OBJC_METH_VAR_NAME_132
+OBJC_METH_VAR_TYPE_133
+OBJC_METH_VAR_TYPE_134
+OBJC_METH_VAR_TYPE_135
+OBJC_METH_VAR_TYPE_136
+OBJC_METH_VAR_NAME_137
+OBJC_METH_VAR_NAME_138
+OBJC_METH_VAR_NAME_139
+OBJC_METH_VAR_NAME_140
+OBJC_METH_VAR_TYPE_141
+OBJC_METH_VAR_NAME_142
+OBJC_METH_VAR_NAME_143
+OBJC_METH_VAR_NAME_144
+OBJC_METH_VAR_NAME_145
+OBJC_METH_VAR_NAME_146
+OBJC_METH_VAR_NAME_147
+OBJC_METH_VAR_NAME_148
+OBJC_METH_VAR_NAME_149
+OBJC_METH_VAR_NAME_150
+OBJC_METH_VAR_TYPE_151
+OBJC_METH_VAR_NAME_152
+OBJC_METH_VAR_NAME_153
+OBJC_METH_VAR_NAME_154
+OBJC_METH_VAR_NAME_155
+OBJC_METH_VAR_NAME_156
+OBJC_METH_VAR_NAME_157
+OBJC_METH_VAR_NAME_158
+l_OBJC_$_INSTANCE_METHODS_JVFloatLabeledTextField
+OBJC_METH_VAR_NAME_159
+OBJC_METH_VAR_TYPE_160
+OBJC_METH_VAR_NAME_161
+OBJC_METH_VAR_NAME_162
+OBJC_METH_VAR_NAME_163
+OBJC_METH_VAR_NAME_164
+OBJC_METH_VAR_TYPE_165
+OBJC_METH_VAR_NAME_166
+OBJC_METH_VAR_TYPE_167
+OBJC_METH_VAR_NAME_168
+OBJC_METH_VAR_NAME_169
+OBJC_METH_VAR_NAME_170
+OBJC_METH_VAR_TYPE_171
+OBJC_METH_VAR_NAME_172
+OBJC_METH_VAR_TYPE_173
+OBJC_METH_VAR_NAME_174
+OBJC_METH_VAR_NAME_175
+OBJC_METH_VAR_NAME_176
+l_OBJC_$_INSTANCE_VARIABLES_JVFloatLabeledTextField
+OBJC_PROP_NAME_ATTR_
+OBJC_PROP_NAME_ATTR_177
+OBJC_PROP_NAME_ATTR_178
+OBJC_PROP_NAME_ATTR_179
+OBJC_PROP_NAME_ATTR_180
+OBJC_PROP_NAME_ATTR_181
+OBJC_PROP_NAME_ATTR_182
+OBJC_PROP_NAME_ATTR_183
+OBJC_PROP_NAME_ATTR_184
+OBJC_PROP_NAME_ATTR_185
+OBJC_PROP_NAME_ATTR_186
+OBJC_PROP_NAME_ATTR_187
+OBJC_PROP_NAME_ATTR_188
+OBJC_PROP_NAME_ATTR_189
+OBJC_PROP_NAME_ATTR_190
+OBJC_PROP_NAME_ATTR_191
+OBJC_PROP_NAME_ATTR_192
+OBJC_PROP_NAME_ATTR_193
+OBJC_PROP_NAME_ATTR_194
+OBJC_PROP_NAME_ATTR_195
+OBJC_PROP_NAME_ATTR_196
+OBJC_PROP_NAME_ATTR_197
+OBJC_PROP_NAME_ATTR_198
+OBJC_PROP_NAME_ATTR_199
+l_OBJC_$_PROP_LIST_JVFloatLabeledTextField
+l_OBJC_CLASS_RO_$_JVFloatLabeledTextField
+OBJC_LABEL_CLASS_$
+Apple LLVM version 7.0.0 (clang-700.1.76)
+/Users/alexandershcherbakov/Library/Developer/Xcode/DerivedData/ModuleCache/JMLSH6XWMW8B/CoreGraphics-1YQ59ILDR3NYI.pcm
+CoreGraphics
+/Users/alexandershcherbakov/Library/Developer/Xcode/DerivedData/ModuleCache/JMLSH6XWMW8B/Foundation-A3SOD99KJ0S9.pcm
+Foundation
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework
+/Users/alexandershcherbakov/Library/Developer/Xcode/DerivedData/ModuleCache/JMLSH6XWMW8B/UIKit-2LM3EQU7VVY4O.pcm
+UIKit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework
+CGSizeMake
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField
+CGRectMake
+-[JVFloatLabeledTextField .cxx_destruct]
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField.m
+-[JVFloatLabeledTextField setKeepBaseline:]
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField.h
+-[JVFloatLabeledTextField keepBaseline]
+-[JVFloatLabeledTextField setAdjustsClearButtonRect:]
+-[JVFloatLabeledTextField adjustsClearButtonRect]
+-[JVFloatLabeledTextField setFloatingLabelHideAnimationDuration:]
+-[JVFloatLabeledTextField floatingLabelHideAnimationDuration]
+-[JVFloatLabeledTextField setFloatingLabelShowAnimationDuration:]
+-[JVFloatLabeledTextField floatingLabelShowAnimationDuration]
+-[JVFloatLabeledTextField setAnimateEvenIfNotFirstResponder:]
+-[JVFloatLabeledTextField animateEvenIfNotFirstResponder]
+-[JVFloatLabeledTextField setFloatingLabelActiveTextColor:]
+-[JVFloatLabeledTextField floatingLabelActiveTextColor]
+-[JVFloatLabeledTextField setFloatingLabelTextColor:]
+-[JVFloatLabeledTextField floatingLabelTextColor]
+-[JVFloatLabeledTextField floatingLabelFont]
+-[JVFloatLabeledTextField setPlaceholderYPadding:]
+-[JVFloatLabeledTextField placeholderYPadding]
+-[JVFloatLabeledTextField setFloatingLabelXPadding:]
+-[JVFloatLabeledTextField floatingLabelXPadding]
+-[JVFloatLabeledTextField setFloatingLabelYPadding:]
+-[JVFloatLabeledTextField floatingLabelYPadding]
+-[JVFloatLabeledTextField floatingLabel]
+-[JVFloatLabeledTextField layoutSubviews]
+-[JVFloatLabeledTextField setTextAlignment:]
+-[JVFloatLabeledTextField maxTopInset]
+-[JVFloatLabeledTextField clearButtonRectForBounds:]
+-[JVFloatLabeledTextField insetRectForBounds:]
+-[JVFloatLabeledTextField editingRectForBounds:]
+-[JVFloatLabeledTextField textRectForBounds:]
+-[JVFloatLabeledTextField setPlaceholder:floatingTitle:]
+-[JVFloatLabeledTextField setAttributedPlaceholder:]
+-[JVFloatLabeledTextField setPlaceholder:]
+-[JVFloatLabeledTextField intrinsicContentSize]
+-[JVFloatLabeledTextField setAttributedText:]
+-[JVFloatLabeledTextField setFont:]
+-[JVFloatLabeledTextField setFloatingLabelText:]
+-[JVFloatLabeledTextField setLabelOriginForTextAlignment]
+-[JVFloatLabeledTextField hideFloatingLabel:]
+-[JVFloatLabeledTextField showFloatingLabel:]
+-[JVFloatLabeledTextField setFloatingLabelFont:]
+-[JVFloatLabeledTextField labelActiveColor]
+-[JVFloatLabeledTextField updateDefaultFloatingLabelFont]
+-[JVFloatLabeledTextField defaultFloatingLabelFont]
+-[JVFloatLabeledTextField commonInit]
+-[JVFloatLabeledTextField initWithCoder:]
+-[JVFloatLabeledTextField initWithFrame:]
+-[JVFloatLabeledTextView initWithFrame:]
+-[JVFloatLabeledTextView initWithCoder:]
+-[JVFloatLabeledTextView commonInit]
+-[JVFloatLabeledTextView dealloc]
+-[JVFloatLabeledTextView defaultFloatingLabelFont]
+-[JVFloatLabeledTextView setPlaceholder:]
+-[JVFloatLabeledTextView setPlaceholder:floatingTitle:]
+-[JVFloatLabeledTextView layoutSubviews]
+-[JVFloatLabeledTextView labelActiveColor]
+-[JVFloatLabeledTextView showFloatingLabel:]
+__44-[JVFloatLabeledTextView showFloatingLabel:]_block_invoke
+-[JVFloatLabeledTextView hideFloatingLabel:]
+__44-[JVFloatLabeledTextView hideFloatingLabel:]_block_invoke
+__copy_helper_block_130
+__destroy_helper_block_131
+-[JVFloatLabeledTextView adjustTextContainerInsetTop]
+-[JVFloatLabeledTextView setLabelOriginForTextAlignment]
+-[JVFloatLabeledTextView textRect]
+-[JVFloatLabeledTextView setFloatingLabelFont:]
++[JVFloatLabeledTextView defaultiOSPlaceholderColor]
+-[JVFloatLabeledTextView setTextAlignment:]
+-[JVFloatLabeledTextView setFont:]
+-[JVFloatLabeledTextView setText:]
+-[JVFloatLabeledTextView setPlaceholderTextColor:]
+-[JVFloatLabeledTextView setBackgroundColor:]
+-[JVFloatLabeledTextView placeholder]
+-[JVFloatLabeledTextView placeholderLabel]
+-[JVFloatLabeledTextView floatingLabel]
+-[JVFloatLabeledTextView floatingLabelYPadding]
+-[JVFloatLabeledTextView setFloatingLabelYPadding:]
+-[JVFloatLabeledTextView floatingLabelXPadding]
+-[JVFloatLabeledTextView setFloatingLabelXPadding:]
+-[JVFloatLabeledTextView placeholderYPadding]
+-[JVFloatLabeledTextView setPlaceholderYPadding:]
+-[JVFloatLabeledTextView floatingLabelFont]
+-[JVFloatLabeledTextView floatingLabelTextColor]
+-[JVFloatLabeledTextView setFloatingLabelTextColor:]
+-[JVFloatLabeledTextView floatingLabelActiveTextColor]
+-[JVFloatLabeledTextView setFloatingLabelActiveTextColor:]
+-[JVFloatLabeledTextView floatingLabelShouldLockToTop]
+-[JVFloatLabeledTextView setFloatingLabelShouldLockToTop:]
+-[JVFloatLabeledTextView placeholderTextColor]
+-[JVFloatLabeledTextView animateEvenIfNotFirstResponder]
+-[JVFloatLabeledTextView setAnimateEvenIfNotFirstResponder:]
+-[JVFloatLabeledTextView floatingLabelShowAnimationDuration]
+-[JVFloatLabeledTextView setFloatingLabelShowAnimationDuration:]
+-[JVFloatLabeledTextView floatingLabelHideAnimationDuration]
+-[JVFloatLabeledTextView setFloatingLabelHideAnimationDuration:]
+-[JVFloatLabeledTextView startingTextContainerInsetTop]
+-[JVFloatLabeledTextView setStartingTextContainerInsetTop:]
+-[JVFloatLabeledTextView .cxx_destruct]
+OBJC_METH_VAR_NAME_15
+OBJC_SELECTOR_REFERENCES_16
+OBJC_METH_VAR_NAME_17
+OBJC_SELECTOR_REFERENCES_18
+OBJC_METH_VAR_NAME_19
+OBJC_SELECTOR_REFERENCES_20
+OBJC_METH_VAR_NAME_21
+OBJC_SELECTOR_REFERENCES_22
+OBJC_IVAR_$_JVFloatLabeledTextView._placeholderLabel
+OBJC_METH_VAR_NAME_23
+OBJC_SELECTOR_REFERENCES_24
+OBJC_METH_VAR_NAME_25
+OBJC_SELECTOR_REFERENCES_26
+OBJC_METH_VAR_NAME_27
+OBJC_SELECTOR_REFERENCES_28
+OBJC_METH_VAR_NAME_29
+OBJC_SELECTOR_REFERENCES_30
+OBJC_METH_VAR_NAME_31
+OBJC_SELECTOR_REFERENCES_32
+OBJC_CLASSLIST_REFERENCES_$_33
+OBJC_METH_VAR_NAME_34
+OBJC_SELECTOR_REFERENCES_35
+OBJC_METH_VAR_NAME_36
+OBJC_SELECTOR_REFERENCES_37
+OBJC_CLASSLIST_REFERENCES_$_38
+OBJC_IVAR_$_JVFloatLabeledTextView._placeholderTextColor
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabel
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelFont
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelTextColor
+OBJC_IVAR_$_JVFloatLabeledTextView._animateEvenIfNotFirstResponder
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelShowAnimationDuration
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelHideAnimationDuration
+OBJC_METH_VAR_NAME_62
+OBJC_SELECTOR_REFERENCES_63
+OBJC_METH_VAR_NAME_64
+OBJC_SELECTOR_REFERENCES_65
+OBJC_METH_VAR_NAME_66
+OBJC_SELECTOR_REFERENCES_67
+OBJC_METH_VAR_NAME_68
+OBJC_SELECTOR_REFERENCES_69
+OBJC_METH_VAR_NAME_70
+OBJC_SELECTOR_REFERENCES_71
+OBJC_METH_VAR_NAME_72
+OBJC_SELECTOR_REFERENCES_73
+OBJC_METH_VAR_NAME_74
+OBJC_SELECTOR_REFERENCES_75
+OBJC_CLASSLIST_REFERENCES_$_76
+OBJC_IVAR_$_JVFloatLabeledTextView._placeholder
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelActiveTextColor
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelYPadding
+OBJC_CLASSLIST_REFERENCES_$_125
+OBJC_METH_VAR_NAME_126
+OBJC_SELECTOR_REFERENCES_127
+OBJC_METH_VAR_NAME_128
+OBJC_SELECTOR_REFERENCES_129
+OBJC_IVAR_$_JVFloatLabeledTextView._placeholderYPadding
+__block_descriptor_tmp132
+OBJC_METH_VAR_NAME_133
+OBJC_SELECTOR_REFERENCES_134
+OBJC_METH_VAR_NAME_135
+OBJC_SELECTOR_REFERENCES_136
+OBJC_SELECTOR_REFERENCES_138
+OBJC_SELECTOR_REFERENCES_140
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelXPadding
+OBJC_METH_VAR_NAME_141
+OBJC_SELECTOR_REFERENCES_142
+OBJC_SELECTOR_REFERENCES_144
+OBJC_SELECTOR_REFERENCES_146
+OBJC_SELECTOR_REFERENCES_148
+OBJC_SELECTOR_REFERENCES_150
+OBJC_IVAR_$_JVFloatLabeledTextView._floatingLabelShouldLockToTop
+OBJC_IVAR_$_JVFloatLabeledTextView._startingTextContainerInsetTop
+l_OBJC_$_CLASS_METHODS_JVFloatLabeledTextView
+l_OBJC_METACLASS_RO_$_JVFloatLabeledTextView
+OBJC_CLASS_NAME_151
+OBJC_METH_VAR_TYPE_152
+OBJC_METH_VAR_TYPE_153
+OBJC_METH_VAR_TYPE_154
+OBJC_METH_VAR_TYPE_155
+OBJC_METH_VAR_TYPE_157
+OBJC_METH_VAR_TYPE_158
+OBJC_METH_VAR_TYPE_159
+OBJC_METH_VAR_NAME_160
+OBJC_METH_VAR_TYPE_161
+OBJC_METH_VAR_NAME_165
+OBJC_METH_VAR_TYPE_166
+OBJC_METH_VAR_NAME_167
+OBJC_METH_VAR_TYPE_168
+OBJC_METH_VAR_NAME_171
+OBJC_METH_VAR_NAME_173
+OBJC_METH_VAR_TYPE_177
+OBJC_METH_VAR_NAME_178
+OBJC_METH_VAR_NAME_179
+OBJC_METH_VAR_NAME_180
+OBJC_METH_VAR_NAME_181
+OBJC_METH_VAR_NAME_182
+OBJC_METH_VAR_NAME_183
+OBJC_METH_VAR_NAME_184
+l_OBJC_$_INSTANCE_METHODS_JVFloatLabeledTextView
+OBJC_METH_VAR_NAME_185
+OBJC_METH_VAR_TYPE_186
+OBJC_METH_VAR_NAME_187
+OBJC_METH_VAR_NAME_188
+OBJC_METH_VAR_TYPE_189
+OBJC_METH_VAR_NAME_190
+OBJC_METH_VAR_TYPE_191
+OBJC_METH_VAR_NAME_192
+OBJC_METH_VAR_NAME_193
+OBJC_METH_VAR_TYPE_194
+OBJC_METH_VAR_NAME_195
+OBJC_METH_VAR_NAME_196
+OBJC_METH_VAR_NAME_197
+OBJC_METH_VAR_TYPE_198
+OBJC_METH_VAR_NAME_199
+OBJC_METH_VAR_TYPE_200
+OBJC_METH_VAR_NAME_201
+OBJC_METH_VAR_NAME_202
+OBJC_METH_VAR_NAME_203
+OBJC_METH_VAR_NAME_204
+OBJC_METH_VAR_NAME_205
+l_OBJC_$_INSTANCE_VARIABLES_JVFloatLabeledTextView
+OBJC_PROP_NAME_ATTR_206
+OBJC_PROP_NAME_ATTR_207
+OBJC_PROP_NAME_ATTR_208
+OBJC_PROP_NAME_ATTR_209
+OBJC_PROP_NAME_ATTR_210
+OBJC_PROP_NAME_ATTR_211
+OBJC_PROP_NAME_ATTR_212
+OBJC_PROP_NAME_ATTR_213
+OBJC_PROP_NAME_ATTR_214
+OBJC_PROP_NAME_ATTR_215
+OBJC_PROP_NAME_ATTR_216
+OBJC_PROP_NAME_ATTR_217
+OBJC_PROP_NAME_ATTR_218
+OBJC_PROP_NAME_ATTR_219
+OBJC_PROP_NAME_ATTR_220
+OBJC_PROP_NAME_ATTR_221
+OBJC_PROP_NAME_ATTR_222
+OBJC_PROP_NAME_ATTR_223
+OBJC_PROP_NAME_ATTR_224
+OBJC_PROP_NAME_ATTR_225
+OBJC_PROP_NAME_ATTR_226
+OBJC_PROP_NAME_ATTR_227
+OBJC_PROP_NAME_ATTR_228
+OBJC_PROP_NAME_ATTR_229
+OBJC_PROP_NAME_ATTR_230
+OBJC_PROP_NAME_ATTR_231
+OBJC_PROP_NAME_ATTR_232
+OBJC_PROP_NAME_ATTR_233
+OBJC_PROP_NAME_ATTR_234
+l_OBJC_$_PROP_LIST_JVFloatLabeledTextView
+l_OBJC_CLASS_RO_$_JVFloatLabeledTextView
+UIEdgeInsetsInsetRect
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGeometry.h
+UIEdgeInsetsMake
+-[JVFloatLabeledTextView .cxx_destruct]
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextView.m
+-[JVFloatLabeledTextView setStartingTextContainerInsetTop:]
+-[JVFloatLabeledTextView startingTextContainerInsetTop]
+-[JVFloatLabeledTextView setFloatingLabelHideAnimationDuration:]
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextView.h
+-[JVFloatLabeledTextView floatingLabelHideAnimationDuration]
+-[JVFloatLabeledTextView setFloatingLabelShowAnimationDuration:]
+-[JVFloatLabeledTextView floatingLabelShowAnimationDuration]
+-[JVFloatLabeledTextView setAnimateEvenIfNotFirstResponder:]
+-[JVFloatLabeledTextView animateEvenIfNotFirstResponder]
+-[JVFloatLabeledTextView placeholderTextColor]
+-[JVFloatLabeledTextView setFloatingLabelShouldLockToTop:]
+-[JVFloatLabeledTextView floatingLabelShouldLockToTop]
+-[JVFloatLabeledTextView setFloatingLabelActiveTextColor:]
+-[JVFloatLabeledTextView floatingLabelActiveTextColor]
+-[JVFloatLabeledTextView setFloatingLabelTextColor:]
+-[JVFloatLabeledTextView floatingLabelTextColor]
+-[JVFloatLabeledTextView floatingLabelFont]
+-[JVFloatLabeledTextView setPlaceholderYPadding:]
+-[JVFloatLabeledTextView placeholderYPadding]
+-[JVFloatLabeledTextView setFloatingLabelXPadding:]
+-[JVFloatLabeledTextView floatingLabelXPadding]
+-[JVFloatLabeledTextView setFloatingLabelYPadding:]
+-[JVFloatLabeledTextView floatingLabelYPadding]
+-[JVFloatLabeledTextView floatingLabel]
+-[JVFloatLabeledTextView placeholderLabel]
+-[JVFloatLabeledTextView placeholder]
+-[JVFloatLabeledTextView setBackgroundColor:]
+-[JVFloatLabeledTextView setPlaceholderTextColor:]
+-[JVFloatLabeledTextView setText:]
+-[JVFloatLabeledTextView setFont:]
+-[JVFloatLabeledTextView setTextAlignment:]
++[JVFloatLabeledTextView defaultiOSPlaceholderColor]
+-[JVFloatLabeledTextView setFloatingLabelFont:]
+-[JVFloatLabeledTextView textRect]
+-[JVFloatLabeledTextView setLabelOriginForTextAlignment]
+-[JVFloatLabeledTextView adjustTextContainerInsetTop]
+-[JVFloatLabeledTextView hideFloatingLabel:]
+-[JVFloatLabeledTextView showFloatingLabel:]
+-[JVFloatLabeledTextView labelActiveColor]
+-[JVFloatLabeledTextView layoutSubviews]
+-[JVFloatLabeledTextView setPlaceholder:floatingTitle:]
+-[JVFloatLabeledTextView setPlaceholder:]
+-[JVFloatLabeledTextView defaultFloatingLabelFont]
+-[JVFloatLabeledTextView dealloc]
+-[JVFloatLabeledTextView commonInit]
+-[JVFloatLabeledTextView initWithCoder:]
+-[JVFloatLabeledTextView initWithFrame:]
+-[NSString(TextDirectionality) getBaseDirection]
+l_OBJC_$_CATEGORY_INSTANCE_METHODS_NSString_$_TextDirectionality
+l_OBJC_$_CATEGORY_NSString_$_TextDirectionality
+OBJC_LABEL_CATEGORY_$
+-[NSString(TextDirectionality) getBaseDirection]
+/Users/alexandershcherbakov/timeslower/Carthage/Checkouts/JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField/NSString+TextDirectionality.m
+isCodePointStrongLTR
+isCodePointStrongRTL
+/Users/alexandershcherbakov/Library/Developer/Xcode/DerivedData/JVFloatLabeledTextField-avvegalnrhwdfidjriqqdevtoifc/Build/Intermediates/JVFloatLabeledTextField.build/Release-iphoneos/JVFloatLabeledText.build/DerivedSources/JVFloatLabeledText_vers.c
+Apple LLVM version 7.0.0 (clang-700.1.75)
+/var/folders/zz/zyxvpxvq6csfxvn_n0000000000000/C/org.llvm.clang.root/ModuleCache/1PKN476Z26K39/Foundation-E7AIY98HG4IO.pcm
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk/System/Library/Frameworks/Foundation.framework
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -miphoneos-version-min=4.3 -g -Wno-sign-conversion -fembed-bitcode -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -fgnu-inline-asm -fmodules -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/cf.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/cf.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-63/source/cf.m -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/cf.o -mlinker-version=253.3.2
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-63/source/cf.m
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-63
+_ZL15__ARCLite__loadv
+_ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+_ZL22add_image_hook_swiftV1PK11mach_headerl
+_ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+_ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+_ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+_ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+_ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+_ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+_ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+_ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+_ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+_ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+_ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+_ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+_ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+_ZL32__arclite_object_getIndexedIvarsP11objc_object
+_ZL23__arclite_objc_getClassPKc
+_ZL27__arclite_objc_getMetaClassPKc
+_ZL31__arclite_objc_getRequiredClassPKc
+_ZL26__arclite_objc_lookUpClassPKc
+_ZL26__arclite_objc_getProtocolPKc
+_ZL23__arclite_class_getNameP10objc_class
+_ZL26__arclite_protocol_getNameP8Protocol
+_ZL37__arclite_objc_copyClassNamesForImagePKcPj
+_ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+_ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+_ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+_ZL14initialize_impP11objc_objectP13objc_selector
+_ZL18allocateMaybeSwiftP18glue_swift_class_tm
+_ZL22copySwiftV1MangledNamePKcb
+_ZL13demangledNamePKcb
+_ZL16scanMangledFieldRPKcS0_S1_Ri
+_ZL30arclite_uninitialized_functionv
+_ZL12cxxConstructP11objc_object
+_ZL20fixStringForCoreDataP11objc_object
+OBJC_METACLASS_$___ARCLite__
+_ZL24OBJC_CLASS_$___ARCLite__
+_ZL31OBJC_METACLASS_RO_$___ARCLite__
+_non_lazy_classes
+_ZL27OBJC_CLASS_RO_$___ARCLite__
+_ZL11_class_name
+_ZL32OBJC_$_CLASS_METHODS___ARCLite__
+_ZL17_load_method_name
+_ZL17_load_method_type
+OBJC_METH_VAR_TYPE_6
+l_OBJC_$_PROTOCOL_INSTANCE_METHODS___ARCLiteKeyedSubscripting__
+l_OBJC_$_PROTOCOL_METHOD_TYPES___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+.str7
+.str8
+_ZL30NSUndoManagerProxy_targetClass
+.str11
+.str12
+_ZL29original_NSManagedObject_init
+_ZL40original_NSManagedObject_allocWithEntity
+_ZL35original_NSManagedObject_allocBatch
+_ZL25NSMutableDictionary_class
+.str19
+_ZL22NSConstantString_class
+.str20
+_ZL14NSString_class
+.str21
+_ZL36original_NSKKMS_fastIndexForKnownKey
+_ZL27original_NSKKMS_indexForKey
+.str26
+_ZL28original_NSKKsD_objectForKey
+_ZL34original_NSKKsD_removeObjectForKey
+_ZL32original_NSKKsD_setObject_forKey
+_ZL40original_NSKKsD_addEntriesFromDictionary
+_ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+_ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+.str31
+.str32
+_ZL31original_objc_allocateClassPair
+.str33
+_ZL31original_object_getIndexedIvars
+.str34
+_ZL22original_objc_getClass
+.str35
+_ZL26original_objc_getMetaClass
+.str36
+_ZL30original_objc_getRequiredClass
+.str37
+_ZL25original_objc_lookUpClass
+.str38
+_ZL25original_objc_getProtocol
+.str39
+_ZL22original_class_getName
+.str40
+_ZL25original_protocol_getName
+.str41
+_ZL36original_objc_copyClassNamesForImage
+OBJC_METH_VAR_NAME_42
+OBJC_SELECTOR_REFERENCES_43
+OBJC_METH_VAR_NAME_44
+OBJC_SELECTOR_REFERENCES_45
+.str46
+.str47
+.str48
+.str49
+.str50
+.str51
+.str52
+.str53
+_ZL12demangleLock
+_ZL9Demangled
+.str54
+.str55
+.str56
+.str57
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -fembed-bitcode -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -fgnu-inline-asm -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-63/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-63~53/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=253.3.2
+__arclite_NSKKsD_addEntriesFromDictionary
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-63/source/arclite.mm
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+fixStringForCoreData
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+cxxConstruct
+__arclite_NSManagedObject_init
+arclite_uninitialized_function
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+__arclite_objc_copyClassNamesForImage
+patch_t<const char *(Protocol *)>
+__arclite_protocol_getName
+patch_t<const char *(Class)>
+__isctype
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk/usr/include/ctype.h
+isdigit
+scanMangledField
+copySwiftV1DemangledName
+demangledName
+__arclite_class_getName
+patch_t<Protocol *(const char *)>
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+patch_t<Class (const char *)>
+copySwiftV1MangledName
+__arclite_objc_getClass
+patch_t<void *(id)>
+word_align
+__arclite_object_getIndexedIvars
+patch_t<Class (Class, const char *, unsigned long)>
+allocateMaybeSwift
+isSwift
+metaclass
+__arclite_objc_allocateClassPair
+patch_t<Class (Class, const objc_image_info *)>
+initialize_imp
+property_list_nth
+transcribeProperties
+transcribeProtocols
+method_list_nth
+transcribeMethods
+alignment
+max
+ivar_list_nth
+transcribeIvars
+fastFlags
+data
+ro
+__arclite_objc_readClassPair
+add_image_hook_swiftV1
+install_swiftV1
+install_ARC
+objc_collectingEnabled
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.Internal.sdk/usr/include/objc/objc-auto.h
+keyedGetter
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+addOrReplaceMethod
+install_dict_nil_value
+install_subscripting
+install_autoreleasepool
+__ARCLite__load

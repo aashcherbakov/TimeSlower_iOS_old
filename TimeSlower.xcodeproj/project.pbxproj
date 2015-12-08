@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */; };
+		896B842F1C1714C000C786E7 /* FakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */; };
+		896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */; };
+		896B84321C1721BB00C786E7 /* JVFloatLabeledText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */; };
+		896B84331C1721BB00C786E7 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B748911C152A97005D67AB /* PureLayout.framework */; };
+		896B84341C1721BB00C786E7 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131221C151E8C00C9B02E /* RxBlocking.framework */; };
+		896B84351C1721BB00C786E7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131231C151E8C00C9B02E /* RxCocoa.framework */; };
+		896B84361C1721BB00C786E7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02131241C151E8C00C9B02E /* RxSwift.framework */; };
 		F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */; };
 		F009AE5C1BD9C5F8007F38A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */; };
 		F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F009AE601BD9C5F8007F38A9 /* Assets.xcassets */; };
 		F009AE641BD9C5F8007F38A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AE621BD9C5F8007F38A9 /* LaunchScreen.storyboard */; };
-		F009AE6F1BD9C5F8007F38A9 /* TimeSlowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE6E1BD9C5F8007F38A9 /* TimeSlowerTests.swift */; };
 		F009AE7A1BD9C5F8007F38A9 /* TimeSlowerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE791BD9C5F8007F38A9 /* TimeSlowerUITests.swift */; };
 		F009AE8F1BD9CBA2007F38A9 /* TimeSlowerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
@@ -168,6 +175,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellTests.swift; sourceTree = "<group>"; };
+		896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FakeStoryboard.storyboard; sourceTree = "<group>"; };
+		896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeControllerWithTableView.swift; sourceTree = "<group>"; };
 		F009AE531BD9C5F8007F38A9 /* TimeSlower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F009AE5B1BD9C5F8007F38A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,7 +185,6 @@
 		F009AE631BD9C5F8007F38A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F009AE651BD9C5F8007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F009AE6A1BD9C5F8007F38A9 /* TimeSlowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F009AE6E1BD9C5F8007F38A9 /* TimeSlowerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlowerTests.swift; sourceTree = "<group>"; };
 		F009AE701BD9C5F8007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F009AE751BD9C5F8007F38A9 /* TimeSlowerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE791BD9C5F8007F38A9 /* TimeSlowerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlowerUITests.swift; sourceTree = "<group>"; };
@@ -303,6 +312,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				896B84321C1721BB00C786E7 /* JVFloatLabeledText.framework in Frameworks */,
+				896B84331C1721BB00C786E7 /* PureLayout.framework in Frameworks */,
+				896B84341C1721BB00C786E7 /* RxBlocking.framework in Frameworks */,
+				896B84351C1721BB00C786E7 /* RxCocoa.framework in Frameworks */,
+				896B84361C1721BB00C786E7 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +345,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		896B842D1C17139F00C786E7 /* ProfileTests */ = {
+			isa = PBXGroup;
+			children = (
+				896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */,
+			);
+			name = ProfileTests;
+			sourceTree = "<group>";
+		};
 		F009AE4A1BD9C5F8007F38A9 = {
 			isa = PBXGroup;
 			children = (
@@ -373,8 +395,10 @@
 		F009AE6D1BD9C5F8007F38A9 /* TimeSlowerTests */ = {
 			isa = PBXGroup;
 			children = (
-				F009AE6E1BD9C5F8007F38A9 /* TimeSlowerTests.swift */,
 				F009AE701BD9C5F8007F38A9 /* Info.plist */,
+				896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */,
+				896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */,
+				896B842D1C17139F00C786E7 /* ProfileTests */,
 			);
 			path = TimeSlowerTests;
 			sourceTree = "<group>";
@@ -489,10 +513,10 @@
 				F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */,
 				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F009AF621BDB13A4007F38A9 /* Shared */,
+				F009AF0E1BDAD6CE007F38A9 /* Profile */,
 				F009AF111BDAD6E6007F38A9 /* Menu */,
 				F009AF101BDAD6DF007F38A9 /* Stats */,
 				F009AF0F1BDAD6D6007F38A9 /* Activities */,
-				F009AF0E1BDAD6CE007F38A9 /* Profile */,
 			);
 			name = Features;
 			sourceTree = "<group>";
@@ -878,6 +902,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				896B842F1C1714C000C786E7 /* FakeStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,7 +1005,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F009AE6F1BD9C5F8007F38A9 /* TimeSlowerTests.swift in Sources */,
+				896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */,
+				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,11 +1230,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TimeSlowerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeSlower.app/TimeSlower";
 			};
 			name = Debug;
 		};
@@ -1216,11 +1245,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TimeSlowerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeSlower.app/TimeSlower";
+				TEST_HOST = "";
 			};
 			name = Release;
 		};
