@@ -14,11 +14,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cXn-9m-MhJ">
-                        <rect key="frame" x="8" y="35" width="11" height="12"/>
+                        <rect key="frame" x="8" y="34" width="11" height="12"/>
                         <animations/>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-Wh-jay" customClass="JVFloatLabeledTextField">
-                        <rect key="frame" x="41" y="33" width="279" height="17"/>
+                        <rect key="frame" x="41" y="4" width="279" height="73"/>
                         <animations/>
                         <color key="textColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -32,6 +32,8 @@
                     <constraint firstAttribute="trailing" secondItem="PAJ-Wh-jay" secondAttribute="trailing" constant="8" id="7Bp-FP-sL8"/>
                     <constraint firstItem="PAJ-Wh-jay" firstAttribute="centerY" secondItem="cXn-9m-MhJ" secondAttribute="centerY" id="7dH-Dy-gLz"/>
                     <constraint firstItem="cXn-9m-MhJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="TLy-iK-yAx"/>
+                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="fyP-p6-c9x"/>
+                    <constraint firstAttribute="bottom" secondItem="PAJ-Wh-jay" secondAttribute="bottom" constant="4" id="kGU-34-jrD"/>
                     <constraint firstItem="cXn-9m-MhJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y3t-aT-YSh"/>
                 </constraints>
             </tableViewCellContentView>
