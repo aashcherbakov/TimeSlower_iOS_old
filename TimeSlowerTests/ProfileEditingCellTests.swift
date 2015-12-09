@@ -22,35 +22,22 @@ class ProfileEditingCellTests: XCTestCase {
         
         let controller = storyboard.instantiateInitialViewController()
             as! FakeControllerWithTableView
-        UIApplication.sharedApplication().keyWindow!.rootViewController = fakeController
         
         XCTAssertNotNil(controller.view, "View should be loaded")
         XCTAssertNotNil(controller.tableView, "Table view should be loaded")
         
-        let realBundle = NSBundle.mainBundle()
+        self.fakeController = controller
         
-        fakeController.tableView
+        let realBundle = NSBundle.mainBundle()
+        self.fakeController.tableView
             .registerNib(UINib(nibName: "ProfileEditingTableViewCell",
             bundle: realBundle),
             forCellReuseIdentifier: "ProfileEditingTableViewCell")
-        
-    }
+        }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
