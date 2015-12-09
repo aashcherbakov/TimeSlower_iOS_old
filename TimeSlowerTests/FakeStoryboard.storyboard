@@ -7,7 +7,7 @@
         <!--Fake Controller With Table View-->
         <scene sceneID="QU8-pM-4ta">
             <objects>
-                <viewController storyboardIdentifier="FakeStoryboard" id="TKS-7w-fhK" customClass="FakeControllerWithTableView" customModule="TimeSlowerTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FakeControllerWithTableView" id="TKS-7w-fhK" customClass="FakeControllerWithTableView" customModule="TimeSlowerTests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U5X-gJ-oZF"/>
                         <viewControllerLayoutGuide type="bottom" id="iSV-DA-SfC"/>
@@ -20,6 +20,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="TKS-7w-fhK" id="w6a-SC-p1c"/>
+                                    <outlet property="delegate" destination="TKS-7w-fhK" id="gib-kS-7UT"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
