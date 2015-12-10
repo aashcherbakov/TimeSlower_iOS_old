@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Evs-iJ-fF4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Evs-iJ-fF4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -12,9 +12,6 @@
             <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.ttf">
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
@@ -499,145 +496,21 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rk7-qw-Qvc" userLabel="propertiesView">
-                                <rect key="frame" x="0.0" y="280" width="600" height="247"/>
+                                <rect key="frame" x="40" y="280" width="520" height="247"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUy-Gv-wtA" userLabel="nameView">
-                                        <rect key="frame" x="75" y="10" width="450" height="50"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6yF-Y6-0EJ">
-                                                <rect key="frame" x="0.0" y="19" width="11" height="12"/>
-                                                <animations/>
-                                            </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBz-97-VoN">
-                                                <rect key="frame" x="41" y="0.0" width="409" height="50"/>
-                                                <animations/>
-                                                <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="fg1-P1-bxr" id="wVk-go-nE0"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foh-Ph-JO1">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="247"/>
                                         <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="gBz-97-VoN" secondAttribute="bottom" id="F8q-h7-wqN"/>
-                                            <constraint firstAttribute="height" constant="50" id="G4p-T5-rS3"/>
-                                            <constraint firstAttribute="centerY" secondItem="6yF-Y6-0EJ" secondAttribute="centerY" id="Gqe-TA-T4o"/>
-                                            <constraint firstItem="gBz-97-VoN" firstAttribute="centerY" secondItem="6yF-Y6-0EJ" secondAttribute="centerY" id="LdC-KZ-l57"/>
-                                            <constraint firstItem="gBz-97-VoN" firstAttribute="leading" secondItem="6yF-Y6-0EJ" secondAttribute="trailing" constant="30" id="RO8-e8-b9d"/>
-                                            <constraint firstItem="gBz-97-VoN" firstAttribute="top" secondItem="hUy-Gv-wtA" secondAttribute="top" id="SwO-rl-O3j"/>
-                                            <constraint firstAttribute="trailing" secondItem="gBz-97-VoN" secondAttribute="trailing" id="rIw-Mx-lET"/>
-                                            <constraint firstItem="6yF-Y6-0EJ" firstAttribute="leading" secondItem="hUy-Gv-wtA" secondAttribute="leading" id="uNJ-zr-Tz1"/>
-                                        </constraints>
-                                    </view>
-                                    <view clipsSubviews="YES" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mee-20-Bad" userLabel="birthdayView">
-                                        <rect key="frame" x="75" y="60" width="450" height="50"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birthdayIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uiy-nj-3g9">
-                                                <rect key="frame" x="0.0" y="19" width="10" height="12"/>
-                                                <animations/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of birth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdd-ha-eFK">
-                                                <rect key="frame" x="40" y="15" width="89" height="22"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
-                                                <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerY" secondItem="uiy-nj-3g9" secondAttribute="centerY" id="7Mz-ZK-vax"/>
-                                            <constraint firstItem="uiy-nj-3g9" firstAttribute="leading" secondItem="Mee-20-Bad" secondAttribute="leading" id="BuC-B2-6xA"/>
-                                            <constraint firstAttribute="height" constant="50" id="CnR-nL-kbC"/>
-                                            <constraint firstItem="Xdd-ha-eFK" firstAttribute="leading" secondItem="uiy-nj-3g9" secondAttribute="trailing" constant="30" id="Yn4-zH-35U"/>
-                                            <constraint firstItem="uiy-nj-3g9" firstAttribute="centerY" secondItem="Xdd-ha-eFK" secondAttribute="centerY" id="Zyc-75-Hoq"/>
-                                        </constraints>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDz-Uy-UX4" userLabel="birthdayPicker">
-                                        <rect key="frame" x="75" y="110" width="450" height="30"/>
-                                        <subviews>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HAM-eg-0yU">
-                                                <rect key="frame" x="65" y="-93" width="320" height="216"/>
-                                                <animations/>
-                                                <date key="date" timeIntervalSinceReferenceDate="455678103.84879899">
-                                                    <!--2015-06-11 01:15:03 +0000-->
-                                                </date>
-                                                <connections>
-                                                    <action selector="datePickerChangedValue:" destination="fg1-P1-bxr" eventType="valueChanged" id="B7D-xs-1Fj"/>
-                                                </connections>
-                                            </datePicker>
-                                        </subviews>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerY" secondItem="HAM-eg-0yU" secondAttribute="centerY" id="B5Z-aP-qcX"/>
-                                            <constraint firstAttribute="height" constant="30" id="OJO-0P-pTV"/>
-                                            <constraint firstAttribute="centerX" secondItem="HAM-eg-0yU" secondAttribute="centerX" id="pv5-uk-BrN"/>
-                                        </constraints>
-                                    </view>
-                                    <view clipsSubviews="YES" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vl2-lA-Gd2" userLabel="countryView">
-                                        <rect key="frame" x="75" y="140" width="450" height="50"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="countryIcon" translatesAutoresizingMaskIntoConstraints="NO" id="C8i-rc-EjP">
-                                                <rect key="frame" x="0.0" y="19" width="9" height="12"/>
-                                                <animations/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country of living" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d26-bk-Xlu">
-                                                <rect key="frame" x="39" y="14" width="117" height="22"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
-                                                <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstItem="d26-bk-Xlu" firstAttribute="leading" secondItem="C8i-rc-EjP" secondAttribute="trailing" constant="30" id="6j4-vc-uVX"/>
-                                            <constraint firstItem="d26-bk-Xlu" firstAttribute="centerY" secondItem="C8i-rc-EjP" secondAttribute="centerY" constant="-0.5" id="Sfh-OG-oqF"/>
-                                            <constraint firstItem="C8i-rc-EjP" firstAttribute="leading" secondItem="Vl2-lA-Gd2" secondAttribute="leading" id="j7W-Xk-9ti"/>
-                                            <constraint firstAttribute="centerY" secondItem="C8i-rc-EjP" secondAttribute="centerY" id="lqu-5R-hrQ"/>
-                                            <constraint firstAttribute="height" constant="50" id="qdz-CW-KLq"/>
-                                        </constraints>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGn-Je-EsE" userLabel="countyPicker">
-                                        <rect key="frame" x="75" y="190" width="450" height="30"/>
-                                        <subviews>
-                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T26-4N-C6n" customClass="CountryPicker">
-                                                <rect key="frame" x="65" y="-93" width="320" height="216"/>
-                                                <animations/>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="fg1-P1-bxr" id="YX5-iw-tWg"/>
-                                                    <outlet property="delegate" destination="fg1-P1-bxr" id="Zyd-J1-MoG"/>
-                                                </connections>
-                                            </pickerView>
-                                        </subviews>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerY" secondItem="T26-4N-C6n" secondAttribute="centerY" id="MyN-qj-9n1"/>
-                                            <constraint firstAttribute="centerX" secondItem="T26-4N-C6n" secondAttribute="centerX" id="hDP-Ca-uj9"/>
-                                            <constraint firstAttribute="height" constant="30" id="hdp-X1-Rlf"/>
-                                        </constraints>
-                                    </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
                                 </subviews>
                                 <animations/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="WGn-Je-EsE" firstAttribute="top" secondItem="Vl2-lA-Gd2" secondAttribute="bottom" id="0L2-Ql-64k"/>
-                                    <constraint firstItem="hUy-Gv-wtA" firstAttribute="leading" secondItem="Mee-20-Bad" secondAttribute="leading" id="1Aw-Qa-MM2"/>
-                                    <constraint firstItem="pDz-Uy-UX4" firstAttribute="top" secondItem="Mee-20-Bad" secondAttribute="bottom" id="3m1-7f-mZW"/>
-                                    <constraint firstAttribute="trailing" secondItem="hUy-Gv-wtA" secondAttribute="trailing" constant="75" id="5to-fu-2ml"/>
-                                    <constraint firstItem="pDz-Uy-UX4" firstAttribute="leading" secondItem="Mee-20-Bad" secondAttribute="leading" id="Ia5-h3-7lv"/>
-                                    <constraint firstItem="pDz-Uy-UX4" firstAttribute="trailing" secondItem="Mee-20-Bad" secondAttribute="trailing" id="KxV-9t-v85"/>
-                                    <constraint firstItem="hUy-Gv-wtA" firstAttribute="leading" secondItem="Rk7-qw-Qvc" secondAttribute="leading" constant="75" id="MH9-Dq-vBW"/>
-                                    <constraint firstItem="hUy-Gv-wtA" firstAttribute="trailing" secondItem="Mee-20-Bad" secondAttribute="trailing" id="Oy3-5M-bAj"/>
-                                    <constraint firstItem="hUy-Gv-wtA" firstAttribute="top" secondItem="Rk7-qw-Qvc" secondAttribute="top" constant="10" id="Q9y-fg-ggb"/>
-                                    <constraint firstItem="Vl2-lA-Gd2" firstAttribute="top" secondItem="pDz-Uy-UX4" secondAttribute="bottom" id="Tyq-AC-TWJ"/>
-                                    <constraint firstItem="Vl2-lA-Gd2" firstAttribute="leading" secondItem="WGn-Je-EsE" secondAttribute="leading" id="dm3-ki-Qbr"/>
-                                    <constraint firstItem="Vl2-lA-Gd2" firstAttribute="trailing" secondItem="WGn-Je-EsE" secondAttribute="trailing" id="eVv-1L-Cvk"/>
-                                    <constraint firstItem="Vl2-lA-Gd2" firstAttribute="leading" secondItem="pDz-Uy-UX4" secondAttribute="leading" id="gQo-Bk-nXe"/>
-                                    <constraint firstItem="Vl2-lA-Gd2" firstAttribute="trailing" secondItem="pDz-Uy-UX4" secondAttribute="trailing" id="siX-8E-LGo"/>
-                                    <constraint firstItem="Mee-20-Bad" firstAttribute="top" secondItem="hUy-Gv-wtA" secondAttribute="bottom" id="xeP-G9-JVd"/>
+                                    <constraint firstAttribute="bottom" secondItem="foh-Ph-JO1" secondAttribute="bottom" id="EvZ-it-m9E"/>
+                                    <constraint firstItem="foh-Ph-JO1" firstAttribute="top" secondItem="Rk7-qw-Qvc" secondAttribute="top" id="hwi-Kl-PkG"/>
+                                    <constraint firstItem="foh-Ph-JO1" firstAttribute="leading" secondItem="Rk7-qw-Qvc" secondAttribute="leading" id="jg5-VL-3nv"/>
+                                    <constraint firstAttribute="trailing" secondItem="foh-Ph-JO1" secondAttribute="trailing" id="rc5-hQ-ZxS"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="DCf-qt-Xmf" appends="YES" id="GUB-SL-qOQ"/>
@@ -755,8 +628,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RMp-2L-xEV" secondAttribute="trailing" id="0HQ-Dg-eOD"/>
                             <constraint firstItem="Rk7-qw-Qvc" firstAttribute="top" secondItem="RMp-2L-xEV" secondAttribute="bottom" id="3YQ-a8-48y"/>
-                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" id="3d5-sI-k1t"/>
-                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="73b-2n-7Eo"/>
+                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="40" id="3d5-sI-k1t"/>
+                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="40" id="73b-2n-7Eo"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="top" secondItem="IlO-XD-Drd" secondAttribute="top" id="9Hh-1w-Jnt"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="Av3-89-TbI"/>
                             <constraint firstAttribute="trailing" secondItem="htb-Qx-cAM" secondAttribute="trailing" id="IvY-Lq-VpD"/>
@@ -781,30 +654,15 @@
                         <outlet property="avatarInnerView" destination="9tr-P1-3lI" id="xef-g8-aZO"/>
                         <outlet property="avatarViewHeight" destination="uek-Ec-7e2" id="Q8F-MB-Oaj"/>
                         <outlet property="backgroundImageHeight" destination="Ctv-jh-TQw" id="r9h-Fw-OHO"/>
-                        <outlet property="birthdayIcon" destination="uiy-nj-3g9" id="OKX-bN-sJl"/>
-                        <outlet property="birthdayLabel" destination="Xdd-ha-eFK" id="dHp-b3-B3w"/>
-                        <outlet property="birthdayViewHeight" destination="CnR-nL-kbC" id="pmj-zm-Tqr"/>
                         <outlet property="buttonDownOffset" destination="YLJ-ak-eEw" id="wuu-v5-lA4"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
-                        <outlet property="countryIcon" destination="C8i-rc-EjP" id="EL1-1U-Ohl"/>
-                        <outlet property="countryLabel" destination="d26-bk-Xlu" id="AI2-q7-gIS"/>
-                        <outlet property="countryPicker" destination="T26-4N-C6n" id="CSA-1a-s19"/>
-                        <outlet property="countryPickerViewHeight" destination="hdp-X1-Rlf" id="0Ce-FA-mSY"/>
-                        <outlet property="countryViewHeight" destination="qdz-CW-KLq" id="yTn-t1-7Nw"/>
-                        <outlet property="datePicker" destination="HAM-eg-0yU" id="pgD-P0-edA"/>
-                        <outlet property="datePickerViewHeight" destination="OJO-0P-pTV" id="iZN-hQ-D1P"/>
                         <outlet property="distanceFromNavBar" destination="T29-WK-D4E" id="5FR-wL-IQJ"/>
                         <outlet property="femaleButton" destination="9IA-am-LxA" id="zmR-jj-gHi"/>
                         <outlet property="genderViewHeight" destination="6Et-Rd-hlq" id="ENK-Oy-iej"/>
                         <outlet property="maleButton" destination="6Bk-ur-fSe" id="S4M-YI-4qW"/>
-                        <outlet property="nameIcon" destination="6yF-Y6-0EJ" id="s7Z-Hi-kyD"/>
-                        <outlet property="nameTextField" destination="gBz-97-VoN" id="2qz-6I-P5a"/>
-                        <outlet property="nameViewHeight" destination="G4p-T5-rS3" id="pb4-tr-vM0"/>
+                        <outlet property="propertiesTableView" destination="foh-Ph-JO1" id="82A-gt-d9v"/>
                         <outlet property="propertiesView" destination="Rk7-qw-Qvc" id="v4o-sO-j4F"/>
                         <outlet property="titleLabel" destination="vYE-57-GJL" id="zuf-XN-fDL"/>
-                        <outlet property="topPropertyOffset" destination="Q9y-fg-ggb" id="sCr-Dc-6KV"/>
-                        <outletCollection property="horizontalOffset" destination="MH9-Dq-vBW" collectionClass="NSMutableArray" id="LBs-GL-4jm"/>
-                        <outletCollection property="horizontalOffset" destination="5to-fu-2ml" collectionClass="NSMutableArray" id="avn-Oh-S4n"/>
                         <segue destination="lew-Bl-GjO" kind="unwind" identifier="SaveProfileAndReturnToProfileStats" unwindAction="dismissProfileEditingController:" id="kGh-aX-JgU"/>
                         <segue destination="lew-Bl-GjO" kind="unwind" identifier="ProfileCreated" unwindAction="profileCreated:" id="bMX-Vx-53J"/>
                     </connections>
@@ -824,15 +682,12 @@
         <image name="avatarPickerImage" width="33" height="26"/>
         <image name="backIconWhite" width="9" height="16"/>
         <image name="bigRedBackground" width="320" height="422"/>
-        <image name="birthdayIcon" width="10" height="12"/>
-        <image name="countryIcon" width="9" height="12"/>
         <image name="editIconWhite" width="18" height="18"/>
         <image name="femaleIcon_red" width="37" height="38"/>
         <image name="femaleIcon_white" width="37" height="38"/>
         <image name="infoIcon" width="10" height="10"/>
         <image name="maleIcon_red" width="37" height="38"/>
         <image name="maleIcon_white" width="37" height="38"/>
-        <image name="nameIcon" width="11" height="12"/>
         <image name="okButton" width="50" height="50"/>
         <image name="whiteCurve" width="320" height="30"/>
     </resources>

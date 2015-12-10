@@ -28,38 +28,19 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     }
     
     @IBOutlet weak var changeAvatarButton: UIButton!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var countryPicker: CountryPicker!
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     
-    @IBOutlet weak var nameIcon: UIImageView!
-    @IBOutlet weak var birthdayIcon: UIImageView!
-    @IBOutlet weak var countryIcon: UIImageView!
+    @IBOutlet weak var propertiesTableView: UITableView!
     
     var viewModel: ProfileEditingViewModel?
     
     var userProfile: Profile! 
     var selectedGender: Profile.Gender!
-    var selectedBirthday: NSDate! {
-        didSet {
-            birthdayIcon.image = UIImage(named: Constants.birthdaySelectedIcon)
-            birthdayLabel.textColor = UIColor.blackColor()
-        }
-    }
-    var selectedCountry: String! {
-        didSet {
-            countryIcon.image = UIImage(named: Constants.countrySelectedIcon)
-            countryLabel.textColor = UIColor.blackColor()
-        }
-    }
-    var selectedName: String! {
-        didSet {
-            nameIcon.image = UIImage(named: Constants.nameSelectedIcon)
-            nameTextField.textColor = UIColor.blackColor()
-        }
-    }
+    var selectedBirthday: NSDate!
+    var selectedCountry: String!
+    var selectedName: String!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -78,7 +59,8 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         if currentEditingState == .Default {
             if savingIsPossible().0 {
                 saveProfile()
-                let segueID = presentingViewController!.isKindOfClass(ProfileStatsVC) ? Constants.changesSaved : Constants.returnToMainVCSegue
+                let segueID = presentingViewController!.isKindOfClass(ProfileStatsVC) ?
+                    Constants.changesSaved : Constants.returnToMainVCSegue
                 performSegueWithIdentifier(segueID, sender: self)
             } else {
                 postAlertOnLackOfInfo(message: savingIsPossible().1)
@@ -88,18 +70,11 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    @IBAction func datePickerChangedValue(sender: UIDatePicker) {
-        birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
-        selectedBirthday = sender.date
-    }
-    
-    
     @IBAction func maleSelected(sender: UIButton) {
         selectedGender = .Male
         maleButton.selected = true
         femaleButton.selected = false
         nameTextField.resignFirstResponder()
-
     }
     
     @IBAction func femaleSelected(sender: UIButton) {
@@ -107,10 +82,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         maleButton.selected = false
         femaleButton.selected = true
         nameTextField.resignFirstResponder()
-
     }
-    
-    
     
     @IBAction func avatarButtonPressed() {
         currentEditingState = .Default
@@ -159,7 +131,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             }
             
         } else {
-            
             datePicker.date = Profile.defaultBirthday()
             countryPicker.selectedCountryName = Profile.defaultCountry()
         }
@@ -229,15 +200,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         userProfile.saveChangesToCoreData()
     }
     
-    
-    // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "SaveChangesToProfile" {
-            
-        }
-        
-    }
     
     // MARK: - Lazy instantiation
 

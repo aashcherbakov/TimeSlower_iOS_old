@@ -7,15 +7,53 @@
 //
 
 import Foundation
+import TimeSlowerKit
 
-class ProfileEditingViewModel {
+class ProfileEditingViewModel : NSObject {
     
-    var gender: String?
+    private(set) var tableView: UITableView
+    private(set) var profile: Profile? = CoreDataStack.sharedInstance.fetchProfile()
+    
+    // Profile properties
+    var gender: Profile.Gender?
     var userImage: UIImage?
     var userName: String?
     var userBirthday: NSDate?
     var userCountry: String?
     
+    init(withTableView tableView: UITableView) {
+        self.tableView = tableView
+        super.init()
+        
+        self.setupData()
+        self.setupEvents()
+    }
     
+    private func setupData() {
+        if let existingProfile = self.profile {
+            self.gender = existingProfile.userGender()
+            self.userBirthday = existingProfile.birthday
+            self.userCountry = existingProfile.country
+            self.userName = existingProfile.name
+        }
+    }
+    
+    private func setupEvents() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+}
+
+extension ProfileEditingViewModel : UITableViewDataSource {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+}
+
+extension ProfileEditingViewModel : UITableViewDelegate {
     
 }
