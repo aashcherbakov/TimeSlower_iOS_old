@@ -46,11 +46,12 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
-        setup()
+        self.bindViewModel()
+//        setup()
     }
     
     private func bindViewModel() {
-
+        self.viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
     }
     
     //MARK: - ACTIONS
@@ -74,14 +75,14 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         selectedGender = .Male
         maleButton.selected = true
         femaleButton.selected = false
-        nameTextField.resignFirstResponder()
+//        nameTextField.resignFirstResponder()
     }
     
     @IBAction func femaleSelected(sender: UIButton) {
         selectedGender = .Female
         maleButton.selected = false
         femaleButton.selected = true
-        nameTextField.resignFirstResponder()
+//        nameTextField.resignFirstResponder()
     }
     
     @IBAction func avatarButtonPressed() {
@@ -101,40 +102,40 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         let tapPoint = sender.locationInView(propertiesView)
         let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
         
-        if let view = tapedView {
-            if view.tag == 2 {
-                birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
-                selectedBirthday = datePicker.date
-            } else if view.tag == 3 {
-                countryLabel.text = countryPicker.selectedCountryName
-                selectedCountry = countryPicker.selectedCountryName
-            }
-        }
+//        if let view = tapedView {
+//            if view.tag == 2 {
+//                birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
+//                selectedBirthday = datePicker.date
+//            } else if view.tag == 3 {
+//                countryLabel.text = countryPicker.selectedCountryName
+//                selectedCountry = countryPicker.selectedCountryName
+//            }
+//        }
     }
     
     //MARK: - SETUP / SAVE
 
-    func setup() {
-        if userProfile != nil {
-            selectedGender = userProfile.userGender()
-            tuneGenderButtons()
-            setupImageViewForAvatar()
-
-            nameTextField.text = userProfile.name
-            birthdayLabel.text = dateFormatter.stringFromDate(userProfile.birthday)
-            datePicker.date = userProfile.birthday
-            countryLabel.text = userProfile.country
-            countryPicker.selectedCountryName = userProfile.country
-            
-            if let avatar = UIImage(data: userProfile.photo) {
-                avatarImage.image = avatar
-            }
-            
-        } else {
-            datePicker.date = Profile.defaultBirthday()
-            countryPicker.selectedCountryName = Profile.defaultCountry()
-        }
-    }
+//    func setup() {
+//        if userProfile != nil {
+//            selectedGender = userProfile.userGender()
+//            tuneGenderButtons()
+//            setupImageViewForAvatar()
+//
+//            nameTextField.text = userProfile.name
+//            birthdayLabel.text = dateFormatter.stringFromDate(userProfile.birthday)
+//            datePicker.date = userProfile.birthday
+//            countryLabel.text = userProfile.country
+//            countryPicker.selectedCountryName = userProfile.country
+//            
+//            if let avatar = UIImage(data: userProfile.photo) {
+//                avatarImage.image = avatar
+//            }
+//            
+//        } else {
+//            datePicker.date = Profile.defaultBirthday()
+//            countryPicker.selectedCountryName = Profile.defaultCountry()
+//        }
+//    }
     
 
     
@@ -168,18 +169,18 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     }
     
     func savingIsPossible() -> (Bool, String) {
-        if nameTextField.text == "" {
-            return (false, "Please, enter your name")
-        }
-        if selectedGender == nil {
-            return (false, "Please, select your gender")
-        }
-        if birthdayLabel.text == Constants.defaultDateLabelText {
-            return (false, "Please, select your birthday date")
-        }
-        if countryLabel.text == Constants.defaultCountryLabelText {
-            return (false, "Please, select your country")
-        }
+//        if nameTextField.text == "" {
+//            return (false, "Please, enter your name")
+//        }
+//        if selectedGender == nil {
+//            return (false, "Please, select your gender")
+//        }
+//        if birthdayLabel.text == Constants.defaultDateLabelText {
+//            return (false, "Please, select your birthday date")
+//        }
+//        if countryLabel.text == Constants.defaultCountryLabelText {
+//            return (false, "Please, select your country")
+//        }
         return (true, "")
     }
     
@@ -188,9 +189,9 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             let context = CoreDataStack.sharedInstance.managedObjectContext
             userProfile = Profile.userProfileInManagedContext(context!)
         }
-        userProfile.name = nameTextField.text!
-        userProfile.birthday = dateFormatter.dateFromString(birthdayLabel.text!)!
-        userProfile.country = countryLabel.text!
+//        userProfile.name = nameTextField.text!
+//        userProfile.birthday = dateFormatter.dateFromString(birthdayLabel.text!)!
+//        userProfile.country = countryLabel.text!
         userProfile.gender = Profile.genderWithEnum(selectedGender!)
         if avatarImage.image != UIImage(named: "avatarPickerImage") {
             userProfile.photo = UIImagePNGRepresentation(avatarImage.image!)!
@@ -232,7 +233,7 @@ extension ProfileEditingVC: UITextFieldDelegate {
 
 extension ProfileEditingVC: CountryPickerDelegate {
     func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-        countryLabel.text = name
+//        countryLabel.text = name
         selectedCountry = name
     }
 }

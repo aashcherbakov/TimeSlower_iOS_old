@@ -27,6 +27,7 @@ class ProfileEditingViewModel : NSObject {
         
         self.setupData()
         self.setupEvents()
+        self.setupDesign()
     }
     
     private func setupData() {
@@ -42,10 +43,29 @@ class ProfileEditingViewModel : NSObject {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
+    private func setupDesign() {
+        self.tableView.registerNib(UINib(nibName: ProfileEditingTableViewCell.className, bundle: nil),
+            forCellReuseIdentifier: ProfileEditingTableViewCell.className)
+    }
 }
 
 extension ProfileEditingViewModel : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cellType: ProfileEditingCellType!
+        
+        switch indexPath.row {
+        case 0: cellType = .Name
+        case 1: cellType = .Birthday
+        case 2: cellType = .Country
+        default: break
+        }
+        
+        if let cell = tableView.dequeueReusableCellWithIdentifier(ProfileEditingTableViewCell.className) as? ProfileEditingTableViewCell {
+            cell.setupWith(type: cellType)
+            return cell
+        }
+        
         return UITableViewCell()
     }
     
