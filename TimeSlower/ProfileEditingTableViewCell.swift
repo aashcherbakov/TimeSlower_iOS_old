@@ -43,28 +43,42 @@ class ProfileEditingTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     
+    // MARK: - UITableViewCell lifecycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setupEvents()
+    }
+    
     // MARK: - Setup Methods
     
     func setupWith(type type: ProfileEditingCellType) {
         self.type = type
-        self.setupDesignForState(.Default, cellType: type)
+        setupDesign()
     }
     
-    private func setupDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
-        guard let type = cellType, state = cellState else { return }
-        self.iconImageView.image = self.iconForCellType(type, forState: state)
-        self.textField.textColor = self.textColorForState(state)
-        self.textField.userInteractionEnabled = (cellType == .Name)
-        self.textField.floatingLabel.text = cellType?.rawValue.capitalizedString
+    private func setupDesign() {
+        textField.userInteractionEnabled = (type == .Name)
+        textField.placeholder = type?.rawValue.capitalizedString
+        textField.floatingLabelActiveTextColor = UIColor.darkRed()
         
-        self.bindTextField()
+        if let cellType = type {
+            iconImageView.image = iconForCellType(cellType, forState: .Default)
+        }
     }
     
-    private func bindTextField() {
-        self.textField.rx_text
-            .subscribeNext { [unowned self] (text) -> Void in
+    private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
+        guard let type = cellType, state = cellState else { return }
+        iconImageView.image = iconForCellType(type, forState: state)
+        textField.textColor = textColorForState(state)
+    }
+    
+    private func setupEvents() {
+        textField.rx_text
+            .subscribeNext { [weak self] (text) -> Void in
                 let state: EditingState = (text.characters.count > 0) ? .Editing : .Default
-                self.setupDesignForState(state, cellType: self.type)
+                self?.updateDesignForState(state, cellType: self?.type)
             }
             .addDisposableTo(disposable)
     }
