@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import JVFloatLabeledText
-import RxCocoa
 import RxSwift
+import RxCocoa
+import JVFloatLabeledTextField
 
 /**
  Enum of strings that descrybes cell type
