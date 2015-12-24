@@ -75,5 +75,7 @@ extension ProfileEditingViewModel : UITableViewDataSource {
 }
 
 extension ProfileEditingViewModel : UITableViewDelegate {
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+    }
 }

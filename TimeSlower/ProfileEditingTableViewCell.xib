@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="81" id="KGk-i7-Jjw" customClass="ProfileEditingTableViewCell" customModule="TimeSlower" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="328" height="81"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="170" id="KGk-i7-Jjw" customClass="ProfileEditingTableViewCell" customModule="TimeSlower" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="328" height="80.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="328" height="169.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cXn-9m-MhJ">
-                        <rect key="frame" x="8" y="34" width="11" height="12"/>
-                        <animations/>
-                    </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-Wh-jay" customClass="JVFloatLabeledTextField">
-                        <rect key="frame" x="41" y="4" width="279" height="73"/>
-                        <animations/>
-                        <color key="textColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyI-oC-0is" userLabel="textfieldView">
+                        <rect key="frame" x="0.0" y="0.0" width="328" height="40"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cXn-9m-MhJ">
+                                <rect key="frame" x="8" y="14" width="11" height="12"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-Wh-jay" customClass="JVFloatLabeledTextField">
+                                <rect key="frame" x="27" y="4" width="293" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="MrS-FD-xQh"/>
+                                </constraints>
+                                <color key="textColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MrS-FD-xQh"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PAJ-Wh-jay" secondAttribute="trailing" constant="8" id="1lU-YJ-mfz"/>
+                            <constraint firstAttribute="bottom" secondItem="PAJ-Wh-jay" secondAttribute="bottom" constant="4" id="JZF-jG-xGx"/>
+                            <constraint firstItem="PAJ-Wh-jay" firstAttribute="top" secondItem="wyI-oC-0is" secondAttribute="top" constant="4" id="KUE-aS-Gmj"/>
+                            <constraint firstItem="PAJ-Wh-jay" firstAttribute="leading" secondItem="cXn-9m-MhJ" secondAttribute="trailing" constant="8" id="Vgb-De-0SL"/>
+                            <constraint firstItem="PAJ-Wh-jay" firstAttribute="centerY" secondItem="cXn-9m-MhJ" secondAttribute="centerY" id="dfG-AJ-T9M"/>
+                            <constraint firstAttribute="height" constant="40" id="gbZ-pL-aBM"/>
+                            <constraint firstItem="cXn-9m-MhJ" firstAttribute="leading" secondItem="wyI-oC-0is" secondAttribute="leading" constant="8" id="khx-G2-eKC"/>
+                            <constraint firstItem="cXn-9m-MhJ" firstAttribute="centerY" secondItem="wyI-oC-0is" secondAttribute="centerY" id="z8I-Cd-DE2"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIq-T0-uO0" userLabel="selectorView">
+                        <rect key="frame" x="0.0" y="40" width="328" height="130"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="GJY-7u-ibv"/>
+                            <constraint firstAttribute="height" constant="110" id="KVJ-EU-Atz"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GJY-7u-ibv"/>
+                                <exclude reference="KVJ-EU-Atz"/>
+                            </mask>
+                        </variation>
+                    </view>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="leading" secondItem="cXn-9m-MhJ" secondAttribute="trailing" constant="22" id="0tK-pF-yg7"/>
-                    <constraint firstAttribute="trailing" secondItem="PAJ-Wh-jay" secondAttribute="trailing" constant="8" id="7Bp-FP-sL8"/>
-                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="centerY" secondItem="cXn-9m-MhJ" secondAttribute="centerY" id="7dH-Dy-gLz"/>
-                    <constraint firstItem="cXn-9m-MhJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="TLy-iK-yAx"/>
-                    <constraint firstItem="PAJ-Wh-jay" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="fyP-p6-c9x"/>
-                    <constraint firstAttribute="bottom" secondItem="PAJ-Wh-jay" secondAttribute="bottom" constant="4" id="kGU-34-jrD"/>
-                    <constraint firstItem="cXn-9m-MhJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y3t-aT-YSh"/>
+                    <constraint firstItem="wyI-oC-0is" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1CZ-BY-mcS"/>
+                    <constraint firstItem="HIq-T0-uO0" firstAttribute="top" secondItem="wyI-oC-0is" secondAttribute="bottom" id="1WE-pt-a4t"/>
+                    <constraint firstAttribute="bottom" secondItem="HIq-T0-uO0" secondAttribute="bottom" id="LDG-5t-wxb"/>
+                    <constraint firstItem="HIq-T0-uO0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VxB-8P-gNh"/>
+                    <constraint firstAttribute="trailing" secondItem="HIq-T0-uO0" secondAttribute="trailing" id="XOU-re-mNb"/>
+                    <constraint firstItem="wyI-oC-0is" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="e3V-UP-7jV"/>
+                    <constraint firstAttribute="trailing" secondItem="wyI-oC-0is" secondAttribute="trailing" id="yWq-Y6-NHI"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="iconImageView" destination="cXn-9m-MhJ" id="3o2-bJ-6gT"/>
                 <outlet property="textField" destination="PAJ-Wh-jay" id="sfW-dA-5nC"/>
             </connections>
-            <point key="canvasLocation" x="536" y="513.5"/>
+            <point key="canvasLocation" x="536" y="558"/>
         </tableViewCell>
     </objects>
     <resources>
