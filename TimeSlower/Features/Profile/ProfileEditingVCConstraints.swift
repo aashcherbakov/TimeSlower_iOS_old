@@ -35,30 +35,15 @@ class ProfileEditingVCConstraints: UIViewController {
     //MARK: Height constraints
     @IBOutlet weak var backgroundImageHeight: NSLayoutConstraint!
     @IBOutlet weak var genderViewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var nameViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var birthdayViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var countryViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var countryPickerViewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var topPropertyOffset: NSLayoutConstraint!
     @IBOutlet weak var propertiesView: UIView!
-    @IBOutlet var horizontalOffset: [NSLayoutConstraint]!
     @IBOutlet weak var distanceFromNavBar: NSLayoutConstraint!
-    
     @IBOutlet weak var buttonDownOffset: NSLayoutConstraint!
     @IBOutlet weak var avatarViewHeight: NSLayoutConstraint!
     
     //MARK: Labels outlets // for fonts sizes
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var birthdayLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var avatarInnerView: UIView!
     @IBOutlet weak var avatarFrameView: UIView!
-    
-    
 
     var currentEditingState: EditingState = .Default { didSet { animateConstraintChanges() } }
     var defaultConstraintsSet = false
@@ -95,34 +80,34 @@ class ProfileEditingVCConstraints: UIViewController {
     }
 
     @IBAction func propertisViewTapped(sender: UITapGestureRecognizer) {
-        let tapPoint = sender.locationInView(propertiesView)
-        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
-        
-        if let view = tapedView {
-            if view.tag == 2 {
-                currentEditingState = (currentEditingState != .Birthday) ? .Birthday : .Default
-            } else if view.tag == 3 {
-                currentEditingState = (currentEditingState != .Country) ? .Country : .Default
-            } 
-        }
+//        let tapPoint = sender.locationInView(propertiesView)
+//        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
+//        
+//        if let view = tapedView {
+//            if view.tag == 2 {
+//                currentEditingState = (currentEditingState != .Birthday) ? .Birthday : .Default
+//            } else if view.tag == 3 {
+//                currentEditingState = (currentEditingState != .Country) ? .Country : .Default
+//            } 
+//        }
     }
     
     func setDefaultConstraints() {
-        topPropertyOffset.constant = standardPropertyOffset
+//        topPropertyOffset.constant = standardPropertyOffset
         genderViewHeight.constant = kUsableViewHeight * Constants.genderViewFactor
         backgroundImageHeight.constant = UIScreen.mainScreen().bounds.height * Constants.backgroundImageFactor
         
-        for propertieHeight in [nameViewHeight, datePickerViewHeight, countryViewHeight] {
-            propertieHeight.constant = kUsableViewHeight * Constants.propertyCellViewFactor
-        }
-        
-        for pickerHeight in [datePickerViewHeight, countryPickerViewHeight] {
-            pickerHeight.constant = 0.0
-        }
-        
-        for offset in horizontalOffset {
-            offset.constant = kUsableViewWidth * Constants.horizontalOffset
-        }
+//        for propertieHeight in [nameViewHeight, datePickerViewHeight, countryViewHeight] {
+//            propertieHeight.constant = kUsableViewHeight * Constants.propertyCellViewFactor
+//        }
+//        
+//        for pickerHeight in [datePickerViewHeight, countryPickerViewHeight] {
+//            pickerHeight.constant = 0.0
+//        }
+//        
+//        for offset in horizontalOffset {
+//            offset.constant = kUsableViewWidth * Constants.horizontalOffset
+//        }
         
         defaultConstraintsSet = true
         setCircleFormToAvatarImageView()
@@ -136,40 +121,40 @@ class ProfileEditingVCConstraints: UIViewController {
     }
     
     func setAllPropertyConstraintsToZero() {
-        topPropertyOffset.constant = 0.0
-        nameViewHeight.constant = 0.0
-        birthdayViewHeight.constant = 0.0
-        countryViewHeight.constant = 0.0
-        datePickerViewHeight.constant = 0.0
-        countryPickerViewHeight.constant = 0.0
+//        topPropertyOffset.constant = 0.0
+//        nameViewHeight.constant = 0.0
+//        birthdayViewHeight.constant = 0.0
+//        countryViewHeight.constant = 0.0
+//        datePickerViewHeight.constant = 0.0
+//        countryPickerViewHeight.constant = 0.0
         
     }
     
     func setConstraintsForEditingName() {
         setAllPropertyConstraintsToZero()
-        nameViewHeight.constant = standardCellHeight
+//        nameViewHeight.constant = standardCellHeight
     }
     
     func setConstraintsForEditingBirthday() {
         setAllPropertyConstraintsToZero()
-        birthdayViewHeight.constant = standardCellHeight
-        datePickerViewHeight.constant = Constants.standardPickerViewHeigth
+//        birthdayViewHeight.constant = standardCellHeight
+//        datePickerViewHeight.constant = Constants.standardPickerViewHeigth
     }
     
     func setConstraintsForEditingCountry() {
         setAllPropertyConstraintsToZero()
-        countryViewHeight.constant = standardCellHeight
-        countryPickerViewHeight.constant = Constants.standardPickerViewHeigth
+//        countryViewHeight.constant = standardCellHeight
+//        countryPickerViewHeight.constant = Constants.standardPickerViewHeigth
     }
     
 
     func setConstraintsForDefaultEditingState() {
-        for constraint in [nameViewHeight, birthdayViewHeight, countryViewHeight] {
-            constraint.constant = standardCellHeight
-        }
-        topPropertyOffset.constant = standardPropertyOffset
-        datePickerViewHeight.constant = 0.0
-        countryPickerViewHeight.constant = 0.0
+//        for constraint in [nameViewHeight, birthdayViewHeight, countryViewHeight] {
+//            constraint.constant = standardCellHeight
+//        }
+//        topPropertyOffset.constant = standardPropertyOffset
+//        datePickerViewHeight.constant = 0.0
+//        countryPickerViewHeight.constant = 0.0
     }
 }
 
