@@ -22,14 +22,7 @@ class ProfileEditingViewModel : NSObject {
     private(set) var tableView: UITableView
     private(set) var profile: Profile? = CoreDataStack.sharedInstance.fetchProfile()
     private var selectedIndexPath: NSIndexPath?
-    private var cellConfig = ProfileEditingCellConfig(withProfile: nil)
-    
-    // Profile properties
-    var gender: Profile.Gender?
-    var userImage: UIImage?
-    var userName: String?
-    var userBirthday: NSDate?
-    var userCountry: String?
+    private var cellConfig: ProfileEditingCellConfig?
     
     init(withTableView tableView: UITableView) {
         self.tableView = tableView
@@ -41,12 +34,7 @@ class ProfileEditingViewModel : NSObject {
     }
     
     private func setupData() {
-        if let existingProfile = self.profile {
-            self.gender = existingProfile.userGender()
-            self.userBirthday = existingProfile.birthday
-            self.userCountry = existingProfile.country
-            self.userName = existingProfile.name
-        }
+        cellConfig = ProfileEditingCellConfig(withProfile: profile)
     }
     
     private func setupEvents() {
@@ -75,7 +63,9 @@ extension ProfileEditingViewModel : UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(ProfileEditingTableViewCell.className)
             as? ProfileEditingTableViewCell {
-                cell.setupWith(type: cellType, config: self.cellConfig)
+                if let config = cellConfig {
+                    cell.setupWith(type: cellType, config: config)
+                }
                 return cell
         }
         
@@ -89,7 +79,6 @@ extension ProfileEditingViewModel : UITableViewDataSource {
 
 extension ProfileEditingViewModel : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         let expanded = selectedIndexPath != indexPath
         
         resetCellAtIndexPath(selectedIndexPath, inTableView: tableView)

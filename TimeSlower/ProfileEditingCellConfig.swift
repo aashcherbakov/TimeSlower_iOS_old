@@ -12,9 +12,9 @@ import TimeSlowerKit
 /// Class to configure ProfileEditingTableViewCell
 class ProfileEditingCellConfig: NSObject {
     
-    private var birthday: NSDate?
-    private var name: String?
-    private var country: String?
+    private(set) var birthday: NSDate?
+    private(set) var name: String?
+    private(set) var country: String?
     
     // MARK: Initializer
     
@@ -32,6 +32,8 @@ class ProfileEditingCellConfig: NSObject {
     // MARK: - Internal Methods
     
     func updateValue(value: AnyObject, forType type: ProfileEditingCellType) {
+        guard !value.isKindOfClass(NSNull) else { return }
+        
         switch type {
         case .Name: name = value as? String
         case .Birthday: birthday = value as? NSDate
@@ -56,7 +58,7 @@ class ProfileEditingCellConfig: NSObject {
     }
     
     /// CountryPicker with preselected country - based on user location
-    func baseCountryPicker() -> CountryPicker {
+    func defaultCountryPicker() -> CountryPicker {
         let countryPicker = CountryPicker()
         countryPicker.setSelectedCountryName(country, animated: false)
         return countryPicker
@@ -73,10 +75,10 @@ class ProfileEditingCellConfig: NSObject {
     }
     
     /// Should be a singleton -> refactor
-    func shortDateFormatter() -> NSDateFormatter {
+    lazy var shortDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.dateStyle = .ShortStyle
         return dateFormatter
-    }
+    }()
 }

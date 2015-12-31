@@ -39,6 +39,12 @@ class ProfileEditingTableViewCell: UITableViewCell {
         case Editing
     }
     
+    // MARK: Properties
+    
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var textField: JVFloatLabeledTextField!
+    @IBOutlet weak var viewForPicker: UIView!
+    
     private let disposable = DisposeBag()
     private var type: ProfileEditingCellType?
     private var config: ProfileEditingCellConfig?
@@ -52,20 +58,8 @@ class ProfileEditingTableViewCell: UITableViewCell {
         }
     }
     
-    private func updateTextFieldWithValue(value: AnyObject) {
-        if let string = value as? String {
-            textField.text = string
-        } else if let date = value as? NSDate {
-            textField.text = config?.shortDateFormatter().stringFromDate(date)
-        }
-    }
-
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var textField: JVFloatLabeledTextField!
-    @IBOutlet weak var viewForPicker: UIView!
-    
     private lazy var countryPicker: CountryPicker? = {
-        guard let countryPicker = self.config?.baseCountryPicker() else { return nil }
+        guard let countryPicker = self.config?.defaultCountryPicker() else { return nil }
         countryPicker.delegate = self
         self.selectedValue = countryPicker.selectedCountryName
         return countryPicker
@@ -88,6 +82,12 @@ class ProfileEditingTableViewCell: UITableViewCell {
         setupEvents()
     }
     
+    func setupWith(type type: ProfileEditingCellType, config: ProfileEditingCellConfig) {
+        self.type = type
+        self.config = config
+        setupDesign()
+    }
+    
     // MARK: Internal Methods
     
     func setExpended(expended: Bool) {
@@ -98,12 +98,6 @@ class ProfileEditingTableViewCell: UITableViewCell {
     
     func shouldExpand() -> Bool {
         return self.type != .Name
-    }
-    
-    func setupWith(type type: ProfileEditingCellType, config: ProfileEditingCellConfig) {
-        self.type = type
-        self.config = config
-        setupDesign()
     }
     
     // MARK: - Setup Methods
@@ -145,6 +139,14 @@ class ProfileEditingTableViewCell: UITableViewCell {
         picker.autoCenterInSuperview()
     }
     
+    private func updateTextFieldWithValue(value: AnyObject) {
+        if let string = value as? String {
+            textField.text = string
+        } else if let date = value as? NSDate {
+            textField.text = config?.shortDateFormatter.stringFromDate(date)
+        }
+    }
+    
     private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
         guard let type = cellType, state = cellState else { return }
         iconImageView.image = config?.iconForCellType(type, forState: state)
@@ -154,8 +156,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
 
 extension ProfileEditingTableViewCell : CountryPickerDelegate {
     func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-        textField.text = name
-        config?.updateValue(name, forType: self.type!)
+        selectedValue = name
     }
 }
 
