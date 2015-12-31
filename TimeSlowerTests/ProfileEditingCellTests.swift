@@ -39,17 +39,6 @@ class ProfileEditingCellTests: XCTestCase {
         XCTAssertNotNil(cell, "Cell should not be nil")
     }
     
-    func testSetupNameCell() {
-        
-    }
-    
-    func testSetupCountryCell() {
-        
-    }
-    
-    func testSetupBirthdayCell() {
-        
-    }
 }
 
 extension FakeControllerWithTableView : UITableViewDataSource {
