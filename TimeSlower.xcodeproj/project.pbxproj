@@ -106,6 +106,7 @@
 		F009AF911BDB1935007F38A9 /* TimeSaver.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */; };
 		F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */; };
 		F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */; };
+		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0CB18EE1BED8CAA008B1198 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */; };
@@ -278,6 +279,7 @@
 		F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimeSaver.xib; path = Features/Activities/Views/TimeSaver.xib; sourceTree = "<group>"; };
 		F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelector.swift; path = Features/Activities/Views/TypeSelector.swift; sourceTree = "<group>"; };
 		F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TypeSelector.xib; path = Features/Activities/Views/TypeSelector.xib; sourceTree = "<group>"; };
+		F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfig.swift; sourceTree = "<group>"; };
 		F02131221C151E8C00C9B02E /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		F02131231C151E8C00C9B02E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 			isa = PBXGroup;
 			children = (
 				F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */,
+				F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */,
 				F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */,
 			);
 			name = Cells;
@@ -1040,6 +1043,7 @@
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
+				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
 				F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */,
 				F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,

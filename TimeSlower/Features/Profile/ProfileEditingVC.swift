@@ -47,7 +47,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
         self.bindViewModel()
-//        setup()
     }
     
     private func bindViewModel() {
@@ -97,21 +96,21 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    override func propertisViewTapped(sender: UITapGestureRecognizer) {
-        super.propertisViewTapped(sender)
-        let tapPoint = sender.locationInView(propertiesView)
-        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
-        
-//        if let view = tapedView {
-//            if view.tag == 2 {
-//                birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
-//                selectedBirthday = datePicker.date
-//            } else if view.tag == 3 {
-//                countryLabel.text = countryPicker.selectedCountryName
-//                selectedCountry = countryPicker.selectedCountryName
-//            }
-//        }
-    }
+//    override func propertisViewTapped(sender: UITapGestureRecognizer) {
+//        super.propertisViewTapped(sender)
+//        let tapPoint = sender.locationInView(propertiesView)
+//        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
+//        
+////        if let view = tapedView {
+////            if view.tag == 2 {
+////                birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
+////                selectedBirthday = datePicker.date
+////            } else if view.tag == 3 {
+////                countryLabel.text = countryPicker.selectedCountryName
+////                selectedCountry = countryPicker.selectedCountryName
+////            }
+////        }
+//    }
     
     //MARK: - SETUP / SAVE
 
@@ -218,18 +217,18 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     }
 }
 
-extension ProfileEditingVC: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        currentEditingState = .Default
-        selectedName = textField.text
-        return true
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        currentEditingState = (currentEditingState != .Name) ? .Name : .Default
-    }
-}
+//extension ProfileEditingVC: UITextFieldDelegate {
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        currentEditingState = .Default
+//        selectedName = textField.text
+//        return true
+//    }
+//    
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        currentEditingState = (currentEditingState != .Name) ? .Name : .Default
+//    }
+//}
 
 extension ProfileEditingVC: CountryPickerDelegate {
     func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {

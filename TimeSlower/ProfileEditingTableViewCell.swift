@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxBlocking
+import PureLayout
 import JVFloatLabeledTextField
 
 /**
@@ -39,40 +41,72 @@ class ProfileEditingTableViewCell: UITableViewCell {
     
     private let disposable = DisposeBag()
     private var type: ProfileEditingCellType?
+    private var config: ProfileEditingCellConfig?
+    
+    private var selectedValue: AnyObject? {
+        didSet {
+            guard let value = selectedValue, type = type else { return }
+            updateTextFieldWithValue(value)
+            config?.updateValue(value, forType: type)
+            updateDesignForState(.Editing, cellType: type)
+        }
+    }
+    
+    private func updateTextFieldWithValue(value: AnyObject) {
+        if let string = value as? String {
+            textField.text = string
+        } else if let date = value as? NSDate {
+            textField.text = config?.shortDateFormatter().stringFromDate(date)
+        }
+    }
 
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var textField: JVFloatLabeledTextField!
+    @IBOutlet weak var viewForPicker: UIView!
+    
+    private lazy var countryPicker: CountryPicker? = {
+        guard let countryPicker = self.config?.baseCountryPicker() else { return nil }
+        countryPicker.delegate = self
+        self.selectedValue = countryPicker.selectedCountryName
+        return countryPicker
+    }()
+    
+    private lazy var datePicker: UIDatePicker? = {
+        guard let datePicker = self.config?.defatultDatePicker() else { return nil }
+        datePicker.rx_date
+            .subscribeNext { [weak self] (date) -> Void in
+                self?.selectedValue = date
+            }
+            .addDisposableTo(self.disposable)
+        return datePicker
+    }()
     
     // MARK: - UITableViewCell lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setupEvents()
     }
     
-    // MARK: - Setup Methods
+    // MARK: Internal Methods
     
-    func setupWith(type type: ProfileEditingCellType) {
-        self.type = type
-        setupDesign()
-    }
-    
-    private func setupDesign() {
-        textField.userInteractionEnabled = (type == .Name)
-        textField.placeholder = type?.rawValue.capitalizedString
-        textField.floatingLabelActiveTextColor = UIColor.darkRed()
-        
-        if let cellType = type {
-            iconImageView.image = iconForCellType(cellType, forState: .Default)
+    func setExpended(expended: Bool) {
+        if expended {
+            setupPickerView(forType: type)
         }
     }
     
-    private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
-        guard let type = cellType, state = cellState else { return }
-        iconImageView.image = iconForCellType(type, forState: state)
-        textField.textColor = textColorForState(state)
+    func shouldExpand() -> Bool {
+        return self.type != .Name
     }
+    
+    func setupWith(type type: ProfileEditingCellType, config: ProfileEditingCellConfig) {
+        self.type = type
+        self.config = config
+        setupDesign()
+    }
+    
+    // MARK: - Setup Methods
     
     private func setupEvents() {
         textField.rx_text
@@ -83,18 +117,51 @@ class ProfileEditingTableViewCell: UITableViewCell {
             .addDisposableTo(disposable)
     }
     
-    // MARK: - Private Functions
-    
-    private func iconForCellType(type: ProfileEditingCellType, forState state: EditingState) -> UIImage? {
-        let suffix = (state == .Editing) ? "Selected" : ""
-        let imageName = type.rawValue + "Icon" + suffix
-        return UIImage(named: imageName)
+    private func setupDesign() {
+        textField.delegate = self
+        textField.userInteractionEnabled = (type == .Name)
+        textField.placeholder = type?.rawValue.capitalizedString
+        textField.floatingLabelActiveTextColor = UIColor.darkRed()
+        textField.floatingLabelTextColor = UIColor.darkRed()
+        
+        if let cellType = type {
+            iconImageView.image = config?.iconForCellType(cellType, forState: .Default)
+        }
     }
     
-    private func textColorForState(state: EditingState) -> UIColor {
-        switch state {
-        case .Default: return UIColor.lightGray()
-        case .Editing: return UIColor.darkGray()
+    // MARK: - Private Functions
+    
+    private func setupPickerView(forType type: ProfileEditingCellType?) {
+        guard let type = type else { return }
+        
+        var picker: UIView!
+        switch type {
+        case .Birthday: picker = datePicker
+        case .Country: picker = countryPicker
+        default: return
         }
+        
+        viewForPicker.addSubview(picker)
+        picker.autoCenterInSuperview()
+    }
+    
+    private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
+        guard let type = cellType, state = cellState else { return }
+        iconImageView.image = config?.iconForCellType(type, forState: state)
+        textField.textColor = config?.textColorForState(state)
+    }
+}
+
+extension ProfileEditingTableViewCell : CountryPickerDelegate {
+    func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+        textField.text = name
+        config?.updateValue(name, forType: self.type!)
+    }
+}
+
+extension ProfileEditingTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

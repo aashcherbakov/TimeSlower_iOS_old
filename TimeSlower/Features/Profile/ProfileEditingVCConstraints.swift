@@ -80,16 +80,16 @@ class ProfileEditingVCConstraints: UIViewController {
     }
 
     @IBAction func propertisViewTapped(sender: UITapGestureRecognizer) {
-        let tapPoint = sender.locationInView(propertiesView)
-        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
-        
-        if let view = tapedView {
-            if view.tag == 2 {
-                currentEditingState = (currentEditingState != .Birthday) ? .Birthday : .Default
-            } else if view.tag == 3 {
-                currentEditingState = (currentEditingState != .Country) ? .Country : .Default
-            } 
-        }
+//        let tapPoint = sender.locationInView(propertiesView)
+//        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
+//        
+//        if let view = tapedView {
+//            if view.tag == 2 {
+//                currentEditingState = (currentEditingState != .Birthday) ? .Birthday : .Default
+//            } else if view.tag == 3 {
+//                currentEditingState = (currentEditingState != .Country) ? .Country : .Default
+//            } 
+//        }
     }
     
     func setDefaultConstraints() {

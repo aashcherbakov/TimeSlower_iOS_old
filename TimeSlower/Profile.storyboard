@@ -458,10 +458,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rk7-qw-Qvc" userLabel="propertiesView">
-                                <rect key="frame" x="40" y="280" width="520" height="247"/>
+                                <rect key="frame" x="67" y="280" width="466" height="247"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foh-Ph-JO1">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="247"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foh-Ph-JO1">
+                                        <rect key="frame" x="0.0" y="20" width="466" height="227"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableView>
@@ -470,13 +470,10 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="foh-Ph-JO1" secondAttribute="bottom" id="EvZ-it-m9E"/>
-                                    <constraint firstItem="foh-Ph-JO1" firstAttribute="top" secondItem="Rk7-qw-Qvc" secondAttribute="top" id="hwi-Kl-PkG"/>
+                                    <constraint firstItem="foh-Ph-JO1" firstAttribute="top" secondItem="Rk7-qw-Qvc" secondAttribute="top" constant="20" id="hwi-Kl-PkG"/>
                                     <constraint firstItem="foh-Ph-JO1" firstAttribute="leading" secondItem="Rk7-qw-Qvc" secondAttribute="leading" id="jg5-VL-3nv"/>
                                     <constraint firstAttribute="trailing" secondItem="foh-Ph-JO1" secondAttribute="trailing" id="rc5-hQ-ZxS"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="DCf-qt-Xmf" appends="YES" id="GUB-SL-qOQ"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htb-Qx-cAM" userLabel="genderBar">
                                 <rect key="frame" x="0.0" y="208" width="600" height="72"/>
@@ -566,8 +563,12 @@
                                     <constraint firstAttribute="trailing" secondItem="9tr-P1-3lI" secondAttribute="trailing" constant="8" id="zQo-u6-k4I"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pn6-FB-jhk" userLabel="okButton">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pn6-FB-jhk" userLabel="okButton">
                                 <rect key="frame" x="275" y="535" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="5QQ-hu-qH0"/>
+                                    <constraint firstAttribute="height" constant="50" id="A8a-aO-BPL"/>
+                                </constraints>
                                 <state key="normal" image="okButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -580,8 +581,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RMp-2L-xEV" secondAttribute="trailing" id="0HQ-Dg-eOD"/>
                             <constraint firstItem="Rk7-qw-Qvc" firstAttribute="top" secondItem="RMp-2L-xEV" secondAttribute="bottom" id="3YQ-a8-48y"/>
-                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="40" id="3d5-sI-k1t"/>
-                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="40" id="73b-2n-7Eo"/>
+                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="67" id="3d5-sI-k1t"/>
+                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="67" id="73b-2n-7Eo"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="top" secondItem="IlO-XD-Drd" secondAttribute="top" id="9Hh-1w-Jnt"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="Av3-89-TbI"/>
                             <constraint firstAttribute="trailing" secondItem="htb-Qx-cAM" secondAttribute="trailing" id="IvY-Lq-VpD"/>
