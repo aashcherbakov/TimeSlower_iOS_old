@@ -161,7 +161,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         
         if segue.identifier == Constants.editProfileSegue {
             if let vc = segue.destinationViewController as? ProfileEditingVC {
-                vc.userProfile = profile
+                //vc.userProfile = profile
             }
         }
     }

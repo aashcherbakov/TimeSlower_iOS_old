@@ -458,10 +458,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rk7-qw-Qvc" userLabel="propertiesView">
-                                <rect key="frame" x="67" y="280" width="466" height="247"/>
+                                <rect key="frame" x="50" y="280" width="500" height="247"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foh-Ph-JO1">
-                                        <rect key="frame" x="0.0" y="20" width="466" height="227"/>
+                                        <rect key="frame" x="0.0" y="20" width="500" height="227"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableView>
@@ -475,52 +475,10 @@
                                     <constraint firstAttribute="trailing" secondItem="foh-Ph-JO1" secondAttribute="trailing" id="rc5-hQ-ZxS"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htb-Qx-cAM" userLabel="genderBar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htb-Qx-cAM" userLabel="genderBar" customClass="GenderSelector" customModule="TimeSlower" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="208" width="600" height="72"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HpP-jX-hd7" userLabel="center bar">
-                                        <rect key="frame" x="299" y="17" width="2" height="38"/>
-                                        <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="2" id="4Yl-gY-T5h"/>
-                                            <constraint firstAttribute="height" constant="62" id="IYG-XC-0Ix"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="IYG-XC-0Ix"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Bk-ur-fSe" userLabel="maleButton">
-                                        <rect key="frame" x="222" y="17" width="37" height="38"/>
-                                        <state key="normal" image="maleIcon_white">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="maleIcon_red"/>
-                                        <connections>
-                                            <action selector="maleSelected:" destination="fg1-P1-bxr" eventType="touchUpInside" id="UMC-J2-djb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9IA-am-LxA" userLabel="femaleButton">
-                                        <rect key="frame" x="341" y="17" width="37" height="38"/>
-                                        <state key="normal" image="femaleIcon_white">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="femaleIcon_red"/>
-                                        <connections>
-                                            <action selector="femaleSelected:" destination="fg1-P1-bxr" eventType="touchUpInside" id="zjN-zr-mkL"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="6Bk-ur-fSe" secondAttribute="centerY" id="3IW-rf-IKW"/>
                                     <constraint firstAttribute="height" constant="72" id="6Et-Rd-hlq"/>
-                                    <constraint firstItem="HpP-jX-hd7" firstAttribute="leading" secondItem="6Bk-ur-fSe" secondAttribute="trailing" constant="40" id="NxM-d3-WXs"/>
-                                    <constraint firstAttribute="centerY" secondItem="9IA-am-LxA" secondAttribute="centerY" id="RjA-Kc-kfh"/>
-                                    <constraint firstAttribute="centerY" secondItem="HpP-jX-hd7" secondAttribute="centerY" id="Xjh-s5-vLd"/>
-                                    <constraint firstItem="6Bk-ur-fSe" firstAttribute="height" secondItem="HpP-jX-hd7" secondAttribute="height" id="bvN-OM-rF9"/>
-                                    <constraint firstItem="9IA-am-LxA" firstAttribute="leading" secondItem="HpP-jX-hd7" secondAttribute="trailing" constant="40" id="fry-fS-8Tv"/>
-                                    <constraint firstAttribute="centerX" secondItem="HpP-jX-hd7" secondAttribute="centerX" id="j8f-zl-f5e"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLU-6Z-Lt1" userLabel="avatarBackgroundView">
@@ -581,8 +539,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RMp-2L-xEV" secondAttribute="trailing" id="0HQ-Dg-eOD"/>
                             <constraint firstItem="Rk7-qw-Qvc" firstAttribute="top" secondItem="RMp-2L-xEV" secondAttribute="bottom" id="3YQ-a8-48y"/>
-                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="67" id="3d5-sI-k1t"/>
-                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="67" id="73b-2n-7Eo"/>
+                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="50" id="3d5-sI-k1t"/>
+                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="50" id="73b-2n-7Eo"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="top" secondItem="IlO-XD-Drd" secondAttribute="top" id="9Hh-1w-Jnt"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="Av3-89-TbI"/>
                             <constraint firstAttribute="trailing" secondItem="htb-Qx-cAM" secondAttribute="trailing" id="IvY-Lq-VpD"/>
@@ -610,9 +568,7 @@
                         <outlet property="buttonDownOffset" destination="YLJ-ak-eEw" id="wuu-v5-lA4"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
                         <outlet property="distanceFromNavBar" destination="T29-WK-D4E" id="5FR-wL-IQJ"/>
-                        <outlet property="femaleButton" destination="9IA-am-LxA" id="zmR-jj-gHi"/>
                         <outlet property="genderViewHeight" destination="6Et-Rd-hlq" id="ENK-Oy-iej"/>
-                        <outlet property="maleButton" destination="6Bk-ur-fSe" id="S4M-YI-4qW"/>
                         <outlet property="propertiesTableView" destination="foh-Ph-JO1" id="82A-gt-d9v"/>
                         <outlet property="propertiesView" destination="Rk7-qw-Qvc" id="v4o-sO-j4F"/>
                         <outlet property="titleLabel" destination="vYE-57-GJL" id="zuf-XN-fDL"/>
@@ -636,11 +592,7 @@
         <image name="backIconWhite" width="9" height="16"/>
         <image name="bigRedBackground" width="320" height="422"/>
         <image name="editIconWhite" width="18" height="18"/>
-        <image name="femaleIcon_red" width="37" height="38"/>
-        <image name="femaleIcon_white" width="37" height="38"/>
         <image name="infoIcon" width="10" height="10"/>
-        <image name="maleIcon_red" width="37" height="38"/>
-        <image name="maleIcon_white" width="37" height="38"/>
         <image name="okButton" width="50" height="50"/>
         <image name="whiteCurve" width="320" height="30"/>
     </resources>
