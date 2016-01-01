@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GenderSelector" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="femaleButton" destination="7aQ-Fx-F6d" id="IWq-nI-6bX"/>
+                <outlet property="maleButton" destination="RQj-o1-mz4" id="teu-nR-dWk"/>
+                <outlet property="view" destination="iN0-l3-epB" id="0PU-y0-tBW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="72"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGe-dz-f7o" userLabel="genderBar">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="72"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxg-kH-jEG" userLabel="center bar">
+                            <rect key="frame" x="299" y="17" width="2" height="38"/>
+                            <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="2" id="1vN-ea-r5P"/>
+                                <constraint firstAttribute="height" constant="62" id="QKl-bF-Bgw"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="QKl-bF-Bgw"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQj-o1-mz4" userLabel="maleButton">
+                            <rect key="frame" x="222" y="17" width="37" height="38"/>
+                            <state key="normal" image="maleIcon_white">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="maleIcon_red"/>
+                            <connections>
+                                <action selector="genderButtonTapped:" destination="-1" eventType="touchUpInside" id="bH5-DT-zRe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-Fx-F6d" userLabel="femaleButton">
+                            <rect key="frame" x="341" y="17" width="37" height="38"/>
+                            <state key="normal" image="femaleIcon_white">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="femaleIcon_red"/>
+                            <connections>
+                                <action selector="genderButtonTapped:" destination="-1" eventType="touchUpInside" id="FPG-pJ-KeK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="RQj-o1-mz4" secondAttribute="centerY" id="HnV-4U-n5f"/>
+                        <constraint firstAttribute="centerX" secondItem="uxg-kH-jEG" secondAttribute="centerX" id="Nc3-3E-Ecn"/>
+                        <constraint firstAttribute="centerY" secondItem="uxg-kH-jEG" secondAttribute="centerY" id="Tlx-jR-pns"/>
+                        <constraint firstItem="uxg-kH-jEG" firstAttribute="leading" secondItem="RQj-o1-mz4" secondAttribute="trailing" constant="40" id="YnX-XS-tt6"/>
+                        <constraint firstItem="RQj-o1-mz4" firstAttribute="height" secondItem="uxg-kH-jEG" secondAttribute="height" id="ejT-QQ-Ndv"/>
+                        <constraint firstItem="7aQ-Fx-F6d" firstAttribute="leading" secondItem="uxg-kH-jEG" secondAttribute="trailing" constant="40" id="fUq-Sx-QvS"/>
+                        <constraint firstAttribute="centerY" secondItem="7aQ-Fx-F6d" secondAttribute="centerY" id="hyA-R7-4qv"/>
+                        <constraint firstAttribute="height" constant="72" id="xwF-j7-xul"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="HGe-dz-f7o" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7jA-wH-OXA"/>
+                <constraint firstItem="HGe-dz-f7o" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BgB-ND-7EU"/>
+                <constraint firstItem="HGe-dz-f7o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EcG-Kt-RRH"/>
+                <constraint firstItem="HGe-dz-f7o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="999" id="bOp-5a-Gvw"/>
+                <constraint firstAttribute="bottom" secondItem="HGe-dz-f7o" secondAttribute="bottom" id="evM-70-Ced"/>
+                <constraint firstAttribute="trailing" secondItem="HGe-dz-f7o" secondAttribute="trailing" id="s75-LA-WbQ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="bOp-5a-Gvw"/>
+                    <exclude reference="evM-70-Ced"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="414" y="260"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="femaleIcon_red" width="37" height="38"/>
+        <image name="femaleIcon_white" width="37" height="38"/>
+        <image name="maleIcon_red" width="37" height="38"/>
+        <image name="maleIcon_white" width="37" height="38"/>
+    </resources>
+</document>

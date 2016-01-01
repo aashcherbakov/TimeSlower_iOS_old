@@ -17,30 +17,16 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         static let defaultDateLabelText = "Select your birthday date"
         static let defaultCountryLabelText = "Select your country"
         
-        //image names
-        static let nameSelectedIcon = "nameIconSelected"
-        static let birthdaySelectedIcon = "birthdayIconSelected"
-        static let countrySelectedIcon = "countryIconSelected"
-        
         //segues
         static let returnToMainVCSegue = "ProfileCreated"
         static let changesSaved = "SaveProfileAndReturnToProfileStats"
     }
     
     @IBOutlet weak var changeAvatarButton: UIButton!
-    @IBOutlet weak var maleButton: UIButton!
-    @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
-    
     @IBOutlet weak var propertiesTableView: UITableView!
     
     var viewModel: ProfileEditingViewModel?
-    
-    var userProfile: Profile! 
-    var selectedGender: Profile.Gender!
-    var selectedBirthday: NSDate!
-    var selectedCountry: String!
-    var selectedName: String!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -70,20 +56,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    @IBAction func maleSelected(sender: UIButton) {
-        selectedGender = .Male
-        maleButton.selected = true
-        femaleButton.selected = false
-//        nameTextField.resignFirstResponder()
-    }
-    
-    @IBAction func femaleSelected(sender: UIButton) {
-        selectedGender = .Female
-        maleButton.selected = false
-        femaleButton.selected = true
-//        nameTextField.resignFirstResponder()
-    }
-    
     @IBAction func avatarButtonPressed() {
         currentEditingState = .Default
         
@@ -95,70 +67,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             presentViewController(photoPicker, animated: true, completion: nil)
         }
     }
-    
-//    override func propertisViewTapped(sender: UITapGestureRecognizer) {
-//        super.propertisViewTapped(sender)
-//        let tapPoint = sender.locationInView(propertiesView)
-//        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
-//        
-////        if let view = tapedView {
-////            if view.tag == 2 {
-////                birthdayLabel.text = dateFormatter.stringFromDate(datePicker.date)
-////                selectedBirthday = datePicker.date
-////            } else if view.tag == 3 {
-////                countryLabel.text = countryPicker.selectedCountryName
-////                selectedCountry = countryPicker.selectedCountryName
-////            }
-////        }
-//    }
-    
-    //MARK: - SETUP / SAVE
-
-//    func setup() {
-//        if userProfile != nil {
-//            selectedGender = userProfile.userGender()
-//            tuneGenderButtons()
-//            setupImageViewForAvatar()
-//
-//            nameTextField.text = userProfile.name
-//            birthdayLabel.text = dateFormatter.stringFromDate(userProfile.birthday)
-//            datePicker.date = userProfile.birthday
-//            countryLabel.text = userProfile.country
-//            countryPicker.selectedCountryName = userProfile.country
-//            
-//            if let avatar = UIImage(data: userProfile.photo) {
-//                avatarImage.image = avatar
-//            }
-//            
-//        } else {
-//            datePicker.date = Profile.defaultBirthday()
-//            countryPicker.selectedCountryName = Profile.defaultCountry()
-//        }
-//    }
-    
-
-    
-    func tuneGenderButtons() {
-        if userProfile == nil {
-            deselectGenderButtons()
-        } else {
-            if let gender = selectedGender {
-                if gender == .Male {
-                    maleButton.selected = true
-                } else {
-                    femaleButton.selected = true
-                }
-            } else {
-                deselectGenderButtons()
-            }
-        }
-    }
-    
-    func deselectGenderButtons() {
-        maleButton.selected = false
-        femaleButton.selected = false
-    }
-    
     
     
     func postAlertOnLackOfInfo(message message: String) {
@@ -184,20 +92,20 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     }
     
     func saveProfile() {
-        if userProfile == nil {
-            let context = CoreDataStack.sharedInstance.managedObjectContext
-            userProfile = Profile.userProfileInManagedContext(context!)
-        }
-//        userProfile.name = nameTextField.text!
-//        userProfile.birthday = dateFormatter.dateFromString(birthdayLabel.text!)!
-//        userProfile.country = countryLabel.text!
-        userProfile.gender = Profile.genderWithEnum(selectedGender!)
-        if avatarImage.image != UIImage(named: "avatarPickerImage") {
-            userProfile.photo = UIImagePNGRepresentation(avatarImage.image!)!
-        } else {
-            userProfile.photo = UIImagePNGRepresentation(UIImage(named: "defaultUserImage")!)!
-        }
-        userProfile.saveChangesToCoreData()
+//        if userProfile == nil {
+//            let context = CoreDataStack.sharedInstance.managedObjectContext
+//            userProfile = Profile.userProfileInManagedContext(context!)
+//        }
+////        userProfile.name = nameTextField.text!
+////        userProfile.birthday = dateFormatter.dateFromString(birthdayLabel.text!)!
+////        userProfile.country = countryLabel.text!
+//        userProfile.gender = Profile.genderWithEnum(selectedGender!)
+//        if avatarImage.image != UIImage(named: "avatarPickerImage") {
+//            userProfile.photo = UIImagePNGRepresentation(avatarImage.image!)!
+//        } else {
+//            userProfile.photo = UIImagePNGRepresentation(UIImage(named: "defaultUserImage")!)!
+//        }
+//        userProfile.saveChangesToCoreData()
     }
     
     
@@ -214,26 +122,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         avatarImage.contentMode = .ScaleAspectFit
         avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
         avatarImage.clipsToBounds = true
-    }
-}
-
-//extension ProfileEditingVC: UITextFieldDelegate {
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        currentEditingState = .Default
-//        selectedName = textField.text
-//        return true
-//    }
-//    
-//    func textFieldDidBeginEditing(textField: UITextField) {
-//        currentEditingState = (currentEditingState != .Name) ? .Name : .Default
-//    }
-//}
-
-extension ProfileEditingVC: CountryPickerDelegate {
-    func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-//        countryLabel.text = name
-        selectedCountry = name
     }
 }
 

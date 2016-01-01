@@ -112,6 +112,8 @@
 		F0CB18EE1BED8CAA008B1198 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
+		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
+		F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +293,8 @@
 		F0CB18ED1BED8CAA008B1198 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainNavigationController.swift; path = Features/MainNavigationController.swift; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
+		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
+		F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -600,7 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				F009AF381BDB0FEA007F38A9 /* Profile.storyboard */,
-				F02131281C1524CD00C9B02E /* CountryPicker */,
+				F0F78C811C35EA5100A7B150 /* CustomControls */,
 				F021312D1C15276E00C9B02E /* Cells */,
 			);
 			name = Views;
@@ -710,6 +714,24 @@
 				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
 			);
 			name = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		F0F78C801C35EA4600A7B150 /* GenderSelector */ = {
+			isa = PBXGroup;
+			children = (
+				F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */,
+				F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */,
+			);
+			name = GenderSelector;
+			sourceTree = "<group>";
+		};
+		F0F78C811C35EA5100A7B150 /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				F0F78C801C35EA4600A7B150 /* GenderSelector */,
+				F02131281C1524CD00C9B02E /* CountryPicker */,
+			);
+			name = CustomControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -837,6 +859,7 @@
 				TargetAttributes = {
 					F009AE521BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = EURPM5EP89;
 					};
 					F009AE691BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -882,6 +905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */,
+				F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */,
 				F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */,
 				F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */,
 				F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */,
@@ -1062,6 +1086,7 @@
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
+				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
@@ -1278,11 +1303,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeSlower/TimeSlower-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1294,12 +1322,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeSlower/TimeSlower-Bridging-Header.h";
 			};
 			name = Release;
