@@ -17,3 +17,6 @@ struct LayoutConstants {
 
 let kUsableViewHeight: CGFloat = UIScreen.mainScreen().bounds.height - LayoutConstants.navigationBarHeight
 let kUsableViewWidth: CGFloat = UIScreen.mainScreen().bounds.width
+
+let kProfileStoryboard = "Profile"
+let kActivityStoryboard = "Activities"

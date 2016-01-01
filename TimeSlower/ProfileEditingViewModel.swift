@@ -21,8 +21,11 @@ class ProfileEditingViewModel : NSObject {
     
     private(set) var tableView: UITableView
     private(set) var profile: Profile? = CoreDataStack.sharedInstance.fetchProfile()
+    
     private var selectedIndexPath: NSIndexPath?
-    private var cellConfig: ProfileEditingCellConfig?
+    private(set) var cellConfig: ProfileEditingCellConfig?
+    private(set) var selectedGender: Profile.Gender?
+    private(set) var selectedAvatar: UIImage?
     
     init(withTableView tableView: UITableView) {
         self.tableView = tableView
@@ -32,6 +35,39 @@ class ProfileEditingViewModel : NSObject {
         self.setupEvents()
         self.setupDesign()
     }
+    
+    // MARK: - Internal Functions
+    
+    /// Sets selected user gender private property to Profile.Gender type value
+    func userDidPickGender(intValue: Int) {
+        self.selectedGender = Profile.Gender(rawValue: intValue)
+    }
+    
+    /// Sets selected image as an avatar
+    func userDidPickAvatar(image: UIImage) {
+        selectedAvatar = image
+    }
+    
+    /// Returns String with reason if user did not enter some crusial data
+    func userDidMissData() -> String? {
+        guard cellConfig?.name != nil else { return "Please, enter your name" }
+        guard cellConfig?.country != nil else { return "Please, select your country" }
+        guard cellConfig?.birthday != nil else { return "Please, select your birthday date" }
+        guard selectedGender != nil else { return "Please, select your gender" }
+        
+        return nil
+    }
+    
+    /// Method checks if all data is valid and calls Profile class method saveProfile:withName:... 
+    func saveProfile() {
+        guard let name = cellConfig?.name, birthday = cellConfig?.birthday,
+            country = cellConfig?.country, gender = selectedGender else { return }
+        
+        Profile.saveProfile(withName: name, birthday: birthday, country: country,
+            avatar: selectedAvatar, gender: gender)
+    }
+    
+    // MARK: - Private Functions
     
     private func setupData() {
         cellConfig = ProfileEditingCellConfig(withProfile: profile)
@@ -82,7 +118,6 @@ extension ProfileEditingViewModel : UITableViewDelegate {
         let expanded = selectedIndexPath != indexPath
         
         resetCellAtIndexPath(selectedIndexPath, inTableView: tableView)
-        
         if selectedIndexPath != indexPath {
             resetCellAtIndexPath(indexPath, inTableView: tableView)
         }

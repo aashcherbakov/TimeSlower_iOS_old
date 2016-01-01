@@ -23,22 +23,22 @@ class ProfileEditingCellConfig: NSObject {
             birthday = profile.birthday
             name = profile.name
             country = profile.country
-        } else {
-            birthday = Profile.defaultBirthday()
-            country = Profile.defaultCountry()
         }
     }
         
     // MARK: - Internal Methods
     
-    func updateValue(value: AnyObject, forType type: ProfileEditingCellType) {
-        guard !value.isKindOfClass(NSNull) else { return }
+    func updateValue(value: AnyObject?, forType type: ProfileEditingCellType) {
+        guard let value = value else { return }
         
-        switch type {
-        case .Name: name = value as? String
-        case .Birthday: birthday = value as? NSDate
-        case .Country: country = value as? String
+        if !value.isKindOfClass(NSNull) {
+            switch type {
+            case .Name: name = value as? String
+            case .Birthday: birthday = value as? NSDate
+            case .Country: country = value as? String
+            }
         }
+
     }
     
     /// Icon for EditingState (gray or black)
@@ -60,7 +60,8 @@ class ProfileEditingCellConfig: NSObject {
     /// CountryPicker with preselected country - based on user location
     func defaultCountryPicker() -> CountryPicker {
         let countryPicker = CountryPicker()
-        countryPicker.setSelectedCountryName(country, animated: false)
+        let userCountry = (country != nil) ? country : Profile.defaultCountry()
+        countryPicker.setSelectedCountryName(userCountry, animated: false)
         return countryPicker
     }
     
@@ -68,9 +69,8 @@ class ProfileEditingCellConfig: NSObject {
     func defatultDatePicker() -> UIDatePicker {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .Date
-        if let date = birthday {
-            datePicker.setDate(date, animated: false)
-        }
+        let userBirthday = (birthday != nil) ? birthday : Profile.defaultBirthday()
+        datePicker.setDate(userBirthday!, animated: false)
         return datePicker
     }
     
