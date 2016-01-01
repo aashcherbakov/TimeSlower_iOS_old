@@ -29,6 +29,10 @@ class MainScreenContainerVC: UIViewController {
         }
     }
     
+    private lazy var menuStoryboard: UIStoryboard = {
+        return UIStoryboard(name: "Menu", bundle: nil)
+    }()
+
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -37,6 +41,7 @@ class MainScreenContainerVC: UIViewController {
     }
     
     func setupMainVC() {
+        navigationController?.navigationBarHidden = true
         mainScreenController = UIStoryboard.mainScreenVC()
         mainScreenController.delegate = self
         mainNavigationController = UINavigationController(rootViewController: mainScreenController)
@@ -99,13 +104,11 @@ extension MainScreenContainerVC: MainScreenVCDelegate {
 
 extension UIStoryboard {
     
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle(identifier: "oneLastDay.TimeSlower2")) }
-    
     class func menuViewController() -> MenuVC? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("MenuViewController") as? MenuVC
+        return UIStoryboard(name: "Menu", bundle: nil).instantiateViewControllerWithIdentifier("MenuViewController") as? MenuVC
     }
     
     class func mainScreenVC() -> MainScreenVC? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("MainScreenVC") as? MainScreenVC
+        return UIStoryboard(name: "Stats", bundle: nil).instantiateViewControllerWithIdentifier("MainScreenVC") as? MainScreenVC
     }
 }

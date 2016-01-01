@@ -109,10 +109,19 @@ class EditActivityVC: EditActivityVCConstraints {
             
             if isItSafe.0 {
                 saveActivity()
-                performSegueWithIdentifier("Summ Up Stats", sender: self)
+                showStatsInActivityMotivationVC()
+                
             } else {
                 alertUserOnMissingData(message: isItSafe.1)
             }
+        }
+    }
+    
+    private func showStatsInActivityMotivationVC() {
+        if let motivationVC = self.storyboard?
+            .instantiateViewControllerWithIdentifier(ActivityMotivationVC.className) as? ActivityMotivationVC {
+                motivationVC.activity = self.activity
+                presentViewController(motivationVC, animated: true, completion: nil)
         }
     }
     
