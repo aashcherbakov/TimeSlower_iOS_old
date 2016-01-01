@@ -18,16 +18,6 @@ import TimeSlowerKit
 class MainScreenVC: MainScreenVCConstraints {
 
     struct Constants {
-        //Segue ID's
-        static let activityStatsSegue = "Activity Stats"
-        static let allActivitiedSegue = "All Activities"
-        
-        // Storyboard IDs
-        static let profileStatsStoryboardID = "ProfileStatsVC"
-        static let createProfileStoryboardID = "ProfileEditingVC"
-        static let createAllActivitiesStoryboardID = "ListOfActivitiesVC"
-        
-        // Label names
         static let currentStatusCurrentActivity = "Current activity"
         static let currentStatusNextActivity = "Next activity"
         static let timingStatusStartsIn = "starts in"
@@ -36,7 +26,7 @@ class MainScreenVC: MainScreenVCConstraints {
         static let finishNowButtonTitle = "Finish now"
     }
     
-    //MARK: - Outlets
+    //MARK: - Variables
     
     @IBOutlet weak var periodTitleLabel: UILabel!
     @IBOutlet weak var topWhiteView: UIView!
@@ -49,7 +39,14 @@ class MainScreenVC: MainScreenVCConstraints {
     @IBOutlet weak var legendForRoutinesLabel: UILabel!
     @IBOutlet weak var menuButton: UIButton!
     
-    //MARK: - Properties
+    private lazy var activityStoryboard: UIStoryboard = {
+        return UIStoryboard(name: kActivityStoryboard, bundle: nil)
+    }()
+    
+    private lazy var profileStoryboard: UIStoryboard = {
+        return UIStoryboard(name: kProfileStoryboard, bundle: nil)
+    }()
+    
     var delegate: MainScreenVCDelegate?
     var userProfile: Profile?
     var nextActivity: Activity!
@@ -58,6 +55,7 @@ class MainScreenVC: MainScreenVCConstraints {
     var timer: MZTimerLabel!
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
@@ -121,7 +119,7 @@ class MainScreenVC: MainScreenVCConstraints {
 
     func setupPageViewController() {
         if pageViewController == nil {
-            pageViewController = storyboard?.instantiateViewControllerWithIdentifier("Page View Controller") as! UIPageViewController
+            pageViewController = activityStoryboard.instantiateViewControllerWithIdentifier("Page View Controller") as! UIPageViewController
             pageViewController.dataSource = self
             
             let startVC = viewControllerAtIndex(0) as! CircleStatsVC
@@ -209,7 +207,7 @@ class MainScreenVC: MainScreenVCConstraints {
         nextActivity.finishWithResult()
         nextActivity.deleteScheduledNotificationsForCurrentActivity()
         nextActivity.scheduleRestorationTimer()
-        performSegueWithIdentifier(Constants.activityStatsSegue, sender: self)
+        showActivityStatsViewController()
     }
     
     @IBAction func onMenuButton(sender: UIButton) {
@@ -219,14 +217,12 @@ class MainScreenVC: MainScreenVCConstraints {
     
     // MARK: - Navigation
     
-    @IBAction func profileCreated(segue: UIStoryboardSegue) {
-        userProfile = CoreDataStack.sharedInstance.fetchProfile()
-        if userProfile == nil {
-            print("Profile is not created, try another option")
+    private func showActivityStatsViewController() {
+        if let activityStatsVC = activityStoryboard.instantiateViewControllerWithIdentifier(ActivityStatsVC.className) as? ActivityStatsVC {
+            activityStatsVC.activity = nextActivity
+            presentViewController(activityStatsVC, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func activityCreated(segue: UIStoryboardSegue) { }
     
     func presentVCtoCreateFirstRoutine() {
         if let createActivityVC = activityStoryboard.instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
@@ -235,39 +231,23 @@ class MainScreenVC: MainScreenVCConstraints {
         }
     }
     
-    private lazy var activityStoryboard: UIStoryboard = {
-        return UIStoryboard(name: kActivityStoryboard, bundle: nil)
-    }()
-    
     func presentVCtoCreateNewProfile() {
-        let createProfileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewControllerWithIdentifier(Constants.createProfileStoryboardID) as! ProfileEditingVC
-        presentViewController(createProfileVC, animated: false, completion: nil)
+        if let createProfileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileEditingVC.className) as? ProfileEditingVC {
+            presentViewController(createProfileVC, animated: false, completion: nil)
+        }
     }
     
     func presentProfileVCFromMenu() {
-        let profileVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier(Constants.profileStatsStoryboardID) as! ProfileStatsVC
-        profileVC.profile = self.userProfile
-        navigationController?.pushViewController(profileVC, animated: false)
+        if let profileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileStatsVC.className) as? ProfileStatsVC {
+            profileVC.profile = self.userProfile
+            navigationController?.pushViewController(profileVC, animated: false)
+        }
     }
     
     func presentListOfActivitiesVCFromMenu() {
-        let allActivitiesVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier(Constants.createAllActivitiesStoryboardID) as! ListOfActivitiesVC
-        allActivitiesVC.profile = self.userProfile
-        navigationController?.pushViewController(allActivitiesVC, animated: false)
-    }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == Constants.allActivitiedSegue {
-            if let vc = segue.destinationViewController as? ListOfActivitiesVC {
-                vc.profile = self.userProfile
-            }
-        }
-        
-        if segue.identifier == Constants.activityStatsSegue {
-            if let activityStatsVC = segue.destinationViewController as? ActivityStatsVC {
-                activityStatsVC.activity = nextActivity
-            }
+        if let allActivitiesVC = activityStoryboard.instantiateViewControllerWithIdentifier(ListOfActivitiesVC.className) as? ListOfActivitiesVC {
+            allActivitiesVC.profile = self.userProfile
+            navigationController?.pushViewController(allActivitiesVC, animated: false)
         }
     }
 }
@@ -328,6 +308,3 @@ extension MainScreenVC: MenuVCDelegate {
         
     }
 }
-
-
-

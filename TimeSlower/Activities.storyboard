@@ -679,7 +679,7 @@
         <!--Activity MotivationVC-->
         <scene sceneID="EmM-US-JoT">
             <objects>
-                <viewController id="WEs-dW-zX4" customClass="ActivityMotivationVC" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivityMotivationVC" id="WEs-dW-zX4" customClass="ActivityMotivationVC" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Rd-NX-b2I"/>
                         <viewControllerLayoutGuide type="bottom" id="Ygy-6e-wS1"/>
