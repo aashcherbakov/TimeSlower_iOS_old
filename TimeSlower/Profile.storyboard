@@ -568,6 +568,7 @@
                         <outlet property="buttonDownOffset" destination="YLJ-ak-eEw" id="wuu-v5-lA4"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
                         <outlet property="distanceFromNavBar" destination="T29-WK-D4E" id="5FR-wL-IQJ"/>
+                        <outlet property="genderSelector" destination="htb-Qx-cAM" id="a6u-GO-JjV"/>
                         <outlet property="genderViewHeight" destination="6Et-Rd-hlq" id="ENK-Oy-iej"/>
                         <outlet property="propertiesTableView" destination="foh-Ph-JO1" id="82A-gt-d9v"/>
                         <outlet property="propertiesView" destination="Rk7-qw-Qvc" id="v4o-sO-j4F"/>

@@ -25,7 +25,6 @@ class MainScreenVC: MainScreenVCConstraints {
         // Storyboard IDs
         static let profileStatsStoryboardID = "ProfileStatsVC"
         static let createProfileStoryboardID = "ProfileEditingVC"
-        static let createRoutineStoryboardID = "EditActivityVC"
         static let createAllActivitiesStoryboardID = "ListOfActivitiesVC"
         
         // Label names
@@ -230,10 +229,15 @@ class MainScreenVC: MainScreenVCConstraints {
     @IBAction func activityCreated(segue: UIStoryboardSegue) { }
     
     func presentVCtoCreateFirstRoutine() {
-        let createActivityVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier(Constants.createRoutineStoryboardID) as! EditActivityVC
-        createActivityVC.userProfile = self.userProfile
-        presentViewController(createActivityVC, animated: false, completion: nil)
+        if let createActivityVC = activityStoryboard.instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
+            createActivityVC.userProfile = self.userProfile
+            presentViewController(createActivityVC, animated: false, completion: nil)
+        }
     }
+    
+    private lazy var activityStoryboard: UIStoryboard = {
+        return UIStoryboard(name: kActivityStoryboard, bundle: nil)
+    }()
     
     func presentVCtoCreateNewProfile() {
         let createProfileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewControllerWithIdentifier(Constants.createProfileStoryboardID) as! ProfileEditingVC

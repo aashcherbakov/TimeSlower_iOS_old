@@ -51,10 +51,11 @@ class ProfileEditingTableViewCell: UITableViewCell {
     
     private var selectedValue: AnyObject? {
         didSet {
-            guard let value = selectedValue, type = type else { return }
-            updateTextFieldWithValue(value)
-            config?.updateValue(value, forType: type)
-            updateDesignForState(.Editing, cellType: type)
+            guard let type = type else { return }
+            let state: EditingState = selectedValue != nil ? .Editing : .Default
+            updateTextFieldWithValue(selectedValue)
+            config?.updateValue(selectedValue, forType: type)
+            updateDesignForState(state, cellType: type)
         }
     }
     
@@ -105,8 +106,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
     private func setupEvents() {
         textField.rx_text
             .subscribeNext { [weak self] (text) -> Void in
-                let state: EditingState = (text.characters.count > 0) ? .Editing : .Default
-                self?.updateDesignForState(state, cellType: self?.type)
+                self?.selectedValue = text.characters.count > 0 ? text : nil
             }
             .addDisposableTo(disposable)
     }
@@ -139,7 +139,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
         picker.autoCenterInSuperview()
     }
     
-    private func updateTextFieldWithValue(value: AnyObject) {
+    private func updateTextFieldWithValue(value: AnyObject?) {
         if let string = value as? String {
             textField.text = string
         } else if let date = value as? NSDate {

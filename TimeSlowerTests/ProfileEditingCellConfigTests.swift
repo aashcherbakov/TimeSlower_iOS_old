@@ -52,9 +52,10 @@ class ProfileEditingCellConfigTests: XCTestCase {
     }
     
     func testInitWithoutProfile() {
-        XCTAssertNotNil(config.country, "Country should be default one")
-        XCTAssertNotNil(config.birthday, "There should be default birthday")
-        XCTAssertNil(config.name, "There should be no name")
+        // If user has no profile, all properties are nil
+        XCTAssertNil(config.country)
+        XCTAssertNil(config.birthday)
+        XCTAssertNil(config.name)
     }
     
     func testIconForNameCell() {

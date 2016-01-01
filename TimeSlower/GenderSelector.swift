@@ -14,6 +14,8 @@ class GenderSelector: UIControl {
     @IBOutlet private weak var femaleButton: UIButton!
     @IBOutlet private weak var maleButton: UIButton!
     
+    var selectedSegmentIndex: Int?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupXib()
@@ -55,5 +57,8 @@ class GenderSelector: UIControl {
                 maleButton.selected = !femaleButton.selected
             }
         }
+        
+        selectedSegmentIndex = sender.tag
+        sendActionsForControlEvents(.ValueChanged)
     }
 }

@@ -9,56 +9,50 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import RxSwift
+import RxCocoa
 import TimeSlowerKit
 
 class ProfileEditingVC: ProfileEditingVCConstraints {
-
-    struct Constants {
-        static let defaultDateLabelText = "Select your birthday date"
-        static let defaultCountryLabelText = "Select your country"
-        
-        //segues
-        static let returnToMainVCSegue = "ProfileCreated"
-        static let changesSaved = "SaveProfileAndReturnToProfileStats"
-    }
     
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var propertiesTableView: UITableView!
+    @IBOutlet weak var genderSelector: GenderSelector!
     
     var viewModel: ProfileEditingViewModel?
+    private var disposable = DisposeBag()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
-        self.bindViewModel()
+        bindViewModel()
     }
     
     private func bindViewModel() {
-        self.viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
+        viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
+        genderSelector.rx_controlEvents(.ValueChanged)
+            .subscribeNext { [weak self] (value) -> Void in
+                if let index = self?.genderSelector.selectedSegmentIndex {
+                    self?.viewModel?.userDidPickGender(index)
+                }
+            }
+            .addDisposableTo(disposable)
     }
     
     //MARK: - ACTIONS
 
     @IBAction func onSaveButton() {
-        if currentEditingState == .Default {
-            if savingIsPossible().0 {
-                saveProfile()
-                let segueID = presentingViewController!.isKindOfClass(ProfileStatsVC) ?
-                    Constants.changesSaved : Constants.returnToMainVCSegue
-                performSegueWithIdentifier(segueID, sender: self)
-            } else {
-                postAlertOnLackOfInfo(message: savingIsPossible().1)
-            }
+        if let reason = viewModel?.userDidMissData() {
+            postAlertOnLackOfInfo(message: reason)
         } else {
-            currentEditingState = .Default
+            viewModel?.saveProfile()
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     @IBAction func avatarButtonPressed() {
-        currentEditingState = .Default
-        
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
             let photoPicker = UIImagePickerController()
             photoPicker.sourceType = .PhotoLibrary
@@ -68,55 +62,11 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    
     func postAlertOnLackOfInfo(message message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }
-    
-    func savingIsPossible() -> (Bool, String) {
-//        if nameTextField.text == "" {
-//            return (false, "Please, enter your name")
-//        }
-//        if selectedGender == nil {
-//            return (false, "Please, select your gender")
-//        }
-//        if birthdayLabel.text == Constants.defaultDateLabelText {
-//            return (false, "Please, select your birthday date")
-//        }
-//        if countryLabel.text == Constants.defaultCountryLabelText {
-//            return (false, "Please, select your country")
-//        }
-        return (true, "")
-    }
-    
-    func saveProfile() {
-//        if userProfile == nil {
-//            let context = CoreDataStack.sharedInstance.managedObjectContext
-//            userProfile = Profile.userProfileInManagedContext(context!)
-//        }
-////        userProfile.name = nameTextField.text!
-////        userProfile.birthday = dateFormatter.dateFromString(birthdayLabel.text!)!
-////        userProfile.country = countryLabel.text!
-//        userProfile.gender = Profile.genderWithEnum(selectedGender!)
-//        if avatarImage.image != UIImage(named: "avatarPickerImage") {
-//            userProfile.photo = UIImagePNGRepresentation(avatarImage.image!)!
-//        } else {
-//            userProfile.photo = UIImagePNGRepresentation(UIImage(named: "defaultUserImage")!)!
-//        }
-//        userProfile.saveChangesToCoreData()
-    }
-    
-    
-    // MARK: - Lazy instantiation
-
-    lazy var dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .NoStyle
-        return formatter
-    }()
     
     func setupImageViewForAvatar() {
         avatarImage.contentMode = .ScaleAspectFit
@@ -128,12 +78,14 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
 extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         var image = info[UIImagePickerControllerEditedImage] as? UIImage
-        if image == nil {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        if image == nil { image = info[UIImagePickerControllerOriginalImage] as? UIImage }
+        
+        if let selectedImage = image {
+            setupImageViewForAvatar()
+            avatarImage.image = selectedImage
+            viewModel?.userDidPickAvatar(selectedImage)
         }
         
-        setupImageViewForAvatar()
-        avatarImage.image = image
         dismissViewControllerAnimated(true, completion: nil)
     }
     

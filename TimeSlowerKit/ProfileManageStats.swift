@@ -49,6 +49,33 @@ extension Profile {
         return profile
     }
     
+    public class func saveProfile(withName name: String, birthday: NSDate, country: String,
+        avatar: UIImage?, gender: Profile.Gender) {
+        var profile = fetchProfile()
+        
+        if profile == nil {
+            guard let context = CoreDataStack.sharedInstance.managedObjectContext else { return }
+            profile = Profile.userProfileInManagedContext(context)
+        }
+        
+        if let profile = profile {
+            profile.name = name
+            profile.birthday = birthday
+            profile.country = country
+            profile.gender = Profile.genderWithEnum(gender)
+            profile.photo = UIImagePNGRepresentation(imageForSelectedAvatar(avatar))!
+            profile.saveChangesToCoreData()
+        }
+    }
+    
+    public class func imageForSelectedAvatar(avatar: UIImage?) -> UIImage {
+        if let avatar = avatar {
+            return avatar
+        } else {
+            return UIImage(named: "defaultUserImage")!
+        }
+    }
+    
     /// Don't use in XCTest !
     public class func fetchProfile() -> Profile? {
         return CoreDataStack.sharedInstance.fetchProfile()
