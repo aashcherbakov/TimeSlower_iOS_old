@@ -11,7 +11,9 @@ import CoreData
 
 
 public class CoreDataStack {
-
+    
+    public init() { }
+    
     let sharedAppGroup: String = "group.com.1lastday.timeslower.documents"
     
     public class var sharedInstance: CoreDataStack {

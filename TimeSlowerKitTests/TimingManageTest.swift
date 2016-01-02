@@ -263,7 +263,7 @@ class TimingManageTest: XCTestCase {
     
     func testNextWeekendDateFromDate() {
         let startDate = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/7/15, 10:15 AM")
-        let dayName = LazyCalendar.correctWeekdayFromDate(startDate!)
+        _ = LazyCalendar.correctWeekdayFromDate(startDate!)
         
         let nextSaturday = testActivity.timing.nextWeekendDayFromDate(startDate!)
         let correctNextSaturday = NSDate(timeInterval: 60*60*24*4, sinceDate: startDate!)

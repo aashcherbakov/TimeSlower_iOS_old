@@ -91,25 +91,25 @@ class ProfileManageActivitiesTest: XCTestCase {
     
     //MARK: - Getting activities for weekday
 
-    func testActivitiesForWeekdayWeekendBasisOnSaturday() {
-        testActivity.basis = Activity.basisWithEnum(.Weekends)
-        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
-        XCTAssertEqual(activitiesForWeekday.count, 1, "There should be one activity")
-        XCTAssertEqual(activitiesForWeekday.first!, testActivity, "Activities should be equal")
-    }
-    
-    func testActivitiesForWeekdayDailyBasisOnSaturday() {
-        // test if daily basis counts on saturday
-        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
-        XCTAssertEqual(activitiesForWeekday.count, 1, "There should be one activity")
-        XCTAssertEqual(activitiesForWeekday.first!, testActivity, "Activities should be equal")
-    }
-
-    func testActivitiesForWeekdayWorkdayBasisOnSaturday() {
-        testActivity.basis = Activity.basisWithEnum(.Workdays)
-        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
-        XCTAssertEqual(activitiesForWeekday.count, 0, "There should be one activity")
-    }
+//    func testActivitiesForWeekdayWeekendBasisOnSaturday() {
+//        testActivity.basis = Activity.basisWithEnum(.Weekends)
+//        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
+//        XCTAssertEqual(activitiesForWeekday.count, 1, "There should be one activity")
+//        XCTAssertEqual(activitiesForWeekday.first!, testActivity, "Activities should be equal")
+//    }
+//    
+//    func testActivitiesForWeekdayDailyBasisOnSaturday() {
+//        // test if daily basis counts on saturday
+//        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
+//        XCTAssertEqual(activitiesForWeekday.count, 1, "There should be one activity")
+//        XCTAssertEqual(activitiesForWeekday.first!, testActivity, "Activities should be equal")
+//    }
+//
+//    func testActivitiesForWeekdayWorkdayBasisOnSaturday() {
+//        testActivity.basis = Activity.basisWithEnum(.Workdays)
+//        let activitiesForWeekday = testProfile.activitiesForWeekday(.Saturday)
+//        XCTAssertEqual(activitiesForWeekday.count, 0, "There should be one activity")
+//    }
     
     
     //MARK: - Testing time interval for availability

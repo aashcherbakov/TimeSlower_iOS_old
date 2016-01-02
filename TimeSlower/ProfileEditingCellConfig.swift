@@ -107,7 +107,7 @@ class ProfileEditingCellConfig: NSObject {
     lazy var shortDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.dateStyle = .MediumStyle
         return dateFormatter
     }()
 }

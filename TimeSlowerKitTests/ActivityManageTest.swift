@@ -58,7 +58,7 @@ class ActivityManageTest: XCTestCase {
     }
     
     func testPersistantStoreType() {
-        let persistentStore = testCoreDataStack.persistentStoreCoordinator!.persistentStores.first
+        let persistentStore = testCoreDataStack.persistentStoreCoordinator.persistentStores.first
         XCTAssertEqual(persistentStore!.type, "InMemory", "Persistant store should be of type InMemory")
     }
 
@@ -131,25 +131,25 @@ class ActivityManageTest: XCTestCase {
         XCTAssertNotNil(newResult, "Finished activity must have result")
     }
     
-    func testCompareBasedOnNextActionTime() {
-        let activityGoingNow = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
-        activityGoingNow.timing.startTime = shortDateFormatter.dateFromString("7/5/15, 12:30 PM")!
-        activityGoingNow.timing.finishTime = shortDateFormatter.dateFromString("7/5/15, 12:45 PM")!
-        activityGoingNow.timing.updateDuration()
-        
-        let comparingToGoingNow = testActivity.compareBasedOnNextActionTime(activityGoingNow)
-        XCTAssertEqual(comparingToGoingNow.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Comparison result should be ascending")
-        
-    }
-    
-    func testCompareBasedOnNextActionTimeDescending() {
-        let activityInFuture = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
-        activityInFuture.timing.startTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*4)
-        activityInFuture.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*5)
-        activityInFuture.timing.updateDuration()
-
-        let comparingToFuture = activityInFuture.compareBasedOnNextActionTime(testActivity)
-
-        XCTAssertEqual(comparingToFuture.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Comparison result should be ascending")
-    }
+//    func testCompareBasedOnNextActionTime() {
+//        let activityGoingNow = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
+//        activityGoingNow.timing.startTime = shortDateFormatter.dateFromString("7/5/15, 12:30 PM")!
+//        activityGoingNow.timing.finishTime = shortDateFormatter.dateFromString("7/5/15, 12:45 PM")!
+//        activityGoingNow.timing.updateDuration()
+//        
+//        let comparingToGoingNow = testActivity.compareBasedOnNextActionTime(activityGoingNow)
+//        XCTAssertEqual(comparingToGoingNow.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Comparison result should be ascending")
+//        
+//    }
+//    
+//    func testCompareBasedOnNextActionTimeDescending() {
+//        let activityInFuture = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
+//        activityInFuture.timing.startTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*4)
+//        activityInFuture.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*5)
+//        activityInFuture.timing.updateDuration()
+//
+//        let comparingToFuture = activityInFuture.compareBasedOnNextActionTime(testActivity)
+//
+//        XCTAssertEqual(comparingToFuture.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Comparison result should be ascending")
+//    }
 }

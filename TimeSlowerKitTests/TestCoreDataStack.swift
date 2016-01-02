@@ -11,46 +11,22 @@ import CoreData
 import TimeSlowerKit
 
 public class TestCoreDataStack: CoreDataStack {
-        
-    override init() {
+    
+    required public override init() {
         super.init()
         self.persistentStoreCoordinator = {
             
-            let testManagedObjectModel = self.managedObjectModel.copy() as! NSManagedObjectModel
-            for entity in testManagedObjectModel.entities {
-                if entity.name == "DayResults" {
-                    entity.managedObjectClassName = "TimeSlowerKitTests.DayResults"
-                }
-                if entity.name == "Activity" {
-                    entity.managedObjectClassName = "TimeSlowerKitTests.Activity"
-                }
-                if entity.name == "Timing" {
-                    entity.managedObjectClassName = "TimeSlowerKitTests.Timing"
-                }
-                if entity.name == "Profile" {
-                    entity.managedObjectClassName = "TimeSlowerKitTests.Profile"
-                }
-                if entity.name == "Stats" {
-                    entity.managedObjectClassName = "TimeSlowerKitTests.Stats"
-                }
-            }
+            let psc = NSPersistentStoreCoordinator(
+                managedObjectModel: self.managedObjectModel)
             
-            let psc: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: testManagedObjectModel)
-            var error: NSError? = nil
-            
-            var ps: NSPersistentStore?
             do {
-                ps = try psc!.addPersistentStoreWithType(NSInMemoryStoreType,
-                                configuration: nil, URL: nil, options: nil)
-            } catch let error1 as NSError {
-                error = error1
-                ps = nil
+                try psc.addPersistentStoreWithType(
+                    NSInMemoryStoreType, configuration: nil,
+                    URL: nil, options: nil)
             } catch {
                 fatalError()
             }
-            if ps == nil {
-                abort()
-            }
+            
             return psc
         }()
     }

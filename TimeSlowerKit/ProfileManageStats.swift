@@ -9,10 +9,6 @@
 import Foundation
 import CoreData
 
-
-
-
-
 extension Profile {
     
     public enum Gender: Int {

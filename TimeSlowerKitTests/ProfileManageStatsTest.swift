@@ -115,7 +115,7 @@ class ProfileManageStatsTest: XCTestCase {
     func testFactTimingForToday() {
         let newActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Goal, basis: .Daily)
         newActivity.name = "Fake goal"
-        let fakeResultForGoal = testCoreDataStack.fakeResultForActivity(newActivity)
+        _ = testCoreDataStack.fakeResultForActivity(newActivity)
         let factStats = testProfile.factTimingForPeriod(.Today)
         
         XCTAssertEqual(factStats.0, 7, "Today saving is 7 minutes")
