@@ -20,13 +20,13 @@ class ProfileEditingVCConstraints: UIViewController {
     struct Constants {
         // to height excluding navigation bar
         static let avatarHeightFactor: CGFloat = 0.18
-        static let genderViewFactor: CGFloat = 0.18
+        static let genderViewFactor: CGFloat = 0.14
         static let propertyCellViewFactor: CGFloat = 0.11
         static let topPropertyOffsetFactor: CGFloat = 0.07
         static let buttonDownOffsetFactor: CGFloat = 0.04
         
         // to view total height
-        static let backgroundImageFactor: CGFloat = 0.46
+        static let backgroundImageFactor: CGFloat = 0.36
         
         static let standardPickerViewHeigth: CGFloat = 192
         static let horizontalOffset: CGFloat = 0.12 // to width

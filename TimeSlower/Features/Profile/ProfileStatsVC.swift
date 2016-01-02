@@ -14,7 +14,6 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
 
     struct Constants {
         static let createActivitySegue = "CreateNewActivity"
-        static let editProfileSegue = "Edit Profile"
     }
     
     @IBOutlet weak var timerLabel: UILabel!
@@ -102,7 +101,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     }
 
     @IBAction func onEditButton(sender: UIButton) {
-        performSegueWithIdentifier(Constants.editProfileSegue, sender: self)
+        if let editProfileVC = storyboard?.instantiateViewControllerWithIdentifier(ProfileEditingVC.className) as? ProfileEditingVC {
+            navigationController?.pushViewController(editProfileVC, animated: true)
+        }
     }
     
     //MARK: - Timer setup
@@ -156,12 +157,6 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         if segue.identifier == Constants.createActivitySegue {
             if let vc = segue.destinationViewController as? EditActivityVC {
                 vc.userProfile = profile
-            }
-        }
-        
-        if segue.identifier == Constants.editProfileSegue {
-            if let vc = segue.destinationViewController as? ProfileEditingVC {
-                //vc.userProfile = profile
             }
         }
     }

@@ -28,6 +28,13 @@ class ProfileEditingCellConfig: NSObject {
         
     // MARK: - Internal Methods
     
+    /**
+    [tested]
+    Method to update private property (name, birthday or country) for appropriate type.
+    
+    - parameter value: AnyObject for passing both String and NSDate type
+    - parameter type:  ProfileEditingCellType of the cell
+    */
     func updateValue(value: AnyObject?, forType type: ProfileEditingCellType) {
         guard let value = value else { return }
         
@@ -38,10 +45,32 @@ class ProfileEditingCellConfig: NSObject {
             case .Country: country = value as? String
             }
         }
-
     }
     
-    /// Icon for EditingState (gray or black)
+    /**
+     Returns value of approptiate property for type in form of AnyObject
+     
+     - parameter type: ProfileEditingCellType of the cell
+     
+     - returns: AnyObject? which can contain String or NSDate (for now)
+     */
+    func preparedValueForType(type: ProfileEditingCellType) -> AnyObject? {       
+        switch type {
+        case .Name: return name
+        case .Birthday: return birthday
+        case .Country: return country
+        }
+    }
+    
+    /**
+    [tested]
+    Returns icon for type and state - gray for default, black for active
+    
+    - parameter type:  ProfileEditingCellType of the cell
+    - parameter state: ProfileEditingTableViewCell.EditingState - state in which label is now (editing or default)
+    
+    - returns: UIImage? for given type
+    */
     func iconForCellType(type: ProfileEditingCellType,
         forState state: ProfileEditingTableViewCell.EditingState) -> UIImage? {
             let suffix = (state == .Editing) ? "Selected" : ""

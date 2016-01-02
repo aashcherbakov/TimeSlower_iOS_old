@@ -15,12 +15,12 @@ class ProfileEditingViewModel : NSObject {
     
     private struct Constants {
         static let defaultCellHeight: CGFloat = 50
-        static let expandedCellHeight: CGFloat = 200
+        static let expandedCellHeight: CGFloat = 220
         static let numberOfCells: Int = 3
     }
     
     private(set) var tableView: UITableView
-    private(set) var profile: Profile? = CoreDataStack.sharedInstance.fetchProfile()
+    private(set) var profile: Profile?
     
     private var selectedIndexPath: NSIndexPath?
     private(set) var cellConfig: ProfileEditingCellConfig?
@@ -38,7 +38,7 @@ class ProfileEditingViewModel : NSObject {
     
     // MARK: - Internal Functions
     
-    /// Sets selected user gender private property to Profile.Gender type value
+    /// [tested] Sets selected user gender private property to Profile.Gender type value
     func userDidPickGender(intValue: Int) {
         self.selectedGender = Profile.Gender(rawValue: intValue)
     }
@@ -48,7 +48,7 @@ class ProfileEditingViewModel : NSObject {
         selectedAvatar = image
     }
     
-    /// Returns String with reason if user did not enter some crusial data
+    /// [tested] Returns String with reason if user did not enter some crusial data
     func userDidMissData() -> String? {
         guard cellConfig?.name != nil else { return "Please, enter your name" }
         guard cellConfig?.country != nil else { return "Please, select your country" }
@@ -67,10 +67,22 @@ class ProfileEditingViewModel : NSObject {
             avatar: selectedAvatar, gender: gender)
     }
     
+    func reloadTableView() {
+        selectedIndexPath = nil
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
     // MARK: - Private Functions
     
     private func setupData() {
+        profile = CoreDataStack.sharedInstance.fetchProfile()
         cellConfig = ProfileEditingCellConfig(withProfile: profile)
+        
+        if let profile = profile {
+            selectedAvatar = UIImage(data: profile.photo)
+            selectedGender = profile.userGender()
+        }
     }
     
     private func setupEvents() {
@@ -144,8 +156,10 @@ extension ProfileEditingViewModel : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if selectedIndexPath == indexPath {
             return Constants.expandedCellHeight
-        } else {
+        } else if selectedIndexPath == nil {
             return Constants.defaultCellHeight
+        } else {
+            return 0
         }
     }
 }

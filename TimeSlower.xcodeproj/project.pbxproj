@@ -110,6 +110,7 @@
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */; };
+		F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
 		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
@@ -291,6 +292,7 @@
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModelTests.swift; sourceTree = "<group>"; };
+		F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppColors.swift"; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
 		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
@@ -388,12 +390,12 @@
 		F009AE551BD9C5F8007F38A9 /* TimeSlower */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF0D1BDAD6C5007F38A9 /* Features */,
-				F009AF5B1BDB12D8007F38A9 /* TimeSlower-Bridging-Header.h */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
+				F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF581BDB123A007F38A9 /* Motivator.swift */,
+				F009AF0D1BDAD6C5007F38A9 /* Features */,
 				F009AF121BDADDEC007F38A9 /* Resourses */,
 			);
 			path = TimeSlower;
@@ -577,6 +579,7 @@
 		F009AF121BDADDEC007F38A9 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				F009AF5B1BDB12D8007F38A9 /* TimeSlower-Bridging-Header.h */,
 				F009AE651BD9C5F8007F38A9 /* Info.plist */,
 				F009AE621BD9C5F8007F38A9 /* LaunchScreen.storyboard */,
 				F009AE601BD9C5F8007F38A9 /* Assets.xcassets */,
@@ -1076,6 +1079,7 @@
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
 				F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
+				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,

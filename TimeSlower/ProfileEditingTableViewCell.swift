@@ -39,11 +39,16 @@ class ProfileEditingTableViewCell: UITableViewCell {
         case Editing
     }
     
+    private struct Constants {
+        static let placeholderYPadding: CGFloat = -6.0
+    }
+    
     // MARK: Properties
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var viewForPicker: UIView!
+    @IBOutlet weak var separatorLine: UIView!
     
     private let disposable = DisposeBag()
     private var type: ProfileEditingCellType?
@@ -87,6 +92,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
         self.type = type
         self.config = config
         setupDesign()
+        setupData()
     }
     
     // MARK: Internal Methods
@@ -94,7 +100,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
     func setExpended(expended: Bool) {
         if expended {
             setupPickerView(forType: type)
-        }
+        } 
     }
     
     func shouldExpand() -> Bool {
@@ -111,12 +117,20 @@ class ProfileEditingTableViewCell: UITableViewCell {
             .addDisposableTo(disposable)
     }
     
+    private func setupData() {
+        guard let type = type else { return }
+        selectedValue = config?.preparedValueForType(type)
+    }
+    
     private func setupDesign() {
         textField.delegate = self
         textField.userInteractionEnabled = (type == .Name)
         textField.placeholder = type?.rawValue.capitalizedString
         textField.floatingLabelActiveTextColor = UIColor.darkRed()
         textField.floatingLabelTextColor = UIColor.darkRed()
+        textField.font = UIFont.sourceSansRegular()
+        textField.placeholderYPadding = Constants.placeholderYPadding
+        separatorLine.alpha = (type == .Country) ? 0.0 : 1.0
         
         if let cellType = type {
             iconImageView.image = config?.iconForCellType(cellType, forState: .Default)
@@ -144,7 +158,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
             textField.text = string
         } else if let date = value as? NSDate {
             textField.text = config?.shortDateFormatter.stringFromDate(date)
-        }
+        }        
     }
     
     private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {

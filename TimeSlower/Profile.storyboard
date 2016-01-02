@@ -488,8 +488,8 @@
                                         <rect key="frame" x="8" y="8" width="118" height="118"/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatarPickerImage" translatesAutoresizingMaskIntoConstraints="NO" id="HrX-rP-kZD">
-                                        <rect key="frame" x="8" y="8" width="118" height="118"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatarPickerImage" translatesAutoresizingMaskIntoConstraints="NO" id="HrX-rP-kZD">
+                                        <rect key="frame" x="51" y="54" width="33" height="26"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdh-9b-u4y" userLabel="photoPickerButton">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
@@ -504,19 +504,19 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RLU-6Z-Lt1" secondAttribute="height" multiplier="1:1" id="9XO-zY-t52"/>
-                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="leading" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="AEH-U0-X4l"/>
+                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="AEH-U0-X4l"/>
                                     <constraint firstAttribute="centerY" secondItem="HrX-rP-kZD" secondAttribute="centerY" id="BVp-Fj-a0V"/>
                                     <constraint firstAttribute="centerY" secondItem="Bdh-9b-u4y" secondAttribute="centerY" id="K3t-Mu-5TL"/>
                                     <constraint firstAttribute="height" secondItem="Bdh-9b-u4y" secondAttribute="height" id="P2B-u2-n6B"/>
                                     <constraint firstAttribute="bottom" secondItem="9tr-P1-3lI" secondAttribute="bottom" constant="8" id="Sa3-Hq-ktm"/>
-                                    <constraint firstAttribute="bottom" secondItem="HrX-rP-kZD" secondAttribute="bottom" constant="8" id="Sar-3d-9DH"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HrX-rP-kZD" secondAttribute="bottom" constant="8" id="Sar-3d-9DH"/>
                                     <constraint firstAttribute="centerX" secondItem="Bdh-9b-u4y" secondAttribute="centerX" id="UEg-BS-oK1"/>
                                     <constraint firstAttribute="centerX" secondItem="HrX-rP-kZD" secondAttribute="centerX" id="VFX-AU-eye"/>
                                     <constraint firstItem="9tr-P1-3lI" firstAttribute="leading" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="Wfh-2q-Ru6"/>
-                                    <constraint firstAttribute="trailing" secondItem="HrX-rP-kZD" secondAttribute="trailing" constant="8" id="YFG-o2-j0X"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HrX-rP-kZD" secondAttribute="trailing" constant="8" id="YFG-o2-j0X"/>
                                     <constraint firstItem="9tr-P1-3lI" firstAttribute="top" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="ZNE-AJ-BDr"/>
                                     <constraint firstAttribute="width" secondItem="Bdh-9b-u4y" secondAttribute="width" id="rJM-bB-clN"/>
-                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="top" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="tRP-YC-c1g"/>
+                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="tRP-YC-c1g"/>
                                     <constraint firstAttribute="height" constant="134" id="uek-Ec-7e2"/>
                                     <constraint firstAttribute="trailing" secondItem="9tr-P1-3lI" secondAttribute="trailing" constant="8" id="zQo-u6-k4I"/>
                                 </constraints>

@@ -32,6 +32,16 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     
     private func bindViewModel() {
         viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
+        
+        if let selectedGenderValue = viewModel?.selectedGender?.rawValue {
+            genderSelector.setSelectedGender(selectedGenderValue)
+        }
+        
+        if let avatar = viewModel?.selectedAvatar {
+            avatarImage.image = avatar
+            setupImageViewForAvatar()
+        }
+        
         genderSelector.rx_controlEvents(.ValueChanged)
             .subscribeNext { [weak self] (value) -> Void in
                 if let index = self?.genderSelector.selectedSegmentIndex {
@@ -45,10 +55,11 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
 
     @IBAction func onSaveButton() {
         if let reason = viewModel?.userDidMissData() {
+            viewModel?.reloadTableView()
             postAlertOnLackOfInfo(message: reason)
         } else {
             viewModel?.saveProfile()
-            dismissViewControllerAnimated(true, completion: nil)
+            dismissController()
         }
     }
     
@@ -70,8 +81,16 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     
     func setupImageViewForAvatar() {
         avatarImage.contentMode = .ScaleAspectFit
-        avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
+        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
         avatarImage.clipsToBounds = true
+    }
+    
+    private func dismissController() {
+        if navigationController != nil {
+            navigationController?.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }
 

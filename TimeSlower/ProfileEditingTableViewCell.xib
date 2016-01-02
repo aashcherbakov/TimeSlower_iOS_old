@@ -6,11 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="170" id="KGk-i7-Jjw" customClass="ProfileEditingTableViewCell" customModule="TimeSlower" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="170" id="KGk-i7-Jjw" customClass="ProfileEditingTableViewCell" customModule="TimeSlower" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="328" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="328" height="170"/>
+                <rect key="frame" x="0.0" y="0.0" width="328" height="169.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyI-oC-0is" userLabel="textfieldView">
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="8" y="19" width="11" height="12"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-Wh-jay" customClass="JVFloatLabeledTextField">
-                                <rect key="frame" x="27" y="4" width="293" height="42"/>
+                                <rect key="frame" x="35" y="4" width="285" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="MrS-FD-xQh"/>
                                 </constraints>
@@ -33,13 +33,23 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L69-MU-kz4" userLabel="separator">
+                                <rect key="frame" x="20" y="49" width="288" height="1"/>
+                                <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="C3W-eC-ent"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PAJ-Wh-jay" secondAttribute="trailing" constant="8" id="1lU-YJ-mfz"/>
+                            <constraint firstItem="L69-MU-kz4" firstAttribute="leading" secondItem="wyI-oC-0is" secondAttribute="leading" constant="20" id="8GZ-Ne-vUJ"/>
+                            <constraint firstAttribute="trailing" secondItem="L69-MU-kz4" secondAttribute="trailing" constant="20" id="9fz-V9-nsZ"/>
+                            <constraint firstAttribute="bottom" secondItem="L69-MU-kz4" secondAttribute="bottom" id="Adv-kE-VUD"/>
                             <constraint firstAttribute="bottom" secondItem="PAJ-Wh-jay" secondAttribute="bottom" constant="4" id="JZF-jG-xGx"/>
                             <constraint firstItem="PAJ-Wh-jay" firstAttribute="top" secondItem="wyI-oC-0is" secondAttribute="top" constant="4" id="KUE-aS-Gmj"/>
-                            <constraint firstItem="PAJ-Wh-jay" firstAttribute="leading" secondItem="cXn-9m-MhJ" secondAttribute="trailing" constant="8" id="Vgb-De-0SL"/>
+                            <constraint firstItem="PAJ-Wh-jay" firstAttribute="leading" secondItem="cXn-9m-MhJ" secondAttribute="trailing" constant="16" id="Vgb-De-0SL"/>
                             <constraint firstItem="PAJ-Wh-jay" firstAttribute="centerY" secondItem="cXn-9m-MhJ" secondAttribute="centerY" id="dfG-AJ-T9M"/>
                             <constraint firstAttribute="height" constant="50" id="gbZ-pL-aBM"/>
                             <constraint firstItem="cXn-9m-MhJ" firstAttribute="leading" secondItem="wyI-oC-0is" secondAttribute="leading" constant="8" id="khx-G2-eKC"/>
@@ -65,7 +75,7 @@
                 <constraints>
                     <constraint firstItem="wyI-oC-0is" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1CZ-BY-mcS"/>
                     <constraint firstItem="HIq-T0-uO0" firstAttribute="top" secondItem="wyI-oC-0is" secondAttribute="bottom" id="1WE-pt-a4t"/>
-                    <constraint firstAttribute="bottom" secondItem="HIq-T0-uO0" secondAttribute="bottom" id="LDG-5t-wxb"/>
+                    <constraint firstAttribute="bottom" secondItem="HIq-T0-uO0" secondAttribute="bottom" priority="999" id="LDG-5t-wxb"/>
                     <constraint firstItem="HIq-T0-uO0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VxB-8P-gNh"/>
                     <constraint firstAttribute="trailing" secondItem="HIq-T0-uO0" secondAttribute="trailing" id="XOU-re-mNb"/>
                     <constraint firstItem="wyI-oC-0is" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="e3V-UP-7jV"/>
@@ -75,6 +85,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="iconImageView" destination="cXn-9m-MhJ" id="3o2-bJ-6gT"/>
+                <outlet property="separatorLine" destination="L69-MU-kz4" id="Aao-en-4aS"/>
                 <outlet property="textField" destination="PAJ-Wh-jay" id="sfW-dA-5nC"/>
                 <outlet property="viewForPicker" destination="HIq-T0-uO0" id="0Nz-3p-H6A"/>
             </connections>
