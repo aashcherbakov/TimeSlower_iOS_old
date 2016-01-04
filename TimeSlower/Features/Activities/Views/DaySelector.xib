@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -49,7 +49,6 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-ja-6gy" userLabel="backButton">
                     <rect key="frame" x="0.0" y="0.0" width="28" height="67"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="HeH-Fb-Uqu"/>
                     </constraints>
@@ -63,7 +62,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAn-gP-tIo">
                     <rect key="frame" x="36" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AAn-gP-tIo" secondAttribute="height" multiplier="1:1" id="CWT-gL-ipX"/>
                         <constraint firstAttribute="width" constant="28" id="jMC-dH-wwK"/>
@@ -80,7 +78,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bd5-1r-wiI">
                     <rect key="frame" x="72" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="VVv-mK-WCE"/>
                         <constraint firstAttribute="width" secondItem="bd5-1r-wiI" secondAttribute="height" multiplier="1:1" id="yUf-ws-DH4"/>
@@ -97,7 +94,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-Mh-gg6">
                     <rect key="frame" x="108" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="zSw-Mh-gg6" secondAttribute="height" multiplier="1:1" id="Dxj-io-eaz"/>
                         <constraint firstAttribute="width" constant="28" id="ehR-MO-u9i"/>
@@ -114,7 +110,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-i3-1ca">
                     <rect key="frame" x="144" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="0UF-4P-go5"/>
                         <constraint firstAttribute="width" secondItem="Sgd-i3-1ca" secondAttribute="height" multiplier="1:1" id="tz8-sN-uST"/>
@@ -131,7 +126,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROr-qo-8PK">
                     <rect key="frame" x="180" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="L2y-lA-PGi"/>
                         <constraint firstAttribute="width" secondItem="ROr-qo-8PK" secondAttribute="height" multiplier="1:1" id="ib3-B7-Cme"/>
@@ -148,7 +142,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-Qf-EBo">
                     <rect key="frame" x="216" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="uYW-Qf-EBo" secondAttribute="height" multiplier="1:1" id="OHZ-Yd-y8g"/>
                         <constraint firstAttribute="width" constant="28" id="wFS-bQ-ars"/>
@@ -165,7 +158,6 @@
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-TQ-3B4">
                     <rect key="frame" x="252" y="20" width="28" height="28"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="789-BH-uro"/>
                         <constraint firstAttribute="width" secondItem="e3f-TQ-3B4" secondAttribute="height" multiplier="1:1" id="eMc-UR-3KF"/>
@@ -181,7 +173,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="e3f-TQ-3B4" firstAttribute="leading" secondItem="uYW-Qf-EBo" secondAttribute="trailing" constant="8" id="0pu-TT-rpm"/>

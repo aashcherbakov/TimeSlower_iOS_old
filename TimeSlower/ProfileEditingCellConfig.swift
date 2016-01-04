@@ -78,7 +78,7 @@ class ProfileEditingCellConfig: NSObject {
             return UIImage(named: imageName)
     }
     
-    /// UIColor instance for EditingState
+    /// [tested] UIColor instance for EditingState
     func textColorForState(state: ProfileEditingTableViewCell.EditingState) -> UIColor {
         switch state {
         case .Default: return UIColor.lightGray()

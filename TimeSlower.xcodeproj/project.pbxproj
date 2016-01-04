@@ -111,6 +111,11 @@
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */; };
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */; };
+		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
+		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
+		F0D8F5C31C38B46000D41C78 /* EditActivityNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */; };
+		F0D8F5C41C38B46000D41C78 /* EditActivityNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */; };
+		F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
 		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
@@ -293,6 +298,11 @@
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModelTests.swift; sourceTree = "<group>"; };
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppColors.swift"; sourceTree = "<group>"; };
+		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
+		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
+		F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameCell.swift; sourceTree = "<group>"; };
+		F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameCell.xib; sourceTree = "<group>"; };
+		F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewModel.swift; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
 		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
@@ -541,19 +551,10 @@
 		F009AF0F1BDAD6D6007F38A9 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF941BDB1952007F38A9 /* Cells */,
-				F009AF691BDB189B007F38A9 /* Views */,
 				F009AF361BDB0F45007F38A9 /* Activities.storyboard */,
-				F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */,
-				F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */,
-				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
-				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
-				F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */,
-				F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */,
-				F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */,
-				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
-				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
-				F009AF431BDB1061007F38A9 /* ShareVC.swift */,
+				F0D8F5BE1C384FD400D41C78 /* Views */,
+				F009AF941BDB1952007F38A9 /* Cells */,
+				F009AF691BDB189B007F38A9 /* ViewControllers */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -633,27 +634,21 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
-		F009AF691BDB189B007F38A9 /* Views */ = {
+		F009AF691BDB189B007F38A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
-				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
-				F009AF6E1BDB1935007F38A9 /* ChartView.swift */,
-				F009AF6F1BDB1935007F38A9 /* ChartView.xib */,
-				F009AF701BDB1935007F38A9 /* CircleProgress.swift */,
-				F009AF711BDB1935007F38A9 /* DaySelector.swift */,
-				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
-				F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */,
-				F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */,
-				F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */,
-				F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */,
-				F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */,
-				F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */,
-				F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */,
-				F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */,
-				F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */,
+				F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */,
+				F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */,
+				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
+				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
+				F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */,
+				F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */,
+				F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */,
+				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
+				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
+				F009AF431BDB1061007F38A9 /* ShareVC.swift */,
 			);
-			name = Views;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F009AF941BDB1952007F38A9 /* Cells */ = {
@@ -663,6 +658,8 @@
 				F009AF761BDB1935007F38A9 /* DefaultActivitySelectorCell.xib */,
 				F009AF791BDB1935007F38A9 /* StandardActivityCell.swift */,
 				F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */,
+				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
+				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -698,6 +695,32 @@
 				8508602304D7139584AEE955 /* Pods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0D8F5BE1C384FD400D41C78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */,
+				F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */,
+				F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */,
+				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
+				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
+				F009AF6E1BDB1935007F38A9 /* ChartView.swift */,
+				F009AF6F1BDB1935007F38A9 /* ChartView.xib */,
+				F009AF701BDB1935007F38A9 /* CircleProgress.swift */,
+				F009AF711BDB1935007F38A9 /* DaySelector.swift */,
+				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
+				F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */,
+				F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */,
+				F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */,
+				F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */,
+				F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */,
+				F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */,
+				F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */,
+				F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */,
+				F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F0EB7BDF1BEFCB1700173D5D /* Profile Stats */ = {
@@ -926,8 +949,10 @@
 				F009AF8A1BDB1935007F38A9 /* DefaultActivitySelectorCell.xib in Resources */,
 				F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */,
 				F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */,
+				F0D8F5C41C38B46000D41C78 /* EditActivityNameCell.xib in Resources */,
 				F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */,
 				F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */,
+				F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */,
 				F009AE5C1BD9C5F8007F38A9 /* Main.storyboard in Resources */,
 				F009AF861BDB1935007F38A9 /* DaySelector.xib in Resources */,
 				F009AF8E1BDB1935007F38A9 /* StandardActivityCell.xib in Resources */,
@@ -1065,7 +1090,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */,
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
+				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
 				F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
@@ -1093,6 +1120,7 @@
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
+				F0D8F5C31C38B46000D41C78 /* EditActivityNameCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,

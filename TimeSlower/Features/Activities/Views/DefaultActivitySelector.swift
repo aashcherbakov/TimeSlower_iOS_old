@@ -70,7 +70,6 @@ class DefaultActivitySelector: UIControl {
 }
 
 extension DefaultActivitySelector: UICollectionViewDataSource {
-    
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         

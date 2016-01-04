@@ -11,28 +11,22 @@ import TimeSlowerKit
 
 class EditActivityVC: EditActivityVCConstraints {
 
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var timeSaver: TimeSaver!
-    @IBOutlet weak var basisSelector: BasisSelector!
-    @IBOutlet weak var basisDaysView: DaySelector!
-    @IBOutlet weak var durationValueLabel: UILabel!
-    @IBOutlet weak var notificationSwith: UISwitch!
-    @IBOutlet weak var startTimeValueLabel: UILabel!
-    @IBOutlet weak var defaultActivityPicker: DefaultActivitySelector!
+    @IBOutlet weak var tableView: UITableView!
     
-    var activityDuration: Double = 30.0 {
-        didSet {
-            if durationValueLabel != nil {
-                let format = ".0"
-                durationValueLabel.text = "\(activityDuration.format(format)) min"
-            }
-        }
-    }
-    var startTime: NSDate! {
-        didSet {
-            startTimeValueLabel.text = dateFormatter.stringFromDate(startTime)
-        }
-    }
+//    var activityDuration: Double = 30.0 {
+//        didSet {
+//            if durationValueLabel != nil {
+//                let format = ".0"
+//                durationValueLabel.text = "\(activityDuration.format(format)) min"
+//            }
+//        }
+//    }
+//    var startTime: NSDate! {
+//        didSet {
+//            startTimeValueLabel.text = dateFormatter.stringFromDate(startTime)
+//        }
+//    }
 
     var selectedBasis: ActivityBasis!
     var userProfile: Profile!
@@ -46,14 +40,15 @@ class EditActivityVC: EditActivityVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDesign()
         
-        setupCustomControls()
-
-        defaultActivityPicker.typeToDisplay = .Routines
-        
-        defaultActivityPicker.addTarget(self, action: Selector("defaultActivitySelected:"), forControlEvents: .ValueChanged)
-        basisDaysView.addTarget(self, action: Selector("backToBasisSelector"), forControlEvents: .TouchUpInside)
-        basisSelector.addTarget(self, action: Selector("basisSelectorTapped:"), forControlEvents: .ValueChanged)
+//        setupCustomControls()
+//
+//        defaultActivityPicker.typeToDisplay = .Routines
+//        
+//        defaultActivityPicker.addTarget(self, action: Selector("defaultActivitySelected:"), forControlEvents: .ValueChanged)
+//        basisDaysView.addTarget(self, action: Selector("backToBasisSelector"), forControlEvents: .TouchUpInside)
+//        basisSelector.addTarget(self, action: Selector("basisSelectorTapped:"), forControlEvents: .ValueChanged)
 
         if activity != nil {
             editingState = .Default
@@ -61,15 +56,21 @@ class EditActivityVC: EditActivityVCConstraints {
         }
     }
     
+    private func setupDesign() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
+    }
+    
     func setupCustomControls() {
-        basisSelector.selectedSegmentIndex = 0
-        selectedBasis = ActivityBasis(rawValue: basisSelector.selectedSegmentIndex!)
+//        basisSelector.selectedSegmentIndex = 0
+//        selectedBasis = ActivityBasis(rawValue: basisSelector.selectedSegmentIndex!)
     }
     
     func displayActivityData() {
-        textField.text = activity?.name
+//        textField.text = activity?.name
         timeSaver.sliderValue = activity!.timing.timeToSave.doubleValue
-        basisSelector.selectedSegmentIndex = activity!.activityBasis().rawValue
+//        basisSelector.selectedSegmentIndex = activity!.activityBasis().rawValue
     }
     
     //MARK: - Action
@@ -83,22 +84,22 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     func defaultActivitySelected(value: Int) {
-        textField.text = defaultActivityPicker.selectedActivityName
-        textField.resignFirstResponder()
+//        textField.text = defaultActivityPicker.selectedActivityName
+//        textField.resignFirstResponder()
         editingState = .Default
     }
     
-    @IBAction func durationButtonPressed(sender: UIButton) {
-        if sender.tag == 1 {
-            activityDuration += 5.0
-        } else if sender.tag == 0 {
-            activityDuration -= 5.0
-        }
-    }
-
-    @IBAction func changedStartTime(sender: UIDatePicker) {
-        startTime = sender.date
-    }
+//    @IBAction func durationButtonPressed(sender: UIButton) {
+//        if sender.tag == 1 {
+//            activityDuration += 5.0
+//        } else if sender.tag == 0 {
+//            activityDuration -= 5.0
+//        }
+//    }
+//
+//    @IBAction func changedStartTime(sender: UIDatePicker) {
+//        startTime = sender.date
+//    }
 
     @IBAction func doneButtonPressed() {
         
@@ -126,12 +127,12 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     func allDataEntered() -> (Bool, String) {
-        if textField.text == "" {
-            return (false, "Activity has no name!")
-        }
-        if startTimeValueLabel.text == "" {
-            return (false, "Start time is not selected!")
-        }
+//        if textField.text == "" {
+//            return (false, "Activity has no name!")
+//        }
+//        if startTimeValueLabel.text == "" {
+//            return (false, "Start time is not selected!")
+//        }
         return (true, "")
     }
     
@@ -142,7 +143,7 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     func basisSelectorTapped(sender: BasisSelector) {
-        basisDaysView.basis = ActivityBasis(rawValue: sender.selectedSegmentIndex!)
+//        basisDaysView.basis = ActivityBasis(rawValue: sender.selectedSegmentIndex!)
         editingState = .BasisDetail
     }
     
@@ -155,13 +156,13 @@ class EditActivityVC: EditActivityVCConstraints {
             activity = newActivity
         }
         
-        activity?.name = textField.text!
-        let selectedBasis = ActivityBasis(rawValue:basisSelector.selectedSegmentIndex!)
-        activity?.basis = Activity.basisWithEnum(selectedBasis!)
-        activity?.timing.startTime = Timing.updateTimeForToday(datePicker.date)
-        activity?.timing.duration = NSNumber(double: activityDuration)
-        activity?.timing.finishTime = activity!.timing.startTime.dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
-        activity?.timing.timeToSave = NSNumber(float: timeSaver.slider.value)
+//        activity?.name = textField.text!
+//        let selectedBasis = ActivityBasis(rawValue:basisSelector.selectedSegmentIndex!)
+//        activity?.basis = Activity.basisWithEnum(selectedBasis!)
+//        activity?.timing.startTime = Timing.updateTimeForToday(datePicker.date)
+//        activity?.timing.duration = NSNumber(double: activityDuration)
+//        activity?.timing.finishTime = activity!.timing.startTime.dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
+//        activity?.timing.timeToSave = NSNumber(float: timeSaver.slider.value)
         
         do {
             try activity!.managedObjectContext!.save()
@@ -203,6 +204,30 @@ extension EditActivityVC: UITextFieldDelegate {
         editingState = .NameOnly
     }
 
+}
+
+extension EditActivityVC: UITableViewDataSource {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            if let cell = tableView.dequeueReusableCellWithIdentifier(EditActivityNameCell.className) as? EditActivityNameCell {
+                return cell
+            }
+            
+        default: return UITableViewCell()
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+}
+
+extension EditActivityVC: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
 }
 
 

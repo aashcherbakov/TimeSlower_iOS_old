@@ -28,25 +28,25 @@ class EditActivityVCConstraints: UIViewController {
     }
     
     //MARK: - Icons
-    @IBOutlet weak var nameIcon: UIImageView!
-    @IBOutlet weak var startTimeIcon: UIImageView!
-    @IBOutlet weak var durationIcon: UIImageView!
-    @IBOutlet weak var notificationIcon: UIImageView!
+//    @IBOutlet weak var nameIcon: UIImageView!
+//    @IBOutlet weak var startTimeIcon: UIImageView!
+//    @IBOutlet weak var durationIcon: UIImageView!
+//    @IBOutlet weak var notificationIcon: UIImageView!
     
     //MARK: - Labels
-    @IBOutlet weak var startTimeLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var notificationLabel: UILabel!
-    @IBOutlet weak var textField: UITextField!
+//    @IBOutlet weak var startTimeLabel: UILabel!
+//    @IBOutlet weak var durationLabel: UILabel!
+//    @IBOutlet weak var notificationLabel: UILabel!
+//    @IBOutlet weak var textField: UITextField!
     
     //MARK: - Height Constraints
-    @IBOutlet weak var nameViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var basisViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var basisDaysViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var startTimeViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var durationViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var notificationViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var nameViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var basisViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var basisDaysViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var startTimeViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var durationViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var notificationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var timeSaverViewHeignt: NSLayoutConstraint!
     @IBOutlet weak var buttonHeight: NSLayoutConstraint!
     @IBOutlet weak var topWhiteViewHeight: NSLayoutConstraint!
@@ -102,8 +102,8 @@ class EditActivityVCConstraints: UIViewController {
     func setDefaultConstraints() {
         buttonDownOffset.constant = kUsableViewHeight * LayoutConstants.buttonDownOffset
         buttonHeight.constant = kUsableViewHeight * LayoutConstants.buttonHeightScale
-        rightOffset.constant = kUsableViewWidth * Constants.horizontalOffsetFactor
-        leftOffset.constant = kUsableViewWidth * Constants.horizontalOffsetFactor
+//        rightOffset.constant = kUsableViewWidth * Constants.horizontalOffsetFactor
+//        leftOffset.constant = kUsableViewWidth * Constants.horizontalOffsetFactor
         
         defaultConstraintsSet = true
     }
@@ -111,43 +111,43 @@ class EditActivityVCConstraints: UIViewController {
     
     func setConstraintsForDefaultState() {
         // hide datePicker and basisPickerDetail
-        datePickerViewHeight.constant = 0.0
-        basisDaysViewHeight.constant = 0.0
-        
+//        datePickerViewHeight.constant = 0.0
+//        basisDaysViewHeight.constant = 0.0
+//        
         // big views
         topWhiteViewHeight.constant = kUsableViewHeight * Constants.topWhiteViewFactor
         timeSaverViewHeignt.constant = kUsableViewHeight * Constants.timeSaverViewFactor
 
         // all other equal
-        for constraint in [nameViewHeight, basisViewHeight,
-            startTimeViewHeight, durationViewHeight, notificationViewHeight] {
-            constraint.constant = kUsableViewHeight * Constants.cellHeightFactor
-        }
+//        for constraint in [nameViewHeight, basisViewHeight,
+//            startTimeViewHeight, durationViewHeight, notificationViewHeight] {
+//            constraint.constant = kUsableViewHeight * Constants.cellHeightFactor
+//        }
     }
     
     func setConstraintsForNameOnlyState() {
         
-        for constraint in [basisViewHeight, basisDaysViewHeight, startTimeViewHeight, datePickerViewHeight, durationViewHeight, notificationViewHeight] {
-            constraint.constant = 0
-        }
-        
-        defaultPickerHeight.constant = kUsableViewHeight * Constants.defaultPickerHeightFactor
-        topWhiteViewHeight.constant = defaultPickerHeight.constant + nameViewHeight.constant
+//        for constraint in [basisViewHeight, basisDaysViewHeight, startTimeViewHeight, datePickerViewHeight, durationViewHeight, notificationViewHeight] {
+//            constraint.constant = 0
+//        }
+//        
+//        defaultPickerHeight.constant = kUsableViewHeight * Constants.defaultPickerHeightFactor
+//        topWhiteViewHeight.constant = defaultPickerHeight.constant + nameViewHeight.constant
         
     }
     
     func setConstraintsForBasisDetail() {
-        basisViewHeight.constant = 0.0
-        basisDaysViewHeight.constant = kUsableViewHeight * Constants.cellHeightFactor
+//        basisViewHeight.constant = 0.0
+//        basisDaysViewHeight.constant = kUsableViewHeight * Constants.cellHeightFactor
     }
     
     func setConstraintsForStartTime() {
-        for constraint in [basisViewHeight, basisDaysViewHeight, durationViewHeight, notificationViewHeight] {
-            constraint.constant = 0.0
-        }
-        
-        datePickerViewHeight.constant = 182
-        topWhiteViewHeight.constant = nameViewHeight.constant + startTimeViewHeight.constant + datePickerViewHeight.constant + Constants.offsetFromCellsToDownWhite
+//        for constraint in [basisViewHeight, basisDaysViewHeight, durationViewHeight, notificationViewHeight] {
+//            constraint.constant = 0.0
+//        }
+//        
+//        datePickerViewHeight.constant = 182
+//        topWhiteViewHeight.constant = nameViewHeight.constant + startTimeViewHeight.constant + datePickerViewHeight.constant + Constants.offsetFromCellsToDownWhite
     }
 }
 
