@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TKS-7w-fhK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TKS-7w-fhK">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Fake Controller With Table View-->
@@ -18,7 +19,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WFU-kO-CV5">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="TKS-7w-fhK" id="w6a-SC-p1c"/>
@@ -26,7 +26,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WFU-kO-CV5" firstAttribute="top" secondItem="NTT-uZ-Icm" secondAttribute="top" id="Iw5-Uw-sjG"/>
@@ -42,6 +41,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QfJ-pk-PFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="554" y="481"/>
+        </scene>
+        <!--Fake Controller With Textfield View-->
+        <scene sceneID="tde-eU-hz2">
+            <objects>
+                <viewController storyboardIdentifier="FakeControllerWithTextfieldView" id="mhQ-n2-6pL" customClass="FakeControllerWithTextfieldView" customModule="TimeSlowerTests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zyM-9D-ehr"/>
+                        <viewControllerLayoutGuide type="bottom" id="161-av-4bw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Im4-WT-gWt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qW9-p1-bnz" customClass="TextfieldView" customModule="TimeSlower">
+                                <rect key="frame" x="180" y="20" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="byA-17-e6h"/>
+                                    <constraint firstAttribute="height" constant="128" id="xCk-s8-Ej5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qW9-p1-bnz" firstAttribute="leading" secondItem="Im4-WT-gWt" secondAttribute="leadingMargin" constant="160" id="0U5-fU-wxU"/>
+                            <constraint firstItem="qW9-p1-bnz" firstAttribute="top" secondItem="zyM-9D-ehr" secondAttribute="bottom" id="KJn-SO-gZU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qW9-p1-bnz" secondAttribute="trailing" constant="160" id="q17-Ye-CP8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textfieldView" destination="qW9-p1-bnz" id="xzI-aT-xgL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9OG-DM-FRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="1149"/>
         </scene>
     </scenes>
 </document>

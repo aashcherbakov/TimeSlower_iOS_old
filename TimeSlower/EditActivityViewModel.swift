@@ -47,11 +47,7 @@ class EditActivityViewModel {
 
     private(set) var tableView: UITableView
     
-    private var name: String? {
-        didSet {
-            print("Name is set to \(name)")
-        }
-    }
+    private var name: String?
     private var basis: String?
     private var startTime: NSDate?
     private var notificationsOn: Bool?
@@ -88,35 +84,37 @@ class EditActivityViewModel {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return UITableViewCell() }
         var cell = UITableViewCell()
         switch cellType {
-        case .Name:
-            if let nameCell = tableView.dequeueReusableCellWithIdentifier(EditActivityNameCell.className) as? EditActivityNameCell {
-                nameCell.selectedName
-                    .subscribeNext { [weak self] (name) -> Void in
-                        if name.characters.count > 0 {
-                            self?.name = name
-                            self?.machine.state = .BasisAndStartTime
-                        }
-                    }
-                    .addDisposableTo(disposableBag)
-                
-                nameCell.textFieldIsEditing
-                    .subscribeNext { (editing) -> Void in
-                        if editing {
-                            self.machine.state = .Name
-                        }
-                    }
-                    .addDisposableTo(disposableBag)
-                
-                cell = nameCell
-                
-            }
+        case .Name: cell = nameCell()
         default: break
         }
         
         return cell
     }
     
-    // MARK: - Private functions
+    // MARK: - Private Methods
+    
+    private func nameCell() -> EditActivityNameCell {
+        if let nameCell = tableView.dequeueReusableCellWithIdentifier(EditActivityNameCell.className) as? EditActivityNameCell {
+            
+            nameCell.selectedName
+                .subscribeNext { [weak self] (name) -> Void in
+                    if name.characters.count > 0 {
+                        self?.name = name
+                        self?.machine.state = .BasisAndStartTime
+                    }
+                }.addDisposableTo(disposableBag)
+            
+            nameCell.textFieldIsEditing
+                .subscribeNext { (editing) -> Void in
+                    if editing {
+                        self.machine.state = .Name
+                    }
+                }.addDisposableTo(disposableBag)
+            
+            return nameCell
+        }
+        return EditActivityNameCell()
+    }
 }
 
 // MARK: - StateMachineDelegate

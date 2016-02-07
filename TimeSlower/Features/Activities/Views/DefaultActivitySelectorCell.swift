@@ -16,7 +16,6 @@ class DefaultActivitySelectorCell: UICollectionViewCell {
     
     @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

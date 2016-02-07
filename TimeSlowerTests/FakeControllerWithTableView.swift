@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FakeControllerWithTableView: UIViewController {
+class FakeControllerWithTableView: UIViewController, FakeController {
 
     @IBOutlet weak var tableView: UITableView!
 

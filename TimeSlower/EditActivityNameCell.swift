@@ -9,7 +9,10 @@
 import UIKit
 import RxSwift
 
-/// UITableViewCell subclass to collect activity name. 
+/**
+ UITableViewCell subclass used to enter/edit activity name. Contains TextfieldView to 
+ collect data and, in expanded state, - DefaultActivitySelector.
+*/
 class EditActivityNameCell: UITableViewCell {
     
     @IBOutlet weak var textFieldView: TextfieldView!

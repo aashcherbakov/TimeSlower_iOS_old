@@ -109,6 +109,8 @@
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F0C2F6121C67F2A0006B7D81 /* EditActivityBasisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */; };
+		F0C2F6131C67F2A0006B7D81 /* EditActivityBasisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */; };
 		F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */; };
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */; };
 		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
@@ -116,6 +118,9 @@
 		F0D8F5C31C38B46000D41C78 /* EditActivityNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */; };
 		F0D8F5C41C38B46000D41C78 /* EditActivityNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */; };
 		F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */; };
+		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
+		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithTextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithTextfieldView.swift */; };
+		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */; };
 		F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */; };
@@ -300,6 +305,8 @@
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
+		F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityBasisCell.swift; sourceTree = "<group>"; };
+		F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityBasisCell.xib; sourceTree = "<group>"; };
 		F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModelTests.swift; sourceTree = "<group>"; };
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppColors.swift"; sourceTree = "<group>"; };
 		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
@@ -307,6 +314,9 @@
 		F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameCell.swift; sourceTree = "<group>"; };
 		F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameCell.xib; sourceTree = "<group>"; };
 		F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewModel.swift; sourceTree = "<group>"; };
+		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
+		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithTextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeControllerWithTextfieldView.swift; sourceTree = "<group>"; };
+		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityVCTests.swift; sourceTree = "<group>"; };
 		F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewModel.swift; sourceTree = "<group>"; };
@@ -424,7 +434,9 @@
 			children = (
 				F009AE701BD9C5F8007F38A9 /* Info.plist */,
 				896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */,
+				F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */,
 				896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */,
+				F0E0D38E1C67B9C30087EC10 /* FakeControllerWithTextfieldView.swift */,
 				896B842D1C17139F00C786E7 /* ProfileTests */,
 			);
 			path = TimeSlowerTests;
@@ -744,6 +756,7 @@
 				F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */,
 				F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */,
 				F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */,
+				F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */,
 			);
 			name = TextfieldView;
 			sourceTree = "<group>";
@@ -812,6 +825,8 @@
 				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
 				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
 				F0EB8A381C4333FA009B974A /* DefaultActivitySelector */,
+				F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */,
+				F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1042,6 +1057,7 @@
 				F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */,
 				F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */,
 				F0D8F5C41C38B46000D41C78 /* EditActivityNameCell.xib in Resources */,
+				F0C2F6131C67F2A0006B7D81 /* EditActivityBasisCell.xib in Resources */,
 				F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */,
 				F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */,
 				F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */,
@@ -1213,6 +1229,7 @@
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
+				F0C2F6121C67F2A0006B7D81 /* EditActivityBasisCell.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F0D8F5C31C38B46000D41C78 /* EditActivityNameCell.swift in Sources */,
@@ -1240,7 +1257,10 @@
 			files = (
 				896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */,
 				F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */,
+				F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */,
 				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
+				F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */,
+				F0E0D38F1C67B9C30087EC10 /* FakeControllerWithTextfieldView.swift in Sources */,
 				F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */,
 				F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */,
 			);
