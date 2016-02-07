@@ -89,7 +89,7 @@
                 <outlet property="textField" destination="PAJ-Wh-jay" id="sfW-dA-5nC"/>
                 <outlet property="viewForPicker" destination="HIq-T0-uO0" id="0Nz-3p-H6A"/>
             </connections>
-            <point key="canvasLocation" x="536" y="558"/>
+            <point key="canvasLocation" x="391" y="340"/>
         </tableViewCell>
     </objects>
     <resources>

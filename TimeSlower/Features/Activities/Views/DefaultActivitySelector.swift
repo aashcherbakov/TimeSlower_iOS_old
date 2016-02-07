@@ -61,6 +61,9 @@ class DefaultActivitySelector: UIControl {
         addSubview(view)
     }
     
+    /**
+     Method recalculates width after views are layed out. Needs to be called in layoutSubviews method of superview
+     */
     func setupCollectionViewItemSize() {
         let width = CGRectGetWidth(collectionView!.frame) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout

@@ -8,11 +8,15 @@
 
 import UIKit
 import TimeSlowerKit
+import RxSwift
+import RxCocoa
+
 
 class EditActivityVC: EditActivityVCConstraints {
 
     @IBOutlet weak var timeSaver: TimeSaver!
     @IBOutlet weak var tableView: UITableView!
+    
     
 //    var activityDuration: Double = 30.0 {
 //        didSet {
@@ -28,8 +32,13 @@ class EditActivityVC: EditActivityVCConstraints {
 //        }
 //    }
 
+    
     var selectedBasis: ActivityBasis!
     var userProfile: Profile!
+    
+    private var selectedIndexPath: NSIndexPath?
+    
+    private var viewModel: EditActivityViewModel?
 
     lazy var dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
@@ -40,6 +49,8 @@ class EditActivityVC: EditActivityVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
+
         setupDesign()
         
 //        setupCustomControls()
@@ -56,9 +67,13 @@ class EditActivityVC: EditActivityVCConstraints {
         }
     }
     
+    private func bindViewModel() {
+        viewModel = EditActivityViewModel(withTableView: tableView)
+    }
+    
     private func setupDesign() {
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
     }
     
@@ -190,8 +205,29 @@ class EditActivityVC: EditActivityVCConstraints {
     @IBAction func editingComplete(segue: UIStoryboardSegue) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
+    // MARK: - Private Methods
+    
+    private func resetExpandableCell(atIndexPath indexPath: NSIndexPath) {
+//        shrinkCellAtIndexPath(selectedIndexPath, inTableView: tableView)
+        
+        if selectedIndexPath != indexPath {
+//            shrinkCellAtIndexPath(indexPath, inTableView: tableView)
+        }
+        
+        selectedIndexPath = (indexPath != selectedIndexPath) ? indexPath : nil
+    }
+    
+//    private func shrinkCellAtIndexPath(indexPath: NSIndexPath?, inTableView tableView: UITableView) {
+//        guard let path = indexPath else { return }
+//        
+//        if let cell = tableView.cellForRowAtIndexPath(path) as? ExpandableCell {
+//            cell.expandCell(false)
+//        }
+//    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension EditActivityVC: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -206,15 +242,12 @@ extension EditActivityVC: UITextFieldDelegate {
 
 }
 
+// MARK: - UITableViewDataSource
+
 extension EditActivityVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            if let cell = tableView.dequeueReusableCellWithIdentifier(EditActivityNameCell.className) as? EditActivityNameCell {
-                return cell
-            }
-            
-        default: return UITableViewCell()
+        if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
+            return cell
         }
         return UITableViewCell()
     }
@@ -224,9 +257,24 @@ extension EditActivityVC: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension EditActivityVC: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.heightForRow(indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let expanded = selectedIndexPath != indexPath
+        
+        resetExpandableCell(atIndexPath: indexPath)
+        
+//        if let expandableCell = tableView.cellForRowAtIndexPath(indexPath) as? ExpandableCell {
+            tableView.beginUpdates()
+//            expandableCell.expandCell(expanded)
+            tableView.endUpdates()
+//        }
     }
 }
 

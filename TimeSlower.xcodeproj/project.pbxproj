@@ -117,6 +117,10 @@
 		F0D8F5C41C38B46000D41C78 /* EditActivityNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */; };
 		F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
+		F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */; };
+		F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */; };
+		F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A431C5ECB26009B974A /* StateMachine.swift */; };
+		F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */; };
 		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
 		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
 		F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */; };
@@ -304,6 +308,10 @@
 		F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameCell.xib; sourceTree = "<group>"; };
 		F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewModel.swift; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
+		F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityVCTests.swift; sourceTree = "<group>"; };
+		F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewModel.swift; sourceTree = "<group>"; };
+		F0EB8A431C5ECB26009B974A /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
 		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
 		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
 		F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelector.swift; sourceTree = "<group>"; };
@@ -534,6 +542,7 @@
 				F009AF0E1BDAD6CE007F38A9 /* Profile */,
 				F009AF111BDAD6E6007F38A9 /* Menu */,
 				F009AF101BDAD6DF007F38A9 /* Stats */,
+				F0EB8A3A1C4ABDDC009B974A /* Edit Activity */,
 				F009AF0F1BDAD6D6007F38A9 /* Activities */,
 			);
 			name = Features;
@@ -626,10 +635,11 @@
 		F009AF621BDB13A4007F38A9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF631BDB13E5007F38A9 /* CircularTimer.h */,
-				F009AF641BDB13E5007F38A9 /* CircularTimer.m */,
-				F009AF651BDB13E5007F38A9 /* MZTimerLabel.h */,
-				F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */,
+				F0EB8A341C433367009B974A /* TextfieldView */,
+				F0EB8A3D1C4ABE41009B974A /* CircularTimer */,
+				F0EB8A3E1C4ABE4B009B974A /* TimerLabel */,
+				F0EB8A431C5ECB26009B974A /* StateMachine.swift */,
+				F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -642,8 +652,6 @@
 				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
 				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
 				F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */,
-				F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */,
-				F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */,
 				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
 				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
 				F009AF431BDB1061007F38A9 /* ShareVC.swift */,
@@ -654,12 +662,8 @@
 		F009AF941BDB1952007F38A9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF751BDB1935007F38A9 /* DefaultActivitySelectorCell.swift */,
-				F009AF761BDB1935007F38A9 /* DefaultActivitySelectorCell.xib */,
 				F009AF791BDB1935007F38A9 /* StandardActivityCell.swift */,
 				F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */,
-				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
-				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -700,18 +704,10 @@
 		F0D8F5BE1C384FD400D41C78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */,
-				F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */,
-				F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */,
-				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
-				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
-				F009AF6E1BDB1935007F38A9 /* ChartView.swift */,
-				F009AF6F1BDB1935007F38A9 /* ChartView.xib */,
+				F0EB8A351C4333C8009B974A /* Basis Selector */,
+				F0EB8A361C4333D5009B974A /* Chart View */,
 				F009AF701BDB1935007F38A9 /* CircleProgress.swift */,
-				F009AF711BDB1935007F38A9 /* DaySelector.swift */,
-				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
-				F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */,
-				F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */,
+				F0EB8A371C4333E1009B974A /* Day Selector */,
 				F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */,
 				F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */,
 				F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */,
@@ -740,6 +736,102 @@
 				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
 			);
 			name = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		F0EB8A341C433367009B974A /* TextfieldView */ = {
+			isa = PBXGroup;
+			children = (
+				F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */,
+				F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */,
+				F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */,
+			);
+			name = TextfieldView;
+			sourceTree = "<group>";
+		};
+		F0EB8A351C4333C8009B974A /* Basis Selector */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
+				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
+			);
+			name = "Basis Selector";
+			sourceTree = "<group>";
+		};
+		F0EB8A361C4333D5009B974A /* Chart View */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF6E1BDB1935007F38A9 /* ChartView.swift */,
+				F009AF6F1BDB1935007F38A9 /* ChartView.xib */,
+			);
+			name = "Chart View";
+			sourceTree = "<group>";
+		};
+		F0EB8A371C4333E1009B974A /* Day Selector */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF711BDB1935007F38A9 /* DaySelector.swift */,
+				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
+			);
+			name = "Day Selector";
+			sourceTree = "<group>";
+		};
+		F0EB8A381C4333FA009B974A /* DefaultActivitySelector */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF731BDB1935007F38A9 /* DefaultActivitySelector.swift */,
+				F009AF741BDB1935007F38A9 /* DefaultActivitySelector.xib */,
+				F009AF751BDB1935007F38A9 /* DefaultActivitySelectorCell.swift */,
+				F009AF761BDB1935007F38A9 /* DefaultActivitySelectorCell.xib */,
+			);
+			name = DefaultActivitySelector;
+			sourceTree = "<group>";
+		};
+		F0EB8A3A1C4ABDDC009B974A /* Edit Activity */ = {
+			isa = PBXGroup;
+			children = (
+				F0EB8A3C1C4ABE0A009B974A /* Views */,
+				F0EB8A3B1C4ABE01009B974A /* ViewControllers */,
+			);
+			name = "Edit Activity";
+			sourceTree = "<group>";
+		};
+		F0EB8A3B1C4ABE01009B974A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */,
+				F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */,
+				F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */,
+				F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
+				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
+				F0EB8A381C4333FA009B974A /* DefaultActivitySelector */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F0EB8A3D1C4ABE41009B974A /* CircularTimer */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF631BDB13E5007F38A9 /* CircularTimer.h */,
+				F009AF641BDB13E5007F38A9 /* CircularTimer.m */,
+			);
+			name = CircularTimer;
+			sourceTree = "<group>";
+		};
+		F0EB8A3E1C4ABE4B009B974A /* TimerLabel */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF651BDB13E5007F38A9 /* MZTimerLabel.h */,
+				F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */,
+			);
+			name = TimerLabel;
 			sourceTree = "<group>";
 		};
 		F0F78C801C35EA4600A7B150 /* GenderSelector */ = {
@@ -1093,12 +1185,14 @@
 				F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */,
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
+				F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */,
 				F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
 				F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */,
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
+				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
 				F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */,
@@ -1108,6 +1202,7 @@
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
+				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
@@ -1146,6 +1241,7 @@
 				896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */,
 				F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */,
 				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
+				F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */,
 				F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

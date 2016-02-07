@@ -22,6 +22,7 @@ class TextfieldViewModel: NSObject {
     private var disposable = DisposeBag()
     
     var state: BehaviorSubject<TextFieldViewState>?
+    var dataEntryFinished = Variable<Bool>(false)
     
     init(withTextField: JVFloatLabeledTextField) {
         self.textField = withTextField
@@ -79,16 +80,9 @@ class TextfieldViewModel: NSObject {
     /// Should be a singleton -> refactor
     private var shortDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSCalendar.currentCalendar().locale
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.dateStyle = .MediumStyle
         return dateFormatter
     }()
-
-}
-
-extension TextfieldViewModel : UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }

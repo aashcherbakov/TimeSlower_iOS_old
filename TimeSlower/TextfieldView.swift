@@ -7,9 +7,14 @@
 //
 
 import Foundation
-import RxCocoa
 import RxSwift
 import JVFloatLabeledTextField
+
+
+protocol TextFieldViewDelegate {
+    func textFieldViewDidReturn(withText: String)
+    func textFieldViewDidBeginEditing()
+}
 
 enum TextFieldViewType: String {
     case ActivityName = "activityNameIcon"
@@ -26,12 +31,13 @@ class TextfieldView: UIView {
     
     // MARK: - Variables
     
-    @IBOutlet var view: UIView!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: JVFloatLabeledTextField!
-    private var type: TextFieldViewType?
+    @IBOutlet private var view: UIView!
+    @IBOutlet private weak var imageView: UIImageView!
     private var viewModel: TextfieldViewModel?
+    private var type: TextFieldViewType?
     private var disposable = DisposeBag()
+    private var delegate: TextFieldViewDelegate?
     
     // MARK: - Lifecycle
     
@@ -42,11 +48,18 @@ class TextfieldView: UIView {
     
     // MARK: - Internal Methods
     
-    func setup(withType type: TextFieldViewType) {
+    func setup(withType type: TextFieldViewType, delegate: TextFieldViewDelegate) {
         self.type = type
+        self.delegate = delegate
+        
         setupData()
         setupEvents()
         setupDesign()
+    }
+    
+    func setText(text: String?) {
+        textField.text = text
+        textField.resignFirstResponder()
     }
     
     // MARK: - Setup Methods
@@ -62,6 +75,7 @@ class TextfieldView: UIView {
     }
     
     private func setupEvents() {
+        // state depends on whether user has entered any text or not
         viewModel?.state?
             .subscribeNext { [weak self] (state) -> Void in
                 self?.updateDesignForState(state)
@@ -78,7 +92,7 @@ class TextfieldView: UIView {
     private func setupTextfield() {
         guard let type = type else { return }
         
-        textField.delegate = viewModel
+        textField.delegate = self
         textField.userInteractionEnabled = (type == .ActivityName)
         textField.placeholder = viewModel?.placeholderForType(type)
         textField.floatingLabelActiveTextColor = UIColor.darkRed()
@@ -90,8 +104,24 @@ class TextfieldView: UIView {
     
     private func updateDesignForState(state: TextFieldViewState?) {
         guard let type = type, state = state else { return }
-        textField.textColor = viewModel?.textColorForState(.Empty)
+        textField.textColor = viewModel?.textColorForState(state)
         imageView.image = viewModel?.iconForType(type, state: state)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension TextfieldView : UITextFieldDelegate {
+    // we need to use delegate to forward existing API calls
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        delegate?.textFieldViewDidReturn(textField.text!)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        delegate?.textFieldViewDidBeginEditing()
     }
 }
 

@@ -105,6 +105,8 @@ class ProfileEditingViewModel : NSObject {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ProfileEditingViewModel : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         guard let cellType = cellTypeForIndexPath(indexPath) else { return UITableViewCell() }
@@ -124,6 +126,8 @@ extension ProfileEditingViewModel : UITableViewDataSource {
         return Constants.numberOfCells
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ProfileEditingViewModel : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
