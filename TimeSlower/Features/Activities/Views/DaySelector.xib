@@ -18,6 +18,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DaySelector" customModule="TimeSlower" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="8hd-ja-6gy" id="c79-ki-abh"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kaq-Jx-P6G"/>
                 <outletCollection property="dayButtons" destination="AAn-gP-tIo" collectionClass="NSMutableArray" id="Ynr-0Y-itE"/>
                 <outletCollection property="dayButtons" destination="bd5-1r-wiI" collectionClass="NSMutableArray" id="xyJ-5H-uR2"/>
@@ -43,7 +44,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="312" height="67"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -173,7 +174,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="e3f-TQ-3B4" firstAttribute="leading" secondItem="uYW-Qf-EBo" secondAttribute="trailing" constant="8" id="0pu-TT-rpm"/>
                 <constraint firstItem="zSw-Mh-gg6" firstAttribute="leading" secondItem="bd5-1r-wiI" secondAttribute="trailing" constant="8" id="Ak3-Y8-gOt"/>

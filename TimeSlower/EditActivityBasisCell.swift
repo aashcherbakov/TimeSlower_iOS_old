@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import RxSwift
+import TimeSlowerKit
 
 class EditActivityBasisCell: UITableViewCell {
 
+    @IBOutlet weak var basisSelector: BasisSelector!
+    @IBOutlet weak var daySelector: DaySelector!
+    private var disposableBag = DisposeBag()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        setupEvents()
     }
     
+    private func setupEvents() {
+        basisSelector.selectedSegmentIndex
+            .subscribeNext { [weak self] (index) -> Void in
+                if let index = index {
+                    self?.daySelector.basis = ActivityBasis(rawValue: index)
+                }
+            }
+            .addDisposableTo(disposableBag)
+    }
 }

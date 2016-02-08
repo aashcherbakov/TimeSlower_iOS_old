@@ -713,13 +713,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F0C2F6141C67F3D5006B7D81 /* Edit Basis */ = {
+			isa = PBXGroup;
+			children = (
+				F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */,
+				F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */,
+				F0EB8A351C4333C8009B974A /* Basis Selector */,
+				F0EB8A371C4333E1009B974A /* Day Selector */,
+			);
+			name = "Edit Basis";
+			sourceTree = "<group>";
+		};
+		F0C2F6151C67F3E1006B7D81 /* Edit Name */ = {
+			isa = PBXGroup;
+			children = (
+				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
+				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
+				F0EB8A381C4333FA009B974A /* DefaultActivitySelector */,
+			);
+			name = "Edit Name";
+			sourceTree = "<group>";
+		};
 		F0D8F5BE1C384FD400D41C78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0EB8A351C4333C8009B974A /* Basis Selector */,
 				F0EB8A361C4333D5009B974A /* Chart View */,
 				F009AF701BDB1935007F38A9 /* CircleProgress.swift */,
-				F0EB8A371C4333E1009B974A /* Day Selector */,
 				F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */,
 				F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */,
 				F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */,
@@ -822,11 +841,8 @@
 		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0D8F5C11C38B46000D41C78 /* EditActivityNameCell.swift */,
-				F0D8F5C21C38B46000D41C78 /* EditActivityNameCell.xib */,
-				F0EB8A381C4333FA009B974A /* DefaultActivitySelector */,
-				F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */,
-				F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */,
+				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
+				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
 			);
 			name = Views;
 			sourceTree = "<group>";

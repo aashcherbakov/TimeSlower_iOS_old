@@ -20,11 +20,15 @@ class DaySelector: UIControl {
     @IBOutlet var dayButtons: [UIButton]!
     @IBOutlet var buttonsWidths: [NSLayoutConstraint]!
     @IBOutlet var view: UIView!
-    
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet var twoLastButtonsWidths: [NSLayoutConstraint]!
     @IBOutlet var fiveLastButtonsWidths: [NSLayoutConstraint]!
     
-    var basis: ActivityBasis! { didSet { basisToDisplay = BasisToDisplay(rawValue: basis.rawValue) } }
+    var basis: ActivityBasis! {
+        didSet {
+            basisToDisplay = BasisToDisplay(rawValue: basis.rawValue)
+        }
+    }
     var selectedDays = Set<String>()
     let kDefaultButtonWidth: CGFloat = 28
     
@@ -141,7 +145,6 @@ class DaySelector: UIControl {
         }
         
         restoreButtonWidths()
-        
     }
 
 }

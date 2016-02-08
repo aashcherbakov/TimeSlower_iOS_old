@@ -75,7 +75,7 @@ class EditActivityVC: EditActivityVCConstraints {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
-    }
+        tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)    }
     
     func setupCustomControls() {
 //        basisSelector.selectedSegmentIndex = 0
@@ -253,7 +253,7 @@ extension EditActivityVC: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 5
     }
 }
 

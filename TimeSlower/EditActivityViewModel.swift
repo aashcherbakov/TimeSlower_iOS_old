@@ -14,8 +14,9 @@ import RxSwift
 class EditActivityViewModel {
     
     private struct Constants {
-        static let defaultEditingCellHeight: CGFloat = 56
-        static let nameCellExtpandedHeight: CGFloat = 276
+        static let defaultCellHeight: CGFloat = 56
+        static let nameCellExpandedHeight: CGFloat = 276
+        static let basisCellExpandedHeight: CGFloat = 112
     }
     
     /**
@@ -29,6 +30,8 @@ class EditActivityViewModel {
     enum EditActivityState {
         case NoData
         case Name
+        case Basis
+        case BasisAndDays
         case BasisAndStartTime
         case FullHouse
     }
@@ -59,24 +62,28 @@ class EditActivityViewModel {
         machine = StateMachine(withState: .Name, delegate: self)
     }
     
-    func numberOfRows() -> Int {
-        switch machine.state {
-        case .NoData: return 1
-        case .Name: return 2
-        case .BasisAndStartTime: return 3
-        case .FullHouse: return 5
-        }
-    }
-    
     func heightForRow(indexPath: NSIndexPath) -> CGFloat {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return 0.0 }
         
-        switch (cellType, machine.state) {
-        case (.Name, .Name):
-            return Constants.nameCellExtpandedHeight
-        case (.StartTime, .BasisAndStartTime):
-            return Constants.nameCellExtpandedHeight
-        default: return Constants.defaultEditingCellHeight
+        switch (cellType) {
+        case .Name: return heightForNameCell()
+        case .Basis: return heightForBasisCell()
+        default: return 0
+        }
+    }
+    
+    private func heightForNameCell() -> CGFloat {
+        switch machine.state {
+        case .Name: return Constants.nameCellExpandedHeight
+        default: return Constants.defaultCellHeight
+        }
+    }
+    
+    private func heightForBasisCell() -> CGFloat {
+        switch machine.state {
+        case .Name: return 0
+        case .BasisAndDays: return Constants.basisCellExpandedHeight
+        default: return Constants.defaultCellHeight
         }
     }
     
@@ -85,6 +92,7 @@ class EditActivityViewModel {
         var cell = UITableViewCell()
         switch cellType {
         case .Name: cell = nameCell()
+        case .Basis: cell = basisCell()
         default: break
         }
         
@@ -100,7 +108,7 @@ class EditActivityViewModel {
                 .subscribeNext { [weak self] (name) -> Void in
                     if name.characters.count > 0 {
                         self?.name = name
-                        self?.machine.state = .BasisAndStartTime
+                        self?.machine.state = .Basis
                     }
                 }.addDisposableTo(disposableBag)
             
@@ -115,6 +123,25 @@ class EditActivityViewModel {
         }
         return EditActivityNameCell()
     }
+    
+    private func basisCell() -> EditActivityBasisCell {
+        if let basisCell = tableView.dequeueReusableCellWithIdentifier(EditActivityBasisCell.className) as? EditActivityBasisCell {
+            basisCell.basisSelector.selectedSegmentIndex
+                .subscribeNext { [weak self] (index) -> Void in
+                    self?.machine?.state = .BasisAndDays
+                }
+                .addDisposableTo(disposableBag)
+            
+            basisCell.daySelector.backButton.rx_tap
+                .subscribeNext { [weak self] () -> Void in
+                    self?.machine?.state = .BasisAndStartTime
+                }
+                .addDisposableTo(disposableBag)
+            
+            return basisCell
+        }
+        return EditActivityBasisCell()
+    }
 }
 
 // MARK: - StateMachineDelegate
@@ -123,7 +150,12 @@ extension EditActivityViewModel : StateMachineDelegate {
     func shouldTransitionFrom(from: StateType, to: StateType) -> Bool {
         switch (from, to) {
         case (.NoData, .Name): return true
-        case (.Name, .BasisAndStartTime): return true
+        case (.Name, .Basis): return true
+        case (.Basis, .BasisAndDays): return true
+        case (.Basis, .Name): return true
+        case (.BasisAndDays, .Name): return true
+        case (.BasisAndDays, .BasisAndStartTime): return true
+        case (.BasisAndStartTime, .BasisAndDays): return true
         case (.BasisAndStartTime, .Name): return true
         case (.BasisAndStartTime, .FullHouse): return true
         default: return false

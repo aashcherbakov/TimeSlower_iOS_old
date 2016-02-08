@@ -7,17 +7,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class BasisSelector: UIControl {
 
-    var selectedSegmentIndex: Int? {
-        didSet {
-            if let index = selectedSegmentIndex {
-                configureButtons(index)
-            }
-            sendActionsForControlEvents(UIControlEvents.ValueChanged)
-        }
-    }
+    var selectedSegmentIndex = Variable<Int?>(nil)
     
     @IBOutlet weak var weekendsLabel: UILabel!
     @IBOutlet weak var workdaysLabel: UILabel!
@@ -26,7 +20,6 @@ class BasisSelector: UIControl {
     @IBOutlet weak var dailySelectedIndicator: UIImageView!
     @IBOutlet weak var workdaysSelectedIndicator: UIImageView!
     @IBOutlet weak var weekendsSelectedIndicator: UIImageView!
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,11 +37,15 @@ class BasisSelector: UIControl {
         let touchLocation = touch!.locationInView(self)
         
         if touchLocation.x < (view.frame.width / 3) {
-            selectedSegmentIndex = 0
+            selectedSegmentIndex.value = 0
         } else if touchLocation.x > (view.frame.width / 3 * 2) {
-            selectedSegmentIndex = 2
+            selectedSegmentIndex.value = 2
         } else {
-            selectedSegmentIndex = 1
+            selectedSegmentIndex.value = 1
+        }
+        
+        if let index = selectedSegmentIndex.value where index < 3 && index >= 0 {
+            configureButtons(index)
         }
     }
     
@@ -57,7 +54,7 @@ class BasisSelector: UIControl {
         let icons = [dailySelectedIndicator, workdaysSelectedIndicator, weekendsSelectedIndicator]
         let labels = [dailyLabel, workdaysLabel, weekendsLabel]
         for var i = 0; i < icons.count; i++ {
-            if i == selectedSegmentIndex {
+            if i == selectedSegmentIndex.value {
                 icons[i].image = UIImage(named: "selectedIcon")
                 labels[i].textColor = UIColor.purpleRed()
             } else {
