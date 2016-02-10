@@ -11,7 +11,7 @@ import XCTest
 
 class TextfieldViewTests: XCTestCase {
 
-    var fakeController: FakeControllerWithTextfieldView!
+    var fakeController: FakeControllerWithCustomViews!
     var sut: TextfieldView!
     var fakeDelegate: FakeTextfieldViewDelegate!
     
@@ -19,7 +19,7 @@ class TextfieldViewTests: XCTestCase {
         super.setUp()
         
         // Setup fake controller
-        let controller: FakeControllerWithTextfieldView = FakeStoryboardLoader.testViewController()
+        let controller: FakeControllerWithCustomViews = FakeStoryboardLoader.testViewController()
         fakeController = controller
         sut = fakeController.textfieldView
         fakeDelegate = FakeTextfieldViewDelegate()

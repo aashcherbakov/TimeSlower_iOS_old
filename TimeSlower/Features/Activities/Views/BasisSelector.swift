@@ -9,59 +9,85 @@
 import UIKit
 import RxSwift
 
+/// UIControl subclass used to select activity basis on high level: Daily, Workdays or Weekends
 class BasisSelector: UIControl {
 
+    /// Observable selected index
     var selectedSegmentIndex = Variable<Int?>(nil)
     
-    @IBOutlet weak var weekendsLabel: UILabel!
-    @IBOutlet weak var workdaysLabel: UILabel!
-    @IBOutlet weak var dailyLabel: UILabel!
-    @IBOutlet var view: UIView!
-    @IBOutlet weak var dailySelectedIndicator: UIImageView!
-    @IBOutlet weak var workdaysSelectedIndicator: UIImageView!
-    @IBOutlet weak var weekendsSelectedIndicator: UIImageView!
+    @IBOutlet private weak var weekendsLabel: UILabel!
+    @IBOutlet private weak var workdaysLabel: UILabel!
+    @IBOutlet private weak var dailyLabel: UILabel!
+    @IBOutlet private var view: UIView!
+    @IBOutlet private weak var dailySelectedIndicator: UIImageView!
+    @IBOutlet private weak var workdaysSelectedIndicator: UIImageView!
+    @IBOutlet private weak var weekendsSelectedIndicator: UIImageView!
+    
+    private var selectedIconImage = UIImage(named: "selectedIcon")
+    private var deselectedIconImage = UIImage(named: "deselectedIcon")
+    
+    // MARK: - Lifecycle
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupXib()
     }
     
-    func setupXib() {
+    // MARK: - Private Methods
+    
+    private func setupXib() {
         NSBundle.mainBundle().loadNibNamed("BasisSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first
-        let touchLocation = touch!.locationInView(self)
-        
-        if touchLocation.x < (view.frame.width / 3) {
-            selectedSegmentIndex.value = 0
-        } else if touchLocation.x > (view.frame.width / 3 * 2) {
-            selectedSegmentIndex.value = 2
-        } else {
-            selectedSegmentIndex.value = 1
+        if let touchLocation = touches.first?.locationInView(self) {
+            selectedSegmentIndex.value = selectedIndexFromLocation(touchLocation)
+            configureButtonsForIndex(selectedSegmentIndex.value)
         }
-        
+    }
+    
+    private func selectedIndexFromLocation(touchLocation: CGPoint) -> Int {
+        let sectionWidth = view.frame.width / 3
+        if touchLocation.x < sectionWidth {
+            return 0
+        } else if touchLocation.x > (sectionWidth * 2) {
+            return 2
+        } else {
+            return 1
+        }
+    }
+    
+    private func configureButtonsForIndex(index: Int?) {
         if let index = selectedSegmentIndex.value where index < 3 && index >= 0 {
             configureButtons(index)
         }
     }
     
-    func configureButtons(type: Int) {
-        
-        let icons = [dailySelectedIndicator, workdaysSelectedIndicator, weekendsSelectedIndicator]
-        let labels = [dailyLabel, workdaysLabel, weekendsLabel]
-        for var i = 0; i < icons.count; i++ {
+    private func configureButtons(type: Int) {
+        for var i = 0; i < iconsArray.count; i++ {
             if i == selectedSegmentIndex.value {
-                icons[i].image = UIImage(named: "selectedIcon")
-                labels[i].textColor = UIColor.purpleRed()
+                iconsArray[i].image = selectedIconImage
+                labelsArray[i].textColor = UIColor.purpleRed()
             } else {
-                icons[i].image = UIImage(named: "deselectedIcon")
-                labels[i].textColor = UIColor.lightGray()
+                iconsArray[i].image = deselectedIconImage
+                labelsArray[i].textColor = UIColor.lightGray()
             }
         }
     }
     
+    // MARK: - Lazy Variables
+    
+    private lazy var labelsArray: [UILabel] = {
+        return [self.dailyLabel, self.workdaysLabel, self.weekendsLabel]
+    }()
+    
+    private lazy var iconsArray: [UIImageView] = {
+        return [
+            self.dailySelectedIndicator,
+            self.workdaysSelectedIndicator,
+            self.weekendsSelectedIndicator
+        ]
+    }()
 }

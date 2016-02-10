@@ -17,25 +17,37 @@ class DaySelector: UIControl {
         case Weekends
     }
     
+    private struct Constants {
+        static let defaultButtonWidth: CGFloat = 28
+    }
+    
     @IBOutlet var dayButtons: [UIButton]!
-    @IBOutlet var buttonsWidths: [NSLayoutConstraint]!
-    @IBOutlet var view: UIView!
+    
+    @IBOutlet private var view: UIView!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet var twoLastButtonsWidths: [NSLayoutConstraint]!
-    @IBOutlet var fiveLastButtonsWidths: [NSLayoutConstraint]!
+    @IBOutlet private var buttonsWidths: [NSLayoutConstraint]!
+    @IBOutlet private var twoLastButtonsWidths: [NSLayoutConstraint]!
+    @IBOutlet private var fiveLastButtonsWidths: [NSLayoutConstraint]!
+    
+    var selectedDays = Set<String>()
+    
+
+    private var daysAvailableToSelect = [String]()
+    
+    var activeButtons: [UIButton]!
     
     var basis: ActivityBasis! {
         didSet {
             basisToDisplay = BasisToDisplay(rawValue: basis.rawValue)
         }
     }
-    var selectedDays = Set<String>()
-    let kDefaultButtonWidth: CGFloat = 28
     
     
-    private var daysAvailableToSelect = [String]()
-    private var activeButtons: [UIButton]!
-    private var basisToDisplay: BasisToDisplay! { didSet { setupButtons() } }
+    private var basisToDisplay: BasisToDisplay! {
+        didSet {
+            setupButtons()
+        }
+    }
     
     //MARK: - Lifecycle
     
@@ -52,11 +64,23 @@ class DaySelector: UIControl {
     
     
     //MARK: - Setup buttons
+    
     func setupButtons() {
-        defineAvailableDayNames()
-        prepareActiveButtons()
-        setProperButtonsNames()
-        selectedDays.removeAll(keepCapacity: false)
+        restoreButtonWidths()
+        defineAvailableDayNames() // good
+        prepareActiveButtons() // good
+        setProperButtonsNames() // good
+        updateButtonsDesign()
+        resetSelectedDays()
+        setNeedsLayout()
+    }
+    
+    func restoreButtonWidths() {
+        for width in buttonsWidths {
+            print("old width : \(width.constant)")
+            width.constant = Constants.defaultButtonWidth
+            print("new width : \(width.constant)")
+        }
         setNeedsLayout()
     }
     
@@ -80,17 +104,39 @@ class DaySelector: UIControl {
     func setProperButtonsNames() {
         for button in activeButtons {
             button.setTitle(daysAvailableToSelect[button.tag], forState: .Normal)
-            daySelected(button)
-            setupButtonLayer(button)
+            button.selected = true
         }
     }
     
-    func setupButtonLayer(button: UIButton) {
-        button.layer.cornerRadius = button.bounds.height / 2
+    func updateButtonsDesign() {
+        for button in activeButtons {
+            updateDesignOfButton(button)
+            setupButtonLayer(button)
+        }
+        setNeedsLayout()
+    }
+    
+    private func updateDesignOfButton(button: UIButton) {
+        button.backgroundColor = button.selected ? UIColor.lightGray() : UIColor.clearColor()
+    }
+    
+    private func setupButtonLayer(button: UIButton) {
+        button.layer.cornerRadius = Constants.defaultButtonWidth / 2
+        print("Height: \(button.layer.frame.height), width: \(button.layer.frame.width), corner radiuth: \(button.layer.cornerRadius)")
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.extraLightGray().CGColor
     }
     
+    func resetSelectedDays() {
+        selectedDays.removeAll(keepCapacity: false)
+        
+        for button in activeButtons {
+            if let dayName = button.titleLabel?.text {
+                selectedDays.insert(dayName)
+            }
+        }
+    }
+
     
     
     //MARK: - Layout
@@ -101,7 +147,7 @@ class DaySelector: UIControl {
         }
     }
     
-    func layoutButtonWidthForBasis(basis: BasisToDisplay) {
+    private func layoutButtonWidthForBasis(basis: BasisToDisplay) {
         var widthArray: [NSLayoutConstraint]?
         switch basis {
         case .Daily: break
@@ -116,35 +162,27 @@ class DaySelector: UIControl {
         }
     }
     
-    func restoreButtonWidths() {
-        for width in buttonsWidths {
-            width.constant = kDefaultButtonWidth
-        }
-    }
-    
 
     //MARK: - Actions
     
-    @IBAction func daySelected(sender: UIButton) {
-        let selectedDayName = sender.titleLabel!.text!
-        if sender.selected {
+    @IBAction private func daySelected(sender: UIButton) {
+        updateSelectedListWithButton(sender)
+        updateDesignOfButton(sender)
+    }
+
+    
+    // MARK: - Private Methods
+
+    private func updateSelectedListWithButton(button: UIButton) {
+        let selectedDayName = button.titleLabel!.text!
+        if button.selected {
             selectedDays.remove(selectedDayName)
         } else {
             selectedDays.insert(selectedDayName)
         }
         
-        sender.selected = !sender.selected
-        sender.backgroundColor = sender.selected ? UIColor.lightGray() : UIColor.clearColor()
+        button.selected = !button.selected
     }
     
-    @IBAction func returnToBasisSelection() {
-        sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-        for button in activeButtons {
-            button.selected = false
-            button.backgroundColor = UIColor.clearColor()
-        }
-        
-        restoreButtonWidths()
-    }
 
 }

@@ -10,10 +10,15 @@ import UIKit
 import RxSwift
 import TimeSlowerKit
 
+/**
+ UITableViewCell subclass that allows user to select activity basis.
+ Includes BasisSelector and DaySelector instances.
+*/
 class EditActivityBasisCell: UITableViewCell {
 
     @IBOutlet weak var basisSelector: BasisSelector!
     @IBOutlet weak var daySelector: DaySelector!
+    
     private var disposableBag = DisposeBag()
     
     override func awakeFromNib() {

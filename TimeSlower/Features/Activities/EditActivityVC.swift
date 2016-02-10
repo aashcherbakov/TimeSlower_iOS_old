@@ -90,6 +90,13 @@ class EditActivityVC: EditActivityVCConstraints {
     
     //MARK: - Action
     
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        if let parentController = navigationController {
+            parentController.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
     @IBAction func tapedOnStartTime(sender: UITapGestureRecognizer) {
         editingState = (editingState == .Default) ? .StartTime : .Default
     }
