@@ -17,6 +17,7 @@ class EditActivityViewModel {
         static let defaultCellHeight: CGFloat = 56
         static let nameCellExpandedHeight: CGFloat = 276
         static let basisCellExpandedHeight: CGFloat = 112
+        static let startTimeExpandedHeight: CGFloat = 218
     }
     
     /**
@@ -33,6 +34,7 @@ class EditActivityViewModel {
         case Basis
         case BasisAndDays
         case BasisAndStartTime
+        case StartTime
         case FullHouse
     }
     
@@ -68,7 +70,16 @@ class EditActivityViewModel {
         switch (cellType) {
         case .Name: return heightForNameCell()
         case .Basis: return heightForBasisCell()
+        case .StartTime: return heightForStartTimeCell()
         default: return 0
+        }
+    }
+    
+    private func heightForStartTimeCell() -> CGFloat {
+        switch machine.state {
+        case .Name, .Basis, .NoData: return 0
+        case .StartTime: return Constants.startTimeExpandedHeight
+        default: return Constants.defaultCellHeight
         }
     }
     
@@ -93,6 +104,7 @@ class EditActivityViewModel {
         switch cellType {
         case .Name: cell = nameCell()
         case .Basis: cell = basisCell()
+        case .StartTime: cell = startTimeCell()
         default: break
         }
         
@@ -142,6 +154,26 @@ class EditActivityViewModel {
         }
         return EditActivityBasisCell()
     }
+    
+    private func startTimeCell() -> EditActivityStartTimeCell {
+        if let startTimeCell = tableView.dequeueReusableCellWithIdentifier(EditActivityStartTimeCell.className) as? EditActivityStartTimeCell {
+            startTimeCell.selectedDate
+                .subscribeNext { [weak self] (date) -> Void in
+                    self?.startTime = date
+                }
+                .addDisposableTo(disposableBag)
+            
+            startTimeCell.expanded
+                .subscribeNext { [weak self] (expanded) -> Void in
+                    self?.machine.state = expanded ? .StartTime : .FullHouse
+                }
+                .addDisposableTo(disposableBag)
+            
+            return startTimeCell
+        }
+        
+        return EditActivityStartTimeCell()
+    }
 }
 
 // MARK: - StateMachineDelegate
@@ -155,14 +187,23 @@ extension EditActivityViewModel : StateMachineDelegate {
         case (.Basis, .Name): return true
         case (.BasisAndDays, .Name): return true
         case (.BasisAndDays, .BasisAndStartTime): return true
+        case (.BasisAndDays, .StartTime): return true
         case (.BasisAndStartTime, .BasisAndDays): return true
+        case (.BasisAndStartTime, .StartTime): return true
         case (.BasisAndStartTime, .Name): return true
+        case (.StartTime, .BasisAndStartTime): return true
+        case (.StartTime, .BasisAndDays): return true
+        case (.StartTime, .FullHouse):return true
+        case (.FullHouse, .StartTime): return true
+        case (.FullHouse, .Name): return true
+        case (.FullHouse, .BasisAndDays): return true
         case (.BasisAndStartTime, .FullHouse): return true
         default: return false
         }
     }
     
     func didTransitionFrom(from: StateType, to: StateType) {
+        print("Transition from \(from) to \(to)")
         tableView.beginUpdates()
         tableView.endUpdates()
     }

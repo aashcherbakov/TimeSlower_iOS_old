@@ -109,6 +109,8 @@
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F0495C351C6C21F300AA746A /* EditActivityStartTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0495C331C6C21F300AA746A /* EditActivityStartTimeCell.swift */; };
+		F0495C361C6C21F300AA746A /* EditActivityStartTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0495C341C6C21F300AA746A /* EditActivityStartTimeCell.xib */; };
 		F0C2F6121C67F2A0006B7D81 /* EditActivityBasisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */; };
 		F0C2F6131C67F2A0006B7D81 /* EditActivityBasisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */; };
 		F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */; };
@@ -304,6 +306,8 @@
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
+		F0495C331C6C21F300AA746A /* EditActivityStartTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityStartTimeCell.swift; sourceTree = "<group>"; };
+		F0495C341C6C21F300AA746A /* EditActivityStartTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityStartTimeCell.xib; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityBasisCell.swift; sourceTree = "<group>"; };
@@ -702,6 +706,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		F0495C371C6C21FB00AA746A /* Edit StartTime */ = {
+			isa = PBXGroup;
+			children = (
+				F0495C331C6C21F300AA746A /* EditActivityStartTimeCell.swift */,
+				F0495C341C6C21F300AA746A /* EditActivityStartTimeCell.xib */,
+			);
+			name = "Edit StartTime";
+			sourceTree = "<group>";
+		};
 		F0B748941C152E95005D67AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,8 +798,8 @@
 		F0EB8A351C4333C8009B974A /* Basis Selector */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
 				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
+				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
 			);
 			name = "Basis Selector";
 			sourceTree = "<group>";
@@ -803,9 +816,9 @@
 		F0EB8A371C4333E1009B974A /* Day Selector */ = {
 			isa = PBXGroup;
 			children = (
+				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
 				F009AF711BDB1935007F38A9 /* DaySelector.swift */,
 				F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */,
-				F009AF721BDB1935007F38A9 /* DaySelector.xib */,
 			);
 			name = "Day Selector";
 			sourceTree = "<group>";
@@ -846,6 +859,7 @@
 			children = (
 				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
 				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
+				F0495C371C6C21FB00AA746A /* Edit StartTime */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1058,6 +1072,7 @@
 			files = (
 				F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */,
 				F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */,
+				F0495C361C6C21F300AA746A /* EditActivityStartTimeCell.xib in Resources */,
 				F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */,
 				F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */,
 				F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */,
@@ -1249,6 +1264,7 @@
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F0C2F6121C67F2A0006B7D81 /* EditActivityBasisCell.swift in Sources */,
+				F0495C351C6C21F300AA746A /* EditActivityStartTimeCell.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F0D8F5C31C38B46000D41C78 /* EditActivityNameCell.swift in Sources */,

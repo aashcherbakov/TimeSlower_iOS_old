@@ -72,7 +72,7 @@ class TextfieldView: UIView {
     - parameter type:     TextFieldViewType which will define design details of textfield view
     - parameter delegate: instance that is conforming to TextFieldViewDelegate protocol
     */
-    func setup(withType type: TextFieldViewType, delegate: TextFieldViewDelegate) {
+    func setup(withType type: TextFieldViewType, delegate: TextFieldViewDelegate?) {
         self.type = type
         self.delegate = delegate
         
