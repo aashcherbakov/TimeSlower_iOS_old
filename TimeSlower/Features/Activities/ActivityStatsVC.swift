@@ -69,7 +69,11 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     //MARK: - ACTION
     
     @IBAction func onBackButton(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+        if let navController = navigationController {
+            navController.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func startOrFinishButtonPressed(sender: UIButton) {
