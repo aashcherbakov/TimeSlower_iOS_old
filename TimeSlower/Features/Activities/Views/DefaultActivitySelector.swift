@@ -66,10 +66,10 @@ class DefaultActivitySelector: UIControl {
      */
     func setupCollectionViewItemSize() {
         let width = CGRectGetWidth(collectionView!.frame) / 3
+        let height = CGRectGetHeight(collectionView!.frame) / 2
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
+        layout.itemSize = CGSize(width: width, height: height)
     }
-    
 }
 
 extension DefaultActivitySelector: UICollectionViewDataSource {

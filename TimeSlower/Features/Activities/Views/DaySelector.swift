@@ -50,7 +50,7 @@ class DaySelector: UIControl {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupXib()
+        setupDesign()
     }
     
     override func layoutSubviews() {
@@ -68,6 +68,11 @@ class DaySelector: UIControl {
     }
     
     // MARK: - Private Methods
+    
+    private func setupDesign() {
+        setupXib()
+        setupInitialButtonsDesign()
+    }
     
     private func setupXib() {
         NSBundle.mainBundle().loadNibNamed("DaySelector", owner: self, options: nil)
@@ -125,13 +130,22 @@ class DaySelector: UIControl {
     }
     
     private func updateDesignOfButton(button: UIButton) {
-        button.backgroundColor = button.selected ? UIColor.lightGray() : UIColor.clearColor()
+        let color = button.selected ? UIColor.purpleRed().CGColor : UIColor.lightGray().CGColor
+        button.layer.borderColor = color
+       
+    }
+    
+    private func setupInitialButtonsDesign() {
+        for button in dayButtons {
+            button.backgroundColor = UIColor.clearColor()
+            button.setTitleColor(UIColor.lightGray(), forState: .Normal)
+            button.setTitleColor(UIColor.purpleRed(), forState: .Selected)
+        }
     }
     
     private func setupButtonLayer(button: UIButton) {
         button.layer.cornerRadius = Constants.defaultButtonWidth / 2
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.extraLightGray().CGColor
     }
     
     private func resetSelectedDays() {
