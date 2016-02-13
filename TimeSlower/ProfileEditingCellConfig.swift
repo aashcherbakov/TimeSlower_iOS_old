@@ -73,7 +73,7 @@ class ProfileEditingCellConfig: NSObject {
     */
     func iconForCellType(type: ProfileEditingCellType,
         forState state: ProfileEditingTableViewCell.EditingState) -> UIImage? {
-            let suffix = (state == .Editing) ? "Selected" : ""
+            let suffix = (state == .Editing) ? "Black" : ""
             let imageName = type.rawValue + "Icon" + suffix
             return UIImage(named: imageName)
     }

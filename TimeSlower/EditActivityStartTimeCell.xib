@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,6 +31,13 @@
                             <!--2016-02-11 02:00:59 +0000-->
                         </date>
                     </datePicker>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74q-3N-wjt" userLabel="separator">
+                        <rect key="frame" x="20" y="217" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="M3f-7r-lyD"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -37,12 +45,24 @@
                     <constraint firstItem="XH7-qq-x1j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RQF-fc-ZPg"/>
                     <constraint firstItem="Sus-RE-alW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Skf-ic-zcf"/>
                     <constraint firstItem="Sus-RE-alW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aM5-Hh-jdq"/>
+                    <constraint firstItem="74q-3N-wjt" firstAttribute="top" secondItem="Sus-RE-alW" secondAttribute="bottom" constant="-1" id="cTH-j7-EmH"/>
+                    <constraint firstItem="74q-3N-wjt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fdx-W9-1K2"/>
+                    <constraint firstAttribute="trailing" secondItem="74q-3N-wjt" secondAttribute="trailing" constant="20" id="gWI-vH-gOx"/>
                     <constraint firstAttribute="trailing" secondItem="XH7-qq-x1j" secondAttribute="trailing" id="iu2-YZ-icp"/>
                     <constraint firstAttribute="trailing" secondItem="Sus-RE-alW" secondAttribute="trailing" id="jNd-td-PQh"/>
+                    <constraint firstAttribute="bottom" secondItem="74q-3N-wjt" secondAttribute="bottom" id="x4M-nF-Oph"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="74q-3N-wjt" secondAttribute="bottom" id="yyz-yr-mTi"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="cTH-j7-EmH"/>
+                        <exclude reference="yyz-yr-mTi"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="datePicker" destination="XH7-qq-x1j" id="Qh5-qn-SFF"/>
+                <outlet property="separatorLineHeight" destination="M3f-7r-lyD" id="0z1-Tj-qD8"/>
                 <outlet property="textfieldView" destination="Sus-RE-alW" id="agv-Wz-kcR"/>
             </connections>
             <point key="canvasLocation" x="196" y="492"/>

@@ -33,6 +33,7 @@ enum TextFieldViewType: String {
     case StartTime = "startTimeIcon"
     case Duration = "durationIcon"
     case Notification = "notificationIcon"
+    case Basis = "birthdayIcon"
 }
 
 /** 
@@ -43,7 +44,7 @@ enum TextFieldViewType: String {
 class TextfieldView: UIView {
     
     private struct Constants {
-        static let placeholderYPadding: CGFloat = -6.0
+        static let placeholderYPadding: CGFloat = -2
     }
     
     // MARK: - Variables
@@ -126,8 +127,8 @@ class TextfieldView: UIView {
         textField.delegate = self
         textField.userInteractionEnabled = (type == .ActivityName)
         textField.placeholder = viewModel?.placeholderForType(type)
-        textField.floatingLabelActiveTextColor = UIColor.darkRed()
-        textField.floatingLabelTextColor = UIColor.darkRed()
+        textField.floatingLabelActiveTextColor = UIColor.purpleRed()
+        textField.floatingLabelTextColor = UIColor.purpleRed()
         textField.font = UIFont.sourceSansRegular()
         textField.placeholderYPadding = Constants.placeholderYPadding
         textField.textColor = viewModel?.textColorForState(.Empty)

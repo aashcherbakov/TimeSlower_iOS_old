@@ -56,6 +56,7 @@ class TextfieldViewModel: NSObject {
         case .Duration: return "Duration"
         case .Notification: return "Notification"
         case .StartTime: return "Start time"
+        case .Basis: return "Basis"
         }
     }
     

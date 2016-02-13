@@ -14,6 +14,7 @@ class EditActivityStartTimeCell: UITableViewCell {
 
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     private var disposableBag = DisposeBag()
     var selectedDate = Variable<NSDate?>(nil)
     var expanded = Variable<Bool>(false)
@@ -26,6 +27,7 @@ class EditActivityStartTimeCell: UITableViewCell {
     
     private func setupDesign() {
         textfieldView.setup(withType: .StartTime, delegate: nil)
+        separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
     private func setupEvents() {

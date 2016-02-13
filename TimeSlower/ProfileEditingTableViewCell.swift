@@ -49,6 +49,8 @@ class ProfileEditingTableViewCell: UITableViewCell {
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var viewForPicker: UIView!
     @IBOutlet weak var separatorLine: UIView!
+    @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
+    
     
     private let disposable = DisposeBag()
     private var type: ProfileEditingCellType?
@@ -131,6 +133,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
         textField.font = UIFont.sourceSansRegular()
         textField.placeholderYPadding = Constants.placeholderYPadding
         separatorLine.alpha = (type == .Country) ? 0.0 : 1.0
+        separatorLineHeight.constant = kDefaultSeparatorHeight
         
         if let cellType = type {
             iconImageView.image = config?.iconForCellType(cellType, forState: .Default)

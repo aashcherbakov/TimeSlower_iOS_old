@@ -33,7 +33,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L69-MU-kz4" userLabel="separator">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L69-MU-kz4">
                                 <rect key="frame" x="20" y="49" width="288" height="1"/>
                                 <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -86,6 +86,7 @@
             <connections>
                 <outlet property="iconImageView" destination="cXn-9m-MhJ" id="3o2-bJ-6gT"/>
                 <outlet property="separatorLine" destination="L69-MU-kz4" id="Aao-en-4aS"/>
+                <outlet property="separatorLineHeight" destination="C3W-eC-ent" id="wfV-dq-mjO"/>
                 <outlet property="textField" destination="PAJ-Wh-jay" id="sfW-dA-5nC"/>
                 <outlet property="viewForPicker" destination="HIq-T0-uO0" id="0Nz-3p-H6A"/>
             </connections>

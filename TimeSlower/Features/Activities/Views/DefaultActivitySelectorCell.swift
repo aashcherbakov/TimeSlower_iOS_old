@@ -13,7 +13,6 @@ class DefaultActivitySelectorCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backgroundCircle: UIView!
-    
     @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
@@ -22,9 +21,8 @@ class DefaultActivitySelectorCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        backgroundCircle.layer.cornerRadius = backgroundCircle.frame.height / 2
-//        imageViewHeight.constant = contentView.bounds.height * 0.62
+        imageViewHeight.constant = contentView.bounds.height * 0.5
+        backgroundCircle.layer.cornerRadius = imageViewHeight.constant / 2
     }
     
 }

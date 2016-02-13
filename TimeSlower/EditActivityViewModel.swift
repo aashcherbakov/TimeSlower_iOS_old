@@ -15,8 +15,8 @@ class EditActivityViewModel {
     
     private struct Constants {
         static let defaultCellHeight: CGFloat = 56
-        static let nameCellExpandedHeight: CGFloat = 276
-        static let basisCellExpandedHeight: CGFloat = 112
+        static let nameCellExpandedHeight: CGFloat = 260
+        static let basisCellExpandedHeight: CGFloat = 128
         static let startTimeExpandedHeight: CGFloat = 218
     }
     
@@ -53,7 +53,7 @@ class EditActivityViewModel {
     private(set) var tableView: UITableView
     
     private var name: String?
-    private var basis: String?
+    private var basis: ActivityBasis?
     private var startTime: NSDate?
     private var notificationsOn: Bool?
     private var duration: Double?
@@ -138,9 +138,15 @@ class EditActivityViewModel {
     
     private func basisCell() -> EditActivityBasisCell {
         if let basisCell = tableView.dequeueReusableCellWithIdentifier(EditActivityBasisCell.className) as? EditActivityBasisCell {
-            basisCell.basisSelector.selectedSegmentIndex
-                .subscribeNext { [weak self] (index) -> Void in
-                    self?.machine?.state = .BasisAndDays
+            basisCell.expanded
+                .subscribeNext { [weak self] (expanded) -> Void in
+                    self?.machine.state = expanded ? .BasisAndDays : .BasisAndStartTime
+                }
+                .addDisposableTo(disposableBag)
+            
+            basisCell.selectedBasis
+                .subscribeNext { [weak self] (basis) -> Void in
+                    self?.basis = basis
                 }
                 .addDisposableTo(disposableBag)
             

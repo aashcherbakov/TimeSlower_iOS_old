@@ -26,25 +26,35 @@ class BasisSelector: UIControl {
     private var selectedIconImage = UIImage(named: "selectedIcon")
     private var deselectedIconImage = UIImage(named: "deselectedIcon")
     
+    private let disposableBag = DisposeBag()
+    
     // MARK: - Lifecycle
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupXib()
+        setupDesign()
+        setupEvents()
     }
     
     // MARK: - Private Methods
     
-    private func setupXib() {
+    private func setupDesign() {
         NSBundle.mainBundle().loadNibNamed("BasisSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
+    private func setupEvents() {
+        selectedSegmentIndex
+            .subscribeNext { [weak self] (value) -> Void in
+                self?.configureButtonsForIndex(value)
+            }
+            .addDisposableTo(disposableBag)
+    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touchLocation = touches.first?.locationInView(self) {
             selectedSegmentIndex.value = selectedIndexFromLocation(touchLocation)
-            configureButtonsForIndex(selectedSegmentIndex.value)
         }
     }
     

@@ -15,6 +15,8 @@ struct LayoutConstants {
     static let buttonDownOffset: CGFloat = 0.05
 }
 
+let kDefaultSeparatorHeight: CGFloat = 0.5
+
 let kUsableViewHeight: CGFloat = UIScreen.mainScreen().bounds.height - LayoutConstants.navigationBarHeight
 let kUsableViewWidth: CGFloat = UIScreen.mainScreen().bounds.width
 

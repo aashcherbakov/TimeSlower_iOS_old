@@ -17,6 +17,7 @@ class EditActivityNameCell: UITableViewCell {
     
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!
+    @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
     private(set) var selectedName = Variable<String>("")
     private(set) var textFieldIsEditing = Variable<Bool>(true)
@@ -26,6 +27,7 @@ class EditActivityNameCell: UITableViewCell {
         super.awakeFromNib()
         setupData()
         setupEvents()
+        setupDesign()
     }
     
     override func layoutSubviews() {
@@ -41,6 +43,10 @@ class EditActivityNameCell: UITableViewCell {
     
     func setupEvents() {
         defaultActivitySelectorView.addTarget(self, action: Selector("defaultActivitySelected:"), forControlEvents: .ValueChanged)
+    }
+    
+    func setupDesign() {
+        separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
     func defaultActivitySelected(value: Int) {

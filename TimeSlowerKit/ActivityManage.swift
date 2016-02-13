@@ -18,6 +18,14 @@ public enum ActivityBasis: Int {
     case Daily
     case Workdays
     case Weekends
+    
+    public func description() -> String {
+        switch self {
+        case .Daily: return "Daily"
+        case .Workdays: return "Workdays"
+        case .Weekends: return "Weekends"
+        }
+    }
 }
 
 extension Activity {
