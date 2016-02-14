@@ -12,6 +12,8 @@ import RxSwift
 /// UIControl subclass used to select activity basis on high level: Daily, Workdays or Weekends
 class BasisSelector: UIControl {
 
+    // MARK: - Properties
+    
     /// Observable selected index
     var selectedSegmentIndex = Variable<Int?>(nil)
     
@@ -28,7 +30,7 @@ class BasisSelector: UIControl {
     
     private let disposableBag = DisposeBag()
     
-    // MARK: - Lifecycle
+    // MARK: - Overridden Methods
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -36,7 +38,13 @@ class BasisSelector: UIControl {
         setupEvents()
     }
     
-    // MARK: - Private Methods
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touchLocation = touches.first?.locationInView(self) {
+            selectedSegmentIndex.value = selectedIndexFromLocation(touchLocation)
+        }
+    }
+    
+    // MARK: - Setup Methods
     
     private func setupDesign() {
         NSBundle.mainBundle().loadNibNamed("BasisSelector", owner: self, options: nil)
@@ -52,11 +60,7 @@ class BasisSelector: UIControl {
             .addDisposableTo(disposableBag)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touchLocation = touches.first?.locationInView(self) {
-            selectedSegmentIndex.value = selectedIndexFromLocation(touchLocation)
-        }
-    }
+    // MARK: - Private Methods
     
     private func selectedIndexFromLocation(touchLocation: CGPoint) -> Int {
         let sectionWidth = view.frame.width / 3

@@ -16,21 +16,41 @@ import TimeSlowerKit
 */
 class EditActivityBasisCell: UITableViewCell {
 
+    // MARK: - Properties
+    
     @IBOutlet weak var basisSelector: BasisSelector!
     @IBOutlet weak var daySelector: DaySelector!
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
+    /// Variable that represents activity basis. Observable
     var selectedBasis = Variable<ActivityBasis?>(nil)
+    
+    /**
+     Bool to signal view model that height of the cell should be recalculated.
+     View model subscribes to this property and based on it's value changes the in State Machine.
+     Observable.
+     */
     var expanded = Variable<Bool>(false)
     
     private var disposableBag = DisposeBag()
+    
+    // MARK: - Overridden Methods
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupEvents()
         setupDesign()
     }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        expanded.value = !expanded.value
+        if basisSelector.selectedSegmentIndex.value == nil {
+            basisSelector.selectedSegmentIndex.value = 0 // daily by default
+        }
+    }
+    
+    // MARK: - Setup Methods
     
     private func setupDesign() {
         textfieldView.setup(withType: .Basis, delegate: nil)
@@ -48,12 +68,5 @@ class EditActivityBasisCell: UITableViewCell {
                 }
             }
             .addDisposableTo(disposableBag)
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        expanded.value = !expanded.value
-        if basisSelector.selectedSegmentIndex.value == nil {
-            basisSelector.selectedSegmentIndex.value = 0 // daily by default
-        }
     }
 }

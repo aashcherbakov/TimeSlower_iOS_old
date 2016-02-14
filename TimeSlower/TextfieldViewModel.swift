@@ -16,13 +16,18 @@ enum TextFieldViewState {
     case DataEntered
 }
 
+/// View model for TextfieldView
 class TextfieldViewModel: NSObject {
+    
+    // MARK: - Properties
     
     private var textField: JVFloatLabeledTextField
     private var disposable = DisposeBag()
     
     var state: BehaviorSubject<TextFieldViewState>?
     var dataEntryFinished = Variable<Bool>(false)
+    
+    // MARK: - Overridden Methods
     
     init(withTextField: JVFloatLabeledTextField) {
         self.textField = withTextField
@@ -32,7 +37,9 @@ class TextfieldViewModel: NSObject {
         self.setupEvents()
     }
     
-    func setupEvents() {
+    // MARK: - Setup Methods
+    
+    private func setupEvents() {
         state = BehaviorSubject(value: .Empty)
         textField.rx_text
             .subscribeNext { [weak self] (text) -> Void in
@@ -42,7 +49,7 @@ class TextfieldViewModel: NSObject {
             .addDisposableTo(disposable)
     }
     
-    // MARK: - Config methods
+    // MARK: - Internal Methods
     
     func iconForType(type: TextFieldViewType, state: TextFieldViewState) -> UIImage? {
         let suffix = (state == .Empty) ? "" : "Black"

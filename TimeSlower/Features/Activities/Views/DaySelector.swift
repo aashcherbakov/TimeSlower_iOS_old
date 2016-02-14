@@ -9,12 +9,14 @@
 import UIKit
 import TimeSlowerKit
 
+/// UIControl subclass that alows to pick days of activity basis
 class DaySelector: UIControl {
     
-    enum BasisToDisplay: Int {
-        case Daily
-        case Workdays
-        case Weekends
+    /// Enum that sums up what days should be displayd in selector
+    private enum BasisToDisplay: Int {
+        case Daily // 7 days
+        case Workdays // Mon-Fri
+        case Weekends // Sat-Sun
     }
     
     private struct Constants {
@@ -22,7 +24,6 @@ class DaySelector: UIControl {
     }
     
     @IBOutlet var dayButtons: [UIButton]!
-    
     @IBOutlet private var view: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet private var buttonsWidths: [NSLayoutConstraint]!
@@ -30,10 +31,14 @@ class DaySelector: UIControl {
     @IBOutlet private var fiveLastButtonsWidths: [NSLayoutConstraint]!
     
     private var daysAvailableToSelect = [String]()
-
+    
+    /// Set of days in format "Mon" "Fri" etc
     private(set) var selectedDays = Set<String>()
+    
+    /// Array of active buttons that are set due to BasisToDisplay enum
     private(set) var activeButtons: [UIButton]!
     
+    /// Activity Basis, used to display proper days
     var basis: ActivityBasis! {
         didSet {
             basisToDisplay = BasisToDisplay(rawValue: basis.rawValue)
@@ -46,7 +51,7 @@ class DaySelector: UIControl {
         }
     }
     
-    //MARK: - Lifecycle
+    // MARK: - Overridden Methods
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -60,14 +65,7 @@ class DaySelector: UIControl {
         }
     }
     
-    //MARK: - Actions
-    
-    @IBAction private func daySelected(sender: UIButton) {
-        updateSelectedListWithButton(sender)
-        updateDesignOfButton(sender)
-    }
-    
-    // MARK: - Private Methods
+    // MARK: - Setup Methods
     
     private func setupDesign() {
         setupXib()
@@ -79,6 +77,24 @@ class DaySelector: UIControl {
         bounds = view.bounds
         addSubview(view)
     }
+    
+    private func setupInitialButtonsDesign() {
+        for button in dayButtons {
+            button.backgroundColor = UIColor.clearColor()
+            button.setTitleColor(UIColor.lightGray(), forState: .Normal)
+            button.setTitleColor(UIColor.purpleRed(), forState: .Selected)
+        }
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction private func daySelected(sender: UIButton) {
+        updateSelectedListWithButton(sender)
+        updateDesignOfButton(sender)
+    }
+    
+    // MARK: - Private Methods
+    
     
     private func setupButtons() {
         restoreButtonWidths()
@@ -133,14 +149,6 @@ class DaySelector: UIControl {
         let color = button.selected ? UIColor.purpleRed().CGColor : UIColor.lightGray().CGColor
         button.layer.borderColor = color
        
-    }
-    
-    private func setupInitialButtonsDesign() {
-        for button in dayButtons {
-            button.backgroundColor = UIColor.clearColor()
-            button.setTitleColor(UIColor.lightGray(), forState: .Normal)
-            button.setTitleColor(UIColor.purpleRed(), forState: .Selected)
-        }
     }
     
     private func setupButtonLayer(button: UIButton) {
