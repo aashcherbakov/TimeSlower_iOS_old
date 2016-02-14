@@ -17,22 +17,6 @@ class EditActivityVC: EditActivityVCConstraints {
     @IBOutlet weak var timeSaver: TimeSaver!
     @IBOutlet weak var tableView: UITableView!
     
-    
-//    var activityDuration: Double = 30.0 {
-//        didSet {
-//            if durationValueLabel != nil {
-//                let format = ".0"
-//                durationValueLabel.text = "\(activityDuration.format(format)) min"
-//            }
-//        }
-//    }
-//    var startTime: NSDate! {
-//        didSet {
-//            startTimeValueLabel.text = dateFormatter.stringFromDate(startTime)
-//        }
-//    }
-
-    
     var selectedBasis: ActivityBasis!
     var userProfile: Profile!
     
@@ -52,14 +36,6 @@ class EditActivityVC: EditActivityVCConstraints {
         bindViewModel()
 
         setupDesign()
-        
-//        setupCustomControls()
-//
-//        defaultActivityPicker.typeToDisplay = .Routines
-//        
-//        defaultActivityPicker.addTarget(self, action: Selector("defaultActivitySelected:"), forControlEvents: .ValueChanged)
-//        basisDaysView.addTarget(self, action: Selector("backToBasisSelector"), forControlEvents: .TouchUpInside)
-//        basisSelector.addTarget(self, action: Selector("basisSelectorTapped:"), forControlEvents: .ValueChanged)
 
         if activity != nil {
             editingState = .Default
@@ -74,16 +50,13 @@ class EditActivityVC: EditActivityVCConstraints {
     private func setupDesign() {
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
         tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
         tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.reuseIdentifier)
+        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.className)
     }
     
-    func setupCustomControls() {
-//        basisSelector.selectedSegmentIndex = 0
-//        selectedBasis = ActivityBasis(rawValue: basisSelector.selectedSegmentIndex!)
-    }
     
     func displayActivityData() {
 //        textField.text = activity?.name
@@ -100,6 +73,7 @@ class EditActivityVC: EditActivityVCConstraints {
             dismissViewControllerAnimated(true, completion: nil)
         }
     }
+    
     @IBAction func tapedOnStartTime(sender: UITapGestureRecognizer) {
         editingState = (editingState == .Default) ? .StartTime : .Default
     }
@@ -114,17 +88,6 @@ class EditActivityVC: EditActivityVCConstraints {
         editingState = .Default
     }
     
-//    @IBAction func durationButtonPressed(sender: UIButton) {
-//        if sender.tag == 1 {
-//            activityDuration += 5.0
-//        } else if sender.tag == 0 {
-//            activityDuration -= 5.0
-//        }
-//    }
-//
-//    @IBAction func changedStartTime(sender: UIDatePicker) {
-//        startTime = sender.date
-//    }
 
     @IBAction func doneButtonPressed() {
         
@@ -256,6 +219,8 @@ extension EditActivityVC: UITextFieldDelegate {
 
 extension EditActivityVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
         if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
             return cell
         }
@@ -276,7 +241,6 @@ extension EditActivityVC: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let expanded = selectedIndexPath != indexPath
         
         resetExpandableCell(atIndexPath: indexPath)
         

@@ -191,15 +191,17 @@ class EditActivityViewModel {
     }
     
     private func durationCell() -> EditActivityDurationCell {
-        let durationCell: EditActivityDurationCell = tableView.dequeueReusableCell()
+        if let durationCell = tableView.dequeueReusableCellWithIdentifier(EditActivityDurationCell.className) as? EditActivityDurationCell {
         
-        durationCell.activityDuration
-            .subscribeNext { [weak self] (duration) -> Void in
-                self?.duration = duration
-            }
-            .addDisposableTo(disposableBag)
-        
-        return durationCell
+            durationCell.activityDuration
+                .subscribeNext { [weak self] (duration) -> Void in
+                    self?.duration = duration
+                }
+                .addDisposableTo(disposableBag)
+            
+            return durationCell
+        }
+        return EditActivityDurationCell()
     }
 }
 
