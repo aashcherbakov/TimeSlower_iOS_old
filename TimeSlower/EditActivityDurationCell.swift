@@ -20,6 +20,7 @@ class EditActivityDurationCell: UITableViewCell {
     
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
     /// Duration of activity in minutes. Observable.
     var activityDuration = Variable<Int?>(nil)
@@ -61,6 +62,7 @@ class EditActivityDurationCell: UITableViewCell {
         }
         
         textfieldView.setup(withType: .Duration, delegate: nil)
+        separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
     private func setupEvents() {

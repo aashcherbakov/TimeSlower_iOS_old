@@ -15,7 +15,7 @@ class EditActivityViewModel {
     
     private struct Constants {
         static let defaultCellHeight: CGFloat = 56
-        static let nameCellExpandedHeight: CGFloat = 260
+        static let nameCellExpandedHeight: CGFloat = 286
         static let basisCellExpandedHeight: CGFloat = 128
         static let startTimeExpandedHeight: CGFloat = 218
     }
@@ -72,7 +72,7 @@ class EditActivityViewModel {
         case .Basis: return heightForBasisCell()
         case .StartTime: return heightForStartTimeCell()
         case .Duration: return heightForDurationCell()
-        default: return 0
+        case .Notification: return heightForNotificationCell()
         }
     }
     
@@ -106,6 +106,13 @@ class EditActivityViewModel {
         }
     }
     
+    private func heightForNotificationCell() -> CGFloat {
+        switch machine.state {
+        case .FullHouse: return Constants.defaultCellHeight
+        default: return 0
+        }
+    }
+    
     func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return UITableViewCell() }
         var cell = UITableViewCell()
@@ -114,7 +121,7 @@ class EditActivityViewModel {
         case .Basis: cell = basisCell()
         case .StartTime: cell = startTimeCell()
         case .Duration: cell = durationCell()
-        default: break
+        case .Notification: cell = notificationCell()
         }
         
         return cell
@@ -202,6 +209,19 @@ class EditActivityViewModel {
             return durationCell
         }
         return EditActivityDurationCell()
+    }
+    
+    private func notificationCell() -> EditActivityNotificationCell {
+        if let notificationCell = tableView.dequeueReusableCellWithIdentifier(EditActivityNotificationCell.className) as? EditActivityNotificationCell {
+            
+            notificationCell.notificationsOn
+                .subscribeNext { [weak self] (on) -> Void in
+                    self?.notificationsOn = on
+                }
+                .addDisposableTo(disposableBag)
+            return notificationCell
+        }
+        return EditActivityNotificationCell()
     }
 }
 

@@ -45,11 +45,18 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RR0-e0-Dcf">
-                        <rect key="frame" x="179" y="18" width="99" height="20"/>
+                        <rect key="frame" x="179" y="18" width="99" height="21"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyp-fB-619" userLabel="separator">
+                        <rect key="frame" x="20" y="55" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="EhG-dn-aMl"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="CJi-2w-hQf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2N5-qZ-lHb"/>
@@ -57,9 +64,12 @@
                     <constraint firstItem="RR0-e0-Dcf" firstAttribute="leading" secondItem="Uy0-mi-KBU" secondAttribute="trailing" constant="4" id="4q6-rd-oBj"/>
                     <constraint firstItem="Uy0-mi-KBU" firstAttribute="centerY" secondItem="Gbq-qr-LPL" secondAttribute="centerY" id="Akq-X8-NSs"/>
                     <constraint firstItem="Gbq-qr-LPL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MNQ-Ky-EoF"/>
+                    <constraint firstAttribute="bottom" secondItem="Vyp-fB-619" secondAttribute="bottom" id="Ov2-lK-gzh"/>
                     <constraint firstAttribute="bottom" secondItem="CJi-2w-hQf" secondAttribute="bottom" id="Qk9-hY-WUk"/>
                     <constraint firstItem="RR0-e0-Dcf" firstAttribute="centerY" secondItem="Gbq-qr-LPL" secondAttribute="centerY" id="Uvy-0y-HWA"/>
                     <constraint firstItem="Uy0-mi-KBU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Z0U-PQ-Kvr"/>
+                    <constraint firstAttribute="trailing" secondItem="Vyp-fB-619" secondAttribute="trailing" constant="20" id="Zr6-Lz-Fld"/>
+                    <constraint firstItem="Vyp-fB-619" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bHA-jn-8si"/>
                     <constraint firstItem="CJi-2w-hQf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jyt-8R-S16"/>
                     <constraint firstItem="Gbq-qr-LPL" firstAttribute="leading" secondItem="RR0-e0-Dcf" secondAttribute="trailing" constant="4" id="vbG-W0-nnK"/>
                     <constraint firstAttribute="trailing" secondItem="Gbq-qr-LPL" secondAttribute="trailing" constant="8" id="z2G-xh-Xsj"/>
@@ -67,6 +77,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="durationLabel" destination="RR0-e0-Dcf" id="a3W-Ii-TRE"/>
+                <outlet property="separatorLineHeight" destination="EhG-dn-aMl" id="ySX-Rm-NJo"/>
                 <outlet property="textfieldView" destination="CJi-2w-hQf" id="kcc-Ua-fZs"/>
             </connections>
             <point key="canvasLocation" x="253" y="406"/>
