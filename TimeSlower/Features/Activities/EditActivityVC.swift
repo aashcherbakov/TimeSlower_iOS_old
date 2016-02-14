@@ -77,6 +77,7 @@ class EditActivityVC: EditActivityVCConstraints {
         tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
         tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
         tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
+        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.reuseIdentifier)
     }
     
     func setupCustomControls() {

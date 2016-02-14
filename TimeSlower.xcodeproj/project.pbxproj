@@ -113,6 +113,7 @@
 		F0495C361C6C21F300AA746A /* EditActivityStartTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0495C341C6C21F300AA746A /* EditActivityStartTimeCell.xib */; };
 		F05425A51C6FDDE4001C81D0 /* EditActivityDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A31C6FDDE4001C81D0 /* EditActivityDurationCell.swift */; };
 		F05425A61C6FDDE4001C81D0 /* EditActivityDurationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05425A41C6FDDE4001C81D0 /* EditActivityDurationCell.xib */; };
+		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F0C2F6121C67F2A0006B7D81 /* EditActivityBasisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */; };
 		F0C2F6131C67F2A0006B7D81 /* EditActivityBasisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2F6111C67F2A0006B7D81 /* EditActivityBasisCell.xib */; };
 		F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */; };
@@ -312,6 +313,7 @@
 		F0495C341C6C21F300AA746A /* EditActivityStartTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityStartTimeCell.xib; sourceTree = "<group>"; };
 		F05425A31C6FDDE4001C81D0 /* EditActivityDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationCell.swift; sourceTree = "<group>"; };
 		F05425A41C6FDDE4001C81D0 /* EditActivityDurationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDurationCell.xib; sourceTree = "<group>"; };
+		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0C2F6101C67F2A0006B7D81 /* EditActivityBasisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityBasisCell.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
+				F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
 				F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
@@ -719,6 +722,15 @@
 			name = "Edit StartTime";
 			sourceTree = "<group>";
 		};
+		F05425A91C6FF169001C81D0 /* Edit Duration */ = {
+			isa = PBXGroup;
+			children = (
+				F05425A31C6FDDE4001C81D0 /* EditActivityDurationCell.swift */,
+				F05425A41C6FDDE4001C81D0 /* EditActivityDurationCell.xib */,
+			);
+			name = "Edit Duration";
+			sourceTree = "<group>";
+		};
 		F0B748941C152E95005D67AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,8 +876,7 @@
 				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
 				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
 				F0495C371C6C21FB00AA746A /* Edit StartTime */,
-				F05425A31C6FDDE4001C81D0 /* EditActivityDurationCell.swift */,
-				F05425A41C6FDDE4001C81D0 /* EditActivityDurationCell.xib */,
+				F05425A91C6FF169001C81D0 /* Edit Duration */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1267,6 +1278,7 @@
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
+				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,

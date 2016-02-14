@@ -63,7 +63,7 @@ class ProfileEditingCellConfigTests: XCTestCase {
         XCTAssertEqual(defaultIcon, UIImage(named: "nameIcon"))
         
         let selectedIcon = config.iconForCellType(.Name, forState: .Editing)
-        XCTAssertEqual(selectedIcon, UIImage(named: "nameIconSelected"))
+        XCTAssertEqual(selectedIcon, UIImage(named: "nameIconBlack"))
     }
     
     func testIconForCountryCell() {
@@ -71,7 +71,7 @@ class ProfileEditingCellConfigTests: XCTestCase {
         XCTAssertEqual(defaultIcon, UIImage(named: "countryIcon"))
         
         let selectedIcon = config.iconForCellType(.Country, forState: .Editing)
-        XCTAssertEqual(selectedIcon, UIImage(named: "countryIconSelected"))
+        XCTAssertEqual(selectedIcon, UIImage(named: "countryIconBlack"))
     }
     
     func testIconForBirthdayCell() {
@@ -79,7 +79,7 @@ class ProfileEditingCellConfigTests: XCTestCase {
         XCTAssertEqual(defaultIcon, UIImage(named: "birthdayIcon"))
         
         let selectedIcon = config.iconForCellType(.Birthday, forState: .Editing)
-        XCTAssertEqual(selectedIcon, UIImage(named: "birthdayIconSelected"))
+        XCTAssertEqual(selectedIcon, UIImage(named: "birthdayIconBlack"))
     }
     
     func testTextColorForStyle() {

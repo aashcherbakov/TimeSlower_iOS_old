@@ -56,7 +56,7 @@ class EditActivityViewModel {
     private var basis: ActivityBasis?
     private var startTime: NSDate?
     private var notificationsOn: Bool?
-    private var duration: Double?
+    private var duration: Int?
     private var timeToSave: Double?
     
     init(withTableView tableView: UITableView) {
@@ -71,6 +71,7 @@ class EditActivityViewModel {
         case .Name: return heightForNameCell()
         case .Basis: return heightForBasisCell()
         case .StartTime: return heightForStartTimeCell()
+        case .Duration: return heightForDurationCell()
         default: return 0
         }
     }
@@ -98,6 +99,13 @@ class EditActivityViewModel {
         }
     }
     
+    private func heightForDurationCell() -> CGFloat {
+        switch machine.state {
+        case .FullHouse: return Constants.defaultCellHeight
+        default: return 0
+        }
+    }
+    
     func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return UITableViewCell() }
         var cell = UITableViewCell()
@@ -105,6 +113,7 @@ class EditActivityViewModel {
         case .Name: cell = nameCell()
         case .Basis: cell = basisCell()
         case .StartTime: cell = startTimeCell()
+        case .Duration: cell = durationCell()
         default: break
         }
         
@@ -179,6 +188,18 @@ class EditActivityViewModel {
         }
         
         return EditActivityStartTimeCell()
+    }
+    
+    private func durationCell() -> EditActivityDurationCell {
+        let durationCell: EditActivityDurationCell = tableView.dequeueReusableCell()
+        
+        durationCell.activityDuration
+            .subscribeNext { [weak self] (duration) -> Void in
+                self?.duration = duration
+            }
+            .addDisposableTo(disposableBag)
+        
+        return durationCell
     }
 }
 
