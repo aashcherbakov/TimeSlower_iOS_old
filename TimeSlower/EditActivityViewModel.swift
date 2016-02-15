@@ -47,23 +47,48 @@ class EditActivityViewModel {
     }
     
     typealias StateType = EditActivityState
+    
+    var updatedContentSizeHeight = Variable<CGFloat>(0)
+    
     private var machine: StateMachine<EditActivityViewModel>!
     private var disposableBag = DisposeBag()
 
     private(set) var tableView: UITableView
+    private(set) var timeSaver: TimeSaver
     
     private var name: String?
     private var basis: ActivityBasis?
     private var startTime: NSDate?
     private var notificationsOn: Bool?
     private var duration: Int?
-    private var timeToSave: Double?
+    private var timeToSave: Int?
     
-    init(withTableView tableView: UITableView) {
+    init(withTableView tableView: UITableView, timeSaver: TimeSaver) {
         self.tableView = tableView
-        machine = StateMachine(withState: .Name, delegate: self)
+        self.timeSaver = timeSaver
+        
+        setupEvents()
     }
     
+    // MARK: - Setup Methods
+    
+    private func setupEvents() {
+        machine = StateMachine(withState: .NoData, delegate: self)
+
+        timeSaver.timeToSave
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.timeToSave = minutes
+            }
+            .addDisposableTo(disposableBag)
+    }
+    
+    /**
+     Returns height for given index path due to type of cell and current editing state
+     
+     - parameter indexPath: NSIndexPath from table view delegate
+     
+     - returns: CGFloat for height
+     */
     func heightForRow(indexPath: NSIndexPath) -> CGFloat {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return 0.0 }
         
@@ -76,43 +101,13 @@ class EditActivityViewModel {
         }
     }
     
-    private func heightForStartTimeCell() -> CGFloat {
-        switch machine.state {
-        case .Name, .Basis, .NoData: return 0
-        case .StartTime: return Constants.startTimeExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForNameCell() -> CGFloat {
-        switch machine.state {
-        case .Name: return Constants.nameCellExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForBasisCell() -> CGFloat {
-        switch machine.state {
-        case .Name: return 0
-        case .BasisAndDays: return Constants.basisCellExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForDurationCell() -> CGFloat {
-        switch machine.state {
-        case .FullHouse: return Constants.defaultCellHeight
-        default: return 0
-        }
-    }
-    
-    private func heightForNotificationCell() -> CGFloat {
-        switch machine.state {
-        case .FullHouse: return Constants.defaultCellHeight
-        default: return 0
-        }
-    }
-    
+    /**
+     Method to retrieve specific cell for given index path row
+     
+     - parameter indexPath: NSIndexPath form table view data source
+     
+     - returns: UITableViewCell subclass specific to the row.
+     */
     func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
         guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return UITableViewCell() }
         var cell = UITableViewCell()
@@ -138,14 +133,16 @@ class EditActivityViewModel {
                         self?.name = name
                         self?.machine.state = .Basis
                     }
-                }.addDisposableTo(disposableBag)
+                }
+                .addDisposableTo(disposableBag)
             
             nameCell.textFieldIsEditing
-                .subscribeNext { (editing) -> Void in
+                .subscribeNext { [weak self] (editing) -> Void in
                     if editing {
-                        self.machine.state = .Name
+                        self?.machine.state = .Name
                     }
-                }.addDisposableTo(disposableBag)
+                }
+                .addDisposableTo(disposableBag)
             
             return nameCell
         }
@@ -202,7 +199,10 @@ class EditActivityViewModel {
         
             durationCell.activityDuration
                 .subscribeNext { [weak self] (duration) -> Void in
-                    self?.duration = duration
+                    if let duration = duration {
+                        self?.duration = duration
+                        self?.timeSaver.activityDuration.value = duration
+                    }
                 }
                 .addDisposableTo(disposableBag)
             
@@ -222,6 +222,45 @@ class EditActivityViewModel {
             return notificationCell
         }
         return EditActivityNotificationCell()
+    }
+    
+    // MARK: - Private cell height helpers
+    
+    private func heightForStartTimeCell() -> CGFloat {
+        switch machine.state {
+        case .Name, .Basis, .NoData: return 0
+        case .StartTime: return Constants.startTimeExpandedHeight
+        default: return Constants.defaultCellHeight
+        }
+    }
+    
+    private func heightForNameCell() -> CGFloat {
+        switch machine.state {
+        case .Name: return Constants.nameCellExpandedHeight
+        default: return Constants.defaultCellHeight
+        }
+    }
+    
+    private func heightForBasisCell() -> CGFloat {
+        switch machine.state {
+        case .Name: return 0
+        case .BasisAndDays: return Constants.basisCellExpandedHeight
+        default: return Constants.defaultCellHeight
+        }
+    }
+    
+    private func heightForDurationCell() -> CGFloat {
+        switch machine.state {
+        case .FullHouse: return Constants.defaultCellHeight
+        default: return 0
+        }
+    }
+    
+    private func heightForNotificationCell() -> CGFloat {
+        switch machine.state {
+        case .FullHouse: return Constants.defaultCellHeight
+        default: return 0
+        }
     }
 }
 
@@ -250,10 +289,30 @@ extension EditActivityViewModel : StateMachineDelegate {
         default: return false
         }
     }
+
+    private func heightForTableViewInState(state: StateType) -> CGFloat {
+        switch state {
+        case .NoData: return Constants.defaultCellHeight
+        case .Name: return Constants.nameCellExpandedHeight
+        case .Basis: return Constants.defaultCellHeight * 2
+        case .BasisAndDays: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
+        case .BasisAndStartTime: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
+        case .FullHouse: return Constants.defaultCellHeight * 5
+        case .StartTime: return Constants.startTimeExpandedHeight + Constants.defaultCellHeight * 2
+        }
+    }
     
     func didTransitionFrom(from: StateType, to: StateType) {
         print("Transition from \(from) to \(to)")
+
         tableView.beginUpdates()
         tableView.endUpdates()
+        
+        updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
+
+        
+        print("Content size: \(updatedContentSizeHeight.value)")
+
+
     }
 }

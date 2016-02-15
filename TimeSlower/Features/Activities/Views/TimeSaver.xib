@@ -28,9 +28,6 @@
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" image="YES"/>
                     </accessibility>
-                    <connections>
-                        <action selector="sliderSlided:" destination="-1" eventType="valueChanged" id="Vvm-Cr-4ug"/>
-                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9T-2k-96a">
                     <rect key="frame" x="270" y="32" width="62" height="28"/>

@@ -7,75 +7,61 @@
 //
 
 import UIKit
-import TimeSlowerKit
+import RxSwift
 
+/// UIView subclass that alows to select time to save for activity with UISlider
 class TimeSaver: UIView {
 
+    // MARK: - Properties
+    
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet var view: UIView!
     
-    var activity: Activity? {
-        didSet {
-            duration = activity!.timing.duration.doubleValue
-        }
-    }
-    var selectedDuration: Double!
-    var selectedTimeToSave: Double!
-    var duration: Double!
-    var sliderValue: Double!
-    private let format = ".0"
+    /// Selected time to save, Double. Observable
+    var timeToSave = Variable<Int>(0)
+    
+    /// Duration selected by user
+    var activityDuration = Variable<Int>(30)
+
+    private let disposableBag = DisposeBag()
+    
+    // MARK: - Overridden Methods
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupValues()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupXib()
+        setupDesign()
+        setupEvents()
     }
     
-    func setupXib() {
+    // MARK: - Setup Methods
+    
+    private func setupDesign() {
         NSBundle.mainBundle().loadNibNamed("TimeSaver", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
-
-    func setupValues() {
-        if activity != nil {
-            setupActivityValues()
-        } else {
-            setupDefaultValues()
-        }
-    }
     
-    func setupActivityValues() {
-        
-    }
-    
-    func setupDefaultValues() {
-        slider.maximumValue = 30.0
+    private func setupEvents() {
         slider.minimumValue = 1.0
-        slider.value = 5.0
-        timeLabel.text = "\(slider.value.format(format)) min"
-    }
-    
-    
-    @IBAction func sliderSlided(sender: UISlider) {
-        timeLabel.text = "\(sender.value.format(format)) min"
-    }
-}
 
-extension Float {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
-    }
-}
-
-extension Double {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
+        activityDuration
+            .subscribeNext { [weak self] (duration) -> Void in
+                self?.slider.maximumValue = Float(duration)
+                self?.timeToSave.value = duration / 6
+            }
+            .addDisposableTo(disposableBag)
+        
+        timeToSave
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.slider.value = Float(minutes)
+                self?.timeLabel.text = "\(minutes) min"
+            }
+            .addDisposableTo(disposableBag)
     }
 }

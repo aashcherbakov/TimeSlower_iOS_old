@@ -17,12 +17,14 @@ class EditActivityVC: EditActivityVCConstraints {
     @IBOutlet weak var timeSaver: TimeSaver!
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedBasis: ActivityBasis!
-    var userProfile: Profile!
+    var selectedBasis: ActivityBasis?
+    var userProfile: Profile?
+//    var activity: Activity?
     
     private var selectedIndexPath: NSIndexPath?
     
     private var viewModel: EditActivityViewModel?
+    private let disposableBag = DisposeBag()
 
     lazy var dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
@@ -36,15 +38,17 @@ class EditActivityVC: EditActivityVCConstraints {
         bindViewModel()
 
         setupDesign()
-
-        if activity != nil {
-            editingState = .Default
-            displayActivityData()
-        }
     }
     
     private func bindViewModel() {
-        viewModel = EditActivityViewModel(withTableView: tableView)
+        viewModel = EditActivityViewModel(withTableView: tableView, timeSaver: timeSaver)
+        
+        viewModel?.updatedContentSizeHeight
+            .subscribeNext { [weak self] (height) -> Void in
+                self?.topWhiteViewHeight.constant = height + 44
+                self?.animateConstraintChanges()
+            }
+            .addDisposableTo(disposableBag)
     }
     
     private func setupDesign() {
@@ -58,13 +62,6 @@ class EditActivityVC: EditActivityVCConstraints {
         tableView.registerNib(UINib(nibName: EditActivityNotificationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNotificationCell.className)
     }
     
-    
-    func displayActivityData() {
-//        textField.text = activity?.name
-        timeSaver.sliderValue = activity!.timing.timeToSave.doubleValue
-//        basisSelector.selectedSegmentIndex = activity!.activityBasis().rawValue
-    }
-    
     //MARK: - Action
     
     @IBAction func backButtonTapped(sender: AnyObject) {
@@ -75,35 +72,15 @@ class EditActivityVC: EditActivityVCConstraints {
         }
     }
     
-    @IBAction func tapedOnStartTime(sender: UITapGestureRecognizer) {
-        editingState = (editingState == .Default) ? .StartTime : .Default
-    }
-    
-    func backToBasisSelector() {
-        editingState = .Default
-    }
-    
-    func defaultActivitySelected(value: Int) {
-//        textField.text = defaultActivityPicker.selectedActivityName
-//        textField.resignFirstResponder()
-        editingState = .Default
-    }
-    
-
     @IBAction func doneButtonPressed() {
+        let isItSafe = allDataEntered()
         
-        if editingState == .StartTime {
-            editingState = .Default
-        } else if editingState == .Default {
-            let isItSafe = allDataEntered()
+        if isItSafe.0 {
+            saveActivity()
+            showStatsInActivityMotivationVC()
             
-            if isItSafe.0 {
-                saveActivity()
-                showStatsInActivityMotivationVC()
-                
-            } else {
-                alertUserOnMissingData(message: isItSafe.1)
-            }
+        } else {
+            alertUserOnMissingData(message: isItSafe.1)
         }
     }
     
@@ -131,17 +108,10 @@ class EditActivityVC: EditActivityVCConstraints {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func basisSelectorTapped(sender: BasisSelector) {
-//        basisDaysView.basis = ActivityBasis(rawValue: sender.selectedSegmentIndex!)
-        editingState = .BasisDetail
-    }
-    
-    @IBAction func basisChanged(sender: UISegmentedControl) {
-    }
     
     func saveActivity() {
         if activity == nil {
-            let newActivity = Activity.newActivityForProfile(userProfile, ofType: .Routine)
+            let newActivity = Activity.newActivityForProfile(userProfile!, ofType: .Routine)
             activity = newActivity
         }
         
@@ -179,49 +149,12 @@ class EditActivityVC: EditActivityVCConstraints {
     @IBAction func editingComplete(segue: UIStoryboardSegue) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    // MARK: - Private Methods
-    
-    private func resetExpandableCell(atIndexPath indexPath: NSIndexPath) {
-//        shrinkCellAtIndexPath(selectedIndexPath, inTableView: tableView)
-        
-        if selectedIndexPath != indexPath {
-//            shrinkCellAtIndexPath(indexPath, inTableView: tableView)
-        }
-        
-        selectedIndexPath = (indexPath != selectedIndexPath) ? indexPath : nil
-    }
-    
-//    private func shrinkCellAtIndexPath(indexPath: NSIndexPath?, inTableView tableView: UITableView) {
-//        guard let path = indexPath else { return }
-//        
-//        if let cell = tableView.cellForRowAtIndexPath(path) as? ExpandableCell {
-//            cell.expandCell(false)
-//        }
-//    }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension EditActivityVC: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        editingState = .Default
-        return true
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        editingState = .NameOnly
-    }
-
 }
 
 // MARK: - UITableViewDataSource
 
 extension EditActivityVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
             return cell
         }
@@ -239,17 +172,6 @@ extension EditActivityVC: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         guard let viewModel = viewModel else { return 0 }
         return viewModel.heightForRow(indexPath)
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        resetExpandableCell(atIndexPath: indexPath)
-        
-//        if let expandableCell = tableView.cellForRowAtIndexPath(indexPath) as? ExpandableCell {
-            tableView.beginUpdates()
-//            expandableCell.expandCell(expanded)
-            tableView.endUpdates()
-//        }
     }
 }
 

@@ -26,31 +26,10 @@ class EditActivityVCConstraints: UIViewController {
         static let horizontalOffsetFactor: CGFloat = 0.11
         static let defaultPickerHeightFactor: CGFloat = 0.43
     }
-    
-    //MARK: - Icons
-//    @IBOutlet weak var nameIcon: UIImageView!
-//    @IBOutlet weak var startTimeIcon: UIImageView!
-//    @IBOutlet weak var durationIcon: UIImageView!
-//    @IBOutlet weak var notificationIcon: UIImageView!
-    
-    //MARK: - Labels
-//    @IBOutlet weak var startTimeLabel: UILabel!
-//    @IBOutlet weak var durationLabel: UILabel!
-//    @IBOutlet weak var notificationLabel: UILabel!
-//    @IBOutlet weak var textField: UITextField!
-    
-    //MARK: - Height Constraints
-//    @IBOutlet weak var nameViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var basisViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var basisDaysViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var startTimeViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var durationViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var notificationViewHeight: NSLayoutConstraint!
+
     @IBOutlet weak var timeSaverViewHeignt: NSLayoutConstraint!
     @IBOutlet weak var buttonHeight: NSLayoutConstraint!
     @IBOutlet weak var topWhiteViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var defaultPickerHeight: NSLayoutConstraint!
     
     
     //MARK: - Offsets
@@ -93,9 +72,9 @@ class EditActivityVCConstraints: UIViewController {
     
     func animateConstraintChanges() {
         UIView.animateWithDuration(0.2) {
-            [unowned self]() -> () in
-            self.updateViewConstraints()
-            self.view.layoutIfNeeded()
+            [weak self]() -> () in
+            self?.updateViewConstraints()
+            self?.view.layoutIfNeeded()
         }
     }
     
@@ -115,7 +94,7 @@ class EditActivityVCConstraints: UIViewController {
 //        basisDaysViewHeight.constant = 0.0
 //        
         // big views
-        topWhiteViewHeight.constant = kUsableViewHeight * Constants.topWhiteViewFactor
+//        topWhiteViewHeight.constant = kUsableViewHeight * Constants.topWhiteViewFactor
         timeSaverViewHeignt.constant = kUsableViewHeight * Constants.timeSaverViewFactor
 
         // all other equal

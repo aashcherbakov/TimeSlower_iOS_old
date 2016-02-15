@@ -129,6 +129,7 @@
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
 		F0EA8CB81C711AA700B11252 /* EditActivityNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EA8CB61C711AA700B11252 /* EditActivityNotificationCell.swift */; };
 		F0EA8CB91C711AA700B11252 /* EditActivityNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EA8CB71C711AA700B11252 /* EditActivityNotificationCell.xib */; };
+		F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EA8CBC1C712E9500B11252 /* Float+extension.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */; };
 		F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */; };
@@ -333,6 +334,7 @@
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
 		F0EA8CB61C711AA700B11252 /* EditActivityNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNotificationCell.swift; sourceTree = "<group>"; };
 		F0EA8CB71C711AA700B11252 /* EditActivityNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationCell.xib; sourceTree = "<group>"; };
+		F0EA8CBC1C712E9500B11252 /* Float+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+extension.swift"; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0EB8A3F1C4ABF11009B974A /* EditActivityVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityVCTests.swift; sourceTree = "<group>"; };
 		F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewModel.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 			children = (
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */,
+				F0EA8CBC1C712E9500B11252 /* Float+extension.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
 				F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
@@ -777,8 +780,6 @@
 				F009AF771BDB1935007F38A9 /* ListTypeSelector.swift */,
 				F009AF781BDB1935007F38A9 /* ListTypeSelector.xib */,
 				F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */,
-				F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */,
-				F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */,
 				F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */,
 				F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */,
 			);
@@ -792,6 +793,15 @@
 				F0EA8CB71C711AA700B11252 /* EditActivityNotificationCell.xib */,
 			);
 			name = "Edit Notifications";
+			sourceTree = "<group>";
+		};
+		F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */,
+				F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */,
+			);
+			name = "Edit TimeToSave";
 			sourceTree = "<group>";
 		};
 		F0EB7BDF1BEFCB1700173D5D /* Profile Stats */ = {
@@ -891,6 +901,7 @@
 				F0495C371C6C21FB00AA746A /* Edit StartTime */,
 				F05425A91C6FF169001C81D0 /* Edit Duration */,
 				F0EA8CBA1C711AAD00B11252 /* Edit Notifications */,
+				F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1293,6 +1304,7 @@
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
+				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,

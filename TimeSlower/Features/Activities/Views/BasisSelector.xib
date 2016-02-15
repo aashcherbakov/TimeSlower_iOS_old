@@ -31,7 +31,7 @@
                     <rect key="frame" x="20" y="20" width="8" height="8"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deselectedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="tfm-WN-t7z">
-                    <rect key="frame" x="323" y="20" width="8" height="8"/>
+                    <rect key="frame" x="323.5" y="20" width="8" height="8"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Daily" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djh-aL-ykN">
                     <rect key="frame" x="36" y="15" width="31.5" height="19"/>
@@ -40,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Weekends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khu-Da-ip3">
-                    <rect key="frame" x="339" y="15" width="64.5" height="19"/>
+                    <rect key="frame" x="339.5" y="15" width="64.5" height="19"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                     <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -49,11 +49,11 @@
                     <rect key="frame" x="157" y="20" width="8" height="8"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-Ld-v02">
-                    <rect key="frame" x="242" y="0.0" width="73" height="48"/>
+                    <rect key="frame" x="242.5" y="0.0" width="73" height="48"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEQ-IG-HMj">
-                    <rect key="frame" x="75" y="0.0" width="73.5" height="48"/>
+                    <rect key="frame" x="75.5" y="0.0" width="73.5" height="48"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Workdays" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5U-TN-0jn">
@@ -72,10 +72,10 @@
                 <constraint firstItem="djh-aL-ykN" firstAttribute="leading" secondItem="iWb-iV-IXa" secondAttribute="trailing" constant="8" id="Cy0-CN-ZAq"/>
                 <constraint firstAttribute="centerY" secondItem="I5U-TN-0jn" secondAttribute="centerY" constant="-0.5" id="KtU-hZ-YLn"/>
                 <constraint firstAttribute="trailing" secondItem="khu-Da-ip3" secondAttribute="trailing" priority="250" constant="20" id="R8j-O2-pga"/>
-                <constraint firstAttribute="bottom" secondItem="bEQ-IG-HMj" secondAttribute="bottom" id="YCK-Op-zlb"/>
+                <constraint firstAttribute="bottom" secondItem="bEQ-IG-HMj" secondAttribute="bottom" priority="999" id="YCK-Op-zlb"/>
                 <constraint firstItem="gQN-Ld-v02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aoO-0c-2ae"/>
                 <constraint firstAttribute="centerY" secondItem="iWb-iV-IXa" secondAttribute="centerY" constant="-0.5" id="bmM-MO-6gf"/>
-                <constraint firstAttribute="bottom" secondItem="gQN-Ld-v02" secondAttribute="bottom" id="dcH-7U-PyA"/>
+                <constraint firstAttribute="bottom" secondItem="gQN-Ld-v02" secondAttribute="bottom" priority="999" id="dcH-7U-PyA"/>
                 <constraint firstItem="tfm-WN-t7z" firstAttribute="leading" secondItem="gQN-Ld-v02" secondAttribute="trailing" constant="8" id="hMc-Ck-4zr"/>
                 <constraint firstItem="iWb-iV-IXa" firstAttribute="centerY" secondItem="djh-aL-ykN" secondAttribute="centerY" id="ihO-U8-B30"/>
                 <constraint firstItem="bEQ-IG-HMj" firstAttribute="width" secondItem="gQN-Ld-v02" secondAttribute="width" id="kDo-Uj-xvC"/>
