@@ -19,10 +19,13 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-gd-24l">
+                    <rect key="frame" x="35" y="75" width="530" height="20"/>
+                </imageView>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MmT-sh-XmS">
                     <rect key="frame" x="38" y="70" width="524" height="31"/>
                     <accessibility key="accessibilityConfiguration">
@@ -30,7 +33,7 @@
                     </accessibility>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9T-2k-96a">
-                    <rect key="frame" x="270" y="32" width="62" height="28"/>
+                    <rect key="frame" x="270" y="33" width="62" height="28"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="22"/>
                     <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -46,11 +49,15 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="v4B-Cx-bMC" secondAttribute="centerX" id="0Xj-DU-RyQ"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="centerX" secondItem="Y9T-2k-96a" secondAttribute="centerX" constant="-1" id="3Gg-YG-bie"/>
+                <constraint firstItem="4hC-gd-24l" firstAttribute="centerX" secondItem="MmT-sh-XmS" secondAttribute="centerX" id="GST-2j-lg2"/>
+                <constraint firstItem="4hC-gd-24l" firstAttribute="centerY" secondItem="MmT-sh-XmS" secondAttribute="centerY" id="PdO-de-Mom"/>
                 <constraint firstItem="MmT-sh-XmS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="PdQ-bJ-HTj"/>
                 <constraint firstItem="MmT-sh-XmS" firstAttribute="top" secondItem="Y9T-2k-96a" secondAttribute="bottom" constant="9" id="SRG-uP-PBk"/>
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="top" secondItem="v4B-Cx-bMC" secondAttribute="bottom" constant="8" id="TqK-oM-OHY"/>
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="centerX" secondItem="MmT-sh-XmS" secondAttribute="centerX" constant="1" id="Wxc-Os-Nmd"/>
+                <constraint firstItem="4hC-gd-24l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="mol-Y1-4ny"/>
                 <constraint firstAttribute="trailing" secondItem="MmT-sh-XmS" secondAttribute="trailing" constant="40" id="wYP-4s-hDq"/>
+                <constraint firstAttribute="trailing" secondItem="4hC-gd-24l" secondAttribute="trailing" constant="35" id="xqR-Cb-Efk"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="zal-7z-FAA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -58,4 +65,7 @@
             <point key="canvasLocation" x="540" y="88.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="sliderBackground" width="330" height="20"/>
+    </resources>
 </document>

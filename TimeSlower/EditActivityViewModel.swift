@@ -262,6 +262,18 @@ class EditActivityViewModel {
         default: return 0
         }
     }
+    
+    private func heightForTableViewInState(state: StateType) -> CGFloat {
+        switch state {
+        case .NoData: return Constants.defaultCellHeight
+        case .Name: return Constants.nameCellExpandedHeight
+        case .Basis: return Constants.defaultCellHeight * 2
+        case .BasisAndDays: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
+        case .BasisAndStartTime: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
+        case .FullHouse: return Constants.defaultCellHeight * 5
+        case .StartTime: return Constants.startTimeExpandedHeight + Constants.defaultCellHeight * 2
+        }
+    }
 }
 
 // MARK: - StateMachineDelegate
@@ -289,30 +301,12 @@ extension EditActivityViewModel : StateMachineDelegate {
         default: return false
         }
     }
-
-    private func heightForTableViewInState(state: StateType) -> CGFloat {
-        switch state {
-        case .NoData: return Constants.defaultCellHeight
-        case .Name: return Constants.nameCellExpandedHeight
-        case .Basis: return Constants.defaultCellHeight * 2
-        case .BasisAndDays: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
-        case .BasisAndStartTime: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
-        case .FullHouse: return Constants.defaultCellHeight * 5
-        case .StartTime: return Constants.startTimeExpandedHeight + Constants.defaultCellHeight * 2
-        }
-    }
     
     func didTransitionFrom(from: StateType, to: StateType) {
         print("Transition from \(from) to \(to)")
-
         tableView.beginUpdates()
         tableView.endUpdates()
         
         updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
-
-        
-        print("Content size: \(updatedContentSizeHeight.value)")
-
-
     }
 }

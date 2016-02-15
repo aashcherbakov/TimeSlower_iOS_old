@@ -45,7 +45,7 @@ class EditActivityVC: EditActivityVCConstraints {
         
         viewModel?.updatedContentSizeHeight
             .subscribeNext { [weak self] (height) -> Void in
-                self?.topWhiteViewHeight.constant = height + 44
+                self?.topWhiteViewHeight.constant = height + 24
                 self?.animateConstraintChanges()
             }
             .addDisposableTo(disposableBag)

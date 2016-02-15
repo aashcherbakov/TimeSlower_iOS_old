@@ -387,7 +387,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-6u-eAh" userLabel="timeSaverView" customClass="TimeSaver" customModule="TimeSlower" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="482" width="600" height="140"/>
+                                <rect key="frame" x="0.0" y="502" width="600" height="120"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="140" id="ove-86-1jR"/>
@@ -418,7 +418,7 @@
                             <constraint firstAttribute="trailing" secondItem="S8u-vA-cF3" secondAttribute="trailing" id="VTT-zt-9dY"/>
                             <constraint firstAttribute="trailing" secondItem="zG8-6u-eAh" secondAttribute="trailing" id="VbP-fR-wA5"/>
                             <constraint firstAttribute="trailing" secondItem="h4X-wD-6mW" secondAttribute="trailing" id="ZNT-qS-9eR"/>
-                            <constraint firstItem="zG8-6u-eAh" firstAttribute="top" secondItem="MZr-2f-QdH" secondAttribute="bottom" id="guE-QS-uaN"/>
+                            <constraint firstItem="zG8-6u-eAh" firstAttribute="top" secondItem="MZr-2f-QdH" secondAttribute="bottom" constant="20" id="guE-QS-uaN"/>
                             <constraint firstItem="h4X-wD-6mW" firstAttribute="leading" secondItem="3ec-Ir-yVu" secondAttribute="leading" id="iUF-ae-Gue"/>
                             <constraint firstItem="S8u-vA-cF3" firstAttribute="top" secondItem="h4X-wD-6mW" secondAttribute="bottom" id="kww-X5-cOA"/>
                             <constraint firstItem="ybX-bW-E94" firstAttribute="top" secondItem="itb-1s-Ysd" secondAttribute="bottom" constant="27" id="lIM-m1-MZP"/>

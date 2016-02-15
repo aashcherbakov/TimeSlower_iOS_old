@@ -45,6 +45,10 @@ class TimeSaver: UIView {
         NSBundle.mainBundle().loadNibNamed("TimeSaver", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
+        
+        let trackImage = UIImage(named: "redLine")
+        UISlider.appearance().setMinimumTrackImage(trackImage, forState: .Normal)
+        UISlider.appearance().setMaximumTrackImage(trackImage, forState: .Normal)
     }
     
     private func setupEvents() {
@@ -54,13 +58,19 @@ class TimeSaver: UIView {
             .subscribeNext { [weak self] (duration) -> Void in
                 self?.slider.maximumValue = Float(duration)
                 self?.timeToSave.value = duration / 6
+                self?.slider.value = Float(duration / 6)
             }
             .addDisposableTo(disposableBag)
         
         timeToSave
             .subscribeNext { [weak self] (minutes) -> Void in
-                self?.slider.value = Float(minutes)
                 self?.timeLabel.text = "\(minutes) min"
+            }
+            .addDisposableTo(disposableBag)
+        
+        slider.rx_value
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.timeToSave.value = Int(minutes)
             }
             .addDisposableTo(disposableBag)
     }
