@@ -15,7 +15,7 @@ import RxCocoa
 class EditActivityVC: EditActivityVCConstraints {
 
     @IBOutlet weak var timeSaver: TimeSaver!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editingDataView: EditActivityDataView!
     
     var selectedBasis: ActivityBasis?
     var userProfile: Profile?
@@ -41,25 +41,20 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     private func bindViewModel() {
-        viewModel = EditActivityViewModel(withTableView: tableView, timeSaver: timeSaver)
-        
-        viewModel?.updatedContentSizeHeight
-            .subscribeNext { [weak self] (height) -> Void in
-                self?.topWhiteViewHeight.constant = height + 24
-                self?.animateConstraintChanges()
-            }
-            .addDisposableTo(disposableBag)
+        viewModel = EditActivityViewModel(withDataView: editingDataView, timeSaver: timeSaver)
     }
     
     private func setupDesign() {
-        tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.delegate = self
+        topWhiteViewHeight.constant = 280 + 24
+
         
-        tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityNotificationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNotificationCell.className)
+//        tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
+//        tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
+//        tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
+//        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.className)
+//        tableView.registerNib(UINib(nibName: EditActivityNotificationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNotificationCell.className)
     }
     
     //MARK: - Action
@@ -151,28 +146,28 @@ class EditActivityVC: EditActivityVCConstraints {
     }
 }
 
-// MARK: - UITableViewDataSource
-
-extension EditActivityVC: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension EditActivityVC: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let viewModel = viewModel else { return 0 }
-        return viewModel.heightForRow(indexPath)
-    }
-}
+//// MARK: - UITableViewDataSource
+//
+//extension EditActivityVC: UITableViewDataSource {
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
+//            return cell
+//        }
+//        return UITableViewCell()
+//    }
+//    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 5
+//    }
+//}
+//
+//// MARK: - UITableViewDelegate
+//
+//extension EditActivityVC: UITableViewDelegate {
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        guard let viewModel = viewModel else { return 0 }
+//        return viewModel.heightForRow(indexPath)
+//    }
+//}
 
 
