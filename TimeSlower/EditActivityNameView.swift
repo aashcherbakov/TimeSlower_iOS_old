@@ -38,7 +38,6 @@ class EditActivityNameView: UIView {
         NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
-
     }
     
     override func layoutSubviews() {

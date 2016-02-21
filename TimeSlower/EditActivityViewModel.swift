@@ -90,9 +90,38 @@ class EditActivityViewModel {
                     self?.name = name
                     self?.machine.state = .AddBasis
                 }
-
             }
             .addDisposableTo(disposableBag)
+        
+        dataView.selectedBasis.subscribeNext { [weak self] (basis) -> Void in
+            if let basis = basis {
+                self?.basis = basis
+                if self?.startTime != nil {
+                    self?.machine.state = .FullHouse
+                } else {
+                    self?.machine.state = .AddStartTime
+                }
+            }
+        }.addDisposableTo(disposableBag)
+        
+        
+        dataView.expandedName.subscribeNext { [weak self] (expanded) -> Void in
+            if let expanded = expanded where expanded == true {
+                self?.machine.state = .EditName
+            }
+        }.addDisposableTo(disposableBag)
+        
+        dataView.expandedStartTime.subscribeNext { [weak self] (expanded) -> Void in
+            if let expanded = expanded where expanded == true {
+                self?.machine.state = .EditStartTime
+            }
+        }.addDisposableTo(disposableBag)
+        
+        dataView.expandedBasis.subscribeNext { [weak self] (expanded) -> Void in
+            if let expanded = expanded where expanded == true {
+                self?.machine.state = .EditBasis
+            }
+        }.addDisposableTo(disposableBag)
         
         
         timeSaver.timeToSave
@@ -316,6 +345,9 @@ extension EditActivityViewModel : StateMachineDelegate {
         switch (from, to) {
         case (.NoData, .AddName): return true
         case (.AddName, .AddBasis): return true
+        case (.AddBasis, .AddStartTime): return true
+        case (.AddStartTime, .FullHouse): return true
+        case (.AddStartTime, .EditStartTime): return true
 //        case (.Name, .Basis): return true
 //        case (.Basis, .BasisAndDays): return true
 //        case (.Basis, .Name): return true
