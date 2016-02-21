@@ -23,6 +23,8 @@ class EditActivityDataView: UIView {
     @IBOutlet weak var editNameView: EditActivityNameView!
     @IBOutlet weak var editBasisView: EditActivityBasisView!
     @IBOutlet weak var editStartTimeView: EditActivityStartTimeView!
+    @IBOutlet weak var editDurationView: EditActivityDurationView!
+    @IBOutlet weak var editNotificationView: EditActivityNotificationsView!
     
     @IBOutlet weak var nameViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var basisViewHeightConstraint: NSLayoutConstraint!
@@ -48,27 +50,47 @@ class EditActivityDataView: UIView {
         
         setupEvents()
     }
+    
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed("EditActivityDataView", owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+        updateDesignForState(.AddName)
+    }
 
-    func setupEvents() {
-        editNameView.selectedName.subscribeNext {
-                [weak self] (name) -> Void in
-                self?.selectedName.value = name
-            }.addDisposableTo(disposableBag)
-        
-        editBasisView.selectedBasis.subscribeNext {
-                [weak self] (basis) -> Void in
-                self?.selectedBasis.value = basis
-            }.addDisposableTo(disposableBag)
-        
-        editStartTimeView.selectedDate.subscribeNext {
-                [weak self] (date) -> Void in
-                self?.selectedStartTime.value = date
-            }.addDisposableTo(disposableBag)
-        
+    private func setupEvents() {
+        setupObservationForSelectedValues()
         setupObservationForExpandedProperties()
     }
     
-    func setupObservationForExpandedProperties() {
+    private func setupObservationForSelectedValues() {
+        editNameView.selectedName
+            .subscribeNext { [weak self] (name) -> Void in
+                self?.selectedName.value = name
+            }.addDisposableTo(disposableBag)
+        
+        editBasisView.selectedBasis
+            .subscribeNext { [weak self] (basis) -> Void in
+                self?.selectedBasis.value = basis
+            }.addDisposableTo(disposableBag)
+        
+        editStartTimeView.selectedDate
+            .subscribeNext { [weak self] (date) -> Void in
+                self?.selectedStartTime.value = date
+            }.addDisposableTo(disposableBag)
+        
+        editDurationView.activityDuration
+            .subscribeNext { [weak self] (duration) -> Void in
+                self?.selectedDuration.value = duration
+            }.addDisposableTo(disposableBag)
+        
+        editNotificationView.notificationsOn
+            .subscribeNext { [weak self] (enabled) -> Void in
+                self?.selectedNotifications.value = enabled
+            }.addDisposableTo(disposableBag)
+    }
+    
+    private func setupObservationForExpandedProperties() {
         editStartTimeView.expanded.subscribeNext {
             [weak self] (expanded) -> Void in
                 self?.expandedStartTime.value = expanded
@@ -85,18 +107,10 @@ class EditActivityDataView: UIView {
             }.addDisposableTo(disposableBag)
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("EditActivityDataView", owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-        
-        updateDesignForState(.AddName)
-    }
-    
     func updateDesignForState(state: EditActivityState) {
         switch state {
         case .NoData: break
-        case .AddName:
+        case .AddName, .EditName:
             nameViewHeightConstraint.constant = Constants.nameExpandedHeight
             basisViewHeightConstraint.constant = 0
             startTimeViewHeightConstraint.constant = 0
@@ -117,13 +131,16 @@ class EditActivityDataView: UIView {
             nameViewHeightConstraint.constant = Constants.defaultCellHeight
             basisViewHeightConstraint.constant = Constants.defaultCellHeight
             startTimeViewHeightConstraint.constant = Constants.startTimeExpandedHeight
+        case .EditBasis:
+            basisViewHeightConstraint.constant = Constants.basisExpandedHeight
+            startTimeViewHeightConstraint.constant = Constants.defaultCellHeight
+            nameViewHeightConstraint.constant = Constants.defaultCellHeight
         case .FullHouse:
             nameViewHeightConstraint.constant = Constants.defaultCellHeight
             basisViewHeightConstraint.constant = Constants.defaultCellHeight
             startTimeViewHeightConstraint.constant = Constants.defaultCellHeight
             durationViewHeightConstraint.constant = Constants.defaultCellHeight
             notificationViewHeightConstraint.constant = Constants.defaultCellHeight
-        default: return
         }
         
         UIView.animateWithDuration(0.3) { () -> Void in

@@ -35,26 +35,31 @@ class EditActivityVC: EditActivityVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModel()
-
+        
+        setupData()
         setupDesign()
+        setupEvents()
     }
     
-    private func bindViewModel() {
+    private func setupData() {
         viewModel = EditActivityViewModel(withDataView: editingDataView, timeSaver: timeSaver)
     }
     
     private func setupDesign() {
-//        tableView.dataSource = self
-//        tableView.delegate = self
-        topWhiteViewHeight.constant = 280 + 24
-
-        
-//        tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
-//        tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
-//        tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
-//        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.className)
-//        tableView.registerNib(UINib(nibName: EditActivityNotificationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNotificationCell.className)
+        if let viewModel = viewModel {
+            topWhiteViewHeight.constant = viewModel.updatedContentSizeHeight.value + 24
+        }
+    }
+    
+    private func setupEvents() {
+        viewModel?.updatedContentSizeHeight
+            .subscribeNext { [weak self] (height) -> Void in
+                self?.topWhiteViewHeight.constant = height + 24
+                UIView.animateWithDuration(0.3) {
+                    self?.view.layoutIfNeeded()
+                }
+            }
+            .addDisposableTo(disposableBag)
     }
     
     //MARK: - Action
@@ -145,29 +150,4 @@ class EditActivityVC: EditActivityVCConstraints {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
-
-//// MARK: - UITableViewDataSource
-//
-//extension EditActivityVC: UITableViewDataSource {
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
-//            return cell
-//        }
-//        return UITableViewCell()
-//    }
-//    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 5
-//    }
-//}
-//
-//// MARK: - UITableViewDelegate
-//
-//extension EditActivityVC: UITableViewDelegate {
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        guard let viewModel = viewModel else { return 0 }
-//        return viewModel.heightForRow(indexPath)
-//    }
-//}
-
 

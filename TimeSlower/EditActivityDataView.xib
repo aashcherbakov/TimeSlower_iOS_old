@@ -9,7 +9,9 @@
                 <outlet property="basisViewHeightConstraint" destination="ehS-Yk-HF1" id="EDP-SM-x8y"/>
                 <outlet property="durationViewHeightConstraint" destination="Ooo-sn-WED" id="aAm-PC-NtH"/>
                 <outlet property="editBasisView" destination="DUg-s0-B40" id="lST-Xd-oGe"/>
+                <outlet property="editDurationView" destination="5dg-pO-tEK" id="gEr-BI-GdT"/>
                 <outlet property="editNameView" destination="ASZ-lf-IEk" id="dUS-eg-HsS"/>
+                <outlet property="editNotificationView" destination="VRJ-vo-dsl" id="gKd-Jo-B6H"/>
                 <outlet property="editStartTimeView" destination="bCb-AF-xFQ" id="hY6-ZE-9Ni"/>
                 <outlet property="nameViewHeightConstraint" destination="gbO-Id-HtI" id="vue-eA-JZ3"/>
                 <outlet property="notificationViewHeightConstraint" destination="fMY-Ha-ilH" id="RGL-rf-Bsu"/>
@@ -43,14 +45,14 @@
                         <constraint firstAttribute="height" constant="120" id="UoG-Pe-xlT"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dg-pO-tEK">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dg-pO-tEK" customClass="EditActivityDurationView" customModule="TimeSlower" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="360" width="600" height="120"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="Ooo-sn-WED"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRJ-vo-dsl">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRJ-vo-dsl" customClass="EditActivityNotificationsView" customModule="TimeSlower" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="480" width="600" height="120"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
