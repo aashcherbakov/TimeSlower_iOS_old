@@ -19,7 +19,7 @@ class EditActivityVC: EditActivityVCConstraints {
     
     var selectedBasis: ActivityBasis?
     var userProfile: Profile?
-//    var activity: Activity?
+    var activity: Activity?
     
     private var selectedIndexPath: NSIndexPath?
     
@@ -82,9 +82,10 @@ class EditActivityVC: EditActivityVCConstraints {
             if viewModel.isEditingAnyField() {
                 viewModel.resetEditingState()
             } else {
-                print("Activity is ready to be saved: \(dataEntered.model)")
-//                saveActivity()
-//                showStatsInActivityMotivationVC()
+                if let model = dataEntered.model {
+                    saveActivity(withBlankModel: model)
+                    showStatsInActivityMotivationVC()
+                }
             }
         }
     }
@@ -104,19 +105,19 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     
-    func saveActivity() {
+    func saveActivity(withBlankModel model: ActivityBlankModel) {
         if activity == nil {
             let newActivity = Activity.newActivityForProfile(userProfile!, ofType: .Routine)
             activity = newActivity
         }
         
-//        activity?.name = textField.text!
-//        let selectedBasis = ActivityBasis(rawValue:basisSelector.selectedSegmentIndex!)
-//        activity?.basis = Activity.basisWithEnum(selectedBasis!)
-//        activity?.timing.startTime = Timing.updateTimeForToday(datePicker.date)
-//        activity?.timing.duration = NSNumber(double: activityDuration)
-//        activity?.timing.finishTime = activity!.timing.startTime.dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
-//        activity?.timing.timeToSave = NSNumber(float: timeSaver.slider.value)
+        activity?.name = model.name
+        activity?.basis = Activity.basisWithEnum(model.basis)
+        activity?.timing.startTime = Timing.updateTimeForToday(model.startTime)
+        activity?.timing.duration = NSNumber(integer: model.duration)
+        activity?.timing.finishTime = activity!.timing.startTime
+            .dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
+        activity?.timing.timeToSave = NSNumber(integer: model.timeToSave)
         
         do {
             try activity!.managedObjectContext!.save()
@@ -124,11 +125,9 @@ class EditActivityVC: EditActivityVCConstraints {
             print("Could not save: \(error)") }
         
         activity?.scheduleDefaultStartNotification()
-        print("Created activity description: \(activity!)")
     }
     
     // MARK: - Navigation
-
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

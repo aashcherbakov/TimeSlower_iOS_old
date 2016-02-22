@@ -29,6 +29,27 @@ enum EditActivityState {
     case FullHouse
 }
 
+/**
+ *  Struct that holds data for creating/editing activity
+ */
+struct ActivityBlankModel {
+    var name: String
+    var basis: ActivityBasis
+    var startTime: NSDate
+    var duration: Int
+    var notificationsOn: Bool
+    var timeToSave: Int
+    
+    init(withName name: String, basis: ActivityBasis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
+        self.name = name
+        self.basis = basis
+        self.startTime = startTime
+        self.duration = duration
+        self.notificationsOn = notificationsOn
+        self.timeToSave = timeToSave
+    }
+}
+
 /// View Model for editing/creating activity
 class EditActivityViewModel {
     
@@ -64,24 +85,6 @@ class EditActivityViewModel {
         setupEvents()
     }
     
-    struct ActivityBlankModel {
-        var name: String
-        var basis: ActivityBasis
-        var startTime: NSDate
-        var duration: Int
-        var notificationsOn: Bool
-        var timeToSave: Int
-        
-        init(withName name: String, basis: ActivityBasis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
-            self.name = name
-            self.basis = basis
-            self.startTime = startTime
-            self.duration = duration
-            self.notificationsOn = notificationsOn
-            self.timeToSave = timeToSave
-        }
-    }
-    
     // MARK: - Internal Methods
     
     func isEditingAnyField() -> Bool {
@@ -112,17 +115,9 @@ class EditActivityViewModel {
     }
     
     private func missingDataString() -> String? {
-        if name == nil {
-            return "Name is missing!"
-        }
-        
-        if basis == nil {
-            return "Please, select basis to continue"
-        }
-        
-        if startTime == nil {
-            return "You forgot to enter start time"
-        }
+        if name == nil { return "Name is missing!" }
+        if basis == nil { return "Please, select basis to continue" }
+        if startTime == nil { return "You forgot to enter start time" }
         return nil
     }
     
