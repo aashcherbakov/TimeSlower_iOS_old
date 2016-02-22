@@ -387,7 +387,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-6u-eAh" userLabel="timeSaverView" customClass="TimeSaver" customModule="TimeSlower" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="502" width="600" height="120"/>
+                                <rect key="frame" x="0.0" y="502" width="600" height="134"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="140" id="ove-86-1jR"/>
@@ -410,7 +410,7 @@
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="MZr-2f-QdH" secondAttribute="trailing" id="0BG-Zc-EYV"/>
-                            <constraint firstItem="itb-1s-Ysd" firstAttribute="top" secondItem="zG8-6u-eAh" secondAttribute="bottom" constant="29" id="Brd-kh-LjD"/>
+                            <constraint firstItem="itb-1s-Ysd" firstAttribute="top" secondItem="zG8-6u-eAh" secondAttribute="bottom" constant="15" id="Brd-kh-LjD"/>
                             <constraint firstItem="h4X-wD-6mW" firstAttribute="top" secondItem="3ec-Ir-yVu" secondAttribute="top" id="DtJ-NN-xPm"/>
                             <constraint firstItem="zG8-6u-eAh" firstAttribute="leading" secondItem="3ec-Ir-yVu" secondAttribute="leading" id="KvR-6k-4uS"/>
                             <constraint firstItem="MZr-2f-QdH" firstAttribute="top" secondItem="S8u-vA-cF3" secondAttribute="bottom" id="LAP-dq-t3D"/>

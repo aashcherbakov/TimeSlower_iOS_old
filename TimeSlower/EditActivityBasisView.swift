@@ -27,7 +27,7 @@ class EditActivityBasisView: UIView {
     
     
     /// Variable that represents activity basis. Observable
-    var selectedBasis = Variable<ActivityBasis?>(ActivityBasis.Daily)
+    var selectedBasis = Variable<ActivityBasis?>(nil)
     
     /**
      Bool to signal view model that height of the cell should be recalculated.
@@ -65,6 +65,7 @@ class EditActivityBasisView: UIView {
     private func setupDesign() {
         textFieldView.setup(withType: .Basis, delegate: nil)
         separatorLineHeight.constant = kDefaultSeparatorHeight
+        daySelector.basisToDisplay = .NotSelected
     }
     
     private func setupEvents() {

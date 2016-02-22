@@ -13,10 +13,11 @@ import TimeSlowerKit
 class DaySelector: UIControl {
     
     /// Enum that sums up what days should be displayd in selector
-    private enum BasisToDisplay: Int {
+    enum BasisToDisplay: Int {
         case Daily // 7 days
         case Workdays // Mon-Fri
         case Weekends // Sat-Sun
+        case NotSelected // 7 days but none selected
     }
     
     private struct Constants {
@@ -45,7 +46,7 @@ class DaySelector: UIControl {
         }
     }
     
-    private var basisToDisplay: BasisToDisplay! {
+    var basisToDisplay: BasisToDisplay! {
         didSet {
             setupButtons()
         }
@@ -95,12 +96,11 @@ class DaySelector: UIControl {
     
     // MARK: - Private Methods
     
-    
     private func setupButtons() {
         restoreButtonWidths()
-        defineAvailableDayNames() // good
-        prepareActiveButtons() // good
-        setProperButtonsNames() // good
+        defineAvailableDayNames()
+        prepareActiveButtons()
+        setProperButtonsNames()
         updateButtonsDesign()
         resetSelectedDays()
         setNeedsLayout()
@@ -115,7 +115,7 @@ class DaySelector: UIControl {
     
     private func defineAvailableDayNames() {
         switch basisToDisplay! {
-        case .Daily: daysAvailableToSelect = NSDateFormatter().shortWeekdaySymbols as [String]
+        case .Daily, .NotSelected: daysAvailableToSelect = NSDateFormatter().shortWeekdaySymbols as [String]
         case .Workdays: daysAvailableToSelect = ["Mon", "Tue", "Wed", "Thu", "Fri"]
         case .Weekends: daysAvailableToSelect = ["Sat", "Sun"]
         }
@@ -124,7 +124,7 @@ class DaySelector: UIControl {
     private func prepareActiveButtons() {
         activeButtons = dayButtons
         switch basisToDisplay! {
-        case .Daily: break
+        case .Daily, .NotSelected: break
         case .Workdays: activeButtons.removeRange(5...6)
         case .Weekends: activeButtons.removeRange(2...6)
         }
@@ -133,7 +133,7 @@ class DaySelector: UIControl {
     private func setProperButtonsNames() {
         for button in activeButtons {
             button.setTitle(daysAvailableToSelect[button.tag], forState: .Normal)
-            button.selected = true
+            button.selected = basisToDisplay != .NotSelected ? true : false
         }
     }
     
@@ -180,7 +180,7 @@ class DaySelector: UIControl {
     private func layoutButtonWidthForBasis(basis: BasisToDisplay) {
         var widthArray: [NSLayoutConstraint]?
         switch basis {
-        case .Daily: break
+        case .Daily, .NotSelected: break
         case .Workdays: widthArray = twoLastButtonsWidths
         case .Weekends: widthArray = fiveLastButtonsWidths
         }

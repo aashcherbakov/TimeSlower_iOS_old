@@ -73,14 +73,19 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     @IBAction func doneButtonPressed() {
-        let isItSafe = allDataEntered()
+        guard let viewModel = viewModel else { return }
         
-        if isItSafe.0 {
-            saveActivity()
-            showStatsInActivityMotivationVC()
-            
+        let dataEntered = viewModel.isDataEntered()
+        if let missingData = dataEntered.missingData {
+            alertUserOnMissingData(message: missingData)
         } else {
-            alertUserOnMissingData(message: isItSafe.1)
+            if viewModel.isEditingAnyField() {
+                viewModel.resetEditingState()
+            } else {
+                print("Activity is ready to be saved: \(dataEntered.model)")
+//                saveActivity()
+//                showStatsInActivityMotivationVC()
+            }
         }
     }
     
@@ -92,18 +97,8 @@ class EditActivityVC: EditActivityVCConstraints {
         }
     }
     
-    func allDataEntered() -> (Bool, String) {
-//        if textField.text == "" {
-//            return (false, "Activity has no name!")
-//        }
-//        if startTimeValueLabel.text == "" {
-//            return (false, "Start time is not selected!")
-//        }
-        return (true, "")
-    }
-    
     func alertUserOnMissingData(message message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Oops!", message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }

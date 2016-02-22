@@ -60,12 +60,75 @@ class EditActivityViewModel {
         self.dataView = dataView
         self.timeSaver = timeSaver
         
+        setupDesign()
         setupEvents()
+    }
+    
+    struct ActivityBlankModel {
+        var name: String
+        var basis: ActivityBasis
+        var startTime: NSDate
+        var duration: Int
+        var notificationsOn: Bool
+        var timeToSave: Int
+        
+        init(withName name: String, basis: ActivityBasis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
+            self.name = name
+            self.basis = basis
+            self.startTime = startTime
+            self.duration = duration
+            self.notificationsOn = notificationsOn
+            self.timeToSave = timeToSave
+        }
+    }
+    
+    // MARK: - Internal Methods
+    
+    func isEditingAnyField() -> Bool {
+        return machine.state != .FullHouse
+    }
+    
+    func resetEditingState() {
+        if machine.state != .AddName && machine.state != .AddBasis && machine.state != .AddStartTime {
+            machine.state = .FullHouse
+        }
+    }
+    
+    func isDataEntered() -> (model: ActivityBlankModel?, missingData: String?) {
+        if let name = name, basis = basis, startTime = startTime,
+            notificationsOn = notificationsOn, duration = duration,
+            timeToSave = timeToSave where name.characters.count > 0 {
+                let model = ActivityBlankModel(
+                    withName: name,
+                    basis: basis,
+                    startTime: startTime,
+                    duration: duration,
+                    notificationsOn: notificationsOn,
+                    timeToSave: timeToSave)
+                return (model, nil)
+        } else {
+            return (nil, missingDataString())
+        }
+    }
+    
+    private func missingDataString() -> String? {
+        if name == nil {
+            return "Name is missing!"
+        }
+        
+        if basis == nil {
+            return "Please, select basis to continue"
+        }
+        
+        if startTime == nil {
+            return "You forgot to enter start time"
+        }
+        return nil
     }
     
     // MARK: - Setup Methods
     
-    private func setupEvents() {
+    private func setupDesign() {
         machine = StateMachine(withState: .NoData, delegate: self)
         updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
         
@@ -73,6 +136,23 @@ class EditActivityViewModel {
             machine.state = .AddName
         }
         
+        setupTimeSaverVisability(forState: machine.state)
+    }
+    
+    private func setupEvents() {
+        observeDataViewSelectedValues()
+        observeExpandedViewProperties()
+        observeTimeSaverValue()
+    }
+    
+    private func observeTimeSaverValue() {
+        timeSaver.timeToSave
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.timeToSave = minutes
+            }.addDisposableTo(disposableBag)
+    }
+    
+    private func observeDataViewSelectedValues() {
         dataView.selectedName
             .subscribeNext { [weak self] (name) -> Void in
                 if name.characters.count > 0 {
@@ -83,8 +163,7 @@ class EditActivityViewModel {
                         self?.machine.state = .FullHouse
                     }
                 }
-            }
-            .addDisposableTo(disposableBag)
+            }.addDisposableTo(disposableBag)
         
         dataView.selectedBasis
             .subscribeNext { [weak self] (basis) -> Void in
@@ -96,8 +175,14 @@ class EditActivityViewModel {
                         self?.machine.state = .AddStartTime
                     }
                 }
-            }
-            .addDisposableTo(disposableBag)
+            }.addDisposableTo(disposableBag)
+        
+        dataView.selectedStartTime
+            .subscribeNext { [weak self] (date) -> Void in
+                if let date = date {
+                    self?.startTime = date
+                }
+            }.addDisposableTo(disposableBag)
         
         dataView.selectedDuration
             .subscribeNext { [weak self] (duration) -> Void in
@@ -105,22 +190,12 @@ class EditActivityViewModel {
                     self?.duration = duration
                     self?.timeSaver.activityDuration.value = duration
                 }
-            }
-            .addDisposableTo(disposableBag)
+            }.addDisposableTo(disposableBag)
         
         dataView.selectedNotifications
             .subscribeNext { [weak self] (enabled) -> Void in
                 self?.notificationsOn = enabled
-            }
-            .addDisposableTo(disposableBag)
-        
-        timeSaver.timeToSave
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeToSave = minutes
-            }
-            .addDisposableTo(disposableBag)
-        
-        observeExpandedViewProperties()
+            }.addDisposableTo(disposableBag)
     }
     
     private func observeExpandedViewProperties() {
@@ -157,6 +232,11 @@ class EditActivityViewModel {
         case .EditBasis: return Constants.defaultCellHeight * 4 + Constants.basisCellExpandedHeight
         }
     }
+    
+    private func setupTimeSaverVisability(forState state: StateType) {
+        let shouldNotShow = state == .NoData || state == .AddBasis || state == .AddName || state == .AddStartTime
+        timeSaver.alpha = shouldNotShow ? 0.0 : 1.0
+    }
 }
 
 // MARK: - StateMachineDelegate
@@ -191,5 +271,6 @@ extension EditActivityViewModel : StateMachineDelegate {
         print("Transition from \(from) to \(to)")
         dataView.updateDesignForState(to)
         updatedContentSizeHeight.value = heightForTableViewInState(to)
+        setupTimeSaverVisability(forState: to)
     }
 }
