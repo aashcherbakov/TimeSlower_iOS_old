@@ -151,8 +151,12 @@ extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        performSegueWithIdentifier("ActivityStats", sender: cell)
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? StandardActivityCell {
+            if let editActivityVC = UIStoryboard(name: "Activities", bundle: nil).instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
+                editActivityVC.activity = cell.activity
+                navigationController?.pushViewController(editActivityVC, animated: true)
+            }
+        }
     }
     
     

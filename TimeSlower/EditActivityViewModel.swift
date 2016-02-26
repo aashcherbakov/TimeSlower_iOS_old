@@ -62,6 +62,7 @@ class EditActivityViewModel {
     
     typealias StateType = EditActivityState
     
+    /// Height of all views of EditActivityDataView combined. Used to update top white view height
     var updatedContentSizeHeight = Variable<CGFloat>(0)
     
     private var machine: StateMachine<EditActivityViewModel>!
@@ -76,27 +77,43 @@ class EditActivityViewModel {
     private var notificationsOn: Bool?
     private var duration: Int?
     private var timeToSave: Int?
+    private var activity: Activity?
     
-    init(withDataView dataView: EditActivityDataView, timeSaver: TimeSaver) {
+    init(withDataView dataView: EditActivityDataView, timeSaver: TimeSaver, activity: Activity?) {
         self.dataView = dataView
         self.timeSaver = timeSaver
+        self.activity = activity
         
+        setupData()
         setupDesign()
         setupEvents()
     }
     
     // MARK: - Internal Methods
     
+    /**
+    Method do find out if any views are in expanded state (are editing)
+    
+    - returns: true if any view is being edited now
+    */
     func isEditingAnyField() -> Bool {
         return machine.state != .FullHouse
     }
     
+    /**
+     Sets editing state to .FullHouse - all views are of the same height, none is expanded
+     */
     func resetEditingState() {
         if machine.state != .AddName && machine.state != .AddBasis && machine.state != .AddStartTime {
             machine.state = .FullHouse
         }
     }
     
+    /**
+     Method to determine if data entered in both EditActivityDataView and TimeSaver are valid
+     
+     - returns: ActivityBlankModel if data is entered or String with message which data is missing
+     */
     func isDataEntered() -> (model: ActivityBlankModel?, missingData: String?) {
         if let name = name, basis = basis, startTime = startTime,
             notificationsOn = notificationsOn, duration = duration,
@@ -114,17 +131,25 @@ class EditActivityViewModel {
         }
     }
     
-    private func missingDataString() -> String? {
-        if name == nil { return "Name is missing!" }
-        if basis == nil { return "Please, select basis to continue" }
-        if startTime == nil { return "You forgot to enter start time" }
-        return nil
-    }
-    
     // MARK: - Setup Methods
     
+    private func setupData() {
+        if let activity = activity {
+            dataView.selectedName.value = activity.name
+            dataView.selectedBasis.value = activity.activityBasis()
+            dataView.selectedStartTime.value = activity.timing.startTime
+            dataView.selectedDuration.value = activity.timing.duration.integerValue
+            // TODO: update when notification property will be in activity
+            // dataView.selectedNotifications.value = activity.
+            
+            timeSaver.timeToSave.value = activity.timing.timeToSave.integerValue
+        }
+    }
+    
     private func setupDesign() {
-        machine = StateMachine(withState: .NoData, delegate: self)
+        let initialState: EditActivityState = activity == nil ? .NoData : .FullHouse
+        machine = StateMachine(withState: initialState, delegate: self)
+        
         updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
         
         if name == nil {
@@ -139,6 +164,8 @@ class EditActivityViewModel {
         observeExpandedViewProperties()
         observeTimeSaverValue()
     }
+    
+    // MARK: - Private Methods
     
     private func observeTimeSaverValue() {
         timeSaver.timeToSave
@@ -231,6 +258,13 @@ class EditActivityViewModel {
     private func setupTimeSaverVisability(forState state: StateType) {
         let shouldNotShow = state == .NoData || state == .AddBasis || state == .AddName || state == .AddStartTime
         timeSaver.alpha = shouldNotShow ? 0.0 : 1.0
+    }
+    
+    private func missingDataString() -> String? {
+        if name == nil { return "Name is missing!" }
+        if basis == nil { return "Please, select basis to continue" }
+        if startTime == nil { return "You forgot to enter start time" }
+        return nil
     }
 }
 

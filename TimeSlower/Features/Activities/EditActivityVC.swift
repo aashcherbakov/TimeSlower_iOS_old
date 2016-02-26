@@ -42,7 +42,10 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     private func setupData() {
-        viewModel = EditActivityViewModel(withDataView: editingDataView, timeSaver: timeSaver)
+        viewModel = EditActivityViewModel(
+            withDataView: editingDataView,
+            timeSaver: timeSaver,
+            activity: activity)
     }
     
     private func setupDesign() {
@@ -118,6 +121,8 @@ class EditActivityVC: EditActivityVCConstraints {
         activity?.timing.finishTime = activity!.timing.startTime
             .dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
         activity?.timing.timeToSave = NSNumber(integer: model.timeToSave)
+        
+        // TODO: notification on/off needs to be saved somehow
         
         do {
             try activity!.managedObjectContext!.save()
