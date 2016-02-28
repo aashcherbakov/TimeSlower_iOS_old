@@ -769,6 +769,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F0BE55F31C7FE7C800404301 /* Edit Data */ = {
+			isa = PBXGroup;
+			children = (
+				F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */,
+				F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */,
+			);
+			name = "Edit Data";
+			sourceTree = "<group>";
+		};
 		F0C2F6141C67F3D5006B7D81 /* Edit Basis */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,8 +923,7 @@
 		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */,
-				F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */,
+				F0BE55F31C7FE7C800404301 /* Edit Data */,
 				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
 				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
 				F0495C371C6C21FB00AA746A /* Edit StartTime */,

@@ -135,13 +135,7 @@ class EditActivityViewModel {
     
     private func setupData() {
         if let activity = activity {
-            dataView.selectedName.value = activity.name
-            dataView.selectedBasis.value = activity.activityBasis()
-            dataView.selectedStartTime.value = activity.timing.startTime
-            dataView.selectedDuration.value = activity.timing.duration.integerValue
-            // TODO: update when notification property will be in activity
-            // dataView.selectedNotifications.value = activity.
-            
+            dataView.setupWith(activity: activity)
             timeSaver.timeToSave.value = activity.timing.timeToSave.integerValue
         }
     }
@@ -149,7 +143,6 @@ class EditActivityViewModel {
     private func setupDesign() {
         let initialState: EditActivityState = activity == nil ? .NoData : .FullHouse
         machine = StateMachine(withState: initialState, delegate: self)
-        
         updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
         
         if name == nil {
@@ -160,21 +153,18 @@ class EditActivityViewModel {
     }
     
     private func setupEvents() {
-        observeDataViewSelectedValues()
-        observeExpandedViewProperties()
+        observeSelectedName()
+        observeSelectedBasis()
+        observeSelectedStartTime()
+        observeSelectedDuration()
+        observeSelectedNotification()
         observeTimeSaverValue()
+        observeExpandedViewProperties()
     }
     
     // MARK: - Private Methods
     
-    private func observeTimeSaverValue() {
-        timeSaver.timeToSave
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeToSave = minutes
-            }.addDisposableTo(disposableBag)
-    }
-    
-    private func observeDataViewSelectedValues() {
+    private func observeSelectedName() {
         dataView.selectedName
             .subscribeNext { [weak self] (name) -> Void in
                 if name.characters.count > 0 {
@@ -186,7 +176,9 @@ class EditActivityViewModel {
                     }
                 }
             }.addDisposableTo(disposableBag)
-        
+    }
+    
+    private func observeSelectedBasis() {
         dataView.selectedBasis
             .subscribeNext { [weak self] (basis) -> Void in
                 if let basis = basis {
@@ -198,14 +190,18 @@ class EditActivityViewModel {
                     }
                 }
             }.addDisposableTo(disposableBag)
-        
+    }
+    
+    private func observeSelectedStartTime() {
         dataView.selectedStartTime
             .subscribeNext { [weak self] (date) -> Void in
                 if let date = date {
                     self?.startTime = date
                 }
             }.addDisposableTo(disposableBag)
-        
+    }
+
+    private func observeSelectedDuration() {
         dataView.selectedDuration
             .subscribeNext { [weak self] (duration) -> Void in
                 if let duration = duration {
@@ -213,10 +209,20 @@ class EditActivityViewModel {
                     self?.timeSaver.activityDuration.value = duration
                 }
             }.addDisposableTo(disposableBag)
-        
+    }
+    
+    private func observeSelectedNotification() {
         dataView.selectedNotifications
             .subscribeNext { [weak self] (enabled) -> Void in
                 self?.notificationsOn = enabled
+            }.addDisposableTo(disposableBag)
+
+    }
+    
+    private func observeTimeSaverValue() {
+        timeSaver.timeToSave
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.timeToSave = minutes
             }.addDisposableTo(disposableBag)
     }
     
