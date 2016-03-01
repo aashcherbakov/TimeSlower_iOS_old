@@ -54,11 +54,14 @@ class MainScreenVC: MainScreenVCConstraints {
     var numberOfPages = 4
     var timer: MZTimerLabel!
     
+    let transitionManager = MenuTransitionManager()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
+        transitionManager.sourceViewController = self
     }
     
     func setup() {
@@ -211,11 +214,30 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     @IBAction func onMenuButton(sender: UIButton) {
-        delegate?.toggleMenuWithDelay?(0.0)
+//        delegate?.toggleMenuWithDelay?(0.0)
+        if let menuViewController = UIStoryboard.menuViewController() {
+            menuViewController.transitioningDelegate = transitionManager
+            transitionManager.menuViewController = menuViewController
+//            navigationController?.pushViewController(menuViewController, animated: true)// presentViewController(menuViewController, animated: false, completion: nil)
+        }
+        
     }
     
     
     // MARK: - Navigation
+    
+    @IBAction func unwindToViewController (sender: UIStoryboardSegue) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "presentMenu" {
+            if let menuVC = segue.destinationViewController as? MenuVC {
+                menuVC.transitioningDelegate = transitionManager
+                transitionManager.menuViewController = menuVC
+            }
+        }
+    }
     
     private func showActivityStatsViewController() {
         if let activityStatsVC = activityStoryboard.instantiateViewControllerWithIdentifier(ActivityStatsVC.className) as? ActivityStatsVC {

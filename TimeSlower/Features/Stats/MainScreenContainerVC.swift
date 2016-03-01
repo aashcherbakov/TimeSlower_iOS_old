@@ -20,8 +20,11 @@ class MainScreenContainerVC: UIViewController {
     }
     
     var mainNavigationController: UINavigationController!
+    
     var mainScreenController: MainScreenVC!
+    
     var menuViewController: MenuVC?
+    
     var currentState: SlideOutState = .Default {
         didSet {
             let shouldShowShadow = currentState != .Default
@@ -99,16 +102,6 @@ extension MainScreenContainerVC: MainScreenVCDelegate {
     func showShadowForMainVC(shouldShow: Bool) {
         mainNavigationController.view.layer.shadowOpacity = shouldShow ? 0.8 : 0
     }
-    
 }
 
-extension UIStoryboard {
-    
-    class func menuViewController() -> MenuVC? {
-        return UIStoryboard(name: "Menu", bundle: nil).instantiateViewControllerWithIdentifier("MenuViewController") as? MenuVC
-    }
-    
-    class func mainScreenVC() -> MainScreenVC? {
-        return UIStoryboard(name: "Stats", bundle: nil).instantiateViewControllerWithIdentifier("MainScreenVC") as? MainScreenVC
-    }
-}
+
