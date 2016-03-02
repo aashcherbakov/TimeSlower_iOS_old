@@ -227,7 +227,6 @@ class MainScreenVC: MainScreenVCConstraints {
     // MARK: - Navigation
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue) {
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

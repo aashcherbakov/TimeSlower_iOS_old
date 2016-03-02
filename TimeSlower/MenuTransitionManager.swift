@@ -108,7 +108,7 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     }
     
     private func finishTransition(withProgress progress: CGFloat, direction: TransitionDirection) {
-        let minTransition: CGFloat = direction == .Onstage ? 0.3 : 0.4
+        let minTransition: CGFloat = direction == .Onstage ? 0.3 : 0.1
         
         if progress > minTransition {
             finishInteractiveTransition()
@@ -160,10 +160,10 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
         duration: NSTimeInterval, menuView: UIView, topView: UIView, isPresenting: Bool) {
             
             UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.2, options: [],
-                animations: { [unowned self] in
-                    self.performViewTransformations(ifPresenting: isPresenting, menuView: menuView, topView: topView)
-                }, completion: { [unowned self] finished in
-                    self.completeTransition(inContext: transitionContext, isPresenting: isPresenting)
+                animations: { [weak self] in
+                    self?.performViewTransformations(ifPresenting: isPresenting, menuView: menuView, topView: topView)
+                }, completion: { [weak self] finished in
+                    self?.completeInteractiveTransition(inContext: transitionContext, isPresenting: isPresenting)
                 })
     }
     
@@ -188,25 +188,27 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
     
     // MARK: - Transition Context manipulations
     
-    private func completeTransition(inContext transitionContext: UIViewControllerContextTransitioning, isPresenting: Bool) {
+    private func completeInteractiveTransition(inContext transitionContext: UIViewControllerContextTransitioning, isPresenting: Bool) {
         guard let controllers = self.controllersFromContext(transitionContext) else { return }
         
         if transitionContext.transitionWasCancelled() {
-            transitionContext.completeTransition(false)
             controllers.top.view.userInteractionEnabled = true
             controllers.destination.view.userInteractionEnabled = false
+            transitionContext.completeTransition(false)
             UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
         } else {
-            transitionContext.completeTransition(true)
             controllers.top.view.userInteractionEnabled = false
             controllers.destination.view.userInteractionEnabled = true
+            transitionContext.completeTransition(true)
             UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
-            
-            // fix for bug when second view dissapears from screen
-            // use either that or adjust transform of the menu
-            if isPresenting {
-                UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
-            }
+        }
+        
+        // fix for bug when second view dissapears from screen
+        // use either that or adjust transform of the menu
+        if isPresenting {
+            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
+        } else {
+            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
         }
     }
     
