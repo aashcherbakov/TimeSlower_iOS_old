@@ -54,11 +54,14 @@ class MainScreenVC: MainScreenVCConstraints {
     var numberOfPages = 4
     var timer: MZTimerLabel!
     
+    let transitionManager = MenuTransitionManager()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
+        transitionManager.sourceViewController = self
     }
     
     func setup() {
@@ -211,11 +214,29 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     @IBAction func onMenuButton(sender: UIButton) {
-        delegate?.toggleMenuWithDelay?(0.0)
+//        delegate?.toggleMenuWithDelay?(0.0)
+        if let menuViewController = UIStoryboard.menuViewController() {
+            menuViewController.transitioningDelegate = transitionManager
+            transitionManager.menuViewController = menuViewController
+            navigationController?.pushViewController(menuViewController, animated: true)// presentViewController(menuViewController, animated: false, completion: nil)
+        }
     }
     
     
     // MARK: - Navigation
+    
+    @IBAction func unwindToViewController (sender: UIStoryboardSegue) {
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "presentMenu" {
+            if let menuVC = segue.destinationViewController as? MenuVC {
+                menuVC.transitioningDelegate = transitionManager
+                menuVC.delegate = self
+                transitionManager.menuViewController = menuVC
+            }
+        }
+    }
     
     private func showActivityStatsViewController() {
         if let activityStatsVC = activityStoryboard.instantiateViewControllerWithIdentifier(ActivityStatsVC.className) as? ActivityStatsVC {
@@ -226,8 +247,11 @@ class MainScreenVC: MainScreenVCConstraints {
     
     func presentVCtoCreateFirstRoutine() {
         if let createActivityVC = activityStoryboard.instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
-            createActivityVC.userProfile = self.userProfile
-            presentViewController(createActivityVC, animated: false, completion: nil)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: { 
+                createActivityVC.userProfile = self.userProfile
+                self.presentViewController(createActivityVC, animated: true, completion: nil)
+            })
+            
         }
     }
     
@@ -239,15 +263,19 @@ class MainScreenVC: MainScreenVCConstraints {
     
     func presentProfileVCFromMenu() {
         if let profileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileStatsVC.className) as? ProfileStatsVC {
-            profileVC.profile = self.userProfile
-            navigationController?.pushViewController(profileVC, animated: false)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+                profileVC.profile = self.userProfile
+                self.navigationController?.pushViewController(profileVC, animated: true)
+            })
         }
     }
     
     func presentListOfActivitiesVCFromMenu() {
         if let allActivitiesVC = activityStoryboard.instantiateViewControllerWithIdentifier(ListOfActivitiesVC.className) as? ListOfActivitiesVC {
-            allActivitiesVC.profile = self.userProfile
-            navigationController?.pushViewController(allActivitiesVC, animated: false)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+                allActivitiesVC.profile = self.userProfile
+                self.navigationController?.pushViewController(allActivitiesVC, animated: true)
+            })
         }
     }
 }
