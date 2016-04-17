@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditActivityDataView" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="basisViewHeightConstraint" destination="ehS-Yk-HF1" id="EDP-SM-x8y"/>
+                <outlet property="durationViewHeightConstraint" destination="Ooo-sn-WED" id="aAm-PC-NtH"/>
+                <outlet property="editBasisView" destination="DUg-s0-B40" id="lST-Xd-oGe"/>
+                <outlet property="editDurationView" destination="5dg-pO-tEK" id="gEr-BI-GdT"/>
+                <outlet property="editNameView" destination="ASZ-lf-IEk" id="dUS-eg-HsS"/>
+                <outlet property="editNotificationView" destination="VRJ-vo-dsl" id="gKd-Jo-B6H"/>
+                <outlet property="editStartTimeView" destination="bCb-AF-xFQ" id="hY6-ZE-9Ni"/>
+                <outlet property="nameViewHeightConstraint" destination="gbO-Id-HtI" id="vue-eA-JZ3"/>
+                <outlet property="notificationViewHeightConstraint" destination="fMY-Ha-ilH" id="RGL-rf-Bsu"/>
+                <outlet property="startTimeViewHeightConstraint" destination="UoG-Pe-xlT" id="Hsh-Uc-Pey"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ks9-Tf-sql"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASZ-lf-IEk" customClass="EditActivityNameView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="gbO-Id-HtI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-s0-B40" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="120" width="600" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="ehS-Yk-HF1"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-AF-xFQ" userLabel="Edit Start Time View" customClass="EditActivityStartTimeView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="240" width="600" height="120"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="UoG-Pe-xlT"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dg-pO-tEK" customClass="EditActivityDurationView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="360" width="600" height="120"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="Ooo-sn-WED"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRJ-vo-dsl" customClass="EditActivityNotificationsView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="480" width="600" height="120"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="fMY-Ha-ilH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VRJ-vo-dsl" firstAttribute="top" secondItem="5dg-pO-tEK" secondAttribute="bottom" id="7Yo-P5-GLe"/>
+                <constraint firstItem="VRJ-vo-dsl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7ex-fh-q4n"/>
+                <constraint firstItem="5dg-pO-tEK" firstAttribute="top" secondItem="bCb-AF-xFQ" secondAttribute="bottom" id="7k1-Xm-hv4"/>
+                <constraint firstItem="bCb-AF-xFQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8Yv-zE-BMX"/>
+                <constraint firstAttribute="trailing" secondItem="5dg-pO-tEK" secondAttribute="trailing" id="BaA-sC-fpP"/>
+                <constraint firstItem="DUg-s0-B40" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CN4-qu-olh"/>
+                <constraint firstItem="bCb-AF-xFQ" firstAttribute="top" secondItem="DUg-s0-B40" secondAttribute="bottom" id="Elg-5O-Xh5"/>
+                <constraint firstItem="ASZ-lf-IEk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NQF-qr-DVz"/>
+                <constraint firstItem="5dg-pO-tEK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PuT-xd-h1u"/>
+                <constraint firstItem="5dg-pO-tEK" firstAttribute="top" secondItem="bCb-AF-xFQ" secondAttribute="bottom" id="Q7e-x7-Kzs"/>
+                <constraint firstItem="ASZ-lf-IEk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VF5-D4-CP2"/>
+                <constraint firstItem="bCb-AF-xFQ" firstAttribute="top" secondItem="DUg-s0-B40" secondAttribute="bottom" id="VPE-VR-40U"/>
+                <constraint firstAttribute="trailing" secondItem="VRJ-vo-dsl" secondAttribute="trailing" id="Vgh-m6-YLu"/>
+                <constraint firstItem="DUg-s0-B40" firstAttribute="top" secondItem="ASZ-lf-IEk" secondAttribute="bottom" id="ZjA-2C-gBC"/>
+                <constraint firstAttribute="trailing" secondItem="DUg-s0-B40" secondAttribute="trailing" id="er0-RZ-qGs"/>
+                <constraint firstAttribute="trailing" secondItem="bCb-AF-xFQ" secondAttribute="trailing" id="ppM-St-vSc"/>
+                <constraint firstAttribute="trailing" secondItem="ASZ-lf-IEk" secondAttribute="trailing" id="wOR-Md-Ids"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+    </objects>
+</document>

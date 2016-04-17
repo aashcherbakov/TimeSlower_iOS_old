@@ -15,11 +15,11 @@ import RxCocoa
 class EditActivityVC: EditActivityVCConstraints {
 
     @IBOutlet weak var timeSaver: TimeSaver!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editingDataView: EditActivityDataView!
     
     var selectedBasis: ActivityBasis?
     var userProfile: Profile?
-//    var activity: Activity?
+    var activity: Activity?
     
     private var selectedIndexPath: NSIndexPath?
     
@@ -35,31 +35,34 @@ class EditActivityVC: EditActivityVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModel()
-
+        
+        setupData()
         setupDesign()
+        setupEvents()
     }
     
-    private func bindViewModel() {
-        viewModel = EditActivityViewModel(withTableView: tableView, timeSaver: timeSaver)
-        
-        viewModel?.updatedContentSizeHeight
-            .subscribeNext { [weak self] (height) -> Void in
-                self?.topWhiteViewHeight.constant = height + 24
-                self?.animateConstraintChanges()
-            }
-            .addDisposableTo(disposableBag)
+    private func setupData() {
+        viewModel = EditActivityViewModel(
+            withDataView: editingDataView,
+            timeSaver: timeSaver,
+            activity: activity)
     }
     
     private func setupDesign() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.registerNib(UINib(nibName: EditActivityNameCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNameCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityBasisCell.className, bundle: nil), forCellReuseIdentifier: EditActivityBasisCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityStartTimeCell.className, bundle: nil), forCellReuseIdentifier: EditActivityStartTimeCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityDurationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityDurationCell.className)
-        tableView.registerNib(UINib(nibName: EditActivityNotificationCell.className, bundle: nil), forCellReuseIdentifier: EditActivityNotificationCell.className)
+        if let viewModel = viewModel {
+            topWhiteViewHeight.constant = viewModel.updatedContentSizeHeight.value + 24
+        }
+    }
+    
+    private func setupEvents() {
+        viewModel?.updatedContentSizeHeight
+            .subscribeNext { [weak self] (height) -> Void in
+                self?.topWhiteViewHeight.constant = height + 24
+                UIView.animateWithDuration(0.3) {
+                    self?.view.layoutIfNeeded()
+                }
+            }
+            .addDisposableTo(disposableBag)
     }
     
     //MARK: - Action
@@ -73,14 +76,20 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     @IBAction func doneButtonPressed() {
-        let isItSafe = allDataEntered()
+        guard let viewModel = viewModel else { return }
         
-        if isItSafe.0 {
-            saveActivity()
-            showStatsInActivityMotivationVC()
-            
+        let dataEntered = viewModel.isDataEntered()
+        if let missingData = dataEntered.missingData {
+            alertUserOnMissingData(message: missingData)
         } else {
-            alertUserOnMissingData(message: isItSafe.1)
+            if viewModel.isEditingAnyField() {
+                viewModel.resetEditingState()
+            } else {
+                if let model = dataEntered.model {
+                    saveActivity(withBlankModel: model)
+                    showStatsInActivityMotivationVC()
+                }
+            }
         }
     }
     
@@ -92,36 +101,28 @@ class EditActivityVC: EditActivityVCConstraints {
         }
     }
     
-    func allDataEntered() -> (Bool, String) {
-//        if textField.text == "" {
-//            return (false, "Activity has no name!")
-//        }
-//        if startTimeValueLabel.text == "" {
-//            return (false, "Start time is not selected!")
-//        }
-        return (true, "")
-    }
-    
     func alertUserOnMissingData(message message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Oops!", message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }
     
     
-    func saveActivity() {
+    func saveActivity(withBlankModel model: ActivityBlankModel) {
         if activity == nil {
             let newActivity = Activity.newActivityForProfile(userProfile!, ofType: .Routine)
             activity = newActivity
         }
         
-//        activity?.name = textField.text!
-//        let selectedBasis = ActivityBasis(rawValue:basisSelector.selectedSegmentIndex!)
-//        activity?.basis = Activity.basisWithEnum(selectedBasis!)
-//        activity?.timing.startTime = Timing.updateTimeForToday(datePicker.date)
-//        activity?.timing.duration = NSNumber(double: activityDuration)
-//        activity?.timing.finishTime = activity!.timing.startTime.dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
-//        activity?.timing.timeToSave = NSNumber(float: timeSaver.slider.value)
+        activity?.name = model.name
+        activity?.basis = Activity.basisWithEnum(model.basis)
+        activity?.timing.startTime = Timing.updateTimeForToday(model.startTime)
+        activity?.timing.duration = NSNumber(integer: model.duration)
+        activity?.timing.finishTime = activity!.timing.startTime
+            .dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
+        activity?.timing.timeToSave = NSNumber(integer: model.timeToSave)
+        
+        // TODO: notification on/off needs to be saved somehow
         
         do {
             try activity!.managedObjectContext!.save()
@@ -129,11 +130,9 @@ class EditActivityVC: EditActivityVCConstraints {
             print("Could not save: \(error)") }
         
         activity?.scheduleDefaultStartNotification()
-        print("Created activity description: \(activity!)")
     }
     
     // MARK: - Navigation
-
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -150,29 +149,4 @@ class EditActivityVC: EditActivityVCConstraints {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
-
-// MARK: - UITableViewDataSource
-
-extension EditActivityVC: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = viewModel?.cellForRowAtIndexPath(indexPath) {
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension EditActivityVC: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let viewModel = viewModel else { return 0 }
-        return viewModel.heightForRow(indexPath)
-    }
-}
-
 

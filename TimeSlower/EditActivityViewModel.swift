@@ -10,6 +10,46 @@ import Foundation
 import TimeSlowerKit
 import RxSwift
 
+/**
+ State of ediding an activity
+ 
+ - NoData:            Only name filed is shown with placeholder
+ - Name:              Name field and basis field (user entered/entering name)
+ - BasisAndStartTime: Name, basis and start time field shown (user selected basis)
+ - FullHouse:         All fields are displayed
+ */
+enum EditActivityState {
+    case NoData
+    case AddName
+    case AddBasis
+    case AddStartTime
+    case EditName
+    case EditBasis
+    case EditStartTime
+    case FullHouse
+}
+
+/**
+ *  Struct that holds data for creating/editing activity
+ */
+struct ActivityBlankModel {
+    var name: String
+    var basis: ActivityBasis
+    var startTime: NSDate
+    var duration: Int
+    var notificationsOn: Bool
+    var timeToSave: Int
+    
+    init(withName name: String, basis: ActivityBasis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
+        self.name = name
+        self.basis = basis
+        self.startTime = startTime
+        self.duration = duration
+        self.notificationsOn = notificationsOn
+        self.timeToSave = timeToSave
+    }
+}
+
 /// View Model for editing/creating activity
 class EditActivityViewModel {
     
@@ -20,40 +60,15 @@ class EditActivityViewModel {
         static let startTimeExpandedHeight: CGFloat = 218
     }
     
-    /**
-     State of ediding an activity
-     
-     - NoData:            Only name filed is shown with placeholder
-     - Name:              Name field and basis field (user entered/entering name)
-     - BasisAndStartTime: Name, basis and start time field shown (user selected basis)
-     - FullHouse:         All fields are displayed
-     */
-    enum EditActivityState {
-        case NoData
-        case Name
-        case Basis
-        case BasisAndDays
-        case BasisAndStartTime
-        case StartTime
-        case FullHouse
-    }
-    
-    enum EditActivityCellType: Int {
-        case Name = 0
-        case Basis
-        case StartTime
-        case Duration
-        case Notification
-    }
-    
     typealias StateType = EditActivityState
     
+    /// Height of all views of EditActivityDataView combined. Used to update top white view height
     var updatedContentSizeHeight = Variable<CGFloat>(0)
     
     private var machine: StateMachine<EditActivityViewModel>!
     private var disposableBag = DisposeBag()
 
-    private(set) var tableView: UITableView
+    private(set) var dataView: EditActivityDataView
     private(set) var timeSaver: TimeSaver
     
     private var name: String?
@@ -62,217 +77,200 @@ class EditActivityViewModel {
     private var notificationsOn: Bool?
     private var duration: Int?
     private var timeToSave: Int?
+    private var activity: Activity?
     
-    init(withTableView tableView: UITableView, timeSaver: TimeSaver) {
-        self.tableView = tableView
+    init(withDataView dataView: EditActivityDataView, timeSaver: TimeSaver, activity: Activity?) {
+        self.dataView = dataView
         self.timeSaver = timeSaver
+        self.activity = activity
         
+        setupData()
+        setupDesign()
         setupEvents()
+    }
+    
+    // MARK: - Internal Methods
+    
+    /**
+    Method do find out if any views are in expanded state (are editing)
+    
+    - returns: true if any view is being edited now
+    */
+    func isEditingAnyField() -> Bool {
+        return machine.state != .FullHouse
+    }
+    
+    /**
+     Sets editing state to .FullHouse - all views are of the same height, none is expanded
+     */
+    func resetEditingState() {
+        if machine.state != .AddName && machine.state != .AddBasis && machine.state != .AddStartTime {
+            machine.state = .FullHouse
+        }
+    }
+    
+    /**
+     Method to determine if data entered in both EditActivityDataView and TimeSaver are valid
+     
+     - returns: ActivityBlankModel if data is entered or String with message which data is missing
+     */
+    func isDataEntered() -> (model: ActivityBlankModel?, missingData: String?) {
+        if let name = name, basis = basis, startTime = startTime,
+            notificationsOn = notificationsOn, duration = duration,
+            timeToSave = timeToSave where name.characters.count > 0 {
+                let model = ActivityBlankModel(
+                    withName: name,
+                    basis: basis,
+                    startTime: startTime,
+                    duration: duration,
+                    notificationsOn: notificationsOn,
+                    timeToSave: timeToSave)
+                return (model, nil)
+        } else {
+            return (nil, missingDataString())
+        }
     }
     
     // MARK: - Setup Methods
     
+    private func setupData() {
+        if let activity = activity {
+            dataView.setupWith(activity: activity)
+            timeSaver.timeToSave.value = activity.timing.timeToSave.integerValue
+        }
+    }
+    
+    private func setupDesign() {
+        let initialState: EditActivityState = activity == nil ? .NoData : .FullHouse
+        machine = StateMachine(withState: initialState, delegate: self)
+        updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
+        
+        if name == nil {
+            machine.state = .AddName
+        }
+        
+        setupTimeSaverVisability(forState: machine.state)
+    }
+    
     private func setupEvents() {
-        machine = StateMachine(withState: .NoData, delegate: self)
-
-        timeSaver.timeToSave
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeToSave = minutes
-            }
-            .addDisposableTo(disposableBag)
-    }
-    
-    /**
-     Returns height for given index path due to type of cell and current editing state
-     
-     - parameter indexPath: NSIndexPath from table view delegate
-     
-     - returns: CGFloat for height
-     */
-    func heightForRow(indexPath: NSIndexPath) -> CGFloat {
-        guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return 0.0 }
-        
-        switch (cellType) {
-        case .Name: return heightForNameCell()
-        case .Basis: return heightForBasisCell()
-        case .StartTime: return heightForStartTimeCell()
-        case .Duration: return heightForDurationCell()
-        case .Notification: return heightForNotificationCell()
-        }
-    }
-    
-    /**
-     Method to retrieve specific cell for given index path row
-     
-     - parameter indexPath: NSIndexPath form table view data source
-     
-     - returns: UITableViewCell subclass specific to the row.
-     */
-    func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cellType = EditActivityCellType(rawValue: indexPath.row) else { return UITableViewCell() }
-        var cell = UITableViewCell()
-        switch cellType {
-        case .Name: cell = nameCell()
-        case .Basis: cell = basisCell()
-        case .StartTime: cell = startTimeCell()
-        case .Duration: cell = durationCell()
-        case .Notification: cell = notificationCell()
-        }
-        
-        return cell
+        observeSelectedName()
+        observeSelectedBasis()
+        observeSelectedStartTime()
+        observeSelectedDuration()
+        observeSelectedNotification()
+        observeTimeSaverValue()
+        observeExpandedViewProperties()
     }
     
     // MARK: - Private Methods
     
-    private func nameCell() -> EditActivityNameCell {
-        if let nameCell = tableView.dequeueReusableCellWithIdentifier(EditActivityNameCell.className) as? EditActivityNameCell {
-            
-            nameCell.selectedName
-                .subscribeNext { [weak self] (name) -> Void in
-                    if name.characters.count > 0 {
-                        self?.name = name
-                        self?.machine.state = .Basis
+    private func observeSelectedName() {
+        dataView.selectedName
+            .subscribeNext { [weak self] (name) -> Void in
+                if name.characters.count > 0 {
+                    self?.name = name
+                    if self?.machine.state == .AddName {
+                        self?.machine.state = .AddBasis
+                    } else {
+                        self?.machine.state = .FullHouse
                     }
                 }
-                .addDisposableTo(disposableBag)
-            
-            nameCell.textFieldIsEditing
-                .subscribeNext { [weak self] (editing) -> Void in
-                    if editing {
-                        self?.machine.state = .Name
-                    }
-                }
-                .addDisposableTo(disposableBag)
-            
-            return nameCell
-        }
-        return EditActivityNameCell()
+            }.addDisposableTo(disposableBag)
     }
     
-    private func basisCell() -> EditActivityBasisCell {
-        if let basisCell = tableView.dequeueReusableCellWithIdentifier(EditActivityBasisCell.className) as? EditActivityBasisCell {
-            basisCell.expanded
-                .subscribeNext { [weak self] (expanded) -> Void in
-                    self?.machine.state = expanded ? .BasisAndDays : .BasisAndStartTime
-                }
-                .addDisposableTo(disposableBag)
-            
-            basisCell.selectedBasis
-                .subscribeNext { [weak self] (basis) -> Void in
+    private func observeSelectedBasis() {
+        dataView.selectedBasis
+            .subscribeNext { [weak self] (basis) -> Void in
+                if let basis = basis {
                     self?.basis = basis
+                    if self?.startTime != nil {
+                        self?.machine.state = .FullHouse
+                    } else {
+                        self?.machine.state = .AddStartTime
+                    }
                 }
-                .addDisposableTo(disposableBag)
-            
-            basisCell.daySelector.backButton.rx_tap
-                .subscribeNext { [weak self] () -> Void in
-                    self?.machine?.state = .BasisAndStartTime
-                }
-                .addDisposableTo(disposableBag)
-            
-            return basisCell
-        }
-        return EditActivityBasisCell()
+            }.addDisposableTo(disposableBag)
     }
     
-    private func startTimeCell() -> EditActivityStartTimeCell {
-        if let startTimeCell = tableView.dequeueReusableCellWithIdentifier(EditActivityStartTimeCell.className) as? EditActivityStartTimeCell {
-            startTimeCell.selectedDate
-                .subscribeNext { [weak self] (date) -> Void in
+    private func observeSelectedStartTime() {
+        dataView.selectedStartTime
+            .subscribeNext { [weak self] (date) -> Void in
+                if let date = date {
                     self?.startTime = date
                 }
-                .addDisposableTo(disposableBag)
-            
-            startTimeCell.expanded
-                .subscribeNext { [weak self] (expanded) -> Void in
-                    self?.machine.state = expanded ? .StartTime : .FullHouse
+            }.addDisposableTo(disposableBag)
+    }
+
+    private func observeSelectedDuration() {
+        dataView.selectedDuration
+            .subscribeNext { [weak self] (duration) -> Void in
+                if let duration = duration {
+                    self?.duration = duration
+                    self?.timeSaver.activityDuration.value = duration
                 }
-                .addDisposableTo(disposableBag)
-            
-            return startTimeCell
-        }
+            }.addDisposableTo(disposableBag)
+    }
+    
+    private func observeSelectedNotification() {
+        dataView.selectedNotifications
+            .subscribeNext { [weak self] (enabled) -> Void in
+                self?.notificationsOn = enabled
+            }.addDisposableTo(disposableBag)
+
+    }
+    
+    private func observeTimeSaverValue() {
+        timeSaver.timeToSave
+            .subscribeNext { [weak self] (minutes) -> Void in
+                self?.timeToSave = minutes
+            }.addDisposableTo(disposableBag)
+    }
+    
+    private func observeExpandedViewProperties() {
+        dataView.expandedName
+            .subscribeNext { [weak self] (expanded) -> Void in
+                if let expanded = expanded {
+                    self?.machine.state = expanded ? .EditName : .FullHouse
+                }
+            }.addDisposableTo(disposableBag)
         
-        return EditActivityStartTimeCell()
-    }
-    
-    private func durationCell() -> EditActivityDurationCell {
-        if let durationCell = tableView.dequeueReusableCellWithIdentifier(EditActivityDurationCell.className) as? EditActivityDurationCell {
+        dataView.expandedStartTime
+            .subscribeNext { [weak self] (expanded) -> Void in
+                if let expanded = expanded {
+                    self?.machine.state = expanded ? .EditStartTime : .FullHouse
+                }
+            }.addDisposableTo(disposableBag)
         
-            durationCell.activityDuration
-                .subscribeNext { [weak self] (duration) -> Void in
-                    if let duration = duration {
-                        self?.duration = duration
-                        self?.timeSaver.activityDuration.value = duration
-                    }
+        dataView.expandedBasis
+            .subscribeNext { [weak self] (expanded) -> Void in
+                if let expanded = expanded {
+                    self?.machine.state = expanded ? .EditBasis : .FullHouse
                 }
-                .addDisposableTo(disposableBag)
-            
-            return durationCell
-        }
-        return EditActivityDurationCell()
-    }
-    
-    private func notificationCell() -> EditActivityNotificationCell {
-        if let notificationCell = tableView.dequeueReusableCellWithIdentifier(EditActivityNotificationCell.className) as? EditActivityNotificationCell {
-            
-            notificationCell.notificationsOn
-                .subscribeNext { [weak self] (on) -> Void in
-                    self?.notificationsOn = on
-                }
-                .addDisposableTo(disposableBag)
-            return notificationCell
-        }
-        return EditActivityNotificationCell()
-    }
-    
-    // MARK: - Private cell height helpers
-    
-    private func heightForStartTimeCell() -> CGFloat {
-        switch machine.state {
-        case .Name, .Basis, .NoData: return 0
-        case .StartTime: return Constants.startTimeExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForNameCell() -> CGFloat {
-        switch machine.state {
-        case .Name: return Constants.nameCellExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForBasisCell() -> CGFloat {
-        switch machine.state {
-        case .Name: return 0
-        case .BasisAndDays: return Constants.basisCellExpandedHeight
-        default: return Constants.defaultCellHeight
-        }
-    }
-    
-    private func heightForDurationCell() -> CGFloat {
-        switch machine.state {
-        case .FullHouse: return Constants.defaultCellHeight
-        default: return 0
-        }
-    }
-    
-    private func heightForNotificationCell() -> CGFloat {
-        switch machine.state {
-        case .FullHouse: return Constants.defaultCellHeight
-        default: return 0
-        }
+            }.addDisposableTo(disposableBag)
     }
     
     private func heightForTableViewInState(state: StateType) -> CGFloat {
         switch state {
         case .NoData: return Constants.defaultCellHeight
-        case .Name: return Constants.nameCellExpandedHeight
-        case .Basis: return Constants.defaultCellHeight * 2
-        case .BasisAndDays: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
-        case .BasisAndStartTime: return Constants.basisCellExpandedHeight + Constants.defaultCellHeight * 2
+        case .AddName, .EditName: return Constants.nameCellExpandedHeight
+        case .AddBasis: return Constants.defaultCellHeight + Constants.basisCellExpandedHeight
+        case .AddStartTime: return Constants.defaultCellHeight * 2 + Constants.basisCellExpandedHeight
+        case .EditStartTime: return Constants.startTimeExpandedHeight + Constants.defaultCellHeight * 2
         case .FullHouse: return Constants.defaultCellHeight * 5
-        case .StartTime: return Constants.startTimeExpandedHeight + Constants.defaultCellHeight * 2
+        case .EditBasis: return Constants.defaultCellHeight * 4 + Constants.basisCellExpandedHeight
         }
+    }
+    
+    private func setupTimeSaverVisability(forState state: StateType) {
+        let shouldNotShow = state == .NoData || state == .AddBasis || state == .AddName || state == .AddStartTime
+        timeSaver.alpha = shouldNotShow ? 0.0 : 1.0
+    }
+    
+    private func missingDataString() -> String? {
+        if name == nil { return "Name is missing!" }
+        if basis == nil { return "Please, select basis to continue" }
+        if startTime == nil { return "You forgot to enter start time" }
+        return nil
     }
 }
 
@@ -281,32 +279,33 @@ extension EditActivityViewModel : StateMachineDelegate {
     
     func shouldTransitionFrom(from: StateType, to: StateType) -> Bool {
         switch (from, to) {
-        case (.NoData, .Name): return true
-        case (.Name, .Basis): return true
-        case (.Basis, .BasisAndDays): return true
-        case (.Basis, .Name): return true
-        case (.BasisAndDays, .Name): return true
-        case (.BasisAndDays, .BasisAndStartTime): return true
-        case (.BasisAndDays, .StartTime): return true
-        case (.BasisAndStartTime, .BasisAndDays): return true
-        case (.BasisAndStartTime, .StartTime): return true
-        case (.BasisAndStartTime, .Name): return true
-        case (.StartTime, .BasisAndStartTime): return true
-        case (.StartTime, .BasisAndDays): return true
-        case (.StartTime, .FullHouse):return true
-        case (.FullHouse, .StartTime): return true
-        case (.FullHouse, .Name): return true
-        case (.FullHouse, .BasisAndDays): return true
-        case (.BasisAndStartTime, .FullHouse): return true
+        case (.NoData, .AddName): return true
+        case (.AddName, .AddBasis): return true
+        case (.AddBasis, .AddStartTime): return true
+        case (.AddStartTime, .EditStartTime): return true
+            
+        case (.EditBasis, .EditStartTime): return true
+        case (.EditBasis, .EditName): return true
+            
+        case (.EditStartTime, .EditName): return true
+        case (.EditStartTime, .EditBasis): return true
+            
+        case (.EditName, .FullHouse):return true
+        case (.EditBasis, .FullHouse):return true
+        case (.EditStartTime, .FullHouse):return true
+            
+        case (.FullHouse, .EditName): return true
+        case (.FullHouse, .EditBasis): return true
+        case (.FullHouse, .EditStartTime): return true
+            
         default: return false
         }
     }
     
     func didTransitionFrom(from: StateType, to: StateType) {
         print("Transition from \(from) to \(to)")
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
-        updatedContentSizeHeight.value = heightForTableViewInState(machine.state)
+        dataView.updateDesignForState(to)
+        updatedContentSizeHeight.value = heightForTableViewInState(to)
+        setupTimeSaverVisability(forState: to)
     }
 }

@@ -38,7 +38,7 @@ class EditActivityVCConstraints: UIViewController {
     @IBOutlet weak var buttonDownOffset: NSLayoutConstraint!
 
     
-    var activity: Activity?
+//    var activity: Activity?
     var editingState: EditingState = .Default { didSet { animateConstraintChanges() } }
     var defaultConstraintsSet = false
 
@@ -46,9 +46,9 @@ class EditActivityVCConstraints: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if activity == nil {
-            editingState = .NameOnly
-        }
+//        if activity == nil {
+//            editingState = .NameOnly
+//        }
     }
     
     override func updateViewConstraints() {

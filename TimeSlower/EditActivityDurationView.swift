@@ -1,8 +1,8 @@
 //
-//  EditActivityDurationCell.swift
+//  EditActivityDurationView.swift
 //  TimeSlower
 //
-//  Created by Oleksandr Shcherbakov on 2/13/16.
+//  Created by Oleksandr Shcherbakov on 2/21/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
@@ -10,16 +10,20 @@ import UIKit
 import RxSwift
 
 /// UITableViewCell subclass to edit duration of activity
-class EditActivityDurationCell: UITableViewCell {
+class EditActivityDurationView: UIView {
     
     private struct Constants {
         static let defaultDuration = 30
     }
-
+    
     // MARK: - Properties
+    
     
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var view: UIView!
+    
+    @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
     /// Duration of activity in minutes. Observable.
@@ -28,11 +32,18 @@ class EditActivityDurationCell: UITableViewCell {
     
     // MARK: - Overriden Methods
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupXib()
+        
         setupDesign()
         setupEvents()
+    }
+    
+    func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityDurationView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
     }
     
     // MARK: - Actions

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="basisSelector" destination="1po-pk-MS3" id="mA6-GK-dpe"/>
+                <outlet property="daySelector" destination="6Kl-pX-naX" id="LJ4-q7-Nqf"/>
+                <outlet property="separatorLineHeight" destination="cJL-5f-yL3" id="8yM-Rw-HFz"/>
+                <outlet property="textFieldView" destination="ZVu-7b-ncZ" id="mUS-lq-YEO"/>
+                <outlet property="textFieldViewHeightConstraint" destination="RAL-dc-HMT" id="5VI-wz-Kj3"/>
+                <outlet property="view" destination="iN0-l3-epB" id="TjB-i0-V8z"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVu-7b-ncZ" userLabel="Textfield View" customClass="TextfieldView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="RAL-dc-HMT"/>
+                    </constraints>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1po-pk-MS3" customClass="BasisSelector" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="56" width="600" height="24"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="Sy3-A3-mDD"/>
+                    </constraints>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kl-pX-naX" customClass="DaySelector" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="ijn-Fa-fZb"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ijn-Fa-fZb"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLY-3r-8AH" userLabel="separator">
+                    <rect key="frame" x="20" y="599" width="560" height="1"/>
+                    <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="cJL-5f-yL3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pLY-3r-8AH" firstAttribute="top" secondItem="6Kl-pX-naX" secondAttribute="bottom" id="4Gz-v8-qUZ"/>
+                <constraint firstItem="1po-pk-MS3" firstAttribute="trailing" secondItem="ZVu-7b-ncZ" secondAttribute="trailing" id="9pi-ur-0DG"/>
+                <constraint firstAttribute="bottom" secondItem="6Kl-pX-naX" secondAttribute="bottom" priority="999" id="A04-XT-vEA"/>
+                <constraint firstItem="ZVu-7b-ncZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Acw-ik-mAa"/>
+                <constraint firstAttribute="trailing" secondItem="ZVu-7b-ncZ" secondAttribute="trailing" id="DD1-bH-WDB"/>
+                <constraint firstItem="pLY-3r-8AH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="T9z-cL-Par"/>
+                <constraint firstAttribute="bottom" secondItem="pLY-3r-8AH" secondAttribute="bottom" id="Z2n-BT-4hS"/>
+                <constraint firstItem="1po-pk-MS3" firstAttribute="centerX" secondItem="ZVu-7b-ncZ" secondAttribute="centerX" id="bt8-aD-DeW"/>
+                <constraint firstItem="6Kl-pX-naX" firstAttribute="top" secondItem="1po-pk-MS3" secondAttribute="bottom" id="dEM-FY-0m0"/>
+                <constraint firstItem="1po-pk-MS3" firstAttribute="leading" secondItem="ZVu-7b-ncZ" secondAttribute="leading" id="hI8-B0-axb"/>
+                <constraint firstItem="1po-pk-MS3" firstAttribute="top" secondItem="ZVu-7b-ncZ" secondAttribute="bottom" id="kBV-lg-67c"/>
+                <constraint firstItem="6Kl-pX-naX" firstAttribute="top" secondItem="1po-pk-MS3" secondAttribute="bottom" id="rUb-mq-BS9"/>
+                <constraint firstAttribute="trailing" secondItem="pLY-3r-8AH" secondAttribute="trailing" constant="20" id="t4D-hF-wi3"/>
+                <constraint firstItem="ZVu-7b-ncZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uX7-li-qB4"/>
+                <constraint firstAttribute="trailing" secondItem="6Kl-pX-naX" secondAttribute="trailing" id="vsy-3f-qgv"/>
+                <constraint firstItem="6Kl-pX-naX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yMP-lf-uNK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="dEM-FY-0m0"/>
+                    <exclude reference="4Gz-v8-qUZ"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

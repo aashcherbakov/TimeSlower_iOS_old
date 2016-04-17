@@ -1,8 +1,8 @@
 //
-//  EditActivityBasisCell.swift
+//  EditActivityBasisView.swift
 //  TimeSlower
 //
-//  Created by Oleksandr Shcherbakov on 2/7/16.
+//  Created by Oleksandr Shcherbakov on 2/20/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
@@ -13,15 +13,18 @@ import TimeSlowerKit
 /**
  UITableViewCell subclass that allows user to select activity basis.
  Includes BasisSelector and DaySelector instances.
-*/
-class EditActivityBasisCell: UITableViewCell {
-
+ */
+class EditActivityBasisView: UIView {
+    
     // MARK: - Properties
     
-    @IBOutlet weak var basisSelector: BasisSelector!
-    @IBOutlet weak var daySelector: DaySelector!
-    @IBOutlet weak var textfieldView: TextfieldView!
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
+    @IBOutlet weak var daySelector: DaySelector!
+    @IBOutlet weak var basisSelector: BasisSelector!
+    @IBOutlet weak var textFieldView: TextfieldView!
+    @IBOutlet weak var textFieldViewHeightConstraint: NSLayoutConstraint!
+    
     
     /// Variable that represents activity basis. Observable
     var selectedBasis = Variable<ActivityBasis?>(nil)
@@ -37,10 +40,17 @@ class EditActivityBasisCell: UITableViewCell {
     
     // MARK: - Overridden Methods
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupXib()
         setupEvents()
         setupDesign()
+    }
+    
+    func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityBasisView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -53,8 +63,9 @@ class EditActivityBasisCell: UITableViewCell {
     // MARK: - Setup Methods
     
     private func setupDesign() {
-        textfieldView.setup(withType: .Basis, delegate: nil)
+        textFieldView.setup(withType: .Basis, delegate: nil)
         separatorLineHeight.constant = kDefaultSeparatorHeight
+        daySelector.basisToDisplay = .NotSelected
     }
     
     private func setupEvents() {
@@ -62,8 +73,9 @@ class EditActivityBasisCell: UITableViewCell {
             .subscribeNext { [weak self] (index) -> Void in
                 if let index = index {
                     self?.daySelector.basis = ActivityBasis(rawValue: index)
+                    self?.selectedBasis.value = self?.daySelector.basis
                     if let text = self?.daySelector.basis?.description() {
-                        self?.textfieldView.setText(text)
+                        self?.textFieldView.setText(text)
                     }
                 }
             }

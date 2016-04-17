@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditActivityNameView" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="defaultActivitySelectorView" destination="ih9-kM-cOK" id="opn-bf-Abj"/>
+                <outlet property="separatorLineHeight" destination="y4y-cH-ovz" id="ywH-c9-aeA"/>
+                <outlet property="textFieldView" destination="GNK-kv-4cg" id="bAc-Ou-YfR"/>
+                <outlet property="view" destination="iN0-l3-epB" id="yQ1-N4-FwG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNK-kv-4cg" customClass="TextfieldView" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="JJd-mu-7eo"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="or select one of the suggested" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7D-dF-NGJ">
+                    <rect key="frame" x="213" y="56" width="174" height="18"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                    <color key="textColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tF-KD-N85" userLabel="separator">
+                    <rect key="frame" x="20" y="599" width="560" height="1"/>
+                    <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="y4y-cH-ovz"/>
+                    </constraints>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ih9-kM-cOK" customClass="DefaultActivitySelector" customModule="TimeSlower" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="86" width="600" height="514"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ih9-kM-cOK" secondAttribute="trailing" priority="999" id="0GI-Zx-MT8"/>
+                <constraint firstAttribute="trailing" secondItem="8tF-KD-N85" secondAttribute="trailing" constant="20" id="4u0-em-Su2"/>
+                <constraint firstItem="ih9-kM-cOK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5sx-9t-VaK"/>
+                <constraint firstItem="I7D-dF-NGJ" firstAttribute="centerX" secondItem="GNK-kv-4cg" secondAttribute="centerX" id="FYr-Sr-6BH"/>
+                <constraint firstItem="GNK-kv-4cg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GPp-F9-vaL"/>
+                <constraint firstAttribute="bottom" secondItem="ih9-kM-cOK" secondAttribute="bottom" priority="999" id="UMo-50-t5a"/>
+                <constraint firstItem="8tF-KD-N85" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="X3y-2q-BhT"/>
+                <constraint firstAttribute="bottom" secondItem="8tF-KD-N85" secondAttribute="bottom" id="Z8b-di-t7m"/>
+                <constraint firstAttribute="trailing" secondItem="GNK-kv-4cg" secondAttribute="trailing" id="cT2-iR-hAa"/>
+                <constraint firstItem="I7D-dF-NGJ" firstAttribute="top" secondItem="GNK-kv-4cg" secondAttribute="bottom" id="jyR-IX-MOh"/>
+                <constraint firstItem="GNK-kv-4cg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nh8-CR-BQ6"/>
+                <constraint firstItem="ih9-kM-cOK" firstAttribute="top" secondItem="GNK-kv-4cg" secondAttribute="bottom" constant="30" id="wTZ-rx-vMe"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+    </objects>
+</document>

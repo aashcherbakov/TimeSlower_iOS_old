@@ -1,8 +1,8 @@
 //
-//  EditActivityNotificationCell.swift
+//  File.swift
 //  TimeSlower
 //
-//  Created by Oleksandr Shcherbakov on 2/14/16.
+//  Created by Oleksandr Shcherbakov on 2/21/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
@@ -11,12 +11,14 @@ import RxSwift
 import RxCocoa
 
 /// UITableViewCell subclass to turn on/off notifications for activity
-class EditActivityNotificationCell: UITableViewCell {
-
+class EditActivityNotificationsView: UIView {
+    
     // MARK: - Properties
     
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var textfieldView: TextfieldView!
+    @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     
     /// Bool true if notification switch is on
     var notificationsOn = Variable<Bool>(true)
@@ -24,13 +26,20 @@ class EditActivityNotificationCell: UITableViewCell {
     
     // MARK: - Overridden Methods
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupXib()
         
         setupDesign()
         setupEvents()
     }
-
+    
+    func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityNotificationsView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
+    
     // MARK: - Setup Methods
     
     private func setupDesign() {
