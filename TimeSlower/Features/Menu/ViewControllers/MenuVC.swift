@@ -92,8 +92,8 @@ class MenuVC: UIViewController {
     
     @IBAction func menuOptionTapped(sender: UIButton) {
         delegate?.menuOptionSelected(sender.tag)
-        print("Selected menu option: \(sender.tag)")
     }
     
+   
     
 }

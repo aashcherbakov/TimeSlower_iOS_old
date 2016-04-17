@@ -218,9 +218,8 @@ class MainScreenVC: MainScreenVCConstraints {
         if let menuViewController = UIStoryboard.menuViewController() {
             menuViewController.transitioningDelegate = transitionManager
             transitionManager.menuViewController = menuViewController
-//            navigationController?.pushViewController(menuViewController, animated: true)// presentViewController(menuViewController, animated: false, completion: nil)
+            navigationController?.pushViewController(menuViewController, animated: true)// presentViewController(menuViewController, animated: false, completion: nil)
         }
-        
     }
     
     
@@ -233,6 +232,7 @@ class MainScreenVC: MainScreenVCConstraints {
         if segue.identifier == "presentMenu" {
             if let menuVC = segue.destinationViewController as? MenuVC {
                 menuVC.transitioningDelegate = transitionManager
+                menuVC.delegate = self
                 transitionManager.menuViewController = menuVC
             }
         }
@@ -247,8 +247,11 @@ class MainScreenVC: MainScreenVCConstraints {
     
     func presentVCtoCreateFirstRoutine() {
         if let createActivityVC = activityStoryboard.instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
-            createActivityVC.userProfile = self.userProfile
-            presentViewController(createActivityVC, animated: false, completion: nil)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: { 
+                createActivityVC.userProfile = self.userProfile
+                self.presentViewController(createActivityVC, animated: true, completion: nil)
+            })
+            
         }
     }
     
@@ -260,15 +263,19 @@ class MainScreenVC: MainScreenVCConstraints {
     
     func presentProfileVCFromMenu() {
         if let profileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileStatsVC.className) as? ProfileStatsVC {
-            profileVC.profile = self.userProfile
-            navigationController?.pushViewController(profileVC, animated: false)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+                profileVC.profile = self.userProfile
+                self.navigationController?.pushViewController(profileVC, animated: true)
+            })
         }
     }
     
     func presentListOfActivitiesVCFromMenu() {
         if let allActivitiesVC = activityStoryboard.instantiateViewControllerWithIdentifier(ListOfActivitiesVC.className) as? ListOfActivitiesVC {
-            allActivitiesVC.profile = self.userProfile
-            navigationController?.pushViewController(allActivitiesVC, animated: false)
+            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+                allActivitiesVC.profile = self.userProfile
+                self.navigationController?.pushViewController(allActivitiesVC, animated: true)
+            })
         }
     }
 }

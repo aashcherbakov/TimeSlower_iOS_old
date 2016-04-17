@@ -78,18 +78,23 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
             return
         }
 
-        switch recognizer.state {
-        case .Began:
-            interactive = true
-            presentController(forDirection: direction)
-            
-        case .Changed:
-            updateInteractiveTransition(progress)
-            
-        default: // .Canceled, .Ended etc.
-            interactive = false
-            finishTransition(withProgress: progress, direction: direction)
-        }
+        handleRecognizerState(recognizer.state, withProgress: progress, direction: direction)
+    }
+    
+    private func handleRecognizerState(state: UIGestureRecognizerState, withProgress
+        progress: CGFloat, direction: TransitionDirection) {
+            switch state {
+            case .Began:
+                interactive = true
+                presentController(forDirection: direction)
+                
+            case .Changed:
+                updateInteractiveTransition(progress)
+                
+            default: // .Canceled, .Ended etc.
+                interactive = false
+                finishTransition(withProgress: progress, direction: direction)
+            }
     }
     
     private func presentController(forDirection direction: TransitionDirection) {
@@ -134,6 +139,7 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
         
         let menuController = !presenting ? controllers.top as! MenuVC : controllers.destination as! MenuVC
         let topController = !presenting ? controllers.destination as! MainScreenVC : controllers.top as! MainScreenVC
+        topController.view.layer.shadowOpacity = 0.8
         
         let menuView = menuController.view
         let topView = topController.view
@@ -211,7 +217,7 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
             UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
         }
     }
-    
+        
     private func controllersFromContext(transitionContext: UIViewControllerContextTransitioning) ->
         (top: UIViewController, destination: UIViewController)? {
             
