@@ -64,19 +64,6 @@ class MainScreenVC: MainScreenVCConstraints {
         transitionManager.sourceViewController = self
     }
     
-    func setup() {
-        if userProfile == nil {
-            presentVCtoCreateNewProfile()
-        } else {
-            if userProfile?.allActivities().count == 0 {
-                presentVCtoCreateFirstRoutine()
-            } else {
-                setupNextActivityBlock()
-                setupPageViewController()
-            }
-        }
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if userProfile == nil { userProfile = CoreDataStack.sharedInstance.fetchProfile() }
@@ -90,6 +77,21 @@ class MainScreenVC: MainScreenVCConstraints {
             pageViewController.view.frame = CGRectMake(0, 0, topWhiteView.frame.width, topWhiteView.frame.height)
         }
     }
+    
+    func setup() {
+        if userProfile == nil {
+            presentVCtoCreateNewProfile()
+        } else {
+            if userProfile?.allActivities().count == 0 {
+                presentVCtoCreateFirstRoutine()
+            } else {
+                setupNextActivityBlock()
+                setupPageViewController()
+            }
+        }
+    }
+    
+
     
     //MARK: - Setup
     
@@ -246,19 +248,14 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func presentVCtoCreateFirstRoutine() {
-        if let createActivityVC = activityStoryboard.instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
-            presentedViewController?.dismissViewControllerAnimated(true, completion: { 
-                createActivityVC.userProfile = self.userProfile
-                self.presentViewController(createActivityVC, animated: true, completion: nil)
-            })
-            
-        }
+        let createActivityVC: EditActivityVC = ControllerFactory.createController()
+        createActivityVC.userProfile = userProfile
+        presentViewController(createActivityVC, animated: false, completion: nil)
     }
     
     func presentVCtoCreateNewProfile() {
-        if let createProfileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileEditingVC.className) as? ProfileEditingVC {
-            presentViewController(createProfileVC, animated: false, completion: nil)
-        }
+        let createProfileVC: ProfileEditingVC = ControllerFactory.createController()
+        presentViewController(createProfileVC, animated: true, completion: nil)
     }
     
     func presentProfileVCFromMenu() {
@@ -327,7 +324,6 @@ extension MainScreenVC: MenuVCDelegate {
 
         switch selectedOption {
         case .Profile: presentProfileVCFromMenu()
-        case .CreateActivity: presentVCtoCreateFirstRoutine()
         case .AllActivities: presentListOfActivitiesVCFromMenu()
         default: break
         }

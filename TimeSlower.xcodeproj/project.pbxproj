@@ -12,6 +12,7 @@
 		896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */; };
 		CBF5F4E39DEC62A7D4EE1C3F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8508602304D7139584AEE955 /* Pods.framework */; };
 		CCB8FEC54739C21BB75E9862 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8508602304D7139584AEE955 /* Pods.framework */; };
+		F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */; };
 		F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */; };
 		F009AE5C1BD9C5F8007F38A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */; };
 		F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F009AE601BD9C5F8007F38A9 /* Assets.xcassets */; };
@@ -52,9 +53,7 @@
 		F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */; };
 		F009AF1B1BDADE19007F38A9 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */; };
 		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; };
-		F009AF201BDADED8007F38A9 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF1F1BDADED8007F38A9 /* Menu.storyboard */; };
 		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; };
-		F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF231BDAE4BE007F38A9 /* Stats.storyboard */; };
 		F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */; };
 		F009AF2A1BDAE571007F38A9 /* MainScreenContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */; };
 		F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF271BDAE571007F38A9 /* MainScreenVC.swift */; };
@@ -205,6 +204,7 @@
 		896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellTests.swift; sourceTree = "<group>"; };
 		896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FakeStoryboard.storyboard; sourceTree = "<group>"; };
 		896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeControllerWithTableView.swift; sourceTree = "<group>"; };
+		F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerFactory.swift; path = Features/Shared/ControllerFactory.swift; sourceTree = "<group>"; };
 		F009AE531BD9C5F8007F38A9 /* TimeSlower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F009AE5B1BD9C5F8007F38A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -252,9 +252,7 @@
 		F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Light.ttf"; path = "Fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Regular.ttf"; path = "Fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Semibold.ttf"; path = "Fonts/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
-		F009AF1F1BDADED8007F38A9 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Menu.storyboard; path = Features/Menu/Menu.storyboard; sourceTree = "<group>"; };
 		F009AF211BDAE39F007F38A9 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuVC.swift; path = Features/Menu/ViewControllers/MenuVC.swift; sourceTree = "<group>"; };
-		F009AF231BDAE4BE007F38A9 /* Stats.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Stats.storyboard; sourceTree = "<group>"; };
 		F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleStatsVC.swift; path = Features/Stats/CircleStatsVC.swift; sourceTree = "<group>"; };
 		F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenContainerVC.swift; path = Features/Stats/MainScreenContainerVC.swift; sourceTree = "<group>"; };
 		F009AF271BDAE571007F38A9 /* MainScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenVC.swift; path = Features/Stats/MainScreenVC.swift; sourceTree = "<group>"; };
@@ -609,7 +607,6 @@
 		F009AF101BDAD6DF007F38A9 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF231BDAE4BE007F38A9 /* Stats.storyboard */,
 				F009AF2D1BDAE577007F38A9 /* ViewControllers */,
 			);
 			name = Stats;
@@ -618,7 +615,6 @@
 		F009AF111BDAD6E6007F38A9 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF1F1BDADED8007F38A9 /* Menu.storyboard */,
 				F009AF211BDAE39F007F38A9 /* MenuVC.swift */,
 				F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */,
 			);
@@ -679,6 +675,7 @@
 				F0EB8A3E1C4ABE4B009B974A /* TimerLabel */,
 				F0EB8A431C5ECB26009B974A /* StateMachine.swift */,
 				F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */,
+				F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -1145,14 +1142,12 @@
 				F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */,
 				F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */,
 				F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */,
-				F009AF241BDAE4BE007F38A9 /* Stats.storyboard in Resources */,
 				F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */,
 				F009AF8C1BDB1935007F38A9 /* ListTypeSelector.xib in Resources */,
 				F009AF881BDB1935007F38A9 /* DefaultActivitySelector.xib in Resources */,
 				F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */,
 				F0D71F381C793C5900B8473C /* EditActivityBasisView.xib in Resources */,
 				F009AE641BD9C5F8007F38A9 /* LaunchScreen.storyboard in Resources */,
-				F009AF201BDADED8007F38A9 /* Menu.storyboard in Resources */,
 				F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */,
 				F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */,
 				F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */,
@@ -1350,6 +1345,7 @@
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
 				F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */,
+				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,
 				F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */,
 				F009AF441BDB1061007F38A9 /* ActivityMotivationVC.swift in Sources */,
 				F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */,
