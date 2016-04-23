@@ -110,7 +110,6 @@
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */; };
-		F08B51C51C83932F008C6E8B /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B51C41C83932F008C6E8B /* UIStoryboard+Extension.swift */; };
 		F093E2461C7A40D400E245C4 /* EditActivityDurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */; };
 		F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */; };
 		F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */; };
@@ -316,7 +315,6 @@
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionManager.swift; sourceTree = "<group>"; };
-		F08B51C41C83932F008C6E8B /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDurationView.xib; sourceTree = "<group>"; };
 		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationView.swift; sourceTree = "<group>"; };
 		F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNotificationsView.swift; sourceTree = "<group>"; };
@@ -748,7 +746,6 @@
 				F0EA8CBC1C712E9500B11252 /* Float+extension.swift */,
 				F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */,
 				F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */,
-				F08B51C41C83932F008C6E8B /* UIStoryboard+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1320,7 +1317,6 @@
 				F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
-				F08B51C51C83932F008C6E8B /* UIStoryboard+Extension.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
 				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,

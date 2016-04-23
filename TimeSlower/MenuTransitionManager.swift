@@ -51,7 +51,7 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private func setupEnterGesture() {
         enterPanGesture = UIScreenEdgePanGestureRecognizer()
-        enterPanGesture?.addTarget(self, action: "handleOnstagePan:")
+        enterPanGesture?.addTarget(self, action: #selector(MenuTransitionManager.handleOnstagePan(_:)))
         enterPanGesture?.edges = UIRectEdge.Left
         
         if let recoginzer = enterPanGesture {
@@ -61,7 +61,7 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private func setupExitGesture() {
         exitPanGesture = UIPanGestureRecognizer()
-        exitPanGesture?.addTarget(self, action: "handleOffstagePan:")
+        exitPanGesture?.addTarget(self, action: #selector(MenuTransitionManager.handleOffstagePan(_:)))
         
         if let recognizer = exitPanGesture {
             menuViewController?.view.addGestureRecognizer(recognizer)
@@ -99,9 +99,18 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private func presentController(forDirection direction: TransitionDirection) {
         if direction == .Onstage {
-            sourceViewController?.performSegueWithIdentifier("presentMenu", sender: self)
+            
+            guard let mainScreen = sourceViewController as? MainScreenVC else {
+                return
+            }
+            
+            let menuVC: MenuVC = ControllerFactory.createController()
+            menuVC.transitioningDelegate = mainScreen.transitionManager
+            menuVC.delegate = mainScreen
+            menuViewController = menuVC
+            sourceViewController?.presentViewController(menuVC, animated: true, completion: nil)
         } else {
-            menuViewController?.performSegueWithIdentifier("dismissMenu", sender: self)
+            menuViewController?.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

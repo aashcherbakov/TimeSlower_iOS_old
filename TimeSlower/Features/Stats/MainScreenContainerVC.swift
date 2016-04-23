@@ -45,7 +45,8 @@ class MainScreenContainerVC: UIViewController {
     
     func setupMainVC() {
         navigationController?.navigationBarHidden = true
-        mainScreenController = UIStoryboard.mainScreenVC()
+        let mainScreen: MainScreenVC = ControllerFactory.createController()
+        mainScreenController = mainScreen
         mainScreenController.delegate = self
         mainNavigationController = UINavigationController(rootViewController: mainScreenController)
         view.addSubview(mainNavigationController.view)
@@ -63,20 +64,21 @@ extension MainScreenContainerVC: MainScreenVCDelegate {
     func toggleMenuWithDelay(delay: Double) {
         let notAlreadyExpanded = (currentState != .MenuExpended)
         if notAlreadyExpanded {
-            addMenuViewController()
+//            addMenuViewController()
         }
         animateMenuVC(shouldExpand: notAlreadyExpanded, delay: delay)
     }
     
-    func addMenuViewController() {
-        if menuViewController == nil {
-            menuViewController = UIStoryboard.menuViewController()
-            menuViewController!.delegate = mainScreenController
-            view.insertSubview(menuViewController!.view, atIndex: 0)
-            addChildViewController(menuViewController!)
-            menuViewController?.didMoveToParentViewController(self)
-        }
-    }
+//    func addMenuViewController() {
+//        if menuViewController == nil {
+//            let menu
+//            menuViewController = UIStoryboard.menuViewController()
+//            menuViewController!.delegate = mainScreenController
+//            view.insertSubview(menuViewController!.view, atIndex: 0)
+//            addChildViewController(menuViewController!)
+//            menuViewController?.didMoveToParentViewController(self)
+//        }
+//    }
     
     func animateMenuVC(shouldExpand shouldExpand: Bool, delay: Double) {
         let menuExpendedOffset = kUsableViewWidth * Constants.menuOffsetScale

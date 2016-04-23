@@ -66,7 +66,9 @@ class MainScreenVC: MainScreenVCConstraints {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if userProfile == nil { userProfile = CoreDataStack.sharedInstance.fetchProfile() }
+        if userProfile == nil {
+            userProfile = CoreDataStack.sharedInstance.fetchProfile()
+        }
         setup()
     }
     
@@ -216,28 +218,11 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     @IBAction func onMenuButton(sender: UIButton) {
-//        delegate?.toggleMenuWithDelay?(0.0)
-        if let menuViewController = UIStoryboard.menuViewController() {
-            menuViewController.transitioningDelegate = transitionManager
-            transitionManager.menuViewController = menuViewController
-            navigationController?.pushViewController(menuViewController, animated: true)// presentViewController(menuViewController, animated: false, completion: nil)
-        }
-    }
-    
-    
-    // MARK: - Navigation
-    
-    @IBAction func unwindToViewController (sender: UIStoryboardSegue) {
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "presentMenu" {
-            if let menuVC = segue.destinationViewController as? MenuVC {
-                menuVC.transitioningDelegate = transitionManager
-                menuVC.delegate = self
-                transitionManager.menuViewController = menuVC
-            }
-        }
+        let menuVC: MenuVC = ControllerFactory.createController()
+        menuVC.transitioningDelegate = transitionManager
+        menuVC.delegate = self
+        transitionManager.menuViewController = menuVC
+        presentViewController(menuVC, animated: true, completion: nil)
     }
     
     private func showActivityStatsViewController() {

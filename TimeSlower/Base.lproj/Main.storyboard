@@ -71,7 +71,6 @@
                                         </state>
                                         <connections>
                                             <action selector="onMenuButton:" destination="PdJ-W1-SMj" eventType="touchUpInside" id="RHM-v0-H7Q"/>
-                                            <segue destination="cFE-Oh-eY8" kind="presentation" identifier="presentMenu" id="NLP-Lb-xN0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-z8-rZe">
@@ -399,12 +398,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mj8-vw-HsK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="480.5"/>
+            <point key="canvasLocation" x="1202" y="480.5"/>
         </scene>
         <!--MenuVC-->
         <scene sceneID="i1s-Kv-470">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="cFE-Oh-eY8" customClass="MenuVC" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuVC" id="cFE-Oh-eY8" customClass="MenuVC" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5yg-Lo-6z1"/>
                         <viewControllerLayoutGuide type="bottom" id="MBM-ko-7nd"/>
