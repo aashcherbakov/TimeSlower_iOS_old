@@ -55,7 +55,6 @@
 		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; };
 		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; };
 		F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */; };
-		F009AF2A1BDAE571007F38A9 /* MainScreenContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */; };
 		F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF271BDAE571007F38A9 /* MainScreenVC.swift */; };
 		F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */; };
 		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
@@ -253,7 +252,6 @@
 		F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Semibold.ttf"; path = "Fonts/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
 		F009AF211BDAE39F007F38A9 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuVC.swift; path = Features/Menu/ViewControllers/MenuVC.swift; sourceTree = "<group>"; };
 		F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleStatsVC.swift; path = Features/Stats/CircleStatsVC.swift; sourceTree = "<group>"; };
-		F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenContainerVC.swift; path = Features/Stats/MainScreenContainerVC.swift; sourceTree = "<group>"; };
 		F009AF271BDAE571007F38A9 /* MainScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenVC.swift; path = Features/Stats/MainScreenVC.swift; sourceTree = "<group>"; };
 		F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenVCConstraints.swift; path = Features/Stats/MainScreenVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -639,7 +637,6 @@
 			isa = PBXGroup;
 			children = (
 				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
-				F009AF261BDAE571007F38A9 /* MainScreenContainerVC.swift */,
 				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
 				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
 			);
@@ -1349,7 +1346,6 @@
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
 				F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
-				F009AF2A1BDAE571007F38A9 /* MainScreenContainerVC.swift in Sources */,
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
 				F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */,
 				F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */,
