@@ -94,6 +94,7 @@ class MenuVC: UIViewController {
         delegate?.menuOptionSelected(sender.tag)
     }
     
-   
-    
+    @IBAction func dismissMenu(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
