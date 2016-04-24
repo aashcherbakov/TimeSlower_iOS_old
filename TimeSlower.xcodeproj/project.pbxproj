@@ -575,7 +575,7 @@
 				F009AF621BDB13A4007F38A9 /* Shared */,
 				F009AF0E1BDAD6CE007F38A9 /* Profile */,
 				F009AF111BDAD6E6007F38A9 /* Menu */,
-				F009AF101BDAD6DF007F38A9 /* Stats */,
+				F009AF101BDAD6DF007F38A9 /* MainScreen */,
 				F0EB8A3A1C4ABDDC009B974A /* Edit Activity */,
 				F009AF0F1BDAD6D6007F38A9 /* Activities */,
 			);
@@ -603,12 +603,12 @@
 			name = Activities;
 			sourceTree = "<group>";
 		};
-		F009AF101BDAD6DF007F38A9 /* Stats */ = {
+		F009AF101BDAD6DF007F38A9 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				F009AF2D1BDAE577007F38A9 /* ViewControllers */,
 			);
-			name = Stats;
+			name = MainScreen;
 			sourceTree = "<group>";
 		};
 		F009AF111BDAD6E6007F38A9 /* Menu */ = {
@@ -763,13 +763,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F0BE55F31C7FE7C800404301 /* Edit Data */ = {
+		F0BE55F31C7FE7C800404301 /* DataEntryView */ = {
 			isa = PBXGroup;
 			children = (
 				F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */,
 				F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */,
 			);
-			name = "Edit Data";
+			name = DataEntryView;
 			sourceTree = "<group>";
 		};
 		F0C2F6141C67F3D5006B7D81 /* Edit Basis */ = {
@@ -917,13 +917,8 @@
 		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0BE55F31C7FE7C800404301 /* Edit Data */,
-				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
-				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
-				F0495C371C6C21FB00AA746A /* Edit StartTime */,
-				F05425A91C6FF169001C81D0 /* Edit Duration */,
-				F0EA8CBA1C711AAD00B11252 /* Edit Notifications */,
-				F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */,
+				F0BE55F31C7FE7C800404301 /* DataEntryView */,
+				F0F20F2E1CCD2A2700F7DAA7 /* PropertyEntryViews */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -944,6 +939,19 @@
 				F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */,
 			);
 			name = TimerLabel;
+			sourceTree = "<group>";
+		};
+		F0F20F2E1CCD2A2700F7DAA7 /* PropertyEntryViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
+				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
+				F0495C371C6C21FB00AA746A /* Edit StartTime */,
+				F05425A91C6FF169001C81D0 /* Edit Duration */,
+				F0EA8CBA1C711AAD00B11252 /* Edit Notifications */,
+				F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */,
+			);
+			name = PropertyEntryViews;
 			sourceTree = "<group>";
 		};
 		F0F78C801C35EA4600A7B150 /* GenderSelector */ = {

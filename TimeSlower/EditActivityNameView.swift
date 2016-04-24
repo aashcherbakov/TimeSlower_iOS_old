@@ -52,11 +52,16 @@ class EditActivityNameView: UIView {
     // MARK: - Private Methods
     
     func setupData() {
-        textFieldView.setup(withType: .ActivityName, delegate: self)
+        selectedName.subscribeNext { [weak self] (name) in
+            self?.textFieldView.setup(withType: .ActivityName, delegate: self)
+            self?.textFieldView.setText(name)
+        }.addDisposableTo(disposableBag)
     }
     
     func setupEvents() {
-        defaultActivitySelectorView.addTarget(self, action: Selector("defaultActivitySelected:"), forControlEvents: .ValueChanged)
+        defaultActivitySelectorView.addTarget(self,
+                                              action: #selector(EditActivityNameView.defaultActivitySelected(_:)),
+                                              forControlEvents: .ValueChanged)
     }
     
     func setupDesign() {

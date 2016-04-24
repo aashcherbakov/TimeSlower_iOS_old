@@ -16,6 +16,7 @@ class EditActivityVC: EditActivityVCConstraints {
 
     @IBOutlet weak var timeSaver: TimeSaver!
     @IBOutlet weak var editingDataView: EditActivityDataView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var selectedBasis: ActivityBasis?
     var userProfile: Profile?
@@ -52,6 +53,8 @@ class EditActivityVC: EditActivityVCConstraints {
         if let viewModel = viewModel {
             topWhiteViewHeight.constant = viewModel.updatedContentSizeHeight.value + 24
         }
+        
+        titleLabel.text = (activity != nil) ? "Edit activity" : "New activity"
     }
     
     private func setupEvents() {

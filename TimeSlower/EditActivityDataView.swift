@@ -61,7 +61,10 @@ class EditActivityDataView: UIView {
     }
     
     func setupWith(activity activity: Activity?) {
-        guard let activity = activity else { return }
+        guard let activity = activity else {
+            updateDesignForState(.AddName)
+            return
+        }
         
         editNameView.selectedName.value = activity.name
         editBasisView.selectedBasis.value = activity.activityBasis()
@@ -71,7 +74,7 @@ class EditActivityDataView: UIView {
         
         updateDesignForState(.FullHouse)
     }
-    
+
     /**
      Function used to adjust constraints for given states. Executed with animation duration 0.3
      
@@ -125,8 +128,6 @@ class EditActivityDataView: UIView {
         NSBundle.mainBundle().loadNibNamed("EditActivityDataView", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
-        
-        updateDesignForState(.AddName)
     }
     
     private func setupEvents() {
