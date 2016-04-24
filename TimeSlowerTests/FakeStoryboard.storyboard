@@ -86,6 +86,14 @@
                                     <constraint firstAttribute="height" constant="56" id="uze-W3-XYd"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Wz-Lt-POE" customClass="EditActivityBasisView" customModule="TimeSlower">
+                                <rect key="frame" x="0.0" y="416" width="240" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="LIg-G2-xD9"/>
+                                    <constraint firstAttribute="width" constant="240" id="R5L-T8-P2H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -97,12 +105,15 @@
                             <constraint firstItem="Ig7-HH-86C" firstAttribute="leading" secondItem="5Hc-UN-Vqr" secondAttribute="trailing" constant="8" id="ZMf-qW-lEV"/>
                             <constraint firstItem="161-av-4bw" firstAttribute="top" secondItem="Ig7-HH-86C" secondAttribute="bottom" id="c5D-Pn-zWg"/>
                             <constraint firstItem="5Hc-UN-Vqr" firstAttribute="top" secondItem="s3i-1M-TKn" secondAttribute="bottom" constant="8" id="cp5-6Y-l4E"/>
+                            <constraint firstItem="s3i-1M-TKn" firstAttribute="top" secondItem="0Wz-Lt-POE" secondAttribute="bottom" constant="8" id="fhN-tF-t2v"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qW9-p1-bnz" secondAttribute="trailing" constant="160" id="q17-Ye-CP8"/>
+                            <constraint firstItem="0Wz-Lt-POE" firstAttribute="leading" secondItem="Im4-WT-gWt" secondAttribute="leading" id="xzF-z0-yKf"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="basisSelector" destination="Ig7-HH-86C" id="7Wv-qX-mLH"/>
                         <outlet property="daySelector" destination="5Hc-UN-Vqr" id="Fur-eU-D0c"/>
+                        <outlet property="editActivityBasisView" destination="0Wz-Lt-POE" id="B24-V6-dNy"/>
                         <outlet property="editActivityNameView" destination="s3i-1M-TKn" id="sVA-xv-ZIb"/>
                         <outlet property="textfieldView" destination="qW9-p1-bnz" id="xzI-aT-xgL"/>
                     </connections>

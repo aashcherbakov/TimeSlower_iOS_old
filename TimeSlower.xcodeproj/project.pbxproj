@@ -138,6 +138,7 @@
 		F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */; };
 		F0F20F2D1CCC0FA600F7DAA7 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */; };
 		F0F20F301CCD355F00F7DAA7 /* EditActivityNameViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F20F2F1CCD355F00F7DAA7 /* EditActivityNameViewTests.swift */; };
+		F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F20F311CCD430100F7DAA7 /* EditActivityBasisViewTests.swift */; };
 		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
 		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
 		F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */; };
@@ -346,6 +347,7 @@
 		F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
 		F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		F0F20F2F1CCD355F00F7DAA7 /* EditActivityNameViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameViewTests.swift; sourceTree = "<group>"; };
+		F0F20F311CCD430100F7DAA7 /* EditActivityBasisViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityBasisViewTests.swift; sourceTree = "<group>"; };
 		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
 		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
 		F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelector.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 			children = (
 				F0D71F371C793C5900B8473C /* EditActivityBasisView.xib */,
 				F0D71F351C793C4E00B8473C /* EditActivityBasisView.swift */,
+				F0F20F311CCD430100F7DAA7 /* EditActivityBasisViewTests.swift */,
 				F0EB8A351C4333C8009B974A /* Basis Selector */,
 				F0EB8A371C4333E1009B974A /* Day Selector */,
 			);
@@ -1379,6 +1382,7 @@
 				F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */,
 				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
 				F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */,
+				F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */,
 				F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */,
 				F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */,
 				F0EB8A401C4ABF11009B974A /* EditActivityVCTests.swift in Sources */,

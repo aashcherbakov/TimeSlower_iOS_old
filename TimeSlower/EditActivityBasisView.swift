@@ -80,5 +80,13 @@ class EditActivityBasisView: UIView {
                 }
             }
             .addDisposableTo(disposableBag)
+        
+        selectedBasis.subscribeNext { [weak self] (basis) in
+            guard let basis = basis else {
+                return
+            }
+            
+            self?.textFieldView.setText(basis.description())
+        }.addDisposableTo(disposableBag)
     }
 }
