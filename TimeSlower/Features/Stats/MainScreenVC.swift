@@ -87,8 +87,6 @@ class MainScreenVC: MainScreenVCConstraints {
         }
     }
     
-
-    
     //MARK: - Setup
     
     func setupNextActivityBlock() {
@@ -202,6 +200,12 @@ class MainScreenVC: MainScreenVCConstraints {
         nextActivity.timing.manuallyStarted = NSDate()
         //TODO: update notifications for today
         setupNextActivityBlock()
+    }
+    
+    @IBAction func onAllActivitiesButton(sender: AnyObject) {
+        let allActivitiesController: ListOfActivitiesVC = ControllerFactory.createController()
+        allActivitiesController.profile = userProfile
+        navigationController?.pushViewController(allActivitiesController, animated: true)
     }
     
     func finishActivity() {

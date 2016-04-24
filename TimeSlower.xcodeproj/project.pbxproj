@@ -924,7 +924,12 @@
 			isa = PBXGroup;
 			children = (
 				F0BE55F31C7FE7C800404301 /* DataEntryView */,
-				F0F20F2E1CCD2A2700F7DAA7 /* PropertyEntryViews */,
+				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
+				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
+				F0495C371C6C21FB00AA746A /* Edit StartTime */,
+				F05425A91C6FF169001C81D0 /* Edit Duration */,
+				F0EA8CBA1C711AAD00B11252 /* Edit Notifications */,
+				F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -945,19 +950,6 @@
 				F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */,
 			);
 			name = TimerLabel;
-			sourceTree = "<group>";
-		};
-		F0F20F2E1CCD2A2700F7DAA7 /* PropertyEntryViews */ = {
-			isa = PBXGroup;
-			children = (
-				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
-				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
-				F0495C371C6C21FB00AA746A /* Edit StartTime */,
-				F05425A91C6FF169001C81D0 /* Edit Duration */,
-				F0EA8CBA1C711AAD00B11252 /* Edit Notifications */,
-				F0EA8CBB1C7128C800B11252 /* Edit TimeToSave */,
-			);
-			name = PropertyEntryViews;
 			sourceTree = "<group>";
 		};
 		F0F78C801C35EA4600A7B150 /* GenderSelector */ = {

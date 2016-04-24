@@ -66,12 +66,15 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-z8-rZe">
-                                        <rect key="frame" x="509" y="7" width="71" height="30"/>
+                                        <rect key="frame" x="509" y="0.0" width="71" height="44"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                         <state key="normal" title="All activities">
                                             <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onAllActivitiesButton:" destination="PdJ-W1-SMj" eventType="touchUpInside" id="lmp-hx-2z8"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aa2-Br-wuq">
                                         <rect key="frame" x="277" y="11" width="47" height="23"/>
@@ -83,8 +86,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="02e-NV-CLZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="zuW-z8-rZe" secondAttribute="bottom" id="2c8-aY-BcH"/>
                                     <constraint firstItem="eWj-vW-hui" firstAttribute="leading" secondItem="02m-kf-37h" secondAttribute="leading" id="4l8-Dt-9D3"/>
                                     <constraint firstItem="eWj-vW-hui" firstAttribute="top" secondItem="02m-kf-37h" secondAttribute="top" id="68c-C9-KWx"/>
+                                    <constraint firstItem="zuW-z8-rZe" firstAttribute="top" secondItem="02m-kf-37h" secondAttribute="top" id="8vo-nb-6P6"/>
                                     <constraint firstAttribute="centerX" secondItem="aa2-Br-wuq" secondAttribute="centerX" id="CtU-rf-pCa"/>
                                     <constraint firstAttribute="bottom" secondItem="eWj-vW-hui" secondAttribute="bottom" id="R5J-6k-ITw"/>
                                     <constraint firstAttribute="centerY" secondItem="zuW-z8-rZe" secondAttribute="centerY" id="W62-Ii-LjG"/>
