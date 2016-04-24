@@ -20,6 +20,13 @@ extension UIViewController: Instantiatable { }
  */
 struct ControllerFactory {
     
+    private struct Constants {
+        static let activities = "Activities"
+        static let menu = "Menu"
+        static let profile = "Profile"
+        static let main = "Main"
+    }
+    
     /**
      Creates controller of specified type from appropriate storyboard
      
@@ -34,7 +41,7 @@ struct ControllerFactory {
             fatalError("Controller \(String(T)) should be instantiated")
         }
         
-        return controller
+        return controller 
     }
     
     private static func storyboardForType<T>(type: T) -> UIStoryboard? {
@@ -47,10 +54,12 @@ struct ControllerFactory {
     
     private static func storyboardId<T>(forType type: T) -> String? {
         switch type {
-        case is MenuVC.Type: return "Menu"
-        case is MainScreenVC.Type: return "Main"
-        case is EditActivityVC.Type: return "Activities"
-        case is ProfileEditingVC.Type: return "Profile"
+        case is MenuVC.Type: return Constants.menu
+        case is MainScreenVC.Type: return Constants.main
+        case is EditActivityVC.Type: return Constants.activities
+        case is ListOfActivitiesVC.Type: return Constants.activities
+        case is ActivityMotivationVC.Type: return Constants.activities
+        case is ProfileEditingVC.Type: return Constants.profile
 
         default: return nil
         }
