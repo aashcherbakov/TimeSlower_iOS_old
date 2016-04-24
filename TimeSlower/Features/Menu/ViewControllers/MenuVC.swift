@@ -9,7 +9,6 @@
 import UIKit
 import TimeSlowerKit
 
-
 @objc protocol MenuVCDelegate {
     func menuOptionSelected(option: Int)
 }
@@ -24,7 +23,7 @@ class MenuVC: UIViewController {
         case Feedback
     }
     
-    struct Constants {
+    private struct Constants {
         static let profileSegueID = "ProfileStats"
         static let createActivitySegueID = "CreateNewActivity"
         static let allActivitiesSegueID = "AllActivities"
@@ -44,51 +43,28 @@ class MenuVC: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var avatarBackground: UIView!
     
-    var profile: Profile!
+    var profile: Profile?
     var delegate: MenuVCDelegate?
     
-    //MARK: - Layout
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        setupDefaultConstraints()
-    }
+    // MARK: - Overridden
     
-    func setupDefaultConstraints() {
-        let height = UIScreen.mainScreen().bounds.height
-        avatarBackgroundHeight.constant = height * Constants.avatarBackgroundScale
-        cellHeight.constant = height * Constants.cellHeightScale
-        firstCellOffset.constant = height * Constants.firstCellOffsetScale
-        
-        setupAvatarForm()
-
-    }
-    
-    //MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        profile = CoreDataStack.sharedInstance.fetchProfile()
-        avatarImageView.image = UIImage(data: profile.photo)
-        nameLabel.text = profile.name.uppercaseString
-        countryLabel.text = profile.country.capitalizedString
+        
+        setupDesign()
+        
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        if profile == nil {
-            profile = CoreDataStack.sharedInstance.fetchProfile()
-        }
-    }
-
-    func setupAvatarForm() {
-        avatarBackground.layer.cornerRadius = avatarBackgroundHeight.constant / 2
-        avatarBackground.layer.borderWidth = 1
-        avatarBackground.layer.borderColor = UIColor.darkRed().CGColor
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
         
-        avatarImageView.layer.cornerRadius = (avatarBackgroundHeight.constant - 8) / 2
-        avatarImageView.clipsToBounds = true
-        
+        // since we update constraints based on phone size, 
+        // avatar form should is set here, not in viewDidLoad
+        setupDefaultConstraints()
+        setupAvatarForm()
     }
+    
+    // MARK: - Actions
     
     @IBAction func menuOptionTapped(sender: UIButton) {
         delegate?.menuOptionSelected(sender.tag)
@@ -96,5 +72,32 @@ class MenuVC: UIViewController {
     
     @IBAction func dismissMenu(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupDesign() {
+        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
+            return
+        }
+        
+        avatarImageView.image = UIImage(data: profile.photo)
+        nameLabel.text = profile.name.uppercaseString
+        countryLabel.text = profile.country.capitalizedString
+    }
+
+    private func setupDefaultConstraints() {
+        let height = UIScreen.mainScreen().bounds.height
+        avatarBackgroundHeight.constant = height * Constants.avatarBackgroundScale
+        cellHeight.constant = height * Constants.cellHeightScale
+        firstCellOffset.constant = height * Constants.firstCellOffsetScale
+    }
+    
+    private func setupAvatarForm() {
+        avatarBackground.layer.cornerRadius = avatarBackgroundHeight.constant / 2
+        avatarBackground.layer.borderWidth = 1
+        avatarBackground.layer.borderColor = UIColor.darkRed().CGColor
+        avatarImageView.layer.cornerRadius = (avatarBackgroundHeight.constant - 8) / 2
+        avatarImageView.clipsToBounds = true
     }
 }
