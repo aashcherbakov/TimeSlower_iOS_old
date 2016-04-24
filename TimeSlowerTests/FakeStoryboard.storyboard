@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TKS-7w-fhK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TKS-7w-fhK">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -78,21 +78,32 @@
                                     <constraint firstAttribute="height" constant="56" id="mqV-Wl-JAG"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3i-1M-TKn" customClass="EditActivityNameView" customModule="TimeSlower">
+                                <rect key="frame" x="0.0" y="480" width="240" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="SPg-LS-Cq1"/>
+                                    <constraint firstAttribute="height" constant="56" id="uze-W3-XYd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qW9-p1-bnz" firstAttribute="leading" secondItem="Im4-WT-gWt" secondAttribute="leadingMargin" constant="160" id="0U5-fU-wxU"/>
                             <constraint firstItem="qW9-p1-bnz" firstAttribute="top" secondItem="zyM-9D-ehr" secondAttribute="bottom" id="KJn-SO-gZU"/>
+                            <constraint firstItem="s3i-1M-TKn" firstAttribute="leading" secondItem="Im4-WT-gWt" secondAttribute="leading" id="Log-74-NG5"/>
                             <constraint firstItem="161-av-4bw" firstAttribute="top" secondItem="5Hc-UN-Vqr" secondAttribute="bottom" id="XCC-BN-yTe"/>
                             <constraint firstItem="5Hc-UN-Vqr" firstAttribute="leading" secondItem="Im4-WT-gWt" secondAttribute="leading" id="ZAe-SE-Qfg"/>
                             <constraint firstItem="Ig7-HH-86C" firstAttribute="leading" secondItem="5Hc-UN-Vqr" secondAttribute="trailing" constant="8" id="ZMf-qW-lEV"/>
                             <constraint firstItem="161-av-4bw" firstAttribute="top" secondItem="Ig7-HH-86C" secondAttribute="bottom" id="c5D-Pn-zWg"/>
+                            <constraint firstItem="5Hc-UN-Vqr" firstAttribute="top" secondItem="s3i-1M-TKn" secondAttribute="bottom" constant="8" id="cp5-6Y-l4E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qW9-p1-bnz" secondAttribute="trailing" constant="160" id="q17-Ye-CP8"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="basisSelector" destination="Ig7-HH-86C" id="7Wv-qX-mLH"/>
                         <outlet property="daySelector" destination="5Hc-UN-Vqr" id="Fur-eU-D0c"/>
+                        <outlet property="editActivityNameView" destination="s3i-1M-TKn" id="sVA-xv-ZIb"/>
                         <outlet property="textfieldView" destination="qW9-p1-bnz" id="xzI-aT-xgL"/>
                     </connections>
                 </viewController>

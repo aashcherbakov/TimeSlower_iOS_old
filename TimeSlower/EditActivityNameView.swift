@@ -12,7 +12,7 @@ import UIKit
 import RxSwift
 
 /**
- UITableViewCell subclass used to enter/edit activity name. Contains TextfieldView to
+ UIView subclass used to enter/edit activity name. Contains TextfieldView to
  collect data and, in expanded state, - DefaultActivitySelector.
  */
 class EditActivityNameView: UIView {

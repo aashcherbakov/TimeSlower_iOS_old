@@ -20,6 +20,7 @@ class ProfileEditingViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
+        viewModel = nil
         super.tearDown()
     }
 
@@ -28,9 +29,9 @@ class ProfileEditingViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedGender, Profile.Gender.Male)
     }
     
-    func testUserDidMissDataTrue() {
-        XCTAssertNotNil(viewModel.userDidMissData(), "Should return string for reason")
-    }
+//    func testUserDidMissDataTrue() {
+//        XCTAssertNotNil(viewModel.userDidMissData(), "Should return string for reason")
+//    }
     
     func testUserDidMissDataFalse() {
         viewModel.userDidPickGender(0)

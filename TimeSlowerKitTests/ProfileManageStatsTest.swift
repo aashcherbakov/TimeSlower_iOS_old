@@ -73,7 +73,7 @@ class ProfileManageStatsTest: XCTestCase {
     }
     
     func testUserAge() {
-        XCTAssertEqual(testProfile.userAge(), 28, "User age must be 28 !!! TILL MARCH 2016")
+        XCTAssertEqual(testProfile.userAge(), 29, "User age must be 29")
     }
     
     func testUserGender() {

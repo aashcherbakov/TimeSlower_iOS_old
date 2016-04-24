@@ -53,8 +53,8 @@ class TextfieldView: UIView {
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var imageView: UIImageView!
     
-    private var viewModel: TextfieldViewModel?
-    private var type: TextFieldViewType?
+    private(set) var viewModel: TextfieldViewModel?
+    private(set) var type: TextFieldViewType?
     private var disposable = DisposeBag()
     private var delegate: TextFieldViewDelegate?
     
