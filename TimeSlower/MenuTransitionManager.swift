@@ -145,8 +145,8 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
                 return
         }
         
-        let menuController = !presenting ? controllers.top as! MenuVC : controllers.destination as! MenuVC
-        let topController = !presenting ? controllers.destination as! MainScreenVC : controllers.top as! MainScreenVC
+        let menuController = !presenting ? controllers.top : controllers.destination
+        let topController = !presenting ? controllers.destination : controllers.top
         topController.view.layer.shadowOpacity = 0.8
         
         let menuView = menuController.view

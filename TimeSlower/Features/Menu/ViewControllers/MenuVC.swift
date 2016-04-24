@@ -79,7 +79,7 @@ class MenuVC: UIViewController {
         
         if let controller = controllerForOption(option) {
             dismissViewControllerAnimated(true) {
-                transition.sourceViewController?.presentViewController(controller, animated: false, completion: nil)
+                transition.sourceViewController?.navigationController?.pushViewController(controller, animated: true)
             }
         }
     }
@@ -87,30 +87,26 @@ class MenuVC: UIViewController {
     private func controllerForOption(option: MenuOptions) -> UIViewController? {
         switch option {
         case .Profile:
-            return profileStatsWithNavigation()
+            return profileStatsController()
         case .CreateActivity:
             return createActivityController()
         case .AllActivities:
-            return activityListWithNavigation()
+            return activityListController()
         default:
             return nil
         }
     }
     
-    private func profileStatsWithNavigation() -> UIViewController {
-        let navigationController = UINavigationController()
+    private func profileStatsController() -> UIViewController {
         let profileController: ProfileStatsVC = ControllerFactory.createController()
         profileController.profile = profile
-        navigationController.viewControllers = [profileController]
-        return navigationController
+        return profileController
     }
     
-    private func activityListWithNavigation() -> UIViewController {
-        let navigationController = UINavigationController()
+    private func activityListController() -> UIViewController {
         let listController: ListOfActivitiesVC = ControllerFactory.createController()
         listController.profile = profile
-        navigationController.viewControllers = [listController]
-        return navigationController
+        return listController
     }
     
     private func createActivityController() -> UIViewController {
