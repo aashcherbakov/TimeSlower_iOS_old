@@ -75,6 +75,14 @@ class EditActivityStartTimeView: UIView {
                 }
             }
             .addDisposableTo(disposableBag)
+        
+        selectedDate.subscribeNext { [weak self] (date) in
+            guard let date = date else {
+                return
+            }
+            
+            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(date))
+        }.addDisposableTo(disposableBag)
     }
     
     /// Should be a singleton -> refactor
