@@ -10,11 +10,6 @@ import UIKit
 import CoreData
 import TimeSlowerKit
 
-@objc protocol MainScreenVCDelegate {
-    optional func toggleMenuWithDelay(delay: Double)
-    optional func collapseMenu()
-}
-
 class MainScreenVC: MainScreenVCConstraints {
 
     struct Constants {
@@ -47,7 +42,6 @@ class MainScreenVC: MainScreenVCConstraints {
         return UIStoryboard(name: kProfileStoryboard, bundle: nil)
     }()
     
-    var delegate: MainScreenVCDelegate?
     var userProfile: Profile?
     var nextActivity: Activity!
     var pageViewController: UIPageViewController!
@@ -220,7 +214,6 @@ class MainScreenVC: MainScreenVCConstraints {
     @IBAction func onMenuButton(sender: UIButton) {
         let menuVC: MenuVC = ControllerFactory.createController()
         menuVC.transitioningDelegate = transitionManager
-        menuVC.delegate = self
         transitionManager.menuViewController = menuVC
         presentViewController(menuVC, animated: true, completion: nil)
     }
@@ -269,7 +262,7 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
         var index = vc.pageIndex as Int
         if (index == 0 || index == NSNotFound) { return nil }
 
-        index--
+        index -= 1
 
         return self.viewControllerAtIndex(index)
     }
@@ -278,7 +271,7 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
         let vc = viewController as! CircleStatsVC
         var index = vc.pageIndex as Int
         if (index == NSNotFound) { return nil }
-        index++
+        index += 1
         
         if (index == numberOfPages) { return nil }
 
@@ -298,22 +291,5 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
 extension MainScreenVC: CircleStatsDelegate {
     func pageControllerDidChangeToPage(index: Int) {
         periodTitleLabel.text = LazyCalendar.stringForPeriod(LazyCalendar.Period(rawValue: index)!)
-    }
-}
-
-extension MainScreenVC: MenuVCDelegate {
-    func menuOptionSelected(option: Int) {
-        let selectedOption = MenuVC.MenuOptions(rawValue: option)!
-        
-        delegate?.collapseMenu?()
-
-        switch selectedOption {
-        case .Profile: presentProfileVCFromMenu()
-        case .AllActivities: presentListOfActivitiesVCFromMenu()
-        default: break
-        }
-
-        //TODO: add segues for Feedback and Rate
-        
     }
 }

@@ -106,7 +106,6 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
             
             let menuVC: MenuVC = ControllerFactory.createController()
             menuVC.transitioningDelegate = mainScreen.transitionManager
-            menuVC.delegate = mainScreen
             menuViewController = menuVC
             sourceViewController?.presentViewController(menuVC, animated: true, completion: nil)
         } else {

@@ -585,6 +585,7 @@
 		F009AF0E1BDAD6CE007F38A9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F009AF381BDB0FEA007F38A9 /* Profile.storyboard */,
 				F009AF5A1BDB12C5007F38A9 /* Views */,
 				F009AF611BDB1339007F38A9 /* ViewControllers */,
 			);
@@ -649,7 +650,6 @@
 		F009AF5A1BDB12C5007F38A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF381BDB0FEA007F38A9 /* Profile.storyboard */,
 				F0F78C811C35EA5100A7B150 /* CustomControls */,
 				F021312D1C15276E00C9B02E /* Cells */,
 			);

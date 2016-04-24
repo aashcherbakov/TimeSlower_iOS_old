@@ -60,6 +60,7 @@ struct ControllerFactory {
         case is ListOfActivitiesVC.Type: return Constants.activities
         case is ActivityMotivationVC.Type: return Constants.activities
         case is ProfileEditingVC.Type: return Constants.profile
+        case is ProfileStatsVC.Type: return Constants.profile
 
         default: return nil
         }

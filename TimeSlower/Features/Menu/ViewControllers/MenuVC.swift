@@ -9,13 +9,9 @@
 import UIKit
 import TimeSlowerKit
 
-@objc protocol MenuVCDelegate {
-    func menuOptionSelected(option: Int)
-}
-
 class MenuVC: UIViewController {
     
-    enum MenuOptions: Int {
+    private enum MenuOptions: Int {
         case Profile = 1
         case CreateActivity
         case AllActivities
@@ -24,9 +20,6 @@ class MenuVC: UIViewController {
     }
     
     private struct Constants {
-        static let profileSegueID = "ProfileStats"
-        static let createActivitySegueID = "CreateNewActivity"
-        static let allActivitiesSegueID = "AllActivities"
         static let avatarBackgroundScale: CGFloat = 0.21
         static let cellHeightScale: CGFloat = 0.08
         static let firstCellOffsetScale: CGFloat = 0.04
@@ -43,8 +36,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var avatarBackground: UIView!
     
-    var profile: Profile?
-    var delegate: MenuVCDelegate?
+    private var profile: Profile?
     
     // MARK: - Overridden
     
@@ -52,7 +44,6 @@ class MenuVC: UIViewController {
         super.viewDidLoad()
         
         setupDesign()
-        
     }
     
     override func updateViewConstraints() {
@@ -67,20 +58,75 @@ class MenuVC: UIViewController {
     // MARK: - Actions
     
     @IBAction func menuOptionTapped(sender: UIButton) {
-        delegate?.menuOptionSelected(sender.tag)
+        guard let selectedOption = MenuOptions(rawValue: sender.tag) else {
+            return
+        }
+        presentControllerFromMenu(selectedOption)
     }
     
     @IBAction func dismissMenu(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK: - Private Methods
+    // MARK: - Private Methods 
     
+    // MARK: - Navigation
+    
+    private func presentControllerFromMenu(option: MenuOptions) {
+        guard let transition = transitioningDelegate as? MenuTransitionManager else {
+            return
+        }
+        
+        if let controller = controllerForOption(option) {
+            dismissViewControllerAnimated(true) {
+                transition.sourceViewController?.presentViewController(controller, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    private func controllerForOption(option: MenuOptions) -> UIViewController? {
+        switch option {
+        case .Profile:
+            return profileStatsWithNavigation()
+        case .CreateActivity:
+            return createActivityController()
+        case .AllActivities:
+            return activityListWithNavigation()
+        default:
+            return nil
+        }
+    }
+    
+    private func profileStatsWithNavigation() -> UIViewController {
+        let navigationController = UINavigationController()
+        let profileController: ProfileStatsVC = ControllerFactory.createController()
+        profileController.profile = profile
+        navigationController.viewControllers = [profileController]
+        return navigationController
+    }
+    
+    private func activityListWithNavigation() -> UIViewController {
+        let navigationController = UINavigationController()
+        let listController: ListOfActivitiesVC = ControllerFactory.createController()
+        listController.profile = profile
+        navigationController.viewControllers = [listController]
+        return navigationController
+    }
+    
+    private func createActivityController() -> UIViewController {
+        let controller: EditActivityVC = ControllerFactory.createController()
+        controller.userProfile = profile
+        return controller
+    }
+    
+    // MARK: - Design
+
     private func setupDesign() {
         guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
             return
         }
         
+        self.profile = profile
         avatarImageView.image = UIImage(data: profile.photo)
         nameLabel.text = profile.name.uppercaseString
         countryLabel.text = profile.country.capitalizedString
