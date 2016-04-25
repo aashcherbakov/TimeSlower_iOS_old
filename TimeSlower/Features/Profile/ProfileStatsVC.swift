@@ -97,7 +97,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     
     @IBAction func onNewActivityButton(sender: UIButton) {
-        performSegueWithIdentifier(Constants.createActivitySegue, sender: self)
+        let createActivityVC: EditActivityVC = ControllerFactory.createController()
+        createActivityVC.userProfile = profile
+        navigationController?.pushViewController(createActivityVC, animated: true)
     }
 
     @IBAction func onEditButton(sender: UIButton) {

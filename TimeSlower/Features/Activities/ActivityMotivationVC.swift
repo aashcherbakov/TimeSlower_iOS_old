@@ -111,10 +111,7 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     
     //MARK: - Actions
     @IBAction func saveButtonPressed() {
-        if let _ = presentingViewController as? EditActivityVC {
-            performSegueWithIdentifier("EditingComplete", sender: self)
-        }
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popToRootViewControllerAnimated(true)
     }
 
     @IBAction func onBackButton(sender: UIButton) {

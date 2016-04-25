@@ -97,10 +97,13 @@ class EditActivityVC: EditActivityVCConstraints {
     }
     
     private func showStatsInActivityMotivationVC() {
-        if let motivationVC = self.storyboard?
-            .instantiateViewControllerWithIdentifier(ActivityMotivationVC.className) as? ActivityMotivationVC {
-                motivationVC.activity = self.activity
-                presentViewController(motivationVC, animated: true, completion: nil)
+        let motivationVC: ActivityMotivationVC = ControllerFactory.createController()
+        motivationVC.activity = activity
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(motivationVC, animated: true)
+        } else {
+            presentViewController(motivationVC, animated: true, completion: nil)
         }
     }
     

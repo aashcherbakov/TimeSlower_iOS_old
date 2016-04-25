@@ -47,13 +47,11 @@ class EditActivityBasisViewTests: XCTestCase {
         
         // then
         XCTAssertTrue(sut.expanded.value,
-                    "it should expand view on touch")
-        XCTAssertEqual(sut.basisSelector.selectedSegmentIndex.value, 0,
-                    "it should setup default value for basis selector")
+                      "it should expand view on touch")
         XCTAssertEqual(sut.selectedBasis.value, ActivityBasis.Daily,
-                           "it should set selected daily basis by defatult")
+                       "it should set selected daily basis by defatult")
         XCTAssertEqual(sut.textFieldView.textField.text, sut.selectedBasis.value?.description(),
-                           "it should set text for textfield")
+                       "it should set text for textfield")
     }
     
     func test_selectedValueSetFromOutside() {
@@ -62,9 +60,9 @@ class EditActivityBasisViewTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Weekends",
-                           "it should set textfield text to Weekends")
+                       "it should set textfield text to Weekends")
         XCTAssertNil(sut.basisSelector.selectedSegmentIndex.value,
-                           "it should not set selected segment index")
+                     "it should not set selected segment index")
     }
     
     

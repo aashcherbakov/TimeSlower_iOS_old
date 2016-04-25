@@ -98,7 +98,11 @@ extension Timing {
     // Based on assumption that alarm time for routine is only one - for saving time
     public func updatedAlarmTime() -> NSDate {
         let timeIntervalForRoutineAlarm = (duration.doubleValue - timeToSave.doubleValue) * 60
-        let alarmForRoutine = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: manuallyStarted!)
+        var sinceDate = startTime
+        if let manuallyStarted = manuallyStarted {
+            sinceDate = manuallyStarted
+        }
+        let alarmForRoutine = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: sinceDate)
         return (activity.isRoutine()) ? alarmForRoutine : updatedFinishTime()
     }
     

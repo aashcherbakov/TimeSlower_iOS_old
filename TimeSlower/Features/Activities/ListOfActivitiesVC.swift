@@ -108,6 +108,11 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         tableView.setEditing(!tableView.editing, animated: true)
     }
     
+    @IBAction func onCreateActivityButton(sender: AnyObject) {
+        let createActivityVC: EditActivityVC = ControllerFactory.createController()
+        createActivityVC.userProfile = profile
+        navigationController?.pushViewController(createActivityVC, animated: true)
+    }
     // MARK: - Navigation
     
     @IBAction func onBackButton(sender: UIButton) {
@@ -152,10 +157,9 @@ extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? StandardActivityCell {
-            if let editActivityVC = UIStoryboard(name: "Activities", bundle: nil).instantiateViewControllerWithIdentifier(EditActivityVC.className) as? EditActivityVC {
-                editActivityVC.activity = cell.activity
-                navigationController?.pushViewController(editActivityVC, animated: true)
-            }
+            let editActivityVC: EditActivityVC = ControllerFactory.createController()
+            editActivityVC.activity = cell.activity
+            navigationController?.pushViewController(editActivityVC, animated: true)
         }
     }
     
