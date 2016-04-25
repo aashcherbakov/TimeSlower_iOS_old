@@ -135,9 +135,18 @@ class EditActivityViewModel {
     
     private func setupData() {
         if let activity = activity {
+            updatePropertiesForActivity(activity)
             dataView.setupWith(activity: activity)
             timeSaver.timeToSave.value = activity.timing.timeToSave.integerValue
         }
+    }
+    
+    private func updatePropertiesForActivity(activity: Activity) {
+        name = activity.name
+        basis = activity.activityBasis()
+        startTime = activity.timing.startTime
+        duration = activity.timing.duration.integerValue
+        timeToSave = activity.timing.timeToSave.integerValue
     }
     
     private func setupDesign() {

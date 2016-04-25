@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import TimeSlowerKit
 
 /**
@@ -55,8 +56,8 @@ class EditActivityBasisView: UIView {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         expanded.value = !expanded.value
-        if basisSelector.selectedSegmentIndex.value == nil {
-            basisSelector.selectedSegmentIndex.value = 0 // daily by default
+        if selectedBasis.value == nil {
+            selectedBasis.value = .Daily
         }
     }
     
@@ -71,13 +72,11 @@ class EditActivityBasisView: UIView {
     private func setupEvents() {
         basisSelector.selectedSegmentIndex
             .subscribeNext { [weak self] (index) -> Void in
-                if let index = index {
-                    self?.daySelector.basis = ActivityBasis(rawValue: index)
-                    self?.selectedBasis.value = self?.daySelector.basis
-                    if let text = self?.daySelector.basis?.description() {
-                        self?.textFieldView.setText(text)
-                    }
+                guard let index = index else {
+                    return
                 }
+                
+                self?.updateBasis(index)
             }
             .addDisposableTo(disposableBag)
         
@@ -87,6 +86,17 @@ class EditActivityBasisView: UIView {
             }
             
             self?.textFieldView.setText(basis.description())
+            
         }.addDisposableTo(disposableBag)
+        
+    }
+    
+    private func updateBasis(index: Int) {
+        let newBasis = ActivityBasis(rawValue: index)
+        if selectedBasis.value != newBasis {
+            daySelector.basis = newBasis
+            selectedBasis.value = newBasis
+            textFieldView.setText(newBasis?.description())
+        }
     }
 }

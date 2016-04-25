@@ -167,17 +167,17 @@ class EditActivityDataView: UIView {
     private func setupObservationForExpandedProperties() {
         editStartTimeView.expanded.subscribeNext {
             [weak self] (expanded) -> Void in
-            self?.expandedStartTime.value = expanded
+                self?.expandedStartTime.value = expanded
             }.addDisposableTo(disposableBag)
         
         editBasisView.expanded.subscribeNext {
             [weak self] (expanded) -> Void in
-            self?.expandedBasis.value = expanded
+                self?.expandedBasis.value = expanded
             }.addDisposableTo(disposableBag)
         
         editNameView.textFieldIsEditing.subscribeNext {
             [weak self] (expanded) -> Void in
-            self?.expandedName.value = expanded
+                self?.expandedName.value = expanded
             }.addDisposableTo(disposableBag)
     }
 }

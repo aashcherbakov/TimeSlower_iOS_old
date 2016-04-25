@@ -23,7 +23,7 @@ class EditActivityNameView: UIView {
     @IBOutlet var view: UIView!
     
     private(set) var selectedName = Variable<String>("")
-    private(set) var textFieldIsEditing = Variable<Bool>(true)
+    private(set) var textFieldIsEditing = Variable<Bool>(false)
     private var disposableBag = DisposeBag()
     
     required init?(coder aDecoder: NSCoder) {
