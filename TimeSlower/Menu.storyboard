@@ -46,8 +46,8 @@
                                     <constraint firstAttribute="height" constant="106" id="kQU-w2-hrx"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLEKSANDR IBN SHCHERBAKOV JUNIOR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFO-Xm-b8M">
-                                <rect key="frame" x="44" y="178" width="167" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OLEKSANDR IBN SHCHERBAKOV JUNIOR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFO-Xm-b8M">
+                                <rect key="frame" x="45" y="178" width="166" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="222" id="2ge-tB-RrP"/>
                                 </constraints>
@@ -255,11 +255,16 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3c-I1-2yz">
-                                <rect key="frame" x="500" y="20" width="100" height="80"/>
+                                <rect key="frame" x="500" y="20" width="100" height="580"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3qZ-MW-Qwn"/>
                                     <constraint firstAttribute="height" constant="80" id="k0m-eS-91y"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="k0m-eS-91y"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="dismissMenu:" destination="7iY-BD-XE2" eventType="touchUpInside" id="ppX-KO-LM7"/>
                                 </connections>
@@ -271,6 +276,7 @@
                             <constraint firstAttribute="trailing" secondItem="q3c-I1-2yz" secondAttribute="trailing" id="7c7-N6-Hey"/>
                             <constraint firstItem="rS0-Fn-Zjv" firstAttribute="top" secondItem="mQO-Je-Czi" secondAttribute="top" constant="64" id="9Ku-1b-0p9"/>
                             <constraint firstItem="BKE-WX-kx4" firstAttribute="top" secondItem="gFO-Xm-b8M" secondAttribute="bottom" id="GBt-up-zPD"/>
+                            <constraint firstItem="u9K-nZ-21v" firstAttribute="top" secondItem="q3c-I1-2yz" secondAttribute="bottom" id="HF5-AQ-XDE"/>
                             <constraint firstItem="etA-1m-HWJ" firstAttribute="top" secondItem="BKE-WX-kx4" secondAttribute="bottom" constant="8" id="HFB-Lo-WfJ"/>
                             <constraint firstItem="liS-bO-JTd" firstAttribute="top" secondItem="etA-1m-HWJ" secondAttribute="bottom" constant="8" id="ICD-Tf-v5J"/>
                             <constraint firstItem="BKE-WX-kx4" firstAttribute="leading" secondItem="1qa-cd-QQE" secondAttribute="trailing" constant="2" id="Smf-A7-tou"/>
