@@ -67,6 +67,7 @@ extension Stats {
         case .Daily: days = hours / 24
         case .Workdays: days = (((hours / 24) / 7) / 5)
         case .Weekends: days = (((hours / 24) / 7) / 2)
+        case .Random: days = hours / 24
         }
         
         // Get months and years
@@ -109,6 +110,7 @@ extension Stats {
         case .Daily: return totalDays
         case .Workdays: return totalDays / 7 * 5
         case .Weekends: return totalDays / 7 * 2
+        case .Random: return totalDays
         }
     }
     

@@ -171,7 +171,7 @@ class StatsManageTest: XCTestCase {
     func testBusyDaysForPeriod() {
         let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
         testActivity.basis = Activity.basisWithEnum(.Weekends)
-        testActivity.busyDays = Activity.defaultBusyDaysForBasis(testActivity.activityBasis())
+//        testActivity.busyDays = Activity.defaultBusyDaysForBasis(testActivity.activityBasis())
         let daysInPeriod = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
         XCTAssertEqual(daysInPeriod, 8, "4 Saturdays and 4 Sundays")
     }

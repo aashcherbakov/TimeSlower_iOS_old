@@ -12,7 +12,7 @@ import CoreData
 public class Activity: NSManagedObject {
     
     @NSManaged public var basis: NSNumber
-    @NSManaged public var busyDays: String
+    @NSManaged public var days: NSSet
     @NSManaged public var name: String
     @NSManaged public var type: NSNumber
     @NSManaged public var profile: Profile

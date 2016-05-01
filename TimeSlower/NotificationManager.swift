@@ -45,6 +45,7 @@ extension Activity {
         case .Daily: createNotificationOnDailyBasis()
         case .Workdays: createNotificationOnWorkdayBasis()
         case .Weekends: createNotificationOnWeekendBasis()
+        default: return
         }
     }
     

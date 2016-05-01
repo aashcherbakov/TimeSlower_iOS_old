@@ -107,12 +107,19 @@
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F041945D1CD0479300C9B896 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */; };
+		F041945E1CD0479300C9B896 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = F041945C1CD0479300C9B896 /* Day.swift */; };
+		F04194621CD2E41B00C9B896 /* DateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194601CD2E40300C9B896 /* DateManagerTests.swift */; };
+		F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194651CD2E5A300C9B896 /* TestHelper.swift */; };
+		F04194681CD430DE00C9B896 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194671CD430DE00C9B896 /* Persistable.swift */; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */; };
 		F093E2461C7A40D400E245C4 /* EditActivityDurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */; };
 		F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */; };
 		F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */; };
 		F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */; };
+		F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */; };
+		F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BE1CD6688700809BA2 /* Weekday.swift */; };
 		F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */; };
 		F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
@@ -314,12 +321,19 @@
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
+		F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F041945C1CD0479300C9B896 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		F04194601CD2E40300C9B896 /* DateManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManagerTests.swift; sourceTree = "<group>"; };
+		F04194651CD2E5A300C9B896 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		F04194671CD430DE00C9B896 /* Persistable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionManager.swift; sourceTree = "<group>"; };
 		F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDurationView.xib; sourceTree = "<group>"; };
 		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationView.swift; sourceTree = "<group>"; };
 		F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNotificationsView.swift; sourceTree = "<group>"; };
 		F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationsView.xib; sourceTree = "<group>"; };
+		F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		F0A9F9BE1CD6688700809BA2 /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDataView.xib; sourceTree = "<group>"; };
@@ -486,10 +500,13 @@
 				F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */,
 				F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */,
 				F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */,
+				F04194671CD430DE00C9B896 /* Persistable.swift */,
 				F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */,
 				F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */,
 				F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */,
 				F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */,
+				F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */,
+				F0A9F9BE1CD6688700809BA2 /* Weekday.swift */,
 				F009AEC21BD9CC9A007F38A9 /* Model */,
 				F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */,
 				F009AE901BD9CBA2007F38A9 /* Info.plist */,
@@ -500,6 +517,7 @@
 		F009AEC21BD9CC9A007F38A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F041945F1CD047BE00C9B896 /* Days */,
 				F009AF081BDAD4CF007F38A9 /* Activity */,
 				F009AF0C1BDAD505007F38A9 /* DayResults */,
 				F009AF091BDAD4DC007F38A9 /* Profile */,
@@ -512,6 +530,7 @@
 		F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				F04194651CD2E5A300C9B896 /* TestHelper.swift */,
 				F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */,
 				F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */,
 				F009AEE31BD9CF21007F38A9 /* LazyCalendarTests.swift */,
@@ -724,6 +743,16 @@
 				F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		F041945F1CD047BE00C9B896 /* Days */ = {
+			isa = PBXGroup;
+			children = (
+				F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */,
+				F041945C1CD0479300C9B896 /* Day.swift */,
+				F04194601CD2E40300C9B896 /* DateManagerTests.swift */,
+			);
+			name = Days;
 			sourceTree = "<group>";
 		};
 		F0495C371C6C21FB00AA746A /* Edit StartTime */ = {
@@ -1394,7 +1423,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */,
 				F009AEB61BD9CC86007F38A9 /* Activity.swift in Sources */,
+				F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */,
 				F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */,
 				F009AEBE1BD9CC86007F38A9 /* Stats.swift in Sources */,
 				F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */,
@@ -1402,11 +1433,14 @@
 				F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */,
 				F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */,
 				F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */,
+				F04194681CD430DE00C9B896 /* Persistable.swift in Sources */,
+				F041945D1CD0479300C9B896 /* Day+CoreDataProperties.swift in Sources */,
 				F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */,
 				F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */,
 				F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */,
 				F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */,
 				F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */,
+				F041945E1CD0479300C9B896 /* Day.swift in Sources */,
 				F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */,
 				F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */,
 				F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */,
@@ -1421,11 +1455,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
+				F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
 				F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */,
 				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
 				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
 				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
+				F04194621CD2E41B00C9B896 /* DateManagerTests.swift in Sources */,
 				F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */,
 				F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */,
 			);

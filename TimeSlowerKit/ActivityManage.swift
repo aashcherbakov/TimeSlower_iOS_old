@@ -18,12 +18,24 @@ public enum ActivityBasis: Int {
     case Daily
     case Workdays
     case Weekends
+    case Random
     
     public func description() -> String {
         switch self {
         case .Daily: return "Daily"
         case .Workdays: return "Workdays"
         case .Weekends: return "Weekends"
+        case .Random: return "Random"
+        }
+    }
+    
+    /// Number of days basis ocupies in a week. Used to convert days to basis and vise versa
+    public var numberOfDaysInWeek: Int {
+        switch self {
+        case .Daily: return 7
+        case .Workdays: return 5
+        case .Weekends: return 2
+        case .Random: return 0
         }
     }
 }
@@ -35,6 +47,7 @@ extension Activity {
         case .Daily: return "Mon Tue Wed Thu Fri Sat Sun"
         case .Workdays: return "Mon Tue Wed Thu Fri"
         case .Weekends: return "Sat Sun"
+        case .Random: return ""
         }
     }
     
@@ -95,6 +108,7 @@ extension Activity {
         case .Daily: stringBasis = "Daily"
         case .Workdays: stringBasis = "Workdays"
         case .Weekends: stringBasis = "Weekends"
+        case .Random: stringBasis = "Random"
         }
         return stringBasis
     }

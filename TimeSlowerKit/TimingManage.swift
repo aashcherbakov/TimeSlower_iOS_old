@@ -133,6 +133,7 @@ extension Timing {
         case .Daily: return nextDayFromStartTime()
         case .Weekends: return nextWeekendDayFromDate(NSDate())
         case .Workdays: return nextWorkdayFromDate(NSDate())
+        case .Random: return NSDate()
         }
     }
     
