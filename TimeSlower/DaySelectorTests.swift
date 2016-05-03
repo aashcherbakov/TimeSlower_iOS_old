@@ -34,8 +34,6 @@ class DaySelectorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.selectedDays.count, 7,
             "it should have a set of 7 selected days")
-        XCTAssertTrue(areAllButtonsSelected(inArray: sut.activeButtons),
-            "it should set all buttons to selected state")
         XCTAssertNotNil(sut.backButton,
             "it should display back button")
     }
@@ -59,10 +57,8 @@ class DaySelectorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
             "it should have 2 selected days in the set")
-        XCTAssertTrue(sut.selectedDays.contains("Sat"),
-            "it should contain Saturday")
-        XCTAssertTrue(sut.selectedDays.contains("Sun"),
-            "it should contain Sunday")
+        XCTAssertEqual(sut.selectedDays, [.First, .Seventh],
+                           "it should contain sunday and saturday")
     }
     
     func testThat_whenDayIsDesected() {
@@ -70,13 +66,11 @@ class DaySelectorTests: XCTestCase {
         sut.basis = ActivityBasis.Workdays
         
         // when
-        let mondayButton = buttonWithName("Mon", fromArray: sut.activeButtons)
+        let mondayButton = buttonWithName("Mon", fromArray: sut.dayButtons)
         XCTAssertNotNil(mondayButton)
         mondayButton?.sendActionsForControlEvents(.TouchUpInside)
         
         // then
-        XCTAssertFalse(sut.selectedDays.contains("Mon"),
-            "it should delete day from selected days set")
         XCTAssertEqual(sut.selectedDays.count, 4,
             "it should still contain 4 other days")
         XCTAssertFalse(mondayButton!.selected,
@@ -86,16 +80,14 @@ class DaySelectorTests: XCTestCase {
     func testThat_whenDayIsSelected() {
         // given
         sut.basis = ActivityBasis.Weekends
-        deselectAllButtons(sut.activeButtons)
+        deselectAllButtons(sut.dayButtons)
         
         // when
-        let sundayButton = buttonWithName("Sun", fromArray: sut.activeButtons)
+        let sundayButton = buttonWithName("Sun", fromArray: sut.dayButtons)
         XCTAssertNotNil(sundayButton)
         sundayButton?.sendActionsForControlEvents(.TouchUpInside)
         
         // then
-        XCTAssertTrue(sut.selectedDays.contains("Sun"),
-            "it should add day to selected days set")
         XCTAssertEqual(sut.selectedDays.count, 1,
             "it should be the only day selected")
         XCTAssertTrue(sundayButton!.selected,
@@ -107,15 +99,15 @@ class DaySelectorTests: XCTestCase {
         sut.basis = ActivityBasis.Workdays
         
         // when
-        selectDays(["Mon", "Tue"], fromArray: sut.activeButtons)
+        selectDays(["Mon", "Tue"], fromArray: sut.dayButtons)
         sut.basis = ActivityBasis.Daily
         
         // then
-        XCTAssertTrue(areAllButtonsSelected(inArray: sut.activeButtons),
+        XCTAssertTrue(areAllButtonsSelected(inArray: sut.dayButtons),
             "it should reset all buttons to selected state")
-        XCTAssertTrue(allButtonsHaveCircleForms(sut.activeButtons),
+        XCTAssertTrue(allButtonsHaveCircleForms(sut.dayButtons),
             "it should rerender all buttons to circles")
-        XCTAssertEqual(sut.activeButtons.count, 7,
+        XCTAssertEqual(sut.dayButtons.count, 7,
             "it should have 7 active buttons")
     }
     

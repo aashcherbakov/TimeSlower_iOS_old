@@ -25,7 +25,7 @@ public enum Weekday: Int {
     /// Short name of weekday retrived from NSDateFormatter method showrWeekdaySymbols
     public var shortName: String {
         let defaultDaysArray = DateManager.sharedFormatter().shortWeekdaySymbols
-        return defaultDaysArray[self.rawValue]
+        return defaultDaysArray[self.rawValue - 1]
     }
     
     /// Checks if current day is a workday or not
@@ -38,4 +38,27 @@ public enum Weekday: Int {
             return true
         }
     }
+    
+    public static func weekdaysForBasis(basis: ActivityBasis) -> [Weekday] {
+        var weekdays = [Weekday]()
+        let defaultDaysArray: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
+        
+        switch basis {
+        case .Daily:
+            weekdays = defaultDaysArray
+            
+        case .Workdays, .Weekends:
+            let shouldBeWorkday = basis == .Workdays
+            for day in defaultDaysArray {
+                if day.isWorkday == shouldBeWorkday {
+                    weekdays.append(day)
+                }
+            }
+            
+        default: return weekdays
+        }
+        
+        return weekdays
+    }
+
 }

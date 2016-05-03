@@ -29,25 +29,6 @@ class DateManagerTests: XCTestCase {
                        "Tue", "it should be equal to Tue")
     }
     
-    func test_dateManagerReturnsDayName_fromWeekday() {
-        XCTAssertEqual(Weekday.First.shortName, "Mon",
-                       "it should be Monday")
-        XCTAssertEqual(Weekday.Second.shortName, "Tue",
-                       "it should be Tuesday")
-    }
-    
-    // MARK: - isWorkday()
-    
-    func test_isWorkday() {
-        XCTAssertTrue(Weekday.Second.isWorkday, "it should be workday in USA")
-        XCTAssertTrue(Weekday.Sixth.isWorkday, "it should be workday in USA")
-    }
-    
-    func test_isWeekend() {
-        XCTAssertFalse(Weekday.First.isWorkday, "it should be weekend in USA")
-        XCTAssertFalse(Weekday.Seventh.isWorkday, "it should be weekend in USA")
-    }
-    
     // MARK: - basisFromWeekdays()
     
     func test_basisFromWeekends() {

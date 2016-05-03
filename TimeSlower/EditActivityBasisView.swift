@@ -57,7 +57,7 @@ class EditActivityBasisView: UIView {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         expanded.value = !expanded.value
         if selectedBasis.value == nil {
-            selectedBasis.value = .Daily
+            selectedBasis.value = .Workdays
         }
     }
     
@@ -66,7 +66,6 @@ class EditActivityBasisView: UIView {
     private func setupDesign() {
         textFieldView.setup(withType: .Basis, delegate: nil)
         separatorLineHeight.constant = kDefaultSeparatorHeight
-        daySelector.basisToDisplay = .NotSelected
     }
     
     private func setupEvents() {

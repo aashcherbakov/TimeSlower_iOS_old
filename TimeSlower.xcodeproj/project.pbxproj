@@ -120,6 +120,7 @@
 		F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */; };
 		F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */; };
 		F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BE1CD6688700809BA2 /* Weekday.swift */; };
+		F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */; };
 		F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */; };
 		F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
@@ -334,6 +335,7 @@
 		F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationsView.xib; sourceTree = "<group>"; };
 		F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		F0A9F9BE1CD6688700809BA2 /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTests.swift; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDataView.xib; sourceTree = "<group>"; };
@@ -506,7 +508,9 @@
 				F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */,
 				F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */,
 				F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */,
+				F04194601CD2E40300C9B896 /* DateManagerTests.swift */,
 				F0A9F9BE1CD6688700809BA2 /* Weekday.swift */,
+				F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */,
 				F009AEC21BD9CC9A007F38A9 /* Model */,
 				F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */,
 				F009AE901BD9CBA2007F38A9 /* Info.plist */,
@@ -750,7 +754,6 @@
 			children = (
 				F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */,
 				F041945C1CD0479300C9B896 /* Day.swift */,
-				F04194601CD2E40300C9B896 /* DateManagerTests.swift */,
 			);
 			name = Days;
 			sourceTree = "<group>";
@@ -1462,6 +1465,7 @@
 				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
 				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
 				F04194621CD2E41B00C9B896 /* DateManagerTests.swift in Sources */,
+				F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */,
 				F009AEEB1BD9CF21007F38A9 /* LazyCalendarTests.swift in Sources */,
 				F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */,
 			);

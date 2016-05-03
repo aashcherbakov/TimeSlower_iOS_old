@@ -56,6 +56,7 @@ public class DateManager: NSObject {
         }
     }
     
+    
     private static func shouldDays(days: [Weekday], representBasis basis: ActivityBasis) -> Bool {
         guard days.count == basis.numberOfDaysInWeek else {
             return false
