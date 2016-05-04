@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TimeSlowerKit
 import RxSwift
 
 /// UIControl subclass used to select activity basis on high level: Daily, Workdays or Weekends
@@ -44,6 +45,12 @@ class BasisSelector: UIControl {
         }
     }
     
+    // MARK: - Internal Methods
+    
+    func updateSegmentedIndexForBasis(basis: ActivityBasis) {
+        configureButtonsForIndex(basis.rawValue)
+    }
+    
     // MARK: - Setup Methods
     
     private func setupDesign() {
@@ -74,14 +81,14 @@ class BasisSelector: UIControl {
     }
     
     private func configureButtonsForIndex(index: Int?) {
-        if let index = selectedSegmentIndex.value where index < 3 && index >= 0 {
+        if let index = index where index < 4 && index >= 0 {
             configureButtons(index)
         }
     }
     
     private func configureButtons(type: Int) {
-        for var i = 0; i < iconsArray.count; i++ {
-            if i == selectedSegmentIndex.value {
+        for i in 0 ..< iconsArray.count {
+            if i == type {
                 iconsArray[i].image = selectedIconImage
                 labelsArray[i].textColor = UIColor.purpleRed()
             } else {

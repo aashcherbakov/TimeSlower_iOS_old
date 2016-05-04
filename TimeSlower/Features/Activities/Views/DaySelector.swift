@@ -8,6 +8,7 @@
 
 import UIKit
 import TimeSlowerKit
+import RxSwift
 
 /// UIControl subclass that alows to pick days of activity basis
 class DaySelector: UIControl {
@@ -28,6 +29,9 @@ class DaySelector: UIControl {
     /// Set of days in format "Mon" "Fri" etc
     private(set) var selectedDays = Set<Weekday>()
     
+    /// Basis that comes out of selected days
+    private(set) var selectedBasis = Variable<ActivityBasis?>(nil)
+
     /// Activity Basis, used to display proper days
     var basis: ActivityBasis! {
         didSet {
@@ -79,21 +83,22 @@ class DaySelector: UIControl {
         resetSelectedDays()
         setNeedsLayout()
     }
-
     
-    private func setProperButtonsNames() {
+    private func setProperButtonsNames() {        
         let daysForBasis = Weekday.weekdaysForBasis(basis)
         
         for button in dayButtons {
             let weekday = daysAvailableToSelect[button.tag]
             button.setTitle(weekday.shortName, forState: .Normal)
-            button.selected = daysForBasis.contains(weekday)
+            
+            if basis != .Random {
+                button.selected = daysForBasis.contains(weekday)
+            }
         }
     }
     
     private func updateButtonsDesign() {
         for button in dayButtons {
-            
             updateDesignOfButton(button)
             setupButtonLayer(button)
         }
@@ -112,7 +117,7 @@ class DaySelector: UIControl {
     
     private func resetSelectedDays() {
         selectedDays.removeAll(keepCapacity: false)
-        
+
         for button in dayButtons {
             if button.selected {
                 selectedDays.insert(daysAvailableToSelect[button.tag])
@@ -127,6 +132,9 @@ class DaySelector: UIControl {
         } else {
             selectedDays.insert(selectedWeekday)
         }
+        
+        selectedBasis.value = DateManager.basisFromWeekdays(Array(selectedDays))
         button.selected = !button.selected
     }
+    
 }

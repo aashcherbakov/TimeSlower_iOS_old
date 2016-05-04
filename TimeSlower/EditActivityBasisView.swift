@@ -28,7 +28,7 @@ class EditActivityBasisView: UIView {
     
     
     /// Variable that represents activity basis. Observable
-    var selectedBasis = Variable<ActivityBasis?>(nil)
+    var selectedBasis = Variable<ActivityBasis?>(.Random)
     
     /**
      Bool to signal view model that height of the cell should be recalculated.
@@ -69,23 +69,31 @@ class EditActivityBasisView: UIView {
     }
     
     private func setupEvents() {
-        basisSelector.selectedSegmentIndex
-            .subscribeNext { [weak self] (index) -> Void in
+        basisSelector.selectedSegmentIndex.subscribeNext { [weak self] (index) -> Void in
                 guard let index = index else {
                     return
                 }
                 
                 self?.updateBasis(index)
-            }
-            .addDisposableTo(disposableBag)
+            }.addDisposableTo(disposableBag)
         
         selectedBasis.subscribeNext { [weak self] (basis) in
             guard let basis = basis else {
                 return
             }
             
+            self?.daySelector.basis = basis
             self?.textFieldView.setText(basis.description())
             
+        }.addDisposableTo(disposableBag)
+        
+        daySelector.selectedBasis.subscribeNext { [weak self] (basis) in
+            guard let basis = basis else {
+                return
+            }
+            
+            self?.basisSelector.updateSegmentedIndexForBasis(basis)
+            self?.selectedBasis.value = basis
         }.addDisposableTo(disposableBag)
         
     }
