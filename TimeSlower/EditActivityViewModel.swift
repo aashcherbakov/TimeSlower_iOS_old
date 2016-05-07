@@ -54,10 +54,11 @@ struct ActivityBlankModel {
 class EditActivityViewModel {
     
     private struct Constants {
-        static let defaultCellHeight: CGFloat = 56
-        static let nameCellExpandedHeight: CGFloat = 286
-        static let basisCellExpandedHeight: CGFloat = 128
-        static let startTimeExpandedHeight: CGFloat = 218
+        static let screenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
+        static let defaultCellHeight: CGFloat = round(0.08 * screenHeight)
+        static let nameCellExpandedHeight: CGFloat = round(0.43 * screenHeight)
+        static let basisCellExpandedHeight: CGFloat = round(0.19 * screenHeight)
+        static let startTimeExpandedHeight: CGFloat = round(0.33 * screenHeight)
     }
     
     typealias StateType = EditActivityState
