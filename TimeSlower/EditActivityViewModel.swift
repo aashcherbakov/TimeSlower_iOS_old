@@ -272,8 +272,7 @@ class EditActivityViewModel {
     }
     
     private func setupTimeSaverVisability(forState state: StateType) {
-        let shouldNotShow = state == .NoData || state == .AddBasis || state == .AddName || state == .AddStartTime
-        timeSaver.alpha = shouldNotShow ? 0.0 : 1.0
+        timeSaver.hidden = state != .FullHouse
     }
     
     private func missingDataString() -> String? {
