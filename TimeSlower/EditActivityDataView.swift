@@ -175,7 +175,7 @@ class EditActivityDataView: UIView {
                 self?.expandedBasis.value = expanded
             }.addDisposableTo(disposableBag)
         
-        editNameView.textFieldIsEditing.subscribeNext {
+        editNameView.expanded.subscribeNext {
             [weak self] (expanded) -> Void in
                 self?.expandedName.value = expanded
             }.addDisposableTo(disposableBag)

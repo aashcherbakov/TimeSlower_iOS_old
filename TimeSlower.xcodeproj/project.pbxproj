@@ -121,6 +121,7 @@
 		F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */; };
 		F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BE1CD6688700809BA2 /* Weekday.swift */; };
 		F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */; };
+		F0A9F9C41CDE50C800809BA2 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C31CDE50C800809BA2 /* ExpandableView.swift */; };
 		F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */; };
 		F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
@@ -336,6 +337,7 @@
 		F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		F0A9F9BE1CD6688700809BA2 /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTests.swift; sourceTree = "<group>"; };
+		F0A9F9C31CDE50C800809BA2 /* ExpandableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDataView.xib; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0A9F9C31CDE50C800809BA2 /* ExpandableView.swift */,
 				F0BE55F31C7FE7C800404301 /* DataEntryView */,
 				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
 				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
@@ -1358,6 +1361,7 @@
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
 				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
+				F0A9F9C41CDE50C800809BA2 /* ExpandableView.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,

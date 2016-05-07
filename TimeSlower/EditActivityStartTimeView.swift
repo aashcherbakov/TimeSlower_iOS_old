@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 /// UITableViewCell subclass to edit start time of activity
-class EditActivityStartTimeView: UIView {
+class EditActivityStartTimeView: UIView, ExpandableView {
     
     // MARK: - Properties
     
