@@ -28,7 +28,7 @@ class EditActivityBasisView: UIView, ExpandableView {
     
     
     /// Variable that represents activity basis. Observable
-    var selectedBasis = Variable<ActivityBasis?>(.Random)
+    var selectedBasis = Variable<Basis?>(.Random)
     
     /**
      Bool to signal view model that height of the cell should be recalculated.
@@ -100,7 +100,7 @@ class EditActivityBasisView: UIView, ExpandableView {
     }
     
     private func updateBasis(index: Int) {
-        let newBasis = ActivityBasis(rawValue: index)
+        let newBasis = Basis(rawValue: index)
         if selectedBasis.value != newBasis {
             daySelector.basis = newBasis
             selectedBasis.value = newBasis

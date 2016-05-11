@@ -20,7 +20,7 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     
     //MARK: - Properties
     var activity: Activity! {
-        didSet { lifeSavings = activity.stats.plannedTimingInLifetime() }
+        didSet { lifeSavings = activity.stats!.plannedTimingInLifetime() }
     }
     var lifeSavings: Profile.LifeTime! {
         didSet {
@@ -52,8 +52,8 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     //MARK: - Setup
     func setup() {
         titleLable.text = activity.name
-        startTimeLabel.text = dateFormatter.stringFromDate(activity.timing.updatedStartTime())
-        durationLabel.text = "\(activity.timing.duration.doubleValue.format(format)) min"
+        startTimeLabel.text = dateFormatter.stringFromDate(activity.timing!.updatedStartTime())
+        durationLabel.text = "\(activity.timing!.duration.doubleValue.format(format)) min"
         setupDescriptionLabel()
         setupPageViewController()
     }
@@ -95,8 +95,8 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     }
     
     func setupDescriptionLabel() {
-        let timeToSave = activity.timing.timeToSave.doubleValue.format(format)
-        let name = activity.name.uppercaseString
+        let timeToSave = activity.timing!.timeToSave.doubleValue.format(format)
+        let name = activity.name!.uppercaseString
         let basis = activity.activityBasisDescription()
         descriptionLabel.text = "CUTTING \(timeToSave) MIN OF \(name) \(basis) WILL SAVE FOR YOUR LIFETIME:"
     }

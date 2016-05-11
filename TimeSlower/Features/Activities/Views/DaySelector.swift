@@ -30,10 +30,10 @@ class DaySelector: UIControl {
     private(set) var selectedDays = Set<Weekday>()
     
     /// Basis that comes out of selected days
-    private(set) var selectedBasis = Variable<ActivityBasis?>(nil)
+    private(set) var selectedBasis = Variable<Basis?>(nil)
 
     /// Activity Basis, used to display proper days
-    var basis: ActivityBasis! {
+    var basis: Basis! {
         didSet {
             setupButtons()
         }

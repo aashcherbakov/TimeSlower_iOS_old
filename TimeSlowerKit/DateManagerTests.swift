@@ -39,7 +39,7 @@ class DateManagerTests: XCTestCase {
         let basis = DateManager.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, ActivityBasis.Weekends,
+        XCTAssertEqual(basis, Basis.Weekends,
                            "it should be weekends basis")
     }
     
@@ -51,7 +51,7 @@ class DateManagerTests: XCTestCase {
         let basis = DateManager.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, ActivityBasis.Workdays,
+        XCTAssertEqual(basis, Basis.Workdays,
                        "it should be weekends basis")
     }
     
@@ -63,7 +63,7 @@ class DateManagerTests: XCTestCase {
         let basis = DateManager.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, ActivityBasis.Daily,
+        XCTAssertEqual(basis, Basis.Daily,
                        "it should be weekends basis")
     }
     
@@ -75,7 +75,7 @@ class DateManagerTests: XCTestCase {
         let basis = DateManager.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, ActivityBasis.Random,
+        XCTAssertEqual(basis, Basis.Random,
                        "it should be weekends basis")
     }
 }

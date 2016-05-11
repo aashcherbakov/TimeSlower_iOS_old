@@ -56,7 +56,7 @@ extension Profile {
     }
     
     
-    public func isTimeIntervalFree(startTime start: NSDate, finish: NSDate, basis: ActivityBasis) -> Activity? {
+    public func isTimeIntervalFree(startTime start: NSDate, finish: NSDate, basis: Basis) -> Activity? {
         var preventing: Activity?
         for activity in allActivities() {
             if basis == .Daily {
@@ -91,7 +91,7 @@ extension Profile {
     }
     
     public func sortByNextActionTime(activity1: Activity, activity2: Activity) -> Bool {
-        return activity1.timing.nextActionTime() < (activity2.timing.nextActionTime())
+        return activity1.timing?.nextActionTime() < (activity2.timing?.nextActionTime())
     }
     
     public func findCurrentActivity() -> Activity? {

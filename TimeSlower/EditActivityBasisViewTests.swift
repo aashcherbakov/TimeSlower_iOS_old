@@ -30,8 +30,8 @@ class EditActivityBasisViewTests: XCTestCase {
     
     func test_initialSetupOfView() {
         // then
-        XCTAssertNil(sut.selectedBasis.value,
-                       "it should set selected basis to nil")
+        XCTAssertEqual(sut.selectedBasis.value, .Random,
+                       "it should set selected basis to Random")
         XCTAssertEqual(sut.textFieldView.type, TextFieldViewType.Basis,
                        "it should set textfield type to Basis")
         XCTAssertFalse(sut.expanded.value,
@@ -48,7 +48,7 @@ class EditActivityBasisViewTests: XCTestCase {
         // then
         XCTAssertTrue(sut.expanded.value,
                       "it should expand view on touch")
-        XCTAssertEqual(sut.selectedBasis.value, ActivityBasis.Daily,
+        XCTAssertEqual(sut.selectedBasis.value, .Random,
                        "it should set selected daily basis by defatult")
         XCTAssertEqual(sut.textFieldView.textField.text, sut.selectedBasis.value?.description(),
                        "it should set text for textfield")
@@ -56,10 +56,10 @@ class EditActivityBasisViewTests: XCTestCase {
     
     func test_selectedValueSetFromOutside() {
         // when
-        sut.selectedBasis.value = ActivityBasis.Weekends
+        sut.selectedBasis.value = Basis.Weekends
         
         // then
-        XCTAssertEqual(sut.textFieldView.textField.text, "Weekends",
+        XCTAssertEqual(sut.textFieldView.textField.text, "Saturday and Sunday",
                        "it should set textfield text to Weekends")
         XCTAssertNil(sut.basisSelector.selectedSegmentIndex.value,
                      "it should not set selected segment index")

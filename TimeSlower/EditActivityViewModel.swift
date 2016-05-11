@@ -34,13 +34,13 @@ enum EditActivityState {
  */
 struct ActivityBlankModel {
     var name: String
-    var basis: ActivityBasis
+    var basis: Basis
     var startTime: NSDate
     var duration: Int
     var notificationsOn: Bool
     var timeToSave: Int
     
-    init(withName name: String, basis: ActivityBasis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
+    init(withName name: String, basis: Basis, startTime: NSDate, duration: Int, notificationsOn: Bool, timeToSave: Int) {
         self.name = name
         self.basis = basis
         self.startTime = startTime
@@ -73,7 +73,7 @@ class EditActivityViewModel {
     private(set) var timeSaver: TimeSaver
     
     private var name: String?
-    private var basis: ActivityBasis?
+    private var basis: Basis?
     private var startTime: NSDate?
     private var notificationsOn: Bool?
     private var duration: Int?
@@ -138,16 +138,16 @@ class EditActivityViewModel {
         if let activity = activity {
             updatePropertiesForActivity(activity)
             dataView.setupWith(activity: activity)
-            timeSaver.timeToSave.value = activity.timing.timeToSave.integerValue
+            timeSaver.timeToSave.value = activity.timing!.timeToSave.integerValue
         }
     }
     
     private func updatePropertiesForActivity(activity: Activity) {
         name = activity.name
         basis = activity.activityBasis()
-        startTime = activity.timing.startTime
-        duration = activity.timing.duration.integerValue
-        timeToSave = activity.timing.timeToSave.integerValue
+        startTime = activity.timing!.startTime
+        duration = activity.timing!.duration.integerValue
+        timeToSave = activity.timing!.timeToSave.integerValue
     }
     
     private func setupDesign() {

@@ -14,7 +14,7 @@ public enum ActivityType: Int {
     case Goal
 }
 
-public enum ActivityBasis: Int {
+public enum Basis: Int {
     case Daily
     case Workdays
     case Weekends
@@ -22,10 +22,10 @@ public enum ActivityBasis: Int {
     
     public func description() -> String {
         switch self {
-        case .Daily: return "Daily"
-        case .Workdays: return "Workdays"
-        case .Weekends: return "Weekends"
-        case .Random: return "Random"
+        case .Daily: return "Every single day"
+        case .Workdays: return "Monday - Friday"
+        case .Weekends: return "Saturday and Sunday"
+        case .Random: return "Random days"
         }
     }
     
@@ -42,7 +42,7 @@ public enum ActivityBasis: Int {
 
 extension Activity {
     
-    public class func defaultBusyDaysForBasis(basis: ActivityBasis) -> String {
+    public class func defaultBusyDaysForBasis(basis: Basis) -> String {
         switch basis {
         case .Daily: return "Mon Tue Wed Thu Fri Sat Sun"
         case .Workdays: return "Mon Tue Wed Thu Fri"
@@ -51,7 +51,7 @@ extension Activity {
         }
     }
     
-    public class func dayNamesForBasis(basis: ActivityBasis) -> [String] {
+    public class func dayNamesForBasis(basis: Basis) -> [String] {
         return defaultBusyDaysForBasis(basis).componentsSeparatedByString(" ")
     }
     
@@ -72,7 +72,7 @@ extension Activity {
     }
     
     public func userInfoForActivity() -> [NSObject : AnyObject] {
-        return ["activityName" : name]
+        return ["activityName" : name!]
     }
     
     // MARK: - Convenience setters
@@ -80,26 +80,26 @@ extension Activity {
         return NSNumber(integer: type.rawValue)
     }
     
-    public class func basisWithEnum(basis: ActivityBasis) -> NSNumber {
+    public class func basisWithEnum(basis: Basis) -> NSNumber {
         return NSNumber(integer: basis.rawValue)
     }
     
     public func startActivity() {
-        timing.manuallyStarted = NSDate()
+        timing?.manuallyStarted = NSDate()
     }
     
     
     // MARK: - Property convenience
     public func isRoutine() -> Bool {
-        return (type.integerValue == 0) ? true : false
+        return (type!.integerValue == 0) ? true : false
     }
     
     public func activityType() -> ActivityType {
-        return ActivityType(rawValue: self.type.integerValue)!
+        return ActivityType(rawValue: self.type!.integerValue)!
     }
     
-    public func activityBasis() -> ActivityBasis {
-        return ActivityBasis(rawValue: self.basis.integerValue)!
+    public func activityBasis() -> Basis {
+        return Basis(rawValue: self.basis!.integerValue)!
     }
     
     public func activityBasisDescription() -> String {
@@ -124,28 +124,28 @@ extension Activity {
     
     
     //MARK: - Timing convenience
-    public func isPassedDueForToday() -> Bool { return timing.isPassedDueForToday() }
-    public func isGoingNow() -> Bool { return timing.isGoingNow() }
-    public func isDoneForToday() -> Bool { return timing.isDoneForToday() }
-    public func isManuallyStarted() -> Bool { return timing.manuallyStarted != nil }
-    public func updatedStartTime() -> NSDate { return timing.updatedStartTime() }
-    public func updatedFinishTime() -> NSDate { return timing.updatedFinishTime() }
-    public func updatedAlarmTime() -> NSDate { return timing.updatedAlarmTime() }
+    public func isPassedDueForToday() -> Bool { return timing!.isPassedDueForToday() }
+    public func isGoingNow() -> Bool { return timing!.isGoingNow() }
+    public func isDoneForToday() -> Bool { return timing!.isDoneForToday() }
+    public func isManuallyStarted() -> Bool { return timing!.manuallyStarted != nil }
+    public func updatedStartTime() -> NSDate { return timing!.updatedStartTime() }
+    public func updatedFinishTime() -> NSDate { return timing!.updatedFinishTime() }
+    public func updatedAlarmTime() -> NSDate { return timing!.updatedAlarmTime() }
     
     //MARK: - Data for notifications
     public func startTimerNotificationMessage() -> String {
         var message = ""
         if isRoutine() {
-            message = "Your goal: save \(timing.timeToSave) min. (or months \(stats.summMonths) of your lifetime"
+            message = "Your goal: save \(timing!.timeToSave) min. (or months \(stats!.summMonths) of your lifetime"
         } else {
-            message = "Your goal: spend \(timing.duration) min."
+            message = "Your goal: spend \(timing!.duration) min."
         }
         return message
     }
     
     /// Can't be assigned to a Goal (no snooze for a Goal)
     public func finishTimeNotificationMessage() -> String {
-        return "\(timing.timeToSave) min. left till the end. In order to save \(stats.summMonths) month of your lifetime, you have to finish it now"
+        return "\(timing!.timeToSave) min. left till the end. In order to save \(stats!.summMonths) month of your lifetime, you have to finish it now"
     }
     
     public func lastCallNotificationMessage() -> String {
@@ -155,8 +155,8 @@ extension Activity {
     
     // MARK: - Comparing activities
     func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
-        let thisDate = timing.nextActionTime()
-        let otherDate = otherActivity.timing.nextActionTime()
+        let thisDate = timing!.nextActionTime()
+        let otherDate = otherActivity.timing!.nextActionTime()
         return thisDate.compare(otherDate)
     }
 }

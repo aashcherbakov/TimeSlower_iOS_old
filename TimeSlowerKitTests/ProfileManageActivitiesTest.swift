@@ -176,32 +176,32 @@ class ProfileManageActivitiesTest: XCTestCase {
     func newTestActivity() -> Activity {
         let newActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
         newActivity.name = "Second activity"
-        newActivity.timing.startTime = testDateFormatter.dateFromString("7/5/15, 10:50 AM")!
-        newActivity.timing.finishTime = testDateFormatter.dateFromString("7/5/15, 11:45 AM")!
+        newActivity.timing!.startTime = testDateFormatter.dateFromString("7/5/15, 10:50 AM")!
+        newActivity.timing!.finishTime = testDateFormatter.dateFromString("7/5/15, 11:45 AM")!
         return newActivity
     }
     
     //MARK: - Current and closest activity
     func testFindCurrentActivity() {
-        testActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*5)
-        testActivity.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*30)
+        testActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(-60*5)
+        testActivity.timing!.finishTime = testActivity.timing!.startTime.dateByAddingTimeInterval(60*30)
         
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
+        secondActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
+        secondActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
         
         let currentActivity = testProfile.findCurrentActivity()
         XCTAssertEqual(currentActivity!, testActivity, "Test activity should be the current one")
     }
     
     func testFindCurrentActivityThatTriggersNextClosestActivity() {
-        testActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
-        testActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
+        testActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
+        testActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
         print(testActivity.timing)
                 
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(60*60*3)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(60*60*4)
+        secondActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(60*60*3)
+        secondActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(60*60*4)
         print(secondActivity.timing)
 
         let currentActivity = testProfile.findCurrentActivity()
@@ -212,8 +212,8 @@ class ProfileManageActivitiesTest: XCTestCase {
         testActivity.finishWithResult()
 
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(60*60*1)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(60*60*2)
+        secondActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(60*60*1)
+        secondActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(60*60*2)
         
         let nextActivity = testProfile.findNextActivityForToday()
         XCTAssertEqual(nextActivity!, secondActivity, "Second activity should be the next one")
@@ -224,8 +224,8 @@ class ProfileManageActivitiesTest: XCTestCase {
         testActivity.finishWithResult()
         
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*3)
-        secondActivity.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*4)
+        secondActivity.timing!.startTime = testActivity.timing!.startTime.dateByAddingTimeInterval(60*60*3)
+        secondActivity.timing!.finishTime = testActivity.timing!.startTime.dateByAddingTimeInterval(60*60*4)
         secondActivity.finishWithResult()
         
         let nextActivity = testProfile.findNextActivityInTomorrowList()

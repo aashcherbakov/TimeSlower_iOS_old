@@ -107,15 +107,15 @@ class ActivityManageTest: XCTestCase {
     
     func testSetTypeWithEnum() {
         testActivity.basis = Activity.basisWithEnum(.Weekends)
-        XCTAssertEqual(testActivity.basis.integerValue, ActivityBasis.Weekends.rawValue, "Basis should be Weekends")
+        XCTAssertEqual(testActivity.basis!.integerValue, Basis.Weekends.rawValue, "Basis should be Weekends")
     }
     
     func testSetBasisWithEnum() {
         testActivity.type = Activity.typeWithEnum(.Goal)
-        XCTAssertEqual(testActivity.type.integerValue, ActivityType.Goal.rawValue, "Basis should be Weekends")
+        XCTAssertEqual(testActivity.type!.integerValue, ActivityType.Goal.rawValue, "Basis should be Weekends")
     }
     
-    func testActivityBasisDescription() {
+    func testBasisDescription() {
         XCTAssertEqual(testActivity.activityBasisDescription(), "Daily", "Basis should be spelled as Daily")
     }
 

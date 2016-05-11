@@ -16,7 +16,7 @@ extension DayResults {
         // check if there already is result for this date
         if let fetchedResult = fetchResultWithDate(date, forActivity: activity) {
             result = fetchedResult
-            activity.timing.manuallyStarted = nil
+            activity.timing!.manuallyStarted = nil
             
         } else {
             let entity = NSEntityDescription.entityForName("DayResults", inManagedObjectContext: activity.managedObjectContext!)
@@ -30,10 +30,10 @@ extension DayResults {
             result.factDuration = NSNumber(double: abs(result.factFinishTime.timeIntervalSinceDate(result.factStartTime) / 60))
             
             if activity.isRoutine() {
-                result.factSavedTime = NSNumber(double: activity.timing.duration.doubleValue - result.factDuration.doubleValue)
+                result.factSavedTime = NSNumber(double: activity.timing!.duration.doubleValue - result.factDuration.doubleValue)
             }
             
-            activity.timing.manuallyStarted = nil
+            activity.timing!.manuallyStarted = nil
             
             var error: NSError?
             do {
@@ -56,19 +56,19 @@ extension DayResults {
         var success = 0.0
         var factDuration = factFinishTime.timeIntervalSinceDate(factStartTime) / 60
         
-        if factDuration > activity.timing.duration.doubleValue { factDuration = activity.timing.duration.doubleValue }
+        if factDuration > activity.timing!.duration.doubleValue { factDuration = activity.timing!.duration.doubleValue }
         if factDuration < 0 { factDuration = factDuration * -1 }
         
         if self.activity.isRoutine() {
-            let timeToSave = self.activity.timing.timeToSave.doubleValue
-            let factSavedTime = self.activity.timing.duration.doubleValue - factDuration
+            let timeToSave = self.activity.timing!.timeToSave.doubleValue
+            let factSavedTime = self.activity.timing!.duration.doubleValue - factDuration
             if factSavedTime < 0 {
                 return success
             } else {
                 success = factSavedTime / timeToSave * 100.0
             }
         } else {
-            success = factDuration / (activity.timing.duration.doubleValue) * 100.0
+            success = factDuration / (activity.timing!.duration.doubleValue) * 100.0
         }
         return round(success)
     }
@@ -102,7 +102,7 @@ extension DayResults {
     
     public class func lastWeekResultsForActivity(activity: Activity) -> [DayResults] {
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: "compareDateRepresentationOfString:")
-        var sortedArray = activity.results.sortedArrayUsingDescriptors([sortDescriptor])
+        var sortedArray = activity.results!.sortedArrayUsingDescriptors([sortDescriptor])
         if sortedArray.count > 7 {
             if sortedArray.count > 0 {
                 let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7
@@ -120,7 +120,7 @@ extension DayResults {
         let referenceDate = DayResults.standardDateFormatter().stringFromDate(date)
         
         let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        let activityNamePredicate = NSPredicate(format: "activity.name == %@", activity.name)
+        let activityNamePredicate = NSPredicate(format: "activity.name == %@", activity.name!)
         let dayOfResultPredicate = NSPredicate(format: "date == %@", referenceDate)
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activityNamePredicate, dayOfResultPredicate])
         fetchRequest.predicate = compoundPredicate

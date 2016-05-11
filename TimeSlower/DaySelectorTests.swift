@@ -29,7 +29,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToDaily() {
         // given
-        sut.basis = ActivityBasis.Daily
+        sut.basis = Basis.Daily
                 
         // then
         XCTAssertEqual(sut.selectedDays.count, 7,
@@ -40,7 +40,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToWeekends() {
         // given
-        sut.basis = ActivityBasis.Weekends
+        sut.basis = Basis.Weekends
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
@@ -49,7 +49,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBackButtonIsTapped() {
         // given
-        sut.basis = ActivityBasis.Weekends
+        sut.basis = Basis.Weekends
         
         // when
         sut.backButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
@@ -63,7 +63,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenDayIsDesected() {
         // given
-        sut.basis = ActivityBasis.Workdays
+        sut.basis = Basis.Workdays
         
         // when
         let mondayButton = buttonWithName("Mon", fromArray: sut.dayButtons)
@@ -77,9 +77,9 @@ class DaySelectorTests: XCTestCase {
             "it should leave button deselected")
     }
     
-    func testThat_whenDayIsSelected() {
+    func testThat_whenDayIsDeselected() {
         // given
-        sut.basis = ActivityBasis.Weekends
+        sut.basis = Basis.Weekends
         deselectAllButtons(sut.dayButtons)
         
         // when
@@ -88,7 +88,7 @@ class DaySelectorTests: XCTestCase {
         sundayButton?.sendActionsForControlEvents(.TouchUpInside)
         
         // then
-        XCTAssertEqual(sut.selectedDays.count, 1,
+        XCTAssertEqual(sut.selectedDays.count, 6,
             "it should be the only day selected")
         XCTAssertTrue(sundayButton!.selected,
             "it should leave button selected")
@@ -96,11 +96,11 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsReset() {
         // given
-        sut.basis = ActivityBasis.Workdays
+        sut.basis = Basis.Workdays
         
         // when
         selectDays(["Mon", "Tue"], fromArray: sut.dayButtons)
-        sut.basis = ActivityBasis.Daily
+        sut.basis = Basis.Daily
         
         // then
         XCTAssertTrue(areAllButtonsSelected(inArray: sut.dayButtons),

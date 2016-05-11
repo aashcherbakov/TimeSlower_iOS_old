@@ -47,7 +47,7 @@ class BasisSelector: UIControl {
     
     // MARK: - Internal Methods
     
-    func updateSegmentedIndexForBasis(basis: ActivityBasis) {
+    func updateSegmentedIndexForBasis(basis: Basis) {
         configureButtonsForIndex(basis.rawValue)
     }
     

@@ -38,13 +38,13 @@ public class DateManager: NSObject {
     }
     
     /**
-     Converts given array of weekdays into ActivityBasis case
+     Converts given array of weekdays into Basis case
      
      - parameter weekdays: Array of Weekday instances
      
-     - returns: ActivityBasis case
+     - returns: Basis case
      */
-    public static func basisFromWeekdays(weekdays: [Weekday]) -> ActivityBasis {
+    public static func basisFromWeekdays(weekdays: [Weekday]) -> Basis {
         if shouldDays(weekdays, representBasis: .Weekends) {
             return .Weekends
         } else if shouldDays(weekdays, representBasis: .Workdays) {
@@ -57,7 +57,7 @@ public class DateManager: NSObject {
     }
     
     
-    private static func shouldDays(days: [Weekday], representBasis basis: ActivityBasis) -> Bool {
+    private static func shouldDays(days: [Weekday], representBasis basis: Basis) -> Bool {
         guard days.count == basis.numberOfDaysInWeek else {
             return false
         }

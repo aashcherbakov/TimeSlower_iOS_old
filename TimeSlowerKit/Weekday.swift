@@ -39,7 +39,7 @@ public enum Weekday: Int {
         }
     }
     
-    public static func weekdaysForBasis(basis: ActivityBasis) -> [Weekday] {
+    public static func weekdaysForBasis(basis: Basis) -> [Weekday] {
         var weekdays = [Weekday]()
         let defaultDaysArray: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
         

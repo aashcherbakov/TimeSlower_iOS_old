@@ -18,7 +18,7 @@ class EditActivityVC: EditActivityVCConstraints {
     @IBOutlet weak var editingDataView: EditActivityDataView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var selectedBasis: ActivityBasis?
+    var selectedBasis: Basis?
     var userProfile: Profile?
     var activity: Activity?
     
@@ -26,13 +26,6 @@ class EditActivityVC: EditActivityVCConstraints {
     
     private var viewModel: EditActivityViewModel?
     private let disposableBag = DisposeBag()
-
-    lazy var dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .NoStyle
-        return dateFormatter
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,11 +115,11 @@ class EditActivityVC: EditActivityVCConstraints {
         
         activity?.name = model.name
         activity?.basis = Activity.basisWithEnum(model.basis)
-        activity?.timing.startTime = Timing.updateTimeForToday(model.startTime)
-        activity?.timing.duration = NSNumber(integer: model.duration)
-        activity?.timing.finishTime = activity!.timing.startTime
-            .dateByAddingTimeInterval(activity!.timing.duration.doubleValue * 60)
-        activity?.timing.timeToSave = NSNumber(integer: model.timeToSave)
+        activity?.timing!.startTime = Timing.updateTimeForToday(model.startTime)
+        activity?.timing!.duration = NSNumber(integer: model.duration)
+        activity?.timing!.finishTime = activity!.timing!.startTime
+            .dateByAddingTimeInterval(activity!.timing!.duration.doubleValue * 60)
+        activity?.timing!.timeToSave = NSNumber(integer: model.timeToSave)
         
         // TODO: notification on/off needs to be saved somehow
         

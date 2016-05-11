@@ -43,10 +43,10 @@ public class TestCoreDataStack: CoreDataStack {
     /// - Time to save: 10 min
     /// - Start time: 10:15 AM
     /// - Finish time: 10:45 AM
-    public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: ActivityBasis) -> Activity {
+    public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: Basis) -> Activity {
         let fakeActivity = Activity.newActivityForProfile(profile, ofType: type)
         fakeActivity.basis = Activity.basisWithEnum(basis)
-//        fakeActivity.busyDays = Activity.defaultBusyDaysForBasis(ActivityBasis(rawValue: fakeActivity.basis.integerValue)!)
+//        fakeActivity.busyDays = Activity.defaultBusyDaysForBasis(Basis(rawValue: fakeActivity.basis.integerValue)!)
         fakeActivity.name = "Morning shower"
         fakeActivity.timing = fakeTimingForActivity(fakeActivity)
         return fakeActivity
@@ -69,17 +69,17 @@ public class TestCoreDataStack: CoreDataStack {
         let newResult = DayResults.newResultWithDate(NSDate(), forActivity: activity)
         newResult.date = DayResults.standardDateFormatter().stringFromDate(NSDate())
         newResult.factFinishTime = activity.updatedFinishTime().dateByAddingTimeInterval(-5*60)
-        newResult.activity.timing.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
-        newResult.factStartTime = newResult.activity.timing.manuallyStarted!
+        newResult.activity.timing!.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
+        newResult.factStartTime = (newResult.activity.timing?.manuallyStarted!)!
         newResult.factSuccess = NSNumber(double: newResult.daySuccess())
         
         newResult.factDuration = NSNumber(double: abs(newResult.factFinishTime.timeIntervalSinceDate(newResult.factStartTime) / 60))
         
         if activity.isRoutine() {
-            newResult.factSavedTime = NSNumber(double: activity.timing.duration.doubleValue - newResult.factDuration.doubleValue)
+            newResult.factSavedTime = NSNumber(double: activity.timing!.duration.doubleValue - newResult.factDuration.doubleValue)
         }
         
-        newResult.activity.timing.manuallyStarted = nil
+        newResult.activity.timing!.manuallyStarted = nil
         return newResult
     }
     

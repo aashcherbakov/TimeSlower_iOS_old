@@ -26,13 +26,13 @@ class StandardActivityCell: UITableViewCell {
     }
 
     func setupLabels() {
-        nameLabel.text = activity.name.uppercaseString
+        nameLabel.text = activity.name!.uppercaseString
         startTimeLabel.text = dateFormatter.stringFromDate(activity.updatedStartTime())
         if activity.isDoneForToday() {
             savingsView.alpha = 1.0
-            let result = activity.stats.fastFactSavedForPeriod(.Today)
+            let result = activity.stats!.fastFactSavedForPeriod(.Today)
             factSavedTimeLabel.text = "\(result)"
-            plannedToSaveLabel.text = "\(activity.timing.timeToSave.integerValue)"
+            plannedToSaveLabel.text = "\(activity.timing!.timeToSave.integerValue)"
             
         }
     }

@@ -131,17 +131,23 @@ extension Profile {
     
     //TODO: move to profile
     /// Returns $0 - saved, $1 - spent
-    public func factTimingForPeriod(period: LazyCalendar.Period) -> (Double, Double) {
+    public func factTimingForPeriod(period: LazyCalendar.Period) -> (Double, Double)? {
+
+        
         var summSaved = 0.0
         var summSpent = 0.0
+        
         for activity in allActivities() {
-            for result in activity.stats.allResultsForPeriod(period) {
-                if activity.isRoutine() {
-                    summSaved += result.factSavedTime!.doubleValue
-                } else {
-                    summSpent += result.factDuration.doubleValue
+            if let stats = activity.stats {
+                for result in stats.allResultsForPeriod(period) {
+                    if activity.isRoutine() {
+                        summSaved += result.factSavedTime!.doubleValue
+                    } else {
+                        summSpent += result.factDuration.doubleValue
+                    }
                 }
             }
+            
         }
         return (summSaved, summSpent)
     }
@@ -153,11 +159,11 @@ extension Profile {
         var toSpend = 0.0;
         
         for activity in allActivities() {
-            let numberOfDays = activity.stats.busyDaysForPeriod(period, sinceDate: date)
+            let numberOfDays = activity.stats!.busyDaysForPeriod(period, sinceDate: date)
             if activity.isRoutine() {
-                toSave += activity.timing.timeToSave.doubleValue * Double(numberOfDays)
+                toSave += activity.timing!.timeToSave.doubleValue * Double(numberOfDays)
             } else {
-                toSpend += activity.timing.duration.doubleValue * Double(numberOfDays)
+                toSpend += activity.timing!.duration.doubleValue * Double(numberOfDays)
             }
         }
         return (abs(toSave), abs(toSpend)) // minutes
@@ -166,7 +172,7 @@ extension Profile {
     public func timeStatsForPeriod(period: LazyCalendar.Period) -> DailyStats {
         let fact = factTimingForPeriod(period)
         let planned = plannedTimingInPeriod(period, sinceDate: NSDate())
-        return DailyStats(factSaved: fact.0, factSpent: fact.1, plannedToSave: planned.0, plannedToSpend: planned.1)
+        return DailyStats(factSaved: fact!.0, factSpent: fact!.1, plannedToSave: planned.0, plannedToSpend: planned.1)
     }
     
     //    public func timeStatsForToday() -> DailyStats {

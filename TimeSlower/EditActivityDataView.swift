@@ -44,7 +44,7 @@ class EditActivityDataView: UIView {
     
     // Variables that represent selected values of given views
     var selectedName = Variable<String>("")
-    var selectedBasis = Variable<ActivityBasis?>(nil)
+    var selectedBasis = Variable<Basis?>(nil)
     var selectedStartTime = Variable<NSDate?>(nil)
     var selectedDuration = Variable<Int?>(nil)
     var selectedNotifications = Variable<Bool?>(nil)
@@ -66,10 +66,10 @@ class EditActivityDataView: UIView {
             return
         }
         
-        editNameView.selectedName.value = activity.name
+        editNameView.selectedName.value = activity.name!
         editBasisView.selectedBasis.value = activity.activityBasis()
-        editStartTimeView.selectedDate.value = activity.timing.startTime
-        editDurationView.activityDuration.value = activity.timing.duration.integerValue
+        editStartTimeView.selectedDate.value = activity.timing!.startTime
+        editDurationView.activityDuration.value = activity.timing!.duration.integerValue
         // TODO: assign notifications value
         
         updateDesignForState(.FullHouse)

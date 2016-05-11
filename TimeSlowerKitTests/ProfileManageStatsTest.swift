@@ -118,8 +118,8 @@ class ProfileManageStatsTest: XCTestCase {
         _ = testCoreDataStack.fakeResultForActivity(newActivity)
         let factStats = testProfile.factTimingForPeriod(.Today)
         
-        XCTAssertEqual(factStats.0, 7, "Today saving is 7 minutes")
-        XCTAssertEqual(factStats.1, 23, "Today spendings is 23 minutes")
+        XCTAssertEqual(factStats!.0, 7, "Today saving is 7 minutes")
+        XCTAssertEqual(factStats!.1, 23, "Today spendings is 23 minutes")
     }
     
     func testPlannedTimingForToday() {
@@ -129,7 +129,7 @@ class ProfileManageStatsTest: XCTestCase {
         evenNewerGoal.name = "Even newer goal"
         let newFakeRoutine = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
         newFakeRoutine.name = "Fake routine"
-        newFakeRoutine.timing.timeToSave = NSNumber(double: 15)
+        newFakeRoutine.timing!.timeToSave = NSNumber(double: 15)
         let plannedStats = testProfile.plannedTimingInPeriod(.Today, sinceDate: NSDate())
         XCTAssertEqual(plannedStats.0, 25, "Today planned savings are 25 minutes")
         XCTAssertEqual(plannedStats.1, 60, "Today planned spendings are 60 minutes")
@@ -156,8 +156,8 @@ class ProfileManageStatsTest: XCTestCase {
     func testSummSavedLastYear() {
         createFakeResultsForLastYear()
         let summ = testProfile.factTimingForPeriod(.LastYear)
-        XCTAssertEqual(summ.0, 14, "Total 14 minutes")
-        XCTAssertEqual(summ.1, 0, "Total spent 0 minutes")
+        XCTAssertEqual(summ!.0, 14, "Total 14 minutes")
+        XCTAssertEqual(summ!.1, 0, "Total spent 0 minutes")
     }
     
     func testTimePlannedToSaveLastYear() {
@@ -171,7 +171,7 @@ class ProfileManageStatsTest: XCTestCase {
     func testTimeSavedLastMonth() {
         createFakeResultsForLastMonth()
         let summ = testProfile.factTimingForPeriod(.LastMonth)
-        XCTAssertEqual(summ.0, 14, "Total 14 minutes")
+        XCTAssertEqual(summ!.0, 14, "Total 14 minutes")
     }
     
     func testTimePlannedToSaveLastMonth() {
@@ -184,16 +184,16 @@ class ProfileManageStatsTest: XCTestCase {
     
     func testDateBasedFetchRequestForLastYear() {
         createFakeResultsForLastYear()
-        let result = testActivity.stats.allResultsForPeriod(.LastYear)
+        let result = testActivity.stats!.allResultsForPeriod(.LastYear)
         XCTAssertEqual(result.count, 2, "Only 2 results for last year")
-        XCTAssertEqual(testActivity.results.count, 3, "Activity must have 3 results")
+        XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }
     
     func testAllResultsForLastMonth() {
         createFakeResultsForLastMonth()
-        let result = testActivity.stats.allResultsForPeriod(.LastMonth)
+        let result = testActivity.stats!.allResultsForPeriod(.LastMonth)
         XCTAssertEqual(result.count, 2, "Only 2 results for last month")
-        XCTAssertEqual(testActivity.results.count, 3, "Activity must have 3 results")
+        XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }
     
     //MARK: - Test additionsl methods

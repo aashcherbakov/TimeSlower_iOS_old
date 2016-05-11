@@ -159,7 +159,7 @@ extension Activity {
     
     //MARK: - In case user did not tap "Finish now" on lastStand notification
     func scheduleRestorationTimer() {
-        let intervalTillNextAction = timing.timeIntervalTillRegularEndOfActivity() + 120.0
+        let intervalTillNextAction = timing!.timeIntervalTillRegularEndOfActivity() + 120.0
         NSTimer.scheduledTimerWithTimeInterval(intervalTillNextAction, target: self, selector: "forceFinishActivityInCaseUserHasForgotten", userInfo: nil, repeats: false)
     }
     
