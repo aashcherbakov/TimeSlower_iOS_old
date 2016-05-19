@@ -24,14 +24,14 @@ class DaySelector: UIControl {
     @IBOutlet private var twoLastButtonsWidths: [NSLayoutConstraint]!
     @IBOutlet private var fiveLastButtonsWidths: [NSLayoutConstraint]!
     
-    private var daysAvailableToSelect: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
+    private var daysAvailableToSelect: [Weekday] = Weekday.weekdaysForBasis(.Daily)
     
     /// Set of days in format "Mon" "Fri" etc
     private(set) var selectedDays = Set<Weekday>()
     
     /// Basis that comes out of selected days
     private(set) var selectedBasis = Variable<Basis?>(nil)
-
+    
     /// Activity Basis, used to display proper days
     var basis: Basis! {
         didSet {

@@ -14,7 +14,7 @@ import Foundation
  while in others first day of week is Monday (Russia)
  */
 public enum Weekday: Int {
-    case First = 1
+    case First
     case Second
     case Third
     case Forth
@@ -25,14 +25,14 @@ public enum Weekday: Int {
     /// Short name of weekday retrived from NSDateFormatter method showrWeekdaySymbols
     public var shortName: String {
         let defaultDaysArray = DateManager.sharedFormatter().shortWeekdaySymbols
-        return defaultDaysArray[self.rawValue - 1]
+        return defaultDaysArray[self.rawValue]
     }
     
     /// Checks if current day is a workday or not
     public var isWorkday: Bool {
         let range = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday)
         
-        if rawValue == range.location || rawValue == range.length {
+        if rawValue == range.location - 1 || rawValue == range.length - 1 {
             return false
         } else {
             return true
@@ -41,10 +41,10 @@ public enum Weekday: Int {
     
     public static func weekdaysForBasis(basis: Basis) -> [Weekday] {
         var weekdays = [Weekday]()
-        let defaultDaysArray: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
+        let defaultDaysArray: [Weekday] = daysForWeek(DateManager.sharedFormatter())
         
         switch basis {
-        case .Daily:
+        case .Daily, .Random:
             weekdays = defaultDaysArray
             
         case .Workdays, .Weekends:
@@ -54,11 +54,25 @@ public enum Weekday: Int {
                     weekdays.append(day)
                 }
             }
-            
-        default: return weekdays
         }
         
         return weekdays
     }
 
+    private static func daysForWeek(dateFormatter: NSDateFormatter) -> [Weekday] {
+        var weekdays = [Weekday]()
+        
+        let dayNames = dateFormatter.shortWeekdaySymbols
+        for weekday in dayNames {
+            guard let index = dayNames.indexOf(weekday) else {
+                return weekdays
+            }
+            
+            if let day = Weekday(rawValue: index) {
+                weekdays.append(day)
+            }
+        }
+        
+        return weekdays
+    }
 }
