@@ -170,8 +170,12 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
             isPresenting: presenting)
     }
     
-    private func animateIntractiveTransition(inContext transitionContext: UIViewControllerContextTransitioning,
-        duration: NSTimeInterval, menuView: UIView, topView: UIView, isPresenting: Bool) {
+    private func animateIntractiveTransition(
+        inContext transitionContext: UIViewControllerContextTransitioning,
+        duration: NSTimeInterval,
+        menuView: UIView,
+        topView: UIView,
+        isPresenting: Bool) {
             
             UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.2, options: [],
                 animations: { [weak self] in
@@ -218,7 +222,7 @@ extension MenuTransitionManager: UIViewControllerAnimatedTransitioning {
         }
         
         // fix for bug when second view dissapears from screen
-        // use either that or adjust transform of the menu
+        // http://openradar.appspot.com/radar?id=5320103646199808
         if isPresenting {
             UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
         } else {

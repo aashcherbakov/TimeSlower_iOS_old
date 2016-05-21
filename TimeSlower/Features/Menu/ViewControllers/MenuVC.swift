@@ -78,9 +78,8 @@ class MenuVC: UIViewController {
         }
         
         if let controller = controllerForOption(option) {
-            dismissViewControllerAnimated(true) {
-                transition.sourceViewController?.navigationController?.pushViewController(controller, animated: true)
-            }
+            transition.sourceViewController?.navigationController?.pushViewController(controller, animated: false)
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
