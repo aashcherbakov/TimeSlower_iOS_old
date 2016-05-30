@@ -503,14 +503,9 @@
 			children = (
 				F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */,
 				F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */,
-				F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */,
+				F06AFFA61CF88D880056EE93 /* CoreData */,
+				F06AFFA51CF88D630056EE93 /* Extensions */,
 				F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */,
-				F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */,
-				F04194671CD430DE00C9B896 /* Persistable.swift */,
-				F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */,
-				F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */,
-				F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */,
-				F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */,
 				F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */,
 				F04194601CD2E40300C9B896 /* DateManagerTests.swift */,
 				F0A9F9BE1CD6688700809BA2 /* Weekday.swift */,
@@ -779,6 +774,27 @@
 				F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */,
 			);
 			name = "Edit Duration";
+			sourceTree = "<group>";
+		};
+		F06AFFA51CF88D630056EE93 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF051BDAA020007F38A9 /* NSDate+Extension.swift */,
+				F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */,
+				F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */,
+				F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F06AFFA61CF88D880056EE93 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */,
+				F009AEC31BD9CD25007F38A9 /* CoreDataStack.swift */,
+				F04194671CD430DE00C9B896 /* Persistable.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		F08B51C61C83936D008C6E8B /* Extensions */ = {
