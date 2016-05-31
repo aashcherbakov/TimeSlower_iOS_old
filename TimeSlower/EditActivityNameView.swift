@@ -15,7 +15,7 @@ import RxSwift
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
  collect data and, in expanded state, - DefaultActivitySelector.
  */
-class EditActivityNameView: UIView, ExpandableView {
+class EditActivityNameView: UIControl, ExpandableView {
     
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!

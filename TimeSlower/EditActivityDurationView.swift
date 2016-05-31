@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 /// UITableViewCell subclass to edit duration of activity
-class EditActivityDurationView: UIView {
+class EditActivityDurationView: UIControl {
     
     private struct Constants {
         static let defaultDuration = 30
@@ -29,6 +29,8 @@ class EditActivityDurationView: UIView {
     /// Duration of activity in minutes. Observable.
     var activityDuration = Variable<Int?>(nil)
     private var disposableBag = DisposeBag()
+    
+    var value: Int?
     
     // MARK: - Overriden Methods
     
@@ -62,6 +64,8 @@ class EditActivityDurationView: UIView {
             default: return
             }
             activityDuration.value = newValue
+            self.value = newValue
+            sendActionsForControlEvents(.ValueChanged)
         }
     }
     
@@ -77,6 +81,9 @@ class EditActivityDurationView: UIView {
     }
     
     private func setupEvents() {
+        
+        
+        
         activityDuration
             .subscribeNext { [weak self] (value) -> Void in
                 if let value = value {
@@ -87,4 +94,5 @@ class EditActivityDurationView: UIView {
             }
             .addDisposableTo(disposableBag)
     }
+    
 }

@@ -15,7 +15,7 @@ import TimeSlowerKit
  UITableViewCell subclass that allows user to select activity basis.
  Includes BasisSelector and DaySelector instances.
  */
-class EditActivityBasisView: UIView, ExpandableView {
+class EditActivityBasisView: UIControl, ExpandableView {
     
     // MARK: - Properties
     
@@ -61,6 +61,8 @@ class EditActivityBasisView: UIView, ExpandableView {
         if selectedBasis.value == nil {
             selectedBasis.value = .Workdays
         }
+        
+        sendActionsForControlEvents(.TouchUpInside)
     }
     
     // MARK: - Setup Methods

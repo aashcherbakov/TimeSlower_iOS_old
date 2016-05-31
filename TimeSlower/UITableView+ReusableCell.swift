@@ -19,7 +19,7 @@ public extension ReusableViewCell {
     
     /// Default reuse identifier is set with the class name.
     static var reuseIdentifier: String {
-        return String(self.dynamicType).componentsSeparatedByString(".").last!
+        return String(self)
     }
 }
 

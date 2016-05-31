@@ -86,6 +86,8 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/JVFloatLabeledTextField.framework"
   install_framework "Pods/PureLayout.framework"
+  install_framework "Pods/ReactiveCocoa.framework"
+  install_framework "Pods/Result.framework"
   install_framework "Pods/RxBlocking.framework"
   install_framework "Pods/RxCocoa.framework"
   install_framework "Pods/RxSwift.framework"
@@ -93,6 +95,8 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/JVFloatLabeledTextField.framework"
   install_framework "Pods/PureLayout.framework"
+  install_framework "Pods/ReactiveCocoa.framework"
+  install_framework "Pods/Result.framework"
   install_framework "Pods/RxBlocking.framework"
   install_framework "Pods/RxCocoa.framework"
   install_framework "Pods/RxSwift.framework"
