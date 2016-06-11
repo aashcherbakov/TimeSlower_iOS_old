@@ -15,7 +15,7 @@ import RxSwift
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
  collect data and, in expanded state, - DefaultActivitySelector.
  */
-class EditActivityNameView: UIControl, ExpandableView {
+class EditActivityNameView: UIControl {
     
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!
@@ -46,16 +46,16 @@ class EditActivityNameView: UIControl, ExpandableView {
         super.layoutSubviews()
         defaultActivitySelectorView.setupCollectionViewItemSize()
         
-        if selectedName.value == "" {
-            textFieldView.textField.becomeFirstResponder()
-        }
+//        if selectedName.value == "" {
+//            textFieldView.textField.becomeFirstResponder()
+//        }
     }
     
     // MARK: - Private Methods
     
     func setupData() {
         selectedName.subscribeNext { [weak self] (name) in
-            self?.textFieldView.setup(withType: .ActivityName, delegate: self)
+            self?.textFieldView.setupWithConfig(NameTextfield())
             self?.textFieldView.setText(name)
         }.addDisposableTo(disposableBag)
     }
@@ -78,13 +78,14 @@ class EditActivityNameView: UIControl, ExpandableView {
     }
 }
 
-extension EditActivityNameView: TextFieldViewDelegate {
-    func textFieldViewDidReturn(withText: String) {
-        expanded.value = false
-        selectedName.value = withText
-    }
-    
-    func textFieldViewDidBeginEditing() {
-        expanded.value = true
-    }
-}
+//extension EditActivityNameView: TextFieldViewDelegate {
+//    func textFieldViewDidReturn(withText: String) {
+//        expanded.value = false
+//        selectedName.value = withText
+//    }
+//    
+//    func textFieldViewDidBeginEditing() {
+//        expanded.value = true
+//        sendActionsForControlEvents(.TouchUpInside)
+//    }
+//}

@@ -21,13 +21,12 @@ protocol ExpandableCell {
 
 class EditActivityVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-
     
     var name: String?
+    
     var expandedCellIndex: NSIndexPath? {
         willSet {
             var indexes = [NSIndexPath]()
-            
             if let expandedCellIndex = expandedCellIndex, newValue = newValue where newValue != expandedCellIndex {
                 indexes = [expandedCellIndex, newValue]
             } else if let newValue = newValue {
@@ -36,9 +35,12 @@ class EditActivityVC: UIViewController {
                 indexes = [expandedCellIndex]
             }
             
+            lastExpandedCellIndex = newValue
             tableView.reloadRowsAtIndexPaths(indexes, withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
+    
+    var lastExpandedCellIndex: NSIndexPath?
     
     var userProfile: Profile?
     var activity: Activity?
@@ -52,62 +54,54 @@ class EditActivityVC: UIViewController {
     }
     
 
-    
-    private func editDurationCell(fromTableView tableView: UITableView) -> EditDurationCell {
-        let cell: EditDurationCell = tableView.dequeueReusableCell()
+    private func editNameCellFromTableView(tableView: UITableView) -> EditNameCell {
+        let cell: EditNameCell = tableView.dequeueReusableCell()
         
-        let signal = cell.control.rac_signalForControlEvents(.ValueChanged)
-            .toSignalProducer()
-            .map { (slider) -> Int? in
-                if let slider = slider as? EditActivityDurationView {
-                    return slider.value
-                }
-                return nil
-            }
-            .startWithNext { [weak self] (duration) in
-                print(duration)
+        cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .startWithNext {
+                [weak self] (_) in
+                self?.expandCell(cell, inTableView: tableView)
+                print("Name cell to expand")
         }
         
         return cell
     }
+
     
     private func editBasisCell(fromTableView tableView: UITableView) -> EditBasisCell {
         let cell: EditBasisCell = tableView.dequeueReusableCell()
         
-        let signal = cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] (_) in
-            if let indexPath = tableView.indexPathForCell(cell) {
-                self?.expandedCellIndex = indexPath
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            }
+        cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .startWithNext {
+                [weak self] (_) in
+                self?.expandCell(cell, inTableView: tableView)
+                print("Basis cell to expand")
         }
         
         return cell
     }
     
+    private func expandCell(cell: UITableViewCell, inTableView tableView: UITableView) {
+        guard let indexPath = tableView.indexPathForCell(cell) else { return }
+        
+        expandedCellIndex = indexPath
+    }
 
 }
 
 // MARK: - UITableViewDelegate
 extension EditActivityVC: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        if cell is ExpandableCell {
-            expandedCellIndex = indexPath
-            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         guard let selectedRow = EditRow(rawValue: indexPath.row) else { return 0 }
         
         if let expandableType = selectedRow.expandableCellType() {
-            if indexPath == expandedCellIndex {
+            if indexPath == lastExpandedCellIndex {
                 return expandableType.expandedHeight
             } else {
                 return expandableType.defaultHeight
             }
         }
-
         
         return 0
     }
@@ -140,12 +134,9 @@ extension EditActivityVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         switch indexPath.row {
-        case 0:
-            return EditNameCell()
-        case 1:
-            return editBasisCell(fromTableView: tableView)
-        default:
-            return UITableViewCell()
+        case 0: return editNameCellFromTableView(tableView)
+        case 1: return editBasisCell(fromTableView: tableView)
+        default: return UITableViewCell()
         }
     }
 }
@@ -164,10 +155,4 @@ class EditBasisCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     static let expandedHeight: CGFloat = 80
     static let defaultHeight: CGFloat = 50
 
-}
-
-class EditNameCell: UITableViewCell, ObservableControlCell, ExpandableCell {
-    weak var control: UIControl!
-    static let expandedHeight: CGFloat = 160
-    static let defaultHeight: CGFloat = 50
 }

@@ -32,7 +32,7 @@ class EditActivityBasisViewTests: XCTestCase {
         // then
         XCTAssertEqual(sut.selectedBasis.value, .Random,
                        "it should set selected basis to Random")
-        XCTAssertEqual(sut.textFieldView.type, TextFieldViewType.Basis,
+        XCTAssertTrue(sut.textFieldView.config is BasisTextfield,
                        "it should set textfield type to Basis")
         XCTAssertFalse(sut.expanded.value,
                        "it should not be expended")

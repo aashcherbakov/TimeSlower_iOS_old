@@ -68,7 +68,7 @@ class EditActivityBasisView: UIControl, ExpandableView {
     // MARK: - Setup Methods
     
     private func setupDesign() {
-        textFieldView.setup(withType: .Basis, delegate: nil)
+        textFieldView.setupWithConfig(BasisTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     

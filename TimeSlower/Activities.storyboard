@@ -1225,51 +1225,75 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="388"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditDurationCell" id="NRZ-Db-dKg" customClass="EditDurationCell" customModule="TimeSlower" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditNameCell" id="0SY-xq-GWQ" customClass="EditNameCell" customModule="TimeSlower" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NRZ-Db-dKg" id="vYE-7q-MDf">
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0SY-xq-GWQ" id="izm-lz-cBl">
                                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVz-r1-Tha" customClass="EditActivityDurationView" customModule="TimeSlower" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jb4-NQ-mHQ" customClass="EditActivityNameView" customModule="TimeSlower" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="uVz-r1-Tha" secondAttribute="bottom" id="D1h-sf-hY2"/>
-                                                                <constraint firstItem="uVz-r1-Tha" firstAttribute="top" secondItem="vYE-7q-MDf" secondAttribute="top" id="GWO-7W-rFV"/>
-                                                                <constraint firstAttribute="trailing" secondItem="uVz-r1-Tha" secondAttribute="trailing" id="H9Y-pL-wGD"/>
-                                                                <constraint firstItem="uVz-r1-Tha" firstAttribute="leading" secondItem="vYE-7q-MDf" secondAttribute="leading" id="uE9-A8-9Lf"/>
+                                                                <constraint firstAttribute="trailing" secondItem="jb4-NQ-mHQ" secondAttribute="trailing" id="3lN-GX-HzA"/>
+                                                                <constraint firstItem="jb4-NQ-mHQ" firstAttribute="top" secondItem="izm-lz-cBl" secondAttribute="top" id="72P-9X-dSb"/>
+                                                                <constraint firstAttribute="bottom" secondItem="jb4-NQ-mHQ" secondAttribute="bottom" id="Jgl-wn-bT0"/>
+                                                                <constraint firstItem="jb4-NQ-mHQ" firstAttribute="leading" secondItem="izm-lz-cBl" secondAttribute="leading" id="L5j-fK-dFU"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
-                                                            <outlet property="control" destination="uVz-r1-Tha" id="S1L-p0-vQ0"/>
+                                                            <outlet property="control" destination="jb4-NQ-mHQ" id="dob-XV-ymX"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditBasisCell" id="Ls3-fa-jGx" customClass="EditBasisCell" customModule="TimeSlower" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditBasisCell" id="4b8-qC-zeZ" customClass="EditBasisCell" customModule="TimeSlower" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ls3-fa-jGx" id="edY-Jd-Xyd">
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4b8-qC-zeZ" id="CWK-9p-8Hr">
                                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hW-zD-rse" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vnG-vF-Wdf" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="5hW-zD-rse" firstAttribute="top" secondItem="edY-Jd-Xyd" secondAttribute="top" id="25U-Ej-gzK"/>
-                                                                <constraint firstItem="5hW-zD-rse" firstAttribute="leading" secondItem="edY-Jd-Xyd" secondAttribute="leading" id="O4J-Zx-Tb4"/>
-                                                                <constraint firstAttribute="bottom" secondItem="5hW-zD-rse" secondAttribute="bottom" id="idu-Gc-thX"/>
-                                                                <constraint firstAttribute="trailing" secondItem="5hW-zD-rse" secondAttribute="trailing" id="qzp-vb-GuU"/>
+                                                                <constraint firstAttribute="bottom" secondItem="vnG-vF-Wdf" secondAttribute="bottom" id="0g1-bd-JBp"/>
+                                                                <constraint firstAttribute="trailing" secondItem="vnG-vF-Wdf" secondAttribute="trailing" id="8zX-Iw-7Bd"/>
+                                                                <constraint firstItem="vnG-vF-Wdf" firstAttribute="leading" secondItem="CWK-9p-8Hr" secondAttribute="leading" id="Mam-yE-sQg"/>
+                                                                <constraint firstItem="vnG-vF-Wdf" firstAttribute="top" secondItem="CWK-9p-8Hr" secondAttribute="top" id="PgI-fr-NIF"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
-                                                            <outlet property="control" destination="5hW-zD-rse" id="j5A-dN-cHC"/>
+                                                            <outlet property="control" destination="vnG-vF-Wdf" id="cWD-oo-u41"/>
                                                         </connections>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tKm-V4-cGX">
+                                                        <rect key="frame" x="0.0" y="116" width="600" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tKm-V4-cGX" id="jKN-w4-HKi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Hdv-2V-bMx">
+                                                        <rect key="frame" x="0.0" y="160" width="600" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hdv-2V-bMx" id="xNw-UX-j8d">
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dNT-cg-vG4">
+                                                        <rect key="frame" x="0.0" y="204" width="600" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNT-cg-vG4" id="D57-A4-5Lq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>

@@ -106,6 +106,7 @@
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
 		F041945D1CD0479300C9B896 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */; };
 		F041945E1CD0479300C9B896 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = F041945C1CD0479300C9B896 /* Day.swift */; };
 		F04194621CD2E41B00C9B896 /* DateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194601CD2E40300C9B896 /* DateManagerTests.swift */; };
@@ -114,6 +115,7 @@
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */; };
 		F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */; };
+		F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07974BE1D04CE6F00B72168 /* EditNameCell.swift */; };
 		F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */; };
 		F093E2461C7A40D400E245C4 /* EditActivityDurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */; };
 		F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */; };
@@ -138,7 +140,6 @@
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */; };
 		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
 		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
-		F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -325,6 +326,7 @@
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
+		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
 		F041945B1CD0479300C9B896 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F041945C1CD0479300C9B896 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		F04194601CD2E40300C9B896 /* DateManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -333,6 +335,7 @@
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
+		F07974BE1D04CE6F00B72168 /* EditNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameCell.swift; sourceTree = "<group>"; };
 		F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionManager.swift; sourceTree = "<group>"; };
 		F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDurationView.xib; sourceTree = "<group>"; };
 		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationView.swift; sourceTree = "<group>"; };
@@ -359,7 +362,6 @@
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppColors.swift"; sourceTree = "<group>"; };
 		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
 		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
-		F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewModel.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -753,6 +755,13 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		F0366A9C1D0CA8D1009EBF2B /* Concrete Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Concrete Subclasses";
+			sourceTree = "<group>";
+		};
 		F041945F1CD047BE00C9B896 /* Days */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +808,14 @@
 				F04194671CD430DE00C9B896 /* Persistable.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		F07974B71D04CDD000B72168 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F07974BE1D04CE6F00B72168 /* EditNameCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		F08B51C61C83936D008C6E8B /* Extensions */ = {
@@ -912,8 +929,9 @@
 			children = (
 				F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */,
 				F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */,
-				F0D8F5C51C39781000D41C78 /* TextfieldViewModel.swift */,
+				F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */,
 				F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */,
+				F0366A9C1D0CA8D1009EBF2B /* Concrete Subclasses */,
 			);
 			name = TextfieldView;
 			sourceTree = "<group>";
@@ -960,6 +978,7 @@
 		F0EB8A3A1C4ABDDC009B974A /* Edit Activity */ = {
 			isa = PBXGroup;
 			children = (
+				F07974B71D04CDD000B72168 /* Cells */,
 				F0EB8A3C1C4ABE0A009B974A /* Views */,
 				F0EB8A3B1C4ABE01009B974A /* ViewControllers */,
 				F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */,
@@ -1364,7 +1383,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0D8F5C61C39781000D41C78 /* TextfieldViewModel.swift in Sources */,
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
 				F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */,
@@ -1387,6 +1405,7 @@
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
 				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
+				F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */,
 				F0A9F9C41CDE50C800809BA2 /* ExpandableView.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
@@ -1408,6 +1427,7 @@
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
+				F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
 				F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */,
 				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,

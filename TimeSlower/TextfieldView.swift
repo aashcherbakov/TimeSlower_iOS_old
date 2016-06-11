@@ -7,34 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import JVFloatLabeledTextField
-
-/**
- *  Protocol used to transfer UITextFieldDelegate messages like didBeginEditing:, etc.
- */
-protocol TextFieldViewDelegate {
-    /**
-     Message sent to delegate when user taps "return" button
-     */
-    func textFieldViewDidReturn(withText: String)
-    
-    /**
-     Message sent to delegate when textfield becomes active
-     */
-    func textFieldViewDidBeginEditing()
-}
-
-/**
- Enum that represents type of textfield. Depending on type, icon and placeholder is set.
- */
-enum TextFieldViewType: String {
-    case ActivityName = "activityNameIcon"
-    case StartTime = "startTimeIcon"
-    case Duration = "durationIcon"
-    case Notification = "notificationIcon"
-    case Basis = "birthdayIcon"
-}
+import ReactiveCocoa
 
 /** 
  Class that represents a view with JVFloatLabeledTextField. Depending on set type,
@@ -49,14 +23,11 @@ class TextfieldView: UIView {
     
     // MARK: - Variables
     
-    @IBOutlet private var view: UIView!
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private var view: UIView!
     
-    private(set) var viewModel: TextfieldViewModel?
-    private(set) var type: TextFieldViewType?
-    private var disposable = DisposeBag()
-    private var delegate: TextFieldViewDelegate?
+    var config: TextfieldConfiguration!
     
     // MARK: - Lifecycle
     
@@ -70,14 +41,12 @@ class TextfieldView: UIView {
     /**
     Required setup method for textfield view
     
-    - parameter type:     TextFieldViewType which will define design details of textfield view
+    - parameter config:   TextfieldConfiguration type which will define design details of textfield view
     - parameter delegate: instance that is conforming to TextFieldViewDelegate protocol
     */
-    func setup(withType type: TextFieldViewType, delegate: TextFieldViewDelegate?) {
-        self.type = type
-        self.delegate = delegate
+    func setupWithConfig(config: TextfieldConfiguration) {
+        self.config = config
         
-        setupData()
         setupEvents()
         setupDesign()
     }
@@ -89,9 +58,9 @@ class TextfieldView: UIView {
      */
     func setText(text: String?) {
         textField.text = text
-        textField.resignFirstResponder()
-        let state: TextFieldViewState = text?.characters.count > 0 ? .DataEntered : .Empty
-        updateDesignForState(state)
+        if textField.isFirstResponder() {
+            textField.resignFirstResponder()
+        }
     }
     
     // MARK: - Private Methods
@@ -102,58 +71,31 @@ class TextfieldView: UIView {
         addSubview(view)
     }
     
-    private func setupData() {
-        viewModel = TextfieldViewModel(withTextField: textField)
-    }
-    
     private func setupEvents() {
-        // state depends on whether user has entered any text or not
-        viewModel?.state?
-            .subscribeNext { [weak self] (state) -> Void in
-                self?.updateDesignForState(state)
-            }
-            .addDisposableTo(disposable)
+        let textDirectSignal = textField.rac_valuesForKeyPath("text", observer: self).toSignalProducer()
+        let textInputSignal = textField.rac_textSignal().toSignalProducer()        
+        
+        combineLatest([textDirectSignal, textInputSignal])
+            .map({ (strings) -> Bool in
+                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
+                return combinedString.characters.count > 0
+            })
+            .skipRepeats()
+            .startWithNext { [weak self] (valid) in
+                print(valid.description)
+                self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
+                self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
+        }
     }
     
     private func setupDesign() {
-        guard let type = type else { return }
-        imageView.image = viewModel?.iconForType(type, state: .Empty)
-        setupTextfield()
-    }
-    
-    private func setupTextfield() {
-        guard let type = type else { return }
-        
-        textField.delegate = self
-        textField.userInteractionEnabled = (type == .ActivityName)
-        textField.placeholder = viewModel?.placeholderForType(type)
+        textField.userInteractionEnabled = config.textFieldInteractionEnabled
+        textField.placeholder = config.placeholder
         textField.floatingLabelActiveTextColor = UIColor.purpleRed()
         textField.floatingLabelTextColor = UIColor.purpleRed()
         textField.font = UIFont.sourceSansRegular()
+        textField.textColor = UIColor.lightGray()
         textField.placeholderYPadding = Constants.placeholderYPadding
-        textField.textColor = viewModel?.textColorForState(.Empty)
-    }
-    
-    private func updateDesignForState(state: TextFieldViewState?) {
-        guard let type = type, state = state else { return }
-        textField.textColor = viewModel?.textColorForState(state)
-        imageView.image = viewModel?.iconForType(type, state: state)
-    }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension TextfieldView : UITextFieldDelegate {
-    // we need to use delegate to forward existing API calls
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        delegate?.textFieldViewDidReturn(textField.text!)
-        return true
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        delegate?.textFieldViewDidBeginEditing()
     }
 }
 

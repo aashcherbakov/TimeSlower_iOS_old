@@ -62,7 +62,7 @@ class EditActivityStartTimeView: UIView, ExpandableView {
     // MARK: - Setup Methods
     
     private func setupDesign() {
-        textfieldView.setup(withType: .StartTime, delegate: nil)
+        textfieldView.setupWithConfig(StartTimeTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     

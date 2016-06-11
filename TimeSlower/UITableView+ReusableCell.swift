@@ -39,4 +39,9 @@ public extension UITableView {
             }
         return cell
     }
+    
+    public func registerReusableCell(type: AnyClass) {
+        let identifier = NSStringFromClass(type).componentsSeparatedByString(".").last!
+        registerNib(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+    }
 }

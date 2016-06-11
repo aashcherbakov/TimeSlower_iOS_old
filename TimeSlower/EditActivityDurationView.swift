@@ -76,14 +76,11 @@ class EditActivityDurationView: UIControl {
             activityDuration.value = Constants.defaultDuration
         }
         
-        textfieldView.setup(withType: .Duration, delegate: nil)
+        textfieldView.setupWithConfig(DurationTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
     private func setupEvents() {
-        
-        
-        
         activityDuration
             .subscribeNext { [weak self] (value) -> Void in
                 if let value = value {

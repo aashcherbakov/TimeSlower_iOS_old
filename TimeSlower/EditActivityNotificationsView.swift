@@ -43,7 +43,7 @@ class EditActivityNotificationsView: UIView {
     // MARK: - Setup Methods
     
     private func setupDesign() {
-        textfieldView.setup(withType: .Notification, delegate: nil)
+        textfieldView.setupWithConfig(NotificationsTextfield())
         notificationSwitch.on = notificationsOn.value
         notificationSwitch.onTintColor = UIColor.purpleRed()
     }

@@ -17,13 +17,16 @@ class EditActivityViewControllerTests: XCTestCase {
         super.setUp()
         let controller: EditActivityVC = ControllerFactory.createController()
         sut = controller
+        _ = sut.view
+        sut.tableView.reloadData()
     }
     
     override func tearDown() {
         super.tearDown()
     }
 
-
+    // MARK: - Setup
+    
     func test_SUTInitialSetup() {
         // when
         _ = sut.view
@@ -34,6 +37,8 @@ class EditActivityViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.tableView.delegate is EditActivityVC, "it should setup tableView delegate")
         XCTAssertTrue(sut.tableView.dataSource is EditActivityVC, "it should setup tableView data source")
     }
+    
+    // MARK: - Data Source
     
     func test_DataSourceSetup() {
         // when
@@ -47,29 +52,61 @@ class EditActivityViewControllerTests: XCTestCase {
     func test_setupNameCell() {
         // given
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        
-        // when
-        _ = sut.view
-        sut.tableView.reloadData()
         let cell = sut.tableView.cellForRowAtIndexPath(indexPath)
         
         // then
-        XCTAssertNotNil(cell)
         XCTAssertTrue(cell is ObservableControlCell, "it should have first cell as Observable")
         XCTAssertTrue(cell is ExpandableCell, "it should be expandable")
         XCTAssertEqual(sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath), EditNameCell.defaultHeight, "it should be default height for cell")
     }
     
-    func test_expandNameCell() {
+    // MARK: - Expand Cells
+    
+    func test_expandCell() {
+        // given
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+
+        // when
+        let cell = sut.tableView.cellForRowAtIndexPath(indexPath) as! ObservableControlCell
+        cell.control.sendActionsForControlEvents(.TouchUpInside)
+        let cellHeight = sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath)
+        
+        // then
+        XCTAssertEqual(cellHeight, EditNameCell.expandedHeight, "it should set height to expanded value")
+    }
+    
+    func test_collapseNameCell() {
         // given
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         
         // when
         _ = sut.view
         sut.tableView.reloadData()
-        sut.expandedCellIndex = indexPath
+        let cell = sut.tableView.cellForRowAtIndexPath(indexPath) as! ObservableControlCell
+        cell.control.sendActionsForControlEvents(.TouchUpInside)
         
+        cell.control.sendActionsForControlEvents(.TouchUpInside)
+        let cellHeight = sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath)
+
         // then
-        XCTAssertEqual(sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath), EditNameCell.expandedHeight, "it should be default height for cell")
+//        XCTAssertEqual(cellHeight, EditNameCell.defaultHeight, "it should be default height for cell")
+    }
+    
+    func test_defaultStateWithoutActivity() {
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should set name cell expanded")
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should set state to .Name")
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should set all other cell heights to 0")
+    }
+    
+    func test_changeStateFromNameToBasis() {
+//        let firstCellIndex = NSIndexPath(forRow: 0, inSection: 0)
+//        let secondCellIndex = NSIndexPath(forRow: 1, inSection: 0)
+
+        _ = sut.view
+        sut.tableView.reloadData()
+//        
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should set name cell height to default")
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should set basis cell to expanded")
+//        XCTAssert<#Equal#>(<#T##expression1: T?##T?#>, <#T##expression2: T?##T?#>, "it should leave other cell height as 0")
     }
 }
