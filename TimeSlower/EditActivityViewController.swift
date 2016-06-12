@@ -26,17 +26,11 @@ class EditActivityVC: UIViewController {
     
     var expandedCellIndex: NSIndexPath? {
         willSet {
-            var indexes = [NSIndexPath]()
-            if let expandedCellIndex = expandedCellIndex, newValue = newValue where newValue != expandedCellIndex {
-                indexes = [expandedCellIndex, newValue]
-            } else if let newValue = newValue {
-                indexes = [newValue]
-            } else if let expandedCellIndex = expandedCellIndex {
-                indexes = [expandedCellIndex]
+            UIView.animateWithDuration(0.3) { 
+                self.tableView.beginUpdates()
+                self.lastExpandedCellIndex = newValue
+                self.tableView.endUpdates()
             }
-            
-            lastExpandedCellIndex = newValue
-            tableView.reloadRowsAtIndexPaths(indexes, withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
     
@@ -56,12 +50,11 @@ class EditActivityVC: UIViewController {
 
     private func editNameCellFromTableView(tableView: UITableView) -> EditNameCell {
         let cell: EditNameCell = tableView.dequeueReusableCell()
-        
+
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            .startWithNext {
-                [weak self] (_) in
-                self?.expandCell(cell, inTableView: tableView)
-                print("Name cell to expand")
+            .observeOn(UIScheduler())
+            .startWithNext { [weak self] (_) in
+                self?.expandedCellIndex = tableView.indexPathForCell(cell)
         }
         
         return cell
@@ -72,6 +65,7 @@ class EditActivityVC: UIViewController {
         let cell: EditBasisCell = tableView.dequeueReusableCell()
         
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .observeOn(UIScheduler())
             .startWithNext {
                 [weak self] (_) in
                 self?.expandCell(cell, inTableView: tableView)
@@ -83,7 +77,6 @@ class EditActivityVC: UIViewController {
     
     private func expandCell(cell: UITableViewCell, inTableView tableView: UITableView) {
         guard let indexPath = tableView.indexPathForCell(cell) else { return }
-        
         expandedCellIndex = indexPath
     }
 

@@ -66,7 +66,7 @@ class EditActivityDataView: UIView {
             return
         }
         
-        editNameView.selectedName.value = activity.name!
+//        editNameView.selectedName.value = activity.name!
         editBasisView.selectedBasis.value = activity.activityBasis()
         editStartTimeView.selectedDate.value = activity.timing!.startTime
         editDurationView.activityDuration.value = activity.timing!.duration.integerValue
@@ -138,10 +138,10 @@ class EditActivityDataView: UIView {
     // MARK: - Private Methods - Bindings
     
     private func setupObservationForSelectedValues() {
-        editNameView.selectedName
-            .subscribeNext { [weak self] (name) -> Void in
-                self?.selectedName.value = name
-            }.addDisposableTo(disposableBag)
+//        editNameView.selectedName
+//            .subscribeNext { [weak self] (name) -> Void in
+//                self?.selectedName.value = name
+//            }.addDisposableTo(disposableBag)
         
         editBasisView.selectedBasis
             .subscribeNext { [weak self] (basis) -> Void in
@@ -175,9 +175,9 @@ class EditActivityDataView: UIView {
                 self?.expandedBasis.value = expanded
             }.addDisposableTo(disposableBag)
         
-        editNameView.expanded.subscribeNext {
-            [weak self] (expanded) -> Void in
-                self?.expandedName.value = expanded
-            }.addDisposableTo(disposableBag)
+//        editNameView.expanded.subscribeNext {
+//            [weak self] (expanded) -> Void in
+//                self?.expandedName.value = expanded
+//            }.addDisposableTo(disposableBag)
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class EditNameCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     
     @IBOutlet weak var control: UIControl!
-    
-    static let expandedHeight: CGFloat = 160
+    static let screenHeight = UIScreen.mainScreen().bounds.height
+    static let expandedHeight: CGFloat = round(0.43 * screenHeight)
     static let defaultHeight: CGFloat = 50
 }

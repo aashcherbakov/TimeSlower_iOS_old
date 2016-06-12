@@ -49,26 +49,11 @@ class TextfieldViewTests: XCTestCase {
         // then
         XCTAssertEqual(sut.imageView.image, UIImage(named: "activityNameIcon"),
             "it should have gray image")
-        XCTAssertEqual(sut.textField.placeholder, "Activity name",
+        XCTAssertEqual(sut.textField.placeholder, NameTextfield().placeholder,
             "it should have placeholder Activity name")
     }
     
-    func testThat_whenUserTappedEnterButton() {
-        // given
-        sut.setupWithConfig(NameTextfield())
-        
-        // when
-        sut.setText("Test text")
-        sut.textField.resignFirstResponder()
-        
-        // then
-        XCTAssertFalse(sut.textField.isFirstResponder(),
-            "it should resign first responder")
-    }
-    
     func testThat_whenUserStartsEnteringText() {
-        // given
-        
         // when
         sut.textField.becomeFirstResponder()
         

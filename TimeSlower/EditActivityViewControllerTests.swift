@@ -82,14 +82,14 @@ class EditActivityViewControllerTests: XCTestCase {
         // when
         _ = sut.view
         sut.tableView.reloadData()
-        let cell = sut.tableView.cellForRowAtIndexPath(indexPath) as! ObservableControlCell
-        cell.control.sendActionsForControlEvents(.TouchUpInside)
+        let cell = sut.tableView.cellForRowAtIndexPath(indexPath) as! EditNameCell
+        let nameView = cell.control as? EditActivityNameView
+        nameView?.textFieldView.textField.resignFirstResponder()
         
-        cell.control.sendActionsForControlEvents(.TouchUpInside)
         let cellHeight = sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath)
 
         // then
-//        XCTAssertEqual(cellHeight, EditNameCell.defaultHeight, "it should be default height for cell")
+        XCTAssertEqual(cellHeight, EditNameCell.defaultHeight, "it should be default height for cell")
     }
     
     func test_defaultStateWithoutActivity() {

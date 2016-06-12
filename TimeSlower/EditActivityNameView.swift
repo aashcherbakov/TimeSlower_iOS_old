@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import RxSwift
+import ReactiveCocoa
 
 /**
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
@@ -45,10 +46,6 @@ class EditActivityNameView: UIControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         defaultActivitySelectorView.setupCollectionViewItemSize()
-        
-//        if selectedName.value == "" {
-//            textFieldView.textField.becomeFirstResponder()
-//        }
     }
     
     // MARK: - Private Methods
@@ -64,6 +61,9 @@ class EditActivityNameView: UIControl {
         defaultActivitySelectorView.addTarget(self,
                                               action: #selector(EditActivityNameView.defaultActivitySelected(_:)),
                                               forControlEvents: .ValueChanged)
+        
+        textFieldView.textField.delegate = self
+    
     }
     
     func setupDesign() {
@@ -78,14 +78,15 @@ class EditActivityNameView: UIControl {
     }
 }
 
-//extension EditActivityNameView: TextFieldViewDelegate {
-//    func textFieldViewDidReturn(withText: String) {
-//        expanded.value = false
-//        selectedName.value = withText
-//    }
-//    
-//    func textFieldViewDidBeginEditing() {
-//        expanded.value = true
-//        sendActionsForControlEvents(.TouchUpInside)
-//    }
-//}
+extension EditActivityNameView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        sendActionsForControlEvents(.TouchUpInside)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.becomeFirstResponder()
+        sendActionsForControlEvents(.TouchUpInside)
+    }
+}
