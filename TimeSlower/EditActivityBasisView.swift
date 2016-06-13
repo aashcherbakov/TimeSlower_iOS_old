@@ -30,6 +30,7 @@ class EditActivityBasisView: UIControl, ExpandableView {
     /// Variable that represents activity basis. Observable
     var selectedBasis = Variable<Basis?>(.Random)
     var selectedDays = Set<Weekday>?()
+    dynamic var selectedValue: Set<Int>?
     
     /**
      Bool to signal view model that height of the cell should be recalculated.
@@ -88,6 +89,7 @@ class EditActivityBasisView: UIControl, ExpandableView {
             
             self?.daySelector.basis = basis
             self?.selectedDays = self?.daySelector.selectedDays
+            self?.selectedValue = [1, 2, 3]
             self?.textFieldView.setText(basis.description())
             
         }.addDisposableTo(disposableBag)
@@ -100,6 +102,7 @@ class EditActivityBasisView: UIControl, ExpandableView {
             self?.basisSelector.updateSegmentedIndexForBasis(basis)
             self?.selectedBasis.value = basis
             self?.selectedDays = self?.daySelector.selectedDays
+            self?.selectedValue = [1, 2, 3]
         }.addDisposableTo(disposableBag)
         
     }

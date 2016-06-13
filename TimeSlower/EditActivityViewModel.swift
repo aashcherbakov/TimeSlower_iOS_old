@@ -61,11 +61,11 @@ class EditActivityViewModel {
         static let startTimeExpandedHeight: CGFloat = round(0.33 * screenHeight)
     }
     
-    typealias StateType = EditActivityState
     
     /// Height of all views of EditActivityDataView combined. Used to update top white view height
     var updatedContentSizeHeight = Variable<CGFloat>(0)
-    
+    typealias StateType = EditActivityState
+
     private var machine: StateMachine<EditActivityViewModel>!
     private var disposableBag = DisposeBag()
 

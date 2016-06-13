@@ -12,7 +12,7 @@ import Foundation
 protocol StateMachineDelegate: class {
     
     /// typealias representing enum of states
-    typealias StateType
+    associatedtype StateType
     
     /**
      Delegate method with which you perform initial setup of StateMachine:

@@ -23,10 +23,10 @@ class EditActivityNameView: UIControl {
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet var view: UIView!
     
-    var expanded: Variable<Bool> = Variable(false)
-    
     private(set) var selectedName = Variable<String>("")
 
+    dynamic var selectedValue: String?
+    
     private var disposableBag = DisposeBag()
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,6 +73,7 @@ class EditActivityNameView: UIControl {
     func defaultActivitySelected(value: Int) {
         if let name = defaultActivitySelectorView.selectedActivityName {
             textFieldView.setText(name)
+            selectedValue = name
             selectedName.value = name
         }
     }
