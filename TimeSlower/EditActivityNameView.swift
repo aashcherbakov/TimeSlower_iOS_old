@@ -9,7 +9,6 @@
 import Foundation
 
 import UIKit
-import RxSwift
 import ReactiveCocoa
 
 /**
@@ -22,17 +21,12 @@ class EditActivityNameView: UIControl {
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet var view: UIView!
-    
-    private(set) var selectedName = Variable<String>("")
 
     dynamic var selectedValue: String?
-    
-    private var disposableBag = DisposeBag()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupXib()
-        setupData()
         setupEvents()
         setupDesign()
     }
@@ -50,32 +44,25 @@ class EditActivityNameView: UIControl {
     
     // MARK: - Private Methods
     
-    func setupData() {
-        selectedName.subscribeNext { [weak self] (name) in
-            self?.textFieldView.setupWithConfig(NameTextfield())
-            self?.textFieldView.setText(name)
-        }.addDisposableTo(disposableBag)
-    }
-    
     func setupEvents() {
-        defaultActivitySelectorView.addTarget(self,
-                                              action: #selector(EditActivityNameView.defaultActivitySelected(_:)),
-                                              forControlEvents: .ValueChanged)
+        rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let value = value as? String else { return }
+                self?.textFieldView.setText(value)
+        }
+        
+        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (_) in
+                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+                self?.selectedValue = name
+        }
         
         textFieldView.textField.delegate = self
-    
     }
     
     func setupDesign() {
+        textFieldView.setupWithConfig(NameTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
-    }
-    
-    func defaultActivitySelected(value: Int) {
-        if let name = defaultActivitySelectorView.selectedActivityName {
-            textFieldView.setText(name)
-            selectedValue = name
-            selectedName.value = name
-        }
     }
 }
 

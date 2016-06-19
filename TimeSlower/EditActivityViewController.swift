@@ -22,6 +22,10 @@ protocol ExpandableCell {
 /// Controller that is responsible for editing/entering information about given activity
 class EditActivityVC: UIViewController {
     
+    private struct Constants {
+        static let numberOfRows = 6
+    }
+    
     enum Flow {
         case Editing
         case Creating
@@ -46,11 +50,15 @@ class EditActivityVC: UIViewController {
     var selectedName: String?
     var selectedBasis: [Int]?
     var selectedStartTime: NSDate?
+    var selectedDuration: Double?
+    var selectedNotifications: Bool?
+    var selectedTimeToSave: Double?
     
     var flow: Flow?
     var state: EditingState?
     
     private var lastExpandedCellIndex: NSIndexPath?
+    
     private var expandedCellIndex: NSIndexPath? {
         willSet {
             var nextIndex = newValue
@@ -73,9 +81,16 @@ class EditActivityVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupEvents()
+        setupDesign()
+    }
+    
+    private func setupEvents() {
         tableView.dataSource = self
         tableView.delegate = self
-        
+    }
+    
+    private func setupDesign() {
         if activity != nil {
             flow = .Editing
         } else {
@@ -92,17 +107,19 @@ class EditActivityVC: UIViewController {
             lastExpandedCellIndex = lastExpandedCellIndex,
             cell = tableView.cellForRowAtIndexPath(lastExpandedCellIndex) as? EditNameCell,
             control = cell.control as? EditActivityNameView
-            else {
-                return
-        }
+        else { return }
+        
         control.textFieldView.textField.resignFirstResponder()
     }
     
     // MARK: - Cells
-
+    
     var nameSignal: SignalProducer<AnyObject?, NSError>?
     var basisSignal: SignalProducer<AnyObject?, NSError>?
-    
+    var startTimeSignal: SignalProducer<AnyObject?, NSError>?
+    var durationSignal: SignalProducer<AnyObject?, NSError>?
+    var notificationsSignal: SignalProducer<AnyObject?, NSError>?
+    var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
     
     private func editNameCellFromTableView(tableView: UITableView) -> EditNameCell {
         let cell: EditNameCell = tableView.dequeueReusableCell()
@@ -135,6 +152,8 @@ class EditActivityVC: UIViewController {
         }
     }
     
+    // MARK: - Update state
+    
     private func startTrackingValueChanges() {
         guard let nameSignal = nameSignal, basisSignal = basisSignal else { return }
         
@@ -143,6 +162,29 @@ class EditActivityVC: UIViewController {
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
                 self?.moveToNextEditingState()
+        }
+    }
+    
+    private func moveToNextEditingState() {
+        guard let state = state, nextState = EditingState(rawValue: state.rawValue + 1) else {
+            return
+        }
+        
+        machine.state = nextState
+    }
+    
+    private func expandNextCell() {
+        guard let
+            currentRow = expandedCellIndex?.row,
+            currentSection = expandedCellIndex?.section
+            else { return }
+        
+        let nextRow = currentRow + 1
+        if nextRow <= Constants.numberOfRows {
+            let nextIndexPath = NSIndexPath(forRow: nextRow, inSection: currentSection)
+            expandedCellIndex = nextIndexPath
+        } else {
+            expandedCellIndex = nil
         }
     }
 }
@@ -161,33 +203,14 @@ extension EditActivityVC: StateMachineDelegate {
     
     func didTransitionFrom(from: StateType, to: StateType) {
         state = to
+        expandNextCell()
         print("Moved to state: \(state)")
-        
-        
-    }
-    
-    private func moveToNextEditingState() {
-        guard let state = state, nextState = EditingState(rawValue: state.rawValue + 1) else { return }
-        machine.state = nextState
     }
 }
 
 // MARK: - UITableViewDelegate
+
 extension EditActivityVC: UITableViewDelegate {
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let selectedRow = EditRow(rawValue: indexPath.row) else { return 0 }
-        
-        if let expandableType = selectedRow.expandableCellType() {
-            if indexPath == lastExpandedCellIndex {
-                return expandableType.expandedHeight
-            } else {
-                return expandableType.defaultHeight
-            }
-        }
-        
-        return 0
-    }
     
     private enum EditRow: Int {
         case Name = 0
@@ -205,12 +228,26 @@ extension EditActivityVC: UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        guard let selectedRow = EditRow(rawValue: indexPath.row) else { return 0 }
+        
+        if let expandableType = selectedRow.expandableCellType() {
+            if indexPath == lastExpandedCellIndex {
+                return expandableType.expandedHeight
+            } else {
+                return expandableType.defaultHeight
+            }
+        }
+        
+        return 0
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension EditActivityVC: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return Constants.numberOfRows
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {        

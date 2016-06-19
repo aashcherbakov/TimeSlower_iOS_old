@@ -29,15 +29,15 @@ class EditActivityNameViewTests: XCTestCase {
     
     func test_initialSetupOfView() {
         // then
-        XCTAssertEqual(sut.selectedName.value, "",
-                       "it should set selected name to empty string")
+        XCTAssertNil(sut.selectedValue,
+                       "it should set selected name to nil")
         XCTAssertTrue(sut.textFieldView.config is NameTextfield,
                       "it should set textfield type to Basis")
     }
     
     func test_selectedNameIsSetFromOutside() {
         // when
-        sut.selectedName.value = "Alex"
+        sut.selectedValue = "Alex"
         
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Alex",
@@ -46,7 +46,7 @@ class EditActivityNameViewTests: XCTestCase {
     
     func test_whenUserTappedDoneOnKeyboard() {
         // given
-        sut.selectedName.value = "Alex"
+        sut.selectedValue = "Alex"
         
         // when
         sut.textFieldView.textField.resignFirstResponder()
@@ -54,7 +54,7 @@ class EditActivityNameViewTests: XCTestCase {
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Alex",
                        "it should set textfield text to Alex")
-        XCTAssertEqual(sut.selectedName.value, "Alex",
+        XCTAssertEqual(sut.selectedValue, "Alex",
                        "it should set selected value to Alex")
     }
 }
