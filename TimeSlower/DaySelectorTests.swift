@@ -57,7 +57,7 @@ class DaySelectorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
             "it should have 2 selected days in the set")
-        XCTAssertEqual(sut.selectedDays, [.First, .Seventh],
+        XCTAssertEqual(sut.selectedDays, [Weekday.First.rawValue, Weekday.Seventh.rawValue],
                            "it should contain sunday and saturday")
     }
     

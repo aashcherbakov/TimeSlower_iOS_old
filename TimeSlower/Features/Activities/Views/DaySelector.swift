@@ -8,7 +8,6 @@
 
 import UIKit
 import TimeSlowerKit
-import RxSwift
 
 /// UIControl subclass that alows to pick days of activity basis
 class DaySelector: UIControl {
@@ -27,10 +26,10 @@ class DaySelector: UIControl {
     private var daysAvailableToSelect: [Weekday] = Weekday.weekdaysForBasis(.Daily)
     
     /// Set of days in format "Mon" "Fri" etc
-    private(set) var selectedDays = Set<Weekday>()
+    private(set) var selectedDays = Set<Int>()
     
     /// Basis that comes out of selected days
-    private(set) var selectedBasis = Variable<Basis?>(nil)
+    private(set) var selectedBasis: Basis = .Random
     
     /// Activity Basis, used to display proper days
     var basis: Basis! {
@@ -120,7 +119,7 @@ class DaySelector: UIControl {
 
         for button in dayButtons {
             if button.selected {
-                selectedDays.insert(daysAvailableToSelect[button.tag])
+                selectedDays.insert(daysAvailableToSelect[button.tag].rawValue)
             }
         }
     }
@@ -128,13 +127,24 @@ class DaySelector: UIControl {
     private func updateSelectedListWithButton(button: UIButton) {
         let selectedWeekday = daysAvailableToSelect[button.tag]
         if button.selected {
-            selectedDays.remove(selectedWeekday)
+            selectedDays.remove(selectedWeekday.rawValue)
         } else {
-            selectedDays.insert(selectedWeekday)
+            selectedDays.insert(selectedWeekday.rawValue)
         }
         
-        selectedBasis.value = DateManager.basisFromWeekdays(Array(selectedDays))
+        let weekdays = weekdaysFromSelectedDays(selectedDays)
+        selectedBasis = DateManager.basisFromWeekdays(weekdays)
         button.selected = !button.selected
+        sendActionsForControlEvents(.ValueChanged)
     }
     
+    private func weekdaysFromSelectedDays(days: Set<Int>) -> [Weekday] {
+        var weekdays: [Weekday] = []
+        for day in days {
+            if let weekday = Weekday(rawValue: day) {
+                weekdays.append(weekday)
+            }
+        }
+        return weekdays
+    }
 }

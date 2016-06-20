@@ -104,6 +104,9 @@
 		F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */; };
 		F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */; };
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
+		F0115F781D17349300437E42 /* BasisSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F771D17349300437E42 /* BasisSelectorTests.swift */; };
+		F0115F7A1D1737DB00437E42 /* BasisOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0115F791D1737DB00437E42 /* BasisOptionView.xib */; };
+		F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7B1D1737E900437E42 /* BasisOptionView.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
@@ -321,6 +324,9 @@
 		F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelector.swift; path = Features/Activities/Views/TypeSelector.swift; sourceTree = "<group>"; };
 		F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TypeSelector.xib; path = Features/Activities/Views/TypeSelector.xib; sourceTree = "<group>"; };
 		F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfig.swift; sourceTree = "<group>"; };
+		F0115F771D17349300437E42 /* BasisSelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisSelectorTests.swift; sourceTree = "<group>"; };
+		F0115F791D1737DB00437E42 /* BasisOptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasisOptionView.xib; sourceTree = "<group>"; };
+		F0115F7B1D1737E900437E42 /* BasisOptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisOptionView.swift; sourceTree = "<group>"; };
 		F02131221C151E8C00C9B02E /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		F02131231C151E8C00C9B02E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -941,6 +947,9 @@
 			children = (
 				F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */,
 				F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */,
+				F0115F771D17349300437E42 /* BasisSelectorTests.swift */,
+				F0115F791D1737DB00437E42 /* BasisOptionView.xib */,
+				F0115F7B1D1737E900437E42 /* BasisOptionView.swift */,
 			);
 			name = "Basis Selector";
 			sourceTree = "<group>";
@@ -1243,6 +1252,7 @@
 				F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */,
 				F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */,
 				F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */,
+				F0115F7A1D1737DB00437E42 /* BasisOptionView.xib in Resources */,
 				F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */,
 				F0D71F3A1C7A233900B8473C /* EditActivityStartTimeView.xib in Resources */,
 				F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */,
@@ -1438,6 +1448,7 @@
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
 				F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
+				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
 				F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */,
 				F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */,
@@ -1454,6 +1465,7 @@
 				F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */,
 				F0F20F301CCD355F00F7DAA7 /* EditActivityNameViewTests.swift in Sources */,
 				F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */,
+				F0115F781D17349300437E42 /* BasisSelectorTests.swift in Sources */,
 				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
 				F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */,
 				F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */,

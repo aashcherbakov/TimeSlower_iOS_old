@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import ReactiveCocoa
 import TimeSlowerKit
 
 /**
  UITableViewCell subclass that allows user to select activity basis.
  Includes BasisSelector and DaySelector instances.
  */
-class EditActivityBasisView: UIControl, ExpandableView {
+class EditActivityBasisView: UIControl {
     
     // MARK: - Properties
     
@@ -26,20 +25,18 @@ class EditActivityBasisView: UIControl, ExpandableView {
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var textFieldViewHeightConstraint: NSLayoutConstraint!
     
-    
     /// Variable that represents activity basis. Observable
-    var selectedBasis = Variable<Basis?>(.Random)
-    var selectedDays = Set<Weekday>?()
+    var selectedDays = Set<Int>?()
+    
+    var selectedBasis: Basis? {
+        didSet {
+            daySelector.basis = selectedBasis
+            selectedDays = daySelector.selectedDays
+            textFieldView.setText(selectedBasis?.description())
+        }
+    }
+    
     dynamic var selectedValue: Set<Int>?
-    
-    /**
-     Bool to signal view model that height of the cell should be recalculated.
-     View model subscribes to this property and based on it's value changes the in State Machine.
-     Observable.
-     */
-    var expanded = Variable<Bool>(false)
-    
-    private var disposableBag = DisposeBag()
     
     // MARK: - Overridden Methods
     
@@ -57,10 +54,8 @@ class EditActivityBasisView: UIControl, ExpandableView {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        expanded.value = true
-        
-        if selectedBasis.value == nil {
-            selectedBasis.value = .Workdays
+        if selectedBasis == nil {
+            selectedBasis = .Workdays
         }
         
         sendActionsForControlEvents(.TouchUpInside)
@@ -74,44 +69,29 @@ class EditActivityBasisView: UIControl, ExpandableView {
     }
     
     private func setupEvents() {
-        basisSelector.selectedSegmentIndex.subscribeNext { [weak self] (index) -> Void in
-                guard let index = index else {
-                    return
-                }
+        basisSelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let selector = value as? BasisSelector else { return }
+                self?.updateBasis(selector.selectedIndex)
+        }
+        
+        daySelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let selector = value as? DaySelector else { return }
                 
-                self?.updateBasis(index)
-            }.addDisposableTo(disposableBag)
-        
-        selectedBasis.subscribeNext { [weak self] (basis) in
-            guard let basis = basis else {
-                return
-            }
-            
-            self?.daySelector.basis = basis
-            self?.selectedDays = self?.daySelector.selectedDays
-            self?.selectedValue = [1, 2, 3]
-            self?.textFieldView.setText(basis.description())
-            
-        }.addDisposableTo(disposableBag)
-        
-        daySelector.selectedBasis.subscribeNext { [weak self] (basis) in
-            guard let basis = basis else {
-                return
-            }
-            
-            self?.basisSelector.updateSegmentedIndexForBasis(basis)
-            self?.selectedBasis.value = basis
-            self?.selectedDays = self?.daySelector.selectedDays
-            self?.selectedValue = [1, 2, 3]
-        }.addDisposableTo(disposableBag)
-        
+                self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
+                self?.selectedBasis = selector.selectedBasis
+                self?.selectedDays = selector.selectedDays
+                self?.selectedValue = selector.selectedDays
+        }
     }
     
-    private func updateBasis(index: Int) {
+    private func updateBasis(index: Int?) {
+        guard let index = index else { return }
         let newBasis = Basis(rawValue: index)
-        if selectedBasis.value != newBasis {
+        if selectedBasis != newBasis {
             daySelector.basis = newBasis
-            selectedBasis.value = newBasis
+            selectedBasis = newBasis
             textFieldView.setText(newBasis?.description())
         }
     }

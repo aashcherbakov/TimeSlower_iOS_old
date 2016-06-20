@@ -67,7 +67,7 @@ class EditActivityDataView: UIView {
         }
         
 //        editNameView.selectedName.value = activity.name!
-        editBasisView.selectedBasis.value = activity.activityBasis()
+//        editBasisView.selectedBasis.value = activity.activityBasis()
         editStartTimeView.selectedDate.value = activity.timing!.startTime
         editDurationView.activityDuration.value = activity.timing!.duration.integerValue
         // TODO: assign notifications value
@@ -143,10 +143,10 @@ class EditActivityDataView: UIView {
 //                self?.selectedName.value = name
 //            }.addDisposableTo(disposableBag)
         
-        editBasisView.selectedBasis
-            .subscribeNext { [weak self] (basis) -> Void in
-                self?.selectedBasis.value = basis
-            }.addDisposableTo(disposableBag)
+//        editBasisView.selectedBasis
+//            .subscribeNext { [weak self] (basis) -> Void in
+//                self?.selectedBasis.value = basis
+//            }.addDisposableTo(disposableBag)
         
         editStartTimeView.selectedDate
             .subscribeNext { [weak self] (date) -> Void in
@@ -170,10 +170,10 @@ class EditActivityDataView: UIView {
                 self?.expandedStartTime.value = expanded
             }.addDisposableTo(disposableBag)
         
-        editBasisView.expanded.subscribeNext {
-            [weak self] (expanded) -> Void in
-                self?.expandedBasis.value = expanded
-            }.addDisposableTo(disposableBag)
+//        editBasisView.expanded.subscribeNext {
+//            [weak self] (expanded) -> Void in
+//                self?.expandedBasis.value = expanded
+//            }.addDisposableTo(disposableBag)
         
 //        editNameView.expanded.subscribeNext {
 //            [weak self] (expanded) -> Void in

@@ -271,8 +271,8 @@ class EditDurationCell: UITableViewCell, ObservableControlCell, ExpandableCell {
 class EditBasisCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     
     @IBOutlet weak var control: UIControl!
-    
-    static let expandedHeight: CGFloat = 80
+    static let screenHeight = UIScreen.mainScreen().bounds.height
+    static let expandedHeight: CGFloat = round(0.19 * screenHeight)
     static let defaultHeight: CGFloat = 50
 
 }
