@@ -165,7 +165,9 @@ class EditActivityVC: UIViewController {
     // MARK: - Update state
     
     private func startTrackingValueChanges() {
-        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal else { return }
+        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal else {
+            return
+        }
         
         combineLatest(nameSignal, basisSignal, startTimeSignal)
             .startWithNext { [weak self] (name, basis, startTime) in

@@ -184,14 +184,14 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     func addMissingResultsValuesAndLabels(lastResults: [DayResults]) {
         if lastResults.count < 7 {
             let vacantDaysLeft = 7 - lastWeekResultValues.count
-            for var i = 0; i < (7 - lastResults.count); i++ {
+            for _ in 0 ..< (7 - lastResults.count) {
                 lastWeekResultValues.insert(0.0, atIndex: 0)
             }
             
             let lastDay = DayResults.standardDateFormatter().dateFromString(lastResults.last!.date)
             let components = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: lastDay!)
-            for var i = 0; i < vacantDaysLeft; i++ {
-                components.day--
+            for _ in 0 ..< vacantDaysLeft {
+                components.day -= 1
                 let nextDate = NSCalendar.currentCalendar().dateFromComponents(components)
                 lastWeekDayNames.insert(LazyCalendar.shortDayNameForDate(nextDate!), atIndex: 0)
             }

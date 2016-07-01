@@ -46,10 +46,11 @@ class CircleProgress: UIView {
         }
     }
     
-    func progressAccordingToBounds(var progress: Double) -> Double {
-        progress = min(progress, 1)
-        progress = max(progress, 0)
-        return progress
+    func progressAccordingToBounds(progress: Double) -> Double {
+        var mutableProgress = progress
+        mutableProgress = min(progress, 1)
+        mutableProgress = max(progress, 0)
+        return mutableProgress
     }
     
     
@@ -59,7 +60,7 @@ class CircleProgress: UIView {
         self.endProgress = endProgress
         animationProgressStep = (endProgress - startProgress) * 0.01 / duration
         animationTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self,
-            selector: Selector("updateProgressBarForAnimation"), userInfo: nil, repeats: true)
+            selector: #selector(CircleProgress.updateProgressBarForAnimation), userInfo: nil, repeats: true)
     }
     
     func updateProgressBarForAnimation() {

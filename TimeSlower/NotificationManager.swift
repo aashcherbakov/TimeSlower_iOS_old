@@ -124,19 +124,13 @@ extension Activity {
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.category = category.rawValue
         notification.alertBody = messageForCategory(category)
-        if #available(iOS 8.2, *) {
-            notification.alertTitle = name
-        } else {
-            // Fallback on earlier versions
-        }
+        notification.alertTitle = name
+        
         notification.fireDate = fireDateForCategory(category)
-        if #available(iOS 8.2, *) {
-            notification.userInfo =
+        notification.userInfo =
                 ["activityName" : notification.alertTitle!,
                     "message" : notification.alertBody!]
-        } else {
-            // Fallback on earlier versions
-        }
+        
         
         return notification
     }
@@ -160,7 +154,7 @@ extension Activity {
     //MARK: - In case user did not tap "Finish now" on lastStand notification
     func scheduleRestorationTimer() {
         let intervalTillNextAction = timing!.timeIntervalTillRegularEndOfActivity() + 120.0
-        NSTimer.scheduledTimerWithTimeInterval(intervalTillNextAction, target: self, selector: "forceFinishActivityInCaseUserHasForgotten", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(intervalTillNextAction, target: self, selector: #selector(Activity.forceFinishActivityInCaseUserHasForgotten), userInfo: nil, repeats: false)
     }
     
     func forceFinishActivityInCaseUserHasForgotten() {

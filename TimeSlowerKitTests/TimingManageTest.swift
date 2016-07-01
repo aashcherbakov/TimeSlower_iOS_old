@@ -51,8 +51,8 @@ class TimingManageTest: XCTestCase {
     
     func testCreation() {
         XCTAssertNotNil(testActivityTiming, "Timing should not be nil")
-        XCTAssertTrue(testActivityTiming.respondsToSelector(Selector("updatedStartTime")), "Timing class")
-        XCTAssertTrue(testActivityTiming.activity.respondsToSelector(Selector("isRoutine")), "Timing should have activity attached")
+        XCTAssertTrue(testActivityTiming.respondsToSelector(#selector(Activity.updatedStartTime)), "Timing class")
+        XCTAssertTrue(testActivityTiming.activity.respondsToSelector(#selector(Activity.isRoutine)), "Timing should have activity attached")
         
         let startTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:15 AM")!
         let finishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:45 AM")!

@@ -39,7 +39,7 @@ class ChartView: UIView {
     func setupDaynameLabels() {
         if dayNameLabels.count > 0 {
             var sortedLabels = dayNameLabels.sort { $0.tag < $1.tag }
-            for var i = 0; i < sortedLabels.count; i++ {
+            for i in 0 ..< sortedLabels.count {
                 sortedLabels[i].text = lastWeekDaynames[i]
             }
             dayNameLabels = sortedLabels
@@ -75,7 +75,7 @@ class ChartView: UIView {
     }
     
     func buildProgressLineFromPoint(startPoint: CGPoint) {
-        for var i = 1; i < values.count; i++ {
+        for i in 1 ..< values.count {
             let nextX = startPoint.x + (sectionLength * CGFloat(i))
             let nextY = graphHeight - (graphHeight * (CGFloat(values[i]) / graphYScale))
             let nextPoint = CGPointMake(nextX, nextY)
@@ -89,7 +89,7 @@ class ChartView: UIView {
         //TODO: do we need min and max?
         max = Int(values[0])
         min = Int(values[0])
-        for var i = 0; i < values.count; i++ {
+        for i in 0 ..< values.count {
             let num = Int(values[i])
             if max <= num { max = num }
             if min >= num { min = num }

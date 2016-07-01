@@ -100,8 +100,8 @@
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" misplaced="YES" text="20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWz-Sg-IMb">
-                                                            <rect key="frame" x="20" y="23" width="15" height="19"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" text="20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWz-Sg-IMb">
+                                                            <rect key="frame" x="21" y="23" width="15" height="19"/>
                                                             <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -325,7 +325,7 @@
                                         </state>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="CC4-wh-tol" eventType="touchUpInside" id="tsf-vS-5Dt"/>
-                                            <segue destination="tVB-lB-HtX" kind="unwind" unwindAction="backToActivityList:" id="dWX-Wr-S54"/>
+                                            <segue destination="tVB-lB-HtX" kind="unwind" identifier="backToActivityList" unwindAction="backToActivityList:" id="dWX-Wr-S54"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New activity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bo-VA-k73">
@@ -433,7 +433,7 @@
                         <outlet property="timeSaverViewHeignt" destination="ove-86-1jR" id="Jf7-8G-jN0"/>
                         <outlet property="titleLabel" destination="0Bo-VA-k73" id="dhM-bi-ck5"/>
                         <outlet property="topWhiteViewHeight" destination="OEJ-gT-EKV" id="ZVP-fM-ejv"/>
-                        <segue destination="tVB-lB-HtX" kind="unwind" unwindAction="activityCreated:" id="15V-H3-TmE"/>
+                        <segue destination="tVB-lB-HtX" kind="unwind" identifier="activityCreated" unwindAction="activityCreated:" id="15V-H3-TmE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHD-lp-G0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1001,8 +1001,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLK-nj-fO7" userLabel="avarageSuccessView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AVERAGE SUCCESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CB7-Ng-2bo">
-                                        <rect key="frame" x="233" y="24" width="137" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVERAGE SUCCESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CB7-Ng-2bo">
+                                        <rect key="frame" x="232" y="24" width="137" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" red="0.38431372549999998" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1195,7 +1195,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Gou-uH-b2M" kind="unwind" unwindAction="backToActivityList:" id="r4o-JY-aiH"/>
+                                            <segue destination="Gou-uH-b2M" kind="unwind" identifier="backToActivityList" unwindAction="backToActivityList:" id="r4o-JY-aiH"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New activity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNA-6Z-IPS">
@@ -1381,7 +1381,7 @@
                     <size key="freeformSize" width="600" height="728"/>
                     <connections>
                         <outlet property="tableView" destination="wNu-C5-tB8" id="OeM-Jw-LM6"/>
-                        <segue destination="Gou-uH-b2M" kind="unwind" unwindAction="activityCreated:" id="niV-ph-AMv"/>
+                        <segue destination="Gou-uH-b2M" kind="unwind" identifier="activityCreated" unwindAction="activityCreated:" id="niV-ph-AMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvU-lQ-p0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
