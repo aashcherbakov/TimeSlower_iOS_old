@@ -1271,13 +1271,28 @@
                                                             <outlet property="control" destination="vnG-vF-Wdf" id="cWD-oo-u41"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tKm-V4-cGX">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditStartTimeCell" id="tKm-V4-cGX" customClass="EditStartTimeCell" customModule="TimeSlower" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="116" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tKm-V4-cGX" id="jKN-w4-HKi">
                                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM6-Ad-PSu" customClass="EditActivityStartTimeView" customModule="TimeSlower" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="AM6-Ad-PSu" firstAttribute="leading" secondItem="jKN-w4-HKi" secondAttribute="leading" id="Lkg-xT-rOQ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="AM6-Ad-PSu" secondAttribute="bottom" id="PHW-hU-9e5"/>
+                                                                <constraint firstAttribute="trailing" secondItem="AM6-Ad-PSu" secondAttribute="trailing" id="jSy-T4-cjW"/>
+                                                                <constraint firstItem="AM6-Ad-PSu" firstAttribute="top" secondItem="jKN-w4-HKi" secondAttribute="top" id="s9j-LT-rrY"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="control" destination="AM6-Ad-PSu" id="QUZ-zw-eQL"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Hdv-2V-bMx">
                                                         <rect key="frame" x="0.0" y="160" width="600" height="44"/>

@@ -30,21 +30,12 @@ class EditActivityBasisViewTests: XCTestCase {
     
     func test_initialSetupOfView() {
         // then
-        XCTAssertEqual(sut.selectedBasis, .Random,
-                       "it should set selected basis to Random")
         XCTAssertTrue(sut.textFieldView.config is BasisTextfield,
-                       "it should set textfield type to Basis")
-    }
-    
-    func test_userTouchedView() {
-        // when
-        sut.touchesEnded([UITouch()], withEvent: nil)
-        
-        // then
-        XCTAssertEqual(sut.selectedBasis, .Random,
-                       "it should set selected daily basis by defatult")
-        XCTAssertEqual(sut.textFieldView.textField.text, sut.selectedBasis?.description(),
-                       "it should set text for textfield")
+                      "it should set textfield type to Basis")
+        XCTAssertNil(sut.basisSelector.selectedIndex,
+                     "it should not have selected value")
+        XCTAssertNil(sut.selectedValue,
+                     "it should not have selected days")
     }
     
     func test_selectedValueSetFromOutside() {
@@ -56,7 +47,6 @@ class EditActivityBasisViewTests: XCTestCase {
                        "it should set textfield text to Weekends")
         XCTAssertNil(sut.basisSelector.selectedIndex,
                      "it should not set selected segment index")
+        
     }
-    
-    
 }

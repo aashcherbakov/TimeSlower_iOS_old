@@ -11,6 +11,7 @@ import Foundation
 /// Class to operate with dates. Contains singleton for NSDateFormatter
 public class DateManager: NSObject {
     private static let dateFormatter = NSDateFormatter()
+    private static let shortFormatter = NSDateFormatter()
     
     /**
      Use singleton because date formatter creation is expensive
@@ -21,6 +22,15 @@ public class DateManager: NSObject {
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
         dateFormatter.locale = NSLocale.currentLocale()
         return dateFormatter
+    }
+    
+    public static func sharedShortDateFormatter() -> NSDateFormatter {
+        let formatter = shortFormatter
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        formatter.locale = NSLocale.currentLocale()
+        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = .NoStyle
+        return formatter
     }
     
     /**

@@ -29,12 +29,9 @@ class DaySelector: UIControl {
     private(set) var selectedDays = Set<Int>()
     
     /// Basis that comes out of selected days
-    private(set) var selectedBasis: Basis = .Random
-    
-    /// Activity Basis, used to display proper days
-    var basis: Basis! {
+    var selectedBasis: Basis = .Random {
         didSet {
-            setupButtons()
+            setupButtonsForBasis()
         }
     }
     
@@ -51,6 +48,7 @@ class DaySelector: UIControl {
     private func setupDesign() {
         setupXib()
         setupInitialButtonsDesign()
+        setupButtonsForBasis()
     }
     
     private func setupXib() {
@@ -76,7 +74,7 @@ class DaySelector: UIControl {
     
     // MARK: - Private Methods
     
-    private func setupButtons() {
+    private func setupButtonsForBasis() {
         setProperButtonsNames()
         updateButtonsDesign()
         resetSelectedDays()
@@ -84,13 +82,13 @@ class DaySelector: UIControl {
     }
     
     private func setProperButtonsNames() {        
-        let daysForBasis = Weekday.weekdaysForBasis(basis)
+        let daysForBasis = Weekday.weekdaysForBasis(selectedBasis)
         
         for button in dayButtons {
             let weekday = daysAvailableToSelect[button.tag]
             button.setTitle(weekday.shortName, forState: .Normal)
             
-            if basis != .Random {
+            if selectedBasis != .Random {
                 button.selected = daysForBasis.contains(weekday)
             }
         }
@@ -132,9 +130,9 @@ class DaySelector: UIControl {
             selectedDays.insert(selectedWeekday.rawValue)
         }
         
+        button.selected = !button.selected
         let weekdays = weekdaysFromSelectedDays(selectedDays)
         selectedBasis = DateManager.basisFromWeekdays(weekdays)
-        button.selected = !button.selected
         sendActionsForControlEvents(.ValueChanged)
     }
     

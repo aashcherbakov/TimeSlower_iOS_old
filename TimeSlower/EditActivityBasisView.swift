@@ -25,17 +25,18 @@ class EditActivityBasisView: UIControl {
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var textFieldViewHeightConstraint: NSLayoutConstraint!
     
-    /// Variable that represents activity basis. Observable
-    var selectedDays = Set<Int>?()
     
     var selectedBasis: Basis? {
         didSet {
-            daySelector.basis = selectedBasis
-            selectedDays = daySelector.selectedDays
+            if let selectedBasis = selectedBasis {
+                daySelector.selectedBasis = selectedBasis
+            }
+            
             textFieldView.setText(selectedBasis?.description())
         }
     }
     
+    /// Value that is being tracked from EditActivityViewController
     dynamic var selectedValue: Set<Int>?
     
     // MARK: - Overridden Methods
@@ -54,10 +55,6 @@ class EditActivityBasisView: UIControl {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if selectedBasis == nil {
-            selectedBasis = .Workdays
-        }
-        
         sendActionsForControlEvents(.TouchUpInside)
     }
     
@@ -81,18 +78,18 @@ class EditActivityBasisView: UIControl {
                 
                 self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
                 self?.selectedBasis = selector.selectedBasis
-                self?.selectedDays = selector.selectedDays
                 self?.selectedValue = selector.selectedDays
         }
     }
     
     private func updateBasis(index: Int?) {
         guard let index = index else { return }
-        let newBasis = Basis(rawValue: index)
-        if selectedBasis != newBasis {
-            daySelector.basis = newBasis
+        if let newBasis = Basis(rawValue: index) where selectedBasis != newBasis {
+            daySelector.selectedBasis = newBasis
             selectedBasis = newBasis
-            textFieldView.setText(newBasis?.description())
+            textFieldView.setText(newBasis.description())
+            
         }
+        
     }
 }

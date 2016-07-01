@@ -29,7 +29,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToDaily() {
         // given
-        sut.basis = Basis.Daily
+        sut.selectedBasis = Basis.Daily
                 
         // then
         XCTAssertEqual(sut.selectedDays.count, 7,
@@ -40,7 +40,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToWeekends() {
         // given
-        sut.basis = Basis.Weekends
+        sut.selectedBasis = Basis.Weekends
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
@@ -49,7 +49,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBackButtonIsTapped() {
         // given
-        sut.basis = Basis.Weekends
+        sut.selectedBasis = Basis.Weekends
         
         // when
         sut.backButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
@@ -63,7 +63,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenDayIsDesected() {
         // given
-        sut.basis = Basis.Workdays
+        sut.selectedBasis = Basis.Workdays
         
         // when
         let mondayButton = buttonWithName("Mon", fromArray: sut.dayButtons)
@@ -79,7 +79,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenDayIsDeselected() {
         // given
-        sut.basis = Basis.Weekends
+        sut.selectedBasis = Basis.Weekends
         deselectAllButtons(sut.dayButtons)
         
         // when
@@ -96,11 +96,11 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsReset() {
         // given
-        sut.basis = Basis.Workdays
+        sut.selectedBasis = Basis.Workdays
         
         // when
         selectDays(["Mon", "Tue"], fromArray: sut.dayButtons)
-        sut.basis = Basis.Daily
+        sut.selectedBasis = Basis.Daily
         
         // then
         XCTAssertTrue(areAllButtonsSelected(inArray: sut.dayButtons),

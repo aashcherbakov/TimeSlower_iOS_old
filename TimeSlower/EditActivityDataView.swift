@@ -68,7 +68,7 @@ class EditActivityDataView: UIView {
         
 //        editNameView.selectedName.value = activity.name!
 //        editBasisView.selectedBasis.value = activity.activityBasis()
-        editStartTimeView.selectedDate.value = activity.timing!.startTime
+//        editStartTimeView.selectedDate.value = activity.timing!.startTime
         editDurationView.activityDuration.value = activity.timing!.duration.integerValue
         // TODO: assign notifications value
         
@@ -132,7 +132,7 @@ class EditActivityDataView: UIView {
     
     private func setupEvents() {
         setupObservationForSelectedValues()
-        setupObservationForExpandedProperties()
+//        setupObservationForExpandedProperties()
     }
     
     // MARK: - Private Methods - Bindings
@@ -148,10 +148,10 @@ class EditActivityDataView: UIView {
 //                self?.selectedBasis.value = basis
 //            }.addDisposableTo(disposableBag)
         
-        editStartTimeView.selectedDate
-            .subscribeNext { [weak self] (date) -> Void in
-                self?.selectedStartTime.value = date
-            }.addDisposableTo(disposableBag)
+//        editStartTimeView.selectedDate
+//            .subscribeNext { [weak self] (date) -> Void in
+//                self?.selectedStartTime.value = date
+//            }.addDisposableTo(disposableBag)
         
         editDurationView.activityDuration
             .subscribeNext { [weak self] (duration) -> Void in
@@ -164,12 +164,12 @@ class EditActivityDataView: UIView {
             }.addDisposableTo(disposableBag)
     }
     
-    private func setupObservationForExpandedProperties() {
-        editStartTimeView.expanded.subscribeNext {
-            [weak self] (expanded) -> Void in
-                self?.expandedStartTime.value = expanded
-            }.addDisposableTo(disposableBag)
-        
+//    private func setupObservationForExpandedProperties() {
+//        editStartTimeView.expanded.subscribeNext {
+//            [weak self] (expanded) -> Void in
+//                self?.expandedStartTime.value = expanded
+//            }.addDisposableTo(disposableBag)
+    
 //        editBasisView.expanded.subscribeNext {
 //            [weak self] (expanded) -> Void in
 //                self?.expandedBasis.value = expanded
@@ -179,5 +179,5 @@ class EditActivityDataView: UIView {
 //            [weak self] (expanded) -> Void in
 //                self?.expandedName.value = expanded
 //            }.addDisposableTo(disposableBag)
-    }
+//    }
 }

@@ -142,6 +142,16 @@ class EditActivityVC: UIViewController {
         return cell
     }
     
+    private func editStartTimeCell(fromTableView tableView: UITableView) -> EditStartTimeCell {
+        let cell: EditStartTimeCell = tableView.dequeueReusableCell()
+        bindExpandingBlockToCell(cell)
+        
+        let startTimeControl = cell.control as? EditActivityStartTimeView
+        startTimeSignal = startTimeControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        return cell
+    }
+    
     private func bindExpandingBlockToCell(cell: ObservableControlCell) {
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
             .observeOn(UIScheduler())
@@ -155,12 +165,13 @@ class EditActivityVC: UIViewController {
     // MARK: - Update state
     
     private func startTrackingValueChanges() {
-        guard let nameSignal = nameSignal, basisSignal = basisSignal else { return }
+        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal else { return }
         
-        combineLatest(nameSignal, basisSignal)
-            .startWithNext { [weak self] (name, basis) in
+        combineLatest(nameSignal, basisSignal, startTimeSignal)
+            .startWithNext { [weak self] (name, basis, startTime) in
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
+                self?.selectedStartTime = startTime as? NSDate
                 self?.moveToNextEditingState()
         }
     }
@@ -215,8 +226,8 @@ extension EditActivityVC: UITableViewDelegate {
     private enum EditRow: Int {
         case Name = 0
         case Basis
-        case Duration
         case StartTime
+        case Duration
         case Notifications
         case Saving
         
@@ -224,6 +235,7 @@ extension EditActivityVC: UITableViewDelegate {
             switch self {
             case Name: return EditNameCell.self
             case Basis: return EditBasisCell.self
+            case StartTime: return EditStartTimeCell.self
             default: return nil
             }
         }
@@ -254,6 +266,7 @@ extension EditActivityVC: UITableViewDataSource {
         switch indexPath.row {
         case 0: return editNameCellFromTableView(tableView)
         case 1: return editBasisCell(fromTableView: tableView)
+        case 2: return editStartTimeCell(fromTableView: tableView)
         default:
             startTrackingValueChanges()
             return UITableViewCell()
@@ -268,11 +281,4 @@ class EditDurationCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     static let defaultHeight: CGFloat = 50
 }
 
-class EditBasisCell: UITableViewCell, ObservableControlCell, ExpandableCell {
-    
-    @IBOutlet weak var control: UIControl!
-    static let screenHeight = UIScreen.mainScreen().bounds.height
-    static let expandedHeight: CGFloat = round(0.19 * screenHeight)
-    static let defaultHeight: CGFloat = 50
 
-}

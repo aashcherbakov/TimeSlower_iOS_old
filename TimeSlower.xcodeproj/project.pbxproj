@@ -107,6 +107,8 @@
 		F0115F781D17349300437E42 /* BasisSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F771D17349300437E42 /* BasisSelectorTests.swift */; };
 		F0115F7A1D1737DB00437E42 /* BasisOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0115F791D1737DB00437E42 /* BasisOptionView.xib */; };
 		F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7B1D1737E900437E42 /* BasisOptionView.swift */; };
+		F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */; };
+		F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
@@ -327,6 +329,8 @@
 		F0115F771D17349300437E42 /* BasisSelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisSelectorTests.swift; sourceTree = "<group>"; };
 		F0115F791D1737DB00437E42 /* BasisOptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasisOptionView.xib; sourceTree = "<group>"; };
 		F0115F7B1D1737E900437E42 /* BasisOptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisOptionView.swift; sourceTree = "<group>"; };
+		F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasisCell.swift; sourceTree = "<group>"; };
+		F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStartTimeCell.swift; sourceTree = "<group>"; };
 		F02131221C151E8C00C9B02E /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		F02131231C151E8C00C9B02E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		F02131241C151E8C00C9B02E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -820,6 +824,8 @@
 			isa = PBXGroup;
 			children = (
 				F07974BE1D04CE6F00B72168 /* EditNameCell.swift */,
+				F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */,
+				F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1421,6 +1427,7 @@
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
+				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
@@ -1435,6 +1442,7 @@
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
 				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
+				F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
 				F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */,
