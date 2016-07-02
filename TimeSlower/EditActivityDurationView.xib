@@ -32,8 +32,9 @@
                     </constraints>
                 </view>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sv-zH-Ktt">
-                    <rect key="frame" x="180" y="56" width="240" height="216"/>
+                    <rect key="frame" x="180" y="36" width="240" height="162"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="162" id="6Ec-kU-NUD"/>
                         <constraint firstAttribute="width" constant="240" id="h7Y-dZ-EMg"/>
                     </constraints>
                 </pickerView>
@@ -46,7 +47,7 @@
                 <constraint firstAttribute="trailing" secondItem="9sv-zH-Ktt" secondAttribute="trailing" id="A7Y-mE-hic"/>
                 <constraint firstItem="Ep5-fX-xoU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dtL-Pq-Ovf"/>
                 <constraint firstAttribute="trailing" secondItem="4RR-pg-mxj" secondAttribute="trailing" constant="20" id="fy9-tt-lzL"/>
-                <constraint firstItem="9sv-zH-Ktt" firstAttribute="top" secondItem="Ep5-fX-xoU" secondAttribute="bottom" id="hoP-N4-At2"/>
+                <constraint firstItem="9sv-zH-Ktt" firstAttribute="top" secondItem="Ep5-fX-xoU" secondAttribute="bottom" constant="-20" id="hoP-N4-At2"/>
                 <constraint firstItem="9sv-zH-Ktt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iSM-zr-qNI"/>
                 <constraint firstItem="Ep5-fX-xoU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mq0-Zp-TpR"/>
                 <constraint firstItem="9sv-zH-Ktt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="n5J-IN-NPL"/>

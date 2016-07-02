@@ -45,6 +45,10 @@ class EditActivityStartTimeView: UIControl {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         textfieldView.setText(shortDateFormatter.stringFromDate(datePicker.date))
+        if datePicker.date != selectedValue {
+            selectedValue = datePicker.date
+            sendActionsForControlEvents(.ValueChanged)
+        }
         sendActionsForControlEvents(.TouchUpInside)
     }
     

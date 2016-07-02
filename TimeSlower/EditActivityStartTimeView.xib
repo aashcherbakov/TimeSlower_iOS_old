@@ -33,7 +33,7 @@
                     </constraints>
                 </view>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bQp-Et-gjU">
-                    <rect key="frame" x="140" y="56" width="320" height="162"/>
+                    <rect key="frame" x="140" y="36" width="320" height="162"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="162" id="hQI-gb-bPC"/>
@@ -46,7 +46,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VXy-7a-Bif" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Dke-Wj-kxa"/>
-                <constraint firstItem="bQp-Et-gjU" firstAttribute="top" secondItem="Rcd-SO-u0a" secondAttribute="bottom" id="J5S-3Z-gT6"/>
+                <constraint firstItem="bQp-Et-gjU" firstAttribute="top" secondItem="Rcd-SO-u0a" secondAttribute="bottom" constant="-20" id="J5S-3Z-gT6"/>
                 <constraint firstAttribute="bottom" secondItem="VXy-7a-Bif" secondAttribute="bottom" id="PKp-Ph-C5F"/>
                 <constraint firstAttribute="trailing" secondItem="Rcd-SO-u0a" secondAttribute="trailing" id="Xze-Cv-neQ"/>
                 <constraint firstItem="bQp-Et-gjU" firstAttribute="centerX" secondItem="Rcd-SO-u0a" secondAttribute="centerX" id="cio-Mf-7DE"/>
