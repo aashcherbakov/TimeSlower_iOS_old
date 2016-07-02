@@ -78,6 +78,15 @@ class EditActivityVC: UIViewController {
         }
     }
     
+    private var footerView: UIView {
+        let frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 50)
+        let image = UIImage(named: "whiteCurve")
+        let view = UIView(frame: frame)
+        let imageView = UIImageView(image: image)
+        view.addSubview(imageView)
+        return view
+    }
+    
     // MARK: - Overridden
     
     override func viewDidLoad() {
@@ -100,6 +109,8 @@ class EditActivityVC: UIViewController {
             state = .Name
             machine = StateMachine(withState: .Name, delegate: self)
         }
+        
+        tableView.tableFooterView = footerView
     }
     
     // MARK: - Private Functions
@@ -268,13 +279,6 @@ extension EditActivityVC: UITableViewDelegate {
             case Basis: return EditBasisCell.self
             case StartTime: return EditStartTimeCell.self
             case Duration: return EditDurationCell.self
-            case .Notifications: return EditNotificationsCell.self
-            default: return nil
-            }
-        }
-        
-        func nonExpandableCellType() -> UITableViewCell.Type? {
-            switch self {
             case .Notifications: return EditNotificationsCell.self
             default: return nil
             }
