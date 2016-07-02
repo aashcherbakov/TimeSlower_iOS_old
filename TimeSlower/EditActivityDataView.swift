@@ -69,7 +69,7 @@ class EditActivityDataView: UIView {
 //        editNameView.selectedName.value = activity.name!
 //        editBasisView.selectedBasis.value = activity.activityBasis()
 //        editStartTimeView.selectedDate.value = activity.timing!.startTime
-        editDurationView.activityDuration.value = activity.timing!.duration.integerValue
+//        editDurationView.activityDuration.value = activity.timing!.duration.integerValue
         // TODO: assign notifications value
         
         updateDesignForState(.FullHouse)
@@ -153,10 +153,10 @@ class EditActivityDataView: UIView {
 //                self?.selectedStartTime.value = date
 //            }.addDisposableTo(disposableBag)
         
-        editDurationView.activityDuration
-            .subscribeNext { [weak self] (duration) -> Void in
-                self?.selectedDuration.value = duration
-            }.addDisposableTo(disposableBag)
+//        editDurationView.activityDuration
+//            .subscribeNext { [weak self] (duration) -> Void in
+//                self?.selectedDuration.value = duration
+//            }.addDisposableTo(disposableBag)
         
         editNotificationView.notificationsOn
             .subscribeNext { [weak self] (enabled) -> Void in

@@ -152,6 +152,16 @@ class EditActivityVC: UIViewController {
         return cell
     }
     
+    private func editDurationCell(fromTableView tableView: UITableView) -> EditDurationCell {
+        let cell: EditDurationCell = tableView.dequeueReusableCell()
+        bindExpandingBlockToCell(cell)
+        
+        let durationControl = cell.control as? EditActivityDurationView
+        durationSignal = durationControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        return cell
+    }
+    
     private func bindExpandingBlockToCell(cell: ObservableControlCell) {
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
             .observeOn(UIScheduler())
@@ -165,15 +175,16 @@ class EditActivityVC: UIViewController {
     // MARK: - Update state
     
     private func startTrackingValueChanges() {
-        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal else {
+        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal, durationSignal = durationSignal else {
             return
         }
         
-        combineLatest(nameSignal, basisSignal, startTimeSignal)
-            .startWithNext { [weak self] (name, basis, startTime) in
+        combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal)
+            .startWithNext { [weak self] (name, basis, startTime, duration) in
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
+                self?.selectedDuration = duration as? Double
                 self?.moveToNextEditingState()
         }
     }
@@ -209,6 +220,10 @@ extension EditActivityVC: StateMachineDelegate {
             return selectedName != nil
         case (.Basis, .StartTime):
             return selectedBasis != nil
+        case (.StartTime, .Duration):
+            return selectedStartTime != nil
+        case (.Duration, .FullHouse):
+            return selectedDuration != nil
         default:
             return false
         }
@@ -238,6 +253,7 @@ extension EditActivityVC: UITableViewDelegate {
             case Name: return EditNameCell.self
             case Basis: return EditBasisCell.self
             case StartTime: return EditStartTimeCell.self
+            case Duration: return EditDurationCell.self
             default: return nil
             }
         }
@@ -269,18 +285,12 @@ extension EditActivityVC: UITableViewDataSource {
         case 0: return editNameCellFromTableView(tableView)
         case 1: return editBasisCell(fromTableView: tableView)
         case 2: return editStartTimeCell(fromTableView: tableView)
+        case 3: return editDurationCell(fromTableView: tableView)
         default:
             startTrackingValueChanges()
             return UITableViewCell()
         }
     }
-}
-
-
-class EditDurationCell: UITableViewCell, ObservableControlCell, ExpandableCell {
-    @IBOutlet weak var control: UIControl!
-    static let expandedHeight: CGFloat = 80
-    static let defaultHeight: CGFloat = 50
 }
 
 

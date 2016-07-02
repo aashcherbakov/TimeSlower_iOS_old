@@ -37,7 +37,7 @@ class EditActivityBasisView: UIControl {
     }
     
     /// Value that is being tracked from EditActivityViewController
-    dynamic var selectedValue: Set<Int>?
+    dynamic var selectedValue: [Int]?
     
     // MARK: - Overridden Methods
     
@@ -78,7 +78,7 @@ class EditActivityBasisView: UIControl {
                 
                 self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
                 self?.selectedBasis = selector.selectedBasis
-                self?.selectedValue = selector.selectedDays
+                self?.selectedValue = Array(selector.selectedDays)
         }
     }
     
@@ -87,6 +87,7 @@ class EditActivityBasisView: UIControl {
         if let newBasis = Basis(rawValue: index) where selectedBasis != newBasis {
             daySelector.selectedBasis = newBasis
             selectedBasis = newBasis
+            selectedValue = DateManager.daysFromBasis(newBasis)
             textFieldView.setText(newBasis.description())
             
         }

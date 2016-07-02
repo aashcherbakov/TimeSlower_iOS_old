@@ -118,6 +118,7 @@
 		F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194651CD2E5A300C9B896 /* TestHelper.swift */; };
 		F04194681CD430DE00C9B896 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04194671CD430DE00C9B896 /* Persistable.swift */; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
+		F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3391D26CEBE00933E09 /* EditDurationCell.swift */; };
 		F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */; };
 		F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */; };
 		F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07974BE1D04CE6F00B72168 /* EditNameCell.swift */; };
@@ -343,6 +344,7 @@
 		F04194651CD2E5A300C9B896 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		F04194671CD430DE00C9B896 /* Persistable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
+		F062A3391D26CEBE00933E09 /* EditDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationCell.swift; sourceTree = "<group>"; };
 		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
 		F07974BE1D04CE6F00B72168 /* EditNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameCell.swift; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 				F07974BE1D04CE6F00B72168 /* EditNameCell.swift */,
 				F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */,
 				F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */,
+				F062A3391D26CEBE00933E09 /* EditDurationCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1460,6 +1463,7 @@
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
 				F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */,
 				F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */,
+				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
 				F009AF4A1BDB1061007F38A9 /* EditActivityVCConstraints.swift in Sources */,
 			);
