@@ -1221,7 +1221,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duN-R4-h1O" userLabel="whiteBack">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="388"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wNu-C5-tB8">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wNu-C5-tB8">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="388"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
@@ -1229,7 +1229,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0SY-xq-GWQ" id="izm-lz-cBl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jb4-NQ-mHQ" customClass="EditActivityNameView" customModule="TimeSlower" customModuleProvider="target">
@@ -1252,10 +1252,10 @@
                                                         <rect key="frame" x="0.0" y="72" width="560" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4b8-qC-zeZ" id="CWK-9p-8Hr">
-                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vnG-vF-Wdf" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnG-vF-Wdf" customClass="EditActivityBasisView" customModule="TimeSlower" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
@@ -1275,7 +1275,7 @@
                                                         <rect key="frame" x="0.0" y="116" width="560" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tKm-V4-cGX" id="jKN-w4-HKi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM6-Ad-PSu" customClass="EditActivityStartTimeView" customModule="TimeSlower" customModuleProvider="target">
@@ -1298,7 +1298,7 @@
                                                         <rect key="frame" x="0.0" y="160" width="560" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hdv-2V-bMx" id="xNw-UX-j8d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ma-Vw-S4x" customClass="EditActivityDurationView" customModule="TimeSlower" customModuleProvider="target">

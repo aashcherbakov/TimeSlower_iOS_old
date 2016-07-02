@@ -17,6 +17,7 @@ protocol ObservableControlCell {
 protocol ExpandableCell {
     static var expandedHeight: CGFloat { get }
     static var defaultHeight: CGFloat { get }
+    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat
 }
 
 /// Controller that is responsible for editing/entering information about given activity
@@ -267,6 +268,7 @@ extension EditActivityVC: UITableViewDelegate {
             case Basis: return EditBasisCell.self
             case StartTime: return EditStartTimeCell.self
             case Duration: return EditDurationCell.self
+            case .Notifications: return EditNotificationsCell.self
             default: return nil
             }
         }
@@ -276,7 +278,6 @@ extension EditActivityVC: UITableViewDelegate {
             case .Notifications: return EditNotificationsCell.self
             default: return nil
             }
-            
         }
     }
     
@@ -287,10 +288,12 @@ extension EditActivityVC: UITableViewDelegate {
             if indexPath == lastExpandedCellIndex {
                 return expandableType.expandedHeight
             } else {
-                return expandableType.defaultHeight
+                if let state = state {
+                    return expandableType.heightForState(state)
+                } else {
+                    return expandableType.defaultHeight
+                }
             }
-        } else if selectedRow.nonExpandableCellType() != nil {
-            return Constants.defaultCellHeight
         }
         
         return 0

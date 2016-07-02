@@ -16,4 +16,12 @@ class EditBasisCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     static let expandedHeight: CGFloat = round(0.19 * screenHeight)
     static let defaultHeight: CGFloat = 50
     
+    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat {
+        switch state {
+        case .Name:
+            return 0
+        default:
+            return defaultHeight
+        }
+    }
 }
