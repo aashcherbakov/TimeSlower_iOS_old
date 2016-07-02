@@ -158,11 +158,11 @@ class EditActivityDataView: UIView {
 //                self?.selectedDuration.value = duration
 //            }.addDisposableTo(disposableBag)
         
-        editNotificationView.notificationsOn
-            .subscribeNext { [weak self] (enabled) -> Void in
-                self?.selectedNotifications.value = enabled
-            }.addDisposableTo(disposableBag)
-    }
+//        editNotificationView.notificationsOn
+//            .subscribeNext { [weak self] (enabled) -> Void in
+//                self?.selectedNotifications.value = enabled
+//            }.addDisposableTo(disposableBag)
+//    }
     
 //    private func setupObservationForExpandedProperties() {
 //        editStartTimeView.expanded.subscribeNext {
@@ -179,5 +179,5 @@ class EditActivityDataView: UIView {
 //            [weak self] (expanded) -> Void in
 //                self?.expandedName.value = expanded
 //            }.addDisposableTo(disposableBag)
-//    }
+    }
 }

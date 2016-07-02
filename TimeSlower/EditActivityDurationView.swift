@@ -76,9 +76,7 @@ class EditActivityDurationView: UIControl {
         addSubview(view)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {        
         sendActionsForControlEvents(.TouchUpInside)
     }
     

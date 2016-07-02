@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import ReactiveCocoa
 
 /// UITableViewCell subclass to turn on/off notifications for activity
-class EditActivityNotificationsView: UIView {
+class EditActivityNotificationsView: UIControl {
     
     // MARK: - Properties
     
@@ -21,8 +20,7 @@ class EditActivityNotificationsView: UIView {
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     
     /// Bool true if notification switch is on
-    var notificationsOn = Variable<Bool>(true)
-    private let disposableBag = DisposeBag()
+    dynamic var selectedValue: NSNumber = true
     
     // MARK: - Overridden Methods
     
@@ -30,8 +28,8 @@ class EditActivityNotificationsView: UIView {
         super.init(coder: aDecoder)
         setupXib()
         
-        setupDesign()
         setupEvents()
+        setupDesign()
     }
     
     func setupXib() {
@@ -44,17 +42,22 @@ class EditActivityNotificationsView: UIView {
     
     private func setupDesign() {
         textfieldView.setupWithConfig(NotificationsTextfield())
-        notificationSwitch.on = notificationsOn.value
         notificationSwitch.onTintColor = UIColor.purpleRed()
+        notificationSwitch.on = true
+        updateTextFieldForSwitch(notificationSwitch.on)
     }
     
     private func setupEvents() {
-        notificationSwitch.rx_value
-            .subscribeNext { [weak self] (on) -> Void in
-                self?.notificationsOn.value = on
-                let text = on ? "on" : "off"
-                self?.textfieldView.setText(text)
-            }
-            .addDisposableTo(disposableBag)
+        notificationSwitch.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let switcher = value as? UISwitch else { return }
+                self?.selectedValue = switcher.on
+                self?.updateTextFieldForSwitch(switcher.on)
+        }
+    }
+    
+    private func updateTextFieldForSwitch(on: Bool) {
+        let text = on ? "on" : "off"
+        textfieldView.setText(text)
     }
 }

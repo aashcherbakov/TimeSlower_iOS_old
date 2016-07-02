@@ -24,6 +24,7 @@ class EditActivityVC: UIViewController {
     
     private struct Constants {
         static let numberOfRows = 6
+        static let defaultCellHeight: CGFloat = 50
     }
     
     enum Flow {
@@ -162,6 +163,16 @@ class EditActivityVC: UIViewController {
         return cell
     }
     
+    private func editNotificationCell(fromTableView tableView: UITableView) -> EditNotificationsCell {
+        let cell: EditNotificationsCell = tableView.dequeueReusableCell()
+        bindExpandingBlockToCell(cell)
+        
+        let notificationControl = cell.control as? EditActivityNotificationsView
+        notificationsSignal = notificationControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        return cell
+    }
+    
     private func bindExpandingBlockToCell(cell: ObservableControlCell) {
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
             .observeOn(UIScheduler())
@@ -175,16 +186,18 @@ class EditActivityVC: UIViewController {
     // MARK: - Update state
     
     private func startTrackingValueChanges() {
-        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal, durationSignal = durationSignal else {
+        guard let nameSignal = nameSignal, basisSignal = basisSignal, startTimeSignal = startTimeSignal, durationSignal = durationSignal, notificationsSignal = notificationsSignal else {
             return
         }
         
-        combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal)
-            .startWithNext { [weak self] (name, basis, startTime, duration) in
+        combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
+            .startWithNext { [weak self] (name, basis, startTime, duration, notification) in
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
                 self?.selectedDuration = duration as? Double
+                self?.selectedNotifications = notification as? Bool
+            
                 self?.moveToNextEditingState()
         }
     }
@@ -257,6 +270,14 @@ extension EditActivityVC: UITableViewDelegate {
             default: return nil
             }
         }
+        
+        func nonExpandableCellType() -> UITableViewCell.Type? {
+            switch self {
+            case .Notifications: return EditNotificationsCell.self
+            default: return nil
+            }
+            
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -268,6 +289,8 @@ extension EditActivityVC: UITableViewDelegate {
             } else {
                 return expandableType.defaultHeight
             }
+        } else if selectedRow.nonExpandableCellType() != nil {
+            return Constants.defaultCellHeight
         }
         
         return 0
@@ -280,12 +303,15 @@ extension EditActivityVC: UITableViewDataSource {
         return Constants.numberOfRows
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {        
-        switch indexPath.row {
-        case 0: return editNameCellFromTableView(tableView)
-        case 1: return editBasisCell(fromTableView: tableView)
-        case 2: return editStartTimeCell(fromTableView: tableView)
-        case 3: return editDurationCell(fromTableView: tableView)
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let editRow = EditRow(rawValue: indexPath.row) else { return UITableViewCell() }
+        
+        switch editRow {
+        case .Name: return editNameCellFromTableView(tableView)
+        case .Basis: return editBasisCell(fromTableView: tableView)
+        case .StartTime: return editStartTimeCell(fromTableView: tableView)
+        case .Duration: return editDurationCell(fromTableView: tableView)
+        case .Notifications: return editNotificationCell(fromTableView: tableView)
         default:
             startTrackingValueChanges()
             return UITableViewCell()
