@@ -54,6 +54,7 @@ class EditActivityNameView: UIControl {
         defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .startWithNext { [weak self] (_) in
                 guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+                self?.sendActionsForControlEvents(.TouchUpInside)
                 self?.selectedValue = name
         }
         
@@ -67,7 +68,6 @@ class EditActivityNameView: UIControl {
 }
 
 extension EditActivityNameView: UITextFieldDelegate {
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         sendActionsForControlEvents(.TouchUpInside)
         return true

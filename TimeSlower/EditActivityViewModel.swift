@@ -138,7 +138,7 @@ class EditActivityViewModel {
         if let activity = activity {
             updatePropertiesForActivity(activity)
             dataView.setupWith(activity: activity)
-            timeSaver.timeToSave.value = activity.timing!.timeToSave.integerValue
+//            timeSaver.timeToSave.value = activity.timing!.timeToSave.integerValue
         }
     }
     
@@ -216,7 +216,7 @@ class EditActivityViewModel {
             .subscribeNext { [weak self] (duration) -> Void in
                 if let duration = duration {
                     self?.duration = duration
-                    self?.timeSaver.activityDuration.value = duration
+//                    self?.timeSaver.activityDuration.value = duration
                 }
             }.addDisposableTo(disposableBag)
     }
@@ -230,10 +230,10 @@ class EditActivityViewModel {
     }
     
     private func observeTimeSaverValue() {
-        timeSaver.timeToSave
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeToSave = minutes
-            }.addDisposableTo(disposableBag)
+//        timeSaver.timeToSave
+//            .subscribeNext { [weak self] (minutes) -> Void in
+//                self?.timeToSave = minutes
+//            }.addDisposableTo(disposableBag)
     }
     
     private func observeExpandedViewProperties() {

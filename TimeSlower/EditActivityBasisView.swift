@@ -55,6 +55,7 @@ class EditActivityBasisView: UIControl {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
         sendActionsForControlEvents(.TouchUpInside)
     }
     

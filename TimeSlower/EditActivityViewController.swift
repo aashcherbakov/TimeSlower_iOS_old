@@ -42,6 +42,7 @@ class EditActivityVC: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var timeSaverView: TimeSaver!
     
     var userProfile: Profile?
     var activity: Activity?
@@ -52,15 +53,17 @@ class EditActivityVC: UIViewController {
     var selectedName: String?
     var selectedBasis: [Int]?
     var selectedStartTime: NSDate?
-    var selectedDuration: Double?
+    var selectedDuration: Int?
     var selectedNotifications: Bool?
-    var selectedTimeToSave: Double?
+    var selectedTimeToSave: Int?
     
     var flow: Flow?
     var state: EditingState?
     
     private var footerView: UIView?
-    private var lastExpandedCellIndex: NSIndexPath?
+    
+    dynamic private var lastExpandedCellIndex: NSIndexPath?
+   
     private var expandedCellIndex: NSIndexPath? {
         willSet {
             var nextIndex = newValue
@@ -92,15 +95,20 @@ class EditActivityVC: UIViewController {
     private func setupEvents() {
         tableView.dataSource = self
         tableView.delegate = self
+        
+        changeTimeSaverVisibilityWhenCellExpands()
+        trackTimeSaverValueChanges()
     }
     
     private func setupDesign() {
         if activity != nil {
             flow = .Editing
+            state = .FullHouse
         } else {
             flow = .Creating
             state = .Name
             machine = StateMachine(withState: .Name, delegate: self)
+            timeSaverView.alpha = 0
         }
         
         footerView = tableFooterView()
@@ -199,6 +207,25 @@ class EditActivityVC: UIViewController {
         }
     }
     
+    // MARK: - TimeSaver tracking
+    
+    private func changeTimeSaverVisibilityWhenCellExpands() {
+        rac_valuesForKeyPath("lastExpandedCellIndex", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                if self?.state == .FullHouse {
+                    self?.timeSaverView.alpha = value == nil ? 1 : 0
+                }
+        }
+    }
+    
+    private func trackTimeSaverValueChanges() {
+        timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (timeToSave) in
+                guard let timeToSave = timeToSave as? Int else { return }
+                self?.selectedTimeToSave = timeToSave
+        }
+    }
+    
     // MARK: - Update state
     
     private func startTrackingValueChanges() {
@@ -209,12 +236,17 @@ class EditActivityVC: UIViewController {
             return
         }
         
+        durationSignal.startWithNext { [weak self] (value) in
+            guard let duration = value as? Int else { return }
+            self?.timeSaverView.selectedDuration = duration
+        }
+        
         combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
             .startWithNext { [weak self] (name, basis, startTime, duration, notification) in
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
-                self?.selectedDuration = duration as? Double
+                self?.selectedDuration = duration as? Int
                 self?.selectedNotifications = notification as? Bool
             
                 self?.moveToNextEditingState()
@@ -233,22 +265,21 @@ class EditActivityVC: UIViewController {
 extension EditActivityVC: StateMachineDelegate {
     func shouldTransitionFrom(from: StateType, to: StateType) -> Bool {
         switch (from, to) {
-        case (.Name, .Basis):
-            return selectedName != nil
-        case (.Basis, .StartTime):
-            return selectedBasis != nil
-        case (.StartTime, .Duration):
-            return selectedStartTime != nil
-        case (.Duration, .FullHouse):
-            return selectedDuration != nil
-        default:
-            return false
+        case (.Name, .Basis): return selectedName != nil
+        case (.Basis, .StartTime): return selectedBasis != nil
+        case (.StartTime, .Duration): return selectedStartTime != nil
+        case (.Duration, .FullHouse): return selectedDuration != nil
+        default: return false
         }
     }
     
     func didTransitionFrom(from: StateType, to: StateType) {
         state = to
         expandNextCell()
+        
+        if to == .FullHouse {
+            timeSaverView.alpha = 1
+        }
     }
     
     private func expandNextCell() {

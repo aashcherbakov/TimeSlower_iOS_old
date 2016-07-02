@@ -77,6 +77,8 @@ class EditActivityDurationView: UIControl {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+
         sendActionsForControlEvents(.TouchUpInside)
         updateValueFromPicker(pickerView)
     }
@@ -86,7 +88,7 @@ class EditActivityDurationView: UIControl {
     private func setupDesign() {
         textfieldView.setupWithConfig(DurationTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
-        pickerView.selectRow(4, inComponent: Components.Values.rawValue, animated: true)
+        pickerView.selectRow(4, inComponent: Components.Values.rawValue, animated: false)
     }
     
     private func setupEvents() {

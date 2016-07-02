@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RxSwift
+import ReactiveCocoa
 
 /// UIView subclass that alows to select time to save for activity with UISlider
 class TimeSaver: UIView {
@@ -19,13 +19,10 @@ class TimeSaver: UIView {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet var view: UIView!
     
-    /// Selected time to save, Double. Observable
-    var timeToSave = Variable<Int>(0)
+    /// Selected time to save, Integer. Observable
+    dynamic var selectedValue: NSNumber?
     
-    /// Duration selected by user
-    var activityDuration = Variable<Int>(30)
-
-    private let disposableBag = DisposeBag()
+    dynamic var selectedDuration: NSNumber?
     
     // MARK: - Overridden Methods
     
@@ -54,24 +51,24 @@ class TimeSaver: UIView {
     private func setupEvents() {
         slider.minimumValue = 1.0
 
-        activityDuration
-            .subscribeNext { [weak self] (duration) -> Void in
-                self?.slider.maximumValue = Float(duration)
-                self?.timeToSave.value = duration / 6
-                self?.slider.value = Float(duration / 6)
-            }
-            .addDisposableTo(disposableBag)
+        rac_valuesForKeyPath("selectedDuration", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (duration) in
+                guard let duration = duration as? Float else { return }
+                self?.slider.maximumValue = duration
+                self?.selectedValue = duration / 6
+                self?.slider.value = duration / 6
+        }
         
-        timeToSave
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeLabel.text = "\(minutes) min"
-            }
-            .addDisposableTo(disposableBag)
+        rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let value = value as? Int else { return }
+                self?.timeLabel.text = "\(value) min"
+        }
         
-        slider.rx_value
-            .subscribeNext { [weak self] (minutes) -> Void in
-                self?.timeToSave.value = Int(minutes)
-            }
-            .addDisposableTo(disposableBag)
+        slider.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (slider) in
+                guard let slider = slider as? UISlider else { return }
+                self?.selectedValue = slider.value
+        }
     }
 }

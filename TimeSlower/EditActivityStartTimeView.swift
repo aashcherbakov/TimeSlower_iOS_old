@@ -44,12 +44,13 @@ class EditActivityStartTimeView: UIControl {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        sendActionsForControlEvents(.TouchUpInside)
+
         textfieldView.setText(shortDateFormatter.stringFromDate(datePicker.date))
         if datePicker.date != selectedValue {
             selectedValue = datePicker.date
-            sendActionsForControlEvents(.ValueChanged)
         }
-        sendActionsForControlEvents(.TouchUpInside)
     }
     
     // MARK: - Setup Methods
@@ -67,7 +68,6 @@ class EditActivityStartTimeView: UIControl {
                 }
                 self?.selectedValue = picker.date
                 self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
-                self?.sendActionsForControlEvents(.ValueChanged)
         }
         
         self.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
