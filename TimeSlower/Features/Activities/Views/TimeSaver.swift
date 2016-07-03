@@ -26,10 +26,6 @@ class TimeSaver: UIView {
     
     // MARK: - Overridden Methods
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupDesign()

@@ -67,8 +67,6 @@
 		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
 		F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */; };
 		F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */; };
-		F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */; };
-		F009AF4A1BDB1061007F38A9 /* EditActivityVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */; };
 		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; };
 		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; };
 		F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF431BDB1061007F38A9 /* ShareVC.swift */; };
@@ -133,8 +131,6 @@
 		F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */; };
 		F0A9F9C91CDE7CD000809BA2 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataProperties.swift */; };
 		F0A9F9CA1CDE7CD000809BA2 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C81CDE7CD000809BA2 /* Activity.swift */; };
-		F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */; };
-		F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
 		F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2E1C78E8A6005EC490 /* EditActivityNameView.swift */; };
 		F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */; };
@@ -151,7 +147,6 @@
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
 		F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EA8CBC1C712E9500B11252 /* Float+extension.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
-		F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */; };
 		F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A431C5ECB26009B974A /* StateMachine.swift */; };
 		F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */; };
 		F0F20F2D1CCC0FA600F7DAA7 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */; };
@@ -285,8 +280,6 @@
 		F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVC.swift; path = Features/Activities/ActivityStatsVC.swift; sourceTree = "<group>"; };
 		F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVCConstraints.swift; path = Features/Activities/ActivityStatsVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DotsPageViewController.swift; path = Features/Activities/DotsPageViewController.swift; sourceTree = "<group>"; };
-		F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = EditActivityVC.swift; path = Features/Activities/EditActivityVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditActivityVCConstraints.swift; path = Features/Activities/EditActivityVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVC.swift; path = Features/Activities/ListOfActivitiesVC.swift; sourceTree = "<group>"; };
 		F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVCConstraints.swift; path = Features/Activities/ListOfActivitiesVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF431BDB1061007F38A9 /* ShareVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareVC.swift; path = Features/Activities/ShareVC.swift; sourceTree = "<group>"; };
@@ -360,8 +353,6 @@
 		F0A9F9C81CDE7CD000809BA2 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		F0B748901C152A97005D67AB /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		F0B748911C152A97005D67AB /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
-		F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDataView.xib; sourceTree = "<group>"; };
-		F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityDataView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameView.xib; sourceTree = "<group>"; };
 		F0C0DC2E1C78E8A6005EC490 /* EditActivityNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameView.swift; sourceTree = "<group>"; };
 		F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DaySelectorTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -378,7 +369,6 @@
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
 		F0EA8CBC1C712E9500B11252 /* Float+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+extension.swift"; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
-		F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityViewModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0EB8A431C5ECB26009B974A /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
 		F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
@@ -855,15 +845,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F0BE55F31C7FE7C800404301 /* DataEntryView */ = {
-			isa = PBXGroup;
-			children = (
-				F0C0DC2A1C78CA99005EC490 /* EditActivityDataView.swift */,
-				F0C0DC281C78CA89005EC490 /* EditActivityDataView.xib */,
-			);
-			name = DataEntryView;
-			sourceTree = "<group>";
-		};
 		F0C2F6141C67F3D5006B7D81 /* Edit Basis */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,27 +978,15 @@
 			children = (
 				F07974B71D04CDD000B72168 /* Cells */,
 				F0EB8A3C1C4ABE0A009B974A /* Views */,
-				F0EB8A3B1C4ABE01009B974A /* ViewControllers */,
 				F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */,
 				F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */,
 			);
 			name = "Edit Activity";
 			sourceTree = "<group>";
 		};
-		F0EB8A3B1C4ABE01009B974A /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F009AF3F1BDB1061007F38A9 /* EditActivityVC.swift */,
-				F0EB8A411C5EBAEC009B974A /* EditActivityViewModel.swift */,
-				F009AF401BDB1061007F38A9 /* EditActivityVCConstraints.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
 		F0EB8A3C1C4ABE0A009B974A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0BE55F31C7FE7C800404301 /* DataEntryView */,
 				F0C2F6151C67F3E1006B7D81 /* Edit Name */,
 				F0C2F6141C67F3D5006B7D81 /* Edit Basis */,
 				F0495C371C6C21FB00AA746A /* Edit StartTime */,
@@ -1237,7 +1206,6 @@
 				F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */,
 				F093E2461C7A40D400E245C4 /* EditActivityDurationView.xib in Resources */,
 				F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */,
-				F0C0DC291C78CA89005EC490 /* EditActivityDataView.xib in Resources */,
 				F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */,
 				F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */,
 				F009AF8C1BDB1935007F38A9 /* ListTypeSelector.xib in Resources */,
@@ -1401,7 +1369,6 @@
 			files = (
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
-				F0EB8A421C5EBAEC009B974A /* EditActivityViewModel.swift in Sources */,
 				F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
@@ -1416,7 +1383,6 @@
 				F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */,
 				F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
-				F009AF491BDB1061007F38A9 /* EditActivityVC.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppColors.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
@@ -1458,11 +1424,9 @@
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
-				F0C0DC2B1C78CA99005EC490 /* EditActivityDataView.swift in Sources */,
 				F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */,
 				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
-				F009AF4A1BDB1061007F38A9 /* EditActivityVCConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
