@@ -118,6 +118,8 @@
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3391D26CEBE00933E09 /* EditDurationCell.swift */; };
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
+		F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3451D29B16100933E09 /* ObservableControlCell.swift */; };
+		F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */; };
 		F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */; };
 		F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */; };
 		F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07974BE1D04CE6F00B72168 /* EditNameCell.swift */; };
@@ -338,6 +340,8 @@
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F062A3391D26CEBE00933E09 /* EditDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationCell.swift; sourceTree = "<group>"; };
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
+		F062A3451D29B16100933E09 /* ObservableControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableControlCell.swift; sourceTree = "<group>"; };
+		F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellProtocol.swift; sourceTree = "<group>"; };
 		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
 		F07974BE1D04CE6F00B72168 /* EditNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameCell.swift; sourceTree = "<group>"; };
@@ -980,6 +984,8 @@
 				F0EB8A3C1C4ABE0A009B974A /* Views */,
 				F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */,
 				F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */,
+				F062A3451D29B16100933E09 /* ObservableControlCell.swift */,
+				F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */,
 			);
 			name = "Edit Activity";
 			sourceTree = "<group>";
@@ -1402,6 +1408,7 @@
 				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
+				F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */,
 				F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */,
 				F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
@@ -1421,6 +1428,7 @@
 				F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */,
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
 				F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */,
+				F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,

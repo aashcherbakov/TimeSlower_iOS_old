@@ -1045,6 +1045,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="backButtonTapped:" destination="NxW-VS-sLf" eventType="touchUpInside" id="0KW-wL-1oD"/>
                                             <segue destination="Gou-uH-b2M" kind="unwind" identifier="backToActivityList" unwindAction="backToActivityList:" id="r4o-JY-aiH"/>
                                         </connections>
                                     </button>
@@ -1091,7 +1092,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="control" destination="jb4-NQ-mHQ" id="dob-XV-ymX"/>
+                                            <outlet property="control" destination="jb4-NQ-mHQ" id="3KV-rM-3fC"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditBasisCell" id="4b8-qC-zeZ" customClass="EditBasisCell" customModule="TimeSlower" customModuleProvider="target">
@@ -1208,6 +1209,9 @@
                                 <state key="normal" backgroundImage="okButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="okButtonTapped:" destination="NxW-VS-sLf" eventType="touchUpInside" id="vUO-Kg-r3N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1234,6 +1238,7 @@
                     <connections>
                         <outlet property="tableView" destination="wNu-C5-tB8" id="OeM-Jw-LM6"/>
                         <outlet property="timeSaverView" destination="fD5-U7-Yzx" id="VJY-B3-x3L"/>
+                        <outlet property="titleLabel" destination="aNA-6Z-IPS" id="v0e-Gz-4mD"/>
                         <segue destination="Gou-uH-b2M" kind="unwind" identifier="activityCreated" unwindAction="activityCreated:" id="niV-ph-AMv"/>
                     </connections>
                 </viewController>
@@ -1241,7 +1246,7 @@
                 <exit id="Gou-uH-b2M" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="MYK-Yp-YWT"/>
             </objects>
-            <point key="canvasLocation" x="2017" y="1059"/>
+            <point key="canvasLocation" x="1986" y="1074"/>
         </scene>
     </scenes>
     <resources>

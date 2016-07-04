@@ -15,7 +15,7 @@ import ReactiveCocoa
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
  collect data and, in expanded state, - DefaultActivitySelector.
  */
-class EditActivityNameView: UIControl {
+class EditActivityNameView: ObservableControl {
     
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!
@@ -23,6 +23,9 @@ class EditActivityNameView: UIControl {
     @IBOutlet var view: UIView!
 
     dynamic var selectedValue: String?
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+
+    // MARK: - Overridden
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,24 +34,31 @@ class EditActivityNameView: UIControl {
         setupDesign()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         defaultActivitySelectorView.setupCollectionViewItemSize()
     }
     
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
     // MARK: - Private Methods
     
-    func setupEvents() {
-        rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let value = value as? String else { return }
-                self?.textFieldView.setText(value)
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
+    
+    private func setupEvents() {
+        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        valueChangedSignal = signal
+        
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let value = value as? String else { return }
+            self?.textFieldView.setText(value)
         }
         
         defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
@@ -61,7 +71,7 @@ class EditActivityNameView: UIControl {
         textFieldView.textField.delegate = self
     }
     
-    func setupDesign() {
+    private func setupDesign() {
         textFieldView.setupWithConfig(NameTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }

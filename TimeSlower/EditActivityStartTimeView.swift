@@ -11,7 +11,7 @@ import ReactiveCocoa
 import TimeSlowerKit
 
 /// UITableViewCell subclass to edit start time of activity
-class EditActivityStartTimeView: UIControl {
+class EditActivityStartTimeView: ObservableControl {
     
     // MARK: - Properties
     
@@ -26,6 +26,7 @@ class EditActivityStartTimeView: UIControl {
     
     /// Selected date. Observable
     dynamic var selectedValue: NSDate?
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
     
     // MARK: - Overridden Methods
     
@@ -37,13 +38,8 @@ class EditActivityStartTimeView: UIControl {
         setupEvents()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-    }
-    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Start time touched")
         super.touchesEnded(touches, withEvent: event)
         sendActionsForControlEvents(.TouchUpInside)
 
@@ -53,7 +49,17 @@ class EditActivityStartTimeView: UIControl {
         }
     }
     
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
     // MARK: - Setup Methods
+    
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
     
     private func setupDesign() {
         textfieldView.setupWithConfig(StartTimeTextfield())
@@ -70,10 +76,10 @@ class EditActivityStartTimeView: UIControl {
                 self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
         }
         
-        self.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let value = value as? NSDate else { return }
-                self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
+        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let value = value as? NSDate else { return }
+            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
         }
     }
 }

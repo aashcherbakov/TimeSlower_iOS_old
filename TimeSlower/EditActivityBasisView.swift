@@ -14,7 +14,7 @@ import TimeSlowerKit
  UITableViewCell subclass that allows user to select activity basis.
  Includes BasisSelector and DaySelector instances.
  */
-class EditActivityBasisView: UIControl {
+class EditActivityBasisView: ObservableControl {
     
     // MARK: - Properties
     
@@ -24,7 +24,6 @@ class EditActivityBasisView: UIControl {
     @IBOutlet weak var basisSelector: BasisSelector!
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var textFieldViewHeightConstraint: NSLayoutConstraint!
-    
     
     var selectedBasis: Basis? {
         didSet {
@@ -38,6 +37,7 @@ class EditActivityBasisView: UIControl {
     
     /// Value that is being tracked from EditActivityViewController
     dynamic var selectedValue: [Int]?
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
     
     // MARK: - Overridden Methods
     
@@ -59,6 +59,10 @@ class EditActivityBasisView: UIControl {
         sendActionsForControlEvents(.TouchUpInside)
     }
     
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
     // MARK: - Setup Methods
     
     private func setupDesign() {
@@ -67,6 +71,8 @@ class EditActivityBasisView: UIControl {
     }
     
     private func setupEvents() {
+        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
         basisSelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .startWithNext { [weak self] (value) in
                 guard let selector = value as? BasisSelector else { return }
@@ -90,8 +96,6 @@ class EditActivityBasisView: UIControl {
             selectedBasis = newBasis
             selectedValue = DateManager.daysFromBasis(newBasis)
             textFieldView.setText(newBasis.description())
-            
         }
-        
     }
 }

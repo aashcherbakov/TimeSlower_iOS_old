@@ -9,8 +9,7 @@
 import Foundation
 
 class EditNotificationsCell: UITableViewCell, ExpandableCell, ObservableControlCell {
-    @IBOutlet weak var control: UIControl!    
-    static let defaultHeight: CGFloat = 50
+    @IBOutlet weak var control: ObservableControl!
     static let expandedHeight: CGFloat = 50
 
     static func heightForState(state: EditActivityVC.EditingState) -> CGFloat {
@@ -18,7 +17,7 @@ class EditNotificationsCell: UITableViewCell, ExpandableCell, ObservableControlC
         case .Name, .Basis, .StartTime, .Duration:
             return 0
         default:
-            return defaultHeight
+            return defaultHeight()
         }
     }
 }

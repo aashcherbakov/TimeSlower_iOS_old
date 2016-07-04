@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import ReactiveCocoa
 
 /// UITableViewCell subclass to edit duration of activity
-class EditActivityDurationView: UIControl {
+class EditActivityDurationView: ObservableControl {
     
     /**
      Describes variants of time period: minutes and hours
@@ -60,6 +61,8 @@ class EditActivityDurationView: UIControl {
     private let hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     private var currentPeriod: Period = .Minutes
 
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+
     // MARK: - Overriden Methods
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,12 +73,6 @@ class EditActivityDurationView: UIControl {
         setupDesign()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityDurationView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-    }
-    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
 
@@ -83,7 +80,17 @@ class EditActivityDurationView: UIControl {
         updateValueFromPicker(pickerView)
     }
     
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
     // MARK: - Private Methods
+    
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityDurationView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
     
     private func setupDesign() {
         textfieldView.setupWithConfig(DurationTextfield())
@@ -94,6 +101,8 @@ class EditActivityDurationView: UIControl {
     private func setupEvents() {
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
     }
     
     private func updateValueFromPicker(pickerView: UIPickerView) {

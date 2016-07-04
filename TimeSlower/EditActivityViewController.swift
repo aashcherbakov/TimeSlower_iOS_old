@@ -10,24 +10,20 @@ import UIKit
 import ReactiveCocoa
 import TimeSlowerKit
 
-protocol ObservableControlCell {
-    weak var control: UIControl! { get }
-}
-
-protocol ExpandableCell {
-    static var expandedHeight: CGFloat { get }
-    static var defaultHeight: CGFloat { get }
-    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat
-}
-
 /// Controller that is responsible for editing/entering information about given activity
 class EditActivityVC: UIViewController {
     
     private struct Constants {
-        static let numberOfRows = 6
+        static let numberOfRows = 5
         static let defaultCellHeight: CGFloat = 50
     }
     
+    /**
+     Depending on whether controller has been passed an Activity instance, user will either edit it or create new one
+     
+     - Editing: Editing activity.
+     - Creating: Creating activity. Starting with Name. End state is like start state of Editing
+     */
     enum Flow {
         case Editing
         case Creating
@@ -43,13 +39,17 @@ class EditActivityVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeSaverView: TimeSaver!
+    @IBOutlet weak var titleLabel: UILabel!
     
+    var flow: Flow?
+    var editingState: EditingState?
     var userProfile: Profile?
     var activity: Activity?
     
     typealias StateType = EditingState
     private var machine: StateMachine<EditActivityVC>!
     
+    // MARK: - Activity Properties and ValueSignals
     var selectedName: String?
     var selectedBasis: [Int]?
     var selectedStartTime: NSDate?
@@ -57,11 +57,16 @@ class EditActivityVC: UIViewController {
     var selectedNotifications: Bool?
     var selectedTimeToSave: Int?
     
-    var flow: Flow?
-    var state: EditingState?
+    var nameSignal: SignalProducer<AnyObject?, NSError>?
+    var basisSignal: SignalProducer<AnyObject?, NSError>?
+    var startTimeSignal: SignalProducer<AnyObject?, NSError>?
+    var durationSignal: SignalProducer<AnyObject?, NSError>?
+    var notificationsSignal: SignalProducer<AnyObject?, NSError>?
+    var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
     
+    var valueSignals = [SignalProducer<AnyObject?, NSError>]()
+
     private var footerView: UIView?
-    
     dynamic private var lastExpandedCellIndex: NSIndexPath?
    
     private var expandedCellIndex: NSIndexPath? {
@@ -90,31 +95,37 @@ class EditActivityVC: UIViewController {
         setupDesign()
     }
     
-    // MARK: - Private Functions
+    // MARK: - Actions
     
-    private func setupEvents() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        changeTimeSaverVisibilityWhenCellExpands()
-        trackTimeSaverValueChanges()
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        if let navigationController = navigationController {
+            navigationController.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
+    
+    @IBAction func okButtonTapped(sender: AnyObject) {
+        forceMoveToNextControl()
+    }
+    
+    // MARK: - Private Functions
     
     private func setupDesign() {
         if activity != nil {
             flow = .Editing
-            state = .FullHouse
+            editingState = .FullHouse
         } else {
             flow = .Creating
-            state = .Name
+            editingState = .Name
             machine = StateMachine(withState: .Name, delegate: self)
             timeSaverView.alpha = 0
         }
         
         footerView = tableFooterView()
         tableView.tableFooterView = footerView
+        titleLabel.text = (activity != nil) ? "Edit activity" : "New activity"
     }
-    
     
     private func tableFooterView() -> UIView {
         let frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 50)
@@ -125,94 +136,20 @@ class EditActivityVC: UIViewController {
         return view
     }
     
-    private func resignNameTextfieldAsFirstResponder() {
-        guard let
-            lastExpandedCellIndex = lastExpandedCellIndex,
-            cell = tableView.cellForRowAtIndexPath(lastExpandedCellIndex) as? EditNameCell,
-            control = cell.control as? EditActivityNameView
-        else {
-            return
-        }
+    // MARK: - Events
+    
+    private func setupEvents() {
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        control.textFieldView.textField.resignFirstResponder()
+        changeTimeSaverVisibilityWhenCellExpands()
+        trackTimeSaverValueChanges()
     }
-    
-    // MARK: - Cells
-    
-    var nameSignal: SignalProducer<AnyObject?, NSError>?
-    var basisSignal: SignalProducer<AnyObject?, NSError>?
-    var startTimeSignal: SignalProducer<AnyObject?, NSError>?
-    var durationSignal: SignalProducer<AnyObject?, NSError>?
-    var notificationsSignal: SignalProducer<AnyObject?, NSError>?
-    var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
-    
-    private func editNameCellFromTableView(tableView: UITableView) -> EditNameCell {
-        let cell: EditNameCell = tableView.dequeueReusableCell()
-        makeCellExpandableOnTouch(cell)
-        
-        let nameControl = cell.control as? EditActivityNameView
-        nameSignal = nameControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        
-        return cell
-    }
-
-    
-    private func editBasisCell(fromTableView tableView: UITableView) -> EditBasisCell {
-        let cell: EditBasisCell = tableView.dequeueReusableCell()
-        makeCellExpandableOnTouch(cell)
-        
-        let basisControl = cell.control as? EditActivityBasisView
-        basisSignal = basisControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-
-        return cell
-    }
-    
-    private func editStartTimeCell(fromTableView tableView: UITableView) -> EditStartTimeCell {
-        let cell: EditStartTimeCell = tableView.dequeueReusableCell()
-        makeCellExpandableOnTouch(cell)
-        
-        let startTimeControl = cell.control as? EditActivityStartTimeView
-        startTimeSignal = startTimeControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        
-        return cell
-    }
-    
-    private func editDurationCell(fromTableView tableView: UITableView) -> EditDurationCell {
-        let cell: EditDurationCell = tableView.dequeueReusableCell()
-        makeCellExpandableOnTouch(cell)
-        
-        let durationControl = cell.control as? EditActivityDurationView
-        durationSignal = durationControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        
-        return cell
-    }
-    
-    private func editNotificationCell(fromTableView tableView: UITableView) -> EditNotificationsCell {
-        let cell: EditNotificationsCell = tableView.dequeueReusableCell()
-        makeCellExpandableOnTouch(cell)
-        
-        let notificationControl = cell.control as? EditActivityNotificationsView
-        notificationsSignal = notificationControl?.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        
-        return cell
-    }
-    
-    private func makeCellExpandableOnTouch(cell: ObservableControlCell) {
-        cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] (_) in
-                if let cell = cell as? UITableViewCell {
-                    self?.expandedCellIndex = self?.tableView.indexPathForCell(cell)
-                }
-        }
-    }
-    
-    // MARK: - TimeSaver tracking
     
     private func changeTimeSaverVisibilityWhenCellExpands() {
         rac_valuesForKeyPath("lastExpandedCellIndex", observer: self).toSignalProducer()
             .startWithNext { [weak self] (value) in
-                if self?.state == .FullHouse {
+                if self?.editingState == .FullHouse {
                     self?.timeSaverView.alpha = value == nil ? 1 : 0
                 }
         }
@@ -226,7 +163,13 @@ class EditActivityVC: UIViewController {
         }
     }
     
-    // MARK: - Update state
+    private func mapValueSignals() {
+        nameSignal = valueSignals[EditRow.Name.rawValue]
+        basisSignal = valueSignals[EditRow.Basis.rawValue]
+        startTimeSignal = valueSignals[EditRow.StartTime.rawValue]
+        durationSignal = valueSignals[EditRow.Duration.rawValue]
+        notificationsSignal = valueSignals[EditRow.Notifications.rawValue]
+    }
     
     private func startTrackingValueChanges() {
         guard
@@ -248,17 +191,48 @@ class EditActivityVC: UIViewController {
                 self?.selectedStartTime = startTime as? NSDate
                 self?.selectedDuration = duration as? Int
                 self?.selectedNotifications = notification as? Bool
-            
                 self?.moveToNextEditingState()
         }
     }
     
+    // MARK: - Update state
+    
     private func moveToNextEditingState() {
-        guard let state = state, nextState = EditingState(rawValue: state.rawValue + 1) else {
+        guard let state = editingState, nextState = EditingState(rawValue: state.rawValue + 1) else { return }
+        machine.state = nextState
+    }
+    
+    private func forceMoveToNextControl() {
+        guard let lastIndex = lastExpandedCellIndex, currentCell = tableView.cellForRowAtIndexPath(lastIndex)
+            as? ObservableControlCell else { return }
+        
+        currentCell.control.touchesEnded([UITouch()], withEvent: nil)
+    }
+    
+    private func expandNextCell() {
+        guard let currentRow = expandedCellIndex?.row, currentSection = expandedCellIndex?.section else {
             return
         }
         
-        machine.state = nextState
+        let nextRow = currentRow + 1
+        if nextRow <= Constants.numberOfRows {
+            let nextIndexPath = NSIndexPath(forRow: nextRow, inSection: currentSection)
+            expandedCellIndex = nextIndexPath
+        } else {
+            expandedCellIndex = nil
+        }
+    }
+    
+    private func resignNameTextfieldAsFirstResponder() {
+        guard let
+            lastExpandedCellIndex = lastExpandedCellIndex,
+            cell = tableView.cellForRowAtIndexPath(lastExpandedCellIndex) as? EditNameCell,
+            control = cell.control as? EditActivityNameView
+            else {
+                return
+        }
+        
+        control.textFieldView.textField.resignFirstResponder()
     }
 }
 
@@ -274,28 +248,11 @@ extension EditActivityVC: StateMachineDelegate {
     }
     
     func didTransitionFrom(from: StateType, to: StateType) {
-        state = to
+        editingState = to
         expandNextCell()
         
         if to == .FullHouse {
             timeSaverView.alpha = 1
-        }
-    }
-    
-    private func expandNextCell() {
-        guard let
-            currentRow = expandedCellIndex?.row,
-            currentSection = expandedCellIndex?.section
-        else {
-            return
-        }
-        
-        let nextRow = currentRow + 1
-        if nextRow <= Constants.numberOfRows {
-            let nextIndexPath = NSIndexPath(forRow: nextRow, inSection: currentSection)
-            expandedCellIndex = nextIndexPath
-        } else {
-            expandedCellIndex = nil
         }
     }
 }
@@ -310,16 +267,14 @@ extension EditActivityVC: UITableViewDelegate {
         case StartTime
         case Duration
         case Notifications
-        case Saving
         
-        func expandableCellType() -> ExpandableCell.Type? {
+        func expandableCellType() -> ExpandableCell.Type {
             switch self {
             case Name: return EditNameCell.self
             case Basis: return EditBasisCell.self
             case StartTime: return EditStartTimeCell.self
             case Duration: return EditDurationCell.self
-            case .Notifications: return EditNotificationsCell.self
-            default: return nil
+            case Notifications: return EditNotificationsCell.self
             }
         }
     }
@@ -327,19 +282,16 @@ extension EditActivityVC: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         guard let selectedRow = EditRow(rawValue: indexPath.row) else { return 0 }
         
-        if let expandableType = selectedRow.expandableCellType() {
-            if indexPath == lastExpandedCellIndex {
-                return expandableType.expandedHeight
+        let expandableType = selectedRow.expandableCellType()
+        if indexPath == lastExpandedCellIndex {
+            return expandableType.expandedHeight
+        } else {
+            if let state = editingState {
+                return expandableType.heightForState(state)
             } else {
-                if let state = state {
-                    return expandableType.heightForState(state)
-                } else {
-                    return expandableType.defaultHeight
-                }
+                return expandableType.defaultHeight()
             }
         }
-        
-        return 0
     }
 }
 
@@ -350,21 +302,31 @@ extension EditActivityVC: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row >= EditRow.Notifications.rawValue {
-            startTrackingValueChanges()
+        guard let
+            editRow = EditRow(rawValue: indexPath.row),
+            cell = tableView.dequeueReusableCellWithIdentifier(String(editRow.expandableCellType())) as? ObservableControlCell,
+            valueSignal = cell.signalForValueChange()
+        else {
+            return UITableViewCell()
         }
         
-        guard let editRow = EditRow(rawValue: indexPath.row) else { return UITableViewCell() }
+        cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .observeOn(UIScheduler())
+            .startWithNext { [weak self] (_) in
+                if let cell = cell as? UITableViewCell {
+                    self?.expandedCellIndex = self?.tableView.indexPathForCell(cell)
+                }
+        }
         
-        switch editRow {
-        case .Name: return editNameCellFromTableView(tableView)
-        case .Basis: return editBasisCell(fromTableView: tableView)
-        case .StartTime: return editStartTimeCell(fromTableView: tableView)
-        case .Duration: return editDurationCell(fromTableView: tableView)
-        case .Notifications: return editNotificationCell(fromTableView: tableView)
-        default: return UITableViewCell()
+        valueSignals.insert(valueSignal, atIndex: indexPath.row)
+        mapValueSignalsForIndexPath(indexPath)
+        return cell as! UITableViewCell
+    }
+    
+    private func mapValueSignalsForIndexPath(indexPath: NSIndexPath) {
+        if indexPath.row == EditRow.Notifications.rawValue {
+            mapValueSignals()
+            startTrackingValueChanges()
         }
     }
 }
-
-

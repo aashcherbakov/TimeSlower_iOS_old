@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 
 /// UITableViewCell subclass to turn on/off notifications for activity
-class EditActivityNotificationsView: UIControl {
+class EditActivityNotificationsView: ObservableControl {
     
     // MARK: - Properties
     
@@ -22,6 +22,8 @@ class EditActivityNotificationsView: UIControl {
     /// Bool true if notification switch is on
     dynamic var selectedValue: NSNumber = true
     
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    
     // MARK: - Overridden Methods
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,13 +34,17 @@ class EditActivityNotificationsView: UIControl {
         setupDesign()
     }
     
-    func setupXib() {
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupXib() {
         NSBundle.mainBundle().loadNibNamed(EditActivityNotificationsView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
-    
-    // MARK: - Setup Methods
     
     private func setupDesign() {
         textfieldView.setupWithConfig(NotificationsTextfield())
@@ -48,11 +54,11 @@ class EditActivityNotificationsView: UIControl {
     }
     
     private func setupEvents() {
-        notificationSwitch.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let switcher = value as? UISwitch else { return }
-                self?.selectedValue = switcher.on
-                self?.updateTextFieldForSwitch(switcher.on)
+        valueChangedSignal = notificationSwitch.rac_signalForControlEvents(.ValueChanged).startWith(notificationSwitch).toSignalProducer()
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let switcher = value as? UISwitch else { return }
+            self?.selectedValue = switcher.on
+            self?.updateTextFieldForSwitch(switcher.on)
         }
     }
     
