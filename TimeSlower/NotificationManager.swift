@@ -29,7 +29,7 @@ public enum TimerCategory: String {
     case LastCallTimer = "lastCallTimer"
 }
 
-extension Activity {
+public extension Activity {
     
     struct Constants {
         static let identifierForCommonGoalNotif = "Common Notification For Goals"
@@ -37,7 +37,7 @@ extension Activity {
     
     //MARK: - Create notifications
     
-    func scheduleDefaultStartNotification() {
+    public func scheduleDefaultStartNotification() {
         
         deleteScheduledNotificationsForCurrentActivity()
         

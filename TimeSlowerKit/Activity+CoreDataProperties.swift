@@ -22,5 +22,6 @@ extension Activity {
     @NSManaged public var results: NSSet?
     @NSManaged public var stats: Stats?
     @NSManaged public var timing: Timing?
+    @NSManaged public var notifications: NSNumber?
 
 }

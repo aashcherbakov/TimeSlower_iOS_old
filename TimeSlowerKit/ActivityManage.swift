@@ -161,14 +161,3 @@ extension Activity {
     }
 }
 
-extension NSString {
-    func compareDateRepresentationOfString(otherString: String) -> NSComparisonResult {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
-        
-        let firstDate = dateFormatter.dateFromString(self as String)
-        let secondDate = dateFormatter.dateFromString(otherString)
-        return firstDate!.compare(secondDate!)
-    }
-}

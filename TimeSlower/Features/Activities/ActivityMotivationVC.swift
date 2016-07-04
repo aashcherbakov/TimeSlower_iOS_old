@@ -20,7 +20,9 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     
     //MARK: - Properties
     var activity: Activity! {
-        didSet { lifeSavings = activity.stats!.plannedTimingInLifetime() }
+        didSet {
+            lifeSavings = activity.stats!.plannedTimingInLifetime()
+        }
     }
     var lifeSavings: Profile.LifeTime! {
         didSet {

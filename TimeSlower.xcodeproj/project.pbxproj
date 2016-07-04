@@ -120,6 +120,8 @@
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
 		F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3451D29B16100933E09 /* ObservableControlCell.swift */; };
 		F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */; };
+		F062A34A1D2AB2AB00933E09 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3491D2AB2AB00933E09 /* ActivityManager.swift */; };
+		F062A34C1D2AB2F200933E09 /* NSString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */; };
 		F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */; };
 		F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */; };
 		F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07974BE1D04CE6F00B72168 /* EditNameCell.swift */; };
@@ -342,6 +344,8 @@
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
 		F062A3451D29B16100933E09 /* ObservableControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableControlCell.swift; sourceTree = "<group>"; };
 		F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellProtocol.swift; sourceTree = "<group>"; };
+		F062A3491D2AB2AB00933E09 /* ActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
+		F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Extension.swift"; sourceTree = "<group>"; };
 		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
 		F07974BE1D04CE6F00B72168 /* EditNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameCell.swift; sourceTree = "<group>"; };
@@ -561,6 +565,7 @@
 			children = (
 				F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataProperties.swift */,
 				F0A9F9C81CDE7CD000809BA2 /* Activity.swift */,
+				F062A3491D2AB2AB00933E09 /* ActivityManager.swift */,
 				F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */,
 				F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */,
 				F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */,
@@ -800,6 +805,7 @@
 				F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */,
 				F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */,
 				F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */,
+				F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1469,6 +1475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F062A34C1D2AB2F200933E09 /* NSString+Extension.swift in Sources */,
 				F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */,
 				F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */,
 				F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */,
@@ -1479,6 +1486,7 @@
 				F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */,
 				F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */,
 				F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */,
+				F062A34A1D2AB2AB00933E09 /* ActivityManager.swift in Sources */,
 				F04194681CD430DE00C9B896 /* Persistable.swift in Sources */,
 				F041945D1CD0479300C9B896 /* Day+CoreDataProperties.swift in Sources */,
 				F009AEC41BD9CD25007F38A9 /* CoreDataStack.swift in Sources */,

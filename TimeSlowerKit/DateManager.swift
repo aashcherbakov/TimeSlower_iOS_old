@@ -73,6 +73,15 @@ public class DateManager: NSObject {
         })
     }
     
+    public static func basisFromDays(days: [Int]) -> Basis {
+        return basisFromWeekdays(days.map({ (day) -> Weekday in
+            guard let weekday = Weekday(rawValue: day) else {
+                fatalError("Could not convert day's number representetion to weekday")
+            }
+            return weekday
+        }))
+    }
+    
     // MARK: - Private Functions
     
     private static func shouldDays(days: [Weekday], representBasis basis: Basis) -> Bool {

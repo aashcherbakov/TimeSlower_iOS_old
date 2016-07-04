@@ -45,6 +45,7 @@ class EditActivityVC: UIViewController {
     var editingState: EditingState?
     var userProfile: Profile?
     var activity: Activity?
+    var activityManager = ActivityManager()
     
     typealias StateType = EditingState
     private var machine: StateMachine<EditActivityVC>!
@@ -54,7 +55,7 @@ class EditActivityVC: UIViewController {
     var selectedBasis: [Int]?
     var selectedStartTime: NSDate?
     var selectedDuration: Int?
-    var selectedNotifications: Bool?
+    var selectedNotifications: Bool? = true
     var selectedTimeToSave: Int?
     
     var nameSignal: SignalProducer<AnyObject?, NSError>?
@@ -106,7 +107,22 @@ class EditActivityVC: UIViewController {
     }
     
     @IBAction func okButtonTapped(sender: AnyObject) {
-        forceMoveToNextControl()
+        if editingState == .FullHouse {
+            saveActivity()
+            showStatsInActivityMotivationVC()
+        } else {
+            forceMoveToNextControl()
+        }
+    }
+    
+    private func saveActivity() {
+        guard let name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration, notifications = selectedNotifications, timeToSave = selectedTimeToSave, profile = userProfile else {
+            // TODO: submit notification that something is missing
+            return
+        }
+        
+        // TODO: switch to check type
+        activity = activityManager.createActivityWithType(.Routine, name: name, selectedDays: basis, startTime: startTime, duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
     }
     
     // MARK: - Private Functions
@@ -156,7 +172,8 @@ class EditActivityVC: UIViewController {
     }
     
     private func trackTimeSaverValueChanges() {
-        timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).startWith(timeSaverView)
+            .toSignalProducer()
             .startWithNext { [weak self] (timeToSave) in
                 guard let timeToSave = timeToSave as? Int else { return }
                 self?.selectedTimeToSave = timeToSave
@@ -190,7 +207,7 @@ class EditActivityVC: UIViewController {
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
                 self?.selectedDuration = duration as? Int
-                self?.selectedNotifications = notification as? Bool
+                self?.selectedNotifications = (notification != nil) ?? notification as? Bool
                 self?.moveToNextEditingState()
         }
     }
@@ -234,6 +251,24 @@ class EditActivityVC: UIViewController {
         
         control.textFieldView.textField.resignFirstResponder()
     }
+    
+    private func showStatsInActivityMotivationVC() {
+        let motivationVC: ActivityMotivationVC = ControllerFactory.createController()
+        motivationVC.activity = activity
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(motivationVC, animated: true)
+        } else {
+            presentViewController(motivationVC, animated: true, completion: nil)
+        }
+    }
+    
+    func alertUserOnMissingData(message message: String) {
+        let alert = UIAlertController(title: "Oops!", message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension EditActivityVC: StateMachineDelegate {
