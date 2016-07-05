@@ -43,6 +43,12 @@ class EditActivityNameView: ObservableControl {
         return valueChangedSignal
     }
     
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? String {
+            selectedValue = value
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func setupXib() {

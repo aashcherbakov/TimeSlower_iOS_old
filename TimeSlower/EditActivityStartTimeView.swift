@@ -53,6 +53,13 @@ class EditActivityStartTimeView: ObservableControl {
         return valueChangedSignal
     }
     
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? NSDate {
+            selectedValue = value
+            datePicker.setDate(value, animated: false)
+        }
+    }
+    
     // MARK: - Setup Methods
     
     private func setupXib() {

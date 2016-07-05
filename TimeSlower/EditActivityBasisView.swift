@@ -48,12 +48,6 @@ class EditActivityBasisView: ObservableControl {
         setupDesign()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityBasisView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-    }
-    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         sendActionsForControlEvents(.TouchUpInside)
@@ -63,7 +57,23 @@ class EditActivityBasisView: ObservableControl {
         return valueChangedSignal
     }
     
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? [Int] {
+            selectedValue = value
+            let basis = DateManager.basisFromDays(value)
+            textFieldView.setText(basis.description())
+            basisSelector.updateSegmentedIndexForBasis(basis)
+            daySelector.displayValue(value)
+        }
+    }
+    
     // MARK: - Setup Methods
+    
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityBasisView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
     
     private func setupDesign() {
         textFieldView.setupWithConfig(BasisTextfield())

@@ -38,6 +38,14 @@ class EditActivityNotificationsView: ObservableControl {
         return valueChangedSignal
     }
     
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? NSNumber {
+            selectedValue = value
+            updateTextFieldForSwitch(value.boolValue)
+            notificationSwitch.on = value.boolValue
+        }
+    }
+    
     // MARK: - Setup Methods
     
     private func setupXib() {

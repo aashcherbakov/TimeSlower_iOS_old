@@ -84,6 +84,16 @@ class EditActivityDurationView: ObservableControl {
         return valueChangedSignal
     }
     
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? NSNumber {
+            selectedValue = value
+            let period: Period = value.integerValue > minutes.last ? .Hours : .Minutes
+            textfieldView.setText("Duration: \(value) \(period.description())")
+            
+            setPickerViewToValue(value.integerValue, period: period)
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func setupXib() {
@@ -103,6 +113,13 @@ class EditActivityDurationView: ObservableControl {
         pickerView.dataSource = self
         
         valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+    }
+    
+    private func setPickerViewToValue(value: Int, period: Period) {
+        let valuesArray = period == .Minutes ? minutes : hours
+        if let row = valuesArray.indexOf(value) {
+            pickerView.selectRow(row, inComponent: period.rawValue, animated: false)
+        }
     }
     
     private func updateValueFromPicker(pickerView: UIPickerView) {

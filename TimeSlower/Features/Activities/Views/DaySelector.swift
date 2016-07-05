@@ -42,6 +42,11 @@ class DaySelector: UIControl {
         setupDesign()
     }
 
+    func displayValue(value: [Int]) {
+        selectedDays = Set(value)
+        setupButtonsForSelectedDays(value)
+        updateButtonsDesign()
+    }
     
     // MARK: - Setup Methods
     
@@ -134,6 +139,19 @@ class DaySelector: UIControl {
         let weekdays = weekdaysFromSelectedDays(selectedDays)
         selectedBasis = DateManager.basisFromWeekdays(weekdays)
         sendActionsForControlEvents(.ValueChanged)
+    }
+    
+    private func setupButtonsForSelectedDays(days: [Int]) {
+        let weekdays = Set(weekdaysFromSelectedDays(Set(days)))
+        let selectedDayNames = weekdays.map { (weekday) -> String in
+            return weekday.shortName
+        }
+        
+        for button in dayButtons {
+            if let title = button.titleLabel?.text where selectedDayNames.contains(title) {
+                button.selected = true
+            }
+        }
     }
     
     private func weekdaysFromSelectedDays(days: Set<Int>) -> [Weekday] {

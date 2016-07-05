@@ -27,6 +27,8 @@ public class Day: NSManagedObject, Persistable {
         
         return nil
     }
+    
+    
 }
 
 

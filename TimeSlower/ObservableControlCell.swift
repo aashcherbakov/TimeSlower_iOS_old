@@ -36,4 +36,8 @@ class ObservableControl: UIControl {
     func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
         fatalError("Must be overridden")
     }
+    
+    func setInitialValue(value: AnyObject?) {
+        fatalError("Must be overridden")
+    }
 }

@@ -14,8 +14,8 @@ import CoreData
 
 public extension Day {
 
-    @NSManaged public var name: String?
-    @NSManaged public var number: NSNumber?
-    @NSManaged public var activity: Activity?
+    @NSManaged public var name: String
+    @NSManaged public var number: NSNumber
+    @NSManaged public var activity: Activity
 
 }

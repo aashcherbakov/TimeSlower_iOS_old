@@ -44,7 +44,11 @@ class EditActivityVC: UIViewController {
     var flow: Flow?
     var editingState: EditingState?
     var userProfile: Profile?
-    var activity: Activity?
+    var activity: Activity? {
+        didSet {
+            setupData()
+        }
+    }
     var activityManager = ActivityManager()
     
     typealias StateType = EditingState
@@ -66,6 +70,7 @@ class EditActivityVC: UIViewController {
     var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
     
     var valueSignals = [SignalProducer<AnyObject?, NSError>]()
+    var initialValues: [AnyObject?]?
 
     private var footerView: UIView?
     dynamic private var lastExpandedCellIndex: NSIndexPath?
@@ -107,22 +112,37 @@ class EditActivityVC: UIViewController {
     }
     
     @IBAction func okButtonTapped(sender: AnyObject) {
-        if editingState == .FullHouse {
-            saveActivity()
+        if flow == .Creating && editingState == .FullHouse {
+            createActivity()
             showStatsInActivityMotivationVC()
+        } else if flow == .Editing {
+            saveActivity()
         } else {
             forceMoveToNextControl()
         }
     }
     
-    private func saveActivity() {
-        guard let name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration, notifications = selectedNotifications, timeToSave = selectedTimeToSave, profile = userProfile else {
+    private func createActivity() {
+        guard
+            let name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration,
+            notifications = selectedNotifications, timeToSave = selectedTimeToSave, profile = userProfile else {
             // TODO: submit notification that something is missing
             return
         }
         
         // TODO: switch to check type
-        activity = activityManager.createActivityWithType(.Routine, name: name, selectedDays: basis, startTime: startTime, duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
+        activity = activityManager.createActivityWithType(.Routine, name: name, selectedDays: basis, startTime: startTime,
+            duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
+    }
+    
+    private func saveActivity() {
+        guard
+            let activity = activity, name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration,
+            notifications = selectedNotifications, timeToSave = selectedTimeToSave else {
+                return
+        }
+        
+        activityManager.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime, duration: duration, notifications: notifications, timeToSave: timeToSave)
     }
     
     // MARK: - Private Functions
@@ -141,6 +161,19 @@ class EditActivityVC: UIViewController {
         footerView = tableFooterView()
         tableView.tableFooterView = footerView
         titleLabel.text = (activity != nil) ? "Edit activity" : "New activity"
+    }
+    
+    private func setupData() {
+        if let activity = activity {
+            selectedName = activity.name
+            selectedBasis = activityManager.daysIntegerRepresentation(activity.days as! Set<Day>)
+            selectedStartTime = activity.timing?.startTime
+            selectedDuration = activity.timing?.duration.integerValue
+            selectedNotifications = activity.notifications?.boolValue
+            selectedTimeToSave = activity.timing?.timeToSave.integerValue
+            
+            initialValues = [selectedName, selectedBasis, selectedStartTime, selectedDuration, selectedNotifications]
+        }
     }
     
     private func tableFooterView() -> UIView {
@@ -343,6 +376,10 @@ extension EditActivityVC: UITableViewDataSource {
             valueSignal = cell.signalForValueChange()
         else {
             return UITableViewCell()
+        }
+        
+        if let values = initialValues where values.count == Constants.numberOfRows {
+            cell.control.setInitialValue(values[indexPath.row])
         }
         
         cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()

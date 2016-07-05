@@ -17,7 +17,7 @@ extension Activity {
     @NSManaged public var basis: NSNumber?
     @NSManaged public var name: String?
     @NSManaged public var type: NSNumber?
-    @NSManaged public var days: NSSet?
+    @NSManaged public var days: NSSet
     @NSManaged public var profile: Profile?
     @NSManaged public var results: NSSet?
     @NSManaged public var stats: Stats?

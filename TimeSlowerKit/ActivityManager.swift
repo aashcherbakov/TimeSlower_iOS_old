@@ -24,13 +24,32 @@ public struct ActivityManager {
         activity.timing?.timeToSave = timeToSave
         activity.notifications = notifications
         
-        do {
-            try activity.managedObjectContext?.save()
-        } catch let error as NSError {
-            print("Could not save activity: \(error)")
-        }
+        Activity.saveContext(activity.managedObjectContext)
         
         return activity
+    }
+    
+    public func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: Int, notifications: Bool, timeToSave: Int) {
+        
+        activity.name = name
+        activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
+        activity.basis = DateManager.basisFromDays(selectedDays).rawValue
+        activity.timing?.startTime = startTime
+        activity.timing?.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
+        activity.timing?.duration = duration
+        activity.timing?.timeToSave = timeToSave
+        activity.notifications = notifications
+        
+        Activity.saveContext(activity.managedObjectContext)
+    }
+    
+    public func daysIntegerRepresentation(days: Set<Day>) -> [Int] {
+        var integers = [Int]()
+        for day in days {
+            integers.append(day.number.integerValue)
+        }
+        
+        return integers
     }
     
     private func updateFinishTimeWithDuration(duration: Int, fromStartTime startTime: NSDate) -> NSDate {
@@ -49,4 +68,6 @@ public struct ActivityManager {
         
         return daySet
     }
+    
+    
 }
