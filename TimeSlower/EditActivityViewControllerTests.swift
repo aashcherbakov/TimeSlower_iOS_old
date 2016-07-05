@@ -46,7 +46,7 @@ class EditActivityViewControllerTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut.tableView.numberOfSections, 1, "it should have one section")
-        XCTAssertEqual(sut.tableView.numberOfRowsInSection(0), 6, "it should have 6 rows")
+        XCTAssertEqual(sut.tableView.numberOfRowsInSection(0), 5, "it should have 6 rows")
     }
     
     func test_setupNameCell() {
@@ -57,7 +57,7 @@ class EditActivityViewControllerTests: XCTestCase {
         // then
         XCTAssertTrue(cell is ObservableControlCell, "it should have first cell as Observable")
         XCTAssertTrue(cell is ExpandableCell, "it should be expandable")
-        XCTAssertEqual(sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath), EditNameCell.defaultHeight, "it should be default height for cell")
+        XCTAssertEqual(sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath), EditNameCell.defaultHeight(), "it should be default height for cell")
     }
     
     // MARK: - Expand Cells
@@ -89,7 +89,7 @@ class EditActivityViewControllerTests: XCTestCase {
         let cellHeight = sut.tableView.delegate?.tableView!(sut.tableView, heightForRowAtIndexPath: indexPath)
 
         // then
-        XCTAssertEqual(cellHeight, EditNameCell.defaultHeight, "it should be default height for cell")
+        XCTAssertEqual(cellHeight, EditNameCell.defaultHeight(), "it should be default height for cell")
     }
 
 }
