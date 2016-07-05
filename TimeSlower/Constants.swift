@@ -19,6 +19,9 @@ let kDefaultSeparatorHeight: CGFloat = 0.5
 
 let kUsableViewHeight: CGFloat = UIScreen.mainScreen().bounds.height - LayoutConstants.navigationBarHeight
 let kUsableViewWidth: CGFloat = UIScreen.mainScreen().bounds.width
+let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
 
 let kProfileStoryboard = "Profile"
 let kActivityStoryboard = "Activities"
+

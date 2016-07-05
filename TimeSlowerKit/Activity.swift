@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-public class Activity: NSManagedObject {
+public class Activity: NSManagedObject, Persistable {
 
 // Insert code here to add functionality to your managed object subclass
 

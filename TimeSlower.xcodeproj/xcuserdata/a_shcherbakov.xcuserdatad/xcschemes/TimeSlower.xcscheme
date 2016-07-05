@@ -39,7 +39,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F009AE741BD9C5F8007F38A9"
@@ -52,7 +52,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F009AE941BD9CBA2007F38A9"
+               BlueprintIdentifier = "F009AED21BD9CEA4007F38A9"
                BuildableName = "TimeSlowerKitTests.xctest"
                BlueprintName = "TimeSlowerKitTests"
                ReferencedContainer = "container:TimeSlower.xcodeproj">

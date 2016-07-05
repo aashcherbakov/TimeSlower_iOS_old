@@ -105,7 +105,7 @@ public class LazyCalendar {
         var lastDate = LazyCalendar.nextDayWithName(dayName, fromDate: startDate)
         
         while lastDate == lastDate.earlierDate(sinceDate) || lastDate.isEqualToDate(sinceDate) {
-            numberOfWeekdays++
+            numberOfWeekdays += 1
             lastDate = LazyCalendar.nextDayWithName(dayName, fromDate: lastDate)
         }
         return numberOfWeekdays

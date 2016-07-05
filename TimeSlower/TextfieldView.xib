@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextfieldView">
@@ -17,27 +17,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="activityNameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-1p-yDd">
-                    <rect key="frame" x="0.0" y="31" width="16" height="14"/>
+                    <rect key="frame" x="20" y="31" width="16" height="14"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-dw-9Gs" customClass="JVFloatLabeledTextField">
-                    <rect key="frame" x="24" y="8" width="568" height="59"/>
+                    <rect key="frame" x="44" y="8" width="548" height="59"/>
+                    <gestureRecognizers/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="PnW-1p-yDd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2Q6-P1-x5T"/>
                 <constraint firstAttribute="bottom" secondItem="dwh-dw-9Gs" secondAttribute="bottom" constant="8" id="CNC-0S-mcS"/>
                 <constraint firstAttribute="trailing" secondItem="dwh-dw-9Gs" secondAttribute="trailing" constant="8" id="Dnh-Fi-5IJ"/>
                 <constraint firstItem="dwh-dw-9Gs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PnW-1p-yDd" secondAttribute="trailing" constant="8" symbolic="YES" id="LrP-tI-6ja"/>
                 <constraint firstItem="dwh-dw-9Gs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="OfL-ER-Xvk"/>
-                <constraint firstItem="PnW-1p-yDd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sUf-Y6-x7i"/>
-                <constraint firstItem="dwh-dw-9Gs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="wcM-5U-mOv"/>
+                <constraint firstItem="PnW-1p-yDd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="sUf-Y6-x7i"/>
+                <constraint firstItem="dwh-dw-9Gs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="44" id="wcM-5U-mOv"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="459" y="260.5"/>
+            <point key="canvasLocation" x="283" y="301.5"/>
         </view>
     </objects>
     <resources>

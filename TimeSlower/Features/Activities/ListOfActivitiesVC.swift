@@ -52,8 +52,8 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
-        typeSelector.addTarget(self, action: Selector("typeDidChange:"), forControlEvents: .ValueChanged)
-        listTypeSelector.addTarget(self, action: Selector("basisDidChange:"), forControlEvents: .ValueChanged)
+        typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), forControlEvents: .ValueChanged)
+        listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), forControlEvents: .ValueChanged)
         createActivityButton.layer.cornerRadius = buttonHeight.constant / 2
         
         setupTable()

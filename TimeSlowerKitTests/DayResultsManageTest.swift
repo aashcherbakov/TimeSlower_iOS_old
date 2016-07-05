@@ -139,7 +139,7 @@ class DayResultsManageTest: XCTestCase {
         var results = [DayResults]()
         let originalResultDate = DayResults.standardDateFormatter().dateFromString(testResult.date)
         let dayTimeInterval: Double = 60*60*24
-        for (var i = 1; i < number+1; i++) {
+        for i in 1 ..< number + 1 {
             let newResultDate = originalResultDate?.dateByAddingTimeInterval(-dayTimeInterval * Double(i))
             results.append(DayResults.newResultWithDate(newResultDate!, forActivity: testResult.activity))
         }

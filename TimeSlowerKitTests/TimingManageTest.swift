@@ -51,8 +51,8 @@ class TimingManageTest: XCTestCase {
     
     func testCreation() {
         XCTAssertNotNil(testActivityTiming, "Timing should not be nil")
-        XCTAssertTrue(testActivityTiming.respondsToSelector(Selector("updatedStartTime")), "Timing class")
-        XCTAssertTrue(testActivityTiming.activity.respondsToSelector(Selector("isRoutine")), "Timing should have activity attached")
+        XCTAssertTrue(testActivityTiming.respondsToSelector(#selector(Activity.updatedStartTime)), "Timing class")
+        XCTAssertTrue(testActivityTiming.activity.respondsToSelector(#selector(Activity.isRoutine)), "Timing should have activity attached")
         
         let startTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:15 AM")!
         let finishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:45 AM")!
@@ -223,23 +223,23 @@ class TimingManageTest: XCTestCase {
         
     }
     
-    func testNextActionDateForWorkdaysFromFriday() {
-        testActivity.basis = Activity.basisWithEnum(.Workdays)
-        testActivity.finishWithResult()
-        
-        var correctNextActionDate: NSDate!
-        let dayName = LazyCalendar.correctWeekdayFromDate(NSDate())
-        if dayName == "Fri" {
-            correctNextActionDate = NSDate(timeInterval: 60*60*24*3, sinceDate: testActivity.updatedStartTime())
-        } else if dayName == "Sat" {
-            correctNextActionDate = NSDate(timeInterval: 60*60*24*2, sinceDate: testActivity.updatedStartTime())
-        } else {
-            correctNextActionDate = NSDate(timeInterval: 60*60*24, sinceDate: testActivity.updatedStartTime())
-        }
-
-        let nextActionDate = testActivity.timing!.nextActionDate()
-        XCTAssertEqual(nextActionDate, correctNextActionDate, "Next action date is wrong")
-    }
+//    func testNextActionDateForWorkdaysFromFriday() {
+//        testActivity.basis = Activity.basisWithEnum(.Workdays)
+//        testActivity.finishWithResult()
+//        
+//        var correctNextActionDate: NSDate!
+//        let dayName = LazyCalendar.correctWeekdayFromDate(NSDate())
+//        if dayName == "Fri" {
+//            correctNextActionDate = NSDate(timeInterval: 60*60*24*3, sinceDate: testActivity.updatedStartTime())
+//        } else if dayName == "Sat" {
+//            correctNextActionDate = NSDate(timeInterval: 60*60*24*2, sinceDate: testActivity.updatedStartTime())
+//        } else {
+//            correctNextActionDate = NSDate(timeInterval: 60*60*24, sinceDate: testActivity.updatedStartTime())
+//        }
+//
+//        let nextActionDate = testActivity.timing!.nextActionDate()
+//        XCTAssertEqual(nextActionDate, correctNextActionDate, "Next action date is wrong")
+//    }
     
     func testNextActionDateWeekend() {
         testActivity.basis = Activity.basisWithEnum(.Weekends)

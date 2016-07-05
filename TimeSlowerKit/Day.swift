@@ -13,8 +13,9 @@ import CoreData
 public class Day: NSManagedObject, Persistable {
     
     /// Constructor
-    public static func createFromWeekday(weekday: Weekday, inContext
-        context: NSManagedObjectContext) -> Day? {
+    public static func createFromWeekday(weekday: Weekday, forActivity activity: Activity) -> Day? {
+        
+        guard let context = activity.managedObjectContext else { return nil }
         
         if let day = NSEntityDescription.insertNewObjectForEntityForName(
             String(self), inManagedObjectContext: context) as? Day {
@@ -26,6 +27,8 @@ public class Day: NSManagedObject, Persistable {
         
         return nil
     }
+    
+    
 }
 
 

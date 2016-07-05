@@ -7,32 +7,26 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import ReactiveCocoa
+import TimeSlowerKit
 
 /// UITableViewCell subclass to edit start time of activity
-class EditActivityStartTimeView: UIView, ExpandableView {
+class EditActivityStartTimeView: ObservableControl {
     
     // MARK: - Properties
     
     @IBOutlet weak var view: UIView!
-    
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet weak var textfieldViewHeightConstraint: NSLayoutConstraint!
+    private var shortDateFormatter: NSDateFormatter = {
+        return DateManager.sharedShortDateFormatter()
+    }()
     
     /// Selected date. Observable
-    var selectedDate = Variable<NSDate?>(nil)
-    
-    /**
-     Bool to signal view model that height of the cell should be recalculated.
-     View model subscribes to this property and based on it's value changes the in State Machine.
-     Observable.
-     */
-    var expanded = Variable<Bool>(false)
-    
-    private var disposableBag = DisposeBag()
+    dynamic var selectedValue: NSDate?
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
     
     // MARK: - Overridden Methods
     
@@ -44,53 +38,55 @@ class EditActivityStartTimeView: UIView, ExpandableView {
         setupEvents()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Start time touched")
+        super.touchesEnded(touches, withEvent: event)
+        sendActionsForControlEvents(.TouchUpInside)
+
+        textfieldView.setText(shortDateFormatter.stringFromDate(datePicker.date))
+        if datePicker.date != selectedValue {
+            selectedValue = datePicker.date
+        }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        expanded.value = !expanded.value
-        datePicker.alpha = expanded.value ? 1 : 0
-        if expanded.value == true && selectedDate.value == nil {
-            selectedDate.value = datePicker.date
-            textfieldView.setText(shortDateFormatter.stringFromDate(datePicker.date))
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? NSDate {
+            selectedValue = value
+            datePicker.setDate(value, animated: false)
         }
     }
     
     // MARK: - Setup Methods
     
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
+    
     private func setupDesign() {
-        textfieldView.setup(withType: .StartTime, delegate: nil)
+        textfieldView.setupWithConfig(StartTimeTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
     private func setupEvents() {
-        datePicker.rx_date
-            .subscribeNext { [weak self] (date) -> Void in
-                if self?.selectedDate.value != nil {
-                    self?.selectedDate.value = date
-                    self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(date))
+        datePicker.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (datePicker) in
+                guard let picker = datePicker as? UIDatePicker else {
+                    return
                 }
-            }
-            .addDisposableTo(disposableBag)
+                self?.selectedValue = picker.date
+                self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
+        }
         
-        selectedDate.subscribeNext { [weak self] (date) in
-            guard let date = date else {
-                return
-            }
-            
-            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(date))
-        }.addDisposableTo(disposableBag)
+        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let value = value as? NSDate else { return }
+            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
+        }
     }
-    
-    /// Should be a singleton -> refactor
-    private var shortDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSCalendar.currentCalendar().locale
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .NoStyle
-        return dateFormatter
-    }()
 }

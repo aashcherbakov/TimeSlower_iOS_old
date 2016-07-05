@@ -11,6 +11,7 @@ import Foundation
 /// Class to operate with dates. Contains singleton for NSDateFormatter
 public class DateManager: NSObject {
     private static let dateFormatter = NSDateFormatter()
+    private static let shortFormatter = NSDateFormatter()
     
     /**
      Use singleton because date formatter creation is expensive
@@ -21,6 +22,15 @@ public class DateManager: NSObject {
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
         dateFormatter.locale = NSLocale.currentLocale()
         return dateFormatter
+    }
+    
+    public static func sharedShortDateFormatter() -> NSDateFormatter {
+        let formatter = shortFormatter
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        formatter.locale = NSLocale.currentLocale()
+        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = .NoStyle
+        return formatter
     }
     
     /**
@@ -56,6 +66,23 @@ public class DateManager: NSObject {
         }
     }
     
+    public static func daysFromBasis(basis: Basis) -> [Int] {
+        let weekdays = Weekday.weekdaysForBasis(basis)
+        return weekdays.map({ (weekday) -> Int in
+            return weekday.rawValue
+        })
+    }
+    
+    public static func basisFromDays(days: [Int]) -> Basis {
+        return basisFromWeekdays(days.map({ (day) -> Weekday in
+            guard let weekday = Weekday(rawValue: day) else {
+                fatalError("Could not convert day's number representetion to weekday")
+            }
+            return weekday
+        }))
+    }
+    
+    // MARK: - Private Functions
     
     private static func shouldDays(days: [Weekday], representBasis basis: Basis) -> Bool {
         guard days.count == basis.numberOfDaysInWeek else {

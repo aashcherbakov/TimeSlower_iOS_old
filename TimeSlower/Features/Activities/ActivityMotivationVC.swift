@@ -20,7 +20,9 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     
     //MARK: - Properties
     var activity: Activity! {
-        didSet { lifeSavings = activity.stats!.plannedTimingInLifetime() }
+        didSet {
+            lifeSavings = activity.stats!.plannedTimingInLifetime()
+        }
     }
     var lifeSavings: Profile.LifeTime! {
         didSet {
@@ -134,7 +136,7 @@ extension ActivityMotivationVC: UIPageViewControllerDataSource, UIPageViewContro
             return nil
         }
         
-        index--
+        index -= 1
         return viewControllerAtIndex(index)
     }
     
@@ -150,7 +152,7 @@ extension ActivityMotivationVC: UIPageViewControllerDataSource, UIPageViewContro
             return nil
         }
         
-        index++
+        index += 1
         if index == self.pageTitles.count + 1 {
             return nil
         }

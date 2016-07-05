@@ -7,10 +7,41 @@
 //
 
 import UIKit
-import RxSwift
+import ReactiveCocoa
 
 /// UITableViewCell subclass to edit duration of activity
-class EditActivityDurationView: UIView {
+class EditActivityDurationView: ObservableControl {
+    
+    /**
+     Describes variants of time period: minutes and hours
+     */
+    enum Period: Int {
+        case Minutes
+        case Hours
+        
+        /**
+         Literal lowercase transript of enum case
+         
+         - returns: String with literal transcript
+         */
+        func description() -> String {
+            switch self {
+            case .Minutes: return "minutes"
+            case .Hours: return "hours"
+            }
+        }
+    }
+    
+    /**
+     Components of UIPickerView
+     
+     - Values:  represents numbers
+     - Periods: represents time measurements: minutes or hours
+     */
+    enum Components: Int {
+        case Values
+        case Periods
+    }
     
     private struct Constants {
         static let defaultDuration = 30
@@ -18,73 +49,169 @@ class EditActivityDurationView: UIView {
     
     // MARK: - Properties
     
+    /// Duration of activity in minutes. Observable.
+    dynamic var selectedValue: NSNumber?
     
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var textfieldView: TextfieldView!
-    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var view: UIView!
-    
-    @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
-    /// Duration of activity in minutes. Observable.
-    var activityDuration = Variable<Int?>(nil)
-    private var disposableBag = DisposeBag()
-    
+    private let minutes = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+    private let hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    private var currentPeriod: Period = .Minutes
+
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+
     // MARK: - Overriden Methods
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupXib()
         
-        setupDesign()
         setupEvents()
+        setupDesign()
     }
     
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityDurationView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+
+        sendActionsForControlEvents(.TouchUpInside)
+        updateValueFromPicker(pickerView)
     }
     
-    // MARK: - Actions
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
     
-    @IBAction func quantityButtonTapped(sender: UIButton) {
-        if let value = activityDuration.value {
-            let oldValue = value
-            var newValue = 0
-            switch sender.tag {
-            case 0:
-                if oldValue > 5 {
-                    newValue = oldValue - 5
-                }
-            case 1:
-                newValue = oldValue + 5
-            default: return
-            }
-            activityDuration.value = newValue
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? NSNumber {
+            selectedValue = value
+            let period: Period = value.integerValue > minutes.last ? .Hours : .Minutes
+            textfieldView.setText("Duration: \(value) \(period.description())")
+            
+            setPickerViewToValue(value.integerValue, period: period)
         }
     }
     
     // MARK: - Private Methods
     
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed(EditActivityDurationView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
+    }
+    
     private func setupDesign() {
-        if activityDuration.value == nil {
-            activityDuration.value = Constants.defaultDuration
-        }
-        
-        textfieldView.setup(withType: .Duration, delegate: nil)
+        textfieldView.setupWithConfig(DurationTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
+        pickerView.selectRow(4, inComponent: Components.Values.rawValue, animated: false)
     }
     
     private func setupEvents() {
-        activityDuration
-            .subscribeNext { [weak self] (value) -> Void in
-                if let value = value {
-                    self?.durationLabel.text = "\(value) min"
-                    let hours: Double = Double(value) / 60.0
-                    self?.textfieldView.setText("\(hours.format(".1")) hours")
-                }
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+    }
+    
+    private func setPickerViewToValue(value: Int, period: Period) {
+        let valuesArray = period == .Minutes ? minutes : hours
+        if let row = valuesArray.indexOf(value) {
+            pickerView.selectRow(row, inComponent: period.rawValue, animated: false)
+        }
+    }
+    
+    private func updateValueFromPicker(pickerView: UIPickerView) {
+        let values = getValuesFromPickerView(pickerView)
+        if selectedValue != values.value {
+            updateSelectedValueWithDuration(values.value, period: values.period)
+        }
+    }
+    
+    private func getValuesFromPickerView(pickerView: UIPickerView) -> (value: Int, period: Period) {
+        let row = pickerView.selectedRowInComponent(Components.Values.rawValue)
+        if let period = Period(rawValue: pickerView.selectedRowInComponent(Components.Periods.rawValue)) {
+            let value = selectedValueForRow(row, period: period)
+            return (value, period)
+        } else {
+            fatalError("DatePicker has only one component")
+        }
+    }
+    
+    private func updateSelectedValueWithDuration(duration: Int, period: Period) {
+        selectedValue = duration
+        textfieldView.setText("Duration: \(duration) \(period.description())")
+    }
+}
+
+// MARK: - UIPickerViewDataSource
+extension EditActivityDurationView: UIPickerViewDataSource {
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let selectedComponent = Components(rawValue: component) else { return 0 }
+        
+        switch selectedComponent {
+        case .Values: return currentPeriod == .Hours ? hours.count : minutes.count
+        case .Periods: return 2
+        }
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2
+    }
+}
+
+// MARK: - UIPickerViewDelegate
+extension EditActivityDurationView: UIPickerViewDelegate {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let selectedComponent = Components(rawValue: component) else { return nil }
+        
+        switch selectedComponent {
+        case .Values: return titleForRow(row, selectedPeriod: currentPeriod)
+        case .Periods: return titleForPeriodInRow(row)
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let selectedComponent = Components(rawValue: component) else { return }
+       
+        if let selectedPeriod = Period(rawValue: row) where selectedComponent == .Periods {
+            if currentPeriod.rawValue != selectedPeriod.rawValue {
+                pickerView.reloadComponent(Components.Values.rawValue)
             }
-            .addDisposableTo(disposableBag)
+            currentPeriod = selectedPeriod
+        }
+        
+        updateValueFromPicker(pickerView)
+    }
+    
+    // MARK: - Private methods
+    
+    private func titleForPeriodInRow(row: Int) -> String {
+        guard let period = Period(rawValue: row) else { return "" }
+        return period.description()
+    }
+    
+    private func titleForRow(row: Int, selectedPeriod: Period) -> String {
+        switch selectedPeriod {
+        case .Hours:
+            if row < hours.count {
+                return "\(hours[row])"
+            }
+        case .Minutes:
+            if row < minutes.count {
+                return "\(minutes[row])"
+            }
+        }
+        
+        return ""
+    }
+    
+    private func selectedValueForRow(row: Int, period: Period) -> Int {
+        switch period {
+        case .Hours: return hours[row]
+        case .Minutes: return minutes[row]
+        }
     }
 }

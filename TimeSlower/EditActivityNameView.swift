@@ -9,82 +9,88 @@
 import Foundation
 
 import UIKit
-import RxSwift
+import ReactiveCocoa
 
 /**
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
  collect data and, in expanded state, - DefaultActivitySelector.
  */
-class EditActivityNameView: UIView, ExpandableView {
+class EditActivityNameView: ObservableControl {
     
     @IBOutlet weak var textFieldView: TextfieldView!
     @IBOutlet weak var defaultActivitySelectorView: DefaultActivitySelector!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet var view: UIView!
-    
-    var expanded: Variable<Bool> = Variable(false)
-    
-    private(set) var selectedName = Variable<String>("")
 
-    private var disposableBag = DisposeBag()
+    dynamic var selectedValue: String?
+    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+
+    // MARK: - Overridden
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupXib()
-        setupData()
         setupEvents()
         setupDesign()
-    }
-    
-    func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         defaultActivitySelectorView.setupCollectionViewItemSize()
-        
-        if selectedName.value == "" {
-            textFieldView.textField.becomeFirstResponder()
+    }
+    
+    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+        return valueChangedSignal
+    }
+    
+    override func setInitialValue(value: AnyObject?) {
+        if let value = value as? String {
+            selectedValue = value
         }
     }
     
     // MARK: - Private Methods
     
-    func setupData() {
-        selectedName.subscribeNext { [weak self] (name) in
-            self?.textFieldView.setup(withType: .ActivityName, delegate: self)
-            self?.textFieldView.setText(name)
-        }.addDisposableTo(disposableBag)
+    private func setupXib() {
+        NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
     }
     
-    func setupEvents() {
-        defaultActivitySelectorView.addTarget(self,
-                                              action: #selector(EditActivityNameView.defaultActivitySelected(_:)),
-                                              forControlEvents: .ValueChanged)
-    }
-    
-    func setupDesign() {
-        separatorLineHeight.constant = kDefaultSeparatorHeight
-    }
-    
-    func defaultActivitySelected(value: Int) {
-        if let name = defaultActivitySelectorView.selectedActivityName {
-            textFieldView.setText(name)
-            selectedName.value = name
+    private func setupEvents() {
+        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        valueChangedSignal = signal
+        
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let value = value as? String else { return }
+            self?.textFieldView.setText(value)
         }
+        
+        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (_) in
+                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+                self?.sendActionsForControlEvents(.TouchUpInside)
+                self?.selectedValue = name
+        }
+        
+        textFieldView.textField.delegate = self
+    }
+    
+    private func setupDesign() {
+        textFieldView.setupWithConfig(NameTextfield())
+        separatorLineHeight.constant = kDefaultSeparatorHeight
     }
 }
 
-extension EditActivityNameView: TextFieldViewDelegate {
-    func textFieldViewDidReturn(withText: String) {
-        expanded.value = false
-        selectedName.value = withText
+extension EditActivityNameView: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        sendActionsForControlEvents(.TouchUpInside)
+        return true
     }
     
-    func textFieldViewDidBeginEditing() {
-        expanded.value = true
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.becomeFirstResponder()
+        sendActionsForControlEvents(.TouchUpInside)
     }
 }

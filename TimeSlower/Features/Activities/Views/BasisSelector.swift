@@ -8,28 +8,25 @@
 
 import UIKit
 import TimeSlowerKit
-import RxSwift
+import ReactiveCocoa
 
 /// UIControl subclass used to select activity basis on high level: Daily, Workdays or Weekends
 class BasisSelector: UIControl {
 
     // MARK: - Properties
     
-    /// Observable selected index
-    var selectedSegmentIndex = Variable<Int?>(nil)
+    @IBOutlet private(set) var view: UIView!
+    @IBOutlet weak var dailyOptionView: BasisOptionView!
+    @IBOutlet weak var workdaysOptionView: BasisOptionView!
+    @IBOutlet weak var weekendsOptionView: BasisOptionView!
     
-    @IBOutlet private weak var weekendsLabel: UILabel!
-    @IBOutlet private weak var workdaysLabel: UILabel!
-    @IBOutlet private weak var dailyLabel: UILabel!
-    @IBOutlet private var view: UIView!
-    @IBOutlet private weak var dailySelectedIndicator: UIImageView!
-    @IBOutlet private weak var workdaysSelectedIndicator: UIImageView!
-    @IBOutlet private weak var weekendsSelectedIndicator: UIImageView!
+    var selectedIndex: Int? {
+        didSet {
+            sendActionsForControlEvents(.ValueChanged)
+        }
+    }
     
-    private var selectedIconImage = UIImage(named: "selectedIcon")
-    private var deselectedIconImage = UIImage(named: "deselectedIcon")
-    
-    private let disposableBag = DisposeBag()
+    private var basisOptionsViews: [BasisOptionView] = []
     
     // MARK: - Overridden Methods
     
@@ -39,16 +36,17 @@ class BasisSelector: UIControl {
         setupEvents()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touchLocation = touches.first?.locationInView(self) {
-            selectedSegmentIndex.value = selectedIndexFromLocation(touchLocation)
-        }
-    }
-    
     // MARK: - Internal Methods
     
     func updateSegmentedIndexForBasis(basis: Basis) {
-        configureButtonsForIndex(basis.rawValue)
+        guard basis != .Random else {
+            resetOptionViews(basisOptionsViews)
+            return
+        }
+        
+        selectedIndex = basis.rawValue
+        resetButtonsForSelectedIndex(basis.rawValue)
+        basisOptionsViews[basis.rawValue].optionSelected = true
     }
     
     // MARK: - Setup Methods
@@ -57,58 +55,44 @@ class BasisSelector: UIControl {
         NSBundle.mainBundle().loadNibNamed("BasisSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
+        
+        dailyOptionView.setupForBasis("Daily")
+        workdaysOptionView.setupForBasis("Workdays")
+        weekendsOptionView.setupForBasis("Weekends")
+        
+        basisOptionsViews = [dailyOptionView, workdaysOptionView, weekendsOptionView]
     }
-    
+
     private func setupEvents() {
-        selectedSegmentIndex
-            .subscribeNext { [weak self] (value) -> Void in
-                self?.configureButtonsForIndex(value)
-            }
-            .addDisposableTo(disposableBag)
-    }
-    
-    // MARK: - Private Methods
-    
-    private func selectedIndexFromLocation(touchLocation: CGPoint) -> Int {
-        let sectionWidth = view.frame.width / 3
-        if touchLocation.x < sectionWidth {
-            return 0
-        } else if touchLocation.x > (sectionWidth * 2) {
-            return 2
-        } else {
-            return 1
+        for optionView in basisOptionsViews {
+            subscribeToValueChangeForOptionView(optionView)
         }
     }
     
-    private func configureButtonsForIndex(index: Int?) {
-        if let index = index where index < 4 && index >= 0 {
-            configureButtons(index)
+    private func subscribeToValueChangeForOptionView(optionView: BasisOptionView) {
+        optionView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (value) in
+                guard let option = value as? BasisOptionView,
+                    weakSelf = self else { return }
+                
+                if let optionIndex = weakSelf.basisOptionsViews.indexOf(option) {
+                    weakSelf.selectedIndex = option.optionSelected ? optionIndex : nil
+                    weakSelf.resetButtonsForSelectedIndex(optionIndex)
+                }
         }
     }
     
-    private func configureButtons(type: Int) {
-        for i in 0 ..< iconsArray.count {
-            if i == type {
-                iconsArray[i].image = selectedIconImage
-                labelsArray[i].textColor = UIColor.purpleRed()
-            } else {
-                iconsArray[i].image = deselectedIconImage
-                labelsArray[i].textColor = UIColor.lightGray()
-            }
+    private func resetButtonsForSelectedIndex(index: Int) {
+        var optionsToDeselect = basisOptionsViews
+        if optionsToDeselect.count > index {
+            optionsToDeselect.removeAtIndex(index)
         }
+        resetOptionViews(optionsToDeselect)
     }
     
-    // MARK: - Lazy Variables
-    
-    private lazy var labelsArray: [UILabel] = {
-        return [self.dailyLabel, self.workdaysLabel, self.weekendsLabel]
-    }()
-    
-    private lazy var iconsArray: [UIImageView] = {
-        return [
-            self.dailySelectedIndicator,
-            self.workdaysSelectedIndicator,
-            self.weekendsSelectedIndicator
-        ]
-    }()
+    private func resetOptionViews(optionViews: [BasisOptionView]) {
+        for option in optionViews {
+            option.optionSelected = false
+        }
+    }
 }

@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="SourceSansPro-Regular.ttf">
-            <string>SourceSansPro-Regular</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditActivityDurationView" customModule="TimeSlower" customModuleProvider="target">
             <connections>
-                <outlet property="durationLabel" destination="fQp-pg-SRt" id="st2-Oi-LmW"/>
+                <outlet property="pickerView" destination="9sv-zH-Ktt" id="kxq-LN-h0d"/>
                 <outlet property="separatorLineHeight" destination="Ets-cz-TZL" id="9fM-56-1jD"/>
                 <outlet property="textfieldView" destination="Ep5-fX-xoU" id="X3P-C5-gdb"/>
-                <outlet property="textfieldViewHeight" destination="SiD-es-0zB" id="0Ht-xq-0rD"/>
                 <outlet property="view" destination="iN0-l3-epB" id="I1e-eH-6Fc"/>
             </connections>
         </placeholder>
@@ -24,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ep5-fX-xoU" customClass="TextfieldView" customModule="TimeSlower" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="417" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="SiD-es-0zB"/>
@@ -37,58 +31,34 @@
                         <constraint firstAttribute="height" constant="1" id="Ets-cz-TZL"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EDc-Ng-dxh">
-                    <rect key="frame" x="425" y="13" width="30" height="30"/>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sv-zH-Ktt">
+                    <rect key="frame" x="180" y="36" width="240" height="162"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="YeK-Km-ogO"/>
-                        <constraint firstAttribute="height" constant="30" id="rd7-vR-RCl"/>
+                        <constraint firstAttribute="height" constant="162" id="6Ec-kU-NUD"/>
+                        <constraint firstAttribute="width" constant="240" id="h7Y-dZ-EMg"/>
                     </constraints>
-                    <state key="normal" image="minusButton"/>
-                    <connections>
-                        <action selector="quantityButtonTapped:" destination="-1" eventType="touchUpInside" id="Hc1-3O-H83"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6b3-2f-1l6">
-                    <rect key="frame" x="562" y="13" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="NdD-O2-eJL"/>
-                        <constraint firstAttribute="width" constant="30" id="xnn-eh-305"/>
-                    </constraints>
-                    <state key="normal" image="plusButton"/>
-                    <connections>
-                        <action selector="quantityButtonTapped:" destination="-1" eventType="touchUpInside" id="LEm-TS-PQY"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQp-pg-SRt">
-                    <rect key="frame" x="459" y="18" width="99" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="99" id="DAs-4q-Qmq"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="4RR-pg-mxj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="3he-Sl-RFh"/>
-                <constraint firstItem="6b3-2f-1l6" firstAttribute="leading" secondItem="fQp-pg-SRt" secondAttribute="trailing" constant="4" id="7Tx-Pb-qT1"/>
+                <constraint firstAttribute="trailing" secondItem="Ep5-fX-xoU" secondAttribute="trailing" id="66Y-m6-Tmz"/>
                 <constraint firstAttribute="bottom" secondItem="4RR-pg-mxj" secondAttribute="bottom" id="9pr-KD-d9a"/>
-                <constraint firstAttribute="trailing" secondItem="6b3-2f-1l6" secondAttribute="trailing" constant="8" id="Cu1-Vx-a21"/>
-                <constraint firstItem="EDc-Ng-dxh" firstAttribute="leading" secondItem="Ep5-fX-xoU" secondAttribute="trailing" constant="8" id="PCc-7J-kK8"/>
-                <constraint firstItem="EDc-Ng-dxh" firstAttribute="centerY" secondItem="Ep5-fX-xoU" secondAttribute="centerY" id="Rag-Zp-RTp"/>
-                <constraint firstItem="fQp-pg-SRt" firstAttribute="leading" secondItem="EDc-Ng-dxh" secondAttribute="trailing" constant="4" id="RrM-CM-p6X"/>
+                <constraint firstAttribute="trailing" secondItem="9sv-zH-Ktt" secondAttribute="trailing" id="A7Y-mE-hic"/>
                 <constraint firstItem="Ep5-fX-xoU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dtL-Pq-Ovf"/>
                 <constraint firstAttribute="trailing" secondItem="4RR-pg-mxj" secondAttribute="trailing" constant="20" id="fy9-tt-lzL"/>
-                <constraint firstItem="fQp-pg-SRt" firstAttribute="centerY" secondItem="6b3-2f-1l6" secondAttribute="centerY" id="kaK-Xh-wY4"/>
+                <constraint firstItem="9sv-zH-Ktt" firstAttribute="top" secondItem="Ep5-fX-xoU" secondAttribute="bottom" constant="-20" id="hoP-N4-At2"/>
+                <constraint firstItem="9sv-zH-Ktt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iSM-zr-qNI"/>
                 <constraint firstItem="Ep5-fX-xoU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mq0-Zp-TpR"/>
-                <constraint firstItem="EDc-Ng-dxh" firstAttribute="centerY" secondItem="6b3-2f-1l6" secondAttribute="centerY" id="si5-Qi-GQC"/>
+                <constraint firstItem="9sv-zH-Ktt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="n5J-IN-NPL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="A7Y-mE-hic"/>
+                    <exclude reference="n5J-IN-NPL"/>
+                </mask>
+            </variation>
         </view>
     </objects>
-    <resources>
-        <image name="minusButton" width="31" height="31"/>
-        <image name="plusButton" width="31" height="31"/>
-    </resources>
 </document>

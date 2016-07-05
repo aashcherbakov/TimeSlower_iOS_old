@@ -19,7 +19,7 @@ public extension ReusableViewCell {
     
     /// Default reuse identifier is set with the class name.
     static var reuseIdentifier: String {
-        return String(self.dynamicType).componentsSeparatedByString(".").last!
+        return String(self)
     }
 }
 
@@ -38,5 +38,10 @@ public extension UITableView {
                 fatalError("No table view cell could be dequeued with identifier \(T.reuseIdentifier)")
             }
         return cell
+    }
+    
+    public func registerReusableCell(type: AnyClass) {
+        let identifier = NSStringFromClass(type).componentsSeparatedByString(".").last!
+        registerNib(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
     }
 }

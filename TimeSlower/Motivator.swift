@@ -74,7 +74,7 @@ class Motivator {
                     CGContextSetRGBFillColor(context, 255, 255, 255, 1)
                     CGContextFillEllipseInRect(context, circleRect)
                     
-                    totalCircles++
+                    totalCircles += 1
                 }
             }
         }
