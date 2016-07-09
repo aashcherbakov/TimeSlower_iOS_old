@@ -50,15 +50,20 @@ class TimeSaver: UIView {
         rac_valuesForKeyPath("selectedDuration", observer: self).toSignalProducer()
             .startWithNext { [weak self] (duration) in
                 guard let duration = duration as? Float else { return }
+                if self?.selectedValue == nil || duration != self?.slider.maximumValue {
+                    self?.selectedValue = duration / 6
+                    self?.slider.value = duration / 6
+                }
+                
                 self?.slider.maximumValue = duration
-                self?.selectedValue = duration / 6
-                self?.slider.value = duration / 6
+
         }
         
         rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
             .startWithNext { [weak self] (value) in
                 guard let value = value as? Int else { return }
                 self?.timeLabel.text = "\(value) min"
+                self?.slider.value = Float(value)
         }
         
         slider.rac_signalForControlEvents(.ValueChanged).toSignalProducer()

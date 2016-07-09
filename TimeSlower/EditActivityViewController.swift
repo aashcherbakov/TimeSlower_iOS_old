@@ -44,11 +44,7 @@ class EditActivityVC: UIViewController {
     var flow: Flow?
     var editingState: EditingState?
     var userProfile: Profile?
-    var activity: Activity? {
-        didSet {
-            setupData()
-        }
-    }
+    dynamic var activity: Activity?
     var activityManager = ActivityManager()
     
     typealias StateType = EditingState
@@ -70,11 +66,10 @@ class EditActivityVC: UIViewController {
     var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
     
     var valueSignals = [SignalProducer<AnyObject?, NSError>]()
-    var initialValues: [AnyObject?]?
-
+    var initialValuesForCells: [AnyObject?]?
     private var footerView: UIView?
+    
     dynamic private var lastExpandedCellIndex: NSIndexPath?
-   
     private var expandedCellIndex: NSIndexPath? {
         willSet {
             var nextIndex = newValue
@@ -117,14 +112,14 @@ class EditActivityVC: UIViewController {
             showStatsInActivityMotivationVC()
         } else if flow == .Editing {
             saveActivity()
+            showStatsInActivityMotivationVC()
         } else {
             forceMoveToNextControl()
         }
     }
     
     private func createActivity() {
-        guard
-            let name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration,
+        guard let name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration,
             notifications = selectedNotifications, timeToSave = selectedTimeToSave, profile = userProfile else {
             // TODO: submit notification that something is missing
             return
@@ -136,13 +131,12 @@ class EditActivityVC: UIViewController {
     }
     
     private func saveActivity() {
-        guard
-            let activity = activity, name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration,
-            notifications = selectedNotifications, timeToSave = selectedTimeToSave else {
+        guard let activity = activity, name = selectedName, basis = selectedBasis, startTime = selectedStartTime, duration = selectedDuration, notifications = selectedNotifications, timeToSave = selectedTimeToSave else {
                 return
         }
         
-        activityManager.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime, duration: duration, notifications: notifications, timeToSave: timeToSave)
+        activityManager.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
+            duration: duration, notifications: notifications, timeToSave: timeToSave)
     }
     
     // MARK: - Private Functions
@@ -151,6 +145,8 @@ class EditActivityVC: UIViewController {
         if activity != nil {
             flow = .Editing
             editingState = .FullHouse
+            timeSaverView.selectedDuration = activity?.timing?.duration
+            timeSaverView.selectedValue = activity?.timing?.timeToSave
         } else {
             flow = .Creating
             editingState = .Name
@@ -172,7 +168,7 @@ class EditActivityVC: UIViewController {
             selectedNotifications = activity.notifications?.boolValue
             selectedTimeToSave = activity.timing?.timeToSave.integerValue
             
-            initialValues = [selectedName, selectedBasis, selectedStartTime, selectedDuration, selectedNotifications]
+            initialValuesForCells = [selectedName, selectedBasis, selectedStartTime, selectedDuration, selectedNotifications]
         }
     }
     
@@ -190,6 +186,11 @@ class EditActivityVC: UIViewController {
     private func setupEvents() {
         tableView.dataSource = self
         tableView.delegate = self
+        
+        rac_valuesForKeyPath("activity", observer: self).toSignalProducer().startWithNext { [weak self] (_) in
+            self?.setupData()
+            
+        }
         
         changeTimeSaverVisibilityWhenCellExpands()
         trackTimeSaverValueChanges()
@@ -240,7 +241,7 @@ class EditActivityVC: UIViewController {
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
                 self?.selectedDuration = duration as? Int
-                self?.selectedNotifications = (notification != nil) ?? notification as? Bool
+                self?.selectedNotifications = notification as? Bool
                 self?.moveToNextEditingState()
         }
     }
@@ -286,6 +287,10 @@ class EditActivityVC: UIViewController {
     }
     
     private func showStatsInActivityMotivationVC() {
+        guard let activity = activity else {
+            return
+        }
+        
         let motivationVC: ActivityMotivationVC = ControllerFactory.createController()
         motivationVC.activity = activity
         
@@ -378,7 +383,7 @@ extension EditActivityVC: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        if let values = initialValues where values.count == Constants.numberOfRows {
+        if let values = initialValuesForCells where values.count == Constants.numberOfRows {
             cell.control.setInitialValue(values[indexPath.row])
         }
         

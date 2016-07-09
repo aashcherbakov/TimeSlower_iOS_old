@@ -24,7 +24,7 @@
                         <constraint firstAttribute="height" constant="56" id="RiF-lJ-mxo"/>
                     </constraints>
                 </view>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxO-pN-bMN">
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kxO-pN-bMN">
                     <rect key="frame" x="543" y="12" width="51" height="31"/>
                 </switch>
             </subviews>

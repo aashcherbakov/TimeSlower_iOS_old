@@ -75,9 +75,6 @@ class DayResultsManageTest: XCTestCase {
         let factFinishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:40 AM")!
         testResult.factFinishTime = Timing.updateTimeForToday(factFinishTime)
         testResult.factStartTime = Timing.updateTimeForToday(factStartTime)
-        print("Finish time for result: \(testResult.factFinishTime)")
-        print("Start time for result: \(testResult.factStartTime)")
-
     }
 
     func testFactSpentTime() {
@@ -144,7 +141,6 @@ class DayResultsManageTest: XCTestCase {
             results.append(DayResults.newResultWithDate(newResultDate!, forActivity: testResult.activity))
         }
         fakeWeekResults = results
-        print(results)
     }
     
     func deleteFakeWeekResults() {
