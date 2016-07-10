@@ -30,7 +30,7 @@ extension DayResults {
             result.factDuration = NSNumber(double: abs(result.factFinishTime.timeIntervalSinceDate(result.factStartTime) / 60))
             
             if activity.isRoutine() {
-                result.factSavedTime = NSNumber(double: activity.timing!.duration.doubleValue - result.factDuration.doubleValue)
+                result.factSavedTime = activity.timing!.duration.minutes() - result.factDuration.integerValue
             }
             
             activity.timing!.manuallyStarted = nil
@@ -56,19 +56,21 @@ extension DayResults {
         var success = 0.0
         var factDuration = factFinishTime.timeIntervalSinceDate(factStartTime) / 60
         
-        if factDuration > activity.timing!.duration.doubleValue { factDuration = activity.timing!.duration.doubleValue }
+        if factDuration > Double(activity.timing!.duration.minutes()) {
+            factDuration = Double(activity.timing!.duration.minutes())
+        }
         if factDuration < 0 { factDuration = factDuration * -1 }
         
         if self.activity.isRoutine() {
-            let timeToSave = self.activity.timing!.timeToSave.doubleValue
-            let factSavedTime = self.activity.timing!.duration.doubleValue - factDuration
+            let timeToSave = activity.timing!.timeToSave.doubleValue
+            let factSavedTime = Double(activity.timing!.duration.minutes()) - factDuration
             if factSavedTime < 0 {
                 return success
             } else {
                 success = factSavedTime / timeToSave * 100.0
             }
         } else {
-            success = factDuration / (activity.timing!.duration.doubleValue) * 100.0
+            success = factDuration / (Double(activity.timing!.duration.minutes())) * 100.0
         }
         return round(success)
     }

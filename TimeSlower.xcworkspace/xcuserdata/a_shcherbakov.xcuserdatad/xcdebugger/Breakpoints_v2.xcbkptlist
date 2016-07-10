@@ -29,5 +29,69 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeSlower/EditActivityViewController.swift"
+            timestampString = "489871267.528232"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "saveActivity()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.EditActivityVC.(saveActivity in _442BC186E3366E165083D66F4FD841B7) () -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/EditActivityViewController.swift"
+                  timestampString = "489876418.663216"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.EditActivityVC.(saveActivity in _442BC186E3366E165083D66F4FD841B7) () -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/EditActivityViewController.swift"
+                  timestampString = "489876418.663487"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeSlower/Features/Activities/Views/TimeSaver.swift"
+            timestampString = "489876431.941698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setupEvents()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

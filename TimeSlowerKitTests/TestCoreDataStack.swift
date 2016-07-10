@@ -58,7 +58,7 @@ public class TestCoreDataStack: CoreDataStack {
         let newTiming = Timing.newTimingForActivity(activity: activity)
         newTiming.startTime = shortStyleDateFormatter().dateFromString("7/3/15, 10:15 AM")!
         newTiming.finishTime = shortStyleDateFormatter().dateFromString("7/3/15, 10:45 AM")!
-        newTiming.updateDuration()
+        newTiming.duration = ActivityDuration(value: 30, period: .Minutes)
         newTiming.timeToSave = NSNumber(double: 10.0)
         newTiming.activity = activity
         return newTiming
@@ -76,7 +76,7 @@ public class TestCoreDataStack: CoreDataStack {
         newResult.factDuration = NSNumber(double: abs(newResult.factFinishTime.timeIntervalSinceDate(newResult.factStartTime) / 60))
         
         if activity.isRoutine() {
-            newResult.factSavedTime = NSNumber(double: activity.timing!.duration.doubleValue - newResult.factDuration.doubleValue)
+            newResult.factSavedTime = NSNumber(double: Double(activity.timing!.duration.value) - newResult.factDuration.doubleValue)
         }
         
         newResult.activity.timing!.manuallyStarted = nil

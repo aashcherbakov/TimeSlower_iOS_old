@@ -163,7 +163,7 @@ extension Profile {
             if activity.isRoutine() {
                 toSave += activity.timing!.timeToSave.doubleValue * Double(numberOfDays)
             } else {
-                toSpend += activity.timing!.duration.doubleValue * Double(numberOfDays)
+                toSpend += Double(activity.timing!.duration.minutes()) * Double(numberOfDays)
             }
         }
         return (abs(toSave), abs(toSpend)) // minutes

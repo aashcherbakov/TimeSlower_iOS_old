@@ -12,6 +12,11 @@ import CoreData
 
 extension Stats {
     
+    private struct Constants {
+        let numberOfWeeksInMonth = 4.345
+        let numberOfWeeksInYear = 52.0
+    }
+    
     public struct LifeTime {
         public var years: Double
         public var months: Double
@@ -66,27 +71,26 @@ extension Stats {
         var hours = 0.0, days = 0.0, months = 0.0, years = 0.0
         
         // Get hours
-        if let units = (activity.isRoutine()) ? activity.timing?.timeToSave.doubleValue : activity.timing?.duration.doubleValue {
-            hours = units * Double(daysLeft) / 60.0
-            
-            // Get days
-            switch activity.activityBasis() {
-            case .Daily: days = hours / 24
-            case .Workdays: days = (((hours / 24) / 7) / 5)
-            case .Weekends: days = (((hours / 24) / 7) / 2)
-            case .Random: days = hours / 24
-            }
-            
-            // Get months and years
-            months = days / 30
-            years = months / 12
-            
-            // Set activity's properties
-            summHours = NSNumber(double: hours)
-            summDays = NSNumber(double: days)
-            summMonths = NSNumber(double: months)
-            summYears = NSNumber(double: years)
+        let units = (activity.isRoutine()) ? activity.timing!.timeToSave.doubleValue : Double(activity.timing!.duration.minutes())
+        hours = units * Double(daysLeft) / 60.0
+        
+        // Get days
+        switch activity.activityBasis() {
+        case .Daily: days = hours / 24
+        case .Workdays: days = (((hours / 24) / 7) / 5)
+        case .Weekends: days = (((hours / 24) / 7) / 2)
+        case .Random: days = hours / 24
         }
+        
+        // Get months and years
+        months = days / 30
+        years = months / 12
+        
+        // Set activity's properties
+        summHours = NSNumber(double: hours)
+        summDays = NSNumber(double: days)
+        summMonths = NSNumber(double: months)
+        summYears = NSNumber(double: years)
     }
     
     /// Returns total number of days when activity was "on" based on it's basis
@@ -137,7 +141,7 @@ extension Stats {
             let stats = activity.stats else {
             return nil
         }
-        let dailyTime = activity.isRoutine() ? timing.timeToSave.doubleValue : timing.duration.doubleValue
+        let dailyTime = activity.isRoutine() ? timing.timeToSave.doubleValue : Double(timing.duration.minutes())
         let totalTimePlanned = profile.totalTimeForDailyMinutes(dailyTime)
         let successFroNow = stats.averageSuccess.doubleValue / 100
         
@@ -160,7 +164,7 @@ extension Stats {
                 if anActivity.isRoutine() {
                     toSave += timing.timeToSave.doubleValue
                 } else {
-                    toSpend += timing.duration.doubleValue
+                    toSpend += Double(timing.duration.minutes())
                 }
             }
         }

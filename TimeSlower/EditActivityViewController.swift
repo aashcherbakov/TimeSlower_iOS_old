@@ -54,7 +54,7 @@ class EditActivityVC: UIViewController {
     var selectedName: String?
     var selectedBasis: [Int]?
     var selectedStartTime: NSDate?
-    var selectedDuration: Int?
+    var selectedDuration: ActivityDuration?
     var selectedNotifications: Bool? = true
     var selectedTimeToSave: Int?
     
@@ -164,7 +164,7 @@ class EditActivityVC: UIViewController {
             selectedName = activity.name
             selectedBasis = activityManager.daysIntegerRepresentation(activity.days as! Set<Day>)
             selectedStartTime = activity.timing?.startTime
-            selectedDuration = activity.timing?.duration.integerValue
+            selectedDuration = activity.timing?.duration
             selectedNotifications = activity.notifications?.boolValue
             selectedTimeToSave = activity.timing?.timeToSave.integerValue
             
@@ -231,7 +231,7 @@ class EditActivityVC: UIViewController {
         }
         
         durationSignal.startWithNext { [weak self] (value) in
-            guard let duration = value as? Int else { return }
+            guard let duration = value as? ActivityDuration else { return }
             self?.timeSaverView.selectedDuration = duration
         }
         
@@ -240,7 +240,7 @@ class EditActivityVC: UIViewController {
                 self?.selectedName = name as? String
                 self?.selectedBasis = basis as? [Int]
                 self?.selectedStartTime = startTime as? NSDate
-                self?.selectedDuration = duration as? Int
+                self?.selectedDuration = duration as? ActivityDuration
                 self?.selectedNotifications = notification as? Bool
                 self?.moveToNextEditingState()
         }
