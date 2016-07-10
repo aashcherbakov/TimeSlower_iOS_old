@@ -8,8 +8,12 @@
 
 import Foundation
 
+/// Object that encapsulates duration value and period description
 public class ActivityDuration: NSObject {
+    /// Number of time units - either minutes of hours
     public let value: Int
+    
+    /// Time Unit type - can be .Minutes or .Hours
     public let period: Period
     
     public required init?(coder aDecoder: NSCoder) {
@@ -22,6 +26,11 @@ public class ActivityDuration: NSObject {
         self.period = period
     }
     
+    /**
+     Returns equivalent of value in seconds
+     
+     - returns: Double for seconds in value
+     */
     public func seconds() -> Double {
         var seconds = Double(value) * 60
         
@@ -32,6 +41,11 @@ public class ActivityDuration: NSObject {
         return seconds
     }
     
+    /**
+     Returns equivalent of value in minutes
+     
+     - returns: Int for number of minutes in value
+     */
     public func minutes() -> Int {
         switch period {
         case .Hours: return value * 60
@@ -39,6 +53,11 @@ public class ActivityDuration: NSObject {
         }
     }
     
+    /**
+     Returns equivalent of value in hours
+     
+     - returns: Int for number of hours in value
+     */
     public func hours() -> Int {
         switch period {
         case .Hours: return value
@@ -54,22 +73,3 @@ extension ActivityDuration: NSCoding {
     }
 }
 
-/**
- Describes variants of time period: minutes and hours
- */
-public enum Period: Int {
-    case Minutes
-    case Hours
-    
-    /**
-     Literal lowercase transript of enum case
-     
-     - returns: String with literal transcript
-     */
-    public func description() -> String {
-        switch self {
-        case .Minutes: return "minutes"
-        case .Hours: return "hours"
-        }
-    }
-}
