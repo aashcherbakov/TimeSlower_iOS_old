@@ -110,8 +110,9 @@ class EditActivityDurationView: ObservableControl {
     
     private func getValuesFromPickerView(pickerView: UIPickerView) -> (value: Int, period: Period) {
         let row = pickerView.selectedRowInComponent(Components.Values.rawValue)
-        if let period = Period(rawValue: pickerView.selectedRowInComponent(Components.Periods.rawValue)) {
-            let value = selectedValueForRow(row, period: period)
+        if let
+            period = Period(rawValue: pickerView.selectedRowInComponent(Components.Periods.rawValue)),
+            value = selectedValueForRow(row, period: period) {
             return (value, period)
         } else {
             fatalError("DatePicker has only one component")
@@ -187,10 +188,12 @@ extension EditActivityDurationView: UIPickerViewDelegate {
         return ""
     }
     
-    private func selectedValueForRow(row: Int, period: Period) -> Int {
+    private func selectedValueForRow(row: Int, period: Period) -> Int? {
         switch period {
-        case .Hours: return hours[row]
-        case .Minutes: return minutes[row]
+        case .Hours:
+            return row < hours.count ? hours[row] : hours.last
+        case .Minutes:
+            return row < minutes.count ? minutes[row] : minutes.last
         }
     }
 }

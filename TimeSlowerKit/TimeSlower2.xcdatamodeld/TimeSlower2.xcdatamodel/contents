@@ -53,7 +53,7 @@
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="timing" inverseEntity="Activity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="-243" positionY="126" width="128" height="178"/>
+        <element name="Activity" positionX="-243" positionY="126" width="128" height="180"/>
         <element name="Day" positionX="-182" positionY="-81" width="128" height="88"/>
         <element name="DayResults" positionX="16" positionY="-79" width="128" height="165"/>
         <element name="Profile" positionX="-443" positionY="102" width="128" height="150"/>

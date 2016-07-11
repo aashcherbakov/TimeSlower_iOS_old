@@ -67,30 +67,16 @@ extension Stats {
         guard let daysLeft = activity.profile?.numberOfDaysTillEndOfLifeSinceDate(NSDate()) else {
             return
         }
-        
-        var hours = 0.0, days = 0.0, months = 0.0, years = 0.0
-        
-        // Get hours
-        let units = (activity.isRoutine()) ? activity.timing!.timeToSave.doubleValue : Double(activity.timing!.duration.minutes())
-        hours = units * Double(daysLeft) / 60.0
-        
-        // Get days
-        switch activity.activityBasis() {
-        case .Daily: days = hours / 24
-        case .Workdays: days = (((hours / 24) / 7) / 5)
-        case .Weekends: days = (((hours / 24) / 7) / 2)
-        case .Random: days = hours / 24
-        }
-        
-        // Get months and years
-        months = days / 30
-        years = months / 12
+
+        let busyDays = activity.days.count
+        let duration = activity.timing!.duration.minutes()
+        let calculator = TimeCalculator()
         
         // Set activity's properties
-        summHours = NSNumber(double: hours)
-        summDays = NSNumber(double: days)
-        summMonths = NSNumber(double: months)
-        summYears = NSNumber(double: years)
+        summHours = calculator.totalHours(inDays: daysLeft, duration: duration, busyDays: busyDays)
+        summDays = calculator.totalDays(inDays: daysLeft, duration: duration, busyDays: busyDays)
+        summMonths = calculator.totalMonths(inDays: daysLeft, duration: duration, busyDays: busyDays)
+        summYears = calculator.totalYears(inDays: daysLeft, duration: duration, busyDays: busyDays)
     }
     
     /// Returns total number of days when activity was "on" based on it's basis

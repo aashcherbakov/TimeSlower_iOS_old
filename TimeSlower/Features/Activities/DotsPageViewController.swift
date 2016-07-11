@@ -38,9 +38,6 @@ class DotsPageViewController: UIViewController {
         
     }
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

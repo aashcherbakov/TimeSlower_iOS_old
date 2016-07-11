@@ -23,6 +23,7 @@ public struct ActivityManager {
         activity.timing?.duration = duration
         activity.timing?.timeToSave = timeToSave
         activity.notifications = notifications
+        activity.stats?.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
         
@@ -39,6 +40,7 @@ public struct ActivityManager {
         activity.timing?.duration = duration
         activity.timing?.timeToSave = timeToSave
         activity.notifications = notifications
+        activity.stats?.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
     }

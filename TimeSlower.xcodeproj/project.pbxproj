@@ -133,6 +133,8 @@
 		F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */; };
 		F0A6135D1D32DD100051743C /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135C1D32DD100051743C /* ManagedObject.swift */; };
 		F0A6135F1D32F0860051743C /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135E1D32F0860051743C /* Period.swift */; };
+		F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613601D32F57C0051743C /* ActivityDurationTests.swift */; };
+		F0A613631D332CE30051743C /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613621D332CE30051743C /* TimeCalculator.swift */; };
 		F0A9F9BD1CD6685D00809BA2 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */; };
 		F0A9F9BF1CD6688700809BA2 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9BE1CD6688700809BA2 /* Weekday.swift */; };
 		F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */; };
@@ -360,6 +362,8 @@
 		F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationsView.xib; sourceTree = "<group>"; };
 		F0A6135C1D32DD100051743C /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		F0A6135E1D32F0860051743C /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		F0A613601D32F57C0051743C /* ActivityDurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDurationTests.swift; sourceTree = "<group>"; };
+		F0A613621D332CE30051743C /* TimeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
 		F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0A9F9BE1CD6688700809BA2 /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Weekday.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTests.swift; sourceTree = "<group>"; };
@@ -527,6 +531,7 @@
 				F06AFFA51CF88D630056EE93 /* Extensions */,
 				F009AEC51BD9CD34007F38A9 /* LazyCalendar.swift */,
 				F0A9F9BC1CD6685D00809BA2 /* DateManager.swift */,
+				F0A613621D332CE30051743C /* TimeCalculator.swift */,
 				F04194601CD2E40300C9B896 /* DateManagerTests.swift */,
 				F0A9F9BE1CD6688700809BA2 /* Weekday.swift */,
 				F0A9F9C01CD6C30F00809BA2 /* WeekdayTests.swift */,
@@ -604,6 +609,7 @@
 			children = (
 				F009AEB41BD9CC86007F38A9 /* Timing.swift */,
 				F07AC3081D31A04C0003A917 /* ActivityDuration.swift */,
+				F0A613601D32F57C0051743C /* ActivityDurationTests.swift */,
 				F0A6135E1D32F0860051743C /* Period.swift */,
 				F009AEB51BD9CC86007F38A9 /* TimingManage.swift */,
 			);
@@ -1505,6 +1511,7 @@
 				F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */,
 				F009AF061BDAA020007F38A9 /* NSDate+Extension.swift in Sources */,
 				F009AEC61BD9CD34007F38A9 /* LazyCalendar.swift in Sources */,
+				F0A613631D332CE30051743C /* TimeCalculator.swift in Sources */,
 				F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */,
 				F041945E1CD0479300C9B896 /* Day.swift in Sources */,
 				F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */,
@@ -1525,6 +1532,7 @@
 				F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
 				F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */,
+				F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */,
 				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
 				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
 				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
