@@ -8,29 +8,10 @@
 
 import UIKit
 import ReactiveCocoa
+import TimeSlowerKit
 
 /// UITableViewCell subclass to edit duration of activity
 class EditActivityDurationView: ObservableControl {
-    
-    /**
-     Describes variants of time period: minutes and hours
-     */
-    enum Period: Int {
-        case Minutes
-        case Hours
-        
-        /**
-         Literal lowercase transript of enum case
-         
-         - returns: String with literal transcript
-         */
-        func description() -> String {
-            switch self {
-            case .Minutes: return "minutes"
-            case .Hours: return "hours"
-            }
-        }
-    }
     
     /**
      Components of UIPickerView
@@ -50,7 +31,7 @@ class EditActivityDurationView: ObservableControl {
     // MARK: - Properties
     
     /// Duration of activity in minutes. Observable.
-    dynamic var selectedValue: NSNumber?
+    dynamic var selectedValue: ActivityDuration?
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var textfieldView: TextfieldView!
@@ -85,12 +66,10 @@ class EditActivityDurationView: ObservableControl {
     }
     
     override func setInitialValue(value: AnyObject?) {
-        if let value = value as? NSNumber {
-            selectedValue = value
-            let period: Period = value.integerValue > minutes.last ? .Hours : .Minutes
-            textfieldView.setText("Duration: \(value) \(period.description())")
-            
-            setPickerViewToValue(value.integerValue, period: period)
+        if let duration = value as? ActivityDuration {
+            selectedValue = duration
+            textfieldView.setText("Duration: \(duration.value) \(duration.period.description())")
+            setPickerViewToValue(duration.value, period: duration.period)
         }
     }
     
@@ -131,8 +110,9 @@ class EditActivityDurationView: ObservableControl {
     
     private func getValuesFromPickerView(pickerView: UIPickerView) -> (value: Int, period: Period) {
         let row = pickerView.selectedRowInComponent(Components.Values.rawValue)
-        if let period = Period(rawValue: pickerView.selectedRowInComponent(Components.Periods.rawValue)) {
-            let value = selectedValueForRow(row, period: period)
+        if let
+            period = Period(rawValue: pickerView.selectedRowInComponent(Components.Periods.rawValue)),
+            value = selectedValueForRow(row, period: period) {
             return (value, period)
         } else {
             fatalError("DatePicker has only one component")
@@ -140,7 +120,7 @@ class EditActivityDurationView: ObservableControl {
     }
     
     private func updateSelectedValueWithDuration(duration: Int, period: Period) {
-        selectedValue = duration
+        selectedValue = ActivityDuration(value: duration, period: period)
         textfieldView.setText("Duration: \(duration) \(period.description())")
     }
 }
@@ -208,10 +188,12 @@ extension EditActivityDurationView: UIPickerViewDelegate {
         return ""
     }
     
-    private func selectedValueForRow(row: Int, period: Period) -> Int {
+    private func selectedValueForRow(row: Int, period: Period) -> Int? {
         switch period {
-        case .Hours: return hours[row]
-        case .Minutes: return minutes[row]
+        case .Hours:
+            return row < hours.count ? hours[row] : hours.last
+        case .Minutes:
+            return row < minutes.count ? minutes[row] : minutes.last
         }
     }
 }

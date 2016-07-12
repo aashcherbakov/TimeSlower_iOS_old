@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import TimeSlowerKit
 
 /// UIView subclass that alows to select time to save for activity with UISlider
 class TimeSaver: UIView {
@@ -22,7 +23,7 @@ class TimeSaver: UIView {
     /// Selected time to save, Integer. Observable
     dynamic var selectedValue: NSNumber?
     
-    dynamic var selectedDuration: NSNumber?
+    dynamic var selectedDuration: ActivityDuration?
     
     // MARK: - Overridden Methods
     
@@ -49,16 +50,23 @@ class TimeSaver: UIView {
 
         rac_valuesForKeyPath("selectedDuration", observer: self).toSignalProducer()
             .startWithNext { [weak self] (duration) in
-                guard let duration = duration as? Float else { return }
-                self?.slider.maximumValue = duration
-                self?.selectedValue = duration / 6
-                self?.slider.value = duration / 6
+                guard let duration = duration as? ActivityDuration else { return }
+                if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
+                    let suggestedSaving = duration.value / 4
+                    self?.selectedValue = suggestedSaving
+                    
+                    self?.slider.value = (Float(suggestedSaving) > 1) ? Float(suggestedSaving) : 1
+                }
+                
+                self?.slider.maximumValue = Float(duration.value)
+
         }
         
         rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
             .startWithNext { [weak self] (value) in
-                guard let value = value as? Int else { return }
-                self?.timeLabel.text = "\(value) min"
+                guard let value = value as? Int, duration = self?.selectedDuration else { return }
+                self?.timeLabel.text = "\(value) \(duration.period.description())"
+                self?.slider.value = Float(value)
         }
         
         slider.rac_signalForControlEvents(.ValueChanged).toSignalProducer()

@@ -55,7 +55,7 @@ class ActivityMotivationVC: ActivityMotivationVCConstraints {
     func setup() {
         titleLable.text = activity.name
         startTimeLabel.text = dateFormatter.stringFromDate(activity.timing!.updatedStartTime())
-        durationLabel.text = "\(activity.timing!.duration.doubleValue.format(format)) min"
+        durationLabel.text = "\(activity.timing!.duration.minutes()) min"
         setupDescriptionLabel()
         setupPageViewController()
     }

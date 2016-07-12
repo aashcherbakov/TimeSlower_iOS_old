@@ -24,14 +24,6 @@ extension Timing {
         return timing
     }
     
-    public func updateDuration() {
-        var totalDuration = finishTime.timeIntervalSinceDate(startTime) / 60.0
-        if totalDuration < 0 {
-            totalDuration = totalDuration * -1
-        }
-        duration = NSNumber(double: totalDuration)
-    }
-    
     public func updateAlarmTime() {
         alarmTime = updatedAlarmTime()
     }
@@ -74,7 +66,7 @@ extension Timing {
     public func updatedFinishTime() -> NSDate {
         var newTime: NSDate?
         if let userStarted = manuallyStarted {
-            newTime = NSDate(timeInterval: duration.doubleValue * 60, sinceDate: userStarted)
+            newTime = NSDate(timeInterval: Double(duration.minutes()) * 60, sinceDate: userStarted)
         } else {
             newTime = Timing.updateTimeForToday(finishTime)
             if finishTimeIsNextDay() {
@@ -89,7 +81,7 @@ extension Timing {
         let calendar = NSCalendar.currentCalendar()
         calendar.timeZone = NSTimeZone.localTimeZone()
         let startTimeDayComponent = calendar.components(.Day, fromDate: startTime)
-        let dateAfterAddingActivityDuration = startTime.dateByAddingTimeInterval(duration.doubleValue * 60)
+        let dateAfterAddingActivityDuration = startTime.dateByAddingTimeInterval(Double(duration.minutes()) * 60)
         let finishTimeDayComponent = calendar.components(.Day, fromDate: dateAfterAddingActivityDuration)
         return (startTimeDayComponent.day == finishTimeDayComponent.day) ? false : true
     }
@@ -97,12 +89,12 @@ extension Timing {
     
     // Based on assumption that alarm time for routine is only one - for saving time
     public func updatedAlarmTime() -> NSDate {
-        let timeIntervalForRoutineAlarm = (duration.doubleValue - timeToSave.doubleValue) * 60
+        let timeIntervalForRoutineAlarm = (duration.minutes() - timeToSave.integerValue) * 60
         var sinceDate = startTime
         if let manuallyStarted = manuallyStarted {
             sinceDate = manuallyStarted
         }
-        let alarmForRoutine = NSDate(timeInterval: timeIntervalForRoutineAlarm, sinceDate: sinceDate)
+        let alarmForRoutine = NSDate(timeInterval: Double(timeIntervalForRoutineAlarm), sinceDate: sinceDate)
         return (activity.isRoutine()) ? alarmForRoutine : updatedFinishTime()
     }
     

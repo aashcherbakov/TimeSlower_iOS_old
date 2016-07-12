@@ -12,7 +12,7 @@ public struct ActivityManager {
     
     public init() { }
     
-    public func createActivityWithType(type: ActivityType, name: String, selectedDays: [Int], startTime: NSDate, duration: Int, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
+    public func createActivityWithType(type: ActivityType, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
         
         let activity = Activity.newActivityForProfile(profile, ofType: type)
         activity.name = name
@@ -23,13 +23,14 @@ public struct ActivityManager {
         activity.timing?.duration = duration
         activity.timing?.timeToSave = timeToSave
         activity.notifications = notifications
+        activity.stats?.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
         
         return activity
     }
     
-    public func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: Int, notifications: Bool, timeToSave: Int) {
+    public func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
         
         activity.name = name
         activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
@@ -39,6 +40,7 @@ public struct ActivityManager {
         activity.timing?.duration = duration
         activity.timing?.timeToSave = timeToSave
         activity.notifications = notifications
+        activity.stats?.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
     }
@@ -52,8 +54,8 @@ public struct ActivityManager {
         return integers
     }
     
-    private func updateFinishTimeWithDuration(duration: Int, fromStartTime startTime: NSDate) -> NSDate {
-        return startTime.dateByAddingTimeInterval(Double(duration) * 60)
+    private func updateFinishTimeWithDuration(duration: ActivityDuration, fromStartTime startTime: NSDate) -> NSDate {
+        return startTime.dateByAddingTimeInterval(duration.seconds())
     }
     
     private func dayEntitiesFromSelectedDays(selectedDays: [Int], forActivity activity: Activity) -> Set<Day> {

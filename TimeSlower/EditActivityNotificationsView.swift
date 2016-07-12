@@ -62,11 +62,15 @@ class EditActivityNotificationsView: ObservableControl {
     }
     
     private func setupEvents() {
-        valueChangedSignal = notificationSwitch.rac_signalForControlEvents(.ValueChanged).startWith(notificationSwitch).toSignalProducer()
+        valueChangedSignal = notificationSwitch.rac_signalForControlEvents(.ValueChanged).startWith(notificationSwitch).toSignalProducer().map({ (value) -> NSNumber? in
+            guard let switcher = value as? UISwitch else { return nil }
+            return switcher.on
+        })
+        
         valueChangedSignal?.startWithNext { [weak self] (value) in
-            guard let switcher = value as? UISwitch else { return }
-            self?.selectedValue = switcher.on
-            self?.updateTextFieldForSwitch(switcher.on)
+            guard let value = value as? Bool else { return }
+            self?.selectedValue = value
+            self?.updateTextFieldForSwitch(value)
         }
     }
     

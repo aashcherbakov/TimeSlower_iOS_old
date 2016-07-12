@@ -197,12 +197,10 @@ class ProfileManageActivitiesTest: XCTestCase {
     func testFindCurrentActivityThatTriggersNextClosestActivity() {
         testActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
         testActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
-        print(testActivity.timing)
                 
         let secondActivity = newTestActivity()
         secondActivity.timing!.startTime = NSDate().dateByAddingTimeInterval(60*60*3)
         secondActivity.timing!.finishTime = NSDate().dateByAddingTimeInterval(60*60*4)
-        print(secondActivity.timing)
 
         let currentActivity = testProfile.findCurrentActivity()
         XCTAssertEqual(currentActivity!, secondActivity, "Second activity should be the current one")

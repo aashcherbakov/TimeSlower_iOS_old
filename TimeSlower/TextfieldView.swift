@@ -82,7 +82,6 @@ class TextfieldView: UIView {
             })
             .skipRepeats()
             .startWithNext { [weak self] (valid) in
-                print(valid.description)
                 self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
                 self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
         }

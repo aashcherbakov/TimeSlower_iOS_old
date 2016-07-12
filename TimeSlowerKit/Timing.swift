@@ -9,10 +9,10 @@
 import Foundation
 import CoreData
 
-public class Timing: NSManagedObject {
+public class Timing: ManagedObject {
 
     @NSManaged public var alarmTime: NSDate
-    @NSManaged public var duration: NSNumber
+    @NSManaged public var duration: ActivityDuration
     @NSManaged public var finishTime: NSDate
     @NSManaged public var manuallyStarted: NSDate?
     @NSManaged public var startTime: NSDate
@@ -20,4 +20,14 @@ public class Timing: NSManagedObject {
     /// Time in MINUTES
     @NSManaged public var timeToSave: NSNumber
     @NSManaged public var activity: Activity
+}
+
+extension Timing: ManagedObjectType {
+    public static var entityName: String {
+        return "Timing"
+    }
+    
+    public static var defaultSortDescriptors: [NSSortDescriptor] {
+        return []
+    }
 }
