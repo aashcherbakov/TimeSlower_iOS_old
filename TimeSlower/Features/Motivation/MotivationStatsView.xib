@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotivationStatsView" customModule="TimeSlower" customModuleProvider="target">
+            <connections>
+                <outlet property="durationLabel" destination="YU6-bV-4b9" id="TG1-fA-oCI"/>
+                <outlet property="durationTitleLabel" destination="ZSK-EU-hRP" id="FaV-Ps-YJQ"/>
+                <outlet property="startTimeLabel" destination="hIn-Pv-EUM" id="i8w-Wn-ySH"/>
+                <outlet property="startTimeTitleLabel" destination="dk8-cu-NSx" id="8Nw-MK-9sK"/>
+                <outlet property="view" destination="iN0-l3-epB" id="iXn-jV-yeI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZK-VK-iI5" userLabel="statsView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vka-3s-Z1l" userLabel="separator">
+                            <rect key="frame" x="299" y="0.0" width="2" height="63"/>
+                            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="2" id="7bk-Yh-DX9"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uke-iN-lZJ" userLabel="startTimeView">
+                            <rect key="frame" x="166" y="0.0" width="94" height="22"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk8-cu-NSx">
+                                    <rect key="frame" x="23" y="0.0" width="71" height="22"/>
+                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                                    <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="highlightedColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startTimeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="RZY-Sg-eyx">
+                                    <rect key="frame" x="0.0" y="2" width="15" height="15"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="RZY-Sg-eyx" firstAttribute="leading" secondItem="uke-iN-lZJ" secondAttribute="leading" id="2p5-fc-AWK"/>
+                                <constraint firstItem="RZY-Sg-eyx" firstAttribute="centerY" secondItem="dk8-cu-NSx" secondAttribute="centerY" constant="-1" id="8XO-RV-32b"/>
+                                <constraint firstAttribute="centerY" secondItem="dk8-cu-NSx" secondAttribute="centerY" constant="0.5" id="Adk-8h-KeJ"/>
+                                <constraint firstAttribute="bottom" secondItem="dk8-cu-NSx" secondAttribute="bottom" id="MGO-8k-iuF"/>
+                                <constraint firstItem="dk8-cu-NSx" firstAttribute="leading" secondItem="RZY-Sg-eyx" secondAttribute="trailing" constant="8" id="Qh0-YH-DlJ"/>
+                                <constraint firstAttribute="trailing" secondItem="dk8-cu-NSx" secondAttribute="trailing" id="UIY-8o-3wi"/>
+                                <constraint firstItem="dk8-cu-NSx" firstAttribute="top" secondItem="uke-iN-lZJ" secondAttribute="top" id="rfV-E9-Dbv"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Adk-8h-KeJ"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Aj-ay-oqA" userLabel="durationView">
+                            <rect key="frame" x="338" y="0.0" width="86" height="22"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-EU-hRP">
+                                    <rect key="frame" x="23" y="0.0" width="63" height="22"/>
+                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                                    <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="highlightedColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="durationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-rE-qqT">
+                                    <rect key="frame" x="0.0" y="4" width="15" height="15"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="ZSK-EU-hRP" firstAttribute="top" secondItem="5Aj-ay-oqA" secondAttribute="top" id="5Y1-MO-UW7"/>
+                                <constraint firstItem="ZSK-EU-hRP" firstAttribute="leading" secondItem="5T4-rE-qqT" secondAttribute="trailing" constant="8" id="DxU-DF-7Zc"/>
+                                <constraint firstItem="5T4-rE-qqT" firstAttribute="centerY" secondItem="ZSK-EU-hRP" secondAttribute="centerY" id="FVS-vS-GBU"/>
+                                <constraint firstAttribute="bottom" secondItem="ZSK-EU-hRP" secondAttribute="bottom" id="b8O-Wa-fof"/>
+                                <constraint firstAttribute="trailing" secondItem="ZSK-EU-hRP" secondAttribute="trailing" id="q1K-UE-2l6"/>
+                                <constraint firstItem="5T4-rE-qqT" firstAttribute="leading" secondItem="5Aj-ay-oqA" secondAttribute="leading" id="rEh-mq-Qks"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:00 pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIn-Pv-EUM">
+                            <rect key="frame" x="184" y="22" width="57" height="22"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                            <color key="textColor" red="0.44705882349999998" green="0.44705882349999998" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="highlightedColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35 min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YU6-bV-4b9">
+                            <rect key="frame" x="357" y="22" width="48" height="22"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                            <color key="textColor" red="0.44705882349999998" green="0.44705882349999998" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="highlightedColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="hIn-Pv-EUM" firstAttribute="top" secondItem="uke-iN-lZJ" secondAttribute="bottom" id="3C3-c1-IN2"/>
+                        <constraint firstItem="5Aj-ay-oqA" firstAttribute="top" secondItem="BZK-VK-iI5" secondAttribute="top" id="5Ko-7g-rhZ"/>
+                        <constraint firstItem="uke-iN-lZJ" firstAttribute="centerX" secondItem="hIn-Pv-EUM" secondAttribute="centerX" id="GDI-7r-fkT"/>
+                        <constraint firstAttribute="height" secondItem="Vka-3s-Z1l" secondAttribute="height" id="It8-Tm-vqf"/>
+                        <constraint firstAttribute="centerY" secondItem="Vka-3s-Z1l" secondAttribute="centerY" id="LWc-kE-SDK"/>
+                        <constraint firstAttribute="centerX" secondItem="Vka-3s-Z1l" secondAttribute="centerX" id="MV3-mv-R6k"/>
+                        <constraint firstItem="5Aj-ay-oqA" firstAttribute="leading" secondItem="Vka-3s-Z1l" secondAttribute="trailing" constant="37" id="WT8-F6-Do8"/>
+                        <constraint firstItem="YU6-bV-4b9" firstAttribute="top" secondItem="5Aj-ay-oqA" secondAttribute="bottom" id="XF4-6L-khU"/>
+                        <constraint firstItem="uke-iN-lZJ" firstAttribute="top" secondItem="BZK-VK-iI5" secondAttribute="top" id="ZrO-YV-4Ms"/>
+                        <constraint firstItem="Vka-3s-Z1l" firstAttribute="leading" secondItem="uke-iN-lZJ" secondAttribute="trailing" constant="39" id="bM5-U8-jB3"/>
+                        <constraint firstAttribute="height" constant="63" id="cbI-qu-Yju"/>
+                        <constraint firstItem="YU6-bV-4b9" firstAttribute="centerX" secondItem="5Aj-ay-oqA" secondAttribute="centerX" id="zlg-zu-Fgd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BZK-VK-iI5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5Hj-Sl-qTA"/>
+                <constraint firstAttribute="bottom" secondItem="BZK-VK-iI5" secondAttribute="bottom" id="CPc-rR-OtB"/>
+                <constraint firstAttribute="trailing" secondItem="BZK-VK-iI5" secondAttribute="trailing" id="XAF-qL-UpK"/>
+                <constraint firstItem="BZK-VK-iI5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZBi-4L-FAO"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="547" y="199.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="durationIcon" width="15" height="15"/>
+        <image name="startTimeIcon" width="15" height="15"/>
+    </resources>
+</document>

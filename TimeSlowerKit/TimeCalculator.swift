@@ -10,6 +10,8 @@ import Foundation
 
 public final class TimeCalculator {
     
+    public init() { }
+    
     private let standardWeekDaysNumber = 7.0
     
     public func durationPerDay(originalDuration: Int, busyDays: Int) -> Double {
@@ -17,9 +19,10 @@ public final class TimeCalculator {
     }
     
     public func totalHours(inDays days: Int, duration: Int, busyDays: Int) -> Double {
-        let dailyMinutes = durationPerDay(days, busyDays: busyDays)
+        let dailyMinutes = durationPerDay(duration, busyDays: busyDays)
         return dailyMinutes * Double(days) / 60
     }
+
     
     public func totalDays(inDays days: Int, duration: Int, busyDays: Int) -> Double {
         return totalHours(inDays: days, duration: duration, busyDays: busyDays) / 24
@@ -33,5 +36,6 @@ public final class TimeCalculator {
     public func totalYears(inDays days: Int, duration: Int, busyDays: Int) -> Double {
         return totalMonths(inDays: days, duration: duration, busyDays: busyDays) / 12
     }
+    
     
 }

@@ -291,8 +291,8 @@ class EditActivityVC: UIViewController {
             return
         }
         
-        let motivationVC: ActivityMotivationVC = ControllerFactory.createController()
-        motivationVC.activity = activity
+        let motivationVC: MotivationViewController = ControllerFactory.createController()
+        motivationVC.setupWithActivity(activity)
         
         if let navigationController = navigationController {
             navigationController.pushViewController(motivationVC, animated: true)

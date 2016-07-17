@@ -183,6 +183,7 @@ extension EditActivityDurationView: UIPickerViewDelegate {
             if row < minutes.count {
                 return "\(minutes[row])"
             }
+        default: return ""
         }
         
         return ""
@@ -194,6 +195,7 @@ extension EditActivityDurationView: UIPickerViewDelegate {
             return row < hours.count ? hours[row] : hours.last
         case .Minutes:
             return row < minutes.count ? minutes[row] : minutes.last
+        default: return nil
         }
     }
 }

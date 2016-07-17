@@ -14,6 +14,9 @@ import Foundation
 public enum Period: Int {
     case Minutes
     case Hours
+    case Days
+    case Months
+    case Years
     
     /**
      Literal lowercase transript of enum case
@@ -24,6 +27,24 @@ public enum Period: Int {
         switch self {
         case .Minutes: return "minutes"
         case .Hours: return "hours"
+        case .Days: return "days"
+        case .Months: return "months"
+        case .Years: return "years"
+        }
+    }
+    
+    /**
+     3-letter description like "min" or "hrs"
+     
+     - returns: String with period description
+     */
+    public func shortDescription() -> String {
+        switch self {
+        case .Minutes: return "min"
+        case .Hours: return "hrs"
+        case .Days: return "days"
+        case .Months: return "mo"
+        case .Years: return "yrs"
         }
     }
 }

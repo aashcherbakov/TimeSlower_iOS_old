@@ -16,4 +16,5 @@ class FakeControllerWithCustomViews: UIViewController, FakeController {
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var editActivityNameView: EditActivityNameView!
     @IBOutlet weak var editActivityBasisView: EditActivityBasisView!
+    @IBOutlet weak var motivationControl: MotivationControl!
 }

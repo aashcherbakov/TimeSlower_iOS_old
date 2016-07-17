@@ -50,6 +50,7 @@ public class ActivityDuration: NSObject {
         switch period {
         case .Hours: return value * 60
         case .Minutes: return value
+        default: return 0
         }
     }
     
@@ -62,7 +63,17 @@ public class ActivityDuration: NSObject {
         switch period {
         case .Hours: return value
         case .Minutes: return value / 60
+        default: return 0
         }
+    }
+    
+    /**
+     Transforms value and period into string.
+     
+     - returns: String as "34 min" or "1 hr"
+     */
+    public func shortDescription() -> String {
+        return "\(value) \(period.shortDescription())"
     }
 }
 

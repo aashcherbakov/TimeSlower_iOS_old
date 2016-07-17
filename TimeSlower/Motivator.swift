@@ -8,32 +8,10 @@
 
 import UIKit
 
-class Motivator {
+public final class Motivator {
     
     static let circleHeightScale: CGFloat = 7
-    
-    private class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects: Int) -> (CGFloat, String) {
-        
-        let x = width, y = height, n = CGFloat(numberOfRects)
-        var sx: CGFloat, sy: CGFloat
-        
-        let px = ceil(sqrt(n * x / y))
-        if (floor(px * y / x) * px) < n {
-            sx = y / ceil(px * y / n)
-        } else {
-            sx = x / px
-        }
-        
-        let py = ceil(sqrt(n * y / x))
-        if floor(py * x / y) * py < n {
-            sy = x / ceil(x * py / y)
-        } else {
-            sy = y / py
-        }
-        let maximum = max(sx, sy)
-        let sideName = (maximum == sx) ? "width" : "height"
-        return (maximum, sideName)
-    }
+
     
     
     class func imageWithDotsAmount(dots dots: Int, inFrame frame: CGRect) -> UIImage {
@@ -82,6 +60,30 @@ class Motivator {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+    
+    
+    public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects: Int) -> (CGFloat, String) {
+        
+        let x = width, y = height, n = CGFloat(numberOfRects)
+        var sx: CGFloat, sy: CGFloat
+        
+        let px = ceil(sqrt(n * x / y))
+        if (floor(px * y / x) * px) < n {
+            sx = y / ceil(px * y / n)
+        } else {
+            sx = x / px
+        }
+        
+        let py = ceil(sqrt(n * y / x))
+        if floor(py * x / y) * py < n {
+            sy = x / ceil(x * py / y)
+        } else {
+            sy = y / py
+        }
+        let maximum = max(sx, sy)
+        let sideName = (maximum == sx) ? "width" : "height"
+        return (maximum, sideName)
     }
     
 }
