@@ -177,7 +177,6 @@
 		F0F9BBD71D3ABD8C00920EF8 /* MotivationControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F9BBD61D3ABD8C00920EF8 /* MotivationControlTests.swift */; };
 		F0F9BBDE1D3BBF0500920EF8 /* TimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F9BBDC1D3BBEFD00920EF8 /* TimeCalculatorTests.swift */; };
 		F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F9BBDF1D3BD7D200920EF8 /* LifetimeStats.swift */; };
-		F0F9BBE21D3C024100920EF8 /* MotivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F9BBE11D3C024100920EF8 /* MotivatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -422,7 +421,6 @@
 		F0F9BBD61D3ABD8C00920EF8 /* MotivationControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationControlTests.swift; sourceTree = "<group>"; };
 		F0F9BBDC1D3BBEFD00920EF8 /* TimeCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCalculatorTests.swift; sourceTree = "<group>"; };
 		F0F9BBDF1D3BD7D200920EF8 /* LifetimeStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifetimeStats.swift; sourceTree = "<group>"; };
-		F0F9BBE11D3C024100920EF8 /* MotivatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,7 +516,6 @@
 			children = (
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF581BDB123A007F38A9 /* Motivator.swift */,
-				F0F9BBE11D3C024100920EF8 /* MotivatorTests.swift */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
@@ -1552,7 +1549,6 @@
 				F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */,
 				F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */,
 				F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */,
-				F0F9BBE21D3C024100920EF8 /* MotivatorTests.swift in Sources */,
 				F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */,
 				F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */,
 			);

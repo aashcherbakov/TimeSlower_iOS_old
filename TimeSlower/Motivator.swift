@@ -11,30 +11,36 @@ import UIKit
 public final class Motivator {
     
     static let circleHeightScale: CGFloat = 7
-
+    
+    enum RectSide {
+        case Width
+        case Height
+    }
     
     
     class func imageWithDotsAmount(dots dots: Int, inFrame frame: CGRect) -> UIImage {
         let viewSize = frame.size
-        let viewWidth = CGFloat(viewSize.width)
-        let viewHeight = CGFloat(viewSize.height)
+        let viewWidth = viewSize.width
+        let viewHeight = viewSize.height
         
         UIGraphicsBeginImageContext(viewSize)
         
-        let sideSizeAndName: (CGFloat, String) = Motivator.largestSideOfRect(height: viewHeight, width: viewWidth, numberOfRects: dots)
-        let sideA = sideSizeAndName.0
-        let name = sideSizeAndName.1
+        let sideSizeAndName: (length: CGFloat, name: String) = Motivator.largestSideOfRect(height: viewHeight, width: viewWidth, numberOfRects: CGFloat(dots))
         
-        let numberOfSectionsSideA = (name == "width") ? viewWidth / sideA : viewHeight / sideA
+        let sideA = sideSizeAndName.length
+        let largestSideName = sideSizeAndName.name
+        
+        let numberOfSectionsSideA = (largestSideName == "width") ? viewWidth / sideA : viewHeight / sideA
         let numberOfSectionsSideB = ceil(CGFloat(dots) / numberOfSectionsSideA)
         
-        let sideB = (name == "width") ? viewHeight / numberOfSectionsSideB : viewWidth / numberOfSectionsSideB
+        let sideB = (largestSideName == "width") ? viewHeight / numberOfSectionsSideB : viewWidth / numberOfSectionsSideB
         
         let shortestSideSections = min(numberOfSectionsSideA, numberOfSectionsSideB)
         let longestSideSections = max(numberOfSectionsSideA, numberOfSectionsSideB)
         
         let shortSide = min(sideA, sideB)
         let longSide = max(sideA, sideB)
+        
         
         let context = UIGraphicsGetCurrentContext()
         var totalCircles = 0
@@ -44,13 +50,7 @@ public final class Motivator {
                 if totalCircles >= dots {
                     break
                 } else {
-                    let rect = CGRectMake(longSide * CGFloat(i), shortSide * CGFloat(j), longSide, shortSide)
-                    let newOriginX = rect.origin.x + (longSide - shortSide) / 2
-                    let smallerRect = CGRectMake(newOriginX, rect.origin.y, shortSide, shortSide)
-                    let inset = shortSide / 10
-                    let circleRect = CGRectInset(smallerRect, inset, inset)
-                    CGContextSetRGBFillColor(context, 255, 255, 255, 1)
-                    CGContextFillEllipseInRect(context, circleRect)
+                    addCircle(longSide, shortSide: shortSide, longSection: i, shortSection: j, inContext: context, totalCircles: totalCircles)
                     
                     totalCircles += 1
                 }
@@ -63,27 +63,45 @@ public final class Motivator {
     }
     
     
-    public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects: Int) -> (CGFloat, String) {
+    public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects rectsTotal: CGFloat) -> (CGFloat, String) {
         
-        let x = width, y = height, n = CGFloat(numberOfRects)
-        var sx: CGFloat, sy: CGFloat
+        var sx: CGFloat
+        var sy: CGFloat
         
-        let px = ceil(sqrt(n * x / y))
-        if (floor(px * y / x) * px) < n {
-            sx = y / ceil(px * y / n)
+        let px = ceil(sqrt(rectsTotal * width / height))
+        if (floor(px * height / width) * px) < rectsTotal {
+            sx = height / ceil(px * height / rectsTotal)
         } else {
-            sx = x / px
+            sx = width / px
         }
         
-        let py = ceil(sqrt(n * y / x))
-        if floor(py * x / y) * py < n {
-            sy = x / ceil(x * py / y)
+        let py = ceil(sqrt(rectsTotal * height / width))
+        if floor(py * width / height) * py < rectsTotal {
+            sy = width / ceil(width * py / height)
         } else {
-            sy = y / py
+            sy = height / py
         }
+        
         let maximum = max(sx, sy)
         let sideName = (maximum == sx) ? "width" : "height"
         return (maximum, sideName)
+    }
+    
+    private class func addCircle(longSide: CGFloat, shortSide: CGFloat, longSection: Int, shortSection: Int,
+                                 inContext context: CGContext?, totalCircles: Int) {
+        
+        let x = shortSide * CGFloat(longSection)
+        let y = shortSide * CGFloat(shortSection)
+        let width = shortSide
+        let length = longSide
+        let rect = CGRectMake(x, y, width, length)
+        let newOriginX = rect.origin.x
+        let smallerRect = CGRectMake(newOriginX, rect.origin.y, shortSide, shortSide)
+        let inset = shortSide / 10
+        let circleRect = CGRectInset(smallerRect, inset, inset)
+        
+        CGContextSetRGBFillColor(context, 255, 255, 255, 1)
+        CGContextFillEllipseInRect(context, circleRect)
     }
     
 }
