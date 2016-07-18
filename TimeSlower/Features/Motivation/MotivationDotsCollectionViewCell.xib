@@ -43,7 +43,6 @@
                 <constraint firstItem="dvP-gJ-ako" firstAttribute="centerX" secondItem="wcA-6q-AQO" secondAttribute="centerX" id="AGM-V4-yFP"/>
                 <constraint firstItem="wcA-6q-AQO" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="HYu-CP-Hka"/>
                 <constraint firstItem="dvP-gJ-ako" firstAttribute="top" secondItem="wcA-6q-AQO" secondAttribute="bottom" id="K8P-yZ-nDc"/>
-                <constraint firstItem="dvP-gJ-ako" firstAttribute="top" secondItem="wcA-6q-AQO" secondAttribute="bottom" id="N2e-cj-ISb"/>
                 <constraint firstAttribute="bottom" secondItem="T8B-Ot-Shq" secondAttribute="bottom" constant="8" id="Tax-lI-dwp"/>
                 <constraint firstItem="wcA-6q-AQO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Toy-d7-Nz6"/>
                 <constraint firstItem="T8B-Ot-Shq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ZXt-32-WIW"/>
@@ -51,11 +50,6 @@
                 <constraint firstItem="T8B-Ot-Shq" firstAttribute="top" secondItem="dvP-gJ-ako" secondAttribute="bottom" constant="8" id="g5Q-oY-W1B"/>
             </constraints>
             <size key="customSize" width="317" height="264"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="N2e-cj-ISb"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="imageView" destination="T8B-Ot-Shq" id="OYD-nE-pWJ"/>
                 <outlet property="periodLabel" destination="dvP-gJ-ako" id="MuZ-69-of1"/>

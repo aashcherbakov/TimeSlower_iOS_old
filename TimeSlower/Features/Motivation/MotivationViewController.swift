@@ -22,7 +22,11 @@ class MotivationViewController: UIViewController {
     }()
     
     @IBAction func backButtonTapped(sender: AnyObject) {
-        dismissMotivationController()
+        if let navigationController = navigationController {
+            navigationController.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func editButtonTapped(sender: AnyObject) {
@@ -30,7 +34,11 @@ class MotivationViewController: UIViewController {
     }
     
     @IBAction func okButtonTapped(sender: AnyObject) {
-        dismissMotivationController()
+        if let navigationController = navigationController {
+            navigationController.popToRootViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func setupWithActivity(activity: Activity) {
@@ -58,7 +66,9 @@ class MotivationViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupMotivationControlWithActivity(activity: Activity) {
-        let lifeStats = LifetimeStats(withHours: activity.stats!.summHours)
+        let days = activity.profile!.numberOfDaysTillEndOfLifeSinceDate(NSDate())
+        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing!.timeToSave.integerValue, busyDays: activity.days.count)
+        let lifeStats = LifetimeStats(withHours: hours)
         motivationControl.setupWithLifetimeStats(lifeStats)
     }
     
@@ -68,10 +78,6 @@ class MotivationViewController: UIViewController {
     }
     
     private func dismissMotivationController() {
-        if let navigationController = navigationController {
-            navigationController.popToRootViewControllerAnimated(true)
-        } else {
-            dismissViewControllerAnimated(true, completion: nil)
-        }
+       
     }
 }

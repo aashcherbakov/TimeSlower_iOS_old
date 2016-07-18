@@ -19,19 +19,22 @@ public final class Motivator {
     
     
     class func imageWithDotsAmount(dots dots: Int, inFrame frame: CGRect) -> UIImage {
+        var numDots = dots
+        if dots > 2000 {
+            numDots = 2000
+        }
+        
         let viewSize = frame.size
         let viewWidth = viewSize.width
         let viewHeight = viewSize.height
-        
-        UIGraphicsBeginImageContext(viewSize)
-        
-        let sideSizeAndName: (length: CGFloat, name: String) = Motivator.largestSideOfRect(height: viewHeight, width: viewWidth, numberOfRects: CGFloat(dots))
+                
+        let sideSizeAndName: (length: CGFloat, name: String) = Motivator.largestSideOfRect(height: viewHeight, width: viewWidth, numberOfRects: CGFloat(numDots))
         
         let sideA = sideSizeAndName.length
         let largestSideName = sideSizeAndName.name
         
         let numberOfSectionsSideA = (largestSideName == "width") ? viewWidth / sideA : viewHeight / sideA
-        let numberOfSectionsSideB = ceil(CGFloat(dots) / numberOfSectionsSideA)
+        let numberOfSectionsSideB = ceil(CGFloat(numDots) / numberOfSectionsSideA)
         
         let sideB = (largestSideName == "width") ? viewHeight / numberOfSectionsSideB : viewWidth / numberOfSectionsSideB
         
@@ -41,16 +44,17 @@ public final class Motivator {
         let shortSide = min(sideA, sideB)
         let longSide = max(sideA, sideB)
         
-        
+        let optimalSize = CGSizeMake(shortSide * longestSideSections, shortSide * shortestSideSections)
+        UIGraphicsBeginImageContext(optimalSize)
         let context = UIGraphicsGetCurrentContext()
         var totalCircles = 0
         
-        for i in 0..<Int(longestSideSections) {
-            for j in 0..<Int(shortestSideSections) {
-                if totalCircles >= dots {
+        for i in 0..<Int(shortestSideSections) {
+            for j in 0..<Int(longestSideSections) {
+                if totalCircles >= numDots {
                     break
                 } else {
-                    addCircle(longSide, shortSide: shortSide, longSection: i, shortSection: j, inContext: context, totalCircles: totalCircles)
+                    addCircle(longSide, shortSide: shortSide, longSection: j, shortSection: i, inContext: context, totalCircles: totalCircles)
                     
                     totalCircles += 1
                 }
