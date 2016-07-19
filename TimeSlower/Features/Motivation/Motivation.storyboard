@@ -6,6 +6,9 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
         <mutableArray key="SourceSansPro-Semibold.ttf">
             <string>SourceSansPro-Semibold</string>
             <string>SourceSansPro-Semibold</string>
@@ -136,21 +139,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDM-qt-eRN" userLabel="descriptionView">
                                 <rect key="frame" x="0.0" y="212" width="600" height="114"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUTTING 10 MIN OF MORNING BATH DAILY WILL SAVE FOR YOUR LIFETIME:" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huu-gp-EAs">
-                                        <rect key="frame" x="139" y="36" width="323" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="323" id="4ux-xx-H4S"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUTTING 10 MIN OF MORNING BATH DAILY WILL SAVE FOR YOUR LIFETIME:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huu-gp-EAs">
+                                        <rect key="frame" x="40" y="33" width="520" height="48"/>
+                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.7725490196" green="0.36078431370000003" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="huu-gp-EAs" firstAttribute="centerY" secondItem="EDM-qt-eRN" secondAttribute="centerY" id="7cO-cM-J9e"/>
                                     <constraint firstAttribute="centerX" secondItem="huu-gp-EAs" secondAttribute="centerX" constant="-0.5" id="CpE-Dg-Yc6"/>
-                                    <constraint firstAttribute="height" priority="750" constant="114" id="Zny-f2-eCg"/>
-                                    <constraint firstAttribute="centerY" secondItem="huu-gp-EAs" secondAttribute="centerY" constant="0.5" id="fD0-3m-S0u"/>
+                                    <constraint firstAttribute="trailing" secondItem="huu-gp-EAs" secondAttribute="trailing" priority="750" constant="40" id="KND-DC-wFn"/>
+                                    <constraint firstItem="huu-gp-EAs" firstAttribute="leading" secondItem="EDM-qt-eRN" secondAttribute="leading" constant="40" id="Nw1-ee-7sK"/>
+                                    <constraint firstAttribute="height" constant="114" id="Zny-f2-eCg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-u7-VIK" userLabel="buttonBackground">

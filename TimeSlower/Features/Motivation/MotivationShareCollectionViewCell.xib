@@ -73,7 +73,8 @@
                 <constraint firstItem="bg1-jq-4Ld" firstAttribute="top" secondItem="Le5-JW-H8N" secondAttribute="bottom" constant="8" id="Y8G-IY-px2"/>
                 <constraint firstItem="ANV-eh-WL4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bg1-jq-4Ld" secondAttribute="bottom" constant="20" id="dmW-SQ-HQe"/>
                 <constraint firstItem="Le5-JW-H8N" firstAttribute="centerX" secondItem="Wgx-hy-j6K" secondAttribute="centerX" id="izR-kb-6T2"/>
-                <constraint firstAttribute="bottom" secondItem="ANV-eh-WL4" secondAttribute="bottom" constant="8" id="wIr-Uu-wtW"/>
+                <constraint firstItem="ANV-eh-WL4" firstAttribute="top" secondItem="bg1-jq-4Ld" secondAttribute="bottom" priority="750" constant="66" id="w34-uF-zCR"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ANV-eh-WL4" secondAttribute="bottom" constant="8" id="wIr-Uu-wtW"/>
             </constraints>
             <size key="customSize" width="314" height="248"/>
             <connections>

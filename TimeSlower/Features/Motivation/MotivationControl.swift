@@ -25,7 +25,8 @@ internal class MotivationControl: UIControl {
     
     private struct Constants {
         static let numberOfCells = 4
-        static let defaultDotsFrame = CGRectMake(0, 0, 220, 110)
+        static let dotsImageWidthMultiplier: CGFloat = 0.8
+        static let dotsImageHeightMultiplier: CGFloat = 0.2
     }
     
     @IBOutlet weak var view: UIView!
@@ -61,12 +62,18 @@ internal class MotivationControl: UIControl {
         var images = [UIImage]()
         for type in cellTypes {
             if let numberOfDots = numberOfDotsForCellType(type, stats: stats) {
-                let image = Motivator.imageWithDotsAmount(dots: numberOfDots, inFrame: Constants.defaultDotsFrame)
+                let image = Motivator.imageWithDotsAmount(dots: numberOfDots, inFrame: frameForDotsImage())
                 images.append(image)
             }
         }
         
         return images
+    }
+    
+    private func frameForDotsImage() -> CGRect {
+        let screenSize = UIScreen.mainScreen().bounds.size
+        return CGRectMake(0, 0, round(screenSize.width * Constants.dotsImageWidthMultiplier),
+                          round(screenSize.height * Constants.dotsImageHeightMultiplier))
     }
     
     private func numberOfDotsForCellType(cellType: MotivationCellType, stats: LifetimeStats) -> Int? {

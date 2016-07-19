@@ -20,20 +20,20 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="317" height="264"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvP-gJ-ako">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvP-gJ-ako">
                         <rect key="frame" x="135" y="42" width="47" height="22"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcA-6q-AQO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcA-6q-AQO">
                         <rect key="frame" x="151" y="8" width="15" height="34"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="27"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T8B-Ot-Shq">
-                        <rect key="frame" x="8" y="72" width="301" height="184"/>
+                        <rect key="frame" x="8" y="80" width="301" height="176"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -43,11 +43,12 @@
                 <constraint firstItem="dvP-gJ-ako" firstAttribute="centerX" secondItem="wcA-6q-AQO" secondAttribute="centerX" id="AGM-V4-yFP"/>
                 <constraint firstItem="wcA-6q-AQO" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="HYu-CP-Hka"/>
                 <constraint firstItem="dvP-gJ-ako" firstAttribute="top" secondItem="wcA-6q-AQO" secondAttribute="bottom" id="K8P-yZ-nDc"/>
-                <constraint firstAttribute="bottom" secondItem="T8B-Ot-Shq" secondAttribute="bottom" constant="8" id="Tax-lI-dwp"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="T8B-Ot-Shq" secondAttribute="bottom" constant="8" id="QaL-ci-Gxr"/>
+                <constraint firstAttribute="bottom" secondItem="T8B-Ot-Shq" secondAttribute="bottom" priority="250" constant="8" id="Tax-lI-dwp"/>
                 <constraint firstItem="wcA-6q-AQO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Toy-d7-Nz6"/>
                 <constraint firstItem="T8B-Ot-Shq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ZXt-32-WIW"/>
                 <constraint firstAttribute="trailing" secondItem="T8B-Ot-Shq" secondAttribute="trailing" constant="8" id="fD3-Xr-Vbf"/>
-                <constraint firstItem="T8B-Ot-Shq" firstAttribute="top" secondItem="dvP-gJ-ako" secondAttribute="bottom" constant="8" id="g5Q-oY-W1B"/>
+                <constraint firstItem="T8B-Ot-Shq" firstAttribute="top" secondItem="dvP-gJ-ako" secondAttribute="bottom" constant="16" id="g5Q-oY-W1B"/>
             </constraints>
             <size key="customSize" width="317" height="264"/>
             <connections>

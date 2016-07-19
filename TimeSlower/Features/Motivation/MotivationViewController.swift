@@ -52,9 +52,15 @@ class MotivationViewController: UIViewController {
         
         activityNameLabel.text = activity.name
         activityBasisLabel.text = activity.activityBasisDescription()
+        
+        // TODO: here will be a bug if we save hours
+        let duration = activity.timing!.timeToSave.stringValue
+        
+        let basis = descriptionForActivityBasis(activity)
+        summaryLabel.text = "cutting \(duration) minutes of \(activity.name!) \(basis) will save in your lifetime:".uppercaseString
+        
         setupMotivationControlWithActivity(activity)
         setupStatsViewWithActivity(activity)
-        view.setNeedsLayout()
     }
     
     override func updateViewConstraints() {
@@ -64,6 +70,17 @@ class MotivationViewController: UIViewController {
     }
     
     // MARK: - Private Functions
+    
+    private func descriptionForActivityBasis(activity: Activity) -> String {
+        guard let basis = Basis(rawValue: activity.basis!.integerValue) else { return "" }
+        switch basis {
+        case .Random:
+            return "\(activity.days.count) days a week"
+        case .Daily: return "daily"
+        case .Weekends: return "on weekends"
+        case .Workdays: return "during workdays"
+        }
+    }
     
     private func setupMotivationControlWithActivity(activity: Activity) {
         let days = activity.profile!.numberOfDaysTillEndOfLifeSinceDate(NSDate())
@@ -75,9 +92,5 @@ class MotivationViewController: UIViewController {
     private func setupStatsViewWithActivity(activity: Activity) {
         let startTime = dateFormatter.stringFromDate(activity.timing!.startTime)
         activityStatsView.setupWithStartTime(startTime, duration: activity.timing!.duration.shortDescription())
-    }
-    
-    private func dismissMotivationController() {
-       
     }
 }

@@ -33,7 +33,7 @@ public final class Motivator {
         let sideA = sideSizeAndName.length
         let largestSideName = sideSizeAndName.name
         
-        let numberOfSectionsSideA = (largestSideName == "width") ? viewWidth / sideA : viewHeight / sideA
+        let numberOfSectionsSideA = (largestSideName == "width") ? ceil(viewWidth / sideA) : ceil(viewHeight / sideA)
         let numberOfSectionsSideB = ceil(CGFloat(numDots) / numberOfSectionsSideA)
         
         let sideB = (largestSideName == "width") ? viewHeight / numberOfSectionsSideB : viewWidth / numberOfSectionsSideB
@@ -44,9 +44,14 @@ public final class Motivator {
         let shortSide = min(sideA, sideB)
         let longSide = max(sideA, sideB)
         
-        let optimalSize = CGSizeMake(shortSide * longestSideSections, shortSide * shortestSideSections)
-        UIGraphicsBeginImageContext(optimalSize)
+        var optimalSize = CGSizeMake(shortSide * longestSideSections, shortSide * shortestSideSections)
+        if dots == 1 {
+            optimalSize = CGSizeMake(shortSide, shortSide)
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(optimalSize, false, UIScreen.mainScreen().scale)
         let context = UIGraphicsGetCurrentContext()
+        
         var totalCircles = 0
         
         for i in 0..<Int(shortestSideSections) {
@@ -68,20 +73,19 @@ public final class Motivator {
     
     
     public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects rectsTotal: CGFloat) -> (CGFloat, String) {
-        
         var sx: CGFloat
         var sy: CGFloat
         
         let px = ceil(sqrt(rectsTotal * width / height))
         if (floor(px * height / width) * px) < rectsTotal {
-            sx = height / ceil(px * height / rectsTotal)
+            sx = height / ceil(px * height / width)
         } else {
             sx = width / px
         }
         
         let py = ceil(sqrt(rectsTotal * height / width))
-        if floor(py * width / height) * py < rectsTotal {
-            sy = width / ceil(width * py / height)
+        if (floor(py * width / height) * py) < rectsTotal {
+            sy = width / ceil(py * width / height)
         } else {
             sy = height / py
         }
