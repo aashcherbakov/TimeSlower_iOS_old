@@ -158,6 +158,7 @@
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
+		F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E95F391D43C1C9006D8410 /* MotivationIllustrator.swift */; };
 		F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EA8CBC1C712E9500B11252 /* Float+extension.swift */; };
 		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A431C5ECB26009B974A /* StateMachine.swift */; };
@@ -310,7 +311,7 @@
 		F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVC.swift; path = Features/Profile/ProfileStatsVC.swift; sourceTree = "<group>"; };
 		F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVCConstraints.swift; path = Features/Profile/ProfileStatsVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
-		F009AF581BDB123A007F38A9 /* Motivator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Motivator.swift; sourceTree = "<group>"; };
+		F009AF581BDB123A007F38A9 /* Motivator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Motivator.swift; path = ../../Motivator.swift; sourceTree = "<group>"; };
 		F009AF5B1BDB12D8007F38A9 /* TimeSlower-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeSlower-Bridging-Header.h"; sourceTree = "<group>"; };
 		F009AF5C1BDB12D9007F38A9 /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CountryPicker.bundle; path = Features/Profile/Views/CountryPicker.bundle; sourceTree = "<group>"; };
 		F009AF5D1BDB12D9007F38A9 /* CountryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryPicker.h; path = Features/Profile/Views/CountryPicker.h; sourceTree = "<group>"; };
@@ -402,6 +403,7 @@
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
+		F0E95F391D43C1C9006D8410 /* MotivationIllustrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationIllustrator.swift; sourceTree = "<group>"; };
 		F0EA8CBC1C712E9500B11252 /* Float+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+extension.swift"; sourceTree = "<group>"; };
 		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0EB8A431C5ECB26009B974A /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -515,7 +517,6 @@
 			isa = PBXGroup;
 			children = (
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
-				F009AF581BDB123A007F38A9 /* Motivator.swift */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
@@ -753,6 +754,7 @@
 		F009AF621BDB13A4007F38A9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F0F9BBE41D3C0CC400920EF8 /* MotivationControl */,
 				F0EB8A341C433367009B974A /* TextfieldView */,
 				F0EB8A3D1C4ABE41009B974A /* CircularTimer */,
 				F0EB8A3E1C4ABE4B009B974A /* TimerLabel */,
@@ -890,8 +892,6 @@
 			children = (
 				F0A6136A1D347E270051743C /* Motivation.storyboard */,
 				F0A613671D347E060051743C /* MotivationViewController.swift */,
-				F0F9BBE41D3C0CC400920EF8 /* MotivationControl */,
-				F0F9BBDF1D3BD7D200920EF8 /* LifetimeStats.swift */,
 				F0A613721D347F870051743C /* MotivationStatsView.swift */,
 				F0A613701D347F340051743C /* MotivationStatsView.xib */,
 			);
@@ -1116,12 +1116,16 @@
 		F0F9BBE41D3C0CC400920EF8 /* MotivationControl */ = {
 			isa = PBXGroup;
 			children = (
-				F0F9BBE31D3C0C9F00920EF8 /* Cells */,
+				F0F9BBDF1D3BD7D200920EF8 /* LifetimeStats.swift */,
+				F009AF581BDB123A007F38A9 /* Motivator.swift */,
+				F0E95F391D43C1C9006D8410 /* MotivationIllustrator.swift */,
 				F0F9BBCA1D3A9CDD00920EF8 /* MotivationControl.xib */,
 				F0F9BBCC1D3A9CF100920EF8 /* MotivationControl.swift */,
 				F0F9BBD61D3ABD8C00920EF8 /* MotivationControlTests.swift */,
+				F0F9BBE31D3C0C9F00920EF8 /* Cells */,
 			);
 			name = MotivationControl;
+			path = Features/Motivation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1475,6 +1479,7 @@
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
+				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
 				F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */,
 				F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */,

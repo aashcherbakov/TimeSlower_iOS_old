@@ -8,18 +8,15 @@
 
 import UIKit
 
+/// DO NOT MODIFY ANY OF THIS - BLACK MAGIC WORKING - ¯\_(ツ)_/¯
 public final class Motivator {
     
     static let circleHeightScale: CGFloat = 7
     
-    enum RectSide {
-        case Width
-        case Height
-    }
-    
-    
     class func imageWithDotsAmount(dots dots: Int, inFrame frame: CGRect) -> UIImage {
         var numDots = dots
+        
+        // We often have more than 2000 dots but it's expensive to draw and no one can see tiny dots
         if dots > 2000 {
             numDots = 2000
         }
@@ -44,6 +41,7 @@ public final class Motivator {
         let shortSide = min(sideA, sideB)
         let longSide = max(sideA, sideB)
         
+        // Optimal size of image is needed to center image layout. If there is one dot, optimal size is a dot frame.
         var optimalSize = CGSizeMake(shortSide * longestSideSections, shortSide * shortestSideSections)
         if dots == 1 {
             optimalSize = CGSizeMake(shortSide, shortSide)
@@ -52,8 +50,8 @@ public final class Motivator {
         UIGraphicsBeginImageContextWithOptions(optimalSize, false, UIScreen.mainScreen().scale)
         let context = UIGraphicsGetCurrentContext()
         
+        // Draw circles here
         var totalCircles = 0
-        
         for i in 0..<Int(shortestSideSections) {
             for j in 0..<Int(longestSideSections) {
                 if totalCircles >= numDots {
@@ -71,7 +69,7 @@ public final class Motivator {
         return image
     }
     
-    
+    // Black Magic
     public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects rectsTotal: CGFloat) -> (CGFloat, String) {
         var sx: CGFloat
         var sy: CGFloat
@@ -95,6 +93,7 @@ public final class Motivator {
         return (maximum, sideName)
     }
     
+    // Simple drawing method
     private class func addCircle(longSide: CGFloat, shortSide: CGFloat, longSection: Int, shortSection: Int,
                                  inContext context: CGContext?, totalCircles: Int) {
         

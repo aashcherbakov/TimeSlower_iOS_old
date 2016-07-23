@@ -13,5 +13,12 @@ extension UIFont {
         return UIFont(name: "SourceSansPro-Regular", size: 16.0)!
     }
     
+    class func mainBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "SourceSansPro-Bold", size: size)!
+    }
+    
+    class func mainRegular(size: CGFloat) -> UIFont {
+        return UIFont(name: "SourceSansPro-Regular", size: size)!
+    }
     
 }

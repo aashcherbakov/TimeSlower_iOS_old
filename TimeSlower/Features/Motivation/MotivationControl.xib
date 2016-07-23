@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotivationControl" customModule="TimeSlower" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="Dpf-g1-a7u" id="Qq7-mQ-azf"/>
+                <outlet property="pageControl" destination="0sD-RN-xMZ" id="lNO-6b-26S"/>
                 <outlet property="view" destination="iN0-l3-epB" id="SFK-8b-dDd"/>
             </connections>
         </placeholder>
@@ -25,13 +26,18 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0sD-RN-xMZ">
+                    <rect key="frame" x="281" y="563" width="39" height="37"/>
+                </pageControl>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.7725490196" green="0.36078431370000003" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Dpf-g1-a7u" secondAttribute="bottom" id="2a9-TQ-Ygs"/>
+                <constraint firstItem="0sD-RN-xMZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bRG-QV-nwy"/>
                 <constraint firstItem="Dpf-g1-a7u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eJB-HG-qJf"/>
                 <constraint firstItem="Dpf-g1-a7u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="feg-z9-bS7"/>
                 <constraint firstAttribute="trailing" secondItem="Dpf-g1-a7u" secondAttribute="trailing" id="peo-rE-cqg"/>
+                <constraint firstAttribute="bottom" secondItem="0sD-RN-xMZ" secondAttribute="bottom" id="rM6-XO-pan"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="218" y="476"/>

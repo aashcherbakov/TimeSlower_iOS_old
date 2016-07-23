@@ -9,10 +9,26 @@
 import UIKit
 import TimeSlowerKit
 
+protocol ActivityShareDelegate {
+    func shareMotivationImage()
+}
+
+/**
+ *  Protocol that combines Share and Dots cell setup interface
+ */
 protocol MotivationControlCell {
+    /**
+     Setup method for motivation control cells
+     
+     - parameter stats:    LifetimeStats objects with activity stats
+     - parameter image:    image with dots corresponding to stats
+     - parameter period:   Period of time that represents amount of dots
+     - parameter delegate: delegate for social sharing
+     */
     func setupWithStats(stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate)
 }
 
+/// UIControl subclass that displays user lifetime stats with circle images. Reusable.
 internal class MotivationControl: UIControl {
     
     enum MotivationCellType: Int {
@@ -29,11 +45,19 @@ internal class MotivationControl: UIControl {
         static let dotsImageHeightMultiplier: CGFloat = 0.2
     }
     
-    @IBOutlet weak var view: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private(set) weak var pageControl: UIPageControl!
+    @IBOutlet private(set) weak var view: UIView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
     private(set) var stats: LifetimeStats?
     private(set) var cellTypes: [MotivationCellType]?
     private(set) var dotsImages = [UIImage]()
+    private(set) var delegate: ActivityShareDelegate?
+    
+    private var currentPage: Int {
+        get {
+            return Int(collectionView.contentOffset.x / view.bounds.size.width)
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -47,14 +71,30 @@ internal class MotivationControl: UIControl {
     
     // MARK: - Internal Functions
     
-    func setupWithLifetimeStats(stats: LifetimeStats) {
+    func setupWithLifetimeStats(stats: LifetimeStats, shareDelegate: ActivityShareDelegate) {
+        self.delegate = shareDelegate
         self.stats = stats
         let types = cellTypesForStats(stats)
         cellTypes = types
         dotsImages = createImages(forStats: stats, inCellTypes: types)
+        
+        pageControl.numberOfPages = dotsImages.count + 1
+        setupPageDotsColors()
+    }
+    
+    func updatePageControlForIndex(index: Int) {
+        pageControl.currentPage = index
+        pageControl.updateCurrentPageDisplay()
     }
     
     // MARK: - Private Functions
+    
+    private func setupPageDotsColors() {
+        let pageController = UIPageControl.appearance()
+        pageController.pageIndicatorTintColor = UIColor.darkRed()
+        pageController.currentPageIndicatorTintColor = UIColor.whiteColor()
+        pageController.backgroundColor = UIColor.clearColor()
+    }
     
     private func createImages(forStats stats: LifetimeStats, inCellTypes cellTypes: [MotivationCellType]) -> [UIImage] {
         guard dotsImages.count == 0 else { return dotsImages }
@@ -160,6 +200,17 @@ extension MotivationControl: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension MotivationControl: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        pageControl.currentPage = currentPage
+    }
+    
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        pageControl.currentPage = currentPage
+    }
+
+}
+
 // MARK: - UICollectionViewDataSource
 
 extension MotivationControl: UICollectionViewDataSource {
@@ -192,19 +243,10 @@ extension MotivationControl: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-
-extension MotivationControl: UICollectionViewDelegate {
-    
-}
-
 // MARK: - MotivationShareDelegate
 
 extension MotivationControl: MotivationShareDelegate {
     func motivationShareDelegateDidTapShareButton() {
-        // TODO: implement sharing
+        delegate?.shareMotivationImage()
     }
 }
-
-
-
