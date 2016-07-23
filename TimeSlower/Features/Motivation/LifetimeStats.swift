@@ -52,4 +52,35 @@ internal struct LifetimeStats {
     func yearsDescription() -> String {
         return "\(yearsValueString()) YEARS"
     }
+    
+    func hoursAttributedDescription() -> NSAttributedString {
+        return attributedDescription(hoursValueString(), period: "HOURS")
+    }
+    
+    func daysAttributedDescription() -> NSAttributedString {
+        return attributedDescription(daysValueString(), period: "DAYS")
+    }
+    
+    func monthsAttributedDescription() -> NSAttributedString {
+        return attributedDescription(monthsValueString(), period: "MONTHS")
+    }
+    
+    func yearsAttributedDescription() -> NSAttributedString {
+        return attributedDescription(yearsValueString(), period: "YEARS")
+    }
+    
+    private func attributedDescription(valueString: String, period: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: "\(valueString) \(period)")
+        let boldRange = NSMakeRange(0, valueString.characters.count)
+        
+        let defaultAttributes = [
+            NSFontAttributeName            : UIFont.mainRegular(14),
+            NSForegroundColorAttributeName : UIColor.whiteColor()
+        ]
+        
+        attributedString.addAttributes(defaultAttributes, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: boldRange)
+        return attributedString
+    }
+    
 }

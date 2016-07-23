@@ -82,11 +82,6 @@ internal class MotivationControl: UIControl {
         setupPageDotsColors()
     }
     
-    func updatePageControlForIndex(index: Int) {
-        pageControl.currentPage = index
-        pageControl.updateCurrentPageDisplay()
-    }
-    
     // MARK: - Private Functions
     
     private func setupPageDotsColors() {
@@ -173,7 +168,6 @@ internal class MotivationControl: UIControl {
         default: return nil
         }
     }
-
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -199,6 +193,8 @@ extension MotivationControl: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
+// MARK: - UIScrollViewDelegate
 
 extension MotivationControl: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {

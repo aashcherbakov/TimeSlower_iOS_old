@@ -53,7 +53,7 @@ class MotivationViewController: UIViewController {
         activityNameLabel.text = activity.name
         activityBasisLabel.text = activity.activityBasisDescription()
         
-        summaryLabel.text = motivationDescriptionForActivity(activity)
+        summaryLabel.attributedText = motivationDescriptionForActivity(activity)
         
         setupMotivationControlWithActivity(activity)
         setupStatsViewWithActivity(activity)
@@ -89,11 +89,34 @@ class MotivationViewController: UIViewController {
     }
     
     // TODO: move to activity?
-    private func motivationDescriptionForActivity(activity: Activity) -> String {
+    private func motivationDescriptionForActivity(activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
         let duration = activity.timing!.timeToSave.stringValue
         let basis = descriptionForActivityBasis(activity)
-        return "cutting \(duration) minutes of \(activity.name!) \(basis) will save in your lifetime:".uppercaseString
+        let description = "cutting \(duration) minutes of \(activity.name!) \(basis) will save in your lifetime:".uppercaseString
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .Center
+        let descriptionText = NSMutableAttributedString(string: description)
+        
+        
+        descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, descriptionText.length))
+        let attributes = [NSParagraphStyleAttributeName  : paragraphStyle,
+                          NSFontAttributeName            : UIFont.mainRegular(15),
+                          NSForegroundColorAttributeName : UIColor.whiteColor()]
+        descriptionText.addAttributes(attributes, range: NSMakeRange(0, descriptionText.length))
+
+        let text = descriptionText.string as NSString
+        let durationRange = text.rangeOfString(duration)
+        let nameRange = text.rangeOfString(activity.name!.uppercaseString)
+        let basisRange = text.rangeOfString(basis.uppercaseString)
+        
+        descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: durationRange)
+        descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: nameRange)
+        descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: basisRange)
+
+        
+        return descriptionText
     }
     
     // TODO: move to activity?

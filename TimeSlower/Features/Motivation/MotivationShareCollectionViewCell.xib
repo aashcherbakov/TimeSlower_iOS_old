@@ -20,26 +20,26 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="314" height="248"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 MONTHS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgx-hy-j6K">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="6 MONTHS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgx-hy-j6K">
                         <rect key="frame" x="95" y="8" width="125" height="34"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="27"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16000 HOURS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg1-jq-4Ld">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="16000 HOURS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg1-jq-4Ld">
                         <rect key="frame" x="76" y="92" width="163" height="34"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="27"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="180 DAYS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Le5-JW-H8N">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="180 DAYS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Le5-JW-H8N">
                         <rect key="frame" x="103" y="50" width="109" height="34"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="27"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-eh-WL4">
-                        <rect key="frame" x="27" y="192" width="260" height="48"/>
+                        <rect key="frame" x="27" y="160" width="260" height="48"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="Ltm-MR-KPt"/>
@@ -74,7 +74,7 @@
                 <constraint firstItem="ANV-eh-WL4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bg1-jq-4Ld" secondAttribute="bottom" constant="20" id="dmW-SQ-HQe"/>
                 <constraint firstItem="Le5-JW-H8N" firstAttribute="centerX" secondItem="Wgx-hy-j6K" secondAttribute="centerX" id="izR-kb-6T2"/>
                 <constraint firstItem="ANV-eh-WL4" firstAttribute="top" secondItem="bg1-jq-4Ld" secondAttribute="bottom" priority="750" constant="66" id="w34-uF-zCR"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ANV-eh-WL4" secondAttribute="bottom" constant="8" id="wIr-Uu-wtW"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ANV-eh-WL4" secondAttribute="bottom" constant="40" id="wIr-Uu-wtW"/>
             </constraints>
             <size key="customSize" width="314" height="248"/>
             <connections>
