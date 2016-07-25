@@ -37,7 +37,6 @@ struct MotivationIllustrator {
         backgroundImage.drawInRect(CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height))
         
         // Add description
-//        let descriptionText = attributedDescription(descripton)
         descripton.drawInRect(frameForDescription(descripton))
         
         let offset = backgroundImage.size.height * Constants.lineYOffsetScale

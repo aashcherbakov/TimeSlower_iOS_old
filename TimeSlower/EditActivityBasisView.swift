@@ -35,6 +35,8 @@ class EditActivityBasisView: ObservableControl {
         }
     }
     
+    private var timer: Timer?
+    
     /// Value that is being tracked from EditActivityViewController
     dynamic var selectedValue: [Int]?
     private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
@@ -81,7 +83,7 @@ class EditActivityBasisView: ObservableControl {
     }
     
     private func setupEvents() {
-        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        valueChangedSignal = delayedValueSignalProducer()
         
         basisSelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .startWithNext { [weak self] (value) in
@@ -99,6 +101,27 @@ class EditActivityBasisView: ObservableControl {
         }
     }
     
+    private func delayedValueSignalProducer() -> SignalProducer<AnyObject?, NSError> {
+        return SignalProducer { [weak self] (observer, _) in
+            
+            self?.rac_valuesForKeyPath("selectedValue", observer: self)
+                .toSignalProducer()
+                .on(completed: {
+                        observer.sendCompleted()
+                        self?.timer?.terminate()
+                    },
+                    next: { (value) in
+                        self?.timer?.terminate()
+                        self?.timer = Timer(1) {
+                            observer.sendNext(value)
+                        }
+                        
+                        self?.timer?.start()
+                })
+                .start()
+        }
+    }
+
     private func updateBasis(index: Int?) {
         guard let index = index else { return }
         if let newBasis = Basis(rawValue: index) where selectedBasis != newBasis {
@@ -109,3 +132,4 @@ class EditActivityBasisView: ObservableControl {
         }
     }
 }
+

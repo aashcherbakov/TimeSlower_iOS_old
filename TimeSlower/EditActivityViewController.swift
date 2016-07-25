@@ -72,6 +72,7 @@ class EditActivityVC: UIViewController {
     dynamic private var lastExpandedCellIndex: NSIndexPath?
     private var expandedCellIndex: NSIndexPath? {
         willSet {
+            print("Cell expanded: \(newValue?.row)")
             var nextIndex = newValue
             if nextIndex == lastExpandedCellIndex {
                 nextIndex = nil
@@ -108,11 +109,20 @@ class EditActivityVC: UIViewController {
     
     @IBAction func okButtonTapped(sender: AnyObject) {
         if flow == .Creating && editingState == .FullHouse {
-            createActivity()
-            showStatsInActivityMotivationVC()
+            if expandedCellIndex == nil {
+                createActivity()
+                showStatsInActivityMotivationVC()
+            } else {
+                expandedCellIndex = nil
+            }
+            
         } else if flow == .Editing {
-            saveActivity()
-            showStatsInActivityMotivationVC()
+            if expandedCellIndex == nil {
+                saveActivity()
+                showStatsInActivityMotivationVC()
+            } else {
+                expandedCellIndex = nil
+            }
         } else {
             forceMoveToNextControl()
         }
@@ -146,7 +156,7 @@ class EditActivityVC: UIViewController {
             flow = .Editing
             editingState = .FullHouse
             timeSaverView.selectedDuration = activity?.timing?.duration
-            timeSaverView.selectedValue = activity?.timing?.timeToSave
+            timeSaverView.selectedValue = ActivityDuration(value: (activity?.timing?.timeToSave.integerValue)!, period: (activity?.timing?.duration.period)!)
         } else {
             flow = .Creating
             editingState = .Name
@@ -176,7 +186,9 @@ class EditActivityVC: UIViewController {
         let frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 50)
         let image = UIImage(named: "whiteCurve")
         let view = UIView(frame: frame)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(frame: frame)
+        imageView.contentMode = .ScaleToFill
+        imageView.image = image
         view.addSubview(imageView)
         return view
     }
@@ -209,8 +221,8 @@ class EditActivityVC: UIViewController {
         timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).startWith(timeSaverView)
             .toSignalProducer()
             .startWithNext { [weak self] (timeToSave) in
-                guard let timeToSave = timeToSave as? Int else { return }
-                self?.selectedTimeToSave = timeToSave
+                guard let timeToSave = timeToSave as? ActivityDuration else { return }
+                self?.selectedTimeToSave = timeToSave.minutes()
         }
     }
     

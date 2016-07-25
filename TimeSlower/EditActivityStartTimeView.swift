@@ -27,6 +27,7 @@ class EditActivityStartTimeView: ObservableControl {
     /// Selected date. Observable
     dynamic var selectedValue: NSDate?
     private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    private var timer: Timer?
     
     // MARK: - Overridden Methods
     
@@ -83,10 +84,32 @@ class EditActivityStartTimeView: ObservableControl {
                 self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
         }
         
-        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        valueChangedSignal?.startWithNext { [weak self] (value) in
-            guard let value = value as? NSDate else { return }
-            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
+        valueChangedSignal = delayedProducer()
+    }
+    
+    private func delayedProducer() -> SignalProducer<AnyObject?, NSError> {
+        return SignalProducer { [weak self] (observer, _) in
+            
+            self?.rac_valuesForKeyPath("selectedValue", observer: self)
+                .startWith(self?.datePicker)
+                .toSignalProducer()
+                .on(completed: {
+                        observer.sendCompleted()
+                        self?.timer?.terminate()
+                    },
+                    next: { (value) in
+                        if let value = value as? NSDate {
+                            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
+                        }
+
+                        self?.timer?.terminate()
+                        self?.timer = Timer(1) {
+                            observer.sendNext(value)
+                        }
+                        
+                        self?.timer?.start()
+                })
+                .start()
         }
     }
 }
