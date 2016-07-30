@@ -95,8 +95,9 @@ extension Stats {
         
         let dayNames = Activity.dayNamesForBasis(activity.activityBasis())
         for weekday in dayNames {
-            let currentDayName = LazyCalendar.DayName(rawValue: weekday)!
-            days += LazyCalendar.numberOfWeekdaysNamed(currentDayName, forPeriod: period, sinceDate: date)
+            if let currentDayName = LazyCalendar.DayName(rawValue: weekday) {
+                days += LazyCalendar.numberOfWeekdaysNamed(currentDayName, forPeriod: period, sinceDate: date)
+            }
         }
         return days
     }

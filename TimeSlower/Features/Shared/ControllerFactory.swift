@@ -59,7 +59,6 @@ struct ControllerFactory {
         case is MainScreenVC.Type: return Constants.main
         case is EditActivityVC.Type: return Constants.activities
         case is ListOfActivitiesVC.Type: return Constants.activities
-        case is ActivityMotivationVC.Type: return Constants.activities
         case is ProfileEditingVC.Type: return Constants.profile
         case is ProfileStatsVC.Type: return Constants.profile
         case is MotivationViewController.Type: return Constants.motivaton

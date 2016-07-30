@@ -62,14 +62,10 @@
 		F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */; };
 		F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF361BDB0F45007F38A9 /* Activities.storyboard */; };
 		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; };
-		F009AF441BDB1061007F38A9 /* ActivityMotivationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */; };
-		F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */; };
 		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
 		F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */; };
-		F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */; };
 		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; };
 		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; };
-		F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF431BDB1061007F38A9 /* ShareVC.swift */; };
 		F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */; };
 		F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */; };
 		F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */; };
@@ -299,14 +295,10 @@
 		F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F009AF361BDB0F45007F38A9 /* Activities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		F009AF381BDB0FEA007F38A9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMotivationVC.swift; path = Features/Activities/ActivityMotivationVC.swift; sourceTree = "<group>"; };
-		F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMotivationVCConstraints.swift; path = Features/Activities/ActivityMotivationVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVC.swift; path = Features/Activities/ActivityStatsVC.swift; sourceTree = "<group>"; };
 		F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVCConstraints.swift; path = Features/Activities/ActivityStatsVCConstraints.swift; sourceTree = "<group>"; };
-		F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DotsPageViewController.swift; path = Features/Activities/DotsPageViewController.swift; sourceTree = "<group>"; };
 		F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVC.swift; path = Features/Activities/ListOfActivitiesVC.swift; sourceTree = "<group>"; };
 		F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVCConstraints.swift; path = Features/Activities/ListOfActivitiesVCConstraints.swift; sourceTree = "<group>"; };
-		F009AF431BDB1061007F38A9 /* ShareVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareVC.swift; path = Features/Activities/ShareVC.swift; sourceTree = "<group>"; };
 		F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditingVC.swift; path = Features/Profile/ProfileEditingVC.swift; sourceTree = "<group>"; };
 		F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditingVCConstraints.swift; path = Features/Profile/ProfileEditingVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVC.swift; path = Features/Profile/ProfileStatsVC.swift; sourceTree = "<group>"; };
@@ -771,14 +763,10 @@
 		F009AF691BDB189B007F38A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F009AF3B1BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift */,
-				F009AF3A1BDB1061007F38A9 /* ActivityMotivationVC.swift */,
 				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
 				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
-				F009AF3E1BDB1061007F38A9 /* DotsPageViewController.swift */,
 				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
 				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
-				F009AF431BDB1061007F38A9 /* ShareVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1256,7 +1244,7 @@
 				TargetAttributes = {
 					F009AE521BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = EURPM5EP89;
+						DevelopmentTeam = 8P75UG89TN;
 					};
 					F009AE691BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1268,6 +1256,7 @@
 					};
 					F009AE8B1BD9CBA2007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 8P75UG89TN;
 					};
 					F009AED21BD9CEA4007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1472,7 +1461,6 @@
 			files = (
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
-				F009AF481BDB1061007F38A9 /* DotsPageViewController.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F0A613681D347E060051743C /* MotivationViewController.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
@@ -1508,7 +1496,6 @@
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
-				F009AF4D1BDB1061007F38A9 /* ShareVC.swift in Sources */,
 				F009AF841BDB1935007F38A9 /* CircleProgress.swift in Sources */,
 				F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */,
 				F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */,
@@ -1517,7 +1504,6 @@
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
-				F009AF451BDB1061007F38A9 /* ActivityMotivationVCConstraints.swift in Sources */,
 				F0F9BBD41D3AB8A000920EF8 /* MotivationShareCollectionViewCell.swift in Sources */,
 				F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
@@ -1527,7 +1513,6 @@
 				F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */,
 				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,
 				F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */,
-				F009AF441BDB1061007F38A9 /* ActivityMotivationVC.swift in Sources */,
 				F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */,
 				F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */,
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
@@ -1856,6 +1841,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1866,6 +1853,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1877,6 +1865,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1887,6 +1877,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlowerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
