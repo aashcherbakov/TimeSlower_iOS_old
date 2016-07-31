@@ -63,7 +63,7 @@ class ProfileEditingViewModel : NSObject {
         guard let name = cellConfig?.name, birthday = cellConfig?.birthday,
             country = cellConfig?.country, gender = selectedGender else { return }
         
-        Profile.saveProfile(withName: name, birthday: birthday, country: country,
+        profile = Profile.saveProfile(withName: name, birthday: birthday, country: country,
             avatar: selectedAvatar, gender: gender)
     }
     

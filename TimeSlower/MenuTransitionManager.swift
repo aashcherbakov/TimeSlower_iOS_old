@@ -100,7 +100,7 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     private func presentController(forDirection direction: TransitionDirection) {
         if direction == .Onstage {
             
-            guard let mainScreen = sourceViewController as? MainScreenVC else {
+            guard let mainScreen = sourceViewController as? HomeViewController else {
                 return
             }
             

@@ -127,6 +127,10 @@
 		F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */; };
 		F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */; };
 		F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */; };
+		F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */; };
+		F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */; };
+		F0A577311D4E446D00D2039A /* ClosestActivityDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */; };
+		F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */; };
 		F0A6135D1D32DD100051743C /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135C1D32DD100051743C /* ManagedObject.swift */; };
 		F0A6135F1D32F0860051743C /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135E1D32F0860051743C /* Period.swift */; };
 		F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613601D32F57C0051743C /* ActivityDurationTests.swift */; };
@@ -367,6 +371,10 @@
 		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationView.swift; sourceTree = "<group>"; };
 		F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNotificationsView.swift; sourceTree = "<group>"; };
 		F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationsView.xib; sourceTree = "<group>"; };
+		F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClosestActivityDisplay.xib; sourceTree = "<group>"; };
+		F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosestActivityDisplay.swift; sourceTree = "<group>"; };
 		F0A6135C1D32DD100051743C /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		F0A6135E1D32F0860051743C /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		F0A613601D32F57C0051743C /* ActivityDurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDurationTests.swift; sourceTree = "<group>"; };
@@ -650,11 +658,10 @@
 		F009AF0D1BDAD6C5007F38A9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F009AF621BDB13A4007F38A9 /* Shared */,
 				F009AF0E1BDAD6CE007F38A9 /* Profile */,
 				F009AF111BDAD6E6007F38A9 /* Menu */,
-				F009AF101BDAD6DF007F38A9 /* MainScreen */,
+				F009AF101BDAD6DF007F38A9 /* Home Screen */,
 				F0A613661D347DE90051743C /* Motivation */,
 				F0EB8A3A1C4ABDDC009B974A /* Edit Activity */,
 				F009AF0F1BDAD6D6007F38A9 /* Activities */,
@@ -683,12 +690,13 @@
 			name = Activities;
 			sourceTree = "<group>";
 		};
-		F009AF101BDAD6DF007F38A9 /* MainScreen */ = {
+		F009AF101BDAD6DF007F38A9 /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
+				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F009AF2D1BDAE577007F38A9 /* ViewControllers */,
 			);
-			name = MainScreen;
+			name = "Home Screen";
 			sourceTree = "<group>";
 		};
 		F009AF111BDAD6E6007F38A9 /* Menu */ = {
@@ -720,6 +728,10 @@
 		F009AF2D1BDAE577007F38A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
+				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
+				F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */,
+				F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */,
 				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
 				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
 				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
@@ -1317,6 +1329,7 @@
 				F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */,
 				F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */,
 				F0115F7A1D1737DB00437E42 /* BasisOptionView.xib in Resources */,
+				F0A577311D4E446D00D2039A /* ClosestActivityDisplay.xib in Resources */,
 				F009AE611BD9C5F8007F38A9 /* Assets.xcassets in Resources */,
 				F0D71F3A1C7A233900B8473C /* EditActivityStartTimeView.xib in Resources */,
 				F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */,
@@ -1462,6 +1475,7 @@
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
+				F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */,
 				F0A613681D347E060051743C /* MotivationViewController.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
 				F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */,
@@ -1469,6 +1483,7 @@
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
+				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
@@ -1489,6 +1504,7 @@
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
+				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,

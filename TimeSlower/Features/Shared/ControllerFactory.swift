@@ -62,6 +62,8 @@ struct ControllerFactory {
         case is ProfileEditingVC.Type: return Constants.profile
         case is ProfileStatsVC.Type: return Constants.profile
         case is MotivationViewController.Type: return Constants.motivaton
+        case is HomeViewController.Type: return Constants.main
+        case is ActivityStatsVC.Type: return Constants.activities
 
         default: return nil
         }

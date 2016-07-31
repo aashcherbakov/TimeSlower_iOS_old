@@ -46,11 +46,13 @@ extension Profile {
     }
     
     public class func saveProfile(withName name: String, birthday: NSDate, country: String,
-        avatar: UIImage?, gender: Profile.Gender) {
+        avatar: UIImage?, gender: Profile.Gender) -> Profile? {
         var profile = fetchProfile()
         
         if profile == nil {
-            guard let context = CoreDataStack.sharedInstance.managedObjectContext else { return }
+            guard let context = CoreDataStack.sharedInstance.managedObjectContext else {
+                return nil
+            }
             profile = Profile.userProfileInManagedContext(context)
         }
         
@@ -61,7 +63,10 @@ extension Profile {
             profile.gender = Profile.genderWithEnum(gender)
             profile.photo = UIImagePNGRepresentation(imageForSelectedAvatar(avatar))!
             profile.saveChangesToCoreData()
+            return profile
         }
+        
+        return profile
     }
     
     public class func imageForSelectedAvatar(avatar: UIImage?) -> UIImage {

@@ -11,7 +11,7 @@ import ReactiveCocoa
 import TimeSlowerKit
 
 /// Controller that is responsible for editing/entering information about given activity
-class EditActivityVC: UIViewController {
+internal class EditActivityVC: UIViewController {
     
     private struct Constants {
         static let numberOfRows = 5

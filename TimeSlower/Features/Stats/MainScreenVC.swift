@@ -202,18 +202,20 @@ class MainScreenVC: MainScreenVCConstraints {
         setupNextActivityBlock()
     }
     
-    @IBAction func onAllActivitiesButton(sender: AnyObject) {
-        let allActivitiesController: ListOfActivitiesVC = ControllerFactory.createController()
-        allActivitiesController.profile = userProfile
-        navigationController?.pushViewController(allActivitiesController, animated: true)
-    }
-    
     func finishActivity() {
         nextActivity.finishWithResult()
         nextActivity.deleteScheduledNotificationsForCurrentActivity()
         nextActivity.scheduleRestorationTimer()
         showActivityStatsViewController()
     }
+    
+    @IBAction func onAllActivitiesButton(sender: AnyObject) {
+        let allActivitiesController: ListOfActivitiesVC = ControllerFactory.createController()
+        allActivitiesController.profile = userProfile
+        navigationController?.pushViewController(allActivitiesController, animated: true)
+    }
+    
+
     
     @IBAction func onMenuButton(sender: UIButton) {
         let menuVC: MenuVC = ControllerFactory.createController()

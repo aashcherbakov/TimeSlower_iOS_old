@@ -45,7 +45,7 @@ class MotivationControlTests: XCTestCase {
     }
     
     func test_collectionViewSetup() {
-        sut.setupWithLifetimeStats(stats)
+        sut.setupWithLifetimeStats(stats, shareDelegate: FakeShareDelegate())
         XCTAssertNotNil(sut.stats)
         XCTAssertEqual(sut.collectionView.numberOfItemsInSection(0), 4, "it should have 4 cells")
         XCTAssertEqual(sut.cellTypes!, [.Months, .Days, .Hours, .Share])
@@ -55,7 +55,7 @@ class MotivationControlTests: XCTestCase {
     
     func test_cellLayout_ForYearsLessThanOne() {
         // given
-        sut.setupWithLifetimeStats(stats)
+        sut.setupWithLifetimeStats(stats, shareDelegate: FakeShareDelegate())
         sut.collectionView.reloadData()
         
         // when
@@ -73,7 +73,7 @@ class MotivationControlTests: XCTestCase {
     
     func test_cellLayout_ForMoreThanOneYear() {
         // given
-        sut.setupWithLifetimeStats(yearStats)
+        sut.setupWithLifetimeStats(yearStats, shareDelegate: FakeShareDelegate())
         sut.collectionView.reloadData()
         
         // when
@@ -92,7 +92,7 @@ class MotivationControlTests: XCTestCase {
     
     func test_lastCellForShare() {
         // given
-        sut.setupWithLifetimeStats(stats)
+        sut.setupWithLifetimeStats(stats, shareDelegate: FakeShareDelegate())
         sut.collectionView.reloadData()
         
         // when
@@ -107,7 +107,7 @@ class MotivationControlTests: XCTestCase {
     
     func test_lastCellForShare_WithYears() {
         // given
-        sut.setupWithLifetimeStats(yearStats)
+        sut.setupWithLifetimeStats(yearStats, shareDelegate: FakeShareDelegate())
         sut.collectionView.reloadData()
         
         // when
@@ -118,5 +118,11 @@ class MotivationControlTests: XCTestCase {
         XCTAssertEqual(lastCell.topLabel.text, "3.4 YEARS")
         XCTAssertEqual(lastCell.middleLabel.text, "40.6 MONTHS")
         XCTAssertEqual(lastCell.bottomLabel.text, "1216.7 DAYS")
+    }
+}
+
+private struct FakeShareDelegate: ActivityShareDelegate {
+    private func shareMotivationImage() {
+        
     }
 }

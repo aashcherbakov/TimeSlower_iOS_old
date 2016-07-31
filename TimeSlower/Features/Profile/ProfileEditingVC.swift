@@ -59,8 +59,18 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             postAlertOnLackOfInfo(message: reason)
         } else {
             viewModel?.saveProfile()
-            dismissController()
+            if viewModel?.profile?.activities.count == 0 {
+                createFirstActivity()
+            } else {
+                dismissController()
+            }
         }
+    }
+    
+    private func createFirstActivity() {
+        let activityController: EditActivityVC = ControllerFactory.createController()
+        activityController.userProfile = viewModel?.profile
+        presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func avatarButtonPressed() {
