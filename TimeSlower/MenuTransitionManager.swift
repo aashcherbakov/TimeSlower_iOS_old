@@ -17,7 +17,7 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition {
     
     /// UIViewController from which transition happens
     var sourceViewController: UIViewController? { didSet { setupEnterGesture() } }
-    
+
     /// UIViewController destination
     var menuViewController: UIViewController? { didSet { setupExitGesture() } }
     

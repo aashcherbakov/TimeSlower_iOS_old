@@ -13,5 +13,53 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeSlower/Features/Menu/ViewControllers/MenuVC.swift"
+            timestampString = "491690873.223009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "presentControllerFromMenu(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.MenuVC.(presentControllerFromMenu in _A492A47A748C6E21379326BA6F703636) (TimeSlower.MenuVC.(MenuOptions in _A492A47A748C6E21379326BA6F703636)) -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/Features/Menu/ViewControllers/MenuVC.swift"
+                  timestampString = "491689780.494712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.MenuVC.(presentControllerFromMenu in _A492A47A748C6E21379326BA6F703636) (TimeSlower.MenuVC.(MenuOptions in _A492A47A748C6E21379326BA6F703636)) -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/Features/Menu/ViewControllers/MenuVC.swift"
+                  timestampString = "491689780.49486"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

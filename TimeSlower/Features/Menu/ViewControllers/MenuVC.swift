@@ -24,6 +24,7 @@ class MenuVC: UIViewController {
         static let cellHeightScale: CGFloat = 0.08
         static let firstCellOffsetScale: CGFloat = 0.04
     }
+    
     //MARK: - Constraints
     @IBOutlet weak var avatarBackgroundHeight: NSLayoutConstraint!
     @IBOutlet weak var cellHeight: NSLayoutConstraint!

@@ -454,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIe-pS-fSh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1261" y="1282"/>
+            <point key="canvasLocation" x="1279" y="1278"/>
         </scene>
         <!--Circle StatsVC-->
         <scene sceneID="FUO-uN-tt6">

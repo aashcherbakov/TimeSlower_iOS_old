@@ -16,17 +16,27 @@ class MainNavigationController: UINavigationController {
     
     lazy var coreDataStack = CoreDataStack.self
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupInitialController()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupInitialController()
+        profile = fetchProfile()
+        if viewControllers.first is ProfileEditingVC {
+            if profile != nil {
+                setupInitialController()
+            }
+        }
     }
     
     // MARK: - Private Functions
     
     private func setupInitialController() {
         let rootController: UIViewController
-        if let profile = fetchProfile() {
+        
+        if let profile = profile {
             let homeController: HomeViewController = ControllerFactory.createController()
             homeController.profile = profile
             rootController = homeController

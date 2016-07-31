@@ -8,6 +8,7 @@
 
 import UIKit
 import TimeSlowerKit
+import ReactiveCocoa
 
 class HomeViewController: UIViewController {
     
@@ -23,13 +24,14 @@ class HomeViewController: UIViewController {
     @IBOutlet private(set) weak var controlFlowButton: UIButton!
     @IBOutlet private(set) weak var closestActivityDisplay: ClosestActivityDisplay!
     
-    var profile: Profile?
+    dynamic var profile: Profile?
     var closestActivity: Activity?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDesign()
+        setupEvents()
         transitionManager.sourceViewController = self
     }
     
@@ -69,6 +71,14 @@ class HomeViewController: UIViewController {
     
     // MARK: - Private Functions
     
+    private func setupEvents() {
+        rac_valuesForKeyPath("profile", observer: self).toSignalProducer()
+            .startWithNext { [weak self] (_) in
+                self?.setupClosestActvityDisplay()
+                self?.setupControlFlowButton()
+        }
+    }
+    
     private func setupDesign() {
         setupNavigationBar()
         setupClosestActvityDisplay()
@@ -95,6 +105,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.translucent = true
@@ -107,6 +118,4 @@ class HomeViewController: UIViewController {
         controller.activity = activity
         presentViewController(controller, animated: true, completion: nil)
     }
-    
-    
 }
