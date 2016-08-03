@@ -19,10 +19,12 @@ class HomeViewController: UIViewController {
     }
     
     let transitionManager = MenuTransitionManager()
+    let activityListTransitionManager = ActivityListTransitionManager()
 
     @IBOutlet private(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
     @IBOutlet private(set) weak var controlFlowButton: UIButton!
     @IBOutlet private(set) weak var closestActivityDisplay: ClosestActivityDisplay!
+    @IBOutlet private(set) weak var circleSatsView: CircleStatsView!
     
     dynamic var profile: Profile?
     var closestActivity: Activity?
@@ -33,6 +35,12 @@ class HomeViewController: UIViewController {
         setupDesign()
         setupEvents()
         transitionManager.sourceViewController = self
+        activityListTransitionManager.sourceController = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
     }
     
     // MARK: - Actions
@@ -52,7 +60,8 @@ class HomeViewController: UIViewController {
     private func startActivity(activity: Activity) {
         activity.timing!.manuallyStarted = NSDate()
         //TODO: update notifications for today
-        setupDesign()
+        setupClosestActvityDisplay()
+        setupControlFlowButton()
     }
     
     private func finishActivity(activity: Activity) {
@@ -87,7 +96,9 @@ class HomeViewController: UIViewController {
     
     private func setupClosestActvityDisplay() {
         closestActivity = profile?.findCurrentActivity()
+        
         closestActivityDisplay.setupWithActivity(closestActivity)
+        circleSatsView.displayProgressForProfile(closestActivity?.profile)
     }
     
     private func setupControlFlowButton() {

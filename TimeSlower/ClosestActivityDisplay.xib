@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="SourceSansPro-Regular.ttf">
@@ -33,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:19:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRu-tR-oUw">
-                    <rect key="frame" x="303" y="64" width="53" height="19"/>
+                    <rect key="frame" x="308" y="64" width="53" height="19"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                     <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -45,7 +46,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="starts in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuT-sc-RUA">
-                    <rect key="frame" x="244" y="64" width="51" height="19"/>
+                    <rect key="frame" x="249" y="64" width="51" height="19"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                     <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -59,9 +60,9 @@
                 <constraint firstItem="iRu-tR-oUw" firstAttribute="leading" secondItem="UuT-sc-RUA" secondAttribute="trailing" constant="8" id="UnL-2a-QaJ"/>
                 <constraint firstItem="c2K-XG-ssT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Uu5-Ef-TJ7"/>
                 <constraint firstItem="iCX-Yg-sfj" firstAttribute="top" secondItem="c2K-XG-ssT" secondAttribute="bottom" constant="14" id="VIo-gc-hj2"/>
-                <constraint firstItem="UuT-sc-RUA" firstAttribute="leading" secondItem="iCX-Yg-sfj" secondAttribute="leading" id="byF-z3-RP7"/>
                 <constraint firstItem="UuT-sc-RUA" firstAttribute="top" secondItem="iCX-Yg-sfj" secondAttribute="bottom" constant="2" id="tBw-Ze-wLa"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UuT-sc-RUA" secondAttribute="bottom" constant="20" id="thC-p6-cjc"/>
+                <constraint firstItem="UuT-sc-RUA" firstAttribute="trailing" secondItem="iCX-Yg-sfj" secondAttribute="centerX" id="xVK-zu-zc7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="319" y="230.5"/>

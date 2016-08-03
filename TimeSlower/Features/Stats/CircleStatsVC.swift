@@ -80,8 +80,8 @@ class CircleStatsVC: UIViewController {
         
         savedTimeLabel.text = "\(factTiming!.0.format(format))"
         usedTimeLabel.text = "\(factTiming!.1.format(format))"
-        plannedToSaveLabel.text = "\(plannedTiming.0.format(format))"
-        plannedToUseLabel.text = "\(plannedTiming.1.format(format))"
+        plannedToSaveLabel.text = "\(plannedTiming!.0.format(format))"
+        plannedToUseLabel.text = "\(plannedTiming!.1.format(format))"
         
     }
 }

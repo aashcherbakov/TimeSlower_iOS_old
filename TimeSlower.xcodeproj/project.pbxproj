@@ -131,6 +131,9 @@
 		F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */; };
 		F0A577311D4E446D00D2039A /* ClosestActivityDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */; };
 		F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */; };
+		F0A577361D4EC20800D2039A /* CircleStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577351D4EC20800D2039A /* CircleStatsView.xib */; };
+		F0A577381D4EC21B00D2039A /* CircleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577371D4EC21B00D2039A /* CircleStatsView.swift */; };
+		F0A5773A1D4ED1FF00D2039A /* ActivityListTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */; };
 		F0A6135D1D32DD100051743C /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135C1D32DD100051743C /* ManagedObject.swift */; };
 		F0A6135F1D32F0860051743C /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135E1D32F0860051743C /* Period.swift */; };
 		F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613601D32F57C0051743C /* ActivityDurationTests.swift */; };
@@ -375,6 +378,9 @@
 		F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClosestActivityDisplay.xib; sourceTree = "<group>"; };
 		F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosestActivityDisplay.swift; sourceTree = "<group>"; };
+		F0A577351D4EC20800D2039A /* CircleStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleStatsView.xib; sourceTree = "<group>"; };
+		F0A577371D4EC21B00D2039A /* CircleStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleStatsView.swift; sourceTree = "<group>"; };
+		F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListTransitionManager.swift; sourceTree = "<group>"; };
 		F0A6135C1D32DD100051743C /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		F0A6135E1D32F0860051743C /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		F0A613601D32F57C0051743C /* ActivityDurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDurationTests.swift; sourceTree = "<group>"; };
@@ -730,8 +736,8 @@
 			children = (
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
-				F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */,
-				F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */,
+				F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */,
+				F0A577341D4EC1A900D2039A /* Views */,
 				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
 				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
 				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
@@ -888,6 +894,17 @@
 				F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F0A577341D4EC1A900D2039A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */,
+				F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */,
+				F0A577351D4EC20800D2039A /* CircleStatsView.xib */,
+				F0A577371D4EC21B00D2039A /* CircleStatsView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F0A613661D347DE90051743C /* Motivation */ = {
@@ -1302,6 +1319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0A577361D4EC20800D2039A /* CircleStatsView.xib in Resources */,
 				F009AF181BDADE19007F38A9 /* SourceSansPro-Black.ttf in Resources */,
 				F093E2461C7A40D400E245C4 /* EditActivityDurationView.xib in Resources */,
 				F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */,
@@ -1483,6 +1501,7 @@
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
+				F0A5773A1D4ED1FF00D2039A /* ActivityListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
@@ -1520,6 +1539,7 @@
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
+				F0A577381D4EC21B00D2039A /* CircleStatsView.swift in Sources */,
 				F0F9BBD41D3AB8A000920EF8 /* MotivationShareCollectionViewCell.swift in Sources */,
 				F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,

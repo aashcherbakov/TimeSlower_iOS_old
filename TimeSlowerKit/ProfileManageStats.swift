@@ -136,7 +136,7 @@ extension Profile {
     
     //TODO: move to profile
     /// Returns $0 - saved, $1 - spent
-    public func factTimingForPeriod(period: LazyCalendar.Period) -> (Double, Double)? {
+    public func factTimingForPeriod(period: LazyCalendar.Period) -> (saved: Double, spent: Double)? {
 
         
         var summSaved = 0.0
@@ -159,7 +159,7 @@ extension Profile {
     
     //TODO: move to profile
     /// Returns $0 - saved, $1 - spent in minutes
-    public func plannedTimingInPeriod(period: LazyCalendar.Period, sinceDate date: NSDate) -> (Double, Double) {
+    public func plannedTimingInPeriod(period: LazyCalendar.Period, sinceDate date: NSDate) -> (save: Double, spend: Double)? {
         var toSave = 0.0;
         var toSpend = 0.0;
         
@@ -177,7 +177,7 @@ extension Profile {
     public func timeStatsForPeriod(period: LazyCalendar.Period) -> DailyStats {
         let fact = factTimingForPeriod(period)
         let planned = plannedTimingInPeriod(period, sinceDate: NSDate())
-        return DailyStats(factSaved: fact!.0, factSpent: fact!.1, plannedToSave: planned.0, plannedToSpend: planned.1)
+        return DailyStats(factSaved: fact!.0, factSpent: fact!.1, plannedToSave: planned!.0, plannedToSpend: planned!.1)
     }
     
     //    public func timeStatsForToday() -> DailyStats {
