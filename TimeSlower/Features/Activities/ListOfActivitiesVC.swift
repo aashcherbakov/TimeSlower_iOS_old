@@ -55,7 +55,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), forControlEvents: .ValueChanged)
         listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), forControlEvents: .ValueChanged)
         createActivityButton.layer.cornerRadius = buttonHeight.constant / 2
-        
+        navigationController?.delegate = nil
         setupTable()
         getherActivitiesToDisplay()
         tableView.reloadData()
@@ -116,7 +116,11 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     // MARK: - Navigation
     
     @IBAction func onBackButton(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+        if navigationController != nil {
+            navigationController?.popViewControllerAnimated(true)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func saveActivityReturnToList(segue: UIStoryboardSegue) {
