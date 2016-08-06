@@ -31,6 +31,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     @IBOutlet weak var createActivityButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
+    var presentedModally = false
     var typeToDisplay: TypeToDisplay = .BothTypes
     var basisToDisplay: BasisToDisplay = .Today
     var profile: Profile! { didSet { getherActivitiesToDisplay() } }
@@ -118,7 +119,9 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     @IBAction func onBackButton(sender: UIButton) {
         if navigationController != nil {
             navigationController?.popViewControllerAnimated(true)
-        } else {
+        }
+        
+        if presentedModally {
             dismissViewControllerAnimated(true, completion: nil)
         }
     }

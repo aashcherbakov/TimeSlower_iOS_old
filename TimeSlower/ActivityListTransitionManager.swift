@@ -91,9 +91,12 @@ class ActivityListTransitionManager: UIPercentDrivenInteractiveTransition {
             
             let listController: ListOfActivitiesVC = ControllerFactory.createController()
             listController.profile = currentVC.profile
-            listController.transitioningDelegate = currentVC.activityListTransitionManager
-            activityListController = listController
-            sourceController?.presentViewController(listController, animated: true, completion: nil)
+            listController.presentedModally = true
+            let navigationController = UINavigationController(rootViewController: listController)
+            navigationController.transitioningDelegate = currentVC.activityListTransitionManager
+            
+            activityListController = navigationController
+            sourceController?.presentViewController(navigationController, animated: true, completion: nil)
         } else {
             activityListController?.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -199,14 +202,6 @@ extension ActivityListTransitionManager: UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(true)
             UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
         }
-        
-//        // fix for bug when second view dissapears from screen
-//        // http://openradar.appspot.com/radar?id=5320103646199808
-//        if isPresenting {
-//            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
-//        } else {
-//            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
-//        }
     }
     
     private func controllersFromContext(transitionContext: UIViewControllerContextTransitioning) ->
