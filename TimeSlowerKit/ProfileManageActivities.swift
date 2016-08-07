@@ -91,7 +91,7 @@ extension Profile {
     }
     
     public func sortByNextActionTime(activity1: Activity, activity2: Activity) -> Bool {
-        return activity1.timing?.nextActionTime() < (activity2.timing?.nextActionTime())
+        return activity1.timing.nextActionTime() < (activity2.timing.nextActionTime())
     }
     
     public func findCurrentActivity() -> Activity? {

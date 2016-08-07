@@ -40,7 +40,6 @@ class EditActivityStartTimeView: ObservableControl {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("Start time touched")
         super.touchesEnded(touches, withEvent: event)
         sendActionsForControlEvents(.TouchUpInside)
 

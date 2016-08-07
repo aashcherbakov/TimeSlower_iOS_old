@@ -18,12 +18,12 @@ public struct ActivityManager {
         activity.name = name
         activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
         activity.basis = DateManager.basisFromDays(selectedDays).rawValue
-        activity.timing?.startTime = startTime
-        activity.timing?.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
-        activity.timing?.duration = duration
-        activity.timing?.timeToSave = timeToSave
+        activity.timing.startTime = startTime
+        activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
+        activity.timing.duration = duration
+        activity.timing.timeToSave = timeToSave
         activity.notifications = notifications
-        activity.stats?.updateStats()
+        activity.stats.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
         
@@ -35,12 +35,12 @@ public struct ActivityManager {
         activity.name = name
         activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
         activity.basis = DateManager.basisFromDays(selectedDays).rawValue
-        activity.timing?.startTime = startTime
-        activity.timing?.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
-        activity.timing?.duration = duration
-        activity.timing?.timeToSave = timeToSave
+        activity.timing.startTime = startTime
+        activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
+        activity.timing.duration = duration
+        activity.timing.timeToSave = timeToSave
         activity.notifications = notifications
-        activity.stats?.updateStats()
+        activity.stats.updateStats()
         
         Activity.saveContext(activity.managedObjectContext)
     }

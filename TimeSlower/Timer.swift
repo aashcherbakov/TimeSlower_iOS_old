@@ -24,7 +24,6 @@ internal class Timer: NSObject {
     
     func invokeBlock() {
         block()
-        print("timer ticked")
     }
     
     func terminate() {

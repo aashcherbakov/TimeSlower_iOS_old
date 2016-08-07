@@ -133,7 +133,7 @@
 		F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */; };
 		F0A577361D4EC20800D2039A /* CircleStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577351D4EC20800D2039A /* CircleStatsView.xib */; };
 		F0A577381D4EC21B00D2039A /* CircleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577371D4EC21B00D2039A /* CircleStatsView.swift */; };
-		F0A5773A1D4ED1FF00D2039A /* ActivityListTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */; };
+		F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */; };
 		F0A6135D1D32DD100051743C /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135C1D32DD100051743C /* ManagedObject.swift */; };
 		F0A6135F1D32F0860051743C /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6135E1D32F0860051743C /* Period.swift */; };
 		F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613601D32F57C0051743C /* ActivityDurationTests.swift */; };
@@ -380,7 +380,7 @@
 		F0A577321D4E447800D2039A /* ClosestActivityDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosestActivityDisplay.swift; sourceTree = "<group>"; };
 		F0A577351D4EC20800D2039A /* CircleStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleStatsView.xib; sourceTree = "<group>"; };
 		F0A577371D4EC21B00D2039A /* CircleStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleStatsView.swift; sourceTree = "<group>"; };
-		F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListTransitionManager.swift; sourceTree = "<group>"; };
+		F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransitionManager.swift; sourceTree = "<group>"; };
 		F0A6135C1D32DD100051743C /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		F0A6135E1D32F0860051743C /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		F0A613601D32F57C0051743C /* ActivityDurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDurationTests.swift; sourceTree = "<group>"; };
@@ -736,7 +736,7 @@
 			children = (
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
-				F0A577391D4ED1FF00D2039A /* ActivityListTransitionManager.swift */,
+				F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */,
 				F0A577341D4EC1A900D2039A /* Views */,
 				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
 				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
@@ -1501,7 +1501,7 @@
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
-				F0A5773A1D4ED1FF00D2039A /* ActivityListTransitionManager.swift in Sources */,
+				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,

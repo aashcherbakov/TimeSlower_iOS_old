@@ -14,14 +14,14 @@ import CoreData
 
 extension Activity {
 
-    @NSManaged public var basis: NSNumber?
-    @NSManaged public var name: String?
-    @NSManaged public var type: NSNumber?
+    @NSManaged public var basis: NSNumber
+    @NSManaged public var name: String
+    @NSManaged public var type: NSNumber
     @NSManaged public var days: NSSet
-    @NSManaged public var profile: Profile?
+    @NSManaged public var profile: Profile
     @NSManaged public var results: NSSet?
-    @NSManaged public var stats: Stats?
-    @NSManaged public var timing: Timing?
-    @NSManaged public var notifications: NSNumber?
+    @NSManaged public var stats: Stats
+    @NSManaged public var timing: Timing
+    @NSManaged public var notifications: NSNumber
 
 }

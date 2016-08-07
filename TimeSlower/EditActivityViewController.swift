@@ -72,7 +72,6 @@ internal class EditActivityVC: UIViewController {
     dynamic private var lastExpandedCellIndex: NSIndexPath?
     private var expandedCellIndex: NSIndexPath? {
         willSet {
-            print("Cell expanded: \(newValue?.row)")
             var nextIndex = newValue
             if nextIndex == lastExpandedCellIndex {
                 nextIndex = nil
@@ -155,8 +154,8 @@ internal class EditActivityVC: UIViewController {
         if activity != nil {
             flow = .Editing
             editingState = .FullHouse
-            timeSaverView.selectedDuration = activity?.timing?.duration
-            timeSaverView.selectedValue = ActivityDuration(value: (activity?.timing?.timeToSave.integerValue)!, period: (activity?.timing?.duration.period)!)
+            timeSaverView.selectedDuration = activity?.timing.duration
+            timeSaverView.selectedValue = ActivityDuration(value: (activity?.timing.timeToSave.integerValue)!, period: (activity?.timing.duration.period)!)
         } else {
             flow = .Creating
             editingState = .Name
@@ -173,10 +172,10 @@ internal class EditActivityVC: UIViewController {
         if let activity = activity {
             selectedName = activity.name
             selectedBasis = activityManager.daysIntegerRepresentation(activity.days as! Set<Day>)
-            selectedStartTime = activity.timing?.startTime
-            selectedDuration = activity.timing?.duration
-            selectedNotifications = activity.notifications?.boolValue
-            selectedTimeToSave = activity.timing?.timeToSave.integerValue
+            selectedStartTime = activity.timing.startTime
+            selectedDuration = activity.timing.duration
+            selectedNotifications = activity.notifications.boolValue
+            selectedTimeToSave = activity.timing.timeToSave.integerValue
             
             initialValuesForCells = [selectedName, selectedBasis, selectedStartTime, selectedDuration, selectedNotifications]
         }

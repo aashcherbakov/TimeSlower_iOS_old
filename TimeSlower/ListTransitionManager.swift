@@ -1,5 +1,5 @@
 //
-//  ActivityListTransitionManager.swift
+//  ListTransitionManager.swift
 //  TimeSlower
 //
 //  Created by Oleksandr Shcherbakov on 7/31/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ActivityListTransitionManager: UIPercentDrivenInteractiveTransition {
+class ListTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private enum TransitionDirection {
         case Onstage
@@ -35,13 +35,13 @@ class ActivityListTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private func setupEnterGesture() {
         let enterGesture = UIPanGestureRecognizer()
-        enterGesture.addTarget(self, action: #selector(ActivityListTransitionManager.handleOnstagePan(_:)))
+        enterGesture.addTarget(self, action: #selector(ListTransitionManager.handleOnstagePan(_:)))
         sourceController?.view.addGestureRecognizer(enterGesture)
     }
     
     private func setupExitGesture() {
         let exitGesture = UIPanGestureRecognizer()
-        exitGesture.addTarget(self, action: #selector(ActivityListTransitionManager.handleOffstagePan(_:)))
+        exitGesture.addTarget(self, action: #selector(ListTransitionManager.handleOffstagePan(_:)))
         activityListController?.view.addGestureRecognizer(exitGesture)
     }
     
@@ -104,7 +104,6 @@ class ActivityListTransitionManager: UIPercentDrivenInteractiveTransition {
     
     private func finishTransition(withProgress progress: CGFloat, direction: TransitionDirection) {
         let minTransition: CGFloat = direction == .Onstage ? 0.1 : 0.1
-        print(progress)
         if progress > minTransition {
             finishInteractiveTransition()
         } else {
@@ -113,7 +112,7 @@ class ActivityListTransitionManager: UIPercentDrivenInteractiveTransition {
     }
 }
 
-extension ActivityListTransitionManager: UIViewControllerAnimatedTransitioning {
+extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.5
@@ -159,9 +158,12 @@ extension ActivityListTransitionManager: UIViewControllerAnimatedTransitioning {
                   topView: UIView,
                   isPresenting: Bool) {
         
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.2, options: [],
+        UIView.animateWithDuration(duration, delay: 0.0,
+                                   usingSpringWithDamping: 0.9,
+                                   initialSpringVelocity: 0.2,
+                                   options: [],
                                    animations: { [weak self] in
-                                    self?.performViewTransformations(ifPresenting: isPresenting, menuView: menuView, topView: topView)
+                self?.performViewTransformations(ifPresenting: isPresenting, menuView: menuView, topView: topView)
             }, completion: { [weak self] finished in
                 self?.completeInteractiveTransition(inContext: transitionContext, isPresenting: isPresenting)
             })
@@ -171,8 +173,6 @@ extension ActivityListTransitionManager: UIViewControllerAnimatedTransitioning {
     
     private func performViewTransformations(ifPresenting presenting: Bool, menuView: UIView, topView: UIView) {
         if presenting {
-            // if you don't want menu to be centered in screen, use offStage nethod
-            // menuView.transform = self.offStage(-CGRectGetWidth(menuView.bounds) * 0.1)
             menuView.transform = CGAffineTransformIdentity
             topView.transform = self.offStage(-screenHeight)
         } else {
@@ -217,7 +217,7 @@ extension ActivityListTransitionManager: UIViewControllerAnimatedTransitioning {
     }
 }
 
-extension ActivityListTransitionManager: UIViewControllerTransitioningDelegate {
+extension ListTransitionManager: UIViewControllerTransitioningDelegate {
     
     func animationControllerForPresentedController(
         presented: UIViewController,

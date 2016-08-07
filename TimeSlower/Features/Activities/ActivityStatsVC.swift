@@ -54,14 +54,14 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
         
         let format = ".0"
-        successLabel.text = "\(activity.stats!.averageSuccess.doubleValue.format(format))"
+        successLabel.text = "\(activity.stats.averageSuccess.doubleValue.format(format))"
         setupCircleProgress()
         launchTimer()
         defineStartOrFinishButtonTitle()
     }
     
     func setupCircleProgress() {
-        circleProgress.progress = activity.stats!.averageSuccess.doubleValue
+        circleProgress.progress = activity.stats.averageSuccess.doubleValue
         circleProgress.progressBarWidth = 14
         circleProgress.progressColor = UIColor.purpleRed()
     }
@@ -137,7 +137,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func restartTimerIfActivityChanged() {
-        let intervalTillAction = round(activity.timing!.nextActionTime().timeIntervalSinceNow)
+        let intervalTillAction = round(activity.timing.nextActionTime().timeIntervalSinceNow)
         let intervalFromTimer = round(timer.getTimeRemaining())
         if intervalTillAction != intervalFromTimer {
             reloadTimer()

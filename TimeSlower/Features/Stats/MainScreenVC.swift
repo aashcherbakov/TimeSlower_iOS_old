@@ -94,7 +94,7 @@ class MainScreenVC: MainScreenVCConstraints {
         setupControlFlowButton()
         if let activity = nextActivity {
             launchTimer()
-            activityNameLabel.text = nextActivity.name!.uppercaseString
+            activityNameLabel.text = nextActivity.name.uppercaseString
             currentStatusLabel.text = activity.isGoingNow() ? Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
             timingStatusLabel.text = activity.isGoingNow() ? Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
@@ -155,7 +155,7 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func restartTimerIfProfileHasChanged() {
-        let timeTillFinalDate = nextActivity.timing!.nextActionTime()
+        let timeTillFinalDate = nextActivity.timing.nextActionTime()
         let timeTillEndOfCountdown = timer.getTimeRemaining()
         
         if timeTillFinalDate != timeTillEndOfCountdown {
@@ -165,10 +165,10 @@ class MainScreenVC: MainScreenVCConstraints {
     
     func setupTimerCountdown() {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        timer.setCountDownToDate(nextActivity.timing!.nextActionTime())
+        timer.setCountDownToDate(nextActivity.timing.nextActionTime())
         timer.resetTimerAfterFinish = false
         
-        let timerSecondsToSet = nextActivity.timing!.nextActionTime().timeIntervalSinceNow
+        let timerSecondsToSet = nextActivity.timing.nextActionTime().timeIntervalSinceNow
         timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
         if timerSecondsToSet > 60*60*24 {
             let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
@@ -197,7 +197,7 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func startActivity() {
-        nextActivity.timing!.manuallyStarted = NSDate()
+        nextActivity.timing.manuallyStarted = NSDate()
         //TODO: update notifications for today
         setupNextActivityBlock()
     }

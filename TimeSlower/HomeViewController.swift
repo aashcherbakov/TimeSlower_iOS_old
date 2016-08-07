@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     }
     
     let transitionManager = MenuTransitionManager()
-    let activityListTransitionManager = ActivityListTransitionManager()
+    let activityListTransitionManager = ListTransitionManager()
 
     @IBOutlet private(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
     @IBOutlet private(set) weak var controlFlowButton: UIButton!
@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet private(set) weak var circleSatsView: CircleStatsView!
     
     dynamic var profile: Profile?
-    var closestActivity: Activity?
+    dynamic var closestActivity: Activity?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +46,27 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func controlFlowButtonTapped(sender: UIButton) {
-        guard let activity = closestActivity else {
-            return
-        }
+        guard let activity = closestActivity else { return }
         
         if sender.titleLabel?.text == Constants.startNowButtonTitle {
             startActivity(activity)
         } else if sender.titleLabel?.text == Constants.finishNowButtonTitle {
             finishActivity(activity)
+            closestActivity = profile?.findCurrentActivity()
         }
     }
     
+    @IBAction func openMenu(sender: UIBarButtonItem) {
+        let menuVC: MenuVC = ControllerFactory.createController()
+        menuVC.transitioningDelegate = transitionManager
+        transitionManager.menuViewController = menuVC
+        presentViewController(menuVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Private Functions - ActivityDisplay
+    
     private func startActivity(activity: Activity) {
-        activity.timing!.manuallyStarted = NSDate()
+        activity.timing.manuallyStarted = NSDate()
         //TODO: update notifications for today
         setupClosestActvityDisplay()
         setupControlFlowButton()
@@ -71,14 +79,13 @@ class HomeViewController: UIViewController {
         showStatsControllerForActivity(activity)
     }
     
-    @IBAction func openMenu(sender: UIBarButtonItem) {
-        let menuVC: MenuVC = ControllerFactory.createController()
-        menuVC.transitioningDelegate = transitionManager
-        transitionManager.menuViewController = menuVC
-        presentViewController(menuVC, animated: true, completion: nil)
+    private func setupClosestActvityDisplay() {
+        closestActivity = profile?.findCurrentActivity()        
+        closestActivityDisplay.setupWithActivity(closestActivity)
+        circleSatsView.displayProgressForProfile(closestActivity?.profile)
     }
-    
-    // MARK: - Private Functions
+
+    // MARK: - Private Functions - Design
     
     private func setupEvents() {
         rac_valuesForKeyPath("profile", observer: self).toSignalProducer()
@@ -89,16 +96,8 @@ class HomeViewController: UIViewController {
     }
     
     private func setupDesign() {
-        setupNavigationBar()
         setupClosestActvityDisplay()
         setupControlFlowButton()
-    }
-    
-    private func setupClosestActvityDisplay() {
-        closestActivity = profile?.findCurrentActivity()
-        
-        closestActivityDisplay.setupWithActivity(closestActivity)
-        circleSatsView.displayProgressForProfile(closestActivity?.profile)
     }
     
     private func setupControlFlowButton() {

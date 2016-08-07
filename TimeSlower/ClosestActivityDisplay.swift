@@ -41,10 +41,10 @@ internal final class ClosestActivityDisplay: UIView {
     // MARK: - Internal Functions
     
     func setupWithActivity(activity: Activity?) {
-        setupLabelsForActivity(activity)
        
         if let activity = activity {
             launchTimerForActivity(activity)
+            setupLabelsForActivity(activity)
         }
     }
     
@@ -61,7 +61,7 @@ internal final class ClosestActivityDisplay: UIView {
     }
     
     func restartTimerForActivity(activity: Activity) {
-        let timeTillFinalDate = activity.timing!.nextActionTime()
+        let timeTillFinalDate = activity.timing.nextActionTime()
         let timeTillEndOfCountdown = timer?.getTimeRemaining()
         
         if timeTillFinalDate != timeTillEndOfCountdown {
@@ -73,10 +73,10 @@ internal final class ClosestActivityDisplay: UIView {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
         
         if let timer = timer {
-            timer.setCountDownToDate(activity.timing!.nextActionTime())
+            timer.setCountDownToDate(activity.timing.nextActionTime())
             timer.resetTimerAfterFinish = false
             
-            let timerSecondsToSet = activity.timing!.nextActionTime().timeIntervalSinceNow
+            let timerSecondsToSet = activity.timing.nextActionTime().timeIntervalSinceNow
             timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
             
             if timerSecondsToSet > 60*60*24 {
@@ -106,7 +106,7 @@ internal final class ClosestActivityDisplay: UIView {
     
     private func setupLabelsForActivity(activity: Activity?) {
         if let activity = activity {
-            nameLabel.text = activity.name!.uppercaseString
+            nameLabel.text = activity.name.uppercaseString
             titleLabel.text = activity.isGoingNow() ?
                 Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
             statusLabel.text = activity.isGoingNow() ?

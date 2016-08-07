@@ -69,17 +69,17 @@ public class TestCoreDataStack: CoreDataStack {
         let newResult = DayResults.newResultWithDate(NSDate(), forActivity: activity)
         newResult.date = DayResults.standardDateFormatter().stringFromDate(NSDate())
         newResult.factFinishTime = activity.updatedFinishTime().dateByAddingTimeInterval(-5*60)
-        newResult.activity.timing!.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
-        newResult.factStartTime = (newResult.activity.timing?.manuallyStarted!)!
+        newResult.activity.timing.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
+        newResult.factStartTime = (newResult.activity.timing.manuallyStarted!)
         newResult.factSuccess = NSNumber(double: newResult.daySuccess())
         
         newResult.factDuration = NSNumber(double: abs(newResult.factFinishTime.timeIntervalSinceDate(newResult.factStartTime) / 60))
         
         if activity.isRoutine() {
-            newResult.factSavedTime = NSNumber(double: Double(activity.timing!.duration.value) - newResult.factDuration.doubleValue)
+            newResult.factSavedTime = NSNumber(double: Double(activity.timing.duration.value) - newResult.factDuration.doubleValue)
         }
         
-        newResult.activity.timing!.manuallyStarted = nil
+        newResult.activity.timing.manuallyStarted = nil
         return newResult
     }
     

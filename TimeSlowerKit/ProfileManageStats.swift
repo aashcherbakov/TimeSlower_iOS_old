@@ -143,16 +143,13 @@ extension Profile {
         var summSpent = 0.0
         
         for activity in allActivities() {
-            if let stats = activity.stats {
-                for result in stats.allResultsForPeriod(period) {
-                    if activity.isRoutine() {
-                        summSaved += result.factSavedTime!.doubleValue
-                    } else {
-                        summSpent += result.factDuration.doubleValue
-                    }
+            for result in activity.stats.allResultsForPeriod(period) {
+                if activity.isRoutine() {
+                    summSaved += result.factSavedTime!.doubleValue
+                } else {
+                    summSpent += result.factDuration.doubleValue
                 }
             }
-            
         }
         return (summSaved, summSpent)
     }
@@ -164,11 +161,11 @@ extension Profile {
         var toSpend = 0.0;
         
         for activity in allActivities() {
-            let numberOfDays = activity.stats!.busyDaysForPeriod(period, sinceDate: date)
+            let numberOfDays = activity.stats.busyDaysForPeriod(period, sinceDate: date)
             if activity.isRoutine() {
-                toSave += activity.timing!.timeToSave.doubleValue * Double(numberOfDays)
+                toSave += activity.timing.timeToSave.doubleValue * Double(numberOfDays)
             } else {
-                toSpend += Double(activity.timing!.duration.minutes()) * Double(numberOfDays)
+                toSpend += Double(activity.timing.duration.minutes()) * Double(numberOfDays)
             }
         }
         return (abs(toSave), abs(toSpend)) // minutes

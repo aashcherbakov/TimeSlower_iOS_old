@@ -39,7 +39,7 @@ extension Stats {
     
     /// Can not be tested in XCTests because of InMemory store type bug
     public func updateAverageSuccess() {
-        guard let results = activity.results, let name = activity.name else {
+        guard let results = activity.results else {
             return
         }
         
@@ -47,7 +47,7 @@ extension Stats {
             let fetchRequest = NSFetchRequest(entityName: "DayResults")
             fetchRequest.resultType = .DictionaryResultType
             fetchRequest.propertiesToFetch = averageSuccessCalculation()
-            fetchRequest.predicate = NSPredicate(format: "activity.name == %@", name)
+            fetchRequest.predicate = NSPredicate(format: "activity.name == %@", activity.name)
             
             do {
                 let result = try managedObjectContext!.executeFetchRequest(fetchRequest)
@@ -64,12 +64,9 @@ extension Stats {
     
     // Get total hours spent or saved on activity depending on basis
     public func updateStats() {
-        guard let daysLeft = activity.profile?.numberOfDaysTillEndOfLifeSinceDate(NSDate()) else {
-            return
-        }
-
+        let daysLeft = activity.profile.numberOfDaysTillEndOfLifeSinceDate(NSDate())
         let busyDays = activity.days.count
-        let duration = activity.timing!.duration.minutes()
+        let duration = activity.timing.duration.minutes()
         let calculator = TimeCalculator()
         
         // Set activity's properties
@@ -103,13 +100,13 @@ extension Stats {
     }
     
     public func busyDaysInLifetimeSinceDate(date: NSDate) -> Int {
-        if let totalDays = activity.profile?.numberOfDaysTillEndOfLifeSinceDate(date) {
-            switch activity.activityBasis() {
-            case .Daily: return totalDays
-            case .Workdays: return totalDays / 7 * 5
-            case .Weekends: return totalDays / 7 * 2
-            case .Random: return totalDays
-            }
+        let totalDays = activity.profile.numberOfDaysTillEndOfLifeSinceDate(date)
+        
+        switch activity.activityBasis() {
+        case .Daily: return totalDays
+        case .Workdays: return totalDays / 7 * 5
+        case .Weekends: return totalDays / 7 * 2
+        case .Random: return totalDays
         }
         
         return 0
@@ -123,14 +120,9 @@ extension Stats {
     /// Makes a prognose based on current success in activity.
     /// Returns struct with years, month, days and hours
     public func factTimingInLifetime() -> LifeTime? {
-        guard let timing = activity.timing,
-            let profile = activity.profile,
-            let stats = activity.stats else {
-            return nil
-        }
-        let dailyTime = activity.isRoutine() ? timing.timeToSave.doubleValue : Double(timing.duration.minutes())
-        let totalTimePlanned = profile.totalTimeForDailyMinutes(dailyTime)
-        let successFroNow = stats.averageSuccess.doubleValue / 100
+        let dailyTime = activity.isRoutine() ? activity.timing.timeToSave.doubleValue : Double(activity.timing.duration.minutes())
+        let totalTimePlanned = activity.profile.totalTimeForDailyMinutes(dailyTime)
+        let successFroNow = activity.stats.averageSuccess.doubleValue / 100
         
         return LifeTime(years: totalTimePlanned.years * successFroNow,
             months: totalTimePlanned.months * successFroNow,
@@ -142,21 +134,15 @@ extension Stats {
         var toSave = 0.0
         var toSpend = 0.0
         
-        guard let profile = activity.profile else {
-            return nil
-        }
-        
-        for anActivity in profile.allActivities() {
-            if let timing = anActivity.timing {
-                if anActivity.isRoutine() {
-                    toSave += timing.timeToSave.doubleValue
-                } else {
-                    toSpend += Double(timing.duration.minutes())
-                }
+        for anActivity in activity.profile.allActivities() {
+            if anActivity.isRoutine() {
+                toSave += activity.timing.timeToSave.doubleValue
+            } else {
+                toSpend += Double(activity.timing.duration.minutes())
             }
         }
-        let timingForRoutines = profile.totalTimeForDailyMinutes(toSave)
-        let timingForGoals = profile.totalTimeForDailyMinutes(toSpend)
+        let timingForRoutines = activity.profile.totalTimeForDailyMinutes(toSave)
+        let timingForGoals = activity.profile.totalTimeForDailyMinutes(toSpend)
         return activity.isRoutine() ? timingForRoutines : timingForGoals
     }
     
@@ -178,13 +164,9 @@ extension Stats {
         return summSavedTimeLastYear
     }
     
-    private func allResultsPredicateForPeriod(period: LazyCalendar.Period) -> NSPredicate {
-        guard let name = activity.name else {
-            fatalError()
-        }
-        
+    private func allResultsPredicateForPeriod(period: LazyCalendar.Period) -> NSPredicate {        
         let timePredicate = NSPredicate(format: "raughDate > %@", LazyCalendar.startDateForPeriod(period, sinceDate: NSDate()))
-        let namePredicate = NSPredicate(format: "activity.name == %@", name)
+        let namePredicate = NSPredicate(format: "activity.name == %@", activity.name)
         if period != .Lifetime {
             return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
         } else {

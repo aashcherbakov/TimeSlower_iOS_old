@@ -68,7 +68,7 @@ class MotivationViewController: UIViewController {
     // MARK: - Private Functions
     
     private func descriptionForActivityBasis(activity: Activity) -> String {
-        guard let basis = Basis(rawValue: activity.basis!.integerValue) else { return "" }
+        guard let basis = Basis(rawValue: activity.basis.integerValue) else { return "" }
         switch basis {
         case .Random:
             return "\(activity.days.count) days a week"
@@ -84,16 +84,16 @@ class MotivationViewController: UIViewController {
     }
     
     private func setupStatsViewWithActivity(activity: Activity) {
-        let startTime = dateFormatter.stringFromDate(activity.timing!.startTime)
-        activityStatsView.setupWithStartTime(startTime, duration: activity.timing!.duration.shortDescription())
+        let startTime = dateFormatter.stringFromDate(activity.timing.startTime)
+        activityStatsView.setupWithStartTime(startTime, duration: activity.timing.duration.shortDescription())
     }
     
     // TODO: move to activity?
     private func motivationDescriptionForActivity(activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
-        let duration = activity.timing!.timeToSave.stringValue
+        let duration = activity.timing.timeToSave.stringValue
         let basis = descriptionForActivityBasis(activity)
-        let description = "cutting \(duration) minutes of \(activity.name!) \(basis) will save in your lifetime:".uppercaseString
+        let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercaseString
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .Center
@@ -108,7 +108,7 @@ class MotivationViewController: UIViewController {
 
         let text = descriptionText.string as NSString
         let durationRange = text.rangeOfString(duration)
-        let nameRange = text.rangeOfString(activity.name!.uppercaseString)
+        let nameRange = text.rangeOfString(activity.name.uppercaseString)
         let basisRange = text.rangeOfString(basis.uppercaseString)
         
         descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: durationRange)
@@ -121,8 +121,8 @@ class MotivationViewController: UIViewController {
     
     // TODO: move to activity?
     private func lifeStatsForActivity(activity: Activity) -> LifetimeStats {
-        let days = activity.profile!.numberOfDaysTillEndOfLifeSinceDate(NSDate())
-        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing!.timeToSave.integerValue, busyDays: activity.days.count)
+        let days = activity.profile.numberOfDaysTillEndOfLifeSinceDate(NSDate())
+        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing.timeToSave.integerValue, busyDays: activity.days.count)
         return LifetimeStats(withHours: hours)
     }
     

@@ -65,15 +65,15 @@ class StatsManageTest: XCTestCase {
     }
     
     func testUpdateStats() {
-        testActivity.stats!.updateStats()
+        testActivity.stats.updateStats()
 //        XCTAssertGreaterThan(testActivity.stats!.summHours.doubleValue, 2600, "Summ hours should be more than 2600")
 //        XCTAssertGreaterThan(testActivity.stats!.summDays.doubleValue, 100, "Summ days should be more than 100")
 //        XCTAssertGreaterThan(testActivity.stats!.summMonths.doubleValue, 3, "Summ months should be more than 3")
 //        XCTAssertGreaterThan(testActivity.stats!.summYears.doubleValue, 0.2, "Summ years should be more than 0.2")
-        XCTAssertLessThan(testActivity.stats!.summHours.doubleValue, 3000, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats!.summDays.doubleValue, 130, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats!.summMonths.doubleValue, 5, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats!.summYears.doubleValue, 0.5, "Summ hours must be less then 3000")
+        XCTAssertLessThan(testActivity.stats.summHours.doubleValue, 3000, "Summ hours must be less then 3000")
+        XCTAssertLessThan(testActivity.stats.summDays.doubleValue, 130, "Summ hours must be less then 3000")
+        XCTAssertLessThan(testActivity.stats.summMonths.doubleValue, 5, "Summ hours must be less then 3000")
+        XCTAssertLessThan(testActivity.stats.summYears.doubleValue, 0.5, "Summ hours must be less then 3000")
     }
 
     
@@ -82,23 +82,23 @@ class StatsManageTest: XCTestCase {
         let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
         
         // daily basis
-        var numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+        var numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 30, "Number of busy days for daily activity last month is 30")
-        numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 365, "Number of busy days for daily activity last year is 365")
 
         // weekend basis
         testActivity.basis = Activity.basisWithEnum(.Weekends)
-        numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 8, "Number of busy days for weekend activity last month is 30")
-        numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 106, "Number of busy days for weekend activity last year is 365")
         
         // workday basis
         testActivity.basis = Activity.basisWithEnum(.Workdays)
-        numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 22, "Number of busy days for Workdays activity last month is 30")
-        numberOfBusyDays = testActivity.stats!.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
         XCTAssertEqual(numberOfBusyDays, 266, "Number of busy days for Workdays activity last year is 365")
     }
     
@@ -107,8 +107,8 @@ class StatsManageTest: XCTestCase {
     //MARK: - - Lifetime
     
     func testFactSpentInLifetime() {
-        testActivity.stats!.averageSuccess = NSNumber(double: 70)
-        let timeSpentInFuture = testActivity.stats!.factTimingInLifetime()
+        testActivity.stats.averageSuccess = NSNumber(double: 70)
+        let timeSpentInFuture = testActivity.stats.factTimingInLifetime()
         XCTAssertGreaterThan(timeSpentInFuture!.hours, 1900, "Total days spendings should be more than 1900")
         XCTAssertGreaterThan(timeSpentInFuture!.days, 70, "Total days spendings should be more than 70")
         XCTAssertGreaterThan(timeSpentInFuture!.months, 1, "Total days spendings should be more than 1")
@@ -116,7 +116,7 @@ class StatsManageTest: XCTestCase {
     }
     
     func testTimePlannedTimingInLifeTime() {
-        let plannedTime = testActivity.stats!.plannedTimingInLifetime()
+        let plannedTime = testActivity.stats.plannedTimingInLifetime()
         XCTAssertGreaterThan(plannedTime!.hours, 2500, "Planned to save more than 2500 min")
         XCTAssertGreaterThan(plannedTime!.days, 100, "Planned to save 100 days")
         XCTAssertGreaterThan(plannedTime!.months, 3, "Planned to save more than 3 months")
@@ -172,7 +172,7 @@ class StatsManageTest: XCTestCase {
         let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
         testActivity.basis = Activity.basisWithEnum(.Weekends)
 //        testActivity.busyDays = Activity.defaultBusyDaysForBasis(testActivity.activityBasis())
-        let daysInPeriod = testActivity.stats!.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+        let daysInPeriod = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
         XCTAssertEqual(daysInPeriod, 8, "4 Saturdays and 4 Sundays")
     }
     
