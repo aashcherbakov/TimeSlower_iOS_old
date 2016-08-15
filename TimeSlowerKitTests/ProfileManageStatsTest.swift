@@ -24,6 +24,7 @@ class ProfileManageStatsTest: XCTestCase {
     var testActivityTiming: Timing!
     
     var testDateFormatter: NSDateFormatter!
+    var timeMachine: TimeMachine!
     
     //MARK: - Setup
     
@@ -41,6 +42,7 @@ class ProfileManageStatsTest: XCTestCase {
         testCoreDataStack.saveContext()
         
         testDateFormatter = testCoreDataStack.shortStyleDateFormatter()
+        timeMachine = TimeMachine()
     }
     
     override func tearDown() {
@@ -148,8 +150,6 @@ class ProfileManageStatsTest: XCTestCase {
         XCTAssertGreaterThan(totalTime.months, 3, "Number of months must be greater than 3")
         XCTAssertGreaterThan(totalTime.years, 0, "Number of years must be greater than 0")
     }
-
-    
     
     //MARK: - - Last year
     
@@ -181,14 +181,14 @@ class ProfileManageStatsTest: XCTestCase {
     
     func testDateBasedFetchRequestForLastYear() {
         createFakeResultsForLastYear()
-        let result = testActivity.stats.allResultsForPeriod(.LastYear)
+        let result = testActivity.allResultsForPeriod(.LastYear)
         XCTAssertEqual(result.count, 2, "Only 2 results for last year")
         XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }
     
     func testAllResultsForLastMonth() {
         createFakeResultsForLastMonth()
-        let result = testActivity.stats.allResultsForPeriod(.LastMonth)
+        let result = testActivity.allResultsForPeriod(.LastMonth)
         XCTAssertEqual(result.count, 2, "Only 2 results for last month")
         XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }
@@ -196,7 +196,7 @@ class ProfileManageStatsTest: XCTestCase {
     //MARK: - Test additionsl methods
     func createFakeResultsForLastYear() {
         testResult.date = "1/1/15"
-        let lastYearDate = LazyCalendar.startDateForPeriod(.LastYear, sinceDate: NSDate())
+        let lastYearDate = timeMachine.startDateForPeriod(.LastYear, sinceDate: NSDate())
         
         let tooOldResult = testCoreDataStack.fakeResultForActivity(testActivity)
         tooOldResult.date = "5/4/14"

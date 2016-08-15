@@ -62,7 +62,7 @@ class EditActivityBasisView: ObservableControl {
     override func setInitialValue(value: AnyObject?) {
         if let value = value as? [Int] {
             selectedValue = value
-            let basis = DateManager.basisFromDays(value)
+            let basis = Basis.basisFromDays(value)
             textFieldView.setText(basis.description())
             basisSelector.updateSegmentedIndexForBasis(basis)
             daySelector.displayValue(value)
@@ -127,7 +127,7 @@ class EditActivityBasisView: ObservableControl {
         if let newBasis = Basis(rawValue: index) where selectedBasis != newBasis {
             daySelector.selectedBasis = newBasis
             selectedBasis = newBasis
-            selectedValue = DateManager.daysFromBasis(newBasis)
+            selectedValue = Basis.daysFromBasis(newBasis)
             textFieldView.setText(newBasis.description())
         }
     }

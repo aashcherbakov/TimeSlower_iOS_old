@@ -171,7 +171,7 @@ internal class EditActivityVC: UIViewController {
     private func setupData() {
         if let activity = activity {
             selectedName = activity.name
-            selectedBasis = activityManager.daysIntegerRepresentation(activity.days as! Set<Day>)
+            selectedBasis = Day.daysIntegerRepresentation(activity.days as? Set<Day>)
             selectedStartTime = activity.timing.startTime
             selectedDuration = activity.timing.duration
             selectedNotifications = activity.notifications.boolValue

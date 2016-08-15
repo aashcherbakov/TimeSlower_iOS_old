@@ -137,7 +137,7 @@ class DaySelector: UIControl {
         
         button.selected = !button.selected
         let weekdays = weekdaysFromSelectedDays(selectedDays)
-        selectedBasis = DateManager.basisFromWeekdays(weekdays)
+        selectedBasis = Basis.basisFromWeekdays(weekdays)
         sendActionsForControlEvents(.ValueChanged)
     }
     

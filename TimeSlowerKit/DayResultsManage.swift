@@ -103,7 +103,7 @@ extension DayResults {
     }
     
     public class func lastWeekResultsForActivity(activity: Activity) -> [DayResults] {
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: Selector("compareDateRepresentationOfString:"))
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: #selector(NSString.compareDateRepresentationOfString(_:)))
         var sortedArray = activity.results!.sortedArrayUsingDescriptors([sortDescriptor])
         if sortedArray.count > 7 {
             if sortedArray.count > 0 {

@@ -9,16 +9,21 @@
 import XCTest
 @testable import TimeSlowerKit
 
-class WeekdayTests: XCTestCase {
+class WeekdayTests: CoreDataBaseTest {
 
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    func test_createFromDate() {
+        let tuesday = TestHelper.tuesdayApril26()
+        let weekday = Weekday.createFromDate(tuesday)
+        XCTAssertEqual(weekday.rawValue, 2, "it should return third weekdayday")
+        XCTAssertEqual(weekday.shortName, "Tue", "it should be Tuesday")
     }
 
     func test_dateManagerReturnsDayName_fromWeekday() {
@@ -85,4 +90,39 @@ class WeekdayTests: XCTestCase {
                        "it should be 5 days in array")
     }
     
+    func test_weekdaysFromSetOfDays() {
+        let weekdays = Set(Weekday.weekdaysFromSetOfDays(testActivity.days as! Set<Day>))
+        let expectedWeekdays = Set(Weekday.weekdaysForBasis(.Daily))
+        XCTAssertEqual(weekdays, expectedWeekdays, "it should have all 7 days there")
+        XCTAssertEqual(weekdays.count, expectedWeekdays.count)
+    }
+    
+    // MARK: - closest day
+    
+    func test_closestDayToSunday() {
+        let sunday = Weekday(rawValue: 0)!
+        let saturday = Weekday(rawValue: 6)!
+        let friday = Weekday(rawValue: 5)!
+        let days = [saturday, friday]
+        let closestDay = Weekday.closestDay(days, toDay: sunday)
+        XCTAssertEqual(closestDay, friday)
+    }
+    
+    func test_closestDayToSaturday() {
+        let saturday = Weekday(rawValue: 6)!
+        let sunday = Weekday(rawValue: 0)!
+        let friday = Weekday(rawValue: 5)!
+        let days = [sunday, friday]
+        let closestDay = Weekday.closestDay(days, toDay: saturday)
+        XCTAssertEqual(closestDay, sunday)
+    }
+    
+    func test_closestDayToThursday() {
+        let thursday = Weekday(rawValue: 4)!
+        let monday = Weekday(rawValue: 1)!
+        let tuesday = Weekday(rawValue: 2)!
+        let days = [monday, tuesday]
+        let closestDay = Weekday.closestDay(days, toDay: thursday)
+        XCTAssertEqual(closestDay, monday)
+    }
 }

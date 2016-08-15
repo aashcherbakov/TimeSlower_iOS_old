@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TimeCalculator {
+public struct TimeCalculator {
     
     public init() { }
     

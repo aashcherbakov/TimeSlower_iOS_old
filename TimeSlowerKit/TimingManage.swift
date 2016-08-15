@@ -120,31 +120,38 @@ extension Timing {
         }
     }
     
+    /**
+     Next date in activity schedule
+     
+     - returns: NSDate
+     */
     public func nextActionDate() -> NSDate {
-        switch activity.activityBasis() {
-        case .Daily: return nextDayFromStartTime()
-        case .Weekends: return nextWeekendDayFromDate(NSDate())
-        case .Workdays: return nextWorkdayFromDate(NSDate())
-        case .Random: return NSDate()
+        guard let days = activity.days as? Set<Day> else {
+            fatalError("Activity store non-Day type in .days property")
         }
+        
+        let currentWeekday = Weekday.createFromDate(NSDate())
+        let busyWeekdays = Weekday.weekdaysFromSetOfDays(days)
+        let nextClosestDay = Weekday.closestDay(busyWeekdays, toDay: currentWeekday)
+        let nextDate = TimeMachine().nextOccuranceOfWeekday(nextClosestDay, fromDate: NSDate())
+        let actionTimeInDate = activityStartTime(startTime, inDate: nextDate)
+        return actionTimeInDate
     }
     
-    public func nextWeekendDayFromDate(date: NSDate) -> NSDate {
-        let dayName = LazyCalendar.dayNameForDate(date)
-        if dayName == .Saturday {
-            return nextDayFromStartTime()
-        } else {
-            return LazyCalendar.nextDayWithName(.Saturday, fromDate: date)
-        }
-    }
-    
-    public func nextWorkdayFromDate(date: NSDate) -> NSDate {
-        let dayName = LazyCalendar.dayNameForDate(date)
-        if dayName == .Friday || dayName == .Saturday {
-            return LazyCalendar.nextDayWithName(.Monday, fromDate: date)
-        } else {
-            return nextDayFromStartTime()
-        }
+    /**
+     Merges given start time's time in a day and next date's day, month and year
+     
+     - parameter startTime: NSDate for activity start time
+     - parameter nextDate:  NSDate where activity should fire next
+     
+     - returns: NSDate of start time
+     */
+    public func activityStartTime(startTime: NSDate, inDate nextDate: NSDate) -> NSDate {
+        let startTimeComponents = NSCalendar.currentCalendar().components([.Minute, .Hour], fromDate: startTime)
+        let nextDateComponents = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Minute, .Hour], fromDate: nextDate)
+        nextDateComponents.hour = startTimeComponents.hour
+        nextDateComponents.minute = startTimeComponents.minute
+        return NSCalendar.currentCalendar().dateFromComponents(nextDateComponents)!
     }
     
     
@@ -156,11 +163,4 @@ extension Timing {
     func nextDayFromStartTime() -> NSDate {
         return NSDate(timeInterval: 60*60*24, sinceDate: updatedStartTime())
     }
-    
-    
-    
-    
-    
-    
-    
 }

@@ -116,7 +116,7 @@ class ActivityManageTest: XCTestCase {
     }
     
     func testBasisDescription() {
-        XCTAssertEqual(testActivity.activityBasisDescription(), "Daily", "Basis should be spelled as Daily")
+        XCTAssertEqual(testActivity.activityBasis().description(), "Every single day", "Basis should be spelled as Daily")
     }
 
     

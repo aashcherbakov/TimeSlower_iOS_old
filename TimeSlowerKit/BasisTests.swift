@@ -1,34 +1,26 @@
 //
-//  DayTests.swift
+//  BasisTests.swift
 //  TimeSlower
 //
-//  Created by Oleksandr Shcherbakov on 4/28/16.
+//  Created by Oleksandr Shcherbakov on 8/14/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
 import XCTest
-@testable import TimeSlowerKit
+import TimeSlowerKit
 
-class DateManagerTests: XCTestCase {
-    
-    var tuesday: NSDate!
-    
+class BasisTests: XCTestCase {
+
     override func setUp() {
         super.setUp()
-        tuesday = TestHelper.tuesdayApril26()
-        
+        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        tuesday = nil
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func test_dateManagerReturnsDayName_forDayNumber() {
-        XCTAssertEqual(DateManager.shortDayNameForDate(tuesday),
-                       "Tue", "it should be equal to Tue")
-    }
-    
+
     // MARK: - basisFromWeekdays()
     
     func test_basisFromWeekends() {
@@ -36,11 +28,11 @@ class DateManagerTests: XCTestCase {
         let days: [Weekday] = [.First, .Seventh]
         
         // when
-        let basis = DateManager.basisFromWeekdays(days)
+        let basis = Basis.basisFromWeekdays(days)
         
         // then
         XCTAssertEqual(basis, Basis.Weekends,
-                           "it should be weekends basis")
+                       "it should be weekends basis")
     }
     
     func test_basisFromWorkdays() {
@@ -48,7 +40,7 @@ class DateManagerTests: XCTestCase {
         let days: [Weekday] = [.Second, .Third, .Forth, .Fifth, .Sixth]
         
         // when
-        let basis = DateManager.basisFromWeekdays(days)
+        let basis = Basis.basisFromWeekdays(days)
         
         // then
         XCTAssertEqual(basis, Basis.Workdays,
@@ -60,7 +52,7 @@ class DateManagerTests: XCTestCase {
         let days: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
         
         // when
-        let basis = DateManager.basisFromWeekdays(days)
+        let basis = Basis.basisFromWeekdays(days)
         
         // then
         XCTAssertEqual(basis, Basis.Daily,
@@ -72,10 +64,12 @@ class DateManagerTests: XCTestCase {
         let days: [Weekday] = [.First, .Sixth, .Seventh]
         
         // when
-        let basis = DateManager.basisFromWeekdays(days)
+        let basis = Basis.basisFromWeekdays(days)
         
         // then
         XCTAssertEqual(basis, Basis.Random,
                        "it should be weekends basis")
     }
+
+
 }

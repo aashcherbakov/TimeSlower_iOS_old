@@ -46,13 +46,18 @@ public class TestCoreDataStack: CoreDataStack {
     public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: Basis) -> Activity {
         let fakeActivity = Activity.newActivityForProfile(profile, ofType: type)
         fakeActivity.basis = Activity.basisWithEnum(basis)
-//        fakeActivity.busyDays = Activity.defaultBusyDaysForBasis(Basis(rawValue: fakeActivity.basis.integerValue)!)
         fakeActivity.name = "Morning shower"
         fakeActivity.timing = fakeTimingForActivity(fakeActivity)
+        
+        let busyDays = Weekday.weekdaysForBasis(basis)
+        let days = NSMutableSet()
+        for day in busyDays {
+            days.addObject(Day.createFromWeekday(day, forActivity: fakeActivity)!)
+        }
+        fakeActivity.days = days.copy() as! NSSet
+    
         return fakeActivity
     }
-    
-    
     
     public func fakeTimingForActivity(activity: Activity) -> Timing {
         let newTiming = Timing.newTimingForActivity(activity: activity)

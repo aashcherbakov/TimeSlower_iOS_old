@@ -61,7 +61,7 @@ extension Stats {
         }
     }
     
-    
+
     // Get total hours spent or saved on activity depending on basis
     public func updateStats() {
         let daysLeft = activity.profile.numberOfDaysTillEndOfLifeSinceDate(NSDate())
@@ -77,25 +77,27 @@ extension Stats {
     }
     
     /// Returns total number of days when activity was "on" based on it's basis
-    public func busyDaysForPeriod(period: LazyCalendar.Period, sinceDate date: NSDate) -> Int {
+    public func busyDaysForPeriod(period: TimeMachine.Period, sinceDate date: NSDate) -> Int {
         var days = 0
+        let calendar = TimeMachine()
         
         if period == .Today { days = 1 }
         
         if period == .LastYear && activity.activityBasis() == .Daily {
-            return LazyCalendar.numberOfDaysInPeriod(period, fromDate: date)
+            return calendar.numberOfDaysInPeriod(period, fromDate: date)
         }
         
         if period == .Lifetime {
             return busyDaysInLifetimeSinceDate(date)
         }
         
-        let dayNames = Activity.dayNamesForBasis(activity.activityBasis())
-        for weekday in dayNames {
-            if let currentDayName = LazyCalendar.DayName(rawValue: weekday) {
-                days += LazyCalendar.numberOfWeekdaysNamed(currentDayName, forPeriod: period, sinceDate: date)
+        if let dayNames = activity.days as? Set<Day> {
+            for weekday in dayNames {
+//                days += calendar.numberOfWeekdaysNamed(currentDayName, forPeriod: period, sinceDate: date)
             }
         }
+        
+        
         return days
     }
     
@@ -108,8 +110,6 @@ extension Stats {
         case .Weekends: return totalDays / 7 * 2
         case .Random: return totalDays
         }
-        
-        return 0
     }
     
     
@@ -147,12 +147,12 @@ extension Stats {
     }
     
     /// Cannot be tested in InMemoryStoreType
-    public func fastFactSavedForPeriod(period: LazyCalendar.Period) -> Double {
+    public func fastFactSavedForPeriod(period: TimeMachine.Period) -> Double {
         var summSavedTimeLastYear = 0.0
         
         let fetchRequest = NSFetchRequest(entityName: "DayResults")
         fetchRequest.resultType = .DictionaryResultType
-        fetchRequest.predicate = allResultsPredicateForPeriod(period)
+        fetchRequest.predicate = activity.allResultsPredicateForPeriod(period)
         fetchRequest.propertiesToFetch = propertiesToFetch()
         
         do {
@@ -164,15 +164,7 @@ extension Stats {
         return summSavedTimeLastYear
     }
     
-    private func allResultsPredicateForPeriod(period: LazyCalendar.Period) -> NSPredicate {        
-        let timePredicate = NSPredicate(format: "raughDate > %@", LazyCalendar.startDateForPeriod(period, sinceDate: NSDate()))
-        let namePredicate = NSPredicate(format: "activity.name == %@", activity.name)
-        if period != .Lifetime {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
-        } else {
-            return namePredicate
-        }
-    }
+
     
     private func propertiesToFetch() -> [NSExpressionDescription] {
         let summExpressionDesc = NSExpressionDescription()
@@ -190,42 +182,6 @@ extension Stats {
         return [successToCount]
     }
     
-    //TODO: Move to Acitivity
-    /// Workaround method for UnitTesting
-    public func allResultsForPeriod(period: LazyCalendar.Period) -> [DayResults] {
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        fetchRequest.predicate = allResultsPredicateForPeriod(period)
-        
-        let results = try! activity.managedObjectContext!.executeFetchRequest(fetchRequest) as! [DayResults]
-        
-        return results
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }

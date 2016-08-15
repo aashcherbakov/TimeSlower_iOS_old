@@ -21,6 +21,7 @@ class TimingManageTest: XCTestCase {
     var testActivityStats: Stats!
     var testActivityTiming: Timing!
     var standartDateFormatter: NSDateFormatter!
+    var timeMachine: TimeMachine!
     
     override func setUp() {
         super.setUp()
@@ -37,6 +38,7 @@ class TimingManageTest: XCTestCase {
         
         testActivityTiming = testActivity.timing
         testActivityStats = testActivity.stats
+        timeMachine = TimeMachine()
     }
     
     override func tearDown() {
@@ -170,7 +172,9 @@ class TimingManageTest: XCTestCase {
         XCTAssertEqual(testActivityTiming.updatedAlarmTime(), testActivityTiming.updatedFinishTime(), "For goal alarm time is finishtime")
     }
     
-    func disabled_testNextActionTime() {
+    // MARK: - Next Action Time
+    
+    func test_nextActionTime() {
         // is going now -> finishTime
         testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(-60*60)
         testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(60*60)
@@ -210,7 +214,7 @@ class TimingManageTest: XCTestCase {
 //        testActivity.finishWithResult()
 //        
 //        var correctNextActionDate: NSDate!
-//        let dayName = LazyCalendar.correctWeekdayFromDate(NSDate())
+//        let dayName = timeMachine.correctWeekdayFromDate(NSDate())
 //        if dayName == "Fri" {
 //            correctNextActionDate = NSDate(timeInterval: 60*60*24*3, sinceDate: testActivity.updatedStartTime())
 //        } else if dayName == "Sat" {
@@ -229,13 +233,13 @@ class TimingManageTest: XCTestCase {
         
         let referenceDate = NSDate()
         var correctNextActionDate: NSDate!
-        let dayName = LazyCalendar.correctWeekdayFromDate(NSDate())
+        let dayName = timeMachine.correctWeekdayFromDate(NSDate())
         if dayName == "Sat" {
             correctNextActionDate = NSDate(timeInterval: 60*60*24, sinceDate: testActivity.updatedStartTime())
         } else if dayName == "Sun" {
             correctNextActionDate = NSDate(timeInterval: 60*60*24*6, sinceDate: testActivity.updatedStartTime())
         } else {
-            correctNextActionDate = testActivity.timing.nextWeekendDayFromDate(referenceDate)
+//            correctNextActionDate = testActivity.timing.nextWeekendDayFromDate(referenceDate)
         }
         let dateFormatter = DayResults.standardDateFormatter()
         let nextActionDate = dateFormatter.stringFromDate(testActivity.timing.nextActionDate())
@@ -245,11 +249,18 @@ class TimingManageTest: XCTestCase {
     
     func testNextWeekendDateFromDate() {
         let startDate = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/7/15, 10:15 AM")
-        _ = LazyCalendar.correctWeekdayFromDate(startDate!)
+        _ = timeMachine.correctWeekdayFromDate(startDate!)
         
-        let nextSaturday = testActivity.timing.nextWeekendDayFromDate(startDate!)
+//        let nextSaturday = testActivity.timing.nextWeekendDayFromDate(startDate!)
         let correctNextSaturday = NSDate(timeInterval: 60*60*24*4, sinceDate: startDate!)
-        XCTAssertEqual(nextSaturday, correctNextSaturday, "Next saturday date is wrong")
+//        XCTAssertEqual(nextSaturday, correctNextSaturday, "Next saturday date is wrong")
+    }
+    
+    func test_activityStartTimeInDate() {
+        let startDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("7/7/15, 10:15 AM")!
+        let nextActionDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("9/8/16, 00:00 AM")!
+        let expectedDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("9/8/16, 10:15 AM")!
+        XCTAssertEqual(testActivity.timing.activityStartTime(startDate, inDate: nextActionDate), expectedDate, "it should be 10:15 on August 9th 2016")
     }
     
     //MARK: - Helper functions

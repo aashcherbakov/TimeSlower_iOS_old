@@ -25,3 +25,6 @@ let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
 let kProfileStoryboard = "Profile"
 let kActivityStoryboard = "Activities"
 
+let kNumberOfDaysInWeek = 7
+
+

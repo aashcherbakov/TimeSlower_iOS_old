@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension NSString {
-        func compareDateRepresentationOfString(otherString: String) -> NSComparisonResult {
+public extension NSString {
+    @objc public func compareDateRepresentationOfString(otherString: String) -> NSComparisonResult {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.dateStyle = .ShortStyle

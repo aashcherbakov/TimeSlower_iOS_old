@@ -31,27 +31,29 @@ extension Profile {
     }
     
     public func activitiesForDate(date: NSDate) -> [Activity] {
-        let dayOfWeek = LazyCalendar.DayName(rawValue: LazyCalendar.correctWeekdayFromDate(date))
-        return sortActivitiesByTime(activitiesForWeekday(dayOfWeek!))
+//        let calendar = TimeMachine(withProfile: self)
+//        let dayOfWeek = TimeMachine.DayName(rawValue: calendar.correctWeekdayFromDate(date))
+//        return sortActivitiesByTime(activitiesForWeekday(dayOfWeek!))
+        return []
     }
     
     
     
-    func activitiesForWeekday(weekday: LazyCalendar.DayName) -> [Activity] {
+    func activitiesForWeekday(weekday: Weekday) -> [Activity] {
         var resultArray = [Activity]()
-        if weekday == .Saturday || weekday == .Sunday {
-            for activity in allActivities() {
-                if activity.activityBasis() == .Daily || activity.activityBasis() == .Weekends {
-                    resultArray.append(activity)
-                }
-            }
-        } else if weekday != .Saturday && weekday != .Sunday {
-            for activity in allActivities() {
-                if activity.activityBasis() == .Daily || activity.activityBasis() == .Workdays {
-                    resultArray.append(activity)
-                }
-            }
-        }
+//        if weekday == .Saturday || weekday == .Sunday {
+//            for activity in allActivities() {
+//                if activity.activityBasis() == .Daily || activity.activityBasis() == .Weekends {
+//                    resultArray.append(activity)
+//                }
+//            }
+//        } else if weekday != .Saturday && weekday != .Sunday {
+//            for activity in allActivities() {
+//                if activity.activityBasis() == .Daily || activity.activityBasis() == .Workdays {
+//                    resultArray.append(activity)
+//                }
+//            }
+//        }
         return resultArray
     }
     

@@ -34,14 +34,14 @@ class CircleStatsView: UIView {
     }
     
     func displayProgressForProfile(profile: Profile?) {
-        guard let profile = profile else {
-            fatalError("No profile found, database programming error")
-        }
+//        guard let profile = profile else {
+//            fatalError("No profile found, database programming error")
+//        }
         
         setupCircleDesign()
         
         
-        setupDataForProfile(profile)
+//        setupDataForProfile(profile)
     }
     
     // MARK: - Private Functions

@@ -50,7 +50,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     
     func setup() {
         activityNameLabel.text = activity.name
-        activityBasisLabel.text = activity.activityBasisDescription()
+        activityBasisLabel.text = activity.activityBasis().description()
         timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
         
         let format = ".0"
@@ -193,7 +193,8 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
             for _ in 0 ..< vacantDaysLeft {
                 components.day -= 1
                 let nextDate = NSCalendar.currentCalendar().dateFromComponents(components)
-                lastWeekDayNames.insert(LazyCalendar.shortDayNameForDate(nextDate!), atIndex: 0)
+                let calendar = TimeMachine()
+                lastWeekDayNames.insert(calendar.shortDayNameForDate(nextDate!), atIndex: 0)
             }
         }
     }

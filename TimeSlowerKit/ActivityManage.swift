@@ -9,67 +9,7 @@
 import Foundation
 import CoreData
 
-public enum ActivityType: Int {
-    case Routine
-    case Goal
-}
-
-public enum Basis: Int {
-    case Daily
-    case Workdays
-    case Weekends
-    case Random
-    
-    public func description() -> String {
-        switch self {
-        case .Daily: return "Every single day"
-        case .Workdays: return "Monday - Friday"
-        case .Weekends: return "Saturday and Sunday"
-        case .Random: return "Random days"
-        }
-    }
-    
-    /// Number of days basis ocupies in a week. Used to convert days to basis and vise versa
-    public var numberOfDaysInWeek: Int {
-        switch self {
-        case .Daily: return 7
-        case .Workdays: return 5
-        case .Weekends: return 2
-        case .Random: return 0
-        }
-    }
-}
-
 extension Activity {
-    
-    public class func defaultBusyDaysForBasis(basis: Basis) -> String {
-        switch basis {
-        case .Daily: return "Mon Tue Wed Thu Fri Sat Sun"
-        case .Workdays: return "Mon Tue Wed Thu Fri"
-        case .Weekends: return "Sat Sun"
-        case .Random: return ""
-        }
-    }
-    
-    public class func dayNamesForBasis(basis: Basis) -> [String] {
-        return defaultBusyDaysForBasis(basis).componentsSeparatedByString(" ")
-    }
-    
-    public class func newActivityForProfile(userProfile: Profile, ofType: ActivityType) -> Activity {
-        let entity = NSEntityDescription.entityForName("Activity", inManagedObjectContext: userProfile.managedObjectContext!)
-        let activity = Activity(entity: entity!, insertIntoManagedObjectContext: userProfile.managedObjectContext)
-        activity.type = Activity.typeWithEnum(ofType)
-        activity.profile = userProfile
-        activity.stats = Stats.newStatsForActivity(activity: activity)
-        activity.timing = Timing.newTimingForActivity(activity: activity)
-        
-        var error: NSError?
-        do {
-            try userProfile.managedObjectContext!.save()
-        } catch let error1 as NSError { error = error1; print("Could not save activity: \(error)") }
-        
-        return activity
-    }
     
     public func userInfoForActivity() -> [NSObject : AnyObject] {
         return ["activityName" : name]
@@ -102,17 +42,6 @@ extension Activity {
         return Basis(rawValue: self.basis.integerValue)!
     }
     
-    public func activityBasisDescription() -> String {
-        var stringBasis = ""
-        switch activityBasis() {
-        case .Daily: stringBasis = "Daily"
-        case .Workdays: stringBasis = "Workdays"
-        case .Weekends: stringBasis = "Weekends"
-        case .Random: stringBasis = "Random"
-        }
-        return stringBasis
-    }
-    
     // MARK: - Results for activity
     public func finishWithResult() {
         DayResults.newResultWithDate(NSDate(), forActivity: self)
@@ -121,7 +50,6 @@ extension Activity {
     public func lastWeekResults() -> [DayResults] {
         return DayResults.lastWeekResultsForActivity(self)
     }
-    
     
     //MARK: - Timing convenience
     public func isPassedDueForToday() -> Bool { return timing.isPassedDueForToday() }
@@ -152,9 +80,8 @@ extension Activity {
         return isRoutine() ? "There is no time lest to save on this activity. Try to finish earlier next time." : "Time's up for today! You can finish now"
     }
     
-    
     // MARK: - Comparing activities
-    func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
+    public func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
         let thisDate = timing.nextActionTime()
         let otherDate = otherActivity.timing.nextActionTime()
         return thisDate.compare(otherDate)

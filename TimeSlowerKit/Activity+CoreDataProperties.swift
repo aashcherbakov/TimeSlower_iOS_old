@@ -14,7 +14,7 @@ import CoreData
 
 extension Activity {
 
-    @NSManaged public var basis: NSNumber
+    @NSManaged public var basis: NSNumber 
     @NSManaged public var name: String
     @NSManaged public var type: NSNumber
     @NSManaged public var days: NSSet

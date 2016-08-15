@@ -16,8 +16,8 @@ public struct ActivityManager {
         
         let activity = Activity.newActivityForProfile(profile, ofType: type)
         activity.name = name
-        activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = DateManager.basisFromDays(selectedDays).rawValue
+        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
+        activity.basis = Basis.basisFromDays(selectedDays).rawValue
         activity.timing.startTime = startTime
         activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
         activity.timing.duration = duration
@@ -33,8 +33,8 @@ public struct ActivityManager {
     public func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
         
         activity.name = name
-        activity.days = dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = DateManager.basisFromDays(selectedDays).rawValue
+        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
+        activity.basis = Basis.basisFromDays(selectedDays).rawValue
         activity.timing.startTime = startTime
         activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
         activity.timing.duration = duration
@@ -45,31 +45,9 @@ public struct ActivityManager {
         Activity.saveContext(activity.managedObjectContext)
     }
     
-    public func daysIntegerRepresentation(days: Set<Day>) -> [Int] {
-        var integers = [Int]()
-        for day in days {
-            integers.append(day.number.integerValue)
-        }
-        
-        return integers
-    }
+    // MARK: - Private Methods
     
     private func updateFinishTimeWithDuration(duration: ActivityDuration, fromStartTime startTime: NSDate) -> NSDate {
         return startTime.dateByAddingTimeInterval(duration.seconds())
     }
-    
-    private func dayEntitiesFromSelectedDays(selectedDays: [Int], forActivity activity: Activity) -> Set<Day> {
-        var daySet = Set<Day>()
-        for day in selectedDays {
-            if let weekday = Weekday(rawValue: day),
-                newDay = Day.createFromWeekday(weekday, forActivity: activity) {
-                
-                daySet.insert(newDay)
-            }
-        }
-        
-        return daySet
-    }
-    
-    
 }

@@ -17,9 +17,7 @@ class MotivationViewController: UIViewController {
     @IBOutlet weak var motivationControl: MotivationControl!
     @IBOutlet weak var activityStatsView: MotivationStatsView!
     private(set) var activity: Activity?
-    lazy var dateFormatter: NSDateFormatter = {
-        return DateManager.sharedShortDateFormatter()
-    }()
+    private let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         if let navigationController = navigationController {
@@ -51,7 +49,7 @@ class MotivationViewController: UIViewController {
         guard let activity = activity else { return }
         
         activityNameLabel.text = activity.name
-        activityBasisLabel.text = activity.activityBasisDescription()
+        activityBasisLabel.text = activity.activityBasis().description()
         
         summaryLabel.attributedText = motivationDescriptionForActivity(activity)
         
