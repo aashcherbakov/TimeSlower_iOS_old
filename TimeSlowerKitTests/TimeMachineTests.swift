@@ -18,7 +18,6 @@ class TimeMachineTests: XCTestCase {
     override func setUp() {
         super.setUp()
         shortDateFromatter = StaticDateFormatter.shortDateAndTimeFormatter
-        
         timeMachine = TimeMachine()
     }
     
@@ -89,16 +88,25 @@ class TimeMachineTests: XCTestCase {
         XCTAssertEqual(nextThursday, correctNextThursday!, "Next Thursday must be 18th")
     }
     
+    // MARK: - End Date
     
+    func test_startDateForPeriod() {
+        let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
+        let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
+        let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
 
-    func test_endDateForPeriod() {
+        XCTAssertEqual(timeMachine.startDateForPeriod(.Today, sinceDate: date), date)
+        XCTAssertEqual(timeMachine.startDateForPeriod(.LastMonth, sinceDate: date), monthBeforDate)
+        XCTAssertEqual(timeMachine.startDateForPeriod(.LastYear, sinceDate: date), yearBeforeDate)
+    }
+
+    func test_numberOfDatesInPeriod() {
         let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
         let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
         let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
         
-        XCTAssertEqual(timeMachine.endDateForPeriod(.Today, sinceDate: date), date)
-        XCTAssertEqual(timeMachine.endDateForPeriod(.LastMonth, sinceDate: date), monthBeforDate)
-        XCTAssertEqual(timeMachine.endDateForPeriod(.LastYear, sinceDate: date), yearBeforeDate)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.Today, fromDate: date), 0)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastMonth, fromDate: monthBeforDate), 31)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastYear, fromDate: yearBeforeDate), 365)
     }
-
 }

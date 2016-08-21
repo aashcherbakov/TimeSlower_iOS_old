@@ -29,7 +29,13 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     
     var countdownTimer: MZTimerLabel!
-    var profile: Profile! { didSet { profileStats = profile.timeStatsForPeriod(.Lifetime) } }
+    var profile: Profile! {
+        didSet {
+            // TODO: overall stats
+//            profileStats = profile.timeStatsForPeriod(.Lifetime)
+        }
+    }
+    
     var profileStats: Profile.DailyStats!
 
     

@@ -38,7 +38,7 @@ public class Activity: NSManagedObject, Persistable {
     }
     
     /// Workaround method for UnitTesting
-    public func allResultsForPeriod(period: TimeMachine.Period) -> [DayResults] {
+    public func allResultsForPeriod(period: PastPeriod) -> [DayResults] {
         let fetchRequest = NSFetchRequest(entityName: "DayResults")
         fetchRequest.predicate = allResultsPredicateForPeriod(period)
         
@@ -47,14 +47,11 @@ public class Activity: NSManagedObject, Persistable {
         return results
     }
     
-    public func allResultsPredicateForPeriod(period: TimeMachine.Period) -> NSPredicate {
+    public func allResultsPredicateForPeriod(period: PastPeriod) -> NSPredicate {
         let calendar = TimeMachine()
         let timePredicate = NSPredicate(format: "raughDate > %@", calendar.startDateForPeriod(period, sinceDate: NSDate()))
         let namePredicate = NSPredicate(format: "activity.name == %@", name)
-        if period != .Lifetime {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
-        } else {
-            return namePredicate
-        }
+        
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
     }
 }

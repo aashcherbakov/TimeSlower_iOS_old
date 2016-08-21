@@ -24,7 +24,7 @@ class CircleStatsVC: UIViewController {
 
     var delegate: CircleStatsDelegate!
     var profile: Profile!
-    var period: TimeMachine.Period!
+    var period: PastPeriod!
     var pageIndex: Int!
     
     @IBOutlet weak var circleProgress: CircleProgress! {

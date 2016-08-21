@@ -14,25 +14,13 @@ import Foundation
 public struct TimeMachine {
     
     private let dateFormatter = StaticDateFormatter.self
+    private let calendar: NSCalendar
     
-    public init() { }
-    
-    // rename to PastPeriod
-    public enum Period: Int {
-        case Today
-        case LastMonth
-        case LastYear
-        case Lifetime
-        
-        public func stringForPeriod(period: Period) -> String {
-            switch period {
-            case .Today: return "Today"
-            case .LastMonth: return "Last month"
-            case .LastYear: return "Last year"
-            case .Lifetime: return "Lifetime"
-            }
-        }
+    public init(calendar: NSCalendar = NSCalendar.currentCalendar()) {
+        self.calendar = calendar
     }
+    
+
     
     /**
      Finds a date of next specified weekday closest to given date.
@@ -49,47 +37,38 @@ public struct TimeMachine {
         return NSDate(timeInterval: timeIntervalToAdd, sinceDate: date)
     }
     
-    
-    public func startDateForPeriod(period: Period, sinceDate date: NSDate) -> NSDate {
-        let componentsFromToday = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: date)
+    /**
+     Method to retrieve an NSDate in a past for specified period
+     
+     - parameter period: period in the past
+     - parameter date:   starting date
+     
+     - returns: NSDate N days before given date
+     */
+    public func startDateForPeriod(period: PastPeriod, sinceDate date: NSDate) -> NSDate {
+        let componentsFromToday = calendar.components([.Year, .Month, .Day, .Hour, .Minute], fromDate: date)
+        
         switch period {
         case .Today: break
         case .LastMonth: componentsFromToday.month = componentsFromToday.month - 1
         case .LastYear: componentsFromToday.year = componentsFromToday.year - 1
-        case .Lifetime: break
         }
         
-        return NSCalendar.currentCalendar().dateFromComponents(componentsFromToday)!
+        return calendar.dateFromComponents(componentsFromToday)!
     }
     
-    // refactor direct call to Profile
-    public func numberOfDaysInPeriod(period: Period, fromDate date: NSDate) -> Int {
+    /**
+     Returns number of days in given period since passed date
+     
+     - parameter period: period in the past
+     - parameter date:   starting date
+     
+     - returns: Int with number of days
+     */
+    public func numberOfDaysInPeriod(period: PastPeriod, fromDate date: NSDate) -> Int {
         let startDate = startDateForPeriod(period, sinceDate: date)
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: date, toDate: startDate, options: [])
-        return (period == .Lifetime) ? Profile.fetchProfile()!.numberOfDaysTillEndOfLifeSinceDate(date) : abs(components.day)
-    }
-    
-    public func numberOfWeekdaysInPeriod(period: Period, fromDate date: NSDate) -> Int {
-        let startDate = startDateForPeriod(period, sinceDate: date)
-        let endDate = endDateForPeriod(period, sinceDate: date)
-        let components = NSCalendar.currentCalendar().components(.Day, fromDate: startDate, toDate: endDate, options: [])
-        return components.day
-    }
-    
-    public func endDateForPeriod(period: Period, sinceDate date: NSDate) -> NSDate {
-        switch period {
-        case .Today:
-            return date
-        case .LastMonth:
-            return NSDate(timeInterval: -60*60*24*30, sinceDate: date)
-        case .LastYear:
-            let components = NSCalendar.currentCalendar().components([.Hour, .Minute, .Second, .Day, .Month, .Year], fromDate: date)
-            components.year -= 1
-            return NSCalendar.currentCalendar().dateFromComponents(components)!
-        case .Lifetime:
-            // TODO: UGLYNESS! remove to hell when it's clear what the fuck is this for anyway.
-            return CoreDataStack.sharedInstance.fetchProfile()!.dateOfApproximateLifeEnd()
-        }
+        let components = calendar.components(NSCalendarUnit.Day, fromDate: date, toDate: startDate, options: [])
+        return abs(components.day)
     }
     
     // MARK: - Private Methods

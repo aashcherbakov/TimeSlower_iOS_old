@@ -77,7 +77,7 @@ extension Stats {
     }
     
     /// Returns total number of days when activity was "on" based on it's basis
-    public func busyDaysForPeriod(period: TimeMachine.Period, sinceDate date: NSDate) -> Int {
+    public func busyDaysForPeriod(period: PastPeriod, sinceDate date: NSDate) -> Int {
         var days = 0
         let calendar = TimeMachine()
         
@@ -85,10 +85,6 @@ extension Stats {
         
         if period == .LastYear && activity.activityBasis() == .Daily {
             return calendar.numberOfDaysInPeriod(period, fromDate: date)
-        }
-        
-        if period == .Lifetime {
-            return busyDaysInLifetimeSinceDate(date)
         }
         
         if let dayNames = activity.days as? Set<Day> {
@@ -147,7 +143,7 @@ extension Stats {
     }
     
     /// Cannot be tested in InMemoryStoreType
-    public func fastFactSavedForPeriod(period: TimeMachine.Period) -> Double {
+    public func fastFactSavedForPeriod(period: PastPeriod) -> Double {
         var summSavedTimeLastYear = 0.0
         
         let fetchRequest = NSFetchRequest(entityName: "DayResults")

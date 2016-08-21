@@ -136,7 +136,7 @@ extension Profile {
     
     //TODO: move to profile
     /// Returns $0 - saved, $1 - spent
-    public func factTimingForPeriod(period: TimeMachine.Period) -> (saved: Double, spent: Double)? {
+    public func factTimingForPeriod(period: PastPeriod) -> (saved: Double, spent: Double)? {
 
         
         var summSaved = 0.0
@@ -156,7 +156,7 @@ extension Profile {
     
     //TODO: move to profile
     /// Returns $0 - saved, $1 - spent in minutes
-    public func plannedTimingInPeriod(period: TimeMachine.Period, sinceDate date: NSDate) -> (save: Double, spend: Double)? {
+    public func plannedTimingInPeriod(period: PastPeriod, sinceDate date: NSDate) -> (save: Double, spend: Double)? {
         var toSave = 0.0;
         var toSpend = 0.0;
         
@@ -171,7 +171,7 @@ extension Profile {
         return (abs(toSave), abs(toSpend)) // minutes
     }
     
-    public func timeStatsForPeriod(period: TimeMachine.Period) -> DailyStats {
+    public func timeStatsForPeriod(period: PastPeriod) -> DailyStats {
         let fact = factTimingForPeriod(period)
         let planned = plannedTimingInPeriod(period, sinceDate: NSDate())
         return DailyStats(factSaved: fact!.0, factSpent: fact!.1, plannedToSave: planned!.0, plannedToSpend: planned!.1)

@@ -134,7 +134,7 @@ class MainScreenVC: MainScreenVCConstraints {
     func viewControllerAtIndex(index: Int) -> UIViewController {
         let vc: CircleStatsVC = storyboard?.instantiateViewControllerWithIdentifier("CircleStatsVC") as! CircleStatsVC
         vc.profile = self.userProfile
-        vc.period = TimeMachine.Period(rawValue: index)
+        vc.period = PastPeriod(rawValue: index)
         vc.pageIndex = index
         vc.delegate = self
         return vc
@@ -296,6 +296,6 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
 
 extension MainScreenVC: CircleStatsDelegate {
     func pageControllerDidChangeToPage(index: Int) {
-//        periodTitleLabel.text = TimeMachine.stringForPeriod(TimeMachine.Period(rawValue: index)!)
+//        periodTitleLabel.text = TimeMachine.stringForPeriod(PastPeriod(rawValue: index)!)
     }
 }
