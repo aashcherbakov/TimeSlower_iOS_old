@@ -233,7 +233,7 @@ class TimingManageTest: XCTestCase {
         
         let referenceDate = NSDate()
         var correctNextActionDate: NSDate!
-        let dayName = timeMachine.correctWeekdayFromDate(NSDate())
+        let dayName = Weekday.shortDayNameForDate(referenceDate)
         if dayName == "Sat" {
             correctNextActionDate = NSDate(timeInterval: 60*60*24, sinceDate: testActivity.updatedStartTime())
         } else if dayName == "Sun" {
@@ -249,7 +249,7 @@ class TimingManageTest: XCTestCase {
     
     func testNextWeekendDateFromDate() {
         let startDate = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/7/15, 10:15 AM")
-        _ = timeMachine.correctWeekdayFromDate(startDate!)
+        _ = Weekday.shortDayNameForDate(startDate!)
         
 //        let nextSaturday = testActivity.timing.nextWeekendDayFromDate(startDate!)
         let correctNextSaturday = NSDate(timeInterval: 60*60*24*4, sinceDate: startDate!)

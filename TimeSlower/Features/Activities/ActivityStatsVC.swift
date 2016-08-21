@@ -193,8 +193,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
             for _ in 0 ..< vacantDaysLeft {
                 components.day -= 1
                 let nextDate = NSCalendar.currentCalendar().dateFromComponents(components)
-                let calendar = TimeMachine()
-                lastWeekDayNames.insert(calendar.shortDayNameForDate(nextDate!), atIndex: 0)
+                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), atIndex: 0)
             }
         }
     }

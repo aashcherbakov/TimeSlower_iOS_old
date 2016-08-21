@@ -26,29 +26,9 @@ class TimeMachineTests: XCTestCase {
         shortDateFromatter = nil
         super.tearDown()
     }
+
     
-    func test_correctWeekdayFromDate() {
-        let date = TestHelper.mondayApril25()
-        XCTAssertEqual(timeMachine.correctWeekdayFromDate(date), "Mon", "it should be monday")
-    }
-    
-    func test_endDateForPeriod() {
-        let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
-        let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
-        let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
-        
-        XCTAssertEqual(timeMachine.endDateForPeriod(.Today, sinceDate: date), date)
-        XCTAssertEqual(timeMachine.endDateForPeriod(.LastMonth, sinceDate: date), monthBeforDate)
-        XCTAssertEqual(timeMachine.endDateForPeriod(.LastYear, sinceDate: date), yearBeforeDate)
-    }
-    
-    func testCorrectWeekdayFromDate() {
-        let testDate = DayResults.standardDateFormatter().dateFromString("7/6/15")
-        let shortName = timeMachine.correctWeekdayFromDate(testDate!)
-        XCTAssertEqual(shortName, "Mon", "Correct weekday must be monday")
-    }
-    
-    //MARK: - nextDayWithName tests
+    //MARK: - next offcurance of day tests
     
     func testNextDayWithNameFromDateNextSaturdayFromWednesday() {
         let wednesdayDate = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
@@ -108,6 +88,17 @@ class TimeMachineTests: XCTestCase {
         let nextThursday = timeMachine.nextOccuranceOfWeekday(thursday, fromDate: mondayDate!)
         XCTAssertEqual(nextThursday, correctNextThursday!, "Next Thursday must be 18th")
     }
+    
+    
 
+    func test_endDateForPeriod() {
+        let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
+        let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
+        let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
+        
+        XCTAssertEqual(timeMachine.endDateForPeriod(.Today, sinceDate: date), date)
+        XCTAssertEqual(timeMachine.endDateForPeriod(.LastMonth, sinceDate: date), monthBeforDate)
+        XCTAssertEqual(timeMachine.endDateForPeriod(.LastYear, sinceDate: date), yearBeforeDate)
+    }
 
 }

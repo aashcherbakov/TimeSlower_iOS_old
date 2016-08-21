@@ -6,12 +6,9 @@
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
-import Foundation
-
 /**
  Enum that describes a weekday. Used to handle situations when in some contries
- first day is Sunday (US)
- while in others first day of week is Monday (Russia)
+ first day is Sunday (US) while in others first day of week is Monday (Russia)
  */
 public enum Weekday: Int {
     case First
@@ -22,6 +19,8 @@ public enum Weekday: Int {
     case Sixth
     case Seventh
     
+    public static var calendar = NSCalendar.currentCalendar()
+    
     /**
      Created a weekday from NSDate instance
      
@@ -30,7 +29,7 @@ public enum Weekday: Int {
      - returns: Weekday
      */
     public static func createFromDate(date: NSDate) -> Weekday {
-        let day = NSCalendar.currentCalendar().component(.Weekday, fromDate: date)
+        let day = calendar.component(.Weekday, fromDate: date)
         return Weekday(rawValue: (day - 1) % 7)!
     }
     
@@ -42,7 +41,7 @@ public enum Weekday: Int {
     
     /// Checks if current day is a workday or not
     public var isWorkday: Bool {
-        let range = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday)
+        let range = Weekday.calendar.maximumRangeOfUnit(.Weekday)
         
         if rawValue == range.location - 1 || rawValue == range.length - 1 {
             return false
@@ -51,26 +50,6 @@ public enum Weekday: Int {
         }
     }
     
-    public static func weekdaysForBasis(basis: Basis) -> [Weekday] {
-        var weekdays = [Weekday]()
-        let defaultDaysArray: [Weekday] = daysForWeek(StaticDateFormatter.shortDateAndTimeFormatter)
-        
-        switch basis {
-        case .Daily, .Random:
-            weekdays = defaultDaysArray
-            
-        case .Workdays, .Weekends:
-            let shouldBeWorkday = basis == .Workdays
-            for day in defaultDaysArray {
-                if day.isWorkday == shouldBeWorkday {
-                    weekdays.append(day)
-                }
-            }
-        }
-        
-        return weekdays
-    }
-
     /**
      Creates array of weekdays based given dateFormatter using shortWeekdaySymbols property.
      
@@ -94,28 +73,6 @@ public enum Weekday: Int {
         
         return weekdays
     }
-    
-    /**
-     Converts Set of Days stored in Activity to array of Weekdays
-     
-     - parameter days: Set<Day>
-     
-     - returns: Array of Weeday instances
-     */
-    public static func weekdaysFromSetOfDays(days: Set<Day>) -> [Weekday] {
-        var busyWeekdays = [Weekday]()
-        
-        for day in days {
-            if let weekday = Weekday(rawValue: day.number.integerValue) {
-                busyWeekdays.append(weekday)
-            }
-        }
-        
-        return busyWeekdays
-    }
-    
-
-    
     
     /**
      Finds next closest day to a day. If there is no in current week, looks into next one.
@@ -160,5 +117,57 @@ public enum Weekday: Int {
         }
     }
     
+    /**
+     Converts date to weekday and returns short name of the day
+     
+     - parameter date: NSDate of which we want to know name
+     
+     - returns: String with name
+     */
+    public static func shortDayNameForDate(date: NSDate) -> String {
+        let weekday = Weekday.createFromDate(date)
+        return weekday.shortName
+    }
 
+}
+
+extension Weekday { // TimeSlower model dependent methods
+    /**
+     Converts Set of Days stored in Activity to array of Weekdays
+     
+     - parameter days: Set<Day>
+     
+     - returns: Array of Weeday instances
+     */
+    public static func weekdaysFromSetOfDays(days: Set<Day>) -> [Weekday] {
+        var busyWeekdays = [Weekday]()
+        
+        for day in days {
+            if let weekday = Weekday(rawValue: day.number.integerValue) {
+                busyWeekdays.append(weekday)
+            }
+        }
+        
+        return busyWeekdays
+    }
+    
+    public static func weekdaysForBasis(basis: Basis) -> [Weekday] {
+        var weekdays = [Weekday]()
+        let defaultDaysArray: [Weekday] = daysForWeek(StaticDateFormatter.shortDateAndTimeFormatter)
+        
+        switch basis {
+        case .Daily, .Random:
+            weekdays = defaultDaysArray
+            
+        case .Workdays, .Weekends:
+            let shouldBeWorkday = basis == .Workdays
+            for day in defaultDaysArray {
+                if day.isWorkday == shouldBeWorkday {
+                    weekdays.append(day)
+                }
+            }
+        }
+        
+        return weekdays
+    }
 }

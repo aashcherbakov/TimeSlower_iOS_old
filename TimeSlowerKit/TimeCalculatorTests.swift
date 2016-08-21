@@ -23,6 +23,11 @@ class TimeCalculatorTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+    
+    func test_durationPerDay() {
+        let minutes = sut.durationPerDay(20, busyDays: 5)
+        XCTAssertEqualWithAccuracy(minutes, 14.2, accuracy: 0.1)
+    }
 
     func test_hours() {
         let hours = sut.totalHours(inDays: 3, duration: 20, busyDays: 7)

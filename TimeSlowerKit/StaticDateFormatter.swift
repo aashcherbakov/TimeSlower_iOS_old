@@ -9,6 +9,8 @@
 /// Class that holds singletons to predefined static NSDateFormatter instances. 
 public final class StaticDateFormatter {
     
+    private init() { } // This prevents others from using the default initializer
+    
     public static let shortDateNoTimeFromatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone.localTimeZone()

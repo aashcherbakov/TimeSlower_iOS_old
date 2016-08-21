@@ -34,6 +34,14 @@ public struct TimeMachine {
         }
     }
     
+    /**
+     Finds a date of next specified weekday closest to given date.
+     
+     - parameter weekday: Weekday we are looking for
+     - parameter date:    NSDate from which count starts.
+     
+     - returns: NSDate for next occurance of given weekday
+     */
     public func nextOccuranceOfWeekday(weekday: Weekday, fromDate date: NSDate) -> NSDate {
         let fromWeekday = Weekday.createFromDate(date)
         let difference = intervalFromDay(fromWeekday.rawValue, toDay: weekday.rawValue)
@@ -41,16 +49,6 @@ public struct TimeMachine {
         return NSDate(timeInterval: timeIntervalToAdd, sinceDate: date)
     }
     
-    /// Returns string from array ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    public func correctWeekdayFromDate(date: NSDate) -> String {
-        let weekday = Weekday.createFromDate(date)
-        return weekday.shortName
-    }
-    
-    public func shortDayNameForDate(date: NSDate) -> String {
-        let weekday = Weekday.createFromDate(date)
-        return weekday.shortName
-    }
     
     public func startDateForPeriod(period: Period, sinceDate date: NSDate) -> NSDate {
         let componentsFromToday = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: date)
