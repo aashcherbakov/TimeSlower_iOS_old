@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ *  Struct responsible for creating instance of Activity from given parameters as
+ *  well as setting up default parameters. For instance, update stats.
+ */
 public struct ActivityManager {
     
     public init() { }

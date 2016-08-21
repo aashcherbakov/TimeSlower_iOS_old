@@ -36,7 +36,10 @@ public class Day: NSManagedObject, Persistable {
      - returns: number properties of Day
      */
     public static func daysIntegerRepresentation(days: Set<Day>?) -> [Int] {
-        guard let days = days else { return [Int]() }
+        guard let days = days else {
+            return [Int]()
+        }
+        
         var integers = [Int]()
         for day in days {
             integers.append(day.number.integerValue)

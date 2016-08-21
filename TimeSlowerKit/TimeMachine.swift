@@ -16,11 +16,16 @@ public struct TimeMachine {
     private let dateFormatter = StaticDateFormatter.self
     private let calendar: NSCalendar
     
+    /**
+     Initializer
+     
+     - parameter calendar: Set to NSCalendar.currentCalendar() by default
+     
+     - returns: calendar used for calculations
+     */
     public init(calendar: NSCalendar = NSCalendar.currentCalendar()) {
         self.calendar = calendar
     }
-    
-
     
     /**
      Finds a date of next specified weekday closest to given date.
