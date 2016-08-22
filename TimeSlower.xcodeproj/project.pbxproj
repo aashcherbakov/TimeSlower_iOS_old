@@ -21,10 +21,9 @@
 		F009AE8F1BD9CBA2007F38A9 /* TimeSlowerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
 		F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */; };
+		F009AEB71BD9CC86007F38A9 /* Activity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAB1BD9CC86007F38A9 /* Activity+Extensions.swift */; };
 		F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */; };
 		F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAD1BD9CC86007F38A9 /* DayResults.swift */; };
-		F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */; };
 		F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEAF1BD9CC86007F38A9 /* Profile.swift */; };
 		F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */; };
 		F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */; };
@@ -38,7 +37,6 @@
 		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; };
 		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; };
 		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
-		F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */; };
 		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; };
 		F009AEEB1BD9CF21007F38A9 /* TimeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE31BD9CF21007F38A9 /* TimeMachineTests.swift */; };
 		F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */; };
@@ -115,7 +113,6 @@
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
 		F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3451D29B16100933E09 /* ObservableControlCell.swift */; };
 		F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */; };
-		F062A34A1D2AB2AB00933E09 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3491D2AB2AB00933E09 /* ActivityManager.swift */; };
 		F062A34C1D2AB2F200933E09 /* NSString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */; };
 		F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */; };
 		F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */; };
@@ -134,6 +131,9 @@
 		F09997771D6152FE006030D9 /* BasisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997761D6152FE006030D9 /* BasisTests.swift */; };
 		F099977A1D6A3E2D006030D9 /* PastPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997791D6A3E2D006030D9 /* PastPeriod.swift */; };
 		F099977C1D6A41A2006030D9 /* DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099977B1D6A41A2006030D9 /* DayTests.swift */; };
+		F099977E1D6A485D006030D9 /* ActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099977D1D6A485D006030D9 /* ActivityTests.swift */; };
+		F09997801D6A8367006030D9 /* DayResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099977F1D6A8367006030D9 /* DayResultsTests.swift */; };
+		F09997821D6A83AD006030D9 /* DayResults+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997811D6A83AD006030D9 /* DayResults+CoreDataProperties.swift */; };
 		F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */; };
 		F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */; };
 		F0A577311D4E446D00D2039A /* ClosestActivityDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */; };
@@ -266,10 +266,9 @@
 		F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimeSlowerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE8E1BD9CBA2007F38A9 /* TimeSlowerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeSlowerKit.h; sourceTree = "<group>"; };
 		F009AE901BD9CBA2007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityManage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F009AEAB1BD9CC86007F38A9 /* Activity+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Activity+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityNotifications.swift; sourceTree = "<group>"; };
 		F009AEAD1BD9CC86007F38A9 /* DayResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResults.swift; sourceTree = "<group>"; };
-		F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManage.swift; sourceTree = "<group>"; };
 		F009AEAF1BD9CC86007F38A9 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileManageActivities.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStats.swift; sourceTree = "<group>"; };
@@ -284,7 +283,6 @@
 		F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeSlower2.xcdatamodel; sourceTree = "<group>"; };
 		F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AED71BD9CEA4007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ActivityManageTest.swift; path = TimeSlowerKitTests/ActivityManageTest.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManageTest.swift; sourceTree = "<group>"; };
 		F009AEE31BD9CF21007F38A9 /* TimeMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMachineTests.swift; path = TimeSlowerKitTests/TimeMachineTests.swift; sourceTree = SOURCE_ROOT; };
 		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageActivitiesTest.swift; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
 		F062A3451D29B16100933E09 /* ObservableControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableControlCell.swift; sourceTree = "<group>"; };
 		F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellProtocol.swift; sourceTree = "<group>"; };
-		F062A3491D2AB2AB00933E09 /* ActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Extension.swift"; sourceTree = "<group>"; };
 		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
@@ -387,6 +384,9 @@
 		F09997761D6152FE006030D9 /* BasisTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisTests.swift; sourceTree = "<group>"; };
 		F09997791D6A3E2D006030D9 /* PastPeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPeriod.swift; sourceTree = "<group>"; };
 		F099977B1D6A41A2006030D9 /* DayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTests.swift; sourceTree = "<group>"; };
+		F099977D1D6A485D006030D9 /* ActivityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTests.swift; sourceTree = "<group>"; };
+		F099977F1D6A8367006030D9 /* DayResultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsTests.swift; sourceTree = "<group>"; };
+		F09997811D6A83AD006030D9 /* DayResults+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayResults+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClosestActivityDisplay.xib; sourceTree = "<group>"; };
@@ -620,9 +620,8 @@
 				F09997691D57D67B006030D9 /* ActivityType.swift */,
 				F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataProperties.swift */,
 				F0A9F9C81CDE7CD000809BA2 /* Activity.swift */,
-				F062A3491D2AB2AB00933E09 /* ActivityManager.swift */,
-				F009AEAB1BD9CC86007F38A9 /* ActivityManage.swift */,
-				F009AEE01BD9CF11007F38A9 /* ActivityManageTest.swift */,
+				F009AEAB1BD9CC86007F38A9 /* Activity+Extensions.swift */,
+				F099977D1D6A485D006030D9 /* ActivityTests.swift */,
 				F009AEAC1BD9CC86007F38A9 /* ActivityNotifications.swift */,
 			);
 			name = Activity;
@@ -663,8 +662,9 @@
 		F009AF0C1BDAD505007F38A9 /* DayResults */ = {
 			isa = PBXGroup;
 			children = (
+				F09997811D6A83AD006030D9 /* DayResults+CoreDataProperties.swift */,
 				F009AEAD1BD9CC86007F38A9 /* DayResults.swift */,
-				F009AEAE1BD9CC86007F38A9 /* DayResultsManage.swift */,
+				F099977F1D6A8367006030D9 /* DayResultsTests.swift */,
 			);
 			name = DayResults;
 			sourceTree = "<group>";
@@ -1642,7 +1642,6 @@
 				F0A6135F1D32F0860051743C /* Period.swift in Sources */,
 				F009AEB81BD9CC86007F38A9 /* ActivityNotifications.swift in Sources */,
 				F07AC3091D31A04C0003A917 /* ActivityDuration.swift in Sources */,
-				F062A34A1D2AB2AB00933E09 /* ActivityManager.swift in Sources */,
 				F0A6135D1D32DD100051743C /* ManagedObject.swift in Sources */,
 				F04194681CD430DE00C9B896 /* Persistable.swift in Sources */,
 				F041945D1CD0479300C9B896 /* Day+CoreDataProperties.swift in Sources */,
@@ -1658,11 +1657,11 @@
 				F09997731D61068E006030D9 /* Constants.swift in Sources */,
 				F041945E1CD0479300C9B896 /* Day.swift in Sources */,
 				F09997681D57D651006030D9 /* Basis.swift in Sources */,
-				F009AEBA1BD9CC86007F38A9 /* DayResultsManage.swift in Sources */,
 				F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */,
 				F009AEC01BD9CC86007F38A9 /* Timing.swift in Sources */,
 				F0A9F9C91CDE7CD000809BA2 /* Activity+CoreDataProperties.swift in Sources */,
-				F009AEB71BD9CC86007F38A9 /* ActivityManage.swift in Sources */,
+				F009AEB71BD9CC86007F38A9 /* Activity+Extensions.swift in Sources */,
+				F09997821D6A83AD006030D9 /* DayResults+CoreDataProperties.swift in Sources */,
 				F009AEC11BD9CC86007F38A9 /* TimingManage.swift in Sources */,
 				F009AEB91BD9CC86007F38A9 /* DayResults.swift in Sources */,
 			);
@@ -1675,8 +1674,8 @@
 				F099977C1D6A41A2006030D9 /* DayTests.swift in Sources */,
 				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
 				F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */,
+				F09997801D6A8367006030D9 /* DayResultsTests.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
-				F009AEE11BD9CF11007F38A9 /* ActivityManageTest.swift in Sources */,
 				F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */,
 				F09997751D6136A0006030D9 /* CoreDataBaseTest.swift in Sources */,
 				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
@@ -1686,6 +1685,7 @@
 				F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */,
 				F009AEEB1BD9CF21007F38A9 /* TimeMachineTests.swift in Sources */,
 				F09997771D6152FE006030D9 /* BasisTests.swift in Sources */,
+				F099977E1D6A485D006030D9 /* ActivityTests.swift in Sources */,
 				F009AEEE1BD9CF21007F38A9 /* StatsManageTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -44,10 +44,14 @@ public class TestCoreDataStack: CoreDataStack {
     /// - Start time: 10:15 AM
     /// - Finish time: 10:45 AM
     public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: Basis) -> Activity {
-        let fakeActivity = Activity.newActivityForProfile(profile, ofType: type)
-        fakeActivity.basis = Activity.basisWithEnum(basis)
-        fakeActivity.name = "Morning shower"
-        fakeActivity.timing = fakeTimingForActivity(fakeActivity)
+        let fakeActivity = Activity.createActivityWithType(type,
+            name: "Morning shower",
+            selectedDays: Basis.daysFromBasis(basis),
+            startTime: StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("7/3/15, 10:15 AM")!,
+            duration: ActivityDuration(value: 30, period: .Minutes),
+            notifications: true,
+            timeToSave: 10,
+            forProfile: profile)
         
         let busyDays = Weekday.weekdaysForBasis(basis)
         let days = NSMutableSet()

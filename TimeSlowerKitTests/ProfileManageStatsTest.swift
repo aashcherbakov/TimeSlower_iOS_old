@@ -181,14 +181,14 @@ class ProfileManageStatsTest: XCTestCase {
     
     func testDateBasedFetchRequestForLastYear() {
         createFakeResultsForLastYear()
-        let result = testActivity.allResultsForPeriod(.LastYear)
+        let result = testActivity.unitTesting_allResultsForPeriod(.LastYear)
         XCTAssertEqual(result.count, 2, "Only 2 results for last year")
         XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }
     
     func testAllResultsForLastMonth() {
         createFakeResultsForLastMonth()
-        let result = testActivity.allResultsForPeriod(.LastMonth)
+        let result = testActivity.unitTesting_allResultsForPeriod(.LastMonth)
         XCTAssertEqual(result.count, 2, "Only 2 results for last month")
         XCTAssertEqual(testActivity.results!.count, 3, "Activity must have 3 results")
     }

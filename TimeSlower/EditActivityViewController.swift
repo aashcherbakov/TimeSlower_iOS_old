@@ -45,7 +45,6 @@ internal class EditActivityVC: UIViewController {
     var editingState: EditingState?
     var userProfile: Profile?
     dynamic var activity: Activity?
-    var activityManager = ActivityManager()
     
     typealias StateType = EditingState
     private var machine: StateMachine<EditActivityVC>!
@@ -135,7 +134,7 @@ internal class EditActivityVC: UIViewController {
         }
         
         // TODO: switch to check type
-        activity = activityManager.createActivityWithType(.Routine, name: name, selectedDays: basis, startTime: startTime,
+        activity = Activity.createActivityWithType(.Routine, name: name, selectedDays: basis, startTime: startTime,
             duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
     }
     
@@ -144,7 +143,7 @@ internal class EditActivityVC: UIViewController {
                 return
         }
         
-        activityManager.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
+        Activity.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
             duration: duration, notifications: notifications, timeToSave: timeToSave)
     }
     

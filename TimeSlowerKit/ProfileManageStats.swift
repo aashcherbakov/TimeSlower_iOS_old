@@ -143,7 +143,7 @@ extension Profile {
         var summSpent = 0.0
         
         for activity in allActivities() {
-            for result in activity.allResultsForPeriod(period) {
+            for result in activity.unitTesting_allResultsForPeriod(period) {
                 if activity.isRoutine() {
                     summSaved += result.factSavedTime!.doubleValue
                 } else {
