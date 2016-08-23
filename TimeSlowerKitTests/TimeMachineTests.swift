@@ -109,4 +109,15 @@ class TimeMachineTests: XCTestCase {
         XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastMonth, fromDate: monthBeforDate), 31)
         XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastYear, fromDate: yearBeforeDate), 365)
     }
+    
+    // MARK: - Date manipulations
+    
+    func test_updatedTimeForDate() {
+        let time = shortDateFromatter.dateFromString("8/23/16, 10:00 AM")!
+        let newDate = shortDateFromatter.dateFromString("3/28/17, 12:00 PM")!
+        let expectedDate = shortDateFromatter.dateFromString("3/28/17, 10:00 AM")!
+        let result = timeMachine.updatedTime(time, forDate: newDate)
+        XCTAssertEqual(result, expectedDate, "it should give updated date")
+    }
+
 }

@@ -76,6 +76,24 @@ public struct TimeMachine {
         return abs(components.day)
     }
     
+    /**
+     Combines hours and minutes of passed time with year/day/month of forDate
+     
+     - parameter time:    NSDate that contains wished time
+     - parameter forDate: NSDate you want to transfer time to
+     
+     - returns: NSDate with passed time.
+     */
+    public func updatedTime(time: NSDate, forDate: NSDate) -> NSDate {
+        let oldDateComponents = NSCalendar.currentCalendar().components([.Hour, .Minute], fromDate: time)
+        let newDateComponents = NSCalendar.currentCalendar().components([.Month, .Day, .Year], fromDate: forDate)
+        
+        newDateComponents.hour = oldDateComponents.hour
+        newDateComponents.minute = oldDateComponents.minute
+        
+        return NSCalendar.currentCalendar().dateFromComponents(newDateComponents)!
+    }
+    
     // MARK: - Private Methods
     
     private func intervalFromDay(fromDay: Int, toDay: Int) -> Double {

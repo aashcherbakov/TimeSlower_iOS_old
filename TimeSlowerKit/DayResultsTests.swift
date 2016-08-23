@@ -25,16 +25,19 @@ class DayResultsTests: CoreDataBaseTest {
     }
 
     func test_createResult() {
-        let date = shortDateFormatter.dateFromString("8/21/16")!
+        let testDateString = "8/21/16"
+        let date = shortDateFormatter.dateFromString(testDateString)!
         
         let result = DayResults.newResultWithDate(date, forActivity: testActivity)
         
         XCTAssertNotNil(result)
         XCTAssertEqual(result.activity, testActivity, "it should assign test activity as owner")
-        XCTAssertEqual(shortDateFormatter.stringFromDate(result.raughDate), "8/21/16")
-        XCTAssertEqual(shortTimeFormatter.stringFromDate(result.factFinishTime), "8/21/16, 12:00 AM")
-        XCTAssertEqual(result.date, "8/21/16")
+        XCTAssertEqual(shortDateFormatter.stringFromDate(result.raughDate), testDateString)
+        XCTAssertEqual(shortTimeFormatter.stringFromDate(result.factFinishTime), "\(testDateString), 12:00 AM")
+        XCTAssertEqual(result.date, testDateString)
         
+        let expectedStartTime = shortDateFormatter.dateFromString("\(testDateString), 10:15 AM")
+        XCTAssertEqual(result.factStartTime, expectedStartTime)
     }
     
     func test_fetchResultWithDate() {

@@ -28,7 +28,7 @@ public class DayResults: NSManagedObject, Persistable {
             result.date = DayResults.standardDateFormatter().stringFromDate(date)
 
             
-            result.factStartTime = activity.updatedStartTime()
+            result.factStartTime = activity.timing.updatedStartTimeForDate(date)
             result.factDuration = NSNumber(double: abs(result.factFinishTime.timeIntervalSinceDate(result.factStartTime) / 60))
             result.factSuccess = NSNumber(double: result.daySuccess())
             
