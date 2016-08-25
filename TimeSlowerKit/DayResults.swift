@@ -26,10 +26,11 @@ public class DayResults: NSManagedObject, Persistable {
             result.factFinishTime = date
             result.raughDate = date
             result.date = DayResults.standardDateFormatter().stringFromDate(date)
-
-            
             result.factStartTime = activity.timing.updatedStartTimeForDate(date)
-            result.factDuration = NSNumber(double: abs(result.factFinishTime.timeIntervalSinceDate(result.factStartTime) / 60))
+            result.factDuration = factDurationFromStart(result.factStartTime, toFinish: result.factFinishTime)
+            
+            
+            
             result.factSuccess = NSNumber(double: result.daySuccess())
             
             if activity.isRoutine() {
@@ -50,7 +51,14 @@ public class DayResults: NSManagedObject, Persistable {
         return StaticDateFormatter.shortDateNoTimeFromatter
     }
     
+
+    
     // in % of goal achieved
+    /**
+     Calculates % of time saved/spent
+     
+     - returns: Double for % of achieved result
+     */
     public func daySuccess() -> Double {
         var success = 0.0
         var factDuration = factFinishTime.timeIntervalSinceDate(factStartTime) / 60
@@ -58,6 +66,7 @@ public class DayResults: NSManagedObject, Persistable {
         if factDuration > Double(activity.timing.duration.minutes()) {
             factDuration = Double(activity.timing.duration.minutes())
         }
+        
         if factDuration < 0 { factDuration = factDuration * -1 }
         
         if self.activity.isRoutine() {
@@ -143,5 +152,14 @@ public class DayResults: NSManagedObject, Persistable {
         let results = try! context.executeFetchRequest(fetchRequest) as! [DayResults]
         return results
     }
+    
+    // MARK: - Private Functions
+    
+    // tested
+    private class func factDurationFromStart(start: NSDate, toFinish finish: NSDate) -> Double {
+        let timeFromStartToFinish = start.timeIntervalSinceDate(finish)
+        return abs(timeFromStartToFinish) / 60
+    }
+
 }
 

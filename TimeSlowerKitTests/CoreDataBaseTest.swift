@@ -15,6 +15,13 @@ class CoreDataBaseTest: XCTestCase {
     var testCoreDataStack: TestCoreDataStack!
     var testContext: NSManagedObjectContext!
     var testProfile: Profile!
+    
+    /// Creates activity with name "Morning shower" with built in timing
+    ///
+    /// - Duration: 30 min
+    /// - Time to save: 10 min
+    /// - Start time: 10:15 AM
+    /// - Finish time: 10:45 AM
     var testActivity: Activity!
     var testActivityStats: Stats!
     var testActivityTiming: Timing!
