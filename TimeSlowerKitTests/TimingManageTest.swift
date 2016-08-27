@@ -11,33 +11,17 @@ import XCTest
 import CoreData
 import TimeSlowerKit
 
-class TimingManageTest: XCTestCase {
+class TimingManageTest: CoreDataBaseTest {
 
-    var testCoreDataStack: TestCoreDataStack!
-    var testContext: NSManagedObjectContext!
-    var testProfile: Profile!
-    var testActivity: Activity!
-    
-    var testActivityStats: Stats!
-    var testActivityTiming: Timing!
     var standartDateFormatter: NSDateFormatter!
     var timeMachine: TimeMachine!
+    
+    var shortDateFormatter: NSDateFormatter!
     
     override func setUp() {
         super.setUp()
         
-        // CoreDataStack
-        testCoreDataStack = TestCoreDataStack()
-        testContext = testCoreDataStack.managedObjectContext
-        standartDateFormatter = DayResults.standardDateFormatter()
-        
-        // Creating fake instances
-        testProfile = testCoreDataStack.fakeProfile()
-        testActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
-        testCoreDataStack.saveContext()
-        
-        testActivityTiming = testActivity.timing
-        testActivityStats = testActivity.stats
+        shortDateFormatter = StaticDateFormatter.shortDateAndTimeFormatter
         timeMachine = TimeMachine()
     }
     
@@ -131,6 +115,21 @@ class TimingManageTest: XCTestCase {
         testActivityTiming.manuallyStarted = nil
         let upToDateStartTime = Timing.updateTimeForToday(testActivityTiming.startTime)
         XCTAssertEqual(testActivityTiming.updatedStartTime(), upToDateStartTime, "Updated start time should be regular start time")
+    }
+    
+    func test_updatedStartTimeForDate() {
+        // given
+        let time = shortDateFormatter.dateFromString("8/23/16, 10:00 AM")!
+        let newDate = shortDateFormatter.dateFromString("3/28/17, 12:00 PM")!
+        let expectedDate = shortDateFormatter.dateFromString("3/28/17, 10:00 AM")!
+        
+        // when
+        testActivityTiming.manuallyStarted = nil
+        testActivityTiming.startTime = time
+        let result = testActivityTiming.updatedStartTimeForDate(newDate)
+        
+        // then
+        XCTAssertEqual(result, expectedDate, "it should give updated date")
     }
     
     func testUpdatedFinishTime() {

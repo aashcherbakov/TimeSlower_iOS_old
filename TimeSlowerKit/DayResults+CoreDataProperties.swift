@@ -21,6 +21,8 @@ public extension DayResults {
     @NSManaged public var factStartTime: NSDate
     @NSManaged public var factSuccess: NSNumber
     @NSManaged public var factSavedTime: NSNumber?
+    
+    /// Time spent on activity in current accurance in Minutes
     @NSManaged public var factDuration: NSNumber
     
     @NSManaged public var activity: Activity

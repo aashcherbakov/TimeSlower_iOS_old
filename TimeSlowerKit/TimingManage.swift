@@ -63,6 +63,24 @@ extension Timing {
         return (manuallyStarted != nil) ? manuallyStarted! : Timing.updateTimeForToday(startTime)
     }
     
+    /**
+     Updates startTime of activity to given date. 
+     Use cases:
+     1) When activity is created, it has only time, not date (DatePicker displays only time)
+     2) When we look when activity should accure next in calendar
+     
+     - parameter date: NSDate to which startTime should be updated
+     
+     - returns: NSDate with correct start time in specified date
+     */
+    public func updatedStartTimeForDate(date: NSDate) -> NSDate {
+        if let manuallyStarted = manuallyStarted {
+            return manuallyStarted
+        } else {
+            return TimeMachine().updatedTime(startTime, forDate: date)
+        }
+    }
+    
     public func updatedFinishTime() -> NSDate {
         var newTime: NSDate?
         if let userStarted = manuallyStarted {
@@ -111,6 +129,7 @@ extension Timing {
         let newDate = NSCalendar.currentCalendar().dateFromComponents(finalComponents)!
         return newDate
     }
+
     
     public func nextActionTime() -> NSDate {
         if activity.isDoneForToday() || activity.isPassedDueForToday() {
