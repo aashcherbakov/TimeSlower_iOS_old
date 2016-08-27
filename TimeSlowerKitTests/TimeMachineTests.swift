@@ -14,15 +14,23 @@ class TimeMachineTests: XCTestCase {
 
     var shortDateFromatter: NSDateFormatter!
     var timeMachine: TimeMachine!
+    var testStartDate: NSDate!
+    var testFinishDate: NSDate!
     
     override func setUp() {
         super.setUp()
         shortDateFromatter = StaticDateFormatter.shortDateAndTimeFormatter
         timeMachine = TimeMachine()
+        
+        testStartDate = shortDateFromatter.dateFromString("8/21/16, 10:15 AM")
+        testFinishDate = shortDateFromatter.dateFromString("8/21/16, 10:45 AM")
     }
     
     override func tearDown() {
         shortDateFromatter = nil
+        testStartDate = nil
+        testFinishDate = nil
+        timeMachine = nil
         super.tearDown()
     }
 
@@ -118,6 +126,20 @@ class TimeMachineTests: XCTestCase {
         let expectedDate = shortDateFromatter.dateFromString("3/28/17, 10:00 AM")!
         let result = timeMachine.updatedTime(time, forDate: newDate)
         XCTAssertEqual(result, expectedDate, "it should give updated date")
+    }
+    
+    // MARK: - Fact Duration
+    
+    func test_factDurationFromStart() {
+        XCTAssertEqual(timeMachine.minutesFromStart(testStartDate, toFinish: testFinishDate), 30)
+    }
+    
+    func test_factDurationFromFinishToStart() {
+        XCTAssertEqual(timeMachine.minutesFromStart(testFinishDate, toFinish: testStartDate), 30)
+    }
+    
+    func test_factDurationFromFinishToFinish() {
+        XCTAssertEqual(timeMachine.minutesFromStart(testFinishDate, toFinish: testFinishDate), 0)
     }
 
 }

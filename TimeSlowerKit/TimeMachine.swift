@@ -94,6 +94,19 @@ public struct TimeMachine {
         return NSCalendar.currentCalendar().dateFromComponents(newDateComponents)!
     }
     
+    /**
+     Returns duration between dates in Minutes
+     
+     - parameter start:  NSDate for start date
+     - parameter finish: NSDate for finish
+     
+     - returns: Double that represents number of minutes between given dates
+     */
+    public func minutesFromStart(start: NSDate, toFinish finish: NSDate) -> Double {
+        let timeFromStartToFinish = start.timeIntervalSinceDate(finish)
+        return abs(timeFromStartToFinish) / 60
+    }
+    
     // MARK: - Private Methods
     
     private func intervalFromDay(fromDay: Int, toDay: Int) -> Double {

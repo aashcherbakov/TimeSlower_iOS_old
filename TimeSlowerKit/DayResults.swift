@@ -27,10 +27,7 @@ public class DayResults: NSManagedObject, Persistable {
             result.raughDate = date
             result.date = DayResults.standardDateFormatter().stringFromDate(date)
             result.factStartTime = activity.timing.updatedStartTimeForDate(date)
-            result.factDuration = factDurationFromStart(result.factStartTime, toFinish: result.factFinishTime)
-            
-            
-            
+            result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
             result.factSuccess = NSNumber(double: result.daySuccess())
             
             if activity.isRoutine() {
@@ -38,93 +35,78 @@ public class DayResults: NSManagedObject, Persistable {
             }
             
             activity.timing.manuallyStarted = nil
-            
-            var error: NSError?
-            do {
-                try activity.managedObjectContext!.save()
-            } catch let error1 as NSError { error = error1; print("Could not save: \(error)") }
+            saveContext(activity.managedObjectContext)
         }
+        
         return result
     }
     
+    /**
+     Formatter that operates with date in format "8/29/16". Made to compare dates and fetch 
+     results based on simple date.
+     
+     - returns: NSDateFormatter singleton instance
+     */
     public class func standardDateFormatter() -> NSDateFormatter {
         return StaticDateFormatter.shortDateNoTimeFromatter
     }
     
-
     
-    // in % of goal achieved
     /**
      Calculates % of time saved/spent
      
      - returns: Double for % of achieved result
      */
     public func daySuccess() -> Double {
-        var success = 0.0
-        var factDuration = factFinishTime.timeIntervalSinceDate(factStartTime) / 60
-        
-        if factDuration > Double(activity.timing.duration.minutes()) {
-            factDuration = Double(activity.timing.duration.minutes())
-        }
-        
-        if factDuration < 0 { factDuration = factDuration * -1 }
-        
-        if self.activity.isRoutine() {
-            let timeToSave = activity.timing.timeToSave.doubleValue
-            let factSavedTime = Double(activity.timing.duration.minutes()) - factDuration
-            if factSavedTime < 0 {
-                return success
-            } else {
-                success = factSavedTime / timeToSave * 100.0
-            }
-        } else {
-            success = factDuration / (Double(activity.timing.duration.minutes())) * 100.0
-        }
-        return round(success)
+        let successCalculator = DayResults.successForActivityType(activity.activityType())
+        let duration = Double(activity.timing.duration.minutes())
+        let goal = activity.timing.timeToSave.doubleValue
+        return successCalculator(start: factStartTime, finish: factFinishTime, maxDuration: duration, goal: goal)
     }
     
-    
-    public func factSpentTime() -> Double {
-        var timeFromStartToFinish = factFinishTime.timeIntervalSinceDate(factStartTime)
-        if timeFromStartToFinish < 0 { timeFromStartToFinish = -1.0 * timeFromStartToFinish }
-        return timeFromStartToFinish / 60
-    }
-    
-    
+    /**
+     Compares results based on dates
+     
+     - parameter otherResult: DayResult instance
+     
+     - returns: NSComparison description
+     */
     public func compareDatesOfResults(otherResult: DayResults) -> NSComparisonResult {
         let dateFormatter = DayResults.standardDateFormatter()
-        let originalDate = dateFormatter.dateFromString(date)
-        let otherDate = dateFormatter.dateFromString(otherResult.date)
-        return originalDate!.compare(otherDate!)
-    }
-    
-    public func shortDayNameForDate() -> String {
-        let dateFormatter = DayResults.standardDateFormatter()
-        let daySymbols = dateFormatter.shortWeekdaySymbols
         
-        let formalDate = dateFormatter.dateFromString(date)
-        let weekday = NSCalendar.currentCalendar().component(.Weekday, fromDate: formalDate!)
-        let weekdayNumberForArray = (weekday - 1) % 7
-        let dayName: String = daySymbols[weekdayNumberForArray]
-        
-        return dayName
-    }
-    
-    public class func lastWeekResultsForActivity(activity: Activity) -> [DayResults] {
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: #selector(NSString.compareDateRepresentationOfString(_:)))
-        var sortedArray = activity.results!.sortedArrayUsingDescriptors([sortDescriptor])
-        if sortedArray.count > 7 {
-            if sortedArray.count > 0 {
-                let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7
-                sortedArray.removeRange(0..<(sortedArray.count - lastResultsNumber))
-            }
+        guard let
+            originalDate = dateFormatter.dateFromString(date),
+            otherDate = dateFormatter.dateFromString(otherResult.date)
+        else {
+            fatalError("Could not convert dates")
         }
-        return sortedArray as! [DayResults]
+        return originalDate.compare(otherDate)
+    }
+    
+    /**
+     Wrapper that returns Weekday.shortDayNameForDate() using date property (not raughDate!)
+     
+     - returns: String with short day name
+     */
+    public func shortDayNameForDate() -> String {
+        guard let date = DayResults.standardDateFormatter().dateFromString(date) else {
+            return ""
+        }
+        
+        return Weekday.shortDayNameForDate(date)
     }
     
     
     //MARK: - Fetching
     
+    /**
+     Fetches result for activity in given date
+     
+     - parameter date:     NSDate for which we search results
+     - parameter activity: Activity instance
+     
+     - returns: DayResults instance if there is one for given date
+     */
     public class func fetchResultWithDate(date: NSDate, forActivity activity: Activity) -> DayResults? {
         let referenceDate = DayResults.standardDateFormatter().stringFromDate(date)
         
@@ -143,9 +125,16 @@ public class DayResults: NSManagedObject, Persistable {
         }
     }
     
+    /**
+     Fetches all results in given context
+     
+     - parameter date:    NSDate for which we search results
+     - parameter context: NSManagedObjectContext
+     
+     - returns: Array of DayResults for specific date
+     */
     public class func fetchResultsWithDate(date: NSDate, inContext context: NSManagedObjectContext) -> [DayResults] {
         let referenceDate = DayResults.standardDateFormatter().stringFromDate(date)
-        
         let fetchRequest = NSFetchRequest(entityName: "DayResults")
         fetchRequest.predicate = NSPredicate(format: "date == %@", referenceDate)
         
@@ -153,13 +142,90 @@ public class DayResults: NSManagedObject, Persistable {
         return results
     }
     
-    // MARK: - Private Functions
-    
-    // tested
-    private class func factDurationFromStart(start: NSDate, toFinish finish: NSDate) -> Double {
-        let timeFromStartToFinish = start.timeIntervalSinceDate(finish)
-        return abs(timeFromStartToFinish) / 60
+    /**
+     Fetches all results, sorts them by date and returns up to 7 latest results
+     
+     - parameter activity: Activity instance
+     
+     - returns: Array of DayResults
+     */
+    public static func lastWeekResultsForActivity(activity: Activity) -> [DayResults] {
+        guard let results = activity.results else { return [DayResults]() }
+        
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: #selector(NSString.compareDateRepresentationOfString(_:)))
+
+        if let sortedArray = results.sortedArrayUsingDescriptors([sortDescriptor]) as? [DayResults] {
+            return removeSpareResults(sortedArray)
+        }
+        
+        return [DayResults]()
     }
 
+    /**
+     Defines success of routine
+     
+     - parameter start:       NSDate for fact start
+     - parameter finish:      NSDate for fact finish
+     - parameter maxDuration: Double for initial duration of routine
+     - parameter goal:        Double for time to save of routine
+     
+     - returns: Double for % of success. Can't be negative.
+     */
+    static func successForRoutine(start
+        start: NSDate,
+        finish: NSDate,
+        maxDuration: Double,
+        goal: Double) -> Double {
+        
+        let factDuration = TimeMachine().minutesFromStart(start, toFinish: finish)
+        let factSavedTime =  maxDuration - factDuration
+        if factSavedTime < 0 {
+            return 0
+        } else {
+            return factSavedTime / goal * 100.0
+        }
+    }
+    
+    /**
+     Defines success for goal base of fact duration and planned duration
+     
+     - parameter start:       NSDate for fact start
+     - parameter finish:      NSDate for fact finish
+     - parameter maxDuration: Double for initial duration of goal
+     - parameter goal:        not used
+     
+     - returns: Double for % of success. Can't be negative.
+     */
+    static func successForGoal(start
+        start: NSDate,
+        finish: NSDate,
+        maxDuration: Double,
+        goal: Double) -> Double {
+        
+        let factDuration = TimeMachine().minutesFromStart(start, toFinish: finish)
+        if factDuration > 0 {
+            return factDuration / maxDuration * 100.0
+        } else {
+            return 0
+        }
+    }
+    
+    // MARK: - Private Functions
+    
+    private static func successForActivityType(type: ActivityType) -> ((start: NSDate, finish: NSDate, maxDuration: Double, goal: Double) -> Double) {
+        switch type {
+        case .Routine: return successForRoutine
+        case .Goal: return successForGoal
+        }
+    }
+    
+    private static func removeSpareResults(results: [DayResults]) -> [DayResults] {
+        var sortedArray = results
+        if sortedArray.count > 7 {
+            let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7
+            sortedArray.removeRange(0..<(sortedArray.count - lastResultsNumber))
+        }
+        return sortedArray
+    }
 }
 

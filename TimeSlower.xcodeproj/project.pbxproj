@@ -37,7 +37,6 @@
 		F009AECC1BD9CD49007F38A9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; };
 		F009AECD1BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F009AEC91BD9CD49007F38A9 /* TimeSlower2.xcdatamodeld */; };
 		F009AED81BD9CEA4007F38A9 /* TimeSlowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009AE8C1BD9CBA2007F38A9 /* TimeSlowerKit.framework */; };
-		F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */; };
 		F009AEEB1BD9CF21007F38A9 /* TimeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE31BD9CF21007F38A9 /* TimeMachineTests.swift */; };
 		F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */; };
 		F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */; };
@@ -283,10 +282,9 @@
 		F009AECA1BD9CD49007F38A9 /* TimeSlower2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeSlower2.xcdatamodel; sourceTree = "<group>"; };
 		F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AED71BD9CEA4007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsManageTest.swift; sourceTree = "<group>"; };
 		F009AEE31BD9CF21007F38A9 /* TimeMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMachineTests.swift; path = TimeSlowerKitTests/TimeMachineTests.swift; sourceTree = SOURCE_ROOT; };
-		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageActivitiesTest.swift; sourceTree = "<group>"; };
-		F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStatsTest.swift; sourceTree = "<group>"; };
+		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileManageActivitiesTest.swift; path = TimeSlowerKitTests/ProfileManageActivitiesTest.swift; sourceTree = SOURCE_ROOT; };
+		F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileManageStatsTest.swift; path = TimeSlowerKitTests/ProfileManageStatsTest.swift; sourceTree = SOURCE_ROOT; };
 		F009AEE61BD9CF21007F38A9 /* StatsManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatsManageTest.swift; path = TimeSlowerKitTests/StatsManageTest.swift; sourceTree = SOURCE_ROOT; };
 		F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TestCoreDataStack.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEE91BD9CF21007F38A9 /* TimingManageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimingManageTest.swift; path = TimeSlowerKitTests/TimingManageTest.swift; sourceTree = SOURCE_ROOT; };
@@ -605,9 +603,6 @@
 			children = (
 				F09997741D6136A0006030D9 /* CoreDataBaseTest.swift */,
 				F04194651CD2E5A300C9B896 /* TestHelper.swift */,
-				F009AEE21BD9CF21007F38A9 /* DayResultsManageTest.swift */,
-				F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */,
-				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
 				F009AEE71BD9CF21007F38A9 /* TestCoreDataStack.swift */,
 				F009AED71BD9CEA4007F38A9 /* Info.plist */,
 			);
@@ -633,6 +628,8 @@
 				F009AEAF1BD9CC86007F38A9 /* Profile.swift */,
 				F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */,
 				F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */,
+				F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */,
+				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1672,7 +1669,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F099977C1D6A41A2006030D9 /* DayTests.swift in Sources */,
-				F009AEEA1BD9CF21007F38A9 /* DayResultsManageTest.swift in Sources */,
 				F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */,
 				F09997801D6A8367006030D9 /* DayResultsTests.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
