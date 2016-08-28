@@ -123,9 +123,13 @@ class MenuVC: UIViewController {
         }
         
         self.profile = profile
-        avatarImageView.image = UIImage(data: profile.photo)
         nameLabel.text = profile.name.uppercaseString
         countryLabel.text = profile.country.capitalizedString
+        
+        if let photoData = profile.photo {
+            avatarImageView.image = UIImage(data: photoData)
+        }
+
     }
 
     private func setupDefaultConstraints() {

@@ -148,10 +148,6 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
         XCTAssertEqual(sortingRestult.first, testActivity, "old activity should be earlier")
     }
     
-
-    
-    
-    
     
     //MARK: - Current and closest activity
     

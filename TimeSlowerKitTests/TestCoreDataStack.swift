@@ -32,9 +32,21 @@ public class TestCoreDataStack: CoreDataStack {
     }
     
     public func fakeProfile() -> Profile {
-        let fakeProfile = Profile.userProfileInManagedContext(self.managedObjectContext)
-        fakeProfile.name = "Mike Tyson"
-        return fakeProfile
+        guard let entity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: managedObjectContext!) else {
+            fatalError("No entity named Profile in given context")
+        }
+
+        let profile = Profile(entity: entity, insertIntoManagedObjectContext: managedObjectContext!)
+        profile.name = "Mike Tyson"
+        profile.birthday = Profile.defaultBirthday()
+        profile.country = Profile.defaultCountry()
+        profile.gender = 0
+        profile.dateOfDeath = profile.dateOfApproximateLifeEnd()
+        
+        Profile.saveContext(managedObjectContext!)
+        return profile
+        
+
     }
     
     /// Creates activity with name "Morning shower" with built in timing

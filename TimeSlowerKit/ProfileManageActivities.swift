@@ -112,11 +112,11 @@ extension Profile {
     
     public func findNextActivityForToday() -> Activity? {
         var closestStartTime = NSDate().dateByAddingTimeInterval(60*60*24)
-        var nextActivity: Activity!
+        var nextActivity: Activity?
         
         for activity in activitiesForDate(NSDate()) {
             if !activity.isDoneForToday() && !activity.isPassedDueForToday() {
-                if activity.updatedStartTime() < (closestStartTime) {
+                if activity.updatedStartTime() < closestStartTime {
                     closestStartTime = activity.updatedStartTime()
                     nextActivity = activity
                 }

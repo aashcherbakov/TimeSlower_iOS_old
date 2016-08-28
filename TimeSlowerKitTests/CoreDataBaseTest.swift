@@ -43,7 +43,14 @@ class CoreDataBaseTest: XCTestCase {
     }
     
     override func tearDown() {
+        
+        testContext = nil
         testCoreDataStack = nil
+        testProfile = nil
+        testActivity = nil
+        testActivityStats = nil
+        testActivityTiming = nil
+        
         super.tearDown()
     }
 

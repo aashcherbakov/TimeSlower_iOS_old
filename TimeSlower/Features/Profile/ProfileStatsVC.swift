@@ -84,7 +84,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         totalHoursSpentLabel.text = "\(profileStats.factSpent.format(format))"
         userGreatingLabel.text = "Hello " + profile.name
         
-        avatarImageView.image = UIImage(data: profile.photo)
+        if let photoData = profile.photo {
+            avatarImageView.image = UIImage(data: photoData)
+        }
     }
     
     func setupAvatarForm() {

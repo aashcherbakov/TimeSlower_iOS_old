@@ -14,6 +14,13 @@ extension Profile {
     public enum Gender: Int {
         case Male = 0
         case Female = 1
+        
+        func description() -> String {
+            switch self {
+            case .Male: return "Male"
+            case .Female: return "Female"
+            }
+        }
     }
     
     public struct LifeTime {
@@ -31,80 +38,94 @@ extension Profile {
     }
     
     // MARK: - Creation and fetching
-    public class func userProfileInManagedContext(context: NSManagedObjectContext!) -> Profile {
+    
+    /**
+     Main method to create profile from given data. If Profile instance is
+     
+     - parameter name:     String for name
+     - parameter birthday: NSDate for birthday
+     - parameter country:  String for country
+     - parameter avatar:   UIImage optional
+     - parameter gender:   Profile.Gender
+     
+     - returns: Profile instance
+     */
+    public static func saveProfile(withName
+        name: String,
+        birthday: NSDate,
+        country: String,
+        avatar: UIImage?,
+        gender: Profile.Gender) -> Profile {
         
-        let entity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: context)
-        let profile = Profile(entity: entity!, insertIntoManagedObjectContext: context)
-        profile.birthday = defaultBirthday()
-        profile.country = defaultCountry()!
-        profile.gender = 0
-        profile.dateOfDeath = profile.dateOfApproximateLifeEnd()
-        
-        profile.saveChangesToCoreData()
-        
-        return profile
+        return ProfileCreator().saveProfile(withName: name, birthday: birthday, country: country, avatar: avatar, gender: gender)
     }
     
-    public class func saveProfile(withName name: String, birthday: NSDate, country: String,
-        avatar: UIImage?, gender: Profile.Gender) -> Profile? {
-        var profile = fetchProfile()
-        
-        if profile == nil {
-            guard let context = CoreDataStack.sharedInstance.managedObjectContext else {
-                return nil
-            }
-            profile = Profile.userProfileInManagedContext(context)
-        }
-        
-        if let profile = profile {
-            profile.name = name
-            profile.birthday = birthday
-            profile.country = country
-            profile.gender = Profile.genderWithEnum(gender)
-            profile.photo = UIImagePNGRepresentation(imageForSelectedAvatar(avatar))!
-            profile.saveChangesToCoreData()
-            return profile
-        }
-        
-        return profile
-    }
-    
-    public class func imageForSelectedAvatar(avatar: UIImage?) -> UIImage {
+    /**
+     Sets default image if user did not select his avatar
+     
+     - parameter avatar: UIImage from Profile photo property
+     
+     - returns: UIImage with avatar
+     */
+    public class func imageForSelectedAvatar(avatar: UIImage?) -> UIImage? {
         if let avatar = avatar {
             return avatar
         } else {
-            return UIImage(named: "defaultUserImage")!
+            return UIImage(named: "defaultUserImage")
         }
     }
     
-    /// Don't use in XCTest !
+    /**
+     Fetches profile from shared core data stack.
+     
+     - returns: Profile?
+     
+     - warning: Don't use in XCTest!
+     */
     public class func fetchProfile() -> Profile? {
         return CoreDataStack.sharedInstance.fetchProfile()
     }
     
-    public func saveChangesToCoreData() {
-        var error: NSError?
-        do {
-            try managedObjectContext!.save()
-        } catch let error1 as NSError { error = error1; print("Profile error: could not save: \(error)") }
-    }
-    
     //MARK: - User Properties
     
+    /**
+     Returns user age.
+     
+     - returns: Double for user age
+     */
     public func userAge() -> Double {
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Year,
-            fromDate: birthday, toDate: NSDate(), options: NSCalendarOptions())
+        let components = NSCalendar.currentCalendar().components(.Year, fromDate: birthday, toDate: NSDate(), options: [])
         return Double(components.year)
     }
     
+    /**
+     Returns Gender based of saved gender value in Profile
+     
+     - returns: Gender enum
+     */
     public func userGender() -> Gender {
-        return Gender(rawValue: gender.integerValue)!
+        guard let gender = Gender(rawValue: gender.integerValue) else {
+            fatalError("Used unallowed integer to create gender")
+        }
+        return gender
     }
     
+    /**
+     Provides string description for user gender
+     
+     - returns: "Male" of "Female"
+     */
     public func userGenderString() -> String {
-        return (gender.integerValue == 0) ? "Male" : "Female"
+        return userGender().description()
     }
     
+    /**
+     Transforms given gender value into NSNumber instance
+     
+     - parameter gender: Gender instance
+     
+     - returns: 0 for male, 1 for female
+     */
     public class func genderWithEnum(gender: Gender) -> NSNumber {
         return NSNumber(integer: gender.rawValue)
     }
@@ -112,10 +133,20 @@ extension Profile {
     
     //MARK: - Life expacity stats
     
+    /**
+     Returns difference between years left for profile based of life expacity and current user age.
+     
+     - returns: Double
+     */
     public func yearsLeftForProfile() -> Double {
         return maxYearsForProfile() - userAge()
     }
     
+    /**
+     Returns life expactancy for user of given age in given country
+     
+     - returns: Double for average expected years to live
+     */
     public func maxYearsForProfile() -> Double {
         let lifeInContries = Profile.lifeExpacityDictionary()
         let keyForTopDictionary = country.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil)
@@ -123,6 +154,11 @@ extension Profile {
         return (lifeInContries[keyForTopDictionary]![keyForInnerDictionary]! as NSString).doubleValue
     }
     
+    /**
+     Returns date of approximate death based of maximum years in chosen country with chosen gender
+     
+     - returns: NSDate of avarage person's death
+     */
     public func dateOfApproximateLifeEnd() -> NSDate {
         let components = NSDateComponents()
         components.setValue(Int(maxYearsForProfile()), forComponent: .Year)
@@ -130,15 +166,14 @@ extension Profile {
     }
     
     
-    //MARK: - Timing stats
+    
+
     
     
     
-    //TODO: move to profile
     /// Returns $0 - saved, $1 - spent
     public func factTimingForPeriod(period: PastPeriod) -> (saved: Double, spent: Double)? {
 
-        
         var summSaved = 0.0
         var summSpent = 0.0
         
@@ -154,7 +189,6 @@ extension Profile {
         return (summSaved, summSpent)
     }
     
-    //TODO: move to profile
     /// Returns $0 - saved, $1 - spent in minutes
     public func plannedTimingInPeriod(period: PastPeriod, sinceDate date: NSDate) -> (save: Double, spend: Double)? {
         var toSave = 0.0;
@@ -258,65 +292,54 @@ extension Profile {
     }
     
     
-    
     //MARK: - Default settings
     
+    /**
+     Returns default birthday. Used on profile creation.
+     
+     - returns: NSDate for March 3 1987
+     */
     public class func defaultBirthday() -> NSDate {
         return DayResults.standardDateFormatter().dateFromString("3/28/87")!
     }
     
-    public class func defaultCountry() -> String? {
-        let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as! String
-        let codesForCountries = countryCodesDictionary()
-        if let defaultCode = codesForCountries[countryCode] {
+    /**
+     Returns default country based on country code in current locale.
+     
+     - returns: String with country name of users locale
+     */
+    public class func defaultCountry() -> String {
+        guard let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String else {
+            assert(false, "Error: no such code as " + NSLocaleCountryCode + " in current database")
+            return ""
+        }
+        
+        if let defaultCode = countryCodesDictionary()[countryCode] {
             return defaultCode
         } else {
-            print("Error: no such code as " + countryCode + " in current database")
+            assert(false, "Error: no such code as " + countryCode + " in current database")
+            return ""
         }
-        return nil
     }
     
-    
-    class func countryCodesDictionary() -> [String:String] {
-        let path = NSBundle(identifier: "oneLastDay.TimeSlowerKit")!.pathForResource("ISOCodes", ofType: "txt")
-        let ISOCodes: NSString?
-        do {
-            ISOCodes = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        } catch _ as NSError {
-            ISOCodes = nil
-        }
-        
-        var dictionary = [String:String]()
-        let components = ISOCodes!.componentsSeparatedByString("\r")
-        
-        for str in components {
-            let countryData = str.componentsSeparatedByString("/")
-            dictionary[countryData[1]] = countryData[0]
-        }
-        
-        return dictionary
+    /**
+     Reads ISOCodes file and returns a dictionary with keys for country names and values as codes
+     
+     - returns: [String:String]
+     */
+    private class func countryCodesDictionary() -> [String:String] {
+        return DataStore().countryCodesDictionary()
     }
     
-    class func lifeExpacityDictionary() -> [String:[String:String]] {
-        let bundle = NSBundle(identifier: "oneLastDay.TimeSlowerKit")
-        let path = bundle!.pathForResource("LifeExpacity2013", ofType: "txt")
-        let contentsOfFile: NSString?
-        do {
-            contentsOfFile = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        } catch _ as NSError {
-            contentsOfFile = nil
-        }
-        let countryLines = contentsOfFile?.componentsSeparatedByString("\n") as [String]!
-        
-        var allCountries = [String:[String:String]]()
-        for string in countryLines {
-            if string != "" {
-                let countryData = string.componentsSeparatedByString("/")
-                let countryDataDictionary = ["Average": countryData[2], "Male": countryData[3], "Female": countryData[5]]
-                let countryName = countryData[1]
-                allCountries[countryName] = countryDataDictionary
-            }
-        }
-        return allCountries
+    /**
+     Reads LifeExpacity2013 file and returns dictionary with countries as keys and values for
+     life expacity for man and woman
+     
+     - returns: [String:[String:String]]
+     */
+    private class func lifeExpacityDictionary() -> [String:[String:String]] {
+        return DataStore().lifeExpacityDictionary()
     }
+    
+
 }

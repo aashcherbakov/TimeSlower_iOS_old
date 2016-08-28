@@ -133,6 +133,13 @@
 		F099977E1D6A485D006030D9 /* ActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099977D1D6A485D006030D9 /* ActivityTests.swift */; };
 		F09997801D6A8367006030D9 /* DayResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099977F1D6A8367006030D9 /* DayResultsTests.swift */; };
 		F09997821D6A83AD006030D9 /* DayResults+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997811D6A83AD006030D9 /* DayResults+CoreDataProperties.swift */; };
+		F09997841D73457B006030D9 /* ProfileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997831D73457B006030D9 /* ProfileCreator.swift */; };
+		F09997861D73458A006030D9 /* ProfileCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997851D73458A006030D9 /* ProfileCreatorTests.swift */; };
+		F09997871D734945006030D9 /* LifeExpacity2013.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC81BD9CD49007F38A9 /* LifeExpacity2013.txt */; };
+		F09997881D734949006030D9 /* ISOCodes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F009AEC71BD9CD49007F38A9 /* ISOCodes.txt */; };
+		F099978A1D737E8A006030D9 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09997891D737E8A006030D9 /* DataStore.swift */; };
+		F099978C1D73897E006030D9 /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099978B1D73897E006030D9 /* StatsCalculator.swift */; };
+		F099978E1D7389C0006030D9 /* StatsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F099978D1D7389C0006030D9 /* StatsCalculatorTests.swift */; };
 		F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */; };
 		F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */; };
 		F0A577311D4E446D00D2039A /* ClosestActivityDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */; };
@@ -385,6 +392,11 @@
 		F099977D1D6A485D006030D9 /* ActivityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTests.swift; sourceTree = "<group>"; };
 		F099977F1D6A8367006030D9 /* DayResultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsTests.swift; sourceTree = "<group>"; };
 		F09997811D6A83AD006030D9 /* DayResults+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayResults+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F09997831D73457B006030D9 /* ProfileCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCreator.swift; sourceTree = "<group>"; };
+		F09997851D73458A006030D9 /* ProfileCreatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCreatorTests.swift; sourceTree = "<group>"; };
+		F09997891D737E8A006030D9 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		F099978B1D73897E006030D9 /* StatsCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsCalculator.swift; sourceTree = "<group>"; };
+		F099978D1D7389C0006030D9 /* StatsCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsCalculatorTests.swift; sourceTree = "<group>"; };
 		F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F0A577301D4E446D00D2039A /* ClosestActivityDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClosestActivityDisplay.xib; sourceTree = "<group>"; };
@@ -630,6 +642,11 @@
 				F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */,
 				F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */,
 				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
+				F09997831D73457B006030D9 /* ProfileCreator.swift */,
+				F09997851D73458A006030D9 /* ProfileCreatorTests.swift */,
+				F09997891D737E8A006030D9 /* DataStore.swift */,
+				F099978B1D73897E006030D9 /* StatsCalculator.swift */,
+				F099978D1D7389C0006030D9 /* StatsCalculatorTests.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1418,6 +1435,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F09997871D734945006030D9 /* LifeExpacity2013.txt in Resources */,
+				F09997881D734949006030D9 /* ISOCodes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1634,6 +1653,7 @@
 				F009AEBF1BD9CC86007F38A9 /* StatsManage.swift in Sources */,
 				F0A9F9CA1CDE7CD000809BA2 /* Activity.swift in Sources */,
 				F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */,
+				F09997841D73457B006030D9 /* ProfileCreator.swift in Sources */,
 				F009AEBB1BD9CC86007F38A9 /* Profile.swift in Sources */,
 				F009AEBC1BD9CC86007F38A9 /* ProfileManageActivities.swift in Sources */,
 				F0A6135F1D32F0860051743C /* Period.swift in Sources */,
@@ -1651,6 +1671,8 @@
 				F0A613631D332CE30051743C /* TimeCalculator.swift in Sources */,
 				F009AEBD1BD9CC86007F38A9 /* ProfileManageStats.swift in Sources */,
 				F09997711D60CB6E006030D9 /* StaticDateFormatter.swift in Sources */,
+				F099978A1D737E8A006030D9 /* DataStore.swift in Sources */,
+				F099978C1D73897E006030D9 /* StatsCalculator.swift in Sources */,
 				F09997731D61068E006030D9 /* Constants.swift in Sources */,
 				F041945E1CD0479300C9B896 /* Day.swift in Sources */,
 				F09997681D57D651006030D9 /* Basis.swift in Sources */,
@@ -1672,10 +1694,12 @@
 				F04194661CD2E5A300C9B896 /* TestHelper.swift in Sources */,
 				F09997801D6A8367006030D9 /* DayResultsTests.swift in Sources */,
 				F009AEF11BD9CF21007F38A9 /* TimingManageTest.swift in Sources */,
+				F099978E1D7389C0006030D9 /* StatsCalculatorTests.swift in Sources */,
 				F0A613611D32F57C0051743C /* ActivityDurationTests.swift in Sources */,
 				F09997751D6136A0006030D9 /* CoreDataBaseTest.swift in Sources */,
 				F009AEEF1BD9CF21007F38A9 /* TestCoreDataStack.swift in Sources */,
 				F009AEEC1BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift in Sources */,
+				F09997861D73458A006030D9 /* ProfileCreatorTests.swift in Sources */,
 				F0F9BBDE1D3BBF0500920EF8 /* TimeCalculatorTests.swift in Sources */,
 				F009AEED1BD9CF21007F38A9 /* ProfileManageStatsTest.swift in Sources */,
 				F0A9F9C21CD6C33400809BA2 /* WeekdayTests.swift in Sources */,

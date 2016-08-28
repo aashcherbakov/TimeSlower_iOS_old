@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-public class Profile: NSManagedObject {
+public class Profile: NSManagedObject, Persistable {
 
     @NSManaged public var birthday: NSDate
     @NSManaged public var country: String
     @NSManaged public var dateOfDeath: NSDate
     @NSManaged public var gender: NSNumber
     @NSManaged public var name: String
-    @NSManaged public var photo: NSData
+    @NSManaged public var photo: NSData?
     @NSManaged public var activities: NSSet
 
 }

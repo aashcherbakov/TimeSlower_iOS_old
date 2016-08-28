@@ -80,8 +80,11 @@ class ProfileEditingViewModel : NSObject {
         cellConfig = ProfileEditingCellConfig(withProfile: profile)
         
         if let profile = profile {
-            selectedAvatar = UIImage(data: profile.photo)
             selectedGender = profile.userGender()
+        }
+        
+        if let photoData = profile?.photo {
+            selectedAvatar = UIImage(data: photoData)
         }
     }
     
