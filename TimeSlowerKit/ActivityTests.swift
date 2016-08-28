@@ -30,6 +30,7 @@ class ActivityTests: CoreDataBaseTest {
         finishTime = dateFormatter.dateFromString("7/8/15, 10:30 AM")!
         updatedStartTime = dateFormatter.dateFromString("7/8/15, 11:00 AM")!
         updatedFinishTime = dateFormatter.dateFromString("7/8/15, 11:40 AM")!
+        
     }
     
     override func tearDown() {
@@ -178,6 +179,39 @@ class ActivityTests: CoreDataBaseTest {
         
         // then
         XCTAssertEqual(comparingResult.rawValue, NSComparisonResult.OrderedDescending.rawValue, "Comparison result should be ascending")
+    }
+    
+    func test_fitWeekday() {
+        let weekday = Weekday(rawValue: 0)!
+        XCTAssertTrue(testActivity.fitsWeekday(weekday), "it should fit Saturday as it's a daily activity")
+    }
+    
+    func test_fitWeekdayNegative() {
+        let weekday = Weekday(rawValue: 0)!
+        let workdayActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Workdays)
+        XCTAssertFalse(workdayActivity.fitsWeekday(weekday), "it should not fit Saturday as it's a workdays only activity")
+    }
+    
+    // MARK: - Occupies Time Between Start and Finish date
+    
+    func test_occupiesTimeBetween_Positive() {
+        XCTAssertTrue(testActivity.occupiesTimeBetween(startTime, finish: finishTime),
+                      "it should be occupied by test activity")
+    }
+    
+    func test_occupiesTimeBetween_Positive_StartTimeIntersection() {
+        XCTAssertTrue(testActivity.occupiesTimeBetween(startTime, finish: updatedFinishTime),
+                      "it should be occupied by test activity")
+    }
+    
+    func test_occupiesTimeBetween_Positive_FinishTimeIntersection() {
+        XCTAssertTrue(testActivity.occupiesTimeBetween(finishTime, finish: updatedFinishTime),
+                      "it should be occupied by test activity")
+    }
+    
+    func test_occupiesTimeBetween_Negative() {
+        XCTAssertFalse(testActivity.occupiesTimeBetween(updatedStartTime, finish: updatedFinishTime),
+                      "it should not be occupied by test activity")
     }
     
     

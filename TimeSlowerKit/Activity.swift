@@ -12,6 +12,8 @@ import CoreData
 /// NSManagedObject subclass that stores information about user activity
 public class Activity: NSManagedObject, Persistable {
     
+    private let timeMachine = TimeMachine()
+    
     // TODO: convert properties of activity to Enum
     public class func typeWithEnum(type: ActivityType) -> NSNumber {
         return NSNumber(integer: type.rawValue)
@@ -51,8 +53,57 @@ public class Activity: NSManagedObject, Persistable {
         return currentActivityTime.compare(otherActivityTime)
     }
     
+    /**
+     Checks if activity is happening in given Weekday
+     
+     - parameter weekday: Weekday to check
+     
+     - returns: True if days of activity has this weekday
+     */
+    public func fitsWeekday(weekday: Weekday) -> Bool {
+        let fit = days.filter { (day) -> Bool in
+            guard let day = day as? Day else { return false }
+            return day.name == weekday.shortName
+        }
+        
+        return fit.count > 0
+    }
+    
+    /**
+     Checks if activity is occupying given period of time
+     
+     - parameter start:  NSDate for start of period
+     - parameter finish: NSDate for finish
+     
+     - returns: True if period is occupied
+     */
+    public func occupiesTimeBetween(start: NSDate, finish: NSDate) -> Bool {
+        let updatedStartTime = timeMachine.updatedTime(timing.startTime, forDate: start)
+        let updatedFinishTime = timeMachine.updatedTime(timing.finishTime, forDate: finish)
+
+        if start < updatedFinishTime && updatedStartTime < finish {
+            return true
+        }
+
+        return false
+    }
+    
     // MARK: - Persistance
     
+    /**
+     Creates Activity instance and saves it in Profile's context
+     
+     - parameter type:          ActivityType - goal or routine
+     - parameter name:          String for name
+     - parameter selectedDays:  Array of Integers from 0 to 6
+     - parameter startTime:     NSDate
+     - parameter duration:      ActivityDuration instance
+     - parameter notifications: True for enabled notifications
+     - parameter timeToSave:    Int for minutes to be saved
+     - parameter profile:       Profile instance
+     
+     - returns: Activity instance
+     */
     public static func createActivityWithType(type: ActivityType, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
         
         let activity = Activity.newActivityForProfile(profile, ofType: type)

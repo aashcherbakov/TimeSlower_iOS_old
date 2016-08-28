@@ -14,88 +14,84 @@ extension Profile {
     
     //MARK: - Activities in general
     
+    /**
+     Transforms NSSet of stored Activities to array
+     
+     - returns: Array of Activity instances
+     */
     public func allActivities() -> [Activity] {
-        var activitiesArray = [Activity]()
-        for activity in activities {
-            if let checkedActivity = activity as? Activity {
-                activitiesArray.append(checkedActivity)
-            }
-        }
-        return activitiesArray
+        return activities.allObjects as! [Activity]
     }
     
+    /**
+     Filters set of activities and returns one with matched name
+     
+     - parameter passedName: String with name
+     
+     - returns: Activity if there is one with given name
+     */
     public func activityForName(passedName: String) -> Activity? {
-        let matchingActivities = allActivities().filter({ $0.name == passedName })
-        if matchingActivities.count > 0 { return matchingActivities[0] }
-        return nil
+        return allActivities().filter { $0.name == passedName }.first
     }
     
+    /**
+     Searches for all activities that accurs on given date.
+     
+     - parameter date: NSDate instance
+     
+     - returns: sorted by next action time Array of Activity instances
+     */
     public func activitiesForDate(date: NSDate) -> [Activity] {
-//        let calendar = TimeMachine(withProfile: self)
-//        let dayOfWeek = TimeMachine.DayName(rawValue: calendar.correctWeekdayFromDate(date))
-//        return sortActivitiesByTime(activitiesForWeekday(dayOfWeek!))
-        return []
+        let weekday = Weekday.createFromDate(date)
+        let activities = allActivities().filter { $0.fitsWeekday(weekday) }
+        return sortActivitiesByTime(activities)
     }
     
-    
-    
-    func activitiesForWeekday(weekday: Weekday) -> [Activity] {
-        var resultArray = [Activity]()
-//        if weekday == .Saturday || weekday == .Sunday {
-//            for activity in allActivities() {
-//                if activity.activityBasis() == .Daily || activity.activityBasis() == .Weekends {
-//                    resultArray.append(activity)
-//                }
-//            }
-//        } else if weekday != .Saturday && weekday != .Sunday {
-//            for activity in allActivities() {
-//                if activity.activityBasis() == .Daily || activity.activityBasis() == .Workdays {
-//                    resultArray.append(activity)
-//                }
-//            }
-//        }
-        return resultArray
-    }
-    
-    
-    public func isTimeIntervalFree(startTime start: NSDate, finish: NSDate, basis: Basis) -> Activity? {
-        var preventing: Activity?
-        for activity in allActivities() {
-            if basis == .Daily {
-                preventing = checkTimeIntervalForActivity(activity, testedStart: start, testedFinish: finish)
-            } else {
-                if activity.activityBasis() == basis || activity.activityBasis() == .Daily {
-                    preventing = checkTimeIntervalForActivity(activity, testedStart: start, testedFinish: finish)
+    /**
+     Checks if time interval is free for creating new activity.
+     Made to make sure activities do not overlap with each other.
+     
+     - parameter start:    NSDate for start time
+     - parameter duration: ActivityDuration
+     - parameter days:     Array of Weekday instances for activity occurances
+     
+     - returns: Activity that is occupying given time if there is one
+     */
+    public func hasActivityScheduledToStart(start: NSDate, duration: ActivityDuration, days: [Weekday]) -> Activity? {
+        let activities = allActivities()
+        let needStart = TimeMachine().updatedTime(start, forDate: NSDate())
+        let needFinish = needStart.dateByAddingTimeInterval(duration.seconds())
+
+        for day in days {
+            let weekdayActivities = activities.filter { $0.fitsWeekday(day) }
+            for activity in weekdayActivities {
+                if activity.occupiesTimeBetween(needStart, finish: needFinish) {
+                    return activity
                 }
             }
         }
-        return preventing
-    }
-    
-    
-    /// Should not be called directly (public for testing reasons)
-    public func checkTimeIntervalForActivity(activity: Activity, testedStart: NSDate, testedFinish: NSDate) -> Activity? {
-        let start = Timing.updateTimeForToday(testedStart)
-        let finish = Timing.updateTimeForToday(testedFinish)
-        
-        if start < (activity.updatedFinishTime()) {
-            if activity.updatedStartTime() < (finish) {
-                return activity
-            }
-        }
+       
         return nil
     }
     
-    public func sortActivitiesByTime(arrayOfActivities: [Activity]) -> [Activity] {
-        let arrayToSort = arrayOfActivities
-        let sortedArray: [Activity] = arrayToSort.sort(sortByNextActionTime)
-        return sortedArray
+    /**
+     Sorts activities by nextActionTime()
+     
+     - parameter arrayOfActivities: Array of activities
+     
+     - returns: Sorted Array of Activity instances
+     */
+    func sortActivitiesByTime(arrayOfActivities: [Activity]) -> [Activity] {
+        return arrayOfActivities.sort {
+            $0.timing.nextActionTime() < $1.timing.nextActionTime()
+        }
     }
     
-    public func sortByNextActionTime(activity1: Activity, activity2: Activity) -> Bool {
-        return activity1.timing.nextActionTime() < (activity2.timing.nextActionTime())
-    }
-    
+    /**
+     Looks for activity that is going on right now. If there is none, returns next closest activity
+     
+     - returns: Activity instance
+     */
     public func findCurrentActivity() -> Activity? {
         for activity in activitiesForDate(NSDate()) {
             if activity.isGoingNow() {
@@ -133,6 +129,14 @@ extension Profile {
         let tomorrowActivities = activitiesForDate(NSDate().dateByAddingTimeInterval(60*60*24))
         return (tomorrowActivities.count > 0) ? sortActivitiesByTime(tomorrowActivities).first! : nil
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     //MARK: - Goals
     

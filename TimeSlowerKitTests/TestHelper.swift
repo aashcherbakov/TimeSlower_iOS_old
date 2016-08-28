@@ -8,6 +8,7 @@
 
 import Foundation
 
+import TimeSlowerKit
 struct TestHelper {
     
     static func tuesdayApril26() -> NSDate {

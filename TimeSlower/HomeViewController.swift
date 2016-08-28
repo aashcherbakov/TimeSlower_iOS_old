@@ -10,7 +10,7 @@ import UIKit
 import TimeSlowerKit
 import ReactiveCocoa
 
-class HomeViewController: UIViewController {
+internal class HomeViewController: UIViewController {
     
     private struct Constants {
         static let controlFlowButtonHeight: CGFloat = 48

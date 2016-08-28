@@ -627,8 +627,8 @@
 			children = (
 				F009AEAF1BD9CC86007F38A9 /* Profile.swift */,
 				F009AEB01BD9CC86007F38A9 /* ProfileManageActivities.swift */,
-				F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */,
 				F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTest.swift */,
+				F009AEB11BD9CC86007F38A9 /* ProfileManageStats.swift */,
 				F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTest.swift */,
 			);
 			name = Profile;
@@ -1304,7 +1304,7 @@
 				TargetAttributes = {
 					F009AE521BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 8P75UG89TN;
+						DevelopmentTeam = EURPM5EP89;
 					};
 					F009AE691BD9C5F8007F38A9 = {
 						CreatedOnToolsVersion = 7.0.1;
