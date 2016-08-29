@@ -66,7 +66,7 @@ extension Stats {
     }
     
     public func updateSuccessWithResult(result: DayResults) {
-        guard let results = activity.results else {
+        guard let results = activity.results where results.count > 0 else {
             averageSuccess = result.factSuccess
             return
         }

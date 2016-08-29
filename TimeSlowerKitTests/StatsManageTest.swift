@@ -58,12 +58,14 @@ class StatsManageTest: CoreDataBaseTest {
     }
     
     func test_updateAvarageSuccess() {
+        testResult.factSuccess = 70
+        testActivity.stats.updateSuccessWithResult(testResult)
         let result1 = DayResults.newResultWithDate(TestHelper.mondayApril25(), forActivity: testActivity)
         result1.factSuccess = 50
+        testActivity.stats.updateSuccessWithResult(result1)
         let result2 = DayResults.newResultWithDate(TestHelper.saturdayApril30(), forActivity: testActivity)
         result2.factSuccess = 60
-        
-        try! testContext.save()
+        testActivity.stats.updateSuccessWithResult(result2)
         
         XCTAssertEqual(testActivity.stats.averageSuccess, 60)
     }

@@ -27,7 +27,8 @@ public class DayResults: NSManagedObject, Persistable {
             result.date = DayResults.standardDateFormatter().stringFromDate(date)
             result.factStartTime = activity.timing.updatedStartTimeForDate(date)
             result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
-            result.factSuccess = NSNumber(double: result.daySuccess())
+            result.factSuccess = NSNumber(double: result.daySuccessForTiming(activity.timing))
+            
             activity.stats.updateSuccessWithResult(result)
             
             if activity.isRoutine() {
@@ -59,10 +60,10 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Double for % of achieved result
      */
-    public func daySuccess() -> Double {
+    public func daySuccessForTiming(timing: Timing) -> Double {
         let successCalculator = DayResults.successForActivityType(activity.activityType())
-        let duration = Double(activity.timing.duration.minutes())
-        let goal = activity.timing.timeToSave.doubleValue
+        let duration = Double(timing.duration.minutes())
+        let goal = timing.timeToSave.doubleValue
         return successCalculator(start: factStartTime, finish: factFinishTime, maxDuration: duration, goal: goal)
     }
     

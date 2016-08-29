@@ -92,7 +92,7 @@ public class TestCoreDataStack: CoreDataStack {
         newResult.factFinishTime = activity.updatedFinishTime().dateByAddingTimeInterval(-5*60)
         newResult.activity.timing.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
         newResult.factStartTime = (newResult.activity.timing.manuallyStarted!)
-        newResult.factSuccess = NSNumber(double: newResult.daySuccess())
+        newResult.factSuccess = NSNumber(double: newResult.daySuccessForTiming(activity.timing))
         
         newResult.factDuration = NSNumber(double: abs(newResult.factFinishTime.timeIntervalSinceDate(newResult.factStartTime) / 60))
         

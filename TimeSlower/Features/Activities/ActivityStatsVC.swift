@@ -172,7 +172,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     func setValuesAndLabelsForGraph(lastResults: [DayResults]) {
         for result in lastResults {
             lastWeekDayNames.append(result.shortDayNameForDate())
-            lastWeekResultValues.append(result.daySuccess())
+            lastWeekResultValues.append(result.daySuccessForTiming(activity.timing))
         }
         
         addMissingResultsValuesAndLabels(lastResults)
