@@ -22,19 +22,21 @@ public class DayResults: NSManagedObject, Persistable {
         } else {
             let entity = NSEntityDescription.entityForName("DayResults", inManagedObjectContext: activity.managedObjectContext!)
             result = DayResults(entity: entity!, insertIntoManagedObjectContext: activity.managedObjectContext)
-            result.activity = activity
             result.factFinishTime = date
             result.raughDate = date
             result.date = DayResults.standardDateFormatter().stringFromDate(date)
             result.factStartTime = activity.timing.updatedStartTimeForDate(date)
             result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
             result.factSuccess = NSNumber(double: result.daySuccess())
+            activity.stats.updateSuccessWithResult(result)
             
             if activity.isRoutine() {
                 result.factSavedTime = activity.timing.duration.minutes() - result.factDuration.integerValue
             }
             
+            result.activity = activity
             activity.timing.manuallyStarted = nil
+
             saveContext(activity.managedObjectContext)
         }
         

@@ -24,47 +24,36 @@ extension Stats {
         public var hours: Double
     }
     
+    /**
+     Creates new stats object and assigns it to given activity
+     
+     - parameter givenActivity: Activity instance
+     
+     - returns: Stats instance
+     */
     public class func newStatsForActivity(activity givenActivity: Activity) -> Stats {
-        let entity = NSEntityDescription.entityForName("Stats", inManagedObjectContext: givenActivity.managedObjectContext!)
-        let stats = Stats(entity: entity!, insertIntoManagedObjectContext: givenActivity.managedObjectContext)
-        stats.activity = givenActivity
+        guard let context = givenActivity.managedObjectContext else {
+            fatalError("Passed activity has no context")
+        }
         
-        var error: NSError?
-        do {
-            try givenActivity.managedObjectContext!.save()
-        } catch let error1 as NSError { error = error1; print("Could not save: \(error)") }
+        guard let entity = NSEntityDescription.entityForName("Stats", inManagedObjectContext: context) else {
+            fatalError("Could not find entity with name Stats")
+        }
+        
+        let stats = Stats(entity: entity, insertIntoManagedObjectContext: context)
+        stats.activity = givenActivity
+        saveContext(context)
         
         return stats
     }
-    
-    /// Can not be tested in XCTests because of InMemory store type bug
-    public func updateAverageSuccess() {
-        guard let results = activity.results else {
-            return
-        }
-        
-        if results.count > 0 {
-            let fetchRequest = NSFetchRequest(entityName: "DayResults")
-            fetchRequest.resultType = .DictionaryResultType
-            fetchRequest.propertiesToFetch = averageSuccessCalculation()
-            fetchRequest.predicate = NSPredicate(format: "activity.name == %@", activity.name)
-            
-            do {
-                let result = try managedObjectContext!.executeFetchRequest(fetchRequest)
-                let resultDict = result[0]
-                let averSuccess: AnyObject? = resultDict["averSuccess"]
-                let transformingSuccess = "\(averSuccess)"
-                self.averageSuccess = NSNumber(integer: Int(transformingSuccess)!)
-            } catch let error as NSError {
-                print("Error during updating avarage success: \(error)")
-            }
-        }
-    }
-    
 
-    // Get total hours spent or saved on activity depending on basis
-    public func updateStats() {
-        let daysLeft = activity.profile.numberOfDaysTillEndOfLifeSinceDate(NSDate())
+    /**
+     Calculates total hours, days, months and years that would be spent on activity in lifetime of user
+     
+     - parameter date: starting NSDate
+     */
+    public func updateStatsForDate(date: NSDate) {
+        let daysLeft = activity.profile.numberOfDaysTillEndOfLifeSinceDate(date)
         let busyDays = activity.days.count
         let duration = activity.timing.duration.minutes()
         let calculator = TimeCalculator()
@@ -76,39 +65,43 @@ extension Stats {
         summYears = calculator.totalYears(inDays: daysLeft, duration: duration, busyDays: busyDays)
     }
     
-    /// Returns total number of days when activity was "on" based on it's basis
-    public func busyDaysForPeriod(period: PastPeriod, sinceDate date: NSDate) -> Int {
-        var days = 0
-        let calendar = TimeMachine()
-        
-        if period == .Today { days = 1 }
-        
-        if period == .LastYear && activity.activityBasis() == .Daily {
-            return calendar.numberOfDaysInPeriod(period, fromDate: date)
+    public func updateSuccessWithResult(result: DayResults) {
+        guard let results = activity.results else {
+            averageSuccess = result.factSuccess
+            return
         }
         
-        if let dayNames = activity.days as? Set<Day> {
-            for weekday in dayNames {
-//                days += calendar.numberOfWeekdaysNamed(currentDayName, forPeriod: period, sinceDate: date)
-            }
-        }
-        
-        
-        return days
+        let currentSuccess = averageSuccess.doubleValue
+        let numberOfResults = Double(results.count)
+        let summResultsValue = currentSuccess * numberOfResults + result.factSuccess.doubleValue
+        averageSuccess = summResultsValue / (numberOfResults + 1)
     }
     
-    public func busyDaysInLifetimeSinceDate(date: NSDate) -> Int {
-        let totalDays = activity.profile.numberOfDaysTillEndOfLifeSinceDate(date)
-        
-        switch activity.activityBasis() {
-        case .Daily: return totalDays
-        case .Workdays: return totalDays / 7 * 5
-        case .Weekends: return totalDays / 7 * 2
-        case .Random: return totalDays
-        }
-    }
+
     
-    
+//    /// Can not be tested in XCTests because of InMemory store type bug
+//    public func updateAverageSuccess() {
+//        guard let results = activity.results, context = managedObjectContext else {
+//            return
+//        }
+//        
+//        if results.count > 0 {
+//            let fetchRequest = NSFetchRequest(entityName: "DayResults")
+//            fetchRequest.resultType = .DictionaryResultType
+//            fetchRequest.propertiesToFetch = averageSuccessCalculation()
+//            fetchRequest.predicate = NSPredicate(format: "activity.name == %@", activity.name)
+//            
+//            do {
+//                let result = try context.executeFetchRequest(fetchRequest)
+//                let resultDict = result[0]
+//                let averSuccess: AnyObject? = resultDict["averSuccess"]
+//                let transformingSuccess = "\(averSuccess)"
+//                averageSuccess = NSNumber(integer: Int(transformingSuccess)!)
+//            } catch let error as NSError {
+//                print("Error during updating avarage success: \(error)")
+//            }
+//        }
+//    }
     
     
     //MARK: - LifeTime stats
@@ -124,22 +117,6 @@ extension Stats {
             months: totalTimePlanned.months * successFroNow,
             days: totalTimePlanned.days * successFroNow,
             hours: totalTimePlanned.hours * successFroNow)
-    }
-    
-    public func plannedTimingInLifetime() -> Profile.LifeTime? {
-        var toSave = 0.0
-        var toSpend = 0.0
-        
-        for anActivity in activity.profile.allActivities() {
-            if anActivity.isRoutine() {
-                toSave += activity.timing.timeToSave.doubleValue
-            } else {
-                toSpend += Double(activity.timing.duration.minutes())
-            }
-        }
-        let timingForRoutines = activity.profile.totalTimeForDailyMinutes(toSave)
-        let timingForGoals = activity.profile.totalTimeForDailyMinutes(toSpend)
-        return activity.isRoutine() ? timingForRoutines : timingForGoals
     }
     
     /// Cannot be tested in InMemoryStoreType
@@ -159,6 +136,24 @@ extension Stats {
         }
         return summSavedTimeLastYear
     }
+
+    
+    public func plannedTimingInLifetime() -> Profile.LifeTime? {
+        var toSave = 0.0
+        var toSpend = 0.0
+        
+        for anActivity in activity.profile.allActivities() {
+            if anActivity.isRoutine() {
+                toSave += activity.timing.timeToSave.doubleValue
+            } else {
+                toSpend += Double(activity.timing.duration.minutes())
+            }
+        }
+        let timingForRoutines = activity.profile.totalTimeForDailyMinutes(toSave)
+        let timingForGoals = activity.profile.totalTimeForDailyMinutes(toSpend)
+        return activity.isRoutine() ? timingForRoutines : timingForGoals
+    }
+    
     
 
     
@@ -179,5 +174,11 @@ extension Stats {
     }
     
 
-    
+    // TODO: checkout what to do with this?
+    /// Returns total number of days when activity was "on" based on it's basis
+    public func busyDaysForPeriod(period: PastPeriod, sinceDate date: NSDate) -> Int {
+        let totalDays = TimeMachine().numberOfDaysInPeriod(period, fromDate: date)
+        return totalDays / 7 * activity.days.count
+        // what if it's today and it only once?
+    }
 }

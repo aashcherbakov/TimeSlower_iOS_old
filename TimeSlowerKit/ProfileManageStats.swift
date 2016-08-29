@@ -165,9 +165,32 @@ extension Profile {
         return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: birthday, options: [])!
     }
     
-    
+    /**
+     Returns number of days between given date and dateOfApproximateLifeEnd() value
+     
+     - parameter date: NSDate to start countdown
+     
+     - returns: Int for number of days
+     */
+    public func numberOfDaysTillEndOfLifeSinceDate(date: NSDate) -> Int {
+        let components = NSCalendar.currentCalendar().components(
+            .Day, fromDate: date, toDate: dateOfApproximateLifeEnd(), options: [])
+        return components.day
+    }
     
 
+    
+    
+    public func totalTimeForDailyMinutes(minutes: Double) -> LifeTime {
+        let minutes = Double(minutes)
+        let daysLeft = Double(numberOfDaysTillEndOfLifeSinceDate(NSDate()))
+        
+        let hours = minutes * daysLeft / 60.0
+        let days = hours / 24
+        let months = days / 30
+        let years = months / 12
+        return LifeTime(years: years, months: months, days: days, hours: hours)
+    }
     
     
     
@@ -272,24 +295,8 @@ extension Profile {
     //    }
     
     
-    public func totalTimeForDailyMinutes(minutes: Double) -> LifeTime {
-        let minutes = Double(minutes)
-        let daysLeft = Double(numberOfDaysTillEndOfLifeSinceDate(NSDate()))
-        
-        let hours = minutes * daysLeft / 60.0
-        let days = hours / 24
-        let months = days / 30
-        let years = months / 12
-        return LifeTime(years: years, months: months, days: days, hours: hours)
-    }
-    
-    public func numberOfDaysTillEndOfLifeSinceDate(date: NSDate) -> Int {
-        let components = NSCalendar.currentCalendar().components(.Day,
-            fromDate: date,
-            toDate: dateOfApproximateLifeEnd(),
-            options: [])
-        return components.day
-    }
+ 
+
     
     
     //MARK: - Default settings

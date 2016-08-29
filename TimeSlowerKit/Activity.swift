@@ -115,7 +115,7 @@ public class Activity: NSManagedObject, Persistable {
         activity.timing.duration = duration
         activity.timing.timeToSave = timeToSave
         activity.notifications = notifications
-        activity.stats.updateStats()
+        activity.stats.updateStatsForDate(NSDate())
         
         Activity.saveContext(activity.managedObjectContext)
         
@@ -132,7 +132,7 @@ public class Activity: NSManagedObject, Persistable {
         activity.timing.duration = duration
         activity.timing.timeToSave = timeToSave
         activity.notifications = notifications
-        activity.stats.updateStats()
+        activity.stats.updateStatsForDate(NSDate())
         
         Activity.saveContext(activity.managedObjectContext)
     }

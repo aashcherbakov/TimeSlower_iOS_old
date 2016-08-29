@@ -11,17 +11,10 @@ import XCTest
 import CoreData
 import TimeSlowerKit
 
-class StatsManageTest: XCTestCase {
+class StatsManageTest: CoreDataBaseTest {
 
-    var testCoreDataStack: TestCoreDataStack!
-    var testContext: NSManagedObjectContext!
-    
-    var testProfile: Profile!
-    var testActivity: Activity!
     var testResult: DayResults!
     var testActivityForDeletion: Activity!
-    var testActivityStats: Stats!
-    var testActivityTiming: Timing!
     
     var testDateFormatter: NSDateFormatter!
     var standartDateFormatter: NSDateFormatter!
@@ -32,31 +25,13 @@ class StatsManageTest: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        // CoreDataStack
-        testCoreDataStack = TestCoreDataStack()
-        testContext = testCoreDataStack.managedObjectContext
-        
-        // Creating fake instances
-        testProfile = testCoreDataStack.fakeProfile()
-        testActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
         testResult = testCoreDataStack.fakeResultForActivity(testActivity)
-        testActivityStats = testActivity.stats
-        testActivityTiming = testActivity.timing
-        testCoreDataStack.saveContext()
-        
         testDateFormatter = testCoreDataStack.shortStyleDateFormatter()
         standartDateFormatter = DayResults.standardDateFormatter()
         timeMachine = TimeMachine()
     }
     
     override func tearDown() {
-        testContext.deleteObject(testResult)
-        testContext.deleteObject(testActivityTiming)
-        testContext.deleteObject(testActivityStats)
-        testContext.deleteObject(testActivity)
-        testContext.deleteObject(testProfile)
-        testCoreDataStack.saveContext()
-        
         testCoreDataStack = nil
         testContext = nil
         testProfile = nil
@@ -66,44 +41,32 @@ class StatsManageTest: XCTestCase {
         super.tearDown()
     }
     
-    func testUpdateStats() {
-        testActivity.stats.updateStats()
-//        XCTAssertGreaterThan(testActivity.stats!.summHours.doubleValue, 2600, "Summ hours should be more than 2600")
-//        XCTAssertGreaterThan(testActivity.stats!.summDays.doubleValue, 100, "Summ days should be more than 100")
-//        XCTAssertGreaterThan(testActivity.stats!.summMonths.doubleValue, 3, "Summ months should be more than 3")
-//        XCTAssertGreaterThan(testActivity.stats!.summYears.doubleValue, 0.2, "Summ years should be more than 0.2")
-        XCTAssertLessThan(testActivity.stats.summHours.doubleValue, 3000, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats.summDays.doubleValue, 130, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats.summMonths.doubleValue, 5, "Summ hours must be less then 3000")
-        XCTAssertLessThan(testActivity.stats.summYears.doubleValue, 0.5, "Summ hours must be less then 3000")
-    }
-
-    
-    func testBusyDaysForActivity() {
-        
-        let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
-        
-        // daily basis
-        var numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 30, "Number of busy days for daily activity last month is 30")
-        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 365, "Number of busy days for daily activity last year is 365")
-
-        // weekend basis
-        testActivity.basis = Activity.basisWithEnum(.Weekends)
-        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 8, "Number of busy days for weekend activity last month is 30")
-        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 106, "Number of busy days for weekend activity last year is 365")
-        
-        // workday basis
-        testActivity.basis = Activity.basisWithEnum(.Workdays)
-        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 22, "Number of busy days for Workdays activity last month is 30")
-        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
-        XCTAssertEqual(numberOfBusyDays, 266, "Number of busy days for Workdays activity last year is 365")
+    func test_newStatsForActivity() {
+        let stats = Stats.newStatsForActivity(activity: testActivity)
+        XCTAssertNotNil(stats, "it should create stats object")
+        XCTAssertEqual(stats.activity, testActivity, "it should assign fake activity")
+        XCTAssertEqual(testActivity.stats, stats, "it should replace stats in test activity")
     }
     
+    func test_updateStats() {
+        testActivity.stats.updateStatsForDate(
+            DayResults.standardDateFormatter().dateFromString("08/28/16")!)
+        XCTAssertEqual(testActivity.stats.summHours.doubleValue, 8689.5, "Summ hours 8689")
+        XCTAssertEqual(testActivity.stats.summDays.doubleValue, 362.0625, "Summ days must be 362")
+        XCTAssertEqual(testActivity.stats.summMonths.doubleValue, 12.06875, "Summ months must be 12")
+        XCTAssertEqualWithAccuracy(testActivity.stats.summYears.doubleValue, 1, accuracy: 0.1, "Summ years must be 1")
+    }
+    
+    func test_updateAvarageSuccess() {
+        let result1 = DayResults.newResultWithDate(TestHelper.mondayApril25(), forActivity: testActivity)
+        result1.factSuccess = 50
+        let result2 = DayResults.newResultWithDate(TestHelper.saturdayApril30(), forActivity: testActivity)
+        result2.factSuccess = 60
+        
+        try! testContext.save()
+        
+        XCTAssertEqual(testActivity.stats.averageSuccess, 60)
+    }
     
     //MARK: - Savings: saved/planned
     //MARK: - - Lifetime
@@ -164,16 +127,36 @@ class StatsManageTest: XCTestCase {
 //        XCTAssertEqual(numberOfFridays, 5, "5 thursdays a month")
 //    }
     
-    func testBusyDaysForPeriod() {
-        let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
-        testActivity.basis = Activity.basisWithEnum(.Weekends)
-//        testActivity.busyDays = Activity.defaultBusyDaysForBasis(testActivity.activityBasis())
-        let daysInPeriod = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
-        XCTAssertEqual(daysInPeriod, 8, "4 Saturdays and 4 Sundays")
-    }
+//    func testBusyDaysForPeriod() {
+//        let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
+//        testActivity.basis = Activity.basisWithEnum(.Weekends)
+//        let daysInPeriod = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+//        XCTAssertEqual(daysInPeriod, 8, "4 Saturdays and 4 Sundays")
+//    }
     
-    
-    
-    
+//    func testBusyDaysForActivity() {
+//
+//        let referenceDate = standartDateFormatter.dateFromString("7/9/15")!
+//
+//        // daily basis
+//        var numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 30, "Number of busy days for daily activity last month is 30")
+//        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 365, "Number of busy days for daily activity last year is 365")
+//
+//        // weekend basis
+//        testActivity.basis = Activity.basisWithEnum(.Weekends)
+//        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 8, "Number of busy days for weekend activity last month is 30")
+//        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 106, "Number of busy days for weekend activity last year is 365")
+//
+//        // workday basis
+//        testActivity.basis = Activity.basisWithEnum(.Workdays)
+//        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastMonth, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 22, "Number of busy days for Workdays activity last month is 30")
+//        numberOfBusyDays = testActivity.stats.busyDaysForPeriod(.LastYear, sinceDate: referenceDate)
+//        XCTAssertEqual(numberOfBusyDays, 266, "Number of busy days for Workdays activity last year is 365")
+//    }
 
 }

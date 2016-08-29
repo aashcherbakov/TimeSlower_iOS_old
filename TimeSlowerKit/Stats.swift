@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public class Stats: NSManagedObject {
+public class Stats: NSManagedObject, Persistable {
 
     @NSManaged public var averageSuccess: NSNumber
     @NSManaged public var summDays: NSNumber
