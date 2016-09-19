@@ -14,7 +14,7 @@ public protocol Persistable: class { }
 
 public extension Persistable {
     /// Wrapper for save() function of NSManagedObjectContext called that trows error in default implementation
-    static func saveContext(context: NSManagedObjectContext?) {
+    static func saveContext(_ context: NSManagedObjectContext?) {
         do {
             try context?.save()
         } catch let error as NSError {

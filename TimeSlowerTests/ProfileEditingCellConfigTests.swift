@@ -35,7 +35,7 @@ class ProfileEditingCellConfigTests: XCTestCase {
     }
     
     func testUpdateBirthday() {
-        let date = NSDate()
+        let date = Date()
         config.updateValue(date, forType: .Birthday)
         XCTAssertEqual(date, config.birthday, "Birthday should be today")
     }

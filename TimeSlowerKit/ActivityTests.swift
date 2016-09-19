@@ -12,24 +12,24 @@ import TimeSlowerKit
 
 class ActivityTests: CoreDataBaseTest {
     
-    var startTime: NSDate!
-    var finishTime: NSDate!
+    var startTime: Date!
+    var finishTime: Date!
     
-    var updatedStartTime: NSDate!
-    var updatedFinishTime: NSDate!
+    var updatedStartTime: Date!
+    var updatedFinishTime: Date!
     
     var expectation: XCTestExpectation!
     var testActivityForDeletion: Activity!
-    var dateFormatter: NSDateFormatter!
+    var dateFormatter: DateFormatter!
     
     override func setUp() {
         super.setUp()
         dateFormatter = StaticDateFormatter.shortDateAndTimeFormatter
 
-        startTime = dateFormatter.dateFromString("7/8/15, 10:00 AM")!
-        finishTime = dateFormatter.dateFromString("7/8/15, 10:30 AM")!
-        updatedStartTime = dateFormatter.dateFromString("7/8/15, 11:00 AM")!
-        updatedFinishTime = dateFormatter.dateFromString("7/8/15, 11:40 AM")!
+        startTime = dateFormatter.date(from: "7/8/15, 10:00 AM")!
+        finishTime = dateFormatter.date(from: "7/8/15, 10:30 AM")!
+        updatedStartTime = dateFormatter.date(from: "7/8/15, 11:00 AM")!
+        updatedFinishTime = dateFormatter.date(from: "7/8/15, 11:40 AM")!
         
     }
     
@@ -75,7 +75,7 @@ class ActivityTests: CoreDataBaseTest {
           name: "Morning",
           selectedDays: [6, 0],
           startTime: updatedStartTime,
-          duration: ActivityDuration(value: 40, period: .Minutes),
+          duration: ActivityDuration(value: 40, period: .minutes),
           notifications: false,
           timeToSave: 10)
         
@@ -95,8 +95,8 @@ class ActivityTests: CoreDataBaseTest {
     }
     
     func testDeleteActivity() {
-        expectation = self.expectationForNotification(
-            NSManagedObjectContextDidSaveNotification,
+        expectation = self.expectation(
+            forNotification: Notification.Name.NSManagedObjectContextDidSave,
                 object: testCoreDataStack.managedObjectContext) {
                     notification in
                     return true
@@ -104,20 +104,20 @@ class ActivityTests: CoreDataBaseTest {
         
         let testActivityName = "Super name"
         testActivityForDeletion = Activity.createActivityWithType(
-            .Routine,
+            .routine,
             name: "Morning shower",
             selectedDays: [1],
-            startTime: dateFormatter.dateFromString("7/3/15, 10:15 AM")!,
-            duration: ActivityDuration(value: 30, period: .Minutes),
+            startTime: dateFormatter.date(from: "7/3/15, 10:15 AM")!,
+            duration: ActivityDuration(value: 30, period: .minutes),
             notifications: true,
             timeToSave: 10,
             forProfile: testProfile)
         
         testActivityForDeletion.name = testActivityName        
-        testCoreDataStack.managedObjectContext!.deleteObject(testActivityForDeletion)
+        testCoreDataStack.managedObjectContext!.delete(testActivityForDeletion)
         testCoreDataStack.saveContext()
         
-        waitForExpectationsWithTimeout(2.0) {
+        waitForExpectations(timeout: 2.0) {
             [unowned self] error in
             XCTAssertNil(self.testProfile.activityForName(testActivityName), "Activity should be nil after deletion")
             self.testActivityForDeletion = nil
@@ -127,17 +127,17 @@ class ActivityTests: CoreDataBaseTest {
     func fakeFetchRequest() -> [Activity] {
         let request = NSFetchRequest(entityName: "Activity")
         request.predicate = NSPredicate(format: "name == %@", "Morning shower")
-        return try! testContext.executeFetchRequest(request) as! [Activity]
+        return try! testContext.fetch(request) as! [Activity]
     }
     
     func testSetTypeWithEnum() {
-        testActivity.basis = Activity.basisWithEnum(.Weekends)
-        XCTAssertEqual(testActivity.basis.integerValue, Basis.Weekends.rawValue, "Basis should be Weekends")
+        testActivity.basis = Activity.basisWithEnum(.weekends)
+        XCTAssertEqual(testActivity.basis.intValue, Basis.weekends.rawValue, "Basis should be Weekends")
     }
     
     func testSetBasisWithEnum() {
-        testActivity.type = Activity.typeWithEnum(.Goal)
-        XCTAssertEqual(testActivity.type.integerValue, ActivityType.Goal.rawValue, "Basis should be Weekends")
+        testActivity.type = Activity.typeWithEnum(.goal)
+        XCTAssertEqual(testActivity.type.intValue, ActivityType.goal.rawValue, "Basis should be Weekends")
     }
     
     func testBasisDescription() {
@@ -146,12 +146,12 @@ class ActivityTests: CoreDataBaseTest {
     
     func testFinishWithResult() {
         // Negative
-        let result = DayResults.fetchResultWithDate(NSDate(), forActivity: testActivity)
+        let result = DayResults.fetchResultWithDate(Date(), forActivity: testActivity)
         XCTAssertNil(result, "Activity is not finished so it should not have any results")
         
         // Positive
         testActivity.finishWithResult()
-        let newResult = DayResults.fetchResultWithDate(NSDate(), forActivity: testActivity)
+        let newResult = DayResults.fetchResultWithDate(Date(), forActivity: testActivity)
         XCTAssertNotNil(newResult, "Finished activity must have result")
     }
     
@@ -166,7 +166,7 @@ class ActivityTests: CoreDataBaseTest {
         let comparingResult = firstActivity.compareBasedOnNextActionTime(secondActivity)
         
         // then
-        XCTAssertEqual(comparingResult.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Comparison result should be ascending")
+        XCTAssertEqual(comparingResult.rawValue, ComparisonResult.orderedAscending.rawValue, "Comparison result should be ascending")
     }
     
     func testCompareBasedOnNextActionTimeDescending() {
@@ -178,7 +178,7 @@ class ActivityTests: CoreDataBaseTest {
         let comparingResult = secondActivity.compareBasedOnNextActionTime(firstActivity)
         
         // then
-        XCTAssertEqual(comparingResult.rawValue, NSComparisonResult.OrderedDescending.rawValue, "Comparison result should be ascending")
+        XCTAssertEqual(comparingResult.rawValue, ComparisonResult.orderedDescending.rawValue, "Comparison result should be ascending")
     }
     
     func test_fitWeekday() {
@@ -188,7 +188,7 @@ class ActivityTests: CoreDataBaseTest {
     
     func test_fitWeekdayNegative() {
         let weekday = Weekday(rawValue: 0)!
-        let workdayActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Workdays)
+        let workdayActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .routine, basis: .workdays)
         XCTAssertFalse(workdayActivity.fitsWeekday(weekday), "it should not fit Saturday as it's a workdays only activity")
     }
     
@@ -217,24 +217,24 @@ class ActivityTests: CoreDataBaseTest {
     
     // MARK: - Helper functions
     
-    private func coffeeRoutine() -> Activity {
-        let activity = Activity.createActivityWithType(.Routine,
+    fileprivate func coffeeRoutine() -> Activity {
+        let activity = Activity.createActivityWithType(.routine,
            name: "Coffee",
            selectedDays: [1, 2, 3],
            startTime: startTime,
-           duration: ActivityDuration(value: 30, period: .Minutes),
+           duration: ActivityDuration(value: 30, period: .minutes),
            notifications: true,
            timeToSave: 5,
            forProfile: testProfile)
         return activity
     }
     
-    private func afterCoffeeRoutine() -> Activity {
-        let activity = Activity.createActivityWithType(.Routine,
+    fileprivate func afterCoffeeRoutine() -> Activity {
+        let activity = Activity.createActivityWithType(.routine,
             name: "After coffee",
             selectedDays: [1, 2, 3],
             startTime: updatedStartTime,
-            duration: ActivityDuration(value: 30, period: .Minutes),
+            duration: ActivityDuration(value: 30, period: .minutes),
             notifications: true,
             timeToSave: 5,
             forProfile: testProfile)

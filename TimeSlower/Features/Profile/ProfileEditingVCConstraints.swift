@@ -11,10 +11,10 @@ import UIKit
 class ProfileEditingVCConstraints: UIViewController {
 
     enum EditingState: Int {
-        case Default
-        case Name
-        case Birthday
-        case Country
+        case `default`
+        case name
+        case birthday
+        case country
     }
     
     struct Constants {
@@ -45,14 +45,14 @@ class ProfileEditingVCConstraints: UIViewController {
     @IBOutlet weak var avatarInnerView: UIView!
     @IBOutlet weak var avatarFrameView: UIView!
 
-    var currentEditingState: EditingState = .Default { didSet { animateConstraintChanges() } }
+    var currentEditingState: EditingState = .default { didSet { animateConstraintChanges() } }
     var defaultConstraintsSet = false
     let standardCellHeight = kUsableViewHeight * Constants.propertyCellViewFactor
     let standardPropertyOffset = kUsableViewHeight * Constants.topPropertyOffsetFactor
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
 
     }
     
@@ -64,22 +64,22 @@ class ProfileEditingVCConstraints: UIViewController {
         }
         
         switch currentEditingState {
-        case .Default: setConstraintsForDefaultEditingState()
-        case .Name: setConstraintsForEditingName()
-        case .Birthday: setConstraintsForEditingBirthday()
-        case .Country: setConstraintsForEditingCountry()
+        case .default: setConstraintsForDefaultEditingState()
+        case .name: setConstraintsForEditingName()
+        case .birthday: setConstraintsForEditingBirthday()
+        case .country: setConstraintsForEditingCountry()
         }
     }
     
     func animateConstraintChanges() {
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             [unowned self]() -> () in
             self.updateViewConstraints()
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 
-    @IBAction func propertisViewTapped(sender: UITapGestureRecognizer) {
+    @IBAction func propertisViewTapped(_ sender: UITapGestureRecognizer) {
 //        let tapPoint = sender.locationInView(propertiesView)
 //        let tapedView = propertiesView.hitTest(tapPoint, withEvent: nil)
 //        
@@ -95,7 +95,7 @@ class ProfileEditingVCConstraints: UIViewController {
     func setDefaultConstraints() {
 //        topPropertyOffset.constant = standardPropertyOffset
         genderViewHeight.constant = kUsableViewHeight * Constants.genderViewFactor
-        backgroundImageHeight.constant = UIScreen.mainScreen().bounds.height * Constants.backgroundImageFactor
+        backgroundImageHeight.constant = UIScreen.main.bounds.height * Constants.backgroundImageFactor
         
 //        for propertieHeight in [nameViewHeight, datePickerViewHeight, countryViewHeight] {
 //            propertieHeight.constant = kUsableViewHeight * Constants.propertyCellViewFactor
@@ -116,7 +116,7 @@ class ProfileEditingVCConstraints: UIViewController {
     func setCircleFormToAvatarImageView() {
         avatarFrameView.layer.cornerRadius = avatarViewHeight.constant / 2
         avatarFrameView.layer.borderWidth = 1.0
-        avatarFrameView.layer.borderColor = UIColor.purpleRed().CGColor
+        avatarFrameView.layer.borderColor = UIColor.purpleRed().cgColor
         avatarInnerView.layer.cornerRadius = avatarInnerView.bounds.height / 2
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import TimeSlowerKit
 
 protocol CircleStatsDelegate {
-    func pageControllerDidChangeToPage(index: Int)
+    func pageControllerDidChangeToPage(_ index: Int)
 }
 
 class CircleStatsVC: UIViewController {
@@ -57,7 +57,7 @@ class CircleStatsVC: UIViewController {
         innerCircle.setProgress(0.3, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         delegate.pageControllerDidChangeToPage(pageIndex)
     }
@@ -75,7 +75,7 @@ class CircleStatsVC: UIViewController {
     func setupLabels() {
         
         let factTiming = profile.factTimingForPeriod(period)
-        let plannedTiming = profile.plannedTimingInPeriod(period, sinceDate: NSDate())
+        let plannedTiming = profile.plannedTimingInPeriod(period, sinceDate: Date())
         let format = ".0"
         
         savedTimeLabel.text = "\(factTiming!.0.format(format))"

@@ -10,49 +10,47 @@ import Foundation
 import CoreData
 
 
-public class CoreDataStack {
+open class CoreDataStack {
+    
+   
     
     public init() { }
     
     let sharedAppGroup: String = "group.com.1lastday.timeslower.documents"
     
-    public class var sharedInstance: CoreDataStack {
+    open class var sharedInstance: CoreDataStack {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
-            static var instance : CoreDataStack? = nil
+            static var instance = CoreDataStack()
         }
         
-        dispatch_once(&Static.onceToken) {
-            Static.instance = CoreDataStack()
-        }
-        return Static.instance!
+        return Static.instance
     }
     
-    public lazy var applicationDocumentsDirectory: NSURL = {
-        let fileManager = NSFileManager.defaultManager()
-        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask) 
+    open lazy var applicationDocumentsDirectory: URL = {
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask) 
         return urls[0]
     }()
     
-    public lazy var managedObjectModel: NSManagedObjectModel = {
-        let bundle = NSBundle(identifier: "oneLastDay.TimeSlowerKit")
-        let modelURL = bundle?.URLForResource("TimeSlower2", withExtension: "momd")
-        return NSManagedObjectModel(contentsOfURL: modelURL!)!
+    open lazy var managedObjectModel: NSManagedObjectModel = {
+        let bundle = Bundle(identifier: "oneLastDay.TimeSlowerKit")
+        let modelURL = bundle?.url(forResource: "TimeSlower2", withExtension: "momd")
+        return NSManagedObjectModel(contentsOf: modelURL!)!
     }()
     
-    public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    open lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
             
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
@@ -65,14 +63,14 @@ public class CoreDataStack {
         return coordinator
     }()
     
-    public lazy var managedObjectContext: NSManagedObjectContext? = {
+    open lazy var managedObjectContext: NSManagedObjectContext? = {
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
     
-    public func saveContext() {
+    open func saveContext() {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
             if moc.hasChanges {
@@ -88,11 +86,11 @@ public class CoreDataStack {
     }
     
     
-    public func fetchProfile() -> Profile? {
-        let profileFetch = NSFetchRequest(entityName: "Profile")
+    open func fetchProfile() -> Profile? {
+        let profileFetch = NSFetchRequest<Profile>(entityName: "Profile")
         let results: [AnyObject]?
         do {
-            results = try managedObjectContext?.executeFetchRequest(profileFetch)
+            results = try managedObjectContext?.fetch(profileFetch)
         } catch _ as NSError {
             results = nil
         }
@@ -102,7 +100,7 @@ public class CoreDataStack {
             if profiles.count == 0 {
                 return nil
             } else {
-                userProfile = profiles[0] as? Profile
+                userProfile = profiles[0] as! Profile 
             }
         }
         return userProfile

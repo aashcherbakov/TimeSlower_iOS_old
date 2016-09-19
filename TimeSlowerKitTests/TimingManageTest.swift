@@ -13,10 +13,10 @@ import TimeSlowerKit
 
 class TimingManageTest: CoreDataBaseTest {
 
-    var standartDateFormatter: NSDateFormatter!
+    var standartDateFormatter: DateFormatter!
     var timeMachine: TimeMachine!
     
-    var shortDateFormatter: NSDateFormatter!
+    var shortDateFormatter: DateFormatter!
     
     override func setUp() {
         super.setUp()
@@ -26,10 +26,10 @@ class TimingManageTest: CoreDataBaseTest {
     }
     
     override func tearDown() {
-        testCoreDataStack.managedObjectContext!.deleteObject(testProfile)
-        testCoreDataStack.managedObjectContext!.deleteObject(testActivity)
-        testCoreDataStack.managedObjectContext!.deleteObject(testActivityStats)
-        testCoreDataStack.managedObjectContext!.deleteObject(testActivityTiming)
+        testCoreDataStack.managedObjectContext!.delete(testProfile)
+        testCoreDataStack.managedObjectContext!.delete(testActivity)
+        testCoreDataStack.managedObjectContext!.delete(testActivityStats)
+        testCoreDataStack.managedObjectContext!.delete(testActivityTiming)
         
         testCoreDataStack = nil
         super.tearDown()
@@ -37,29 +37,29 @@ class TimingManageTest: CoreDataBaseTest {
     
     func testCreation() {
         XCTAssertNotNil(testActivityTiming, "Timing should not be nil")
-        XCTAssertTrue(testActivityTiming.respondsToSelector(#selector(Activity.updatedStartTime)), "Timing class")
-        XCTAssertTrue(testActivityTiming.activity.respondsToSelector(#selector(Activity.isRoutine)), "Timing should have activity attached")
+        XCTAssertTrue(testActivityTiming.responds(to: #selector(Activity.updatedStartTime)), "Timing class")
+        XCTAssertTrue(testActivityTiming.activity.responds(to: #selector(Activity.isRoutine)), "Timing should have activity attached")
         
-        let startTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:15 AM")!
-        let finishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 10:45 AM")!
+        let startTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 10:15 AM")!
+        let finishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 10:45 AM")!
         XCTAssertEqual(testActivityTiming.startTime, startTime, "Start time has to be 10:15")
         XCTAssertEqual(testActivityTiming.finishTime, finishTime, "Finish time has to be 10:45")
-        XCTAssertEqual(testActivityTiming.timeToSave, NSNumber(double: 10.0), "Time to save has to be 10 min")
+        XCTAssertEqual(testActivityTiming.timeToSave, NSNumber(value: 10.0 as Double), "Time to save has to be 10 min")
     }
     
     func testIsPassedDueForToday() {
         // Positive
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(-60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(-60*60)
         XCTAssertTrue(testActivityTiming.isPassedDueForToday(), "Avtivity should be passed due")
         
         // Negative
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(60*60)
         XCTAssertFalse(testActivityTiming.isPassedDueForToday(), "Avtivity should not be passed due")
     }
     
     func testFinishTimeIsNextDay() {
-        let newStartTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 11:45 PM")!
-        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/4/15, 00:45 AM")!
+        let newStartTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 11:45 PM")!
+        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/4/15, 00:45 AM")!
         testActivityTiming.startTime = newStartTime
         testActivityTiming.finishTime = newFinishTime
         XCTAssertTrue(testActivityTiming.finishTimeIsNextDay(), "Finish time must be next day")
@@ -67,13 +67,13 @@ class TimingManageTest: CoreDataBaseTest {
     
     func testIsGoingNow() {
         // Positive
-        testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(-60*60)
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(60*60)
+        testActivityTiming.startTime = Date().addingTimeInterval(-60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(60*60)
         XCTAssertTrue(testActivityTiming.isGoingNow(), "Activity should be going now")
         
         // Negative
-        testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(-60*60)
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(-20*60)
+        testActivityTiming.startTime = Date().addingTimeInterval(-60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(-20*60)
         XCTAssertFalse(testActivityTiming.isGoingNow(), "Activity should NOT be going now")
     }
 
@@ -87,12 +87,12 @@ class TimingManageTest: CoreDataBaseTest {
     }
     
     func testUpdateTimeForToday() {
-        let twoDaysAgoDate = NSDate().dateByAddingTimeInterval(-60*60*24*2)
+        let twoDaysAgoDate = Date().addingTimeInterval(-60*60*24*2)
         let updatedDate = Timing.updateTimeForToday(twoDaysAgoDate)
         
-        let oldDateComponents = NSCalendar.currentCalendar().components([.Hour, .Minute], fromDate: twoDaysAgoDate)
-        let newDateComponents = NSCalendar.currentCalendar().components([.Month, .Day, .Year, .Hour, .Minute], fromDate: updatedDate)
-        let todayComponents = NSCalendar.currentCalendar().components([.Month, .Day, .Year], fromDate: updatedDate)
+        let oldDateComponents = (Calendar.current as NSCalendar).components([.hour, .minute], from: twoDaysAgoDate)
+        let newDateComponents = (Calendar.current as NSCalendar).components([.month, .day, .year, .hour, .minute], from: updatedDate)
+        let todayComponents = (Calendar.current as NSCalendar).components([.month, .day, .year], from: updatedDate)
         
         // Chacking if time is the same
         XCTAssertEqual(oldDateComponents.minute, newDateComponents.minute, "Minutes should be the same")
@@ -107,7 +107,7 @@ class TimingManageTest: CoreDataBaseTest {
     
     func testUpdatedStartTime() {
         // Positive: case when manually started
-        let manualStart = NSDate()
+        let manualStart = Date()
         testActivityTiming.manuallyStarted = manualStart
         XCTAssertEqual(testActivityTiming.updatedStartTime(), manualStart, "UpdatedStartTime should be equal to manually started")
         
@@ -119,9 +119,9 @@ class TimingManageTest: CoreDataBaseTest {
     
     func test_updatedStartTimeForDate() {
         // given
-        let time = shortDateFormatter.dateFromString("8/23/16, 10:00 AM")!
-        let newDate = shortDateFormatter.dateFromString("3/28/17, 12:00 PM")!
-        let expectedDate = shortDateFormatter.dateFromString("3/28/17, 10:00 AM")!
+        let time = shortDateFormatter.date(from: "8/23/16, 10:00 AM")!
+        let newDate = shortDateFormatter.date(from: "3/28/17, 12:00 PM")!
+        let expectedDate = shortDateFormatter.date(from: "3/28/17, 10:00 AM")!
         
         // when
         testActivityTiming.manuallyStarted = nil
@@ -134,8 +134,8 @@ class TimingManageTest: CoreDataBaseTest {
     
     func testUpdatedFinishTime() {
         // Positive: case when manually started
-        let manualStart = NSDate()
-        let manualFinish = manualStart.dateByAddingTimeInterval(Double(testActivityTiming.duration.value) * 60)
+        let manualStart = Date()
+        let manualFinish = manualStart.addingTimeInterval(Double(testActivityTiming.duration.value) * 60)
         testActivityTiming.manuallyStarted = manualStart
         XCTAssertEqual(testActivityTiming.updatedFinishTime(), manualFinish, "UpdatedStartTime should be equal to manually started")
         
@@ -145,29 +145,29 @@ class TimingManageTest: CoreDataBaseTest {
         XCTAssertEqual(testActivityTiming.updatedFinishTime(), upToDateFinishTime, "Updated finish time should be regular finish time")
         
         // start time now, finish time tomorrow -> ???
-        let newStartTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 11:45 PM")!
-        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/4/15, 00:45 AM")!
+        let newStartTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 11:45 PM")!
+        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/4/15, 00:45 AM")!
         testActivityTiming.startTime = newStartTime
         testActivityTiming.finishTime = newFinishTime
-        let timeInterval = testActivityTiming.updatedFinishTime().timeIntervalSinceDate(testActivityTiming.updatedStartTime())
+        let timeInterval = testActivityTiming.updatedFinishTime().timeIntervalSince(testActivityTiming.updatedStartTime())
         XCTAssertEqual(timeInterval, 60.0*60.0, "Time interval should be 3600 sec")
     }
     
     func testUpdatedAlarmTime() {
-        let manualStart = NSDate()
-        let newStartTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 11:05 AM")!
-        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 11:45 AM")!
+        let manualStart = Date()
+        let newStartTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 11:05 AM")!
+        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 11:45 AM")!
         testActivityTiming.startTime = newStartTime
         testActivityTiming.finishTime = newFinishTime
-        testActivityTiming.duration = ActivityDuration(value: 40, period: .Minutes)
-        testActivityTiming.timeToSave = NSNumber(double: 20.0)
+        testActivityTiming.duration = ActivityDuration(value: 40, period: .minutes)
+        testActivityTiming.timeToSave = NSNumber(value: 20.0 as Double)
         testActivityTiming.manuallyStarted = manualStart
         
-        let alarmForRoutine = NSDate(timeInterval: 20.0 * 60.0, sinceDate: testActivityTiming.manuallyStarted!)
+        let alarmForRoutine = Date(timeInterval: 20.0 * 60.0, since: testActivityTiming.manuallyStarted!)
         XCTAssertEqual(testActivityTiming.updatedAlarmTime(), alarmForRoutine, "UpdatedAlarm time should be updated by manually started")
         
         // If it is a goal
-        testActivityTiming.activity.type = Activity.typeWithEnum(.Goal)
+        testActivityTiming.activity.type = Activity.typeWithEnum(.goal)
         XCTAssertEqual(testActivityTiming.updatedAlarmTime(), testActivityTiming.updatedFinishTime(), "For goal alarm time is finishtime")
     }
     
@@ -175,19 +175,19 @@ class TimingManageTest: CoreDataBaseTest {
     
     func test_nextActionTime() {
         // is going now -> finishTime
-        testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(-60*60)
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(60*60)
+        testActivityTiming.startTime = Date().addingTimeInterval(-60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(60*60)
         XCTAssertEqual(testActivityTiming.nextActionTime(), testActivityTiming.updatedFinishTime(), "Next action time should be finish time")
         
         // is passed due -> startTime tomorrow
-        testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(-60*60)
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(-20*60)
+        testActivityTiming.startTime = Date().addingTimeInterval(-60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(-20*60)
 
-        let startTimeTomorrow = testActivityTiming.updatedStartTime().dateByAddingTimeInterval(60*60*24)
+        let startTimeTomorrow = testActivityTiming.updatedStartTime().addingTimeInterval(60*60*24)
         XCTAssertEqual(testActivityTiming.nextActionTime(), startTimeTomorrow, "Next action time should be start time tomorrow")
         
         // is done for today -> startTime tomorrow
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(60*60)
         testActivityTiming.activity.finishWithResult()
         XCTAssertEqual(testActivityTiming.nextActionTime(), startTimeTomorrow, "Next action time should be start time tomorrow")
         
@@ -195,13 +195,13 @@ class TimingManageTest: CoreDataBaseTest {
         deleteFakeResults()
         XCTAssertFalse(testActivityTiming.isDoneForToday(), "Activity should not be done for today")
         
-        testActivityTiming.startTime = NSDate().dateByAddingTimeInterval(60*60)
-        testActivityTiming.finishTime = NSDate().dateByAddingTimeInterval(80*60)
+        testActivityTiming.startTime = Date().addingTimeInterval(60*60)
+        testActivityTiming.finishTime = Date().addingTimeInterval(80*60)
         XCTAssertEqual(testActivityTiming.nextActionTime(), testActivityTiming.updatedStartTime(), "Next action time should be start time today")
 
         // start time now, finish time tomorrow -> ???
-        let newStartTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/3/15, 00:45 AM")!
-        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/4/15, 00:45 AM")!
+        let newStartTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 00:45 AM")!
+        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/4/15, 00:45 AM")!
         testActivityTiming.startTime = newStartTime
         testActivityTiming.finishTime = newFinishTime
         XCTAssertEqual(testActivityTiming.nextActionTime(), testActivityTiming.updatedFinishTime(), "Next action time should be finish time")
@@ -227,46 +227,46 @@ class TimingManageTest: CoreDataBaseTest {
 //    }
     
     func testNextActionDateWeekend() {
-        testActivity.basis = Activity.basisWithEnum(.Weekends)
+        testActivity.basis = Activity.basisWithEnum(.weekends)
         testActivity.finishWithResult()
         
-        let referenceDate = NSDate()
-        var correctNextActionDate: NSDate!
+        let referenceDate = Date()
+        var correctNextActionDate: Date!
         let dayName = Weekday.shortDayNameForDate(referenceDate)
         if dayName == "Sat" {
-            correctNextActionDate = NSDate(timeInterval: 60*60*24, sinceDate: testActivity.updatedStartTime())
+            correctNextActionDate = Date(timeInterval: 60*60*24, since: testActivity.updatedStartTime())
         } else if dayName == "Sun" {
-            correctNextActionDate = NSDate(timeInterval: 60*60*24*6, sinceDate: testActivity.updatedStartTime())
+            correctNextActionDate = Date(timeInterval: 60*60*24*6, since: testActivity.updatedStartTime())
         } else {
 //            correctNextActionDate = testActivity.timing.nextWeekendDayFromDate(referenceDate)
         }
         let dateFormatter = DayResults.standardDateFormatter()
-        let nextActionDate = dateFormatter.stringFromDate(testActivity.timing.nextActionDate())
-        let correctDate = dateFormatter.stringFromDate(correctNextActionDate)
+        let nextActionDate = dateFormatter.string(from: testActivity.timing.nextActionDate())
+        let correctDate = dateFormatter.string(from: correctNextActionDate)
         XCTAssertEqual(nextActionDate, correctDate, "Next action date is wrong")
     }
     
     func testNextWeekendDateFromDate() {
-        let startDate = testCoreDataStack.shortStyleDateFormatter().dateFromString("7/7/15, 10:15 AM")
+        let startDate = testCoreDataStack.shortStyleDateFormatter().date(from: "7/7/15, 10:15 AM")
         _ = Weekday.shortDayNameForDate(startDate!)
         
 //        let nextSaturday = testActivity.timing.nextWeekendDayFromDate(startDate!)
-        let correctNextSaturday = NSDate(timeInterval: 60*60*24*4, sinceDate: startDate!)
+        let correctNextSaturday = Date(timeInterval: 60*60*24*4, since: startDate!)
 //        XCTAssertEqual(nextSaturday, correctNextSaturday, "Next saturday date is wrong")
     }
     
     func test_activityStartTimeInDate() {
-        let startDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("7/7/15, 10:15 AM")!
-        let nextActionDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("9/8/16, 00:00 AM")!
-        let expectedDate = StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("9/8/16, 10:15 AM")!
+        let startDate = StaticDateFormatter.shortDateAndTimeFormatter.date(from: "7/7/15, 10:15 AM")!
+        let nextActionDate = StaticDateFormatter.shortDateAndTimeFormatter.date(from: "9/8/16, 00:00 AM")!
+        let expectedDate = StaticDateFormatter.shortDateAndTimeFormatter.date(from: "9/8/16, 10:15 AM")!
         XCTAssertEqual(testActivity.timing.activityStartTime(startDate, inDate: nextActionDate), expectedDate, "it should be 10:15 on August 9th 2016")
     }
     
     //MARK: - Helper functions
     
     func deleteFakeResults() {
-        if let result = DayResults.fetchResultWithDate(NSDate(), forActivity: testActivityTiming.activity) {
-            testActivityTiming.managedObjectContext?.deleteObject(result)
+        if let result = DayResults.fetchResultWithDate(Date(), forActivity: testActivityTiming.activity) {
+            testActivityTiming.managedObjectContext?.delete(result)
         }
     }
 

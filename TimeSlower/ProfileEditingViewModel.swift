@@ -8,24 +8,22 @@
 
 import Foundation
 import TimeSlowerKit
-import RxSwift
-import RxCocoa
 
 class ProfileEditingViewModel : NSObject {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let defaultCellHeight: CGFloat = 50
         static let expandedCellHeight: CGFloat = 220
         static let numberOfCells: Int = 3
     }
     
-    private(set) var tableView: UITableView
-    private(set) var profile: Profile?
+    fileprivate(set) var tableView: UITableView
+    fileprivate(set) var profile: Profile?
     
-    private var selectedIndexPath: NSIndexPath?
-    private(set) var cellConfig: ProfileEditingCellConfig?
-    private(set) var selectedGender: Profile.Gender?
-    private(set) var selectedAvatar: UIImage?
+    fileprivate var selectedIndexPath: IndexPath?
+    fileprivate(set) var cellConfig: ProfileEditingCellConfig?
+    fileprivate(set) var selectedGender: Profile.Gender?
+    fileprivate(set) var selectedAvatar: UIImage?
     
     init(withTableView tableView: UITableView) {
         self.tableView = tableView
@@ -39,12 +37,12 @@ class ProfileEditingViewModel : NSObject {
     // MARK: - Internal Functions
     
     /// [tested] Sets selected user gender private property to Profile.Gender type value
-    func userDidPickGender(intValue: Int) {
+    func userDidPickGender(_ intValue: Int) {
         self.selectedGender = Profile.Gender(rawValue: intValue)
     }
     
     /// Sets selected image as an avatar
-    func userDidPickAvatar(image: UIImage) {
+    func userDidPickAvatar(_ image: UIImage) {
         selectedAvatar = image
     }
     
@@ -60,8 +58,8 @@ class ProfileEditingViewModel : NSObject {
     
     /// Method checks if all data is valid and calls Profile class method saveProfile:withName:... 
     func saveProfile() {
-        guard let name = cellConfig?.name, birthday = cellConfig?.birthday,
-            country = cellConfig?.country, gender = selectedGender else { return }
+        guard let name = cellConfig?.name, let birthday = cellConfig?.birthday,
+            let country = cellConfig?.country, let gender = selectedGender else { return }
         
         profile = Profile.saveProfile(withName: name, birthday: birthday, country: country,
             avatar: selectedAvatar, gender: gender)
@@ -75,7 +73,7 @@ class ProfileEditingViewModel : NSObject {
     
     // MARK: - Private Functions
     
-    private func setupData() {
+    fileprivate func setupData() {
         profile = CoreDataStack.sharedInstance.fetchProfile()
         cellConfig = ProfileEditingCellConfig(withProfile: profile)
         
@@ -88,18 +86,18 @@ class ProfileEditingViewModel : NSObject {
         }
     }
     
-    private func setupEvents() {
+    fileprivate func setupEvents() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
     
-    private func setupDesign() {
-        self.tableView.registerNib(UINib(nibName: ProfileEditingTableViewCell.className, bundle: nil),
+    fileprivate func setupDesign() {
+        self.tableView.register(UINib(nibName: ProfileEditingTableViewCell.className, bundle: nil),
             forCellReuseIdentifier: ProfileEditingTableViewCell.className)
     }
     
-    private func cellTypeForIndexPath(indexPath: NSIndexPath) -> ProfileEditingCellType? {
-        switch indexPath.row {
+    fileprivate func cellTypeForIndexPath(_ indexPath: IndexPath) -> ProfileEditingCellType? {
+        switch (indexPath as NSIndexPath).row {
         case 0: return .Name
         case 1: return .Birthday
         case 2: return .Country
@@ -111,13 +109,13 @@ class ProfileEditingViewModel : NSObject {
 // MARK: - UITableViewDataSource
 
 extension ProfileEditingViewModel : UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellType = cellTypeForIndexPath(indexPath) else { return UITableViewCell() }
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier(ProfileEditingTableViewCell.className)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ProfileEditingTableViewCell.className)
             as? ProfileEditingTableViewCell {
                 if let config = cellConfig {
-                    cell.setupWith(type: cellType, config: config)
+                    cell.setupWith(cellType, config: config)
                 }
                 return cell
         }
@@ -125,7 +123,7 @@ extension ProfileEditingViewModel : UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.numberOfCells
     }
 }
@@ -133,7 +131,7 @@ extension ProfileEditingViewModel : UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension ProfileEditingViewModel : UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let expanded = selectedIndexPath != indexPath
         
         resetCellAtIndexPath(selectedIndexPath, inTableView: tableView)
@@ -143,7 +141,7 @@ extension ProfileEditingViewModel : UITableViewDelegate {
         
         selectedIndexPath = (indexPath != selectedIndexPath) ? indexPath : nil
         
-        if let expandableCell = tableView.cellForRowAtIndexPath(indexPath) as? ProfileEditingTableViewCell {
+        if let expandableCell = tableView.cellForRow(at: indexPath) as? ProfileEditingTableViewCell {
             if expandableCell.shouldExpand() {
                 tableView.beginUpdates()
                 expandableCell.setExpended(expanded)
@@ -152,15 +150,15 @@ extension ProfileEditingViewModel : UITableViewDelegate {
         }
     }
     
-    private func resetCellAtIndexPath(indexPath: NSIndexPath?, inTableView tableView: UITableView) {
+    fileprivate func resetCellAtIndexPath(_ indexPath: IndexPath?, inTableView tableView: UITableView) {
         guard let path = indexPath else { return }
         
-        if let cell = tableView.cellForRowAtIndexPath(path) as? ProfileEditingTableViewCell {
+        if let cell = tableView.cellForRow(at: path) as? ProfileEditingTableViewCell {
             cell.setExpended(false)
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if selectedIndexPath == indexPath {
             return Constants.expandedCellHeight
         } else if selectedIndexPath == nil {

@@ -16,13 +16,13 @@ internal struct LifetimeStats {
     
     init(withHours hours: NSNumber) {
         summHours = hours
-        summDays = hours.doubleValue / 24
-        summMonth = summDays.doubleValue / 30
-        summYears = summMonth.doubleValue / 12
+        summDays = NSNumber(value: hours.doubleValue / 24)
+        summMonth = NSNumber(value: summDays.doubleValue / 30)
+        summYears = NSNumber(value: summMonth.doubleValue / 12)
     }
     
     func hoursValueString() -> String {
-        return "\(summHours.integerValue)"
+        return "\(summHours.int32Value)"
     }
     
     func daysValueString() -> String {
@@ -69,13 +69,13 @@ internal struct LifetimeStats {
         return attributedDescription(yearsValueString(), period: "YEARS")
     }
     
-    private func attributedDescription(valueString: String, period: String) -> NSAttributedString {
+    fileprivate func attributedDescription(_ valueString: String, period: String) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: "\(valueString) \(period)")
         let boldRange = NSMakeRange(0, valueString.characters.count)
         
         let defaultAttributes = [
             NSFontAttributeName            : UIFont.mainRegular(14),
-            NSForegroundColorAttributeName : UIColor.whiteColor()
+            NSForegroundColorAttributeName : UIColor.white
         ]
         
         attributedString.addAttributes(defaultAttributes, range: NSMakeRange(0, attributedString.length))

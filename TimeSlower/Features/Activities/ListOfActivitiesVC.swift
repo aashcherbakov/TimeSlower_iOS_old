@@ -12,14 +12,14 @@ import TimeSlowerKit
 class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
 
     enum TypeToDisplay: Int {
-        case Routines
-        case Goals
-        case BothTypes
+        case routines
+        case goals
+        case bothTypes
     }
     
     enum BasisToDisplay: Int {
-        case Today
-        case FullList
+        case today
+        case fullList
     }
     
     struct Constants {
@@ -32,8 +32,8 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     @IBOutlet weak var tableView: UITableView!
     
     var presentedModally = false
-    var typeToDisplay: TypeToDisplay = .BothTypes
-    var basisToDisplay: BasisToDisplay = .Today
+    var typeToDisplay: TypeToDisplay = .bothTypes
+    var basisToDisplay: BasisToDisplay = .today
     var profile: Profile! { didSet { getherActivitiesToDisplay() } }
     var activitiesToDisplay:[Activity]! {
         didSet {
@@ -44,7 +44,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     }
     
     //MARK: - Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if profile != nil {
             getherActivitiesToDisplay()
         }
@@ -52,9 +52,9 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
-        typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), forControlEvents: .ValueChanged)
-        listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), forControlEvents: .ValueChanged)
+        navigationController?.isNavigationBarHidden = true
+        typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), for: .valueChanged)
+        listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), for: .valueChanged)
         createActivityButton.layer.cornerRadius = buttonHeight.constant / 2
         navigationController?.delegate = nil
         setupTable()
@@ -76,66 +76,66 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         if tableView != nil { tableView.reloadData() }
     }
     
-    func filterActivitiesByType(type: TypeToDisplay, activities: [Activity]) -> [Activity] {
-        if type == .BothTypes {
+    func filterActivitiesByType(_ type: TypeToDisplay, activities: [Activity]) -> [Activity] {
+        if type == .bothTypes {
             return activities
         } else {
-            let matchingType: ActivityType = (type == .Routines) ? .Routine : .Goal
+            let matchingType: ActivityType = (type == .routines) ? .routine : .goal
             return activities.filter { (activity) in activity.activityType() == matchingType }
         }
     }
     
-    func activitiesForBasis(basis: BasisToDisplay) -> [Activity] {
-        return basis == .Today ? profile.activitiesForDate(NSDate()) : profile.allActivities()
+    func activitiesForBasis(_ basis: BasisToDisplay) -> [Activity] {
+        return basis == .today ? profile.activitiesForDate(Date()) : profile.allActivities()
     }
     
     //MARK: - Actions
     
-    func typeDidChange(sender: TypeSelector) {
+    func typeDidChange(_ sender: TypeSelector) {
         if let selectedIndex = sender.selectedSegmentIndex {
             typeToDisplay = TypeToDisplay(rawValue: selectedIndex)!
         } else {
-            typeToDisplay = .BothTypes
+            typeToDisplay = .bothTypes
         }
         getherActivitiesToDisplay()
     }
     
-    func basisDidChange(sender: ListTypeSelector) {
+    func basisDidChange(_ sender: ListTypeSelector) {
         basisToDisplay = BasisToDisplay(rawValue: sender.selectedSegmentIndex!)!
         getherActivitiesToDisplay()
     }
     
-    @IBAction func onEditButton(sender: UIButton) {
-        tableView.setEditing(!tableView.editing, animated: true)
+    @IBAction func onEditButton(_ sender: UIButton) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
     }
     
-    @IBAction func onCreateActivityButton(sender: AnyObject) {
+    @IBAction func onCreateActivityButton(_ sender: AnyObject) {
         let createActivityVC: EditActivityVC = ControllerFactory.createController()
         createActivityVC.userProfile = profile
         navigationController?.pushViewController(createActivityVC, animated: true)
     }
     // MARK: - Navigation
     
-    @IBAction func onBackButton(sender: UIButton) {
+    @IBAction func onBackButton(_ sender: UIButton) {
         if navigationController != nil {
-            navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewController(animated: true)
         }
         
         if presentedModally {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func saveActivityReturnToList(segue: UIStoryboardSegue) {
+    @IBAction func saveActivityReturnToList(_ segue: UIStoryboardSegue) {
     
     }
     
-    @IBAction func backToActivityList(segue: UIStoryboardSegue) {
+    @IBAction func backToActivityList(_ segue: UIStoryboardSegue) {
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ActivityStats" {
-            if let vc = segue.destinationViewController as? ActivityStatsVC {
+            if let vc = segue.destination as? ActivityStatsVC {
                 if let cell = sender as? StandardActivityCell {
                     vc.activity = cell.activity
                 }
@@ -143,7 +143,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         }
         
         if segue.identifier == Constants.createActivitySegue {
-            if let vc = segue.destinationViewController as? EditActivityVC {
+            if let vc = segue.destination as? EditActivityVC {
                 vc.userProfile = self.profile
             }
         }
@@ -153,17 +153,17 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
 
 // MARK: - Table view data source
 extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return profile != nil ? activitiesToDisplay.count : 0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? StandardActivityCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? StandardActivityCell {
             let editActivityVC: EditActivityVC = ControllerFactory.createController()
             editActivityVC.activity = cell.activity
             navigationController?.pushViewController(editActivityVC, animated: true)
@@ -171,19 +171,19 @@ extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell", forIndexPath: indexPath) as! StandardActivityCell
-        cell.activity = activitiesToDisplay[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath) as! StandardActivityCell
+        cell.activity = activitiesToDisplay[(indexPath as NSIndexPath).row]
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         tableView.beginUpdates()
-        let activityToDelete = activitiesToDisplay[indexPath.row]
-        activitiesToDisplay.removeAtIndex(indexPath.row)
-        CoreDataStack.sharedInstance.managedObjectContext?.deleteObject(activityToDelete)
+        let activityToDelete = activitiesToDisplay[(indexPath as NSIndexPath).row]
+        activitiesToDisplay.remove(at: (indexPath as NSIndexPath).row)
+        CoreDataStack.sharedInstance.managedObjectContext?.delete(activityToDelete)
         CoreDataStack.sharedInstance.saveContext()
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         tableView.endUpdates()
     }
 }

@@ -35,7 +35,7 @@ class CoreDataBaseTest: XCTestCase {
         
         // Creating fake instances
         testProfile = testCoreDataStack.fakeProfile()
-        testActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
+        testActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .routine, basis: .daily)
         testCoreDataStack.saveContext()
         
         testActivityTiming = testActivity.timing

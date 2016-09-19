@@ -34,11 +34,11 @@ class MainScreenVC: MainScreenVCConstraints {
     @IBOutlet weak var legendForRoutinesLabel: UILabel!
     @IBOutlet weak var menuButton: UIButton!
     
-    private lazy var activityStoryboard: UIStoryboard = {
+    fileprivate lazy var activityStoryboard: UIStoryboard = {
         return UIStoryboard(name: kActivityStoryboard, bundle: nil)
     }()
     
-    private lazy var profileStoryboard: UIStoryboard = {
+    fileprivate lazy var profileStoryboard: UIStoryboard = {
         return UIStoryboard(name: kProfileStoryboard, bundle: nil)
     }()
     
@@ -54,11 +54,11 @@ class MainScreenVC: MainScreenVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         transitionManager.sourceViewController = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if userProfile == nil {
             userProfile = CoreDataStack.sharedInstance.fetchProfile()
@@ -70,7 +70,7 @@ class MainScreenVC: MainScreenVCConstraints {
         super.viewDidLayoutSubviews()
         if pageViewController != nil {
             pageViewController.view.bounds = self.topWhiteView.bounds
-            pageViewController.view.frame = CGRectMake(0, 0, topWhiteView.frame.width, topWhiteView.frame.height)
+            pageViewController.view.frame = CGRect(x: 0, y: 0, width: topWhiteView.frame.width, height: topWhiteView.frame.height)
         }
     }
     
@@ -94,7 +94,7 @@ class MainScreenVC: MainScreenVCConstraints {
         setupControlFlowButton()
         if let activity = nextActivity {
             launchTimer()
-            activityNameLabel.text = nextActivity.name.uppercaseString
+            activityNameLabel.text = nextActivity.name.uppercased()
             currentStatusLabel.text = activity.isGoingNow() ? Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
             timingStatusLabel.text = activity.isGoingNow() ? Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
@@ -108,31 +108,31 @@ class MainScreenVC: MainScreenVCConstraints {
         controlFlowButton.layer.cornerRadius = startNowButtonHeight.constant / 2
         if nextActivity != nil {
             let buttonTitle = nextActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
-            controlFlowButton.setTitle(buttonTitle, forState: .Normal)
-            controlFlowButton.enabled = true
+            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
+            controlFlowButton.isEnabled = true
         } else {
-            controlFlowButton.setTitle("No activities", forState: .Disabled)
-            controlFlowButton.enabled = false
+            controlFlowButton.setTitle("No activities", for: .disabled)
+            controlFlowButton.isEnabled = false
         }
     }
 
     func setupPageViewController() {
         if pageViewController == nil {
-            pageViewController = activityStoryboard.instantiateViewControllerWithIdentifier("Page View Controller") as! UIPageViewController
+            pageViewController = activityStoryboard.instantiateViewController(withIdentifier: "Page View Controller") as! UIPageViewController
             pageViewController.dataSource = self
             
             let startVC = viewControllerAtIndex(0) as! CircleStatsVC
             let viewControllers = [startVC]
             
-            pageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
+            pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
             addChildViewController(pageViewController)
             topWhiteView.addSubview(pageViewController.view)
-            pageViewController.didMoveToParentViewController(self)
+            pageViewController.didMove(toParentViewController: self)
         }
     }
     
-    func viewControllerAtIndex(index: Int) -> UIViewController {
-        let vc: CircleStatsVC = storyboard?.instantiateViewControllerWithIdentifier("CircleStatsVC") as! CircleStatsVC
+    func viewControllerAtIndex(_ index: Int) -> UIViewController {
+        let vc: CircleStatsVC = storyboard?.instantiateViewController(withIdentifier: "CircleStatsVC") as! CircleStatsVC
         vc.profile = self.userProfile
         vc.period = PastPeriod(rawValue: index)
         vc.pageIndex = index
@@ -155,17 +155,17 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func restartTimerIfProfileHasChanged() {
-        let timeTillFinalDate = nextActivity.timing.nextActionTime()
-        let timeTillEndOfCountdown = timer.getTimeRemaining()
-        
-        if timeTillFinalDate != timeTillEndOfCountdown {
-            reloadTimer()
-        }
+//        let timeTillFinalDate = nextActivity.timing.nextActionTime()
+//        let timeTillEndOfCountdown = timer.getTimeRemaining()
+//        
+//        if timeTillFinalDate != timeTillEndOfCountdown {
+//            reloadTimer()
+//        }
     }
     
     func setupTimerCountdown() {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        timer.setCountDownToDate(nextActivity.timing.nextActionTime())
+        timer.setCountDownTo(nextActivity.timing.nextActionTime())
         timer.resetTimerAfterFinish = false
         
         let timerSecondsToSet = nextActivity.timing.nextActionTime().timeIntervalSinceNow
@@ -188,7 +188,7 @@ class MainScreenVC: MainScreenVCConstraints {
 
  
     //MARK: - Actions
-    @IBAction func onControlFlowButton(sender: UIButton) {
+    @IBAction func onControlFlowButton(_ sender: UIButton) {
         if sender.titleLabel!.text == Constants.startNowButtonTitle {
             startActivity()
         } else if sender.titleLabel!.text == Constants.finishNowButtonTitle {
@@ -197,7 +197,7 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func startActivity() {
-        nextActivity.timing.manuallyStarted = NSDate()
+        nextActivity.timing.manuallyStarted = Date()
         //TODO: update notifications for today
         setupNextActivityBlock()
     }
@@ -209,7 +209,7 @@ class MainScreenVC: MainScreenVCConstraints {
         showActivityStatsViewController()
     }
     
-    @IBAction func onAllActivitiesButton(sender: AnyObject) {
+    @IBAction func onAllActivitiesButton(_ sender: AnyObject) {
         let allActivitiesController: ListOfActivitiesVC = ControllerFactory.createController()
         allActivitiesController.profile = userProfile
         navigationController?.pushViewController(allActivitiesController, animated: true)
@@ -217,34 +217,34 @@ class MainScreenVC: MainScreenVCConstraints {
     
 
     
-    @IBAction func onMenuButton(sender: UIButton) {
+    @IBAction func onMenuButton(_ sender: UIButton) {
         let menuVC: MenuVC = ControllerFactory.createController()
         menuVC.transitioningDelegate = transitionManager
         transitionManager.menuViewController = menuVC
-        presentViewController(menuVC, animated: true, completion: nil)
+        present(menuVC, animated: true, completion: nil)
     }
     
-    private func showActivityStatsViewController() {
-        if let activityStatsVC = activityStoryboard.instantiateViewControllerWithIdentifier(ActivityStatsVC.className) as? ActivityStatsVC {
+    fileprivate func showActivityStatsViewController() {
+        if let activityStatsVC = activityStoryboard.instantiateViewController(withIdentifier: ActivityStatsVC.className) as? ActivityStatsVC {
             activityStatsVC.activity = nextActivity
-            presentViewController(activityStatsVC, animated: true, completion: nil)
+            present(activityStatsVC, animated: true, completion: nil)
         }
     }
     
     func presentVCtoCreateFirstRoutine() {
         let createActivityVC: EditActivityVC = ControllerFactory.createController()
         createActivityVC.userProfile = userProfile
-        presentViewController(createActivityVC, animated: false, completion: nil)
+        present(createActivityVC, animated: false, completion: nil)
     }
     
     func presentVCtoCreateNewProfile() {
         let createProfileVC: ProfileEditingVC = ControllerFactory.createController()
-        presentViewController(createProfileVC, animated: true, completion: nil)
+        present(createProfileVC, animated: true, completion: nil)
     }
     
     func presentProfileVCFromMenu() {
-        if let profileVC = profileStoryboard.instantiateViewControllerWithIdentifier(ProfileStatsVC.className) as? ProfileStatsVC {
-            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+        if let profileVC = profileStoryboard.instantiateViewController(withIdentifier: ProfileStatsVC.className) as? ProfileStatsVC {
+            presentedViewController?.dismiss(animated: true, completion: {
                 profileVC.profile = self.userProfile
                 self.navigationController?.pushViewController(profileVC, animated: true)
             })
@@ -252,8 +252,8 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func presentListOfActivitiesVCFromMenu() {
-        if let allActivitiesVC = activityStoryboard.instantiateViewControllerWithIdentifier(ListOfActivitiesVC.className) as? ListOfActivitiesVC {
-            presentedViewController?.dismissViewControllerAnimated(true, completion: {
+        if let allActivitiesVC = activityStoryboard.instantiateViewController(withIdentifier: ListOfActivitiesVC.className) as? ListOfActivitiesVC {
+            presentedViewController?.dismiss(animated: true, completion: {
                 allActivitiesVC.profile = self.userProfile
                 self.navigationController?.pushViewController(allActivitiesVC, animated: true)
             })
@@ -263,7 +263,7 @@ class MainScreenVC: MainScreenVCConstraints {
 
 //MARK: - PageViewController Delegate
 extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let vc = viewController as! CircleStatsVC
         var index = vc.pageIndex as Int
         if (index == 0 || index == NSNotFound) { return nil }
@@ -273,7 +273,7 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
         return self.viewControllerAtIndex(index)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let vc = viewController as! CircleStatsVC
         var index = vc.pageIndex as Int
         if (index == NSNotFound) { return nil }
@@ -284,18 +284,18 @@ extension MainScreenVC: UIPageViewControllerDataSource, UIPageViewControllerDele
         return self.viewControllerAtIndex(index)
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return numberOfPages
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     
 }
 
 extension MainScreenVC: CircleStatsDelegate {
-    func pageControllerDidChangeToPage(index: Int) {
+    func pageControllerDidChangeToPage(_ index: Int) {
 //        periodTitleLabel.text = TimeMachine.stringForPeriod(PastPeriod(rawValue: index)!)
     }
 }

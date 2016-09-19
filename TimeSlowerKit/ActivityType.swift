@@ -15,6 +15,6 @@ import Foundation
  - Goal:    Goal - activity that user wants to spend time on
  */
 public enum ActivityType: Int {
-    case Routine
-    case Goal
+    case routine
+    case goal
 }

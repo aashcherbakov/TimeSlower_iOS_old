@@ -9,16 +9,16 @@
 import Foundation
 
 /// Object that encapsulates duration value and period description
-public class ActivityDuration: NSObject {
+open class ActivityDuration: NSObject {
     /// Number of time units - either minutes of hours
-    public let value: Int
+    open let value: Int
     
     /// Time Unit type - can be .Minutes or .Hours
-    public let period: Period
+    open let period: Period
     
     public required init?(coder aDecoder: NSCoder) {
-        self.period = Period(rawValue: aDecoder.decodeIntegerForKey("period"))!
-        self.value = aDecoder.decodeIntegerForKey("value")
+        self.period = Period(rawValue: aDecoder.decodeInteger(forKey: "period"))!
+        self.value = aDecoder.decodeInteger(forKey: "value")
     }
     
     public init(value: Int, period: Period) {
@@ -31,10 +31,10 @@ public class ActivityDuration: NSObject {
      
      - returns: Double for seconds in value
      */
-    public func seconds() -> Double {
+    open func seconds() -> Double {
         var seconds = Double(value) * 60
         
-        if period == .Hours {
+        if period == .hours {
             seconds = seconds * 60
         }
         
@@ -46,10 +46,10 @@ public class ActivityDuration: NSObject {
      
      - returns: Int for number of minutes in value
      */
-    public func minutes() -> Int {
+    open func minutes() -> Int {
         switch period {
-        case .Hours: return value * 60
-        case .Minutes: return value
+        case .hours: return value * 60
+        case .minutes: return value
         default: return 0
         }
     }
@@ -59,10 +59,10 @@ public class ActivityDuration: NSObject {
      
      - returns: Int for number of hours in value
      */
-    public func hours() -> Int {
+    open func hours() -> Int {
         switch period {
-        case .Hours: return value
-        case .Minutes: return value / 60
+        case .hours: return value
+        case .minutes: return value / 60
         default: return 0
         }
     }
@@ -72,15 +72,15 @@ public class ActivityDuration: NSObject {
      
      - returns: String as "34 min" or "1 hr"
      */
-    public func shortDescription() -> String {
+    open func shortDescription() -> String {
         return "\(value) \(period.shortDescription())"
     }
 }
 
 extension ActivityDuration: NSCoding {
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(value, forKey: "value")
-        aCoder.encodeInteger(period.rawValue, forKey: "period")
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(value, forKey: "value")
+        aCoder.encode(period.rawValue, forKey: "period")
     }
 }
 

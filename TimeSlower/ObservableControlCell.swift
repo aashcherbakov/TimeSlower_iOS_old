@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 
 /**
  *  Cell that contains ObservableControl as subview and alows to subscribe to value changes and touches
@@ -37,7 +37,7 @@ class ObservableControl: UIControl {
         fatalError("Must be overridden")
     }
     
-    func setInitialValue(value: AnyObject?) {
+    func setInitialValue(_ value: AnyObject?) {
         fatalError("Must be overridden")
     }
 }

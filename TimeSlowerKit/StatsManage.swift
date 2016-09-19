@@ -12,7 +12,7 @@ import CoreData
 
 extension Stats {
     
-    private struct Constants {
+    fileprivate struct Constants {
         let numberOfWeeksInMonth = 4.345
         let numberOfWeeksInYear = 52.0
     }
@@ -36,11 +36,11 @@ extension Stats {
             fatalError("Passed activity has no context")
         }
         
-        guard let entity = NSEntityDescription.entityForName("Stats", inManagedObjectContext: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Stats", in: context) else {
             fatalError("Could not find entity with name Stats")
         }
         
-        let stats = Stats(entity: entity, insertIntoManagedObjectContext: context)
+        let stats = Stats(entity: entity, insertInto: context)
         stats.activity = givenActivity
         saveContext(context)
         
@@ -52,21 +52,21 @@ extension Stats {
      
      - parameter date: starting NSDate
      */
-    public func updateStatsForDate(date: NSDate) {
+    public func updateStatsForDate(_ date: Date) {
         let daysLeft = activity.profile.numberOfDaysTillEndOfLifeSinceDate(date)
         let busyDays = activity.days.count
         let duration = activity.timing.duration.minutes()
         let calculator = TimeCalculator()
         
         // Set activity's properties
-        summHours = calculator.totalHours(inDays: daysLeft, duration: duration, busyDays: busyDays)
-        summDays = calculator.totalDays(inDays: daysLeft, duration: duration, busyDays: busyDays)
-        summMonths = calculator.totalMonths(inDays: daysLeft, duration: duration, busyDays: busyDays)
-        summYears = calculator.totalYears(inDays: daysLeft, duration: duration, busyDays: busyDays)
+        summHours = NSNumber(value: calculator.totalHours(inDays: daysLeft, duration: duration, busyDays: busyDays))
+        summDays = NSNumber(value: calculator.totalDays(inDays: daysLeft, duration: duration, busyDays: busyDays))
+        summMonths = NSNumber(value: calculator.totalMonths(inDays: daysLeft, duration: duration, busyDays: busyDays))
+        summYears = NSNumber(value: calculator.totalYears(inDays: daysLeft, duration: duration, busyDays: busyDays))
     }
     
-    public func updateSuccessWithResult(result: DayResults) {
-        guard let results = activity.results where results.count > 0 else {
+    public func updateSuccessWithResult(_ result: DayResults) {
+        guard let results = activity.results , results.count > 0 else {
             averageSuccess = result.factSuccess
             return
         }
@@ -74,7 +74,7 @@ extension Stats {
         let currentSuccess = averageSuccess.doubleValue
         let numberOfResults = Double(results.count)
         let summResultsValue = currentSuccess * numberOfResults + result.factSuccess.doubleValue
-        averageSuccess = summResultsValue / (numberOfResults + 1)
+        averageSuccess = NSNumber(value: summResultsValue / (numberOfResults + 1))
     }
     
 
@@ -120,20 +120,20 @@ extension Stats {
     }
     
     /// Cannot be tested in InMemoryStoreType
-    public func fastFactSavedForPeriod(period: PastPeriod) -> Double {
-        var summSavedTimeLastYear = 0.0
+    public func fastFactSavedForPeriod(_ period: PastPeriod) -> Double {
+        let summSavedTimeLastYear = 0.0
         
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        fetchRequest.resultType = .DictionaryResultType
-        fetchRequest.predicate = activity.allResultsPredicateForPeriod(period)
-        fetchRequest.propertiesToFetch = propertiesToFetch()
-        
-        do {
-            let result = try! managedObjectContext?.executeFetchRequest(fetchRequest) as! [NSDictionary]
-            let resultDict = result[0]
-            summSavedTimeLastYear = resultDict["summSaved"] as! Double
-            
-        }
+//        let fetchRequest = NSFetchRequest<DayResults>(entityName: "DayResults")
+//        fetchRequest.resultType = .dictionaryResultType
+//        fetchRequest.predicate = activity.allResultsPredicateForPeriod(period)
+//        fetchRequest.propertiesToFetch = propertiesToFetch()
+//        
+//        do {
+//            let result = try! managedObjectContext?.fetch(fetchRequest)
+//            let resultDict = result[0]
+//            summSavedTimeLastYear = resultDict.
+//            
+//        }
         return summSavedTimeLastYear
     }
 
@@ -157,26 +157,26 @@ extension Stats {
     
 
     
-    private func propertiesToFetch() -> [NSExpressionDescription] {
+    fileprivate func propertiesToFetch() -> [NSExpressionDescription] {
         let summExpressionDesc = NSExpressionDescription()
         summExpressionDesc.name = "summSaved"
         summExpressionDesc.expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "factSavedTime")])
-        summExpressionDesc.expressionResultType = .DoubleAttributeType
+        summExpressionDesc.expressionResultType = .doubleAttributeType
         return [summExpressionDesc]
     }
     
-    private func averageSuccessCalculation() -> [NSExpressionDescription] {
+    fileprivate func averageSuccessCalculation() -> [NSExpressionDescription] {
         let successToCount = NSExpressionDescription()
         successToCount.name = "averSuccess"
         successToCount.expression = NSExpression(forFunction: "average:", arguments: [NSExpression(forKeyPath: "factSuccess")])
-        successToCount.expressionResultType = .DoubleAttributeType
+        successToCount.expressionResultType = .doubleAttributeType
         return [successToCount]
     }
     
 
     // TODO: checkout what to do with this?
     /// Returns total number of days when activity was "on" based on it's basis
-    public func busyDaysForPeriod(period: PastPeriod, sinceDate date: NSDate) -> Int {
+    public func busyDaysForPeriod(_ period: PastPeriod, sinceDate date: Date) -> Int {
         let totalDays = TimeMachine().numberOfDaysInPeriod(period, fromDate: date)
         return totalDays / 7 * activity.days.count
         // what if it's today and it only once?

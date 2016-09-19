@@ -9,13 +9,13 @@
 import Foundation
 
 public extension NSString {
-    @objc public func compareDateRepresentationOfString(otherString: String) -> NSComparisonResult {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
+    @objc public func compareDateRepresentationOfString(_ otherString: String) -> ComparisonResult {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .short
         
-        let firstDate = dateFormatter.dateFromString(self as String)
-        let secondDate = dateFormatter.dateFromString(otherString)
+        let firstDate = dateFormatter.date(from: self as String)
+        let secondDate = dateFormatter.date(from: otherString)
         return firstDate!.compare(secondDate!)
     }
 }

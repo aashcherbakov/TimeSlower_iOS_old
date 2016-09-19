@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import TimeSlowerKit
 
-public class TestCoreDataStack: CoreDataStack {
+open class TestCoreDataStack: CoreDataStack {
     
     required public override init() {
         super.init()
@@ -20,9 +20,9 @@ public class TestCoreDataStack: CoreDataStack {
                 managedObjectModel: self.managedObjectModel)
             
             do {
-                try psc.addPersistentStoreWithType(
-                    NSInMemoryStoreType, configuration: nil,
-                    URL: nil, options: nil)
+                try psc.addPersistentStore(
+                    ofType: NSInMemoryStoreType, configurationName: nil,
+                    at: nil, options: nil)
             } catch {
                 fatalError()
             }
@@ -31,12 +31,12 @@ public class TestCoreDataStack: CoreDataStack {
         }()
     }
     
-    public func fakeProfile() -> Profile {
-        guard let entity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: managedObjectContext!) else {
+    open func fakeProfile() -> Profile {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Profile", in: managedObjectContext!) else {
             fatalError("No entity named Profile in given context")
         }
 
-        let profile = Profile(entity: entity, insertIntoManagedObjectContext: managedObjectContext!)
+        let profile = Profile(entity: entity, insertInto: managedObjectContext!)
         profile.name = "Mike Tyson"
         profile.birthday = Profile.defaultBirthday()
         profile.country = Profile.defaultCountry()
@@ -55,12 +55,12 @@ public class TestCoreDataStack: CoreDataStack {
     /// - Time to save: 10 min
     /// - Start time: 10:15 AM
     /// - Finish time: 10:45 AM
-    public func fakeActivityWithProfile(profile: Profile, type: ActivityType, basis: Basis) -> Activity {
+    open func fakeActivityWithProfile(_ profile: Profile, type: ActivityType, basis: Basis) -> Activity {
         let fakeActivity = Activity.createActivityWithType(type,
             name: "Morning shower",
             selectedDays: Basis.daysFromBasis(basis),
-            startTime: StaticDateFormatter.shortDateAndTimeFormatter.dateFromString("7/3/15, 10:15 AM")!,
-            duration: ActivityDuration(value: 30, period: .Minutes),
+            startTime: StaticDateFormatter.shortDateAndTimeFormatter.date(from: "7/3/15, 10:15 AM")!,
+            duration: ActivityDuration(value: 30, period: .minutes),
             notifications: true,
             timeToSave: 10,
             forProfile: profile)
@@ -68,36 +68,36 @@ public class TestCoreDataStack: CoreDataStack {
         let busyDays = Weekday.weekdaysForBasis(basis)
         let days = NSMutableSet()
         for day in busyDays {
-            days.addObject(Day.createFromWeekday(day, forActivity: fakeActivity)!)
+            days.add(Day.createFromWeekday(day, forActivity: fakeActivity)!)
         }
         fakeActivity.days = days.copy() as! NSSet
     
         return fakeActivity
     }
     
-    public func fakeTimingForActivity(activity: Activity) -> Timing {
+    open func fakeTimingForActivity(_ activity: Activity) -> Timing {
         let newTiming = Timing.newTimingForActivity(activity: activity)
-        newTiming.startTime = shortStyleDateFormatter().dateFromString("7/3/15, 10:15 AM")!
-        newTiming.finishTime = shortStyleDateFormatter().dateFromString("7/3/15, 10:45 AM")!
-        newTiming.duration = ActivityDuration(value: 30, period: .Minutes)
-        newTiming.timeToSave = NSNumber(double: 10.0)
+        newTiming.startTime = shortStyleDateFormatter().date(from: "7/3/15, 10:15 AM")!
+        newTiming.finishTime = shortStyleDateFormatter().date(from: "7/3/15, 10:45 AM")!
+        newTiming.duration = ActivityDuration(value: 30, period: .minutes)
+        newTiming.timeToSave = NSNumber(value: 10.0 as Double)
         newTiming.activity = activity
         return newTiming
     }
     
     /// Saved 7 min
-    public func fakeResultForActivity(activity: Activity) -> DayResults {
-        let newResult = DayResults.newResultWithDate(NSDate(), forActivity: activity)
-        newResult.date = DayResults.standardDateFormatter().stringFromDate(NSDate())
-        newResult.factFinishTime = activity.updatedFinishTime().dateByAddingTimeInterval(-5*60)
-        newResult.activity.timing.manuallyStarted = activity.updatedStartTime().dateByAddingTimeInterval(2*60)
+    open func fakeResultForActivity(_ activity: Activity) -> DayResults {
+        let newResult = DayResults.newResultWithDate(Date(), forActivity: activity)
+        newResult.date = DayResults.standardDateFormatter().string(from: Date())
+        newResult.factFinishTime = activity.updatedFinishTime().addingTimeInterval(-5*60)
+        newResult.activity.timing.manuallyStarted = activity.updatedStartTime().addingTimeInterval(2*60)
         newResult.factStartTime = (newResult.activity.timing.manuallyStarted!)
-        newResult.factSuccess = NSNumber(double: newResult.daySuccessForTiming(activity.timing))
+        newResult.factSuccess = NSNumber(value: newResult.daySuccessForTiming(activity.timing) as Double)
         
-        newResult.factDuration = NSNumber(double: abs(newResult.factFinishTime.timeIntervalSinceDate(newResult.factStartTime) / 60))
+        newResult.factDuration = NSNumber(value: abs(newResult.factFinishTime.timeIntervalSince(newResult.factStartTime) / 60) as Double)
         
         if activity.isRoutine() {
-            newResult.factSavedTime = NSNumber(double: Double(activity.timing.duration.value) - newResult.factDuration.doubleValue)
+            newResult.factSavedTime = NSNumber(value: Double(activity.timing.duration.value) - newResult.factDuration.doubleValue as Double)
         }
         
         newResult.activity.timing.manuallyStarted = nil
@@ -106,11 +106,11 @@ public class TestCoreDataStack: CoreDataStack {
     
     
     /// Converts dates with format: "7/3/15, 10:15 AM"
-    public func shortStyleDateFormatter() -> NSDateFormatter {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+    open func shortStyleDateFormatter() -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         return dateFormatter
     }
 }

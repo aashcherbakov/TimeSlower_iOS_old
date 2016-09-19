@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-public class Timing: ManagedObject {
+open class Timing: ManagedObject {
 
-    @NSManaged public var alarmTime: NSDate
-    @NSManaged public var duration: ActivityDuration
-    @NSManaged public var finishTime: NSDate
-    @NSManaged public var manuallyStarted: NSDate?
-    @NSManaged public var startTime: NSDate
+    @NSManaged open var alarmTime: Date
+    @NSManaged open var duration: ActivityDuration
+    @NSManaged open var finishTime: Date
+    @NSManaged open var manuallyStarted: Date?
+    @NSManaged open var startTime: Date
     
     /// Time in MINUTES
-    @NSManaged public var timeToSave: NSNumber
-    @NSManaged public var activity: Activity
+    @NSManaged open var timeToSave: NSNumber
+    @NSManaged open var activity: Activity
 }
 
 extension Timing: ManagedObjectType {

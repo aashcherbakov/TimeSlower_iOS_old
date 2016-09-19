@@ -11,11 +11,11 @@ import XCTest
 
 class DayResultsTests: CoreDataBaseTest {
 
-    var shortDateFormatter: NSDateFormatter!
-    var shortTimeFormatter: NSDateFormatter!
+    var shortDateFormatter: DateFormatter!
+    var shortTimeFormatter: DateFormatter!
     var testDateString: String!
-    var testStartDate: NSDate!
-    var testFinishDate: NSDate!
+    var testStartDate: Date!
+    var testFinishDate: Date!
     var sut: DayResults!
     var fakeWeekResults: [DayResults]!
 
@@ -26,8 +26,8 @@ class DayResultsTests: CoreDataBaseTest {
         shortTimeFormatter = StaticDateFormatter.shortDateAndTimeFormatter
         testDateString = "8/21/16"
         
-        testStartDate = shortTimeFormatter.dateFromString("\(testDateString), 10:15 AM")
-        testFinishDate = shortTimeFormatter.dateFromString("\(testDateString), 10:45 AM")
+        testStartDate = shortTimeFormatter.date(from: "\(testDateString), 10:15 AM")
+        testFinishDate = shortTimeFormatter.date(from: "\(testDateString), 10:45 AM")
         
         sut = DayResults.newResultWithDate(testFinishDate, forActivity: testActivity)
     }
@@ -42,12 +42,12 @@ class DayResultsTests: CoreDataBaseTest {
 
     func test_createResult() {
         let result = DayResults.newResultWithDate(testFinishDate, forActivity: testActivity)
-        let expectedStartTime = shortTimeFormatter.dateFromString("\(testDateString), 10:15 AM")!
+        let expectedStartTime = shortTimeFormatter.date(from: "\(testDateString), 10:15 AM")!
 
         XCTAssertNotNil(result)
         XCTAssertEqual(result.activity, testActivity, "it should assign test activity as owner")
-        XCTAssertEqual(shortDateFormatter.stringFromDate(result.raughDate), testDateString)
-        XCTAssertEqual(shortTimeFormatter.stringFromDate(result.factFinishTime), "\(testDateString), 10:45 AM")
+        XCTAssertEqual(shortDateFormatter.string(from: result.raughDate), testDateString)
+        XCTAssertEqual(shortTimeFormatter.string(from: result.factFinishTime), "\(testDateString), 10:45 AM")
         XCTAssertEqual(result.date, testDateString, "it should be 8/21/16")
         XCTAssertEqual(result.factStartTime, expectedStartTime, "it should be 10:15 AM")
         XCTAssertEqual(result.factDuration, 30, "it should be 95 minutes")
@@ -59,8 +59,8 @@ class DayResultsTests: CoreDataBaseTest {
     func test_factDurationFromStartToFinish() {
         let start = sut.factStartTime
         let finish = sut.factFinishTime
-        XCTAssertEqual(shortTimeFormatter.stringFromDate(start), "8/21/16, 10:15 AM")
-        XCTAssertEqual(shortTimeFormatter.stringFromDate(finish), "8/21/16, 10:45 AM")
+        XCTAssertEqual(shortTimeFormatter.string(from: start), "8/21/16, 10:15 AM")
+        XCTAssertEqual(shortTimeFormatter.string(from: finish), "8/21/16, 10:45 AM")
         XCTAssertEqual(sut.factDuration, 30, "It should be 30 minutes")
     }
     
@@ -110,17 +110,17 @@ class DayResultsTests: CoreDataBaseTest {
     
     func testCompareDatesOfResults() {
         // create additional result to compare
-        let earlierDate = NSDate().dateByAddingTimeInterval(-60*60*24*4)
-        sut.date = DayResults.standardDateFormatter().stringFromDate(earlierDate)
-        let additionalResult = DayResults.newResultWithDate(NSDate(), forActivity: testActivity)
+        let earlierDate = Date().addingTimeInterval(-60*60*24*4)
+        sut.date = DayResults.standardDateFormatter().string(from: earlierDate)
+        let additionalResult = DayResults.newResultWithDate(Date(), forActivity: testActivity)
         testCoreDataStack.saveContext()
         
         // compare
         let compareResult = sut.compareDatesOfResults(additionalResult)
-        XCTAssertEqual(compareResult.rawValue, NSComparisonResult.OrderedAscending.rawValue, "Additional result should be earlier than test result")
+        XCTAssertEqual(compareResult.rawValue, ComparisonResult.orderedAscending.rawValue, "Additional result should be earlier than test result")
         
         // delete additional result
-        sut.managedObjectContext?.deleteObject(additionalResult)
+        sut.managedObjectContext?.delete(additionalResult)
     }
     
     
@@ -149,27 +149,27 @@ class DayResultsTests: CoreDataBaseTest {
         let fetchedResult = DayResults.fetchResultWithDate(testFinishDate, forActivity: sut.activity)
         XCTAssertEqual(fetchedResult!, sut, "Results should be equal")
         
-        let nonExistingResultDate = DayResults.standardDateFormatter().dateFromString("1/2/13")
+        let nonExistingResultDate = DayResults.standardDateFormatter().date(from: "1/2/13")
         let nonExistingResult = DayResults.fetchResultWithDate(nonExistingResultDate!, forActivity: sut.activity)
         XCTAssertNil(nonExistingResult, "Non existing result should be nil")
     }
     
     //MARK: - Helper functions
-    func createFakeResultsInNumberOf(number: Int) {
+    func createFakeResultsInNumberOf(_ number: Int) {
         var results = [DayResults]()
-        let originalResultDate = DayResults.standardDateFormatter().dateFromString(sut.date)
+        let originalResultDate = DayResults.standardDateFormatter().date(from: sut.date)
         let dayTimeInterval: Double = 60*60*24
         for i in 1 ..< number + 1 {
-            let newResultDate = originalResultDate?.dateByAddingTimeInterval(-dayTimeInterval * Double(i))
+            let newResultDate = originalResultDate?.addingTimeInterval(-dayTimeInterval * Double(i))
             results.append(DayResults.newResultWithDate(newResultDate!, forActivity: sut.activity))
         }
         fakeWeekResults = results
     }
     
     func deleteFakeWeekResults() {
-        if let results = fakeWeekResults where results.count > 0 {
+        if let results = fakeWeekResults , results.count > 0 {
             for result in results {
-                sut.managedObjectContext?.deleteObject(result)
+                sut.managedObjectContext?.delete(result)
             }
             testCoreDataStack.saveContext()
         }

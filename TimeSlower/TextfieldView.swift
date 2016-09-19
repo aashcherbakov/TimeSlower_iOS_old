@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import JVFloatLabeledTextField
-import ReactiveCocoa
+import ReactiveSwift
 
 /** 
  Class that represents a view with JVFloatLabeledTextField. Depending on set type,
@@ -17,7 +16,7 @@ import ReactiveCocoa
 */
 class TextfieldView: UIView {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let placeholderYPadding: CGFloat = -2
     }
     
@@ -25,7 +24,7 @@ class TextfieldView: UIView {
     
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet private var view: UIView!
+    @IBOutlet fileprivate var view: UIView!
     
     var config: TextfieldConfiguration!
     
@@ -44,7 +43,7 @@ class TextfieldView: UIView {
     - parameter config:   TextfieldConfiguration type which will define design details of textfield view
     - parameter delegate: instance that is conforming to TextFieldViewDelegate protocol
     */
-    func setupWithConfig(config: TextfieldConfiguration) {
+    func setupWithConfig(_ config: TextfieldConfiguration) {
         self.config = config
         
         setupEvents()
@@ -56,39 +55,39 @@ class TextfieldView: UIView {
      
      - parameter text: String
      */
-    func setText(text: String?) {
+    func setText(_ text: String?) {
         textField.text = text
-        if textField.isFirstResponder() {
+        if textField.isFirstResponder {
             textField.resignFirstResponder()
         }
     }
     
     // MARK: - Private Methods
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(TextfieldView.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(TextfieldView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupEvents() {
-        let textDirectSignal = textField.rac_valuesForKeyPath("text", observer: self).toSignalProducer()
-        let textInputSignal = textField.rac_textSignal().toSignalProducer()        
-        
-        combineLatest([textDirectSignal, textInputSignal])
-            .map({ (strings) -> Bool in
-                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
-                return combinedString.characters.count > 0
-            })
-            .skipRepeats()
-            .startWithNext { [weak self] (valid) in
-                self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
-                self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
-        }
+    fileprivate func setupEvents() {
+//        let textDirectSignal = textField.rac_valuesForKeyPath("text", observer: self).toSignalProducer()
+//        let textInputSignal = textField.rac_textSignal().toSignalProducer()        
+//        
+//        combineLatest([textDirectSignal, textInputSignal])
+//            .map({ (strings) -> Bool in
+//                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
+//                return combinedString.characters.count > 0
+//            })
+//            .skipRepeats()
+//            .startWithNext { [weak self] (valid) in
+//                self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
+//                self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
+//        }
     }
     
-    private func setupDesign() {
-        textField.userInteractionEnabled = config.textFieldInteractionEnabled
+    fileprivate func setupDesign() {
+        textField.isUserInteractionEnabled = config.textFieldInteractionEnabled
         textField.placeholder = config.placeholder
         textField.floatingLabelActiveTextColor = UIColor.purpleRed()
         textField.floatingLabelTextColor = UIColor.purpleRed()

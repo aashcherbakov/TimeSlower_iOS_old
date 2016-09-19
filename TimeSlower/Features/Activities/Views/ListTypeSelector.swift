@@ -18,7 +18,7 @@ class ListTypeSelector: UIControl {
     var selectedSegmentIndex: Int! {
         didSet {
             configureButtons(selectedSegmentIndex!)
-            sendActionsForControlEvents(UIControlEvents.ValueChanged)
+            sendActions(for: UIControlEvents.valueChanged)
         }
     }
 
@@ -30,18 +30,18 @@ class ListTypeSelector: UIControl {
     }
     
     func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("ListTypeSelector", owner: self, options: nil)
+        Bundle.main.loadNibNamed("ListTypeSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
-        let touchLocation = touch.locationInView(self)
+        let touchLocation = touch.location(in: self)
         selectedSegmentIndex = (touchLocation.x < view.frame.width / 2) ? 0 : 1
     }
     
-    func configureButtons(type: Int) {
+    func configureButtons(_ type: Int) {
         let forTodayImage = type == 0 ? "selectedIcon" : "deselectedIcon"
         let fullListImage = type == 1 ? "selectedIcon" : "deselectedIcon"
         

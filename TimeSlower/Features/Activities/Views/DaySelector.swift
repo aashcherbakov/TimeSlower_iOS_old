@@ -12,24 +12,24 @@ import TimeSlowerKit
 /// UIControl subclass that alows to pick days of activity basis
 class DaySelector: UIControl {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let defaultButtonWidth: CGFloat = 28
     }
     
     @IBOutlet var dayButtons: [UIButton]!
-    @IBOutlet private var view: UIView!
+    @IBOutlet fileprivate var view: UIView!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet private var buttonsWidths: [NSLayoutConstraint]!
-    @IBOutlet private var twoLastButtonsWidths: [NSLayoutConstraint]!
-    @IBOutlet private var fiveLastButtonsWidths: [NSLayoutConstraint]!
+    @IBOutlet fileprivate var buttonsWidths: [NSLayoutConstraint]!
+    @IBOutlet fileprivate var twoLastButtonsWidths: [NSLayoutConstraint]!
+    @IBOutlet fileprivate var fiveLastButtonsWidths: [NSLayoutConstraint]!
     
-    private var daysAvailableToSelect: [Weekday] = Weekday.weekdaysForBasis(.Daily)
+    fileprivate var daysAvailableToSelect: [Weekday] = Weekday.weekdaysForBasis(.daily)
     
     /// Set of days in format "Mon" "Fri" etc
-    private(set) var selectedDays = Set<Int>()
+    fileprivate(set) var selectedDays = Set<Int>()
     
     /// Basis that comes out of selected days
-    var selectedBasis: Basis = .Random {
+    var selectedBasis: Basis = .random {
         didSet {
             setupButtonsForBasis()
         }
@@ -42,7 +42,7 @@ class DaySelector: UIControl {
         setupDesign()
     }
 
-    func displayValue(value: [Int]) {
+    func displayValue(_ value: [Int]) {
         selectedDays = Set(value)
         setupButtonsForSelectedDays(value)
         updateButtonsDesign()
@@ -50,56 +50,56 @@ class DaySelector: UIControl {
     
     // MARK: - Setup Methods
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         setupXib()
         setupInitialButtonsDesign()
         setupButtonsForBasis()
     }
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("DaySelector", owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed("DaySelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupInitialButtonsDesign() {
+    fileprivate func setupInitialButtonsDesign() {
         for button in dayButtons {
-            button.backgroundColor = UIColor.clearColor()
-            button.setTitleColor(UIColor.lightGray(), forState: .Normal)
-            button.setTitleColor(UIColor.purpleRed(), forState: .Selected)
+            button.backgroundColor = UIColor.clear
+            button.setTitleColor(UIColor.lightGray(), for: UIControlState())
+            button.setTitleColor(UIColor.purpleRed(), for: .selected)
         }
     }
     
     //MARK: - Actions
     
-    @IBAction private func daySelected(sender: UIButton) {
+    @IBAction fileprivate func daySelected(_ sender: UIButton) {
         updateSelectedListWithButton(sender)
         updateDesignOfButton(sender)
     }
     
     // MARK: - Private Methods
     
-    private func setupButtonsForBasis() {
+    fileprivate func setupButtonsForBasis() {
         setProperButtonsNames()
         updateButtonsDesign()
         resetSelectedDays()
         setNeedsLayout()
     }
     
-    private func setProperButtonsNames() {        
+    fileprivate func setProperButtonsNames() {        
         let daysForBasis = Weekday.weekdaysForBasis(selectedBasis)
         
         for button in dayButtons {
             let weekday = daysAvailableToSelect[button.tag]
-            button.setTitle(weekday.shortName, forState: .Normal)
+            button.setTitle(weekday.shortName, for: UIControlState())
             
-            if selectedBasis != .Random {
-                button.selected = daysForBasis.contains(weekday)
+            if selectedBasis != .random {
+                button.isSelected = daysForBasis.contains(weekday)
             }
         }
     }
     
-    private func updateButtonsDesign() {
+    fileprivate func updateButtonsDesign() {
         for button in dayButtons {
             updateDesignOfButton(button)
             setupButtonLayer(button)
@@ -107,54 +107,54 @@ class DaySelector: UIControl {
         setNeedsLayout()
     }
     
-    private func updateDesignOfButton(button: UIButton) {
-        let color = button.selected ? UIColor.purpleRed().CGColor : UIColor.lightGray().CGColor
+    fileprivate func updateDesignOfButton(_ button: UIButton) {
+        let color = button.isSelected ? UIColor.purpleRed().cgColor : UIColor.lightGray().cgColor
         button.layer.borderColor = color
     }
     
-    private func setupButtonLayer(button: UIButton) {
+    fileprivate func setupButtonLayer(_ button: UIButton) {
         button.layer.cornerRadius = Constants.defaultButtonWidth / 2
         button.layer.borderWidth = 1
     }
     
-    private func resetSelectedDays() {
-        selectedDays.removeAll(keepCapacity: false)
+    fileprivate func resetSelectedDays() {
+        selectedDays.removeAll(keepingCapacity: false)
 
         for button in dayButtons {
-            if button.selected {
+            if button.isSelected {
                 selectedDays.insert(daysAvailableToSelect[button.tag].rawValue)
             }
         }
     }
     
-    private func updateSelectedListWithButton(button: UIButton) {
+    fileprivate func updateSelectedListWithButton(_ button: UIButton) {
         let selectedWeekday = daysAvailableToSelect[button.tag]
-        if button.selected {
+        if button.isSelected {
             selectedDays.remove(selectedWeekday.rawValue)
         } else {
             selectedDays.insert(selectedWeekday.rawValue)
         }
         
-        button.selected = !button.selected
+        button.isSelected = !button.isSelected
         let weekdays = weekdaysFromSelectedDays(selectedDays)
         selectedBasis = Basis.basisFromWeekdays(weekdays)
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
     }
     
-    private func setupButtonsForSelectedDays(days: [Int]) {
+    fileprivate func setupButtonsForSelectedDays(_ days: [Int]) {
         let weekdays = Set(weekdaysFromSelectedDays(Set(days)))
         let selectedDayNames = weekdays.map { (weekday) -> String in
             return weekday.shortName
         }
         
         for button in dayButtons {
-            if let title = button.titleLabel?.text where selectedDayNames.contains(title) {
-                button.selected = true
+            if let title = button.titleLabel?.text , selectedDayNames.contains(title) {
+                button.isSelected = true
             }
         }
     }
     
-    private func weekdaysFromSelectedDays(days: Set<Int>) -> [Weekday] {
+    fileprivate func weekdaysFromSelectedDays(_ days: Set<Int>) -> [Weekday] {
         var weekdays: [Weekday] = []
         for day in days {
             if let weekday = Weekday(rawValue: day) {

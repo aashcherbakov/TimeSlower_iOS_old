@@ -9,7 +9,7 @@
 import Foundation
 
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 
 /**
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
@@ -23,7 +23,7 @@ class EditActivityNameView: ObservableControl {
     @IBOutlet var view: UIView!
 
     dynamic var selectedValue: String?
-    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
 
     // MARK: - Overridden
     
@@ -43,7 +43,7 @@ class EditActivityNameView: ObservableControl {
         return valueChangedSignal
     }
     
-    override func setInitialValue(value: AnyObject?) {
+    override func setInitialValue(_ value: AnyObject?) {
         if let value = value as? String {
             selectedValue = value
         }
@@ -51,46 +51,46 @@ class EditActivityNameView: ObservableControl {
     
     // MARK: - Private Methods
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("EditActivityNameView", owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed("EditActivityNameView", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupEvents() {
-        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-        
-        valueChangedSignal = signal
-        
-        valueChangedSignal?.startWithNext { [weak self] (value) in
-            guard let value = value as? String else { return }
-            self?.textFieldView.setText(value)
-        }
-        
-        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (_) in
-                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
-                self?.sendActionsForControlEvents(.TouchUpInside)
-                self?.selectedValue = name
-        }
+    fileprivate func setupEvents() {
+//        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+//        
+//        valueChangedSignal = signal
+//        
+//        valueChangedSignal?.startWithNext { [weak self] (value) in
+//            guard let value = value as? String else { return }
+//            self?.textFieldView.setText(value)
+//        }
+//        
+//        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+//            .startWithNext { [weak self] (_) in
+//                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+//                self?.sendActionsForControlEvents(.TouchUpInside)
+//                self?.selectedValue = name
+//        }
         
         textFieldView.textField.delegate = self
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         textFieldView.setupWithConfig(NameTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
 }
 
 extension EditActivityNameView: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        sendActionsForControlEvents(.TouchUpInside)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        sendActions(for: .touchUpInside)
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
-        sendActionsForControlEvents(.TouchUpInside)
+        sendActions(for: .touchUpInside)
     }
 }

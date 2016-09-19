@@ -10,17 +10,17 @@ import Foundation
 import CoreData
 
 /// Class that defines a day. Used to describe activity basis
-public class Day: NSManagedObject, Persistable {
+open class Day: NSManagedObject, Persistable {
     
     /// Constructor
-    public static func createFromWeekday(weekday: Weekday, forActivity activity: Activity) -> Day? {
+    open static func createFromWeekday(_ weekday: Weekday, forActivity activity: Activity) -> Day? {
         
         guard let context = activity.managedObjectContext else { return nil }
         
-        if let day = NSEntityDescription.insertNewObjectForEntityForName(
-            String(self), inManagedObjectContext: context) as? Day {
+        if let day = NSEntityDescription.insertNewObject(
+            forEntityName: String(describing: self), into: context) as? Day {
             day.name = weekday.shortName
-            day.number = NSNumber(integer: weekday.rawValue)
+            day.number = NSNumber(value: weekday.rawValue as Int)
             saveContext(context)
             return day
         }
@@ -35,14 +35,14 @@ public class Day: NSManagedObject, Persistable {
      
      - returns: number properties of Day
      */
-    public static func daysIntegerRepresentation(days: Set<Day>?) -> [Int] {
+    open static func daysIntegerRepresentation(_ days: Set<Day>?) -> [Int] {
         guard let days = days else {
             return [Int]()
         }
         
         var integers = [Int]()
         for day in days {
-            integers.append(day.number.integerValue)
+            integers.append(day.number.intValue)
         }
         
         return integers
@@ -56,11 +56,11 @@ public class Day: NSManagedObject, Persistable {
      
      - returns: Set of Days
      */
-    public static func dayEntitiesFromSelectedDays(selectedDays: [Int], forActivity activity: Activity) -> Set<Day> {
+    open static func dayEntitiesFromSelectedDays(_ selectedDays: [Int], forActivity activity: Activity) -> Set<Day> {
         var daySet = Set<Day>()
         for day in selectedDays {
             if let weekday = Weekday(rawValue: day),
-                newDay = Day.createFromWeekday(weekday, forActivity: activity) {
+                let newDay = Day.createFromWeekday(weekday, forActivity: activity) {
                 
                 daySet.insert(newDay)
             }

@@ -12,13 +12,13 @@ import CoreData
 extension Profile {
     
     public enum Gender: Int {
-        case Male = 0
-        case Female = 1
+        case male = 0
+        case female = 1
         
         func description() -> String {
             switch self {
-            case .Male: return "Male"
-            case .Female: return "Female"
+            case .male: return "Male"
+            case .female: return "Female"
             }
         }
     }
@@ -52,7 +52,7 @@ extension Profile {
      */
     public static func saveProfile(withName
         name: String,
-        birthday: NSDate,
+        birthday: Date,
         country: String,
         avatar: UIImage?,
         gender: Profile.Gender) -> Profile {
@@ -67,7 +67,7 @@ extension Profile {
      
      - returns: UIImage with avatar
      */
-    public class func imageForSelectedAvatar(avatar: UIImage?) -> UIImage? {
+    public class func imageForSelectedAvatar(_ avatar: UIImage?) -> UIImage? {
         if let avatar = avatar {
             return avatar
         } else {
@@ -94,8 +94,8 @@ extension Profile {
      - returns: Double for user age
      */
     public func userAge() -> Double {
-        let components = NSCalendar.currentCalendar().components(.Year, fromDate: birthday, toDate: NSDate(), options: [])
-        return Double(components.year)
+        let components = (Calendar.current as NSCalendar).components(.year, from: birthday as Date, to: Date(), options: [])
+        return Double(components.year!)
     }
     
     /**
@@ -104,7 +104,7 @@ extension Profile {
      - returns: Gender enum
      */
     public func userGender() -> Gender {
-        guard let gender = Gender(rawValue: gender.integerValue) else {
+        guard let gender = Gender(rawValue: gender.intValue) else {
             fatalError("Used unallowed integer to create gender")
         }
         return gender
@@ -126,8 +126,8 @@ extension Profile {
      
      - returns: 0 for male, 1 for female
      */
-    public class func genderWithEnum(gender: Gender) -> NSNumber {
-        return NSNumber(integer: gender.rawValue)
+    public class func genderWithEnum(_ gender: Gender) -> NSNumber {
+        return NSNumber(value: gender.rawValue as Int)
     }
     
     
@@ -149,7 +149,7 @@ extension Profile {
      */
     public func maxYearsForProfile() -> Double {
         let lifeInContries = Profile.lifeExpacityDictionary()
-        let keyForTopDictionary = country.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil)
+        let keyForTopDictionary = country.capitalized.replacingOccurrences(of: " ", with: "", options: [], range: nil)
         let keyForInnerDictionary = userGenderString()
         return (lifeInContries[keyForTopDictionary]![keyForInnerDictionary]! as NSString).doubleValue
     }
@@ -159,10 +159,10 @@ extension Profile {
      
      - returns: NSDate of avarage person's death
      */
-    public func dateOfApproximateLifeEnd() -> NSDate {
-        let components = NSDateComponents()
-        components.setValue(Int(maxYearsForProfile()), forComponent: .Year)
-        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: birthday, options: [])!
+    public func dateOfApproximateLifeEnd() -> Date {
+        let components = DateComponents()
+        (components as NSDateComponents).setValue(Int(maxYearsForProfile()), forComponent: .year)
+        return (Calendar.current as NSCalendar).date(byAdding: components, to: birthday as Date, options: [])!
     }
     
     /**
@@ -172,18 +172,18 @@ extension Profile {
      
      - returns: Int for number of days
      */
-    public func numberOfDaysTillEndOfLifeSinceDate(date: NSDate) -> Int {
-        let components = NSCalendar.currentCalendar().components(
-            .Day, fromDate: date, toDate: dateOfApproximateLifeEnd(), options: [])
-        return components.day
+    public func numberOfDaysTillEndOfLifeSinceDate(_ date: Date) -> Int {
+        let components = (Calendar.current as NSCalendar).components(
+            .day, from: date, to: dateOfApproximateLifeEnd(), options: [])
+        return components.day!
     }
     
 
     
     
-    public func totalTimeForDailyMinutes(minutes: Double) -> LifeTime {
+    public func totalTimeForDailyMinutes(_ minutes: Double) -> LifeTime {
         let minutes = Double(minutes)
-        let daysLeft = Double(numberOfDaysTillEndOfLifeSinceDate(NSDate()))
+        let daysLeft = Double(numberOfDaysTillEndOfLifeSinceDate(Date()))
         
         let hours = minutes * daysLeft / 60.0
         let days = hours / 24
@@ -195,7 +195,7 @@ extension Profile {
     
     
     /// Returns $0 - saved, $1 - spent
-    public func factTimingForPeriod(period: PastPeriod) -> (saved: Double, spent: Double)? {
+    public func factTimingForPeriod(_ period: PastPeriod) -> (saved: Double, spent: Double)? {
 
         var summSaved = 0.0
         var summSpent = 0.0
@@ -213,7 +213,7 @@ extension Profile {
     }
     
     /// Returns $0 - saved, $1 - spent in minutes
-    public func plannedTimingInPeriod(period: PastPeriod, sinceDate date: NSDate) -> (save: Double, spend: Double)? {
+    public func plannedTimingInPeriod(_ period: PastPeriod, sinceDate date: Date) -> (save: Double, spend: Double)? {
         var toSave = 0.0;
         var toSpend = 0.0;
         
@@ -228,9 +228,9 @@ extension Profile {
         return (abs(toSave), abs(toSpend)) // minutes
     }
     
-    public func timeStatsForPeriod(period: PastPeriod) -> DailyStats {
+    public func timeStatsForPeriod(_ period: PastPeriod) -> DailyStats {
         let fact = factTimingForPeriod(period)
-        let planned = plannedTimingInPeriod(period, sinceDate: NSDate())
+        let planned = plannedTimingInPeriod(period, sinceDate: Date())
         return DailyStats(factSaved: fact!.0, factSpent: fact!.1, plannedToSave: planned!.0, plannedToSpend: planned!.1)
     }
     
@@ -306,8 +306,8 @@ extension Profile {
      
      - returns: NSDate for March 3 1987
      */
-    public class func defaultBirthday() -> NSDate {
-        return DayResults.standardDateFormatter().dateFromString("3/28/87")!
+    public class func defaultBirthday() -> Date {
+        return DayResults.standardDateFormatter().date(from: "3/28/87")!
     }
     
     /**
@@ -316,8 +316,7 @@ extension Profile {
      - returns: String with country name of users locale
      */
     public class func defaultCountry() -> String {
-        guard let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String else {
-            assert(false, "Error: no such code as " + NSLocaleCountryCode + " in current database")
+        guard let countryCode = (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String else {
             return ""
         }
         
@@ -334,7 +333,7 @@ extension Profile {
      
      - returns: [String:String]
      */
-    private class func countryCodesDictionary() -> [String:String] {
+    fileprivate class func countryCodesDictionary() -> [String:String] {
         return DataStore().countryCodesDictionary()
     }
     
@@ -344,7 +343,7 @@ extension Profile {
      
      - returns: [String:[String:String]]
      */
-    private class func lifeExpacityDictionary() -> [String:[String:String]] {
+    fileprivate class func lifeExpacityDictionary() -> [String:[String:String]] {
         return DataStore().lifeExpacityDictionary()
     }
     

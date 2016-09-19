@@ -12,9 +12,9 @@ import TimeSlowerKit
 /// Class to configure ProfileEditingTableViewCell
 class ProfileEditingCellConfig: NSObject {
     
-    private(set) var birthday: NSDate?
-    private(set) var name: String?
-    private(set) var country: String?
+    fileprivate(set) var birthday: Date?
+    fileprivate(set) var name: String?
+    fileprivate(set) var country: String?
     
     // MARK: Initializer
     
@@ -35,13 +35,13 @@ class ProfileEditingCellConfig: NSObject {
     - parameter value: AnyObject for passing both String and NSDate type
     - parameter type:  ProfileEditingCellType of the cell
     */
-    func updateValue(value: AnyObject?, forType type: ProfileEditingCellType) {
+    func updateValue(_ value: AnyObject?, forType type: ProfileEditingCellType) {
         guard let value = value else { return }
         
-        if !value.isKindOfClass(NSNull) {
+        if !value.isKind(of: NSNull.self) {
             switch type {
             case .Name: name = value as? String
-            case .Birthday: birthday = value as? NSDate
+            case .Birthday: birthday = value as? Date
             case .Country: country = value as? String
             }
         }
@@ -54,11 +54,11 @@ class ProfileEditingCellConfig: NSObject {
      
      - returns: AnyObject? which can contain String or NSDate (for now)
      */
-    func preparedValueForType(type: ProfileEditingCellType) -> AnyObject? {       
+    func preparedValueForType(_ type: ProfileEditingCellType) -> AnyObject? {       
         switch type {
-        case .Name: return name
-        case .Birthday: return birthday
-        case .Country: return country
+        case .Name: return name as AnyObject?
+        case .Birthday: return birthday as AnyObject?
+        case .Country: return country as AnyObject?
         }
     }
     
@@ -71,18 +71,18 @@ class ProfileEditingCellConfig: NSObject {
     
     - returns: UIImage? for given type
     */
-    func iconForCellType(type: ProfileEditingCellType,
+    func iconForCellType(_ type: ProfileEditingCellType,
         forState state: ProfileEditingTableViewCell.EditingState) -> UIImage? {
-            let suffix = (state == .Editing) ? "Black" : ""
+            let suffix = (state == .editing) ? "Black" : ""
             let imageName = type.rawValue + "Icon" + suffix
             return UIImage(named: imageName)
     }
     
     /// [tested] UIColor instance for EditingState
-    func textColorForState(state: ProfileEditingTableViewCell.EditingState) -> UIColor {
+    func textColorForState(_ state: ProfileEditingTableViewCell.EditingState) -> UIColor {
         switch state {
-        case .Default: return UIColor.lightGray()
-        case .Editing: return UIColor.darkGray()
+        case .default: return UIColor.lightGray()
+        case .editing: return UIColor.darkGray()
         }
     }
     
@@ -97,17 +97,17 @@ class ProfileEditingCellConfig: NSObject {
     /// UIDatePicker with .Date preselected mode and pre-set time: 28 March 1987 (default) or user's birthday
     func defatultDatePicker() -> UIDatePicker {
         let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .Date
+        datePicker.datePickerMode = .date
         let userBirthday = (birthday != nil) ? birthday : Profile.defaultBirthday()
         datePicker.setDate(userBirthday!, animated: false)
         return datePicker
     }
     
     /// Should be a singleton -> refactor
-    lazy var shortDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .MediumStyle
+    lazy var shortDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
         return dateFormatter
     }()
 }

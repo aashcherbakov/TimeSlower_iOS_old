@@ -37,7 +37,7 @@ class ProfileEditingViewModelTests: XCTestCase {
         viewModel.userDidPickGender(0)
         viewModel.cellConfig?.updateValue("Alex", forType: .Name)
         viewModel.cellConfig?.updateValue("Ukraine", forType: .Country)
-        viewModel.cellConfig?.updateValue(NSDate(), forType: .Birthday)
+        viewModel.cellConfig?.updateValue(Date(), forType: .Birthday)
         XCTAssertNil(viewModel.userDidMissData(), "Has no missed data")
     }
 }

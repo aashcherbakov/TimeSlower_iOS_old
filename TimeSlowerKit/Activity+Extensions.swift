@@ -19,7 +19,7 @@ extension Activity {
      - returns: True if type is Routine
      */
     public func isRoutine() -> Bool {
-        return (type.integerValue == 0) ? true : false
+        return (type.intValue == 0) ? true : false
     }
     
     /**
@@ -28,7 +28,7 @@ extension Activity {
      - returns: ActivityType
      */
     public func activityType() -> ActivityType {
-        return ActivityType(rawValue: self.type.integerValue)!
+        return ActivityType(rawValue: self.type.intValue)!
     }
     
     /**
@@ -37,7 +37,7 @@ extension Activity {
      - returns: Basis
      */
     public func activityBasis() -> Basis {
-        return Basis(rawValue: self.basis.integerValue)!
+        return Basis(rawValue: self.basis.intValue)!
     }
     
     /**
@@ -55,8 +55,8 @@ extension Activity {
     public func isGoingNow() -> Bool { return timing.isGoingNow() }
     public func isDoneForToday() -> Bool { return timing.isDoneForToday() }
     public func isManuallyStarted() -> Bool { return timing.manuallyStarted != nil }
-    public func updatedStartTime() -> NSDate { return timing.updatedStartTime() }
-    public func updatedFinishTime() -> NSDate { return timing.updatedFinishTime() }
-    public func updatedAlarmTime() -> NSDate { return timing.updatedAlarmTime() }
+    public func updatedStartTime() -> Date { return timing.updatedStartTime() as Date }
+    public func updatedFinishTime() -> Date { return timing.updatedFinishTime() as Date }
+    public func updatedAlarmTime() -> Date { return timing.updatedAlarmTime() as Date }
 }
 

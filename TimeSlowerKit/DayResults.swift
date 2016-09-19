@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-public class DayResults: NSManagedObject, Persistable {
+open class DayResults: NSManagedObject, Persistable {
     
-    public class func newResultWithDate(date: NSDate, forActivity activity: Activity) -> DayResults {
+    open class func newResultWithDate(_ date: Date, forActivity activity: Activity) -> DayResults {
         let result: DayResults!
         
         // check if there already is result for this date
@@ -20,19 +20,19 @@ public class DayResults: NSManagedObject, Persistable {
             activity.timing.manuallyStarted = nil
             
         } else {
-            let entity = NSEntityDescription.entityForName("DayResults", inManagedObjectContext: activity.managedObjectContext!)
-            result = DayResults(entity: entity!, insertIntoManagedObjectContext: activity.managedObjectContext)
+            let entity = NSEntityDescription.entity(forEntityName: "DayResults", in: activity.managedObjectContext!)
+            result = DayResults(entity: entity!, insertInto: activity.managedObjectContext)
             result.factFinishTime = date
             result.raughDate = date
-            result.date = DayResults.standardDateFormatter().stringFromDate(date)
+            result.date = DayResults.standardDateFormatter().string(from: date)
             result.factStartTime = activity.timing.updatedStartTimeForDate(date)
-            result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
-            result.factSuccess = NSNumber(double: result.daySuccessForTiming(activity.timing))
+//            result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
+            result.factSuccess = NSNumber(value: result.daySuccessForTiming(activity.timing) as Double)
             
             activity.stats.updateSuccessWithResult(result)
             
             if activity.isRoutine() {
-                result.factSavedTime = activity.timing.duration.minutes() - result.factDuration.integerValue
+//                result.factSavedTime = activity.timing.duration.minutes() - result.factDuration.intValue
             }
             
             result.activity = activity
@@ -50,7 +50,7 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: NSDateFormatter singleton instance
      */
-    public class func standardDateFormatter() -> NSDateFormatter {
+    open class func standardDateFormatter() -> DateFormatter {
         return StaticDateFormatter.shortDateNoTimeFromatter
     }
     
@@ -60,11 +60,11 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Double for % of achieved result
      */
-    public func daySuccessForTiming(timing: Timing) -> Double {
+    open func daySuccessForTiming(_ timing: Timing) -> Double {
         let successCalculator = DayResults.successForActivityType(activity.activityType())
         let duration = Double(timing.duration.minutes())
         let goal = timing.timeToSave.doubleValue
-        return successCalculator(start: factStartTime, finish: factFinishTime, maxDuration: duration, goal: goal)
+        return successCalculator(factStartTime as Date, factFinishTime as Date, duration, goal)
     }
     
     /**
@@ -74,12 +74,12 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: NSComparison description
      */
-    public func compareDatesOfResults(otherResult: DayResults) -> NSComparisonResult {
+    open func compareDatesOfResults(_ otherResult: DayResults) -> ComparisonResult {
         let dateFormatter = DayResults.standardDateFormatter()
         
         guard let
-            originalDate = dateFormatter.dateFromString(date),
-            otherDate = dateFormatter.dateFromString(otherResult.date)
+            originalDate = dateFormatter.date(from: date),
+            let otherDate = dateFormatter.date(from: otherResult.date)
         else {
             fatalError("Could not convert dates")
         }
@@ -91,8 +91,8 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: String with short day name
      */
-    public func shortDayNameForDate() -> String {
-        guard let date = DayResults.standardDateFormatter().dateFromString(date) else {
+    open func shortDayNameForDate() -> String {
+        guard let date = DayResults.standardDateFormatter().date(from: date) else {
             return ""
         }
         
@@ -110,22 +110,23 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: DayResults instance if there is one for given date
      */
-    public class func fetchResultWithDate(date: NSDate, forActivity activity: Activity) -> DayResults? {
-        let referenceDate = DayResults.standardDateFormatter().stringFromDate(date)
-        
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        let activityNamePredicate = NSPredicate(format: "activity.name == %@", activity.name)
-        let dayOfResultPredicate = NSPredicate(format: "date == %@", referenceDate)
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activityNamePredicate, dayOfResultPredicate])
-        fetchRequest.predicate = compoundPredicate
-        
-        let results = try! activity.managedObjectContext!.executeFetchRequest(fetchRequest) as! [DayResults]
-        
-        if let result = results.first {
-            return result
-        } else {
-            return nil
-        }
+    open class func fetchResultWithDate(_ date: Date, forActivity activity: Activity) -> DayResults? {
+//        let referenceDate = DayResults.standardDateFormatter().string(from: date)
+//        
+//        let fetchRequest = NSFetchRequest(entityName: "DayResults")
+//        let activityNamePredicate = NSPredicate(format: "activity.name == %@", activity.name)
+//        let dayOfResultPredicate = NSPredicate(format: "date == %@", referenceDate)
+//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activityNamePredicate, dayOfResultPredicate])
+//        fetchRequest.predicate = compoundPredicate
+//        
+//        let results = try! activity.managedObjectContext!.fetch(fetchRequest) as! [DayResults]
+//        
+//        if let result = results.first {
+//            return result
+//        } else {
+//            return nil
+//        }
+        return nil
     }
     
     /**
@@ -136,13 +137,14 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Array of DayResults for specific date
      */
-    public class func fetchResultsWithDate(date: NSDate, inContext context: NSManagedObjectContext) -> [DayResults] {
-        let referenceDate = DayResults.standardDateFormatter().stringFromDate(date)
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        fetchRequest.predicate = NSPredicate(format: "date == %@", referenceDate)
-        
-        let results = try! context.executeFetchRequest(fetchRequest) as! [DayResults]
-        return results
+    open class func fetchResultsWithDate(_ date: Date, inContext context: NSManagedObjectContext) -> [DayResults] {
+//        let referenceDate = DayResults.standardDateFormatter().string(from: date)
+//        let fetchRequest = NSFetchRequest(entityName: "DayResults")
+//        fetchRequest.predicate = NSPredicate(format: "date == %@", referenceDate)
+//        
+//        let results = try! context.fetch(fetchRequest) as! [DayResults]
+//        return results
+        return []
     }
     
     /**
@@ -152,12 +154,12 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Array of DayResults
      */
-    public static func lastWeekResultsForActivity(activity: Activity) -> [DayResults] {
+    open static func lastWeekResultsForActivity(_ activity: Activity) -> [DayResults] {
         guard let results = activity.results else { return [DayResults]() }
         
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: #selector(NSString.compareDateRepresentationOfString(_:)))
 
-        if let sortedArray = results.sortedArrayUsingDescriptors([sortDescriptor]) as? [DayResults] {
+        if let sortedArray = results.sortedArray(using: [sortDescriptor]) as? [DayResults] {
             return removeSpareResults(sortedArray)
         }
         
@@ -174,9 +176,8 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Double for % of success. Can't be negative.
      */
-    static func successForRoutine(start
-        start: NSDate,
-        finish: NSDate,
+    static func successForRoutine(start: Date,
+        finish: Date,
         maxDuration: Double,
         goal: Double) -> Double {
         
@@ -199,9 +200,8 @@ public class DayResults: NSManagedObject, Persistable {
      
      - returns: Double for % of success. Can't be negative.
      */
-    static func successForGoal(start
-        start: NSDate,
-        finish: NSDate,
+    static func successForGoal(start: Date,
+        finish: Date,
         maxDuration: Double,
         goal: Double) -> Double {
         
@@ -215,18 +215,18 @@ public class DayResults: NSManagedObject, Persistable {
     
     // MARK: - Private Functions
     
-    private static func successForActivityType(type: ActivityType) -> ((start: NSDate, finish: NSDate, maxDuration: Double, goal: Double) -> Double) {
+    fileprivate static func successForActivityType(_ type: ActivityType) -> ((_ start: Date, _ finish: Date, _ maxDuration: Double, _ goal: Double) -> Double) {
         switch type {
-        case .Routine: return successForRoutine
-        case .Goal: return successForGoal
+        case .routine: return successForRoutine
+        case .goal: return successForGoal
         }
     }
     
-    private static func removeSpareResults(results: [DayResults]) -> [DayResults] {
+    fileprivate static func removeSpareResults(_ results: [DayResults]) -> [DayResults] {
         var sortedArray = results
         if sortedArray.count > 7 {
             let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7
-            sortedArray.removeRange(0..<(sortedArray.count - lastResultsNumber))
+            sortedArray.removeSubrange(0..<(sortedArray.count - lastResultsNumber))
         }
         return sortedArray
     }

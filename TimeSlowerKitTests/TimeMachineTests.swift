@@ -12,18 +12,18 @@ import XCTest
 
 class TimeMachineTests: XCTestCase {
 
-    var shortDateFromatter: NSDateFormatter!
+    var shortDateFromatter: DateFormatter!
     var timeMachine: TimeMachine!
-    var testStartDate: NSDate!
-    var testFinishDate: NSDate!
+    var testStartDate: Date!
+    var testFinishDate: Date!
     
     override func setUp() {
         super.setUp()
         shortDateFromatter = StaticDateFormatter.shortDateAndTimeFormatter
         timeMachine = TimeMachine()
         
-        testStartDate = shortDateFromatter.dateFromString("8/21/16, 10:15 AM")
-        testFinishDate = shortDateFromatter.dateFromString("8/21/16, 10:45 AM")
+        testStartDate = shortDateFromatter.date(from: "8/21/16, 10:15 AM")
+        testFinishDate = shortDateFromatter.date(from: "8/21/16, 10:45 AM")
     }
     
     override func tearDown() {
@@ -38,8 +38,8 @@ class TimeMachineTests: XCTestCase {
     //MARK: - next offcurance of day tests
     
     func testNextDayWithNameFromDateNextSaturdayFromWednesday() {
-        let wednesdayDate = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
-        let correctNextSaturday = shortDateFromatter.dateFromString("7/11/15, 10:00 AM")!
+        let wednesdayDate = shortDateFromatter.date(from: "7/8/15, 10:00 AM")!
+        let correctNextSaturday = shortDateFromatter.date(from: "7/11/15, 10:00 AM")!
         
         let saturday = Weekday(rawValue: 6)!
         let nextSaturday = timeMachine.nextOccuranceOfWeekday(saturday, fromDate: wednesdayDate)
@@ -47,8 +47,8 @@ class TimeMachineTests: XCTestCase {
     }
     
     func testNextDayWithNameFromDateNextSundayFromSaturday() {
-        let saturdayDate = shortDateFromatter.dateFromString("7/11/15, 10:00 AM")
-        let correctNextSunday = shortDateFromatter.dateFromString("7/12/15, 10:00 AM")
+        let saturdayDate = shortDateFromatter.date(from: "7/11/15, 10:00 AM")
+        let correctNextSunday = shortDateFromatter.date(from: "7/12/15, 10:00 AM")
         
         let sunday = Weekday(rawValue: 0)!
 
@@ -57,8 +57,8 @@ class TimeMachineTests: XCTestCase {
     }
     
     func testNextDayWithNameFromDateNextSundayFromSunday() {
-        let sundayDate = shortDateFromatter.dateFromString("7/12/15, 10:00 AM")
-        let correctNextSunday = shortDateFromatter.dateFromString("7/19/15, 10:00 AM")
+        let sundayDate = shortDateFromatter.date(from: "7/12/15, 10:00 AM")
+        let correctNextSunday = shortDateFromatter.date(from: "7/19/15, 10:00 AM")
         
         let sunday = Weekday(rawValue: 0)!
 
@@ -67,8 +67,8 @@ class TimeMachineTests: XCTestCase {
     }
     
     func testNextDayWithNameFromDateNextMondayFromFriday() {
-        let fridayDate = shortDateFromatter.dateFromString("7/10/15, 10:00 AM")
-        let correctNextMonday = shortDateFromatter.dateFromString("7/13/15, 10:00 AM")
+        let fridayDate = shortDateFromatter.date(from: "7/10/15, 10:00 AM")
+        let correctNextMonday = shortDateFromatter.date(from: "7/13/15, 10:00 AM")
         
         let monday = Weekday(rawValue: 1)!
 
@@ -77,8 +77,8 @@ class TimeMachineTests: XCTestCase {
     }
     
     func testNextDayWithNameFromDateNextWeekendDayFromSunday() {
-        let sundayDate = shortDateFromatter.dateFromString("7/12/15, 10:00 AM")
-        let correctNextWeekendDay = shortDateFromatter.dateFromString("7/18/15, 10:00 AM")
+        let sundayDate = shortDateFromatter.date(from: "7/12/15, 10:00 AM")
+        let correctNextWeekendDay = shortDateFromatter.date(from: "7/18/15, 10:00 AM")
         
         let saturday = Weekday(rawValue: 6)!
 
@@ -87,8 +87,8 @@ class TimeMachineTests: XCTestCase {
     }
     
     func testNextDayWithNameFromDateNextThursdayFromMonday() {
-        let mondayDate = shortDateFromatter.dateFromString("7/6/15, 10:00 AM")
-        let correctNextThursday = shortDateFromatter.dateFromString("7/9/15, 10:00 AM")
+        let mondayDate = shortDateFromatter.date(from: "7/6/15, 10:00 AM")
+        let correctNextThursday = shortDateFromatter.date(from: "7/9/15, 10:00 AM")
         
         let thursday = Weekday(rawValue: 4)!
 
@@ -99,31 +99,31 @@ class TimeMachineTests: XCTestCase {
     // MARK: - End Date
     
     func test_startDateForPeriod() {
-        let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
-        let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
-        let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
+        let date = shortDateFromatter.date(from: "7/8/15, 10:00 AM")!
+        let monthBeforDate = shortDateFromatter.date(from: "6/8/15, 10:00 AM")!
+        let yearBeforeDate = shortDateFromatter.date(from: "7/8/14, 10:00 AM")!
 
-        XCTAssertEqual(timeMachine.startDateForPeriod(.Today, sinceDate: date), date)
-        XCTAssertEqual(timeMachine.startDateForPeriod(.LastMonth, sinceDate: date), monthBeforDate)
-        XCTAssertEqual(timeMachine.startDateForPeriod(.LastYear, sinceDate: date), yearBeforeDate)
+        XCTAssertEqual(timeMachine.startDateForPeriod(.today, sinceDate: date), date)
+        XCTAssertEqual(timeMachine.startDateForPeriod(.lastMonth, sinceDate: date), monthBeforDate)
+        XCTAssertEqual(timeMachine.startDateForPeriod(.lastYear, sinceDate: date), yearBeforeDate)
     }
 
     func test_numberOfDatesInPeriod() {
-        let date = shortDateFromatter.dateFromString("7/8/15, 10:00 AM")!
-        let monthBeforDate = shortDateFromatter.dateFromString("6/8/15, 10:00 AM")!
-        let yearBeforeDate = shortDateFromatter.dateFromString("7/8/14, 10:00 AM")!
+        let date = shortDateFromatter.date(from: "7/8/15, 10:00 AM")!
+        let monthBeforDate = shortDateFromatter.date(from: "6/8/15, 10:00 AM")!
+        let yearBeforeDate = shortDateFromatter.date(from: "7/8/14, 10:00 AM")!
         
-        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.Today, fromDate: date), 0)
-        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastMonth, fromDate: monthBeforDate), 31)
-        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.LastYear, fromDate: yearBeforeDate), 365)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.today, fromDate: date), 0)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.lastMonth, fromDate: monthBeforDate), 31)
+        XCTAssertEqual(timeMachine.numberOfDaysInPeriod(.lastYear, fromDate: yearBeforeDate), 365)
     }
     
     // MARK: - Date manipulations
     
     func test_updatedTimeForDate() {
-        let time = shortDateFromatter.dateFromString("8/23/16, 10:00 AM")!
-        let newDate = shortDateFromatter.dateFromString("3/28/17, 12:00 PM")!
-        let expectedDate = shortDateFromatter.dateFromString("3/28/17, 10:00 AM")!
+        let time = shortDateFromatter.date(from: "8/23/16, 10:00 AM")!
+        let newDate = shortDateFromatter.date(from: "3/28/17, 12:00 PM")!
+        let expectedDate = shortDateFromatter.date(from: "3/28/17, 10:00 AM")!
         let result = timeMachine.updatedTime(time, forDate: newDate)
         XCTAssertEqual(result, expectedDate, "it should give updated date")
     }

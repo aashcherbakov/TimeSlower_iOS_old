@@ -24,7 +24,7 @@ class TypeSelector: UIControl {
             } else {
                 deselectAllButtons()
             }
-            sendActionsForControlEvents(UIControlEvents.ValueChanged)
+            sendActions(for: UIControlEvents.valueChanged)
         }
     }
     
@@ -44,14 +44,14 @@ class TypeSelector: UIControl {
     }
     
     func setupXib() {        
-        NSBundle.mainBundle().loadNibNamed("TypeSelector", owner: self, options: nil)
+        Bundle.main.loadNibNamed("TypeSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        let touchLocation = touch!.locationInView(self)
+        let touchLocation = touch!.location(in: self)
         let newIndex = (touchLocation.x < view.frame.width / 2) ? 0 : 1
         if newIndex == selectedSegmentIndex {
             selectedSegmentIndex = nil
@@ -60,15 +60,15 @@ class TypeSelector: UIControl {
         }
     }
     
-    func configureButtons(type: Int) {
+    func configureButtons(_ type: Int) {
         let routineImageName = type == 0 ? "routineIcon" : "routineIconGray"
-        routinesButton.setImage(UIImage(named: routineImageName), forState: .Normal)
+        routinesButton.setImage(UIImage(named: routineImageName), for: UIControlState())
         let goalImageName = type == 1 ? "goalIcon" : "goalIconGray"
-        goalsButton.setImage(UIImage(named: goalImageName), forState: .Normal)
+        goalsButton.setImage(UIImage(named: goalImageName), for: UIControlState())
     }
     
     func deselectAllButtons() {
-        routinesButton.setImage(UIImage(named: "routineIconGray"), forState: .Normal)
-        goalsButton.setImage(UIImage(named: "goalIconGray"), forState: .Normal)
+        routinesButton.setImage(UIImage(named: "routineIconGray"), for: UIControlState())
+        goalsButton.setImage(UIImage(named: "goalIconGray"), for: UIControlState())
     }
 }

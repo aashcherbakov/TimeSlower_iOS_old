@@ -16,8 +16,8 @@ class StatsManageTest: CoreDataBaseTest {
     var testResult: DayResults!
     var testActivityForDeletion: Activity!
     
-    var testDateFormatter: NSDateFormatter!
-    var standartDateFormatter: NSDateFormatter!
+    var testDateFormatter: DateFormatter!
+    var standartDateFormatter: DateFormatter!
     var timeMachine: TimeMachine!
     
     //MARK: - Setup
@@ -50,7 +50,7 @@ class StatsManageTest: CoreDataBaseTest {
     
     func test_updateStats() {
         testActivity.stats.updateStatsForDate(
-            DayResults.standardDateFormatter().dateFromString("08/28/16")!)
+            DayResults.standardDateFormatter().date(from: "08/28/16")!)
         XCTAssertEqual(testActivity.stats.summHours.doubleValue, 8689.5, "Summ hours 8689")
         XCTAssertEqual(testActivity.stats.summDays.doubleValue, 362.0625, "Summ days must be 362")
         XCTAssertEqual(testActivity.stats.summMonths.doubleValue, 12.06875, "Summ months must be 12")
@@ -74,7 +74,7 @@ class StatsManageTest: CoreDataBaseTest {
     //MARK: - - Lifetime
     
     func testFactSpentInLifetime() {
-        testActivity.stats.averageSuccess = NSNumber(double: 70)
+        testActivity.stats.averageSuccess = NSNumber(value: 70 as Double)
         let timeSpentInFuture = testActivity.stats.factTimingInLifetime()
         XCTAssertGreaterThan(timeSpentInFuture!.hours, 1900, "Total days spendings should be more than 1900")
         XCTAssertGreaterThan(timeSpentInFuture!.days, 70, "Total days spendings should be more than 70")
@@ -93,27 +93,27 @@ class StatsManageTest: CoreDataBaseTest {
     //MARK: - Testing helper methods
     
     func testLastYearDate() {
-        let referenceDate = standartDateFormatter.dateFromString("7/9/15")
-        let checkDate = standartDateFormatter.dateFromString("7/9/14")
-        let result = timeMachine.startDateForPeriod(.LastYear, sinceDate: referenceDate!)
+        let referenceDate = standartDateFormatter.date(from: "7/9/15")
+        let checkDate = standartDateFormatter.date(from: "7/9/14")
+        let result = timeMachine.startDateForPeriod(.lastYear, sinceDate: referenceDate!)
         XCTAssertEqual(result, checkDate!, "Last year has to be 2014")
     }
     
     func testLastMonthDate() {
-        var referenceDate = standartDateFormatter.dateFromString("7/9/15")
-        var checkDate = standartDateFormatter.dateFromString("6/9/15")
-        var result = timeMachine.startDateForPeriod(.LastMonth, sinceDate: referenceDate!)
+        var referenceDate = standartDateFormatter.date(from: "7/9/15")
+        var checkDate = standartDateFormatter.date(from: "6/9/15")
+        var result = timeMachine.startDateForPeriod(.lastMonth, sinceDate: referenceDate!)
         XCTAssertEqual(result, checkDate!, "Last month has to be June")
         
-        referenceDate = standartDateFormatter.dateFromString("1/1/15")
-        checkDate = standartDateFormatter.dateFromString("12/1/14")
-        result = timeMachine.startDateForPeriod(.LastMonth, sinceDate: referenceDate!)
+        referenceDate = standartDateFormatter.date(from: "1/1/15")
+        checkDate = standartDateFormatter.date(from: "12/1/14")
+        result = timeMachine.startDateForPeriod(.lastMonth, sinceDate: referenceDate!)
         XCTAssertEqual(result, checkDate!, "Last month has to be December")
     }
     
     func testNumberOfDaysInPeriod() {
-        let referenceDate = standartDateFormatter.dateFromString("7/9/15")
-        let result = timeMachine.numberOfDaysInPeriod(.LastMonth, fromDate: referenceDate!)
+        let referenceDate = standartDateFormatter.date(from: "7/9/15")
+        let result = timeMachine.numberOfDaysInPeriod(.lastMonth, fromDate: referenceDate!)
         XCTAssertEqual(result, 30, "It had to be 30 days in that period")
     }
     

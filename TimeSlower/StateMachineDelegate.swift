@@ -31,7 +31,7 @@ protocol StateMachineDelegate: class {
      
      - returns: true if transition is legal.
      */
-    func shouldTransitionFrom(from: StateType, to: StateType) -> Bool
+    func shouldTransitionFrom(_ from: StateType, to: StateType) -> Bool
     
     /**
      Delegate method called when the state changed. You should perform actions with
@@ -40,5 +40,5 @@ protocol StateMachineDelegate: class {
      - parameter from: current StateType
      - parameter to:   next StateType
      */
-    func didTransitionFrom(from: StateType, to: StateType)
+    func didTransitionFrom(_ from: StateType, to: StateType)
 }

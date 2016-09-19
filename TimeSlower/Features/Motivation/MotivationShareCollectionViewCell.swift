@@ -20,13 +20,13 @@ class MotivationShareCollectionViewCell: UICollectionViewCell, MotivationControl
     @IBOutlet weak var bottomLabel: UILabel!
     @IBOutlet weak var shareButton: UIButton!
     
-    private var delegate: MotivationShareDelegate?
+    fileprivate var delegate: MotivationShareDelegate?
 
-    @IBAction func shareButtonTapped(sender: AnyObject) {
+    @IBAction func shareButtonTapped(_ sender: AnyObject) {
         delegate?.motivationShareDelegateDidTapShareButton()
     }
     
-    func setupWithStats(stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate) {
+    func setupWithStats(_ stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate) {
         self.delegate = delegate
         
         if stats.summYears.doubleValue > 1 {

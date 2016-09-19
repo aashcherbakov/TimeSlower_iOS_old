@@ -16,30 +16,30 @@ class MotivationViewController: UIViewController {
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var motivationControl: MotivationControl!
     @IBOutlet weak var activityStatsView: MotivationStatsView!
-    private(set) var activity: Activity?
-    private let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
+    fileprivate(set) var activity: Activity?
+    fileprivate let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
+    @IBAction func backButtonTapped(_ sender: AnyObject) {
         if let navigationController = navigationController {
-            navigationController.popViewControllerAnimated(true)
+            navigationController.popViewController(animated: true)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func editButtonTapped(sender: AnyObject) {
+    @IBAction func editButtonTapped(_ sender: AnyObject) {
         
     }
     
-    @IBAction func okButtonTapped(sender: AnyObject) {
+    @IBAction func okButtonTapped(_ sender: AnyObject) {
         if let navigationController = navigationController {
-            navigationController.popToRootViewControllerAnimated(true)
+            navigationController.popToRootViewController(animated: true)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    func setupWithActivity(activity: Activity) {
+    func setupWithActivity(_ activity: Activity) {
         self.activity = activity
     }
     
@@ -65,49 +65,49 @@ class MotivationViewController: UIViewController {
     
     // MARK: - Private Functions
     
-    private func descriptionForActivityBasis(activity: Activity) -> String {
-        guard let basis = Basis(rawValue: activity.basis.integerValue) else { return "" }
+    fileprivate func descriptionForActivityBasis(_ activity: Activity) -> String {
+        guard let basis = Basis(rawValue: activity.basis.intValue) else { return "" }
         switch basis {
-        case .Random:
+        case .random:
             return "\(activity.days.count) days a week"
-        case .Daily: return "daily"
-        case .Weekends: return "on weekends"
-        case .Workdays: return "during workdays"
+        case .daily: return "daily"
+        case .weekends: return "on weekends"
+        case .workdays: return "during workdays"
         }
     }
     
-    private func setupMotivationControlWithActivity(activity: Activity) {
+    fileprivate func setupMotivationControlWithActivity(_ activity: Activity) {
         let lifeStats = lifeStatsForActivity(activity)
         motivationControl.setupWithLifetimeStats(lifeStats, shareDelegate: self)
     }
     
-    private func setupStatsViewWithActivity(activity: Activity) {
-        let startTime = dateFormatter.stringFromDate(activity.timing.startTime)
+    fileprivate func setupStatsViewWithActivity(_ activity: Activity) {
+        let startTime = dateFormatter.string(from: activity.timing.startTime)
         activityStatsView.setupWithStartTime(startTime, duration: activity.timing.duration.shortDescription())
     }
     
     // TODO: move to activity?
-    private func motivationDescriptionForActivity(activity: Activity) -> NSAttributedString {
+    fileprivate func motivationDescriptionForActivity(_ activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
         let duration = activity.timing.timeToSave.stringValue
         let basis = descriptionForActivityBasis(activity)
-        let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercaseString
+        let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercased()
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .Center
+        paragraphStyle.alignment = .center
         let descriptionText = NSMutableAttributedString(string: description)
         
         
         descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, descriptionText.length))
         let attributes = [NSParagraphStyleAttributeName  : paragraphStyle,
                           NSFontAttributeName            : UIFont.mainRegular(15),
-                          NSForegroundColorAttributeName : UIColor.whiteColor()]
+                          NSForegroundColorAttributeName : UIColor.white]
         descriptionText.addAttributes(attributes, range: NSMakeRange(0, descriptionText.length))
 
         let text = descriptionText.string as NSString
-        let durationRange = text.rangeOfString(duration)
-        let nameRange = text.rangeOfString(activity.name.uppercaseString)
-        let basisRange = text.rangeOfString(basis.uppercaseString)
+        let durationRange = text.range(of: duration)
+        let nameRange = text.range(of: activity.name.uppercased())
+        let basisRange = text.range(of: basis.uppercased())
         
         descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: durationRange)
         descriptionText.addAttribute(NSFontAttributeName, value: UIFont.mainBold(15), range: nameRange)
@@ -118,13 +118,13 @@ class MotivationViewController: UIViewController {
     }
     
     // TODO: move to activity?
-    private func lifeStatsForActivity(activity: Activity) -> LifetimeStats {
-        let days = activity.profile.numberOfDaysTillEndOfLifeSinceDate(NSDate())
-        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing.timeToSave.integerValue, busyDays: activity.days.count)
-        return LifetimeStats(withHours: hours)
+    fileprivate func lifeStatsForActivity(_ activity: Activity) -> LifetimeStats {
+        let days = activity.profile.numberOfDaysTillEndOfLifeSinceDate(Date())
+        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing.timeToSave.intValue, busyDays: activity.days.count)
+        return LifetimeStats(withHours: NSNumber(value: hours))
     }
     
-    private func sharingImageForActivity(activity: Activity) -> UIImage {
+    fileprivate func sharingImageForActivity(_ activity: Activity) -> UIImage {
         let lifestats = lifeStatsForActivity(activity)
         let description = motivationDescriptionForActivity(activity)
         let illustrator = MotivationIllustrator(withStats: lifestats, descriptionString: description)
@@ -139,9 +139,9 @@ extension MotivationViewController: ActivityShareDelegate {
         
         let image = sharingImageForActivity(activity)
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,
-                                                    UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList]
+        activityController.excludedActivityTypes = [UIActivityType.print, UIActivityType.copyToPasteboard,
+                                                    UIActivityType.assignToContact, UIActivityType.addToReadingList]
         
-        presentViewController(activityController, animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
     }
 }

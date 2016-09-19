@@ -43,14 +43,14 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
 
         if profile != nil {
             setup()
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setup()
     }
@@ -64,9 +64,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     func setupCircles() {
         for circle in [routinesCircle, goalsCircle] {
-            circle.progressBarWidth = 2
-            circle.progressColor = UIColor.whiteColor()
-            circle.trackColor = UIColor.darkRed()
+            circle?.progressBarWidth = 2
+            circle?.progressColor = UIColor.white
+            circle?.trackColor = UIColor.darkRed()
         }
         
         // TODO: here we should come from date of first use
@@ -94,24 +94,24 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         avatarImageView.clipsToBounds = true
         avatarFrameView.layer.cornerRadius = avatarFrameView.bounds.height / 2
         avatarFrameView.layer.borderWidth = 1
-        avatarFrameView.layer.borderColor = UIColor.darkRed().CGColor
+        avatarFrameView.layer.borderColor = UIColor.darkRed().cgColor
     }
     
     //MARK: Action
     
-    @IBAction func backButtonPressed(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
     
     
-    @IBAction func onNewActivityButton(sender: UIButton) {
+    @IBAction func onNewActivityButton(_ sender: UIButton) {
         let createActivityVC: EditActivityVC = ControllerFactory.createController()
         createActivityVC.userProfile = profile
         navigationController?.pushViewController(createActivityVC, animated: true)
     }
 
-    @IBAction func onEditButton(sender: UIButton) {
-        if let editProfileVC = storyboard?.instantiateViewControllerWithIdentifier(ProfileEditingVC.className) as? ProfileEditingVC {
+    @IBAction func onEditButton(_ sender: UIButton) {
+        if let editProfileVC = storyboard?.instantiateViewController(withIdentifier: ProfileEditingVC.className) as? ProfileEditingVC {
             navigationController?.pushViewController(editProfileVC, animated: true)
         }
     }
@@ -141,7 +141,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     func setupTimerCountdown() {
         countdownTimer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        countdownTimer.setCountDownToDate(profile?.dateOfDeath)
+        countdownTimer.setCountDownTo(profile?.dateOfDeath)
         countdownTimer.resetTimerAfterFinish = false
         
         let timerSecondsToSet = profile?.dateOfDeath.timeIntervalSinceNow
@@ -160,12 +160,12 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
 
     
     // MARK: - Navigation
-    @IBAction func dismissProfileEditingController(segue: UIStoryboardSegue) { }
+    @IBAction func dismissProfileEditingController(_ segue: UIStoryboardSegue) { }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Constants.createActivitySegue {
-            if let vc = segue.destinationViewController as? EditActivityVC {
+            if let vc = segue.destination as? EditActivityVC {
                 vc.userProfile = profile
             }
         }

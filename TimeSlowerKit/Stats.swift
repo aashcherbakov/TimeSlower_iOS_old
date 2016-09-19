@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-public class Stats: NSManagedObject, Persistable {
+open class Stats: NSManagedObject, Persistable {
 
-    @NSManaged public var averageSuccess: NSNumber
-    @NSManaged public var summDays: NSNumber
-    @NSManaged public var summHours: NSNumber
-    @NSManaged public var summMonths: NSNumber
-    @NSManaged public var summYears: NSNumber
-    @NSManaged public var activity: Activity
+    @NSManaged open var averageSuccess: NSNumber
+    @NSManaged open var summDays: NSNumber
+    @NSManaged open var summHours: NSNumber
+    @NSManaged open var summMonths: NSNumber
+    @NSManaged open var summYears: NSNumber
+    @NSManaged open var activity: Activity
 
 }

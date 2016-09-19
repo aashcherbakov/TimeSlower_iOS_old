@@ -41,7 +41,7 @@ class MotivationControlTests: XCTestCase {
         XCTAssertNotNil(sut.collectionView)
         XCTAssertNotNil(sut.collectionView.delegate)
         XCTAssertNotNil(sut.collectionView.dataSource)
-        XCTAssertEqual(sut.view.frame.size, CGSizeMake(202, 150))
+        XCTAssertEqual(sut.view.frame.size, CGSize(width: 202, height: 150))
     }
     
     func test_collectionViewSetup() {
@@ -59,9 +59,9 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let firstIndex = NSIndexPath(forItem: 0, inSection: 0)
+        let firstIndex = IndexPath(item: 0, section: 0)
         let firstCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: firstIndex) as! MotivationDotsCollectionViewCell
-        let lastIndex = NSIndexPath(forItem: 2, inSection: 0)
+        let lastIndex = IndexPath(item: 2, section: 0)
         let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationDotsCollectionViewCell
 
         // then
@@ -77,9 +77,9 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let firstIndex = NSIndexPath(forItem: 0, inSection: 0)
+        let firstIndex = IndexPath(item: 0, section: 0)
         let firstCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: firstIndex) as! MotivationDotsCollectionViewCell
-        let lastIndex = NSIndexPath(forItem: 2, inSection: 0)
+        let lastIndex = IndexPath(item: 2, section: 0)
         let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationDotsCollectionViewCell
         
         // then
@@ -96,7 +96,7 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let lastIndex = NSIndexPath(forItem: 3, inSection: 0)
+        let lastIndex = IndexPath(item: 3, section: 0)
         let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationShareCollectionViewCell
         
         // then
@@ -111,7 +111,7 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let lastIndex = NSIndexPath(forItem: 3, inSection: 0)
+        let lastIndex = IndexPath(item: 3, section: 0)
         let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationShareCollectionViewCell
 
         // then
@@ -122,7 +122,7 @@ class MotivationControlTests: XCTestCase {
 }
 
 private struct FakeShareDelegate: ActivityShareDelegate {
-    private func shareMotivationImage() {
+    fileprivate func shareMotivationImage() {
         
     }
 }

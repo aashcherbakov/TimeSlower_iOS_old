@@ -10,31 +10,31 @@ import Foundation
 import CoreData
 
 /// NSManagedObject subclass that stores information about user activity
-public class Activity: NSManagedObject, Persistable {
+open class Activity: NSManagedObject, Persistable {
     
-    private let timeMachine = TimeMachine()
+    fileprivate let timeMachine = TimeMachine()
     
     // TODO: convert properties of activity to Enum
-    public class func typeWithEnum(type: ActivityType) -> NSNumber {
-        return NSNumber(integer: type.rawValue)
+    open class func typeWithEnum(_ type: ActivityType) -> NSNumber {
+        return NSNumber(value: type.rawValue as Int)
     }
     
-    public class func basisWithEnum(basis: Basis) -> NSNumber {
-        return NSNumber(integer: basis.rawValue)
+    open class func basisWithEnum(_ basis: Basis) -> NSNumber {
+        return NSNumber(value: basis.rawValue as Int)
     }
         
     /**
      Mark activity as manually started. finishWithResult method must be called after.
      */
-    public func startActivity() {
-        timing.manuallyStarted = NSDate()
+    open func startActivity() {
+        timing.manuallyStarted = Date()
     }
     
     /**
      Creates DayResult and assigns it to activity. Also, sets manuallyStarted property to nil.
      */
-    public func finishWithResult() {
-        DayResults.newResultWithDate(NSDate(), forActivity: self)
+    open func finishWithResult() {
+        DayResults.newResultWithDate(Date(), forActivity: self)
         timing.manuallyStarted = nil
     }
     
@@ -47,10 +47,10 @@ public class Activity: NSManagedObject, Persistable {
      
      - returns: NSComparisonResult. Descending if current activity is earlier.
      */
-    public func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
+    open func compareBasedOnNextActionTime(_ otherActivity: Activity) -> ComparisonResult {
         let currentActivityTime = timing.nextActionTime()
         let otherActivityTime = otherActivity.timing.nextActionTime()
-        return currentActivityTime.compare(otherActivityTime)
+        return currentActivityTime.compare(otherActivityTime as Date)
     }
     
     /**
@@ -60,7 +60,7 @@ public class Activity: NSManagedObject, Persistable {
      
      - returns: True if days of activity has this weekday
      */
-    public func fitsWeekday(weekday: Weekday) -> Bool {
+    open func fitsWeekday(_ weekday: Weekday) -> Bool {
         let fit = days.filter { (day) -> Bool in
             guard let day = day as? Day else { return false }
             return day.name == weekday.shortName
@@ -77,11 +77,11 @@ public class Activity: NSManagedObject, Persistable {
      
      - returns: True if period is occupied
      */
-    public func occupiesTimeBetween(start: NSDate, finish: NSDate) -> Bool {
+    open func occupiesTimeBetween(_ start: Date, finish: Date) -> Bool {
         let updatedStartTime = timeMachine.updatedTime(timing.startTime, forDate: start)
         let updatedFinishTime = timeMachine.updatedTime(timing.finishTime, forDate: finish)
 
-        if start < updatedFinishTime && updatedStartTime < finish {
+        if start.compare(updatedFinishTime) == .orderedAscending && updatedStartTime.compare(finish) == .orderedDescending {
             return true
         }
 
@@ -104,44 +104,44 @@ public class Activity: NSManagedObject, Persistable {
      
      - returns: Activity instance
      */
-    public static func createActivityWithType(type: ActivityType, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
+    open static func createActivityWithType(_ type: ActivityType, name: String, selectedDays: [Int], startTime: Date, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
         
         let activity = Activity.newActivityForProfile(profile, ofType: type)
         activity.name = name
-        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = Basis.basisFromDays(selectedDays).rawValue
+        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity) as NSSet
+        activity.basis = NSNumber(value: Basis.basisFromDays(selectedDays).rawValue)
         activity.timing.startTime = startTime
         activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
         activity.timing.duration = duration
-        activity.timing.timeToSave = timeToSave
-        activity.notifications = notifications
-        activity.stats.updateStatsForDate(NSDate())
+        activity.timing.timeToSave = NSNumber(value: timeToSave)
+        activity.notifications = notifications as NSNumber
+        activity.stats.updateStatsForDate(Date())
         
         Activity.saveContext(activity.managedObjectContext)
         
         return activity
     }
     
-    public static func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
+    open static func updateActivityWithParameters(_ activity: Activity, name: String, selectedDays: [Int], startTime: Date, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
         
         activity.name = name
-        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = Basis.basisFromDays(selectedDays).rawValue
+        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity) as NSSet
+        activity.basis = NSNumber(value: Basis.basisFromDays(selectedDays).rawValue)
         activity.timing.startTime = startTime
         activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
         activity.timing.duration = duration
-        activity.timing.timeToSave = timeToSave
-        activity.notifications = notifications
-        activity.stats.updateStatsForDate(NSDate())
+        activity.timing.timeToSave = NSNumber(value: timeToSave)
+        activity.notifications = notifications as NSNumber
+        activity.stats.updateStatsForDate(Date())
         
         Activity.saveContext(activity.managedObjectContext)
     }
     
     // MARK: - Fetch Results
     
-    public func allResultsPredicateForPeriod(period: PastPeriod) -> NSPredicate {
+    open func allResultsPredicateForPeriod(_ period: PastPeriod) -> NSPredicate {
         let calendar = TimeMachine()
-        let timePredicate = NSPredicate(format: "raughDate > %@", calendar.startDateForPeriod(period, sinceDate: NSDate()))
+        let timePredicate = NSPredicate(format: "raughDate > %@", calendar.startDateForPeriod(period, sinceDate: Date()) as CVarArg)
         let namePredicate = NSPredicate(format: "activity.name == %@", name)
         
         return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
@@ -150,11 +150,11 @@ public class Activity: NSManagedObject, Persistable {
     
     // MARK: - Notifications
     
-    public func userInfoForActivity() -> [NSObject : AnyObject] {
+    open func userInfoForActivity() -> [AnyHashable: Any] {
         return ["activityName" : name]
     }
     
-    public func startTimerNotificationMessage() -> String {
+    open func startTimerNotificationMessage() -> String {
         var message = ""
         if isRoutine() {
             message = "Your goal: save \(timing.timeToSave) min. (or months \(stats.summMonths) of your lifetime"
@@ -165,26 +165,26 @@ public class Activity: NSManagedObject, Persistable {
     }
     
     /// Can't be assigned to a Goal (no snooze for a Goal)
-    public func finishTimeNotificationMessage() -> String {
+    open func finishTimeNotificationMessage() -> String {
         return "\(timing.timeToSave) min. left till the end. In order to save \(stats.summMonths) month of your lifetime, you have to finish it now"
     }
     
-    public func lastCallNotificationMessage() -> String {
+    open func lastCallNotificationMessage() -> String {
         return isRoutine() ? "There is no time lest to save on this activity. Try to finish earlier next time." : "Time's up for today! You can finish now"
     }
 
     
     // MARK: - Private Methods
     
-    private static func newActivityForProfile(userProfile: Profile, ofType: ActivityType) -> Activity {
+    fileprivate static func newActivityForProfile(_ userProfile: Profile, ofType: ActivityType) -> Activity {
         guard let
             context = userProfile.managedObjectContext,
-            entity = NSEntityDescription.entityForName(Activity.className, inManagedObjectContext: context)
+            let entity = NSEntityDescription.entity(forEntityName: Activity.className, in: context)
             else {
                 fatalError("Attempt to create activity with profile that is not in managed object context")
         }
         
-        let activity = Activity(entity: entity, insertIntoManagedObjectContext: context)
+        let activity = Activity(entity: entity, insertInto: context)
         activity.type = Activity.typeWithEnum(ofType)
         activity.profile = userProfile
         activity.stats = Stats.newStatsForActivity(activity: activity)
@@ -194,17 +194,12 @@ public class Activity: NSManagedObject, Persistable {
         return activity
     }
     
-    private static func updateFinishTimeWithDuration(duration: ActivityDuration, fromStartTime startTime: NSDate) -> NSDate {
-        return startTime.dateByAddingTimeInterval(duration.seconds())
+    fileprivate static func updateFinishTimeWithDuration(_ duration: ActivityDuration, fromStartTime startTime: Date) -> Date {
+        return startTime.addingTimeInterval(duration.seconds())
     }
     
     /// Workaround method for be used only in UnitTesting
-    public func unitTesting_allResultsForPeriod(period: PastPeriod) -> [DayResults] {
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        fetchRequest.predicate = allResultsPredicateForPeriod(period)
-        
-        let results = try! managedObjectContext!.executeFetchRequest(fetchRequest) as! [DayResults]
-        
-        return results
+    open func unitTesting_allResultsForPeriod(_ period: PastPeriod) -> [DayResults] {
+        return []
     }
 }

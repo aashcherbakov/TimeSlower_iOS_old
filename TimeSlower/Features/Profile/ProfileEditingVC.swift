@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 import MobileCoreServices
-import RxSwift
-import RxCocoa
 import TimeSlowerKit
 
 class ProfileEditingVC: ProfileEditingVCConstraints {
@@ -21,16 +19,15 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBOutlet weak var genderSelector: GenderSelector!
     
     var viewModel: ProfileEditingViewModel?
-    private var disposable = DisposeBag()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         bindViewModel()
     }
     
-    private func bindViewModel() {
+    fileprivate func bindViewModel() {
         viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
         
         if let selectedGenderValue = viewModel?.selectedGender?.rawValue {
@@ -42,13 +39,13 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             setupImageViewForAvatar()
         }
         
-        genderSelector.rx_controlEvents(.ValueChanged)
-            .subscribeNext { [weak self] (value) -> Void in
-                if let index = self?.genderSelector.selectedSegmentIndex {
-                    self?.viewModel?.userDidPickGender(index)
-                }
-            }
-            .addDisposableTo(disposable)
+//        genderSelector.rx_controlEvents(.ValueChanged)
+//            .subscribeNext { [weak self] (value) -> Void in
+//                if let index = self?.genderSelector.selectedSegmentIndex {
+//                    self?.viewModel?.userDidPickGender(index)
+//                }
+//            }
+//            .addDisposableTo(disposable)
     }
     
     //MARK: - ACTIONS
@@ -56,7 +53,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBAction func onSaveButton() {
         if let reason = viewModel?.userDidMissData() {
             viewModel?.reloadTableView()
-            postAlertOnLackOfInfo(message: reason)
+            postAlertOnLackOfInfo(reason)
         } else {
             viewModel?.saveProfile()
             if viewModel?.profile?.activities.count == 0 {
@@ -67,45 +64,45 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    private func createFirstActivity() {
+    fileprivate func createFirstActivity() {
         let activityController: EditActivityVC = ControllerFactory.createController()
         activityController.userProfile = viewModel?.profile
-        presentViewController(activityController, animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
     }
     
     @IBAction func avatarButtonPressed() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
             let photoPicker = UIImagePickerController()
-            photoPicker.sourceType = .PhotoLibrary
+            photoPicker.sourceType = .photoLibrary
             photoPicker.delegate = self
             photoPicker.allowsEditing = true
-            presentViewController(photoPicker, animated: true, completion: nil)
+            present(photoPicker, animated: true, completion: nil)
         }
     }
     
-    func postAlertOnLackOfInfo(message message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+    func postAlertOnLackOfInfo(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func setupImageViewForAvatar() {
-        avatarImage.contentMode = .ScaleAspectFit
+        avatarImage.contentMode = .scaleAspectFit
         avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
         avatarImage.clipsToBounds = true
     }
     
-    private func dismissController() {
+    fileprivate func dismissController() {
         if navigationController != nil {
-            navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewController(animated: true)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
 }
 
 extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var image = info[UIImagePickerControllerEditedImage] as? UIImage
         if image == nil { image = info[UIImagePickerControllerOriginalImage] as? UIImage }
         
@@ -115,10 +112,10 @@ extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControl
             viewModel?.userDidPickAvatar(selectedImage)
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

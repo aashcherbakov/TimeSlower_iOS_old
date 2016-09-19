@@ -30,7 +30,7 @@ extension Profile {
      
      - returns: Activity if there is one with given name
      */
-    public func activityForName(passedName: String) -> Activity? {
+    public func activityForName(_ passedName: String) -> Activity? {
         return allActivities().filter { $0.name == passedName }.first
     }
     
@@ -41,7 +41,7 @@ extension Profile {
      
      - returns: sorted by next action time Array of Activity instances
      */
-    public func activitiesForDate(date: NSDate) -> [Activity] {
+    public func activitiesForDate(_ date: Date) -> [Activity] {
         let weekday = Weekday.createFromDate(date)
         let activities = allActivities().filter { $0.fitsWeekday(weekday) }
         return sortActivitiesByTime(activities)
@@ -57,10 +57,10 @@ extension Profile {
      
      - returns: Activity that is occupying given time if there is one
      */
-    public func hasActivityScheduledToStart(start: NSDate, duration: ActivityDuration, days: [Weekday]) -> Activity? {
+    public func hasActivityScheduledToStart(_ start: Date, duration: ActivityDuration, days: [Weekday]) -> Activity? {
         let activities = allActivities()
-        let needStart = TimeMachine().updatedTime(start, forDate: NSDate())
-        let needFinish = needStart.dateByAddingTimeInterval(duration.seconds())
+        let needStart = TimeMachine().updatedTime(start, forDate: Date())
+        let needFinish = needStart.addingTimeInterval(duration.seconds())
 
         for day in days {
             let weekdayActivities = activities.filter { $0.fitsWeekday(day) }
@@ -81,9 +81,9 @@ extension Profile {
      
      - returns: Sorted Array of Activity instances
      */
-    func sortActivitiesByTime(arrayOfActivities: [Activity]) -> [Activity] {
-        return arrayOfActivities.sort {
-            $0.timing.nextActionTime() < $1.timing.nextActionTime()
+    func sortActivitiesByTime(_ arrayOfActivities: [Activity]) -> [Activity] {
+        return arrayOfActivities.sorted {
+            $0.timing.nextActionTime().compare($1.timing.nextActionTime()) == .orderedAscending
         }
     }
     
@@ -93,7 +93,7 @@ extension Profile {
      - returns: Activity instance
      */
     public func findCurrentActivity() -> Activity? {
-        for activity in activitiesForDate(NSDate()) {
+        for activity in activitiesForDate(Date()) {
             if activity.isGoingNow() {
                 return activity
             }
@@ -111,13 +111,13 @@ extension Profile {
     }
     
     public func findNextActivityForToday() -> Activity? {
-        var closestStartTime = NSDate().dateByAddingTimeInterval(60*60*24)
+        var closestStartTime = Date().addingTimeInterval(60*60*24)
         var nextActivity: Activity?
         
-        for activity in activitiesForDate(NSDate()) {
+        for activity in activitiesForDate(Date()) {
             if !activity.isDoneForToday() && !activity.isPassedDueForToday() {
-                if activity.updatedStartTime() < closestStartTime {
-                    closestStartTime = activity.updatedStartTime()
+                if activity.updatedStartTime().compare(closestStartTime) == .orderedDescending {
+                    closestStartTime = activity.updatedStartTime() as Date
                     nextActivity = activity
                 }
             }
@@ -126,7 +126,7 @@ extension Profile {
     }
     
     public func findNextActivityInTomorrowList() -> Activity? {
-        let tomorrowActivities = activitiesForDate(NSDate().dateByAddingTimeInterval(60*60*24))
+        let tomorrowActivities = activitiesForDate(Date().addingTimeInterval(60*60*24))
         return (tomorrowActivities.count > 0) ? sortActivitiesByTime(tomorrowActivities).first! : nil
     }
     

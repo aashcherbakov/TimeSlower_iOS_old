@@ -12,11 +12,11 @@ import Foundation
  Describes variants of time period: minutes and hours
  */
 public enum Period: Int {
-    case Minutes
-    case Hours
-    case Days
-    case Months
-    case Years
+    case minutes
+    case hours
+    case days
+    case months
+    case years
     
     /**
      Literal lowercase transript of enum case
@@ -25,11 +25,11 @@ public enum Period: Int {
      */
     public func description() -> String {
         switch self {
-        case .Minutes: return "minutes"
-        case .Hours: return "hours"
-        case .Days: return "days"
-        case .Months: return "months"
-        case .Years: return "years"
+        case .minutes: return "minutes"
+        case .hours: return "hours"
+        case .days: return "days"
+        case .months: return "months"
+        case .years: return "years"
         }
     }
     
@@ -40,11 +40,11 @@ public enum Period: Int {
      */
     public func shortDescription() -> String {
         switch self {
-        case .Minutes: return "min"
-        case .Hours: return "hrs"
-        case .Days: return "days"
-        case .Months: return "mo"
-        case .Years: return "yrs"
+        case .minutes: return "min"
+        case .hours: return "hrs"
+        case .days: return "days"
+        case .months: return "mo"
+        case .years: return "yrs"
         }
     }
 }

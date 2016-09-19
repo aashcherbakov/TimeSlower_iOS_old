@@ -42,84 +42,84 @@ public extension Activity {
         deleteScheduledNotificationsForCurrentActivity()
         
         switch activityBasis() {
-        case .Daily: createNotificationOnDailyBasis()
-        case .Workdays: createNotificationOnWorkdayBasis()
-        case .Weekends: createNotificationOnWeekendBasis()
+        case .daily: createNotificationOnDailyBasis()
+        case .workdays: createNotificationOnWorkdayBasis()
+        case .weekends: createNotificationOnWeekendBasis()
         default: return
         }
     }
     
     func scheduleFinishTimerNotification() {
         let notification = localNotificationForCategory(.FinishTimer)
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
         
         scheduleRestorationTimer()
     }
     
     func scheduleLastCallTimerNotification() {
         let notification = localNotificationForCategory(.LastCallTimer)
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
         
         scheduleRestorationTimer()
     }
     
-    func scheduleRemindMeInNotification(timeInterval timeInterval: Int) {
+    func scheduleRemindMeInNotification(_ timeInterval: Int) {
         let notification = localNotificationForCategory(.StartTimer)
-        notification.fireDate = NSDate().dateByAddingTimeInterval(NSTimeInterval(timeInterval * 60))
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        notification.fireDate = Date().addingTimeInterval(TimeInterval(timeInterval * 60))
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     
     //MARK: - StartTimer category by basis
     func createNotificationOnDailyBasis() {
         let dailyNotification = localNotificationForCategory(.StartTimer)
-        dailyNotification.repeatInterval = .Day
-        UIApplication.sharedApplication().scheduleLocalNotification(dailyNotification)
+        dailyNotification.repeatInterval = .day
+        UIApplication.shared.scheduleLocalNotification(dailyNotification)
     }
     
     func createNotificationOnWorkdayBasis() {
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         let firstWorkdayAlarm = firstAlarmOfWorkWeek()
-        let componentsToAdd = calendar.components(.Weekday, fromDate: firstWorkdayAlarm)
+        var componentsToAdd = (calendar as NSCalendar).components(.weekday, from: firstWorkdayAlarm)
         for i in 0...4 {
             componentsToAdd.weekday = i
-            let fireDate = calendar.dateByAddingComponents(componentsToAdd, toDate: firstWorkdayAlarm, options: [])
+            let fireDate = (calendar as NSCalendar).date(byAdding: componentsToAdd, to: firstWorkdayAlarm, options: [])
             
             let workdaysNotification = localNotificationForCategory(.StartTimer)
             workdaysNotification.fireDate = fireDate
-            workdaysNotification.repeatInterval = .Weekday
-            UIApplication.sharedApplication().scheduleLocalNotification(workdaysNotification)
+            workdaysNotification.repeatInterval = .weekday
+            UIApplication.shared.scheduleLocalNotification(workdaysNotification)
         }
     }
     
     func createNotificationOnWeekendBasis() {
-        let calendar = NSCalendar.currentCalendar()
-        let alarmDayNumber = calendar.component(.Weekday, fromDate: updatedAlarmTime())
+        let calendar = Calendar.current
+        let alarmDayNumber = (calendar as NSCalendar).component(.weekday, from: updatedAlarmTime())
         let weekendDayNumbers = [1, 7]
         for i in 0...1 {
             let difference = alarmDayNumber - weekendDayNumbers[i]
-            let componentsToAdd = NSDateComponents()
+            var componentsToAdd = DateComponents()
             componentsToAdd.weekday = -difference
-            let fireDate = calendar.dateByAddingComponents(componentsToAdd, toDate: updatedAlarmTime(), options: [])
+            let fireDate = (calendar as NSCalendar).date(byAdding: componentsToAdd, to: updatedAlarmTime(), options: [])
             
             let weekendNotification = localNotificationForCategory(.StartTimer)
             weekendNotification.fireDate = fireDate
-            weekendNotification.repeatInterval = .Weekday
-            UIApplication.sharedApplication().scheduleLocalNotification(weekendNotification)
+            weekendNotification.repeatInterval = .weekday
+            UIApplication.shared.scheduleLocalNotification(weekendNotification)
         }
     }
     
-    func firstAlarmOfWorkWeek() -> NSDate {
-        let calendar = NSCalendar.currentCalendar()
-        let components = NSDateComponents()
-        let difference = (calendar.firstWeekday + 1) - calendar.component(.Weekday, fromDate: updatedAlarmTime())
+    func firstAlarmOfWorkWeek() -> Date {
+        let calendar = Calendar.current
+        var components = DateComponents()
+        let difference = (calendar.firstWeekday + 1) - (calendar as NSCalendar).component(.weekday, from: updatedAlarmTime())
         components.weekday = difference
-        return calendar.dateByAddingComponents(components, toDate: updatedAlarmTime(), options: [])!
+        return (calendar as NSCalendar).date(byAdding: components, to: updatedAlarmTime(), options: [])!
     }
     
     
     //MARK: - UILocalNotification instance
-    func localNotificationForCategory(category: TimerCategory) -> UILocalNotification {
+    func localNotificationForCategory(_ category: TimerCategory) -> UILocalNotification {
         let notification = UILocalNotification()
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.category = category.rawValue
@@ -135,7 +135,7 @@ public extension Activity {
         return notification
     }
     
-    func messageForCategory(category: TimerCategory) -> String {
+    func messageForCategory(_ category: TimerCategory) -> String {
         switch category {
         case .StartTimer: return startTimerNotificationMessage()
         case .FinishTimer: return finishTimeNotificationMessage()
@@ -143,7 +143,7 @@ public extension Activity {
         }
     }
     
-    func fireDateForCategory(category: TimerCategory) -> NSDate {
+    func fireDateForCategory(_ category: TimerCategory) -> Date {
         switch category {
         case .StartTimer: return updatedStartTime()
         case .FinishTimer: return updatedAlarmTime()
@@ -154,7 +154,7 @@ public extension Activity {
     //MARK: - In case user did not tap "Finish now" on lastStand notification
     func scheduleRestorationTimer() {
         let intervalTillNextAction = timing.timeIntervalTillRegularEndOfActivity() + 120.0
-        NSTimer.scheduledTimerWithTimeInterval(intervalTillNextAction, target: self, selector: #selector(Activity.forceFinishActivityInCaseUserHasForgotten), userInfo: nil, repeats: false)
+        Foundation.Timer.scheduledTimer(timeInterval: intervalTillNextAction, target: self, selector: #selector(Activity.forceFinishActivityInCaseUserHasForgotten), userInfo: nil, repeats: false)
     }
     
     func forceFinishActivityInCaseUserHasForgotten() {
@@ -168,7 +168,7 @@ public extension Activity {
             if let name = notification.userInfo?["activityName"] as? String {
                 if name == self.name {
                     if notification.category != TimerCategory.StartTimer.rawValue {
-                        UIApplication.sharedApplication().cancelLocalNotification(notification)
+                        UIApplication.shared.cancelLocalNotification(notification)
                     }
                 }
             }
@@ -179,13 +179,13 @@ public extension Activity {
         for notification in allNotifications()! {
             if let name = notification.userInfo?["activityName"] as? String {
                 if name == self.name {
-                    UIApplication.sharedApplication().cancelLocalNotification(notification)
+                    UIApplication.shared.cancelLocalNotification(notification)
                 }
             }
         }
     }
     
     func allNotifications() -> [UILocalNotification]? {
-        return UIApplication.sharedApplication().scheduledLocalNotifications
+        return UIApplication.shared.scheduledLocalNotifications
     }
 }

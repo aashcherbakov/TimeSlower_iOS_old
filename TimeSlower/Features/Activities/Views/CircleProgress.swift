@@ -7,6 +7,44 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class CircleProgress: UIView {
 
@@ -19,17 +57,17 @@ class CircleProgress: UIView {
     var startAngle: CGFloat = 270
     var startProgress, endProgress, animationProgressStep: CGFloat!
     var currentAnimationProgress: CGFloat = 0.0
-    var animationTimer: NSTimer!
+    var animationTimer: Foundation.Timer!
     
     var progressColor = UIColor(red: 221/255, green: 75/255, blue: 77/255, alpha: 1)
     var trackColor: UIColor = UIColor(red: 240/255, green: 238/255, blue: 237/255, alpha: 1)
 
-    func setProgress(progress: Double, animated: Bool) {
+    func setProgress(_ progress: Double, animated: Bool) {
         setProgress(progress, animated: animated, duration: Constants.animationDuration)
     }
 
     
-    private func setProgress(progress: Double, animated: Bool, duration: CGFloat) {
+    fileprivate func setProgress(_ progress: Double, animated: Bool, duration: CGFloat) {
         self.progress = progressAccordingToBounds(progress)
         
         if animationTimer != nil {
@@ -46,7 +84,7 @@ class CircleProgress: UIView {
         }
     }
     
-    func progressAccordingToBounds(progress: Double) -> Double {
+    func progressAccordingToBounds(_ progress: Double) -> Double {
         var mutableProgress = progress
         mutableProgress = min(progress, 1)
         mutableProgress = max(progress, 0)
@@ -54,12 +92,12 @@ class CircleProgress: UIView {
     }
     
     
-    func animateProgressBarChangeFrom(startProgress: CGFloat, endProgress: CGFloat, duration: CGFloat) {
+    func animateProgressBarChangeFrom(_ startProgress: CGFloat, endProgress: CGFloat, duration: CGFloat) {
         currentAnimationProgress = startProgress
         self.startProgress = startProgress
         self.endProgress = endProgress
         animationProgressStep = (endProgress - startProgress) * 0.01 / duration
-        animationTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self,
+        animationTimer = Foundation.Timer.scheduledTimer(timeInterval: 0.01, target: self,
             selector: #selector(CircleProgress.updateProgressBarForAnimation), userInfo: nil, repeats: true)
     }
     
@@ -76,41 +114,41 @@ class CircleProgress: UIView {
         setNeedsDisplay()
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        backgroundColor = UIColor.clearColor()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        backgroundColor = UIColor.clear
         
-        let innerCenter = CGPointMake(bounds.size.width / 2, bounds.size.height / 2)
+        let innerCenter = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         let radius = min(innerCenter.x, innerCenter.y)
         let currentAngleProgress = CGFloat(progress) * 360 + startAngle
         
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        CGContextClearRect(context, rect)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.clear(rect)
         
         drawBackground(context)
         drawProgressBar(context, progressAngle: currentAngleProgress, center: innerCenter, radius: radius)
     }
     
-    func drawBackground(context: CGContextRef) {
-        CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
-        CGContextFillRect(context, bounds)
+    func drawBackground(_ context: CGContext) {
+        context.setFillColor(UIColor.clear.cgColor)
+        context.fill(bounds)
     }
     
-    func drawProgressBar(context: CGContextRef, progressAngle: CGFloat, center: CGPoint, radius: CGFloat) {
+    func drawProgressBar(_ context: CGContext, progressAngle: CGFloat, center: CGPoint, radius: CGFloat) {
                 
-        CGContextSetFillColorWithColor(context, progressColor.CGColor)
-        CGContextBeginPath(context)
-        CGContextAddArc(context, center.x, center.y, radius, startAngle.degreesToRadians, progressAngle.degreesToRadians, 0)
-        CGContextAddArc(context, center.x, center.y, radius - progressBarWidth, progressAngle.degreesToRadians, startAngle.degreesToRadians, 1)
-        CGContextClosePath(context)
-        CGContextFillPath(context)
+        context.setFillColor(progressColor.cgColor)
+        context.beginPath()
+        context.addArc(center: center, radius: startAngle.degreesToRadians, startAngle: progressAngle.degreesToRadians, endAngle: 0, clockwise: true)
+        context.addArc(center: center, radius: radius - progressBarWidth, startAngle: progressAngle.degreesToRadians, endAngle: startAngle.degreesToRadians, clockwise: true)
+        context.closePath()
+        context.fillPath()
         
-        CGContextSetFillColorWithColor(context, trackColor.CGColor)
-        CGContextBeginPath(context)
-        CGContextAddArc(context, center.x, center.y, radius, progressAngle.degreesToRadians, (startAngle + 360).degreesToRadians, 0)
-        CGContextAddArc(context, center.x, center.y, radius - progressBarWidth, (startAngle + 360).degreesToRadians, progressAngle.degreesToRadians, 1)
-        CGContextClosePath(context)
-        CGContextFillPath(context)
+        context.setFillColor(trackColor.cgColor)
+        context.beginPath()
+//        CGContextAddArc(context, center.x, center.y, radius, progressAngle.degreesToRadians, (startAngle + 360).degreesToRadians, 0)
+//        CGContextAddArc(context, center.x, center.y, radius - progressBarWidth, (startAngle + 360).degreesToRadians, progressAngle.degreesToRadians, 1)
+        context.closePath()
+        context.fillPath()
     }
 }
 

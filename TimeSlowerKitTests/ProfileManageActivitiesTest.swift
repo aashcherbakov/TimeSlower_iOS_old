@@ -13,7 +13,7 @@ import CoreData
 
 class ProfileManageActivitiesTest: CoreDataBaseTest {
     
-    var testDateFormatter: NSDateFormatter!
+    var testDateFormatter: DateFormatter!
     
     //MARK: - Setup
     
@@ -39,14 +39,14 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     // MARK: - activitisForDate
     
     func testActivitiesForDateOnDailyActivities() {
-        let activitiesForToday = testProfile.activitiesForDate(NSDate())
+        let activitiesForToday = testProfile.activitiesForDate(Date())
         XCTAssertEqual(activitiesForToday.count, 1, "There should be one activity")
         XCTAssertEqual(activitiesForToday.first!, testActivity, "Activities should be equal")
     }
     
     func testActivitiesForDateOnWeekendBasis() {
         testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 6)!, forActivity: testActivity)!]
-        let weekendDate = DayResults.standardDateFormatter().dateFromString("7/4/15")
+        let weekendDate = DayResults.standardDateFormatter().date(from: "7/4/15")
         let activitiesForToday = testProfile.activitiesForDate(weekendDate!)
 
         
@@ -56,7 +56,7 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     
     func testActivitiesForDateOnWorkdayBasis() {
         testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 1)!, forActivity: testActivity)!]
-        let workdayDate = DayResults.standardDateFormatter().dateFromString("7/6/15")
+        let workdayDate = DayResults.standardDateFormatter().date(from: "7/6/15")
         let activitiesForToday = testProfile.activitiesForDate(workdayDate!)
         
         XCTAssertEqual(activitiesForToday.count, 1, "There should be one activity")
@@ -67,7 +67,7 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
         testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 0)!, forActivity: testActivity)!]
         try! testContext.save()
         
-        let workdayDate = DayResults.standardDateFormatter().dateFromString("8/24/16")
+        let workdayDate = DayResults.standardDateFormatter().date(from: "8/24/16")
         let activitiesForToday = testProfile.activitiesForDate(workdayDate!)
         XCTAssertEqual(activitiesForToday.count, 0, "There should be no activities")
     }
@@ -75,34 +75,34 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     //MARK: - isTimeIntervalFree
     
     func testIsTimeIntervalFreeFalse() {
-        let testStart = testDateFormatter.dateFromString("7/5/15, 10:30 AM")!
-        let testFinish = testDateFormatter.dateFromString("7/5/15, 10:45 AM")!
+        let testStart = testDateFormatter.date(from: "7/5/15, 10:30 AM")!
+        let testFinish = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
         let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-        let duration = ActivityDuration(value: Int(minutes), period: .Minutes)
-        let days = Weekday.weekdaysForBasis(.Daily)
+        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+        let days = Weekday.weekdaysForBasis(.daily)
         
         let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
         XCTAssertNotNil(preventingActivity, "Time should not be free")
     }
     
     func testIsTimeIntervalFreeTrue() {
-        let testStart = testDateFormatter.dateFromString("7/5/15, 10:50 AM")!
-        let testFinish = testDateFormatter.dateFromString("7/5/15, 11:45 AM")!
+        let testStart = testDateFormatter.date(from: "7/5/15, 10:50 AM")!
+        let testFinish = testDateFormatter.date(from: "7/5/15, 11:45 AM")!
         let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-        let duration = ActivityDuration(value: Int(minutes), period: .Minutes)
-        let days = Weekday.weekdaysForBasis(.Daily)
+        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+        let days = Weekday.weekdaysForBasis(.daily)
         
         let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
         XCTAssertNil(preventingActivity, "Time should be free")
     }
     
     func testIsTimeIntervalFreeOnDifferentBasis() {
-        testActivity.basis = Activity.basisWithEnum(.Workdays)
-        let testStart = testDateFormatter.dateFromString("7/5/15, 10:30 AM")!
-        let testFinish = testDateFormatter.dateFromString("7/5/15, 10:45 AM")!
+        testActivity.basis = Activity.basisWithEnum(.workdays)
+        let testStart = testDateFormatter.date(from: "7/5/15, 10:30 AM")!
+        let testFinish = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
         let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-        let duration = ActivityDuration(value: Int(minutes), period: .Minutes)
-        let days = Weekday.weekdaysForBasis(.Daily)
+        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+        let days = Weekday.weekdaysForBasis(.daily)
 
 
         let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
@@ -110,11 +110,11 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     }
     
     func testIsTimeIntervalFreeWithOneMunuteClose() {
-        let testStart = testDateFormatter.dateFromString("7/5/15, 10:45 AM")!
-        let testFinish = testDateFormatter.dateFromString("7/5/15, 11:45 AM")!
+        let testStart = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
+        let testFinish = testDateFormatter.date(from: "7/5/15, 11:45 AM")!
         let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-        let duration = ActivityDuration(value: Int(minutes), period: .Minutes)
-        let days = Weekday.weekdaysForBasis(.Daily)
+        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+        let days = Weekday.weekdaysForBasis(.daily)
 
         let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
         XCTAssertNil(preventingActivity, "Time should not be free")
@@ -128,7 +128,7 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     
     func test_hasFreeTimeStarting_sameTime_differentDay() {
         testActivity.days = Day.dayEntitiesFromSelectedDays([0, 6], forActivity: testActivity)
-        let workdays = Weekday.weekdaysForBasis(.Workdays)
+        let workdays = Weekday.weekdaysForBasis(.workdays)
         let result = testProfile.hasActivityScheduledToStart(testActivity.timing.startTime, duration: testActivity.timing.duration, days: workdays)
         XCTAssertNil(result, "it should not have preventing activity")
     }
@@ -152,24 +152,24 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     //MARK: - Current and closest activity
     
     func testFindCurrentActivity() {
-        testActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*5)
-        testActivity.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*30)
+        testActivity.timing.startTime = Date().addingTimeInterval(-60*5)
+        testActivity.timing.finishTime = testActivity.timing.startTime.addingTimeInterval(60*30)
         
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
+        secondActivity.timing.startTime = Date().addingTimeInterval(-60*60*5)
+        secondActivity.timing.finishTime = Date().addingTimeInterval(-60*60*4)
         
         let currentActivity = testProfile.findCurrentActivity()
         XCTAssertEqual(currentActivity!, testActivity, "Test activity should be the current one")
     }
     
     func testFindCurrentActivityThatTriggersNextClosestActivity() {
-        testActivity.timing.startTime = NSDate().dateByAddingTimeInterval(-60*60*5)
-        testActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(-60*60*4)
+        testActivity.timing.startTime = Date().addingTimeInterval(-60*60*5)
+        testActivity.timing.finishTime = Date().addingTimeInterval(-60*60*4)
                 
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(60*60*3)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(60*60*4)
+        secondActivity.timing.startTime = Date().addingTimeInterval(60*60*3)
+        secondActivity.timing.finishTime = Date().addingTimeInterval(60*60*4)
 
         let currentActivity = testProfile.findCurrentActivity()
         XCTAssertEqual(currentActivity!, secondActivity, "Second activity should be the current one")
@@ -179,8 +179,8 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
         testActivity.finishWithResult()
 
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = NSDate().dateByAddingTimeInterval(60*60*1)
-        secondActivity.timing.finishTime = NSDate().dateByAddingTimeInterval(60*60*2)
+        secondActivity.timing.startTime = Date().addingTimeInterval(60*60*1)
+        secondActivity.timing.finishTime = Date().addingTimeInterval(60*60*2)
         
         let nextActivity = testProfile.findNextActivityForToday()
         XCTAssertEqual(nextActivity!, secondActivity, "Second activity should be the next one")
@@ -191,8 +191,8 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
         testActivity.finishWithResult()
         
         let secondActivity = newTestActivity()
-        secondActivity.timing.startTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*3)
-        secondActivity.timing.finishTime = testActivity.timing.startTime.dateByAddingTimeInterval(60*60*4)
+        secondActivity.timing.startTime = testActivity.timing.startTime.addingTimeInterval(60*60*3)
+        secondActivity.timing.finishTime = testActivity.timing.startTime.addingTimeInterval(60*60*4)
         secondActivity.finishWithResult()
         
         let nextActivity = testProfile.findNextActivityInTomorrowList()
@@ -206,7 +206,7 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     }
     
     func testHasGoalsTrue() {
-        testActivity.type = Activity.typeWithEnum(.Goal)
+        testActivity.type = Activity.typeWithEnum(.goal)
         XCTAssertNotNil(testProfile.hasGoals(), "Test profile must have goals")
     }
     
@@ -216,7 +216,7 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     }
     
     func testGoalsForTodayTrue() {
-        testActivity.type = Activity.typeWithEnum(.Goal)
+        testActivity.type = Activity.typeWithEnum(.goal)
         let goalsForToday = testProfile.goalsForToday()
         XCTAssertEqual(goalsForToday.count, 1, "There should be one goal for today")
     }
@@ -224,10 +224,10 @@ class ProfileManageActivitiesTest: CoreDataBaseTest {
     // MARK: - Helper Functions
     
     func newTestActivity() -> Activity {
-        let newActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .Routine, basis: .Daily)
+        let newActivity = testCoreDataStack.fakeActivityWithProfile(testProfile, type: .routine, basis: .daily)
         newActivity.name = "Second activity"
-        newActivity.timing.startTime = testDateFormatter.dateFromString("7/5/15, 10:50 AM")!
-        newActivity.timing.finishTime = testDateFormatter.dateFromString("7/5/15, 11:45 AM")!
+        newActivity.timing.startTime = testDateFormatter.date(from: "7/5/15, 10:50 AM")!
+        newActivity.timing.finishTime = testDateFormatter.date(from: "7/5/15, 11:45 AM")!
         return newActivity
     }
 }

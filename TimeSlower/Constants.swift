@@ -17,10 +17,10 @@ struct LayoutConstants {
 
 let kDefaultSeparatorHeight: CGFloat = 0.5
 
-let kUsableViewHeight: CGFloat = UIScreen.mainScreen().bounds.height - LayoutConstants.navigationBarHeight
-let kUsableViewWidth: CGFloat = UIScreen.mainScreen().bounds.width
-let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
-let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+let kUsableViewHeight: CGFloat = UIScreen.main.bounds.height - LayoutConstants.navigationBarHeight
+let kUsableViewWidth: CGFloat = UIScreen.main.bounds.width
+let kScreenWidth: CGFloat = UIScreen.main.bounds.width
+let kScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 let kProfileStoryboard = "Profile"
 let kActivityStoryboard = "Activities"

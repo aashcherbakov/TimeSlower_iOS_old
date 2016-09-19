@@ -12,7 +12,7 @@ import TimeSlowerKit
 /// UINavigationController subclass responsible for setting up initial controller on launch.
 class MainNavigationController: UINavigationController {
     
-    private var profile: Profile?
+    fileprivate var profile: Profile?
     
     lazy var coreDataStack = CoreDataStack.self
 
@@ -21,7 +21,7 @@ class MainNavigationController: UINavigationController {
         setupInitialController()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         profile = fetchProfile()
         if viewControllers.first is ProfileEditingVC {
@@ -33,7 +33,7 @@ class MainNavigationController: UINavigationController {
     
     // MARK: - Private Functions
     
-    private func setupInitialController() {
+    fileprivate func setupInitialController() {
         let rootController: UIViewController
         
         if let profile = profile {
@@ -48,7 +48,7 @@ class MainNavigationController: UINavigationController {
         setViewControllers([rootController], animated: false)
     }
     
-    private func fetchProfile() -> Profile? {
+    fileprivate func fetchProfile() -> Profile? {
         return coreDataStack.sharedInstance.fetchProfile()
     }
 }

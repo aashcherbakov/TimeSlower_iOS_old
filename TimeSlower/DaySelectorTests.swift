@@ -117,12 +117,12 @@ class DaySelectorTests: XCTestCase {
     func areAllButtonsSelected(inArray buttons: [UIButton]) -> Bool {
         var allButtonsSelected = true
         for button in buttons {
-            allButtonsSelected = button.selected
+            allButtonsSelected = button.isSelected
         }
         return allButtonsSelected
     }
     
-    func buttonWithName(name: String, fromArray buttons: [UIButton]) -> UIButton? {
+    func buttonWithName(_ name: String, fromArray buttons: [UIButton]) -> UIButton? {
         for button in buttons {
             if button.titleLabel?.text == name {
                 return button
@@ -131,20 +131,20 @@ class DaySelectorTests: XCTestCase {
         return nil
     }
     
-    func deselectAllButtons(buttons: [UIButton]) {
+    func deselectAllButtons(_ buttons: [UIButton]) {
         for button in buttons {
-            button.sendActionsForControlEvents(.TouchUpInside)
+            button.sendActions(for: .touchUpInside)
         }
     }
     
-    func selectDays(days: [String], fromArray buttons: [UIButton]) {
+    func selectDays(_ days: [String], fromArray buttons: [UIButton]) {
         for day in days {
             let button = buttonWithName(day, fromArray: buttons)
-            button?.sendActionsForControlEvents(.TouchUpInside)
+            button?.sendActions(for: .touchUpInside)
         }
     }
     
-    func allButtonsHaveCircleForms(buttons: [UIButton]) -> Bool {
+    func allButtonsHaveCircleForms(_ buttons: [UIButton]) -> Bool {
         let goodRadius = buttons[0].bounds.height / 2
         for button in buttons {
             if button.layer.cornerRadius != goodRadius {

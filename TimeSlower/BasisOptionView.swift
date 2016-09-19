@@ -15,8 +15,8 @@ class BasisOptionView: UIControl {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
     
-    private let selectedIcon = UIImage(named: "selectedIcon")
-    private let deselectedIcon = UIImage(named: "deselectedIcon")
+    fileprivate let selectedIcon = UIImage(named: "selectedIcon")
+    fileprivate let deselectedIcon = UIImage(named: "deselectedIcon")
     
     dynamic var optionSelected = false {
         didSet {
@@ -27,13 +27,13 @@ class BasisOptionView: UIControl {
     
     // MARK: - Internal Functions
     
-    func setupForBasis(basis: String) {
+    func setupForBasis(_ basis: String) {
         label.text = basis
     }
     
-    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: UIButton) {
         optionSelected = !optionSelected
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
     }
     
     // MARK: - Setup Functions
@@ -43,8 +43,8 @@ class BasisOptionView: UIControl {
         setupDesign()
     }
     
-    private func setupDesign() {
-        NSBundle.mainBundle().loadNibNamed("BasisOptionView", owner: self, options: nil)
+    fileprivate func setupDesign() {
+        Bundle.main.loadNibNamed("BasisOptionView", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }

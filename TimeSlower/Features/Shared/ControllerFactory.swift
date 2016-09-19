@@ -20,7 +20,7 @@ extension UIViewController: Instantiatable { }
  */
 struct ControllerFactory {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let activities = "Activities"
         static let menu = "Menu"
         static let profile = "Profile"
@@ -34,18 +34,18 @@ struct ControllerFactory {
      - returns: controller of specified type
      */
     static func createController<T: Instantiatable>() -> T {
-        guard let storyboard = storyboardForType(T) else {
-            fatalError("Controller \(String(T)) should be instantiated")
+        guard let storyboard = storyboardForType(T.self) else {
+            fatalError("Controller \(String(describing: T.self)) should be instantiated")
         }
         
-        guard let controller = storyboard.instantiateViewControllerWithIdentifier(String(T)) as? T else {
-            fatalError("Controller \(String(T)) should be instantiated")
+        guard let controller = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as? T else {
+            fatalError("Controller \(String(describing: T.self)) should be instantiated")
         }
         
         return controller 
     }
     
-    private static func storyboardForType<T>(type: T) -> UIStoryboard? {
+    fileprivate static func storyboardForType<T>(_ type: T) -> UIStoryboard? {
         if let storyboardId = storyboardId(forType: type) {
             return UIStoryboard(name: storyboardId, bundle: nil)
         } else {
@@ -53,7 +53,7 @@ struct ControllerFactory {
         }
     }
     
-    private static func storyboardId<T>(forType type: T) -> String? {
+    fileprivate static func storyboardId<T>(forType type: T) -> String? {
         switch type {
         case is MenuVC.Type: return Constants.menu
         case is MainScreenVC.Type: return Constants.main

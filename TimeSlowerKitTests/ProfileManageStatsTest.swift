@@ -13,7 +13,7 @@ import CoreData
 
 class ProfileManageStatsTest: CoreDataBaseTest {
     
-    var testDateFormatter: NSDateFormatter!
+    var testDateFormatter: DateFormatter!
     var timeMachine: TimeMachine!
     var testResult: DayResults!
     
@@ -39,7 +39,7 @@ class ProfileManageStatsTest: CoreDataBaseTest {
     // MARK: - Default values
     
     func testDefaultBirthday() {
-        XCTAssertEqual(testProfile.birthday, DayResults.standardDateFormatter().dateFromString("3/28/87")!, "Default birthday should be 28 of march")
+        XCTAssertEqual(testProfile.birthday, DayResults.standardDateFormatter().date(from: "3/28/87")!, "Default birthday should be 28 of march")
     }
     
     func testDefaultCountry() {
@@ -53,7 +53,7 @@ class ProfileManageStatsTest: CoreDataBaseTest {
     }
     
     func testUserGender() {
-        XCTAssertEqual(testProfile.userGender(), Profile.Gender.Male, "User gender should be male")
+        XCTAssertEqual(testProfile.userGender(), Profile.Gender.male, "User gender should be male")
     }
     
     func testUserGenderString() {
@@ -61,7 +61,7 @@ class ProfileManageStatsTest: CoreDataBaseTest {
     }
     
     func testGenderWithEnum() {
-        testProfile.gender = Profile.genderWithEnum(.Female)
+        testProfile.gender = Profile.genderWithEnum(.female)
         XCTAssertEqual(testProfile.gender, 1, "Gender must change to female")
     }
     
@@ -74,14 +74,14 @@ class ProfileManageStatsTest: CoreDataBaseTest {
     }
     
     func testDateOfApproximateLifeEnd() {
-        let dateOfDeathString = DayResults.standardDateFormatter().stringFromDate(testProfile.dateOfApproximateLifeEnd())
+        let dateOfDeathString = DayResults.standardDateFormatter().string(from: testProfile.dateOfApproximateLifeEnd())
         XCTAssertEqual(dateOfDeathString, "3/28/64", "Date of death should be March 2064")
     }
 
     //MARK: - Minutes to lifetime conversion
     
     func testNumberOfDaysTillEndOfLife() {
-        XCTAssertGreaterThan(testProfile.numberOfDaysTillEndOfLifeSinceDate(NSDate()), 17000, "Number of days must be greater than 17000")
+        XCTAssertGreaterThan(testProfile.numberOfDaysTillEndOfLifeSinceDate(Date()), 17000, "Number of days must be greater than 17000")
     }
     
     func testTotalTimeForDailyMinutes() {

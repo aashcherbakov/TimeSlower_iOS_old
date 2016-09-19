@@ -27,7 +27,7 @@ internal struct ProfileCreator {
      */
     internal func saveProfile(withName
         name: String,
-        birthday: NSDate,
+        birthday: Date,
         country: String,
         avatar: UIImage?,
         gender: Profile.Gender) -> Profile {
@@ -50,16 +50,16 @@ internal struct ProfileCreator {
      
      - returns: Profile instance
      */
-    internal func userProfileInManagedContext(context: NSManagedObjectContext) -> Profile {
+    internal func userProfileInManagedContext(_ context: NSManagedObjectContext) -> Profile {
         
-        guard let entity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Profile", in: context) else {
             fatalError("No entity named Profile in given context")
         }
         
         if let profile = Profile.fetchProfile() {
             return profile
         } else {
-            let profile = Profile(entity: entity, insertIntoManagedObjectContext: context)
+            let profile = Profile(entity: entity, insertInto: context)
             profile.name = "Anonymous"
             profile.birthday = Profile.defaultBirthday()
             profile.country = Profile.defaultCountry()
@@ -71,7 +71,7 @@ internal struct ProfileCreator {
         }
     }
     
-    private func updateProfile(profile: Profile, name: String, birthday: NSDate, country: String, avatar: UIImage?, gender: Profile.Gender) {
+    fileprivate func updateProfile(_ profile: Profile, name: String, birthday: Date, country: String, avatar: UIImage?, gender: Profile.Gender) {
         
         profile.name = name
         profile.birthday = birthday

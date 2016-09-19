@@ -12,9 +12,9 @@ class EditNotificationsCell: UITableViewCell, ExpandableCell, ObservableControlC
     @IBOutlet weak var control: ObservableControl!
     static let expandedHeight: CGFloat = 50
 
-    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat {
+    static func heightForState(_ state: EditActivityVC.EditingState) -> CGFloat {
         switch state {
-        case .Name, .Basis, .StartTime, .Duration:
+        case .name, .basis, .startTime, .duration:
             return 0
         default:
             return defaultHeight()

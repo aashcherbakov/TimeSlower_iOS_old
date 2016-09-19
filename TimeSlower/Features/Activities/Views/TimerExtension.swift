@@ -12,9 +12,9 @@ import TimeSlowerKit
 
 extension MZTimerLabel {
     
-    func setupStandardTimerForActivity(activity: Activity) {
+    func setupStandardTimerForActivity(_ activity: Activity) {
         let fireDate = activity.timing.nextActionTime()
-        setCountDownToDate(fireDate)
+        setCountDownTo(fireDate)
         resetTimerAfterFinish = false
         
         var timeIntervalToSet = activity.timing.nextActionTime().timeIntervalSinceNow

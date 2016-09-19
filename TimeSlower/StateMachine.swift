@@ -21,8 +21,8 @@ class StateMachine <P : StateMachineDelegate> {
         set { moveToState(newValue) }
     }
     
-    private unowned let delegate: P
-    private var privateState: P.StateType {
+    fileprivate unowned let delegate: P
+    fileprivate var privateState: P.StateType {
         didSet { delegate.didTransitionFrom(oldValue, to: privateState) }
     }
     
@@ -35,7 +35,7 @@ class StateMachine <P : StateMachineDelegate> {
     
     // Private Methods
     
-    private func moveToState(newValue: P.StateType) {
+    fileprivate func moveToState(_ newValue: P.StateType) {
         if delegate.shouldTransitionFrom(privateState, to: newValue) {
             privateState = newValue
         }

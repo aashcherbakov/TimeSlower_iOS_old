@@ -51,7 +51,7 @@ class EditActivityViewControllerTests: XCTestCase {
     
     func test_setupNameCell() {
         // given
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
         let cell = sut.tableView.cellForRowAtIndexPath(indexPath)
         
         // then
@@ -64,7 +64,7 @@ class EditActivityViewControllerTests: XCTestCase {
     
     func test_expandCell() {
         // given
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
 
         // when
         let cell = sut.tableView.cellForRowAtIndexPath(indexPath) as! ObservableControlCell
@@ -77,7 +77,7 @@ class EditActivityViewControllerTests: XCTestCase {
     
     func test_collapseNameCell() {
         // given
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
         
         // when
         _ = sut.view

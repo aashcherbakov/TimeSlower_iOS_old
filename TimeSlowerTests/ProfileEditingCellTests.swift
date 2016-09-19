@@ -18,11 +18,11 @@ class ProfileEditingCellTests: XCTestCase {
         
         // Setup fake controller
         let storyboard = UIStoryboard(name: "FakeStoryboard",
-            bundle: NSBundle(forClass: FakeControllerWithTableView.classForCoder()))
-        let controller = storyboard.instantiateViewControllerWithIdentifier("FakeControllerWithTableView")
+            bundle: Bundle(for: FakeControllerWithTableView.classForCoder()))
+        let controller = storyboard.instantiateViewController(withIdentifier: "FakeControllerWithTableView")
             as! FakeControllerWithTableView
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController = controller
+        UIApplication.shared.keyWindow?.rootViewController = controller
         self.viewModel = ProfileEditingViewModel(withTableView: controller.tableView)
         
         XCTAssertNotNil(controller.view, "View should be loaded")
@@ -35,18 +35,18 @@ class ProfileEditingCellTests: XCTestCase {
     
     func testDequeueCell() {
         let cell = viewModel.tableView(viewModel.tableView,
-            cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+            cellForRowAtIndexPath: IndexPath(forRow: 0, inSection: 0))
         XCTAssertNotNil(cell, "Cell should not be nil")
     }
     
 }
 
 extension FakeControllerWithTableView : UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return ProfileEditingTableViewCell()
     }
 }
