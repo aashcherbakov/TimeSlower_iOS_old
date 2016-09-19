@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import ReactiveSwift
+import Result
 
 /**
  UIView subclass used to enter/edit activity name. Contains TextfieldView to
@@ -58,21 +59,22 @@ class EditActivityNameView: ObservableControl {
     }
     
     fileprivate func setupEvents() {
-//        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-//        
-//        valueChangedSignal = signal
-//        
-//        valueChangedSignal?.startWithNext { [weak self] (value) in
-//            guard let value = value as? String else { return }
-//            self?.textFieldView.setText(value)
-//        }
-//        
-//        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (_) in
-//                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
-//                self?.sendActionsForControlEvents(.TouchUpInside)
-//                self?.selectedValue = name
-//        }
+        
+        let signal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        
+        valueChangedSignal = signal
+        
+        valueChangedSignal?.startWithNext { [weak self] (value) in
+            guard let value = value as? String else { return }
+            self?.textFieldView.setText(value)
+        }
+        
+        defaultActivitySelectorView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
+            .startWithNext { [weak self] (_) in
+                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+                self?.sendActionsForControlEvents(.TouchUpInside)
+                self?.selectedValue = name
+        }
         
         textFieldView.textField.delegate = self
     }
