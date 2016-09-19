@@ -161,6 +161,8 @@
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
 		F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0DC2E1C78E8A6005EC490 /* EditActivityNameView.swift */; };
 		F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */; };
+		F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */; };
+		F0CDAA031D8F838E0090D7E3 /* ReactiveObjCBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */; };
 		F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D71F351C793C4E00B8473C /* EditActivityBasisView.swift */; };
 		F0D71F381C793C5900B8473C /* EditActivityBasisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D71F371C793C5900B8473C /* EditActivityBasisView.xib */; };
 		F0D71F3A1C7A233900B8473C /* EditActivityStartTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D71F391C7A233900B8473C /* EditActivityStartTimeView.xib */; };
@@ -416,6 +418,8 @@
 		F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameView.xib; sourceTree = "<group>"; };
 		F0C0DC2E1C78E8A6005EC490 /* EditActivityNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameView.swift; sourceTree = "<group>"; };
 		F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DaySelectorTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
+		F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjCBridge.framework; path = Carthage/Build/iOS/ReactiveObjCBridge.framework; sourceTree = "<group>"; };
 		F0D71F351C793C4E00B8473C /* EditActivityBasisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityBasisView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0D71F371C793C5900B8473C /* EditActivityBasisView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityBasisView.xib; sourceTree = "<group>"; };
 		F0D71F391C7A233900B8473C /* EditActivityStartTimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityStartTimeView.xib; sourceTree = "<group>"; };
@@ -464,6 +468,8 @@
 				F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */,
 				F09308981D8F562A008FFE1E /* Result.framework in Frameworks */,
 				F09308961D8F5627008FFE1E /* ReactiveSwift.framework in Frameworks */,
+				F0CDAA031D8F838E0090D7E3 /* ReactiveObjCBridge.framework in Frameworks */,
+				F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,6 +918,8 @@
 		F09308921D8F5623008FFE1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */,
+				F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */,
 				F0DB8A211D8F6F4900B6E176 /* JVFloatLabeledTextField */,
 				F09308971D8F562A008FFE1E /* Result.framework */,
 				F09308951D8F5627008FFE1E /* ReactiveSwift.framework */,
@@ -1452,6 +1460,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveObjCBridge.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveObjC.framework",
 			);
 			outputPaths = (
 			);
