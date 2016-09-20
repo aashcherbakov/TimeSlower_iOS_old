@@ -58,6 +58,16 @@
                ReferencedContainer = "container:TimeSlower.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F0CDAA101D90C69F0090D7E3"
+               BuildableName = "TimeSlowerDataBaseTests.xctest"
+               BlueprintName = "TimeSlowerDataBaseTests"
+               ReferencedContainer = "container:TimeSlower.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
