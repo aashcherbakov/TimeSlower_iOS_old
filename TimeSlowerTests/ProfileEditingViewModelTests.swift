@@ -26,7 +26,7 @@ class ProfileEditingViewModelTests: XCTestCase {
 
     func testUserDidPickGender() {
         viewModel.userDidPickGender(0)
-        XCTAssertEqual(viewModel.selectedGender, Profile.Gender.Male)
+        XCTAssertEqual(viewModel.selectedGender, Profile.Gender.male)
     }
     
 //    func testUserDidMissDataTrue() {
@@ -35,9 +35,9 @@ class ProfileEditingViewModelTests: XCTestCase {
     
     func testUserDidMissDataFalse() {
         viewModel.userDidPickGender(0)
-        viewModel.cellConfig?.updateValue("Alex", forType: .Name)
-        viewModel.cellConfig?.updateValue("Ukraine", forType: .Country)
-        viewModel.cellConfig?.updateValue(Date(), forType: .Birthday)
+        viewModel.cellConfig?.updateValue("Alex" as AnyObject?, forType: .Name)
+        viewModel.cellConfig?.updateValue("Ukraine" as AnyObject?, forType: .Country)
+        viewModel.cellConfig?.updateValue(Date() as AnyObject?, forType: .Birthday)
         XCTAssertNil(viewModel.userDidMissData(), "Has no missed data")
     }
 }

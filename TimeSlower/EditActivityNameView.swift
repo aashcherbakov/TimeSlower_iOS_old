@@ -64,19 +64,19 @@ class EditActivityNameView: ObservableControl {
         
         let signal = rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
         
-        valueChangedSignal = signal
-        
-        valueChangedSignal?.startWithNext { [weak self] (value) in
-            guard let value = value as? String else { return }
-            self?.textFieldView.setText(value)
-        }
-        
-        defaultActivitySelectorView.rac_signal(for: .valueChanged).toSignalProducer()
-            .startWithNext { [weak self] (_) in
-                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
-                self?.sendActions(for: .touchUpInside)
-                self?.selectedValue = name
-        }
+//        valueChangedSignal = signal
+//        
+//        valueChangedSignal?.startWithNext { [weak self] (value) in
+//            guard let value = value as? String else { return }
+//            self?.textFieldView.setText(value)
+//        }
+//        
+//        defaultActivitySelectorView.rac_signal(for: .valueChanged).toSignalProducer()
+//            .startWithNext { [weak self] (_) in
+//                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+//                self?.sendActions(for: .touchUpInside)
+//                self?.selectedValue = name
+//        }
         
         textFieldView.textField.delegate = self
     }
