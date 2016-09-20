@@ -43,10 +43,10 @@
 //    /**
 //     Fetches results for last week
 //     
-//     - returns: [DayResults]
+//     - returns: [Result]
 //     */
-//    public func lastWeekResults() -> [DayResults] {
-//        return DayResults.lastWeekResultsForActivity(self)
+//    public func lastWeekResults() -> [Result] {
+//        return Result.lastWeekResultsForActivity(self)
 //    }
 //    
 //    //MARK: - Timing convenience

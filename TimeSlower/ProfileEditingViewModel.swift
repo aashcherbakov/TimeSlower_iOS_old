@@ -22,7 +22,7 @@ class ProfileEditingViewModel : NSObject {
     
     fileprivate var selectedIndexPath: IndexPath?
     fileprivate(set) var cellConfig: ProfileEditingCellConfig?
-    fileprivate(set) var selectedGender: Profile.Gender?
+    fileprivate(set) var selectedGender: Gender?
     fileprivate(set) var selectedAvatar: UIImage?
     
     init(withTableView tableView: UITableView) {
@@ -38,7 +38,7 @@ class ProfileEditingViewModel : NSObject {
     
     /// [tested] Sets selected user gender private property to Profile.Gender type value
     func userDidPickGender(_ intValue: Int) {
-        self.selectedGender = Profile.Gender(rawValue: intValue)
+        self.selectedGender = Gender(rawValue: intValue)
     }
     
     /// Sets selected image as an avatar
@@ -61,8 +61,8 @@ class ProfileEditingViewModel : NSObject {
         guard let name = cellConfig?.name, let birthday = cellConfig?.birthday,
             let country = cellConfig?.country, let gender = selectedGender else { return }
         
-        profile = Profile.saveProfile(withName: name, birthday: birthday, country: country,
-            avatar: selectedAvatar, gender: gender)
+//        profile = Profile.saveProfile(withName: name, birthday: birthday, country: country,
+//            avatar: selectedAvatar, gender: gender)
     }
     
     func reloadTableView() {
@@ -74,15 +74,15 @@ class ProfileEditingViewModel : NSObject {
     // MARK: - Private Functions
     
     fileprivate func setupData() {
-        profile = CoreDataStack.sharedInstance.fetchProfile()
+//        profile = CoreDataStack.sharedInstance.fetchProfile()
         cellConfig = ProfileEditingCellConfig(withProfile: profile)
         
         if let profile = profile {
-            selectedGender = profile.userGender()
+//            selectedGender = profile.userGender()
         }
         
         if let photoData = profile?.photo {
-            selectedAvatar = UIImage(data: photoData)
+//            selectedAvatar = UIImage(data: photoData)
         }
     }
     

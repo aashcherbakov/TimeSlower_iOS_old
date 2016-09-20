@@ -56,11 +56,11 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             postAlertOnLackOfInfo(reason)
         } else {
             viewModel?.saveProfile()
-            if viewModel?.profile?.activities.count == 0 {
-                createFirstActivity()
-            } else {
-                dismissController()
-            }
+//            if viewModel?.profile?.activities.count == 0 {
+//                createFirstActivity()
+//            } else {
+//                dismissController()
+//            }
         }
     }
     

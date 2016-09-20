@@ -52,12 +52,12 @@
 //     Made to make sure activities do not overlap with each other.
 //     
 //     - parameter start:    NSDate for start time
-//     - parameter duration: ActivityDuration
+//     - parameter duration: Endurance
 //     - parameter days:     Array of Weekday instances for activity occurances
 //     
 //     - returns: Activity that is occupying given time if there is one
 //     */
-//    public func hasActivityScheduledToStart(_ start: Date, duration: ActivityDuration, days: [Weekday]) -> Activity? {
+//    public func hasActivityScheduledToStart(_ start: Date, duration: Endurance, days: [Weekday]) -> Activity? {
 //        let activities = allActivities()
 //        let needStart = TimeMachine().updatedTime(start, forDate: Date())
 //        let needFinish = needStart.addingTimeInterval(duration.seconds())

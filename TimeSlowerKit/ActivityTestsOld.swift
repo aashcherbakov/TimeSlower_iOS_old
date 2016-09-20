@@ -75,7 +75,7 @@
 //          name: "Morning",
 //          selectedDays: [6, 0],
 //          startTime: updatedStartTime,
-//          duration: ActivityDuration(value: 40, period: .minutes),
+//          duration: Endurance(value: 40, period: .minutes),
 //          notifications: false,
 //          timeToSave: 10)
 //        
@@ -108,7 +108,7 @@
 ////            name: "Morning shower",
 ////            selectedDays: [1],
 ////            startTime: dateFormatter.date(from: "7/3/15, 10:15 AM")!,
-////            duration: ActivityDuration(value: 30, period: .minutes),
+////            duration: Endurance(value: 30, period: .minutes),
 ////            notifications: true,
 ////            timeToSave: 10,
 ////            forProfile: testProfile)
@@ -146,12 +146,12 @@
 //    
 //    func testFinishWithResult() {
 //        // Negative
-//        let result = DayResults.fetchResultWithDate(Date(), forActivity: testActivity)
+//        let result = Result.fetchResultWithDate(Date(), forActivity: testActivity)
 //        XCTAssertNil(result, "Activity is not finished so it should not have any results")
 //        
 //        // Positive
 //        testActivity.finishWithResult()
-//        let newResult = DayResults.fetchResultWithDate(Date(), forActivity: testActivity)
+//        let newResult = Result.fetchResultWithDate(Date(), forActivity: testActivity)
 //        XCTAssertNotNil(newResult, "Finished activity must have result")
 //    }
 //    
@@ -222,7 +222,7 @@
 //           name: "Coffee",
 //           selectedDays: [1, 2, 3],
 //           startTime: startTime,
-//           duration: ActivityDuration(value: 30, period: .minutes),
+//           duration: Endurance(value: 30, period: .minutes),
 //           notifications: true,
 //           timeToSave: 5,
 //           forProfile: testProfile)
@@ -234,7 +234,7 @@
 //            name: "After coffee",
 //            selectedDays: [1, 2, 3],
 //            startTime: updatedStartTime,
-//            duration: ActivityDuration(value: 30, period: .minutes),
+//            duration: Endurance(value: 30, period: .minutes),
 //            notifications: true,
 //            timeToSave: 5,
 //            forProfile: testProfile)

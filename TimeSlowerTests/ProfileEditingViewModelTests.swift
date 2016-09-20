@@ -26,7 +26,7 @@ class ProfileEditingViewModelTests: XCTestCase {
 
     func testUserDidPickGender() {
         viewModel.userDidPickGender(0)
-        XCTAssertEqual(viewModel.selectedGender, Profile.Gender.male)
+        XCTAssertEqual(viewModel.selectedGender, Gender.male)
     }
     
 //    func testUserDidMissDataTrue() {

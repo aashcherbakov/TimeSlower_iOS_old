@@ -118,17 +118,17 @@ class MenuVC: UIViewController {
     // MARK: - Design
 
     fileprivate func setupDesign() {
-        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
-            return
-        }
-        
-        self.profile = profile
-        nameLabel.text = profile.name.uppercased()
-        countryLabel.text = profile.country.capitalized
-        
-        if let photoData = profile.photo {
-            avatarImageView.image = UIImage(data: photoData)
-        }
+//        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
+//            return
+//        }
+//        
+//        self.profile = profile
+//        nameLabel.text = profile.name.uppercased()
+//        countryLabel.text = profile.country.capitalized
+//        
+//        if let photoData = profile.photo {
+//            avatarImageView.image = UIImage(data: photoData)
+//        }
 
     }
 

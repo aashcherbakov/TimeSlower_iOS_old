@@ -1,5 +1,5 @@
 ////
-////  DayResultsTests.swift
+////  ResultTests.swift
 ////  TimeSlower
 ////
 ////  Created by Oleksandr Shcherbakov on 8/21/16.
@@ -9,15 +9,15 @@
 //import XCTest
 //@testable import TimeSlowerKit
 //
-//class DayResultsTests: CoreDataBaseTest {
+//class ResultTests: CoreDataBaseTest {
 //
 //    var shortDateFormatter: DateFormatter!
 //    var shortTimeFormatter: DateFormatter!
 //    var testDateString: String!
 //    var testStartDate: Date!
 //    var testFinishDate: Date!
-//    var sut: DayResults!
-//    var fakeWeekResults: [DayResults]!
+//    var sut: Result!
+//    var fakeWeekResults: [Result]!
 //
 //    
 //    override func setUp() {
@@ -29,7 +29,7 @@
 //        testStartDate = shortTimeFormatter.date(from: "8/21/16, 10:15 AM")
 //        testFinishDate = shortTimeFormatter.date(from: "8/21/16, 10:45 AM")
 //        
-//        sut = DayResults.newResultWithDate(testFinishDate, forActivity: testActivity)
+//        sut = Result.newResultWithDate(testFinishDate, forActivity: testActivity)
 //    }
 //    
 //    override func tearDown() {
@@ -41,7 +41,7 @@
 //    }
 //
 //    func test_createResult() {
-//        let result = DayResults.newResultWithDate(testFinishDate, forActivity: testActivity)
+//        let result = Result.newResultWithDate(testFinishDate, forActivity: testActivity)
 //        let expectedStartTime = shortTimeFormatter.date(from: "8/21/16, 10:15 AM")!
 //
 //        XCTAssertNotNil(result)
@@ -67,52 +67,52 @@
 //    // MARK: - Success calculation for Routine
 //    
 //    func test_successForRoutine_noSuccess() {
-//        let result = DayResults.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 30, goal: 10)
+//        let result = Result.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 30, goal: 10)
 //        XCTAssertEqual(result, 0, "it should have no success at all")
 //    }
 //    
 //    func test_successForRoutine_fullSuccess() {
-//        let result = DayResults.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 40, goal: 10)
+//        let result = Result.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 40, goal: 10)
 //        XCTAssertEqual(result, 100, "it should have 100% success")
 //    }
 //    
 //    func test_successForRoutine_someSuccess() {
-//        let result = DayResults.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 35, goal: 10)
+//        let result = Result.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 35, goal: 10)
 //        XCTAssertEqual(result, 50, "it should have 50% success")
 //    }
 //    
 //    func test_successForRoutine_superSuccess() {
-//        let result = DayResults.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 50, goal: 10)
+//        let result = Result.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 50, goal: 10)
 //        XCTAssertEqual(result, 200, "it should have 200% success")
 //    }
 //    
 //    func test_successForRoutine_negativeSuccess() {
-//        let result = DayResults.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
+//        let result = Result.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
 //        XCTAssertEqual(result, 0, "it should have no success")
 //    }
 //    
 //    // MARK: - Success calculation for Goal
 //    
 //    func test_successForGoal_fullSuccess() {
-//        let result = DayResults.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 30, goal: 10)
+//        let result = Result.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 30, goal: 10)
 //        XCTAssertEqual(result, 100)
 //    }
 //    
 //    func test_successForGoal_noSuccess() {
-//        let result = DayResults.successForGoal(start: testStartDate, finish: testStartDate, maxDuration: 30, goal: 10)
+//        let result = Result.successForGoal(start: testStartDate, finish: testStartDate, maxDuration: 30, goal: 10)
 //        XCTAssertEqual(result, 0)
 //    }
 //    
 //    func test_successForGoal_superSuccess() {
-//        let result = DayResults.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
+//        let result = Result.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
 //        XCTAssertEqual(result, 150)
 //    }
 //    
 //    func testCompareDatesOfResults() {
 //        // create additional result to compare
 //        let earlierDate = Date().addingTimeInterval(-60*60*24*4)
-//        sut.date = DayResults.standardDateFormatter().string(from: earlierDate)
-//        let additionalResult = DayResults.newResultWithDate(Date(), forActivity: testActivity)
+//        sut.date = Result.standardDateFormatter().string(from: earlierDate)
+//        let additionalResult = Result.newResultWithDate(Date(), forActivity: testActivity)
 //        testCoreDataStack.saveContext()
 //        
 //        // compare
@@ -140,28 +140,28 @@
 //    func testLastWeekResultsForActivity() {
 //        createFakeResultsInNumberOf(5)
 //        XCTAssertEqual(fakeWeekResults.count, 5, "There should be 5 fake results in array")
-//        let lastWeekResults = DayResults.lastWeekResultsForActivity(testActivity)
+//        let lastWeekResults = Result.lastWeekResultsForActivity(testActivity)
 //        XCTAssertEqual(lastWeekResults.count, 6, "There should be 6 results")
 //        deleteFakeWeekResults()
 //    }
 //    
 //    func testFetchResultWithDate() {
-////        let fetchedResult = DayResults.fetchResultWithDate(testFinishDate, forActivity: sut.activity)
+////        let fetchedResult = Result.fetchResultWithDate(testFinishDate, forActivity: sut.activity)
 ////        XCTAssertEqual(fetchedResult!, sut, "Results should be equal")
 ////        
-////        let nonExistingResultDate = DayResults.standardDateFormatter().date(from: "1/2/13")
-////        let nonExistingResult = DayResults.fetchResultWithDate(nonExistingResultDate!, forActivity: sut.activity)
+////        let nonExistingResultDate = Result.standardDateFormatter().date(from: "1/2/13")
+////        let nonExistingResult = Result.fetchResultWithDate(nonExistingResultDate!, forActivity: sut.activity)
 ////        XCTAssertNil(nonExistingResult, "Non existing result should be nil")
 //    }
 //    
 //    //MARK: - Helper functions
 //    func createFakeResultsInNumberOf(_ number: Int) {
-//        var results = [DayResults]()
-//        let originalResultDate = DayResults.standardDateFormatter().date(from: sut.date)
+//        var results = [Result]()
+//        let originalResultDate = Result.standardDateFormatter().date(from: sut.date)
 //        let dayTimeInterval: Double = 60*60*24
 //        for i in 1 ..< number + 1 {
 //            let newResultDate = originalResultDate?.addingTimeInterval(-dayTimeInterval * Double(i))
-//            results.append(DayResults.newResultWithDate(newResultDate!, forActivity: sut.activity))
+//            results.append(Result.newResultWithDate(newResultDate!, forActivity: sut.activity))
 //        }
 //        fakeWeekResults = results
 //    }

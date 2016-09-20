@@ -50,7 +50,7 @@
 //    }
 //    
 //    public func isDoneForToday() -> Bool {
-//        if let _ = DayResults.fetchResultWithDate(Date(), forActivity: self.activity) {
+//        if let _ = Result.fetchResultWithDate(Date(), forActivity: self.activity) {
 //            return true
 //        }
 //        return false

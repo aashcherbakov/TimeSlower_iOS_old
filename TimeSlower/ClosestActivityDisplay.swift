@@ -73,17 +73,17 @@ internal final class ClosestActivityDisplay: UIView {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
         
         if let timer = timer {
-            timer.setCountDownTo(activity.timing.nextActionTime())
-            timer.resetTimerAfterFinish = false
-            
-            let timerSecondsToSet = activity.timing.nextActionTime().timeIntervalSinceNow
-            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
-            
-            if timerSecondsToSet > 60*60*24 {
-                let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
-                timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
-            }
-            
+//            timer.setCountDownTo(activity.timing.nextActionTime())
+//            timer.resetTimerAfterFinish = false
+//            
+//            let timerSecondsToSet = activity.timing.nextActionTime().timeIntervalSinceNow
+//            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
+//            
+//            if timerSecondsToSet > 60*60*24 {
+//                let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
+//                timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
+//            }
+//            
             timer.start()
         }
     }
@@ -106,11 +106,11 @@ internal final class ClosestActivityDisplay: UIView {
     
     fileprivate func setupLabelsForActivity(_ activity: Activity?) {
         if let activity = activity {
-            nameLabel.text = activity.name.uppercased()
-            titleLabel.text = activity.isGoingNow() ?
-                Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
-            statusLabel.text = activity.isGoingNow() ?
-                Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
+//            nameLabel.text = activity.name.uppercased()
+//            titleLabel.text = activity.isGoingNow() ?
+//                Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
+//            statusLabel.text = activity.isGoingNow() ?
+//                Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
             nameLabel.text = "Create an activity first"
             titleLabel.text = ""

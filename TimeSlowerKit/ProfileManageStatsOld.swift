@@ -245,7 +245,7 @@
 //    //    public func factTimingForToday() -> (Double, Double) {
 //    //        var savedToday = 0.0
 //    //        var spentToday = 0.0
-//    //        let allResultsForToday = DayResults.fetchResultsWithDate(NSDate(), inContext: managedObjectContext!)
+//    //        let allResultsForToday = Result.fetchResultsWithDate(NSDate(), inContext: managedObjectContext!)
 //    //        for result in allResultsForToday {
 //    //            if result.activity.isRoutine() {
 //    //                savedToday += result.factSavedTime!.doubleValue
@@ -307,7 +307,7 @@
 //     - returns: NSDate for March 3 1987
 //     */
 //    public class func defaultBirthday() -> Date {
-//        return DayResults.standardDateFormatter().date(from: "3/28/87")!
+//        return Result.standardDateFormatter().date(from: "3/28/87")!
 //    }
 //    
 //    /**

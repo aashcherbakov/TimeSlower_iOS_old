@@ -20,7 +20,7 @@
 //    }
 //
 //    func test_userProfileInManagedContext() {
-//        XCTAssertEqual(testProfile.birthday, DayResults.standardDateFormatter().date(from: "3/28/87")!, "Default birthday should be 28 of march")
+//        XCTAssertEqual(testProfile.birthday, Result.standardDateFormatter().date(from: "3/28/87")!, "Default birthday should be 28 of march")
 //        XCTAssertEqual(testProfile.country, "United States", "Default country should be US")
 //        XCTAssertEqual(testProfile.gender, Profile.genderWithEnum(.male), "Default gender is male")
 //        XCTAssertNotNil(testProfile.dateOfDeath, "Date of death should not be nil")

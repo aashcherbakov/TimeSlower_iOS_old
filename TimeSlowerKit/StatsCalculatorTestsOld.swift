@@ -13,7 +13,7 @@
 //    
 //    var testDateFormatter: DateFormatter!
 //    var timeMachine: TimeMachine!
-//    var testResult: DayResults!
+//    var testResult: Result!
 //    
 //    //MARK: - Setup
 //    
@@ -132,7 +132,7 @@
 //    }
 //    
 //    func createFakeResultsForLastMonth() {
-//        let standartDateFormatter = DayResults.standardDateFormatter()
+//        let standartDateFormatter = Result.standardDateFormatter()
 //        testResult.date = standartDateFormatter.string(from: Date().addingTimeInterval(-60*60*24*7))
 //        
 //        let tooOldResult = testCoreDataStack.fakeResultForActivity(testActivity)
@@ -150,7 +150,7 @@
 //    
 //    func deleteFakeWeekResults() {
 //        for activity in testProfile.allActivities() {
-//            if let results = activity.results as? Set<DayResults> , results.count > 0 {
+//            if let results = activity.results as? Set<Result> , results.count > 0 {
 //                for result in results {
 //                    testContext.delete(result)
 //                }

@@ -27,14 +27,14 @@ class StandardActivityCell: UITableViewCell {
 
     func setupLabels() {
         nameLabel.text = activity.name.uppercased()
-        startTimeLabel.text = dateFormatter.string(from: activity.updatedStartTime())
-        if activity.isDoneForToday() {
-            savingsView.alpha = 1.0
-            let result = activity.stats.fastFactSavedForPeriod(.today)
-            factSavedTimeLabel.text = "\(result)"
-            plannedToSaveLabel.text = "\(activity.timing.timeToSave.int32Value)"
-            
-        }
+//        startTimeLabel.text = dateFormatter.string(from: activity.updatedStartTime())
+//        if activity.isDoneForToday() {
+//            savingsView.alpha = 1.0
+//            let result = activity.stats.fastFactSavedForPeriod(.today)
+//            factSavedTimeLabel.text = "\(result)"
+//            plannedToSaveLabel.text = "\(activity.timing.timeToSave.int32Value)"
+//            
+//        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

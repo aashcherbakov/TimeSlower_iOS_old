@@ -136,6 +136,8 @@
 		F0A6136B1D347E270051743C /* Motivation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0A6136A1D347E270051743C /* Motivation.storyboard */; };
 		F0A613711D347F340051743C /* MotivationStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A613701D347F340051743C /* MotivationStatsView.xib */; };
 		F0A613731D347F870051743C /* MotivationStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613721D347F870051743C /* MotivationStatsView.swift */; };
+		F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A76E231D91586C0096208E /* NSObject+Extension.swift */; };
+		F0A76E251D915E3F0096208E /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDAA671D90C81E0090D7E3 /* FakeCoreDataStack.swift */; };
 		F0A9F9C91CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift */; };
 		F0A9F9CA1CDE7CD000809BA2 /* ActivityOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C81CDE7CD000809BA2 /* ActivityOld.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
@@ -365,14 +367,14 @@
 		F009AEB11BD9CC86007F38A9 /* ProfileManageStatsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManageStatsOld.swift; sourceTree = "<group>"; };
 		F009AEB21BD9CC86007F38A9 /* StatsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsOld.swift; sourceTree = "<group>"; };
 		F009AEB31BD9CC86007F38A9 /* StatsManageOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManageOld.swift; sourceTree = "<group>"; };
-		F009AEB41BD9CC86007F38A9 /* TimingOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingOld.swift; sourceTree = "<group>"; };
+		F009AEB41BD9CC86007F38A9 /* TimingOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimingOld.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEB51BD9CC86007F38A9 /* TimingManageOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingManageOld.swift; sourceTree = "<group>"; };
 		F009AED31BD9CEA4007F38A9 /* TimeSlowerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeSlowerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AED71BD9CEA4007F38A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileManageActivitiesTestOld.swift; path = TimeSlowerKitTests/ProfileManageActivitiesTestOld.swift; sourceTree = SOURCE_ROOT; };
+		F009AEE41BD9CF21007F38A9 /* ProfileManageActivitiesTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ProfileManageActivitiesTestOld.swift; path = TimeSlowerKitTests/ProfileManageActivitiesTestOld.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AEE51BD9CF21007F38A9 /* ProfileManageStatsTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileManageStatsTestOld.swift; path = TimeSlowerKitTests/ProfileManageStatsTestOld.swift; sourceTree = SOURCE_ROOT; };
 		F009AEE61BD9CF21007F38A9 /* StatsManageTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatsManageTestOld.swift; path = TimeSlowerKitTests/StatsManageTestOld.swift; sourceTree = SOURCE_ROOT; };
-		F009AEE91BD9CF21007F38A9 /* TimingManageTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimingManageTestOld.swift; path = TimeSlowerKitTests/TimingManageTestOld.swift; sourceTree = SOURCE_ROOT; };
+		F009AEE91BD9CF21007F38A9 /* TimingManageTestOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TimingManageTestOld.swift; path = TimeSlowerKitTests/TimingManageTestOld.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AF131BDADE19007F38A9 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Black.ttf"; path = "Fonts/SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
 		F009AF141BDADE19007F38A9 /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Bold.ttf"; path = "Fonts/SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Light.ttf"; path = "Fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
@@ -423,7 +425,7 @@
 		F009AF791BDB1935007F38A9 /* StandardActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardActivityCell.swift; path = Features/Activities/Views/StandardActivityCell.swift; sourceTree = "<group>"; };
 		F009AF7A1BDB1935007F38A9 /* StandardActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StandardActivityCell.xib; path = Features/Activities/Views/StandardActivityCell.xib; sourceTree = "<group>"; };
 		F009AF7B1BDB1935007F38A9 /* TimerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerExtension.swift; path = Features/Activities/Views/TimerExtension.swift; sourceTree = "<group>"; };
-		F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSaver.swift; path = Features/Activities/Views/TimeSaver.swift; sourceTree = "<group>"; };
+		F009AF7C1BDB1935007F38A9 /* TimeSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TimeSaver.swift; path = Features/Activities/Views/TimeSaver.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimeSaver.xib; path = Features/Activities/Views/TimeSaver.xib; sourceTree = "<group>"; };
 		F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelector.swift; path = Features/Activities/Views/TypeSelector.swift; sourceTree = "<group>"; };
 		F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TypeSelector.xib; path = Features/Activities/Views/TypeSelector.xib; sourceTree = "<group>"; };
@@ -444,22 +446,22 @@
 		F062A3451D29B16100933E09 /* ObservableControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableControlCell.swift; sourceTree = "<group>"; };
 		F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellProtocol.swift; sourceTree = "<group>"; };
 		F062A34B1D2AB2F200933E09 /* NSString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Extension.swift"; sourceTree = "<group>"; };
-		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
+		F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityViewControllerTests.swift; sourceTree = "<group>"; };
 		F07974BE1D04CE6F00B72168 /* EditNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNameCell.swift; sourceTree = "<group>"; };
-		F07AC3081D31A04C0003A917 /* Old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Old.swift; sourceTree = "<group>"; };
+		F07AC3081D31A04C0003A917 /* Old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Old.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionManager.swift; sourceTree = "<group>"; };
 		F09308951D8F5627008FFE1E /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		F09308971D8F562A008FFE1E /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		F093E2451C7A40D400E245C4 /* EditActivityDurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityDurationView.xib; sourceTree = "<group>"; };
-		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityDurationView.swift; sourceTree = "<group>"; };
+		F093E2471C7A40E400E245C4 /* EditActivityDurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityDurationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F093E2491C7A437100E245C4 /* EditActivityNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNotificationsView.swift; sourceTree = "<group>"; };
 		F093E24B1C7A43C800E245C4 /* EditActivityNotificationsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNotificationsView.xib; sourceTree = "<group>"; };
 		F09997671D57D651006030D9 /* BasisOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisOld.swift; sourceTree = "<group>"; };
 		F09997691D57D67B006030D9 /* ActivityTypeOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTypeOld.swift; sourceTree = "<group>"; };
 		F09997761D6152FE006030D9 /* BasisTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisTestsOld.swift; sourceTree = "<group>"; };
 		F099977B1D6A41A2006030D9 /* DayTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTestsOld.swift; sourceTree = "<group>"; };
-		F099977D1D6A485D006030D9 /* ActivityTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTestsOld.swift; sourceTree = "<group>"; };
+		F099977D1D6A485D006030D9 /* ActivityTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityTestsOld.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F099977F1D6A8367006030D9 /* DayResultsTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayResultsTestsOld.swift; sourceTree = "<group>"; };
 		F09997811D6A83AD006030D9 /* DayResults+CoreDataPropertiesOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayResults+CoreDataPropertiesOld.swift"; sourceTree = "<group>"; };
 		F09997831D73457B006030D9 /* ProfileCreatorOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCreatorOld.swift; sourceTree = "<group>"; };
@@ -474,13 +476,14 @@
 		F0A577351D4EC20800D2039A /* CircleStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleStatsView.xib; sourceTree = "<group>"; };
 		F0A577371D4EC21B00D2039A /* CircleStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleStatsView.swift; sourceTree = "<group>"; };
 		F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransitionManager.swift; sourceTree = "<group>"; };
-		F0A613601D32F57C0051743C /* ActivityDurationTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDurationTestsOld.swift; sourceTree = "<group>"; };
+		F0A613601D32F57C0051743C /* ActivityDurationTestsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityDurationTestsOld.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0A613671D347E060051743C /* MotivationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationViewController.swift; sourceTree = "<group>"; };
 		F0A6136A1D347E270051743C /* Motivation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Motivation.storyboard; sourceTree = "<group>"; };
 		F0A613701D347F340051743C /* MotivationStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotivationStatsView.xib; sourceTree = "<group>"; };
 		F0A613721D347F870051743C /* MotivationStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationStatsView.swift; sourceTree = "<group>"; };
+		F0A76E231D91586C0096208E /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataPropertiesOld.swift"; sourceTree = "<group>"; };
-		F0A9F9C81CDE7CD000809BA2 /* ActivityOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityOld.swift; sourceTree = "<group>"; };
+		F0A9F9C81CDE7CD000809BA2 /* ActivityOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityOld.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameView.xib; sourceTree = "<group>"; };
 		F0C0DC2E1C78E8A6005EC490 /* EditActivityNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameView.swift; sourceTree = "<group>"; };
 		F0C2F6161C682F13006B7D81 /* DaySelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DaySelectorTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1077,6 +1080,7 @@
 				F0EA8CBC1C712E9500B11252 /* Float+extension.swift */,
 				F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */,
 				F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */,
+				F0A76E231D91586C0096208E /* NSObject+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1242,8 +1246,8 @@
 			children = (
 				F0CDAA5D1D90C7FF0090D7E3 /* ManagedObject.swift */,
 				F0CDAA5E1D90C7FF0090D7E3 /* ManagedObjectType.swift */,
-				F0CDAA5F1D90C7FF0090D7E3 /* CoreDataStack.swift */,
 				F0CDAA601D90C7FF0090D7E3 /* NSObject+Extension.swift */,
+				F0CDAA5F1D90C7FF0090D7E3 /* CoreDataStack.swift */,
 				F0CDAA611D90C7FF0090D7E3 /* NSManagedObjectContext+Extension.swift */,
 				F0CDAA591D90C7ED0090D7E3 /* TimeSlowerDataBase.xcdatamodel */,
 			);
@@ -1996,6 +2000,7 @@
 				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
+				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				F0DB8A371D8F6F4900B6E176 /* NSString+TextDirectionality.m in Sources */,
@@ -2142,6 +2147,7 @@
 				F0CDAAC61D90CBA90090D7E3 /* ResultTests.swift in Sources */,
 				F0CDAAA21D90CB360090D7E3 /* ResultAdapterTests.swift in Sources */,
 				F0CDAAA71D90CB470090D7E3 /* ProfileAdapterTests.swift in Sources */,
+				F0A76E251D915E3F0096208E /* FakeCoreDataStack.swift in Sources */,
 				F099978E1D7389C0006030D9 /* StatsCalculatorTestsOld.swift in Sources */,
 				F0CDAAE01D90CBF30090D7E3 /* WeekdayTests.swift in Sources */,
 				F0CDAA751D90CA180090D7E3 /* TimeCalculatorTests.swift in Sources */,

@@ -1,5 +1,5 @@
 ////
-////  DayResults.swift
+////  Result.swift
 ////  TimeSlower2
 ////
 ////  Created by Aleksander Shcherbakov on 7/4/15.
@@ -9,10 +9,10 @@
 //import Foundation
 //import CoreData
 //
-//open class DayResults: NSManagedObject, Persistable {
+//open class Result: NSManagedObject, Persistable {
 //    
-//    open class func newResultWithDate(_ date: Date, forActivity activity: Activity) -> DayResults {
-//        let result: DayResults!
+//    open class func newResultWithDate(_ date: Date, forActivity activity: Activity) -> Result {
+//        let result: Result!
 //        
 //        // check if there already is result for this date
 //        if let fetchedResult = fetchResultWithDate(date, forActivity: activity) {
@@ -20,11 +20,11 @@
 //            activity.timing.manuallyStarted = nil
 //            
 //        } else {
-//            let entity = NSEntityDescription.entity(forEntityName: "DayResults", in: activity.managedObjectContext!)
-//            result = DayResults(entity: entity!, insertInto: activity.managedObjectContext)
+//            let entity = NSEntityDescription.entity(forEntityName: "Result", in: activity.managedObjectContext!)
+//            result = Result(entity: entity!, insertInto: activity.managedObjectContext)
 //            result.factFinishTime = date
 //            result.raughDate = date
-//            result.date = DayResults.standardDateFormatter().string(from: date)
+//            result.date = Result.standardDateFormatter().string(from: date)
 //            result.factStartTime = activity.timing.updatedStartTimeForDate(date)
 ////            result.factDuration = TimeMachine().minutesFromStart(result.factStartTime, toFinish: result.factFinishTime)
 //            result.factSuccess = NSNumber(value: result.daySuccessForTiming(activity.timing) as Double)
@@ -61,7 +61,7 @@
 //     - returns: Double for % of achieved result
 //     */
 //    open func daySuccessForTiming(_ timing: Timing) -> Double {
-//        let successCalculator = DayResults.successForActivityType(activity.activityType())
+//        let successCalculator = Result.successForActivityType(activity.activityType())
 //        let duration = Double(timing.duration.minutes())
 //        let goal = timing.timeToSave.doubleValue
 //        return successCalculator(factStartTime as Date, factFinishTime as Date, duration, goal)
@@ -74,8 +74,8 @@
 //     
 //     - returns: NSComparison description
 //     */
-//    open func compareDatesOfResults(_ otherResult: DayResults) -> ComparisonResult {
-//        let dateFormatter = DayResults.standardDateFormatter()
+//    open func compareDatesOfResults(_ otherResult: Result) -> ComparisonResult {
+//        let dateFormatter = Result.standardDateFormatter()
 //        
 //        guard let
 //            originalDate = dateFormatter.date(from: date),
@@ -92,7 +92,7 @@
 //     - returns: String with short day name
 //     */
 //    open func shortDayNameForDate() -> String {
-//        guard let date = DayResults.standardDateFormatter().date(from: date) else {
+//        guard let date = Result.standardDateFormatter().date(from: date) else {
 //            return ""
 //        }
 //        
@@ -108,18 +108,18 @@
 //     - parameter date:     NSDate for which we search results
 //     - parameter activity: Activity instance
 //     
-//     - returns: DayResults instance if there is one for given date
+//     - returns: Result instance if there is one for given date
 //     */
-//    open class func fetchResultWithDate(_ date: Date, forActivity activity: Activity) -> DayResults? {
-////        let referenceDate = DayResults.standardDateFormatter().string(from: date)
+//    open class func fetchResultWithDate(_ date: Date, forActivity activity: Activity) -> Result? {
+////        let referenceDate = Result.standardDateFormatter().string(from: date)
 ////        
-////        let fetchRequest = NSFetchRequest(entityName: "DayResults")
+////        let fetchRequest = NSFetchRequest(entityName: "Result")
 ////        let activityNamePredicate = NSPredicate(format: "activity.name == %@", activity.name)
 ////        let dayOfResultPredicate = NSPredicate(format: "date == %@", referenceDate)
 ////        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activityNamePredicate, dayOfResultPredicate])
 ////        fetchRequest.predicate = compoundPredicate
 ////        
-////        let results = try! activity.managedObjectContext!.fetch(fetchRequest) as! [DayResults]
+////        let results = try! activity.managedObjectContext!.fetch(fetchRequest) as! [Result]
 ////        
 ////        if let result = results.first {
 ////            return result
@@ -135,14 +135,14 @@
 //     - parameter date:    NSDate for which we search results
 //     - parameter context: NSManagedObjectContext
 //     
-//     - returns: Array of DayResults for specific date
+//     - returns: Array of Result for specific date
 //     */
-//    open class func fetchResultsWithDate(_ date: Date, inContext context: NSManagedObjectContext) -> [DayResults] {
-////        let referenceDate = DayResults.standardDateFormatter().string(from: date)
-////        let fetchRequest = NSFetchRequest(entityName: "DayResults")
+//    open class func fetchResultsWithDate(_ date: Date, inContext context: NSManagedObjectContext) -> [Result] {
+////        let referenceDate = Result.standardDateFormatter().string(from: date)
+////        let fetchRequest = NSFetchRequest(entityName: "Result")
 ////        fetchRequest.predicate = NSPredicate(format: "date == %@", referenceDate)
 ////        
-////        let results = try! context.fetch(fetchRequest) as! [DayResults]
+////        let results = try! context.fetch(fetchRequest) as! [Result]
 ////        return results
 //        return []
 //    }
@@ -152,18 +152,18 @@
 //     
 //     - parameter activity: Activity instance
 //     
-//     - returns: Array of DayResults
+//     - returns: Array of Result
 //     */
-//    open static func lastWeekResultsForActivity(_ activity: Activity) -> [DayResults] {
-//        guard let results = activity.results else { return [DayResults]() }
+//    open static func lastWeekResultsForActivity(_ activity: Activity) -> [Result] {
+//        guard let results = activity.results else { return [Result]() }
 //        
 //        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true, selector: #selector(NSString.compareDateRepresentationOfString(_:)))
 //
-//        if let sortedArray = results.sortedArray(using: [sortDescriptor]) as? [DayResults] {
+//        if let sortedArray = results.sortedArray(using: [sortDescriptor]) as? [Result] {
 //            return removeSpareResults(sortedArray)
 //        }
 //        
-//        return [DayResults]()
+//        return [Result]()
 //    }
 //
 //    /**
@@ -222,7 +222,7 @@
 //        }
 //    }
 //    
-//    fileprivate static func removeSpareResults(_ results: [DayResults]) -> [DayResults] {
+//    fileprivate static func removeSpareResults(_ results: [Result]) -> [Result] {
 //        var sortedArray = results
 //        if sortedArray.count > 7 {
 //            let lastResultsNumber = (sortedArray.count < 7) ? sortedArray.count : 7

@@ -9,7 +9,7 @@
 //import Foundation
 //
 ///// Object that encapsulates duration value and period description
-//open class ActivityDuration: NSObject {
+//open class Endurance: NSObject {
 //    /// Number of time units - either minutes of hours
 //    open let value: Int
 //    
@@ -77,7 +77,7 @@
 //    }
 //}
 //
-//extension ActivityDuration: NSCoding {
+//extension Endurance: NSCoding {
 //    public func encode(with aCoder: NSCoder) {
 //        aCoder.encode(value, forKey: "value")
 //        aCoder.encode(period.rawValue, forKey: "period")

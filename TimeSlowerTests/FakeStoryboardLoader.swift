@@ -12,16 +12,14 @@ import TimeSlower
 
 protocol FakeController {
     var view: UIView! { get }
-    static func classForCoder() -> AnyClass
-    static var className: String { get }
 }
 
 class FakeStoryboardLoader {
     
-    class func testViewController<T : FakeController>() -> T {
+    class func testViewController<T : FakeController>() -> T where T: NSObject {
         // Setup fake controller
         let storyboard = UIStoryboard(name: "FakeStoryboard", bundle: Bundle(for: T.classForCoder()))
-        let controller = storyboard.instantiateViewController(withIdentifier: T.className)
+        let controller = storyboard.instantiateViewController(withIdentifier: String(describing: T.self))
             as! T
         
         UIApplication.shared.keyWindow?.rootViewController = controller as? UIViewController

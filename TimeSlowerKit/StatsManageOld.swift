@@ -65,7 +65,7 @@
 //        summYears = NSNumber(value: calculator.totalYears(inDays: daysLeft, duration: duration, busyDays: busyDays))
 //    }
 //    
-//    public func updateSuccessWithResult(_ result: DayResults) {
+//    public func updateSuccessWithResult(_ result: Result) {
 //        guard let results = activity.results , results.count > 0 else {
 //            averageSuccess = result.factSuccess
 //            return
@@ -86,7 +86,7 @@
 ////        }
 ////        
 ////        if results.count > 0 {
-////            let fetchRequest = NSFetchRequest(entityName: "DayResults")
+////            let fetchRequest = NSFetchRequest(entityName: "Result")
 ////            fetchRequest.resultType = .DictionaryResultType
 ////            fetchRequest.propertiesToFetch = averageSuccessCalculation()
 ////            fetchRequest.predicate = NSPredicate(format: "activity.name == %@", activity.name)
@@ -123,7 +123,7 @@
 //    public func fastFactSavedForPeriod(_ period: PastPeriod) -> Double {
 //        let summSavedTimeLastYear = 0.0
 //        
-////        let fetchRequest = NSFetchRequest<DayResults>(entityName: "DayResults")
+////        let fetchRequest = NSFetchRequest<Result>(entityName: "Result")
 ////        fetchRequest.resultType = .dictionaryResultType
 ////        fetchRequest.predicate = activity.allResultsPredicateForPeriod(period)
 ////        fetchRequest.propertiesToFetch = propertiesToFetch()

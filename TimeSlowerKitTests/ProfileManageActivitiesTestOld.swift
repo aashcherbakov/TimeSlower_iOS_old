@@ -46,7 +46,7 @@
 //    
 //    func testActivitiesForDateOnWeekendBasis() {
 //        testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 6)!, forActivity: testActivity)!]
-//        let weekendDate = DayResults.standardDateFormatter().date(from: "7/4/15")
+//        let weekendDate = Result.standardDateFormatter().date(from: "7/4/15")
 //        let activitiesForToday = testProfile.activitiesForDate(weekendDate!)
 //
 //        
@@ -56,7 +56,7 @@
 //    
 //    func testActivitiesForDateOnWorkdayBasis() {
 //        testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 1)!, forActivity: testActivity)!]
-//        let workdayDate = DayResults.standardDateFormatter().date(from: "7/6/15")
+//        let workdayDate = Result.standardDateFormatter().date(from: "7/6/15")
 //        let activitiesForToday = testProfile.activitiesForDate(workdayDate!)
 //        
 //        XCTAssertEqual(activitiesForToday.count, 1, "There should be one activity")
@@ -67,7 +67,7 @@
 //        testActivity.days = [Day.createFromWeekday(Weekday(rawValue: 0)!, forActivity: testActivity)!]
 //        try! testContext.save()
 //        
-//        let workdayDate = DayResults.standardDateFormatter().date(from: "8/24/16")
+//        let workdayDate = Result.standardDateFormatter().date(from: "8/24/16")
 //        let activitiesForToday = testProfile.activitiesForDate(workdayDate!)
 //        XCTAssertEqual(activitiesForToday.count, 0, "There should be no activities")
 //    }
@@ -78,7 +78,7 @@
 //        let testStart = testDateFormatter.date(from: "7/5/15, 10:30 AM")!
 //        let testFinish = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
 //        let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-//        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+//        let duration = Endurance(value: Int(minutes), period: .minutes)
 //        let days = Weekday.weekdaysForBasis(.daily)
 //        
 //        let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
@@ -89,7 +89,7 @@
 //        let testStart = testDateFormatter.date(from: "7/5/15, 10:50 AM")!
 //        let testFinish = testDateFormatter.date(from: "7/5/15, 11:45 AM")!
 //        let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-//        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+//        let duration = Endurance(value: Int(minutes), period: .minutes)
 //        let days = Weekday.weekdaysForBasis(.daily)
 //        
 //        let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)
@@ -101,7 +101,7 @@
 //        let testStart = testDateFormatter.date(from: "7/5/15, 10:30 AM")!
 //        let testFinish = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
 //        let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-//        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+//        let duration = Endurance(value: Int(minutes), period: .minutes)
 //        let days = Weekday.weekdaysForBasis(.daily)
 //
 //
@@ -113,7 +113,7 @@
 //        let testStart = testDateFormatter.date(from: "7/5/15, 10:45 AM")!
 //        let testFinish = testDateFormatter.date(from: "7/5/15, 11:45 AM")!
 //        let minutes = TimeMachine().minutesFromStart(testStart, toFinish: testFinish)
-//        let duration = ActivityDuration(value: Int(minutes), period: .minutes)
+//        let duration = Endurance(value: Int(minutes), period: .minutes)
 //        let days = Weekday.weekdaysForBasis(.daily)
 //
 //        let preventingActivity = testProfile.hasActivityScheduledToStart(testStart, duration: duration, days: days)

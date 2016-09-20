@@ -14,8 +14,6 @@ class MainNavigationController: UINavigationController {
     
     fileprivate var profile: Profile?
     
-    lazy var coreDataStack = CoreDataStack.self
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialController()
@@ -23,7 +21,7 @@ class MainNavigationController: UINavigationController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profile = fetchProfile()
+//        profile = fetchProfile()
         if viewControllers.first is ProfileEditingVC {
             if profile != nil {
                 setupInitialController()
@@ -36,9 +34,9 @@ class MainNavigationController: UINavigationController {
     fileprivate func setupInitialController() {
         let rootController: UIViewController
         
-        if let profile = profile {
+        if profile != nil {
             let homeController: HomeViewController = ControllerFactory.createController()
-            homeController.profile = profile
+//            homeController.profile = profile
             rootController = homeController
         } else {
             let profileController: ProfileEditingVC = ControllerFactory.createController()
@@ -48,7 +46,7 @@ class MainNavigationController: UINavigationController {
         setViewControllers([rootController], animated: false)
     }
     
-    fileprivate func fetchProfile() -> Profile? {
-        return coreDataStack.sharedInstance.fetchProfile()
-    }
+//    fileprivate func fetchProfile() -> Profile? {
+//        return coreDataStack.sharedInstance.fetchProfile()
+//    }
 }

@@ -159,7 +159,7 @@
 //        let newFinishTime = testCoreDataStack.shortStyleDateFormatter().date(from: "7/3/15, 11:45 AM")!
 //        testActivityTiming.startTime = newStartTime
 //        testActivityTiming.finishTime = newFinishTime
-//        testActivityTiming.duration = ActivityDuration(value: 40, period: .minutes)
+//        testActivityTiming.duration = Endurance(value: 40, period: .minutes)
 //        testActivityTiming.timeToSave = NSNumber(value: 20.0 as Double)
 //        testActivityTiming.manuallyStarted = manualStart
 //        
@@ -240,7 +240,7 @@
 //        } else {
 ////            correctNextActionDate = testActivity.timing.nextWeekendDayFromDate(referenceDate)
 //        }
-//        let dateFormatter = DayResults.standardDateFormatter()
+//        let dateFormatter = Result.standardDateFormatter()
 //        let nextActionDate = dateFormatter.string(from: testActivity.timing.nextActionDate())
 ////        let correctDate = dateFormatter.string(from: correctNextActionDate)
 ////        XCTAssertEqual(nextActionDate, correctDate, "Next action date is wrong")
@@ -265,7 +265,7 @@
 //    //MARK: - Helper functions
 //    
 //    func deleteFakeResults() {
-//        if let result = DayResults.fetchResultWithDate(Date(), forActivity: testActivityTiming.activity) {
+//        if let result = Result.fetchResultWithDate(Date(), forActivity: testActivityTiming.activity) {
 //            testActivityTiming.managedObjectContext?.delete(result)
 //        }
 //    }

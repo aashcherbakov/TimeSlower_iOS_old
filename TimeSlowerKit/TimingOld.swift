@@ -12,7 +12,7 @@
 //open class Timing: ManagedObject {
 //
 //    @NSManaged open var alarmTime: Date
-//    @NSManaged open var duration: ActivityDuration
+//    @NSManaged open var duration: Endurance
 //    @NSManaged open var finishTime: Date
 //    @NSManaged open var manuallyStarted: Date?
 //    @NSManaged open var startTime: Date

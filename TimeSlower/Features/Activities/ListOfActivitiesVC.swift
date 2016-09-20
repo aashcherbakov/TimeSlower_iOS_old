@@ -81,12 +81,14 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
             return activities
         } else {
             let matchingType: ActivityType = (type == .routines) ? .routine : .goal
-            return activities.filter { (activity) in activity.activityType() == matchingType }
+//            return activities.filter { (activity) in activity.activityType() == matchingType }
+            return []
         }
     }
     
     func activitiesForBasis(_ basis: BasisToDisplay) -> [Activity] {
-        return basis == .today ? profile.activitiesForDate(Date()) : profile.allActivities()
+//        return basis == .today ? profile.activitiesForDate(Date()) : profile.allActivities()
+        return []
     }
     
     //MARK: - Actions
@@ -165,7 +167,7 @@ extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? StandardActivityCell {
             let editActivityVC: EditActivityVC = ControllerFactory.createController()
-            editActivityVC.activity = cell.activity
+//            editActivityVC.activity = cell.activity
             navigationController?.pushViewController(editActivityVC, animated: true)
         }
     }
@@ -181,8 +183,8 @@ extension ListOfActivitiesVC: UITableViewDataSource, UITableViewDelegate {
         tableView.beginUpdates()
         let activityToDelete = activitiesToDisplay[(indexPath as NSIndexPath).row]
         activitiesToDisplay.remove(at: (indexPath as NSIndexPath).row)
-        CoreDataStack.sharedInstance.managedObjectContext?.delete(activityToDelete)
-        CoreDataStack.sharedInstance.saveContext()
+//        CoreDataStack.sharedInstance.managedObjectContext?.delete(activityToDelete)
+//        CoreDataStack.sharedInstance.saveContext()
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         tableView.endUpdates()
     }

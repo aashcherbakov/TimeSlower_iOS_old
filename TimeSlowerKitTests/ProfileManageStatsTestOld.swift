@@ -15,7 +15,7 @@
 //    
 //    var testDateFormatter: DateFormatter!
 //    var timeMachine: TimeMachine!
-//    var testResult: DayResults!
+//    var testResult: Result!
 //    
 //    //MARK: - Setup
 //    
@@ -39,7 +39,7 @@
 //    // MARK: - Default values
 //    
 //    func testDefaultBirthday() {
-//        XCTAssertEqual(testProfile.birthday, DayResults.standardDateFormatter().date(from: "3/28/87")!, "Default birthday should be 28 of march")
+//        XCTAssertEqual(testProfile.birthday, Result.standardDateFormatter().date(from: "3/28/87")!, "Default birthday should be 28 of march")
 //    }
 //    
 //    func testDefaultCountry() {
@@ -74,7 +74,7 @@
 //    }
 //    
 //    func testDateOfApproximateLifeEnd() {
-//        let dateOfDeathString = DayResults.standardDateFormatter().string(from: testProfile.dateOfApproximateLifeEnd())
+//        let dateOfDeathString = Result.standardDateFormatter().string(from: testProfile.dateOfApproximateLifeEnd())
 //        XCTAssertEqual(dateOfDeathString, "3/28/64", "Date of death should be March 2064")
 //    }
 //

@@ -61,7 +61,7 @@ class MainScreenVC: MainScreenVCConstraints {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if userProfile == nil {
-            userProfile = CoreDataStack.sharedInstance.fetchProfile()
+//            userProfile = CoreDataStack.sharedInstance.fetchProfile()
         }
         setup()
     }
@@ -78,38 +78,38 @@ class MainScreenVC: MainScreenVCConstraints {
         if userProfile == nil {
             presentVCtoCreateNewProfile()
         } else {
-            if userProfile?.allActivities().count == 0 {
-                presentVCtoCreateFirstRoutine()
-            } else {
-                setupNextActivityBlock()
-                setupPageViewController()
-            }
+//            if userProfile?.allActivities().count == 0 {
+//                presentVCtoCreateFirstRoutine()
+//            } else {
+//                setupNextActivityBlock()
+//                setupPageViewController()
+//            }
         }
     }
     
     //MARK: - Setup
     
     func setupNextActivityBlock() {
-        nextActivity = userProfile?.findCurrentActivity()
-        setupControlFlowButton()
-        if let activity = nextActivity {
-            launchTimer()
-            activityNameLabel.text = nextActivity.name.uppercased()
-            currentStatusLabel.text = activity.isGoingNow() ? Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
-            timingStatusLabel.text = activity.isGoingNow() ? Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
-        } else {
-            activityNameLabel.text = "Create an activity first"
-            timingStatusLabel.text = ""
-            timerLabel.text = ""
-        }
+//        nextActivity = userProfile?.findCurrentActivity()
+//        setupControlFlowButton()
+//        if let activity = nextActivity {
+//            launchTimer()
+//            activityNameLabel.text = nextActivity.name.uppercased()
+//            currentStatusLabel.text = activity.isGoingNow() ? Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
+//            timingStatusLabel.text = activity.isGoingNow() ? Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
+//        } else {
+//            activityNameLabel.text = "Create an activity first"
+//            timingStatusLabel.text = ""
+//            timerLabel.text = ""
+//        }
     }
     
     func setupControlFlowButton() {
         controlFlowButton.layer.cornerRadius = startNowButtonHeight.constant / 2
         if nextActivity != nil {
-            let buttonTitle = nextActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
-            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
-            controlFlowButton.isEnabled = true
+//            let buttonTitle = nextActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
+//            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
+//            controlFlowButton.isEnabled = true
         } else {
             controlFlowButton.setTitle("No activities", for: .disabled)
             controlFlowButton.isEnabled = false
@@ -164,18 +164,18 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func setupTimerCountdown() {
-        timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        timer.setCountDownTo(nextActivity.timing.nextActionTime())
-        timer.resetTimerAfterFinish = false
-        
-        let timerSecondsToSet = nextActivity.timing.nextActionTime().timeIntervalSinceNow
-        timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
-        if timerSecondsToSet > 60*60*24 {
-            let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
-            timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
-        }
-        
-        timer.start()
+//        timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
+//        timer.setCountDownTo(nextActivity.timing.nextActionTime())
+//        timer.resetTimerAfterFinish = false
+//        
+//        let timerSecondsToSet = nextActivity.timing.nextActionTime().timeIntervalSinceNow
+//        timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
+//        if timerSecondsToSet > 60*60*24 {
+//            let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
+//            timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
+//        }
+//        
+//        timer.start()
     }
     
     func reloadTimer() {
@@ -197,15 +197,15 @@ class MainScreenVC: MainScreenVCConstraints {
     }
     
     func startActivity() {
-        nextActivity.timing.manuallyStarted = Date()
+//        nextActivity.timing.manuallyStarted = Date()
         //TODO: update notifications for today
         setupNextActivityBlock()
     }
     
     func finishActivity() {
-        nextActivity.finishWithResult()
-        nextActivity.deleteScheduledNotificationsForCurrentActivity()
-        nextActivity.scheduleRestorationTimer()
+//        nextActivity.finishWithResult()
+//        nextActivity.deleteScheduledNotificationsForCurrentActivity()
+//        nextActivity.scheduleRestorationTimer()
         showActivityStatsViewController()
     }
     

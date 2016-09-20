@@ -1,5 +1,5 @@
 ////
-////  DayResults+CoreDataProperties.swift
+////  Result+CoreDataProperties.swift
 ////  TimeSlower
 ////
 ////  Created by Oleksandr Shcherbakov on 8/21/16.
@@ -9,7 +9,7 @@
 //import Foundation
 //import CoreData
 //
-//public extension DayResults {
+//public extension Result {
 //    
 //    /// Fact date of result
 //    @NSManaged public var raughDate: Date

@@ -31,7 +31,7 @@ class EditActivityDurationView: ObservableControl {
     // MARK: - Properties
     
     /// Duration of activity in minutes. Observable.
-    dynamic var selectedValue: ActivityDuration?
+    var selectedValue: MutableProperty<Endurance>?
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var textfieldView: TextfieldView!
@@ -66,8 +66,8 @@ class EditActivityDurationView: ObservableControl {
     }
     
     override func setInitialValue(_ value: AnyObject?) {
-        if let duration = value as? ActivityDuration {
-            selectedValue = duration
+        if let duration = value as? Endurance {
+//            selectedValue?.value = duration.value
             textfieldView.setText("Duration: \(duration.value) \(duration.period.description())")
             setPickerViewToValue(duration.value, period: duration.period)
         }
@@ -103,7 +103,7 @@ class EditActivityDurationView: ObservableControl {
     
     fileprivate func updateValueFromPicker(_ pickerView: UIPickerView) {
         let values = getValuesFromPickerView(pickerView)
-        if selectedValue?.value != values.value {
+        if selectedValue?.value.value != values.value {
             self.updateSelectedValueWithDuration(values.value, period: values.period)
         }
     }
@@ -120,7 +120,7 @@ class EditActivityDurationView: ObservableControl {
     }
     
     fileprivate func updateSelectedValueWithDuration(_ duration: Int, period: Period) {
-        selectedValue = ActivityDuration(value: duration, period: period)
+        selectedValue?.value = Endurance(value: duration, period: period)
         textfieldView.setText("Duration: \(duration) \(period.description())")
     }
 }

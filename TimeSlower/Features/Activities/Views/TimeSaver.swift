@@ -25,8 +25,8 @@ class TimeSaver: UIView {
     @IBOutlet var view: UIView!
     
     /// Selected time to save, Integer. Observable
-    dynamic var selectedValue: ActivityDuration?
-    dynamic var selectedDuration: ActivityDuration?
+    var selectedValue: MutableProperty<Endurance>?
+    var selectedDuration: MutableProperty<Endurance>?
     
     // MARK: - Overridden Methods
     
@@ -54,7 +54,7 @@ class TimeSaver: UIView {
 //        rac_valuesForKeyPath("selectedDuration", observer: self).toSignalProducer()
 //            .startWithNext { [weak self] (duration) in
 //                guard let
-//                    duration = duration as? ActivityDuration,
+//                    duration = duration as? Endurance,
 //                    let suggestedSaving = self?.minumumSavingForDuration(duration)
 //                else {
 //                    return
@@ -63,7 +63,7 @@ class TimeSaver: UIView {
 //                self?.slider.minimumValue = duration.period == .Hours ? Float(Constants.minimumMinutesToSave) : 1.0
 //                
 //                if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
-//                    self?.selectedValue = ActivityDuration(value: suggestedSaving, period: duration.period)
+//                    self?.selectedValue = Endurance(value: suggestedSaving, period: duration.period)
 //                
 //                }
 //                
@@ -73,7 +73,7 @@ class TimeSaver: UIView {
 //        
 //        rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
 //            .startWithNext { [weak self] (value) in
-//                guard let value = value as? ActivityDuration, let duration = self?.selectedDuration else { return }
+//                guard let value = value as? Endurance, let duration = self?.selectedDuration else { return }
 //                self?.timeLabel.text = "\(value.value) \(duration.period.description())"
 //                self?.slider.setValue(Float(value.value), animated: true)
 //        }
@@ -81,11 +81,11 @@ class TimeSaver: UIView {
 //        slider.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
 //            .startWithNext { [weak self] (slider) in
 //                guard let slider = slider as? UISlider, let duration = self?.selectedDuration else { return }
-//                self?.selectedValue = ActivityDuration(value: Int(slider.value), period: duration.period)
+//                self?.selectedValue = Endurance(value: Int(slider.value), period: duration.period)
 //        }
     }
     
-    fileprivate func minumumSavingForDuration(_ duration: ActivityDuration) -> Int {
+    fileprivate func minumumSavingForDuration(_ duration: Endurance) -> Int {
         var suggestedSaving = duration.value / 4
         if duration.period == .hours {
             suggestedSaving = suggestedSaving > Constants.minimumMinutesToSave ?

@@ -44,7 +44,7 @@ internal class EditActivityVC: UIViewController {
     var flow: Flow?
     var editingState: EditingState?
     var userProfile: Profile?
-    dynamic var activity: Activity?
+    var activity: MutableProperty<Activity>?
     
     typealias StateType = EditingState
     fileprivate var machine: StateMachine<EditActivityVC>!
@@ -53,7 +53,7 @@ internal class EditActivityVC: UIViewController {
     var selectedName: String?
     var selectedBasis: [Int]?
     var selectedStartTime: Date?
-    var selectedDuration: ActivityDuration?
+    var selectedDuration: Endurance?
     var selectedNotifications: Bool? = true
     var selectedTimeToSave: Int?
     
@@ -134,8 +134,8 @@ internal class EditActivityVC: UIViewController {
         }
         
         // TODO: switch to check type
-        activity = Activity.createActivityWithType(.routine, name: name, selectedDays: basis, startTime: startTime,
-            duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
+//        activity = Activity.createActivityWithType(.routine, name: name, selectedDays: basis, startTime: startTime,
+//            duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
     }
     
     fileprivate func saveActivity() {
@@ -143,8 +143,8 @@ internal class EditActivityVC: UIViewController {
                 return
         }
         
-        Activity.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
-            duration: duration, notifications: notifications, timeToSave: timeToSave)
+//        Activity.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
+//            duration: duration, notifications: notifications, timeToSave: timeToSave)
     }
     
     // MARK: - Private Functions
@@ -153,8 +153,8 @@ internal class EditActivityVC: UIViewController {
         if activity != nil {
             flow = .editing
             editingState = .fullHouse
-            timeSaverView.selectedDuration = activity?.timing.duration
-            timeSaverView.selectedValue = ActivityDuration(value: Int((activity?.timing.timeToSave.int32Value)!), period: (activity?.timing.duration.period)!)
+//            timeSaverView.selectedDuration = activity?.timing.duration
+//            timeSaverView.selectedValue = Endurance(value: Int((activity?.timing.timeToSave.int32Value)!), period: (activity?.timing.duration.period)!)
         } else {
             flow = .creating
             editingState = .name
@@ -169,14 +169,14 @@ internal class EditActivityVC: UIViewController {
     
     fileprivate func setupData() {
         if let activity = activity {
-            selectedName = activity.name
-            selectedBasis = Day.daysIntegerRepresentation(activity.days as? Set<Day>)
-            selectedStartTime = activity.timing.startTime
-            selectedDuration = activity.timing.duration
-            selectedNotifications = activity.notifications.boolValue
-            selectedTimeToSave = activity.timing.timeToSave.intValue
+//            selectedName = activity.name
+//            selectedBasis = Day.daysIntegerRepresentation(activity.days as? Set<Day>)
+//            selectedStartTime = activity.timing.startTime
+//            selectedDuration = activity.timing.duration
+//            selectedNotifications = activity.notifications.boolValue
+//            selectedTimeToSave = activity.timing.timeToSave.intValue
             
-            initialValuesForCells = [selectedName as Optional<AnyObject>, selectedBasis as Optional<AnyObject>, selectedStartTime as Optional<AnyObject>, selectedDuration, selectedNotifications as Optional<AnyObject>]
+//            initialValuesForCells = [selectedName as Optional<AnyObject>, selectedBasis as Optional<AnyObject>, selectedStartTime as Optional<AnyObject>, selectedDuration, selectedNotifications as Optional<AnyObject>]
         }
     }
     
@@ -219,7 +219,7 @@ internal class EditActivityVC: UIViewController {
 //        timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).startWith(timeSaverView)
 //            .toSignalProducer()
 //            .startWithNext { [weak self] (timeToSave) in
-//                guard let timeToSave = timeToSave as? ActivityDuration else { return }
+//                guard let timeToSave = timeToSave as? Endurance else { return }
 //                self?.selectedTimeToSave = timeToSave.minutes()
 //        }
     }
@@ -241,7 +241,7 @@ internal class EditActivityVC: UIViewController {
         }
         
 //        durationSignal.startWithNext { [weak self] (value) in
-//            guard let duration = value as? ActivityDuration else { return }
+//            guard let duration = value as? Endurance else { return }
 //            self?.timeSaverView.selectedDuration = duration
 //        }
 //        
@@ -250,7 +250,7 @@ internal class EditActivityVC: UIViewController {
 //                self?.selectedName = name as? String
 //                self?.selectedBasis = basis as? [Int]
 //                self?.selectedStartTime = startTime as? NSDate as Date?
-//                self?.selectedDuration = duration as? ActivityDuration
+//                self?.selectedDuration = duration as? Endurance
 //                self?.selectedNotifications = notification as? Bool
 //                self?.moveToNextEditingState()
 //        }
@@ -302,7 +302,7 @@ internal class EditActivityVC: UIViewController {
         }
         
         let motivationVC: MotivationViewController = ControllerFactory.createController()
-        motivationVC.setupWithActivity(activity)
+        motivationVC.setupWithActivity(activity.value)
         
         if let navigationController = navigationController {
             navigationController.pushViewController(motivationVC, animated: true)

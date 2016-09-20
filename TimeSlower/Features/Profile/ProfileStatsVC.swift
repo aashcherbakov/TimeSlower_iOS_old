@@ -36,7 +36,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         }
     }
     
-    var profileStats: Profile.DailyStats!
+//    var profileStats: Profile.DailyStats!
 
     
     //MARK: - Lifecycle
@@ -70,23 +70,23 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         }
         
         // TODO: here we should come from date of first use
-        let routineProgress = profileStats.factSaved / (profileStats.plannedToSave / 60)
-        routinesCircle.progress = routineProgress > 0 ? routineProgress : 0
-        
-        let goalProgress = profileStats.factSpent / (profileStats.plannedToSpend / 60)
-        goalsCircle.progress = goalProgress > 0 ? goalProgress : 0
+//        let routineProgress = profileStats.factSaved / (profileStats.plannedToSave / 60)
+//        routinesCircle.progress = routineProgress > 0 ? routineProgress : 0
+//        
+//        let goalProgress = profileStats.factSpent / (profileStats.plannedToSpend / 60)
+//        goalsCircle.progress = goalProgress > 0 ? goalProgress : 0
     }
     
 
     func setupLabels() {
         let format = ".0"
-        totalHoursSavedLabel.text = "\(profileStats.factSaved.format(format))"
-        totalHoursSpentLabel.text = "\(profileStats.factSpent.format(format))"
-        userGreatingLabel.text = "Hello " + profile.name
-        
-        if let photoData = profile.photo {
-            avatarImageView.image = UIImage(data: photoData)
-        }
+//        totalHoursSavedLabel.text = "\(profileStats.factSaved.format(format))"
+//        totalHoursSpentLabel.text = "\(profileStats.factSpent.format(format))"
+//        userGreatingLabel.text = "Hello " + profile.name
+//        
+//        if let photoData = profile.photo {
+//            avatarImageView.image = UIImage(data: photoData)
+//        }
     }
     
     func setupAvatarForm() {
@@ -140,13 +140,13 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     }
     
     func setupTimerCountdown() {
-        countdownTimer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        countdownTimer.setCountDownTo(profile?.dateOfDeath)
-        countdownTimer.resetTimerAfterFinish = false
-        
-        let timerSecondsToSet = profile?.dateOfDeath.timeIntervalSinceNow
-        countdownTimer.timeFormat = NSString(format: "%.0f:mm:ss", round((timerSecondsToSet! - 60*60) / 60 / 60)) as String
-        countdownTimer.start()
+//        countdownTimer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
+//        countdownTimer.setCountDownTo(profile?.dateOfDeath)
+//        countdownTimer.resetTimerAfterFinish = false
+//        
+//        let timerSecondsToSet = profile?.dateOfDeath.timeIntervalSinceNow
+//        countdownTimer.timeFormat = NSString(format: "%.0f:mm:ss", round((timerSecondsToSet! - 60*60) / 60 / 60)) as String
+//        countdownTimer.start()
     }
     
     func reloadTimer() {

@@ -34,7 +34,7 @@
 //     Creates DayResult and assigns it to activity. Also, sets manuallyStarted property to nil.
 //     */
 //    open func finishWithResult() {
-//        DayResults.newResultWithDate(Date(), forActivity: self)
+//        Result.newResultWithDate(Date(), forActivity: self)
 //        timing.manuallyStarted = nil
 //    }
 //    
@@ -97,14 +97,14 @@
 //     - parameter name:          String for name
 //     - parameter selectedDays:  Array of Integers from 0 to 6
 //     - parameter startTime:     NSDate
-//     - parameter duration:      ActivityDuration instance
+//     - parameter duration:      Endurance instance
 //     - parameter notifications: True for enabled notifications
 //     - parameter timeToSave:    Int for minutes to be saved
 //     - parameter profile:       Profile instance
 //     
 //     - returns: Activity instance
 //     */
-//    open static func createActivityWithType(_ type: ActivityType, name: String, selectedDays: [Int], startTime: Date, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
+//    open static func createActivityWithType(_ type: ActivityType, name: String, selectedDays: [Int], startTime: Date, duration: Endurance, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
 //        
 //        let activity = Activity.newActivityForProfile(profile, ofType: type)
 //        activity.name = name
@@ -122,7 +122,7 @@
 //        return activity
 //    }
 //    
-//    open static func updateActivityWithParameters(_ activity: Activity, name: String, selectedDays: [Int], startTime: Date, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
+//    open static func updateActivityWithParameters(_ activity: Activity, name: String, selectedDays: [Int], startTime: Date, duration: Endurance, notifications: Bool, timeToSave: Int) {
 //        
 //        activity.name = name
 //        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity) as NSSet
@@ -194,12 +194,12 @@
 //        return activity
 //    }
 //    
-//    fileprivate static func updateFinishTimeWithDuration(_ duration: ActivityDuration, fromStartTime startTime: Date) -> Date {
+//    fileprivate static func updateFinishTimeWithDuration(_ duration: Endurance, fromStartTime startTime: Date) -> Date {
 //        return startTime.addingTimeInterval(duration.seconds())
 //    }
 //    
 //    /// Workaround method for be used only in UnitTesting
-//    open func unitTesting_allResultsForPeriod(_ period: PastPeriod) -> [DayResults] {
+//    open func unitTesting_allResultsForPeriod(_ period: PastPeriod) -> [Result] {
 //        return []
 //    }
 //}

@@ -13,7 +13,7 @@
 //
 //class StatsManageTest: CoreDataBaseTest {
 //
-//    var testResult: DayResults!
+//    var testResult: Result!
 //    var testActivityForDeletion: Activity!
 //    
 //    var testDateFormatter: DateFormatter!
@@ -27,7 +27,7 @@
 //        
 //        testResult = testCoreDataStack.fakeResultForActivity(testActivity)
 //        testDateFormatter = testCoreDataStack.shortStyleDateFormatter()
-//        standartDateFormatter = DayResults.standardDateFormatter()
+//        standartDateFormatter = Result.standardDateFormatter()
 //        timeMachine = TimeMachine()
 //    }
 //    
@@ -50,7 +50,7 @@
 //    
 //    func test_updateStats() {
 //        testActivity.stats.updateStatsForDate(
-//            DayResults.standardDateFormatter().date(from: "08/28/16")!)
+//            Result.standardDateFormatter().date(from: "08/28/16")!)
 //        XCTAssertEqual(testActivity.stats.summHours.doubleValue, 8689.5, "Summ hours 8689")
 //        XCTAssertEqual(testActivity.stats.summDays.doubleValue, 362.0625, "Summ days must be 362")
 //        XCTAssertEqual(testActivity.stats.summMonths.doubleValue, 12.06875, "Summ months must be 12")
@@ -60,10 +60,10 @@
 //    func test_updateAvarageSuccess() {
 //        testResult.factSuccess = 70
 //        testActivity.stats.updateSuccessWithResult(testResult)
-//        let result1 = DayResults.newResultWithDate(TestHelper.mondayApril25(), forActivity: testActivity)
+//        let result1 = Result.newResultWithDate(TestHelper.mondayApril25(), forActivity: testActivity)
 //        result1.factSuccess = 50
 //        testActivity.stats.updateSuccessWithResult(result1)
-//        let result2 = DayResults.newResultWithDate(TestHelper.saturdayApril30(), forActivity: testActivity)
+//        let result2 = Result.newResultWithDate(TestHelper.saturdayApril30(), forActivity: testActivity)
 //        result2.factSuccess = 60
 //        testActivity.stats.updateSuccessWithResult(result2)
 //        

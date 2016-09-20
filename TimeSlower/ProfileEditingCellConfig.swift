@@ -20,7 +20,7 @@ class ProfileEditingCellConfig: NSObject {
     
     init(withProfile: Profile?) {
         if let profile = withProfile {
-            birthday = profile.birthday
+            birthday = profile.dateOfBirth
             name = profile.name
             country = profile.country
         }
@@ -89,8 +89,8 @@ class ProfileEditingCellConfig: NSObject {
     /// CountryPicker with preselected country - based on user location
     func defaultCountryPicker() -> CountryPicker {
         let countryPicker = CountryPicker()
-        let userCountry = (country != nil) ? country : Profile.defaultCountry()
-        countryPicker.setSelectedCountryName(userCountry, animated: false)
+//        let userCountry = (country != nil) ? country : Profile.defaultCountry()
+        countryPicker.setSelectedCountryName(country, animated: false)
         return countryPicker
     }
     
@@ -98,8 +98,8 @@ class ProfileEditingCellConfig: NSObject {
     func defatultDatePicker() -> UIDatePicker {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
-        let userBirthday = (birthday != nil) ? birthday : Profile.defaultBirthday()
-        datePicker.setDate(userBirthday!, animated: false)
+//        let userBirthday = (birthday != nil) ? birthday : Profile.defaultBirthday()
+        datePicker.setDate(birthday!, animated: false)
         return datePicker
     }
     

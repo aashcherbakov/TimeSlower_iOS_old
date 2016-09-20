@@ -58,24 +58,24 @@ class CircleStatsView: UIView {
     
     fileprivate func setupDataForProfile(_ profile: Profile) {
 
-        if let
-            factTiming = profile.factTimingForPeriod(.today),
-            let plannedTiming = profile.plannedTimingInPeriod(.today, sinceDate: Date()) {
-            
-            setupLabels(factTiming, plannedTiming: plannedTiming)
-            setupProgress(factTiming.saved, planned: plannedTiming.save, activityType: .routine)
-            setupProgress(factTiming.spent, planned: plannedTiming.spend, activityType: .goal)
-        }
+//        if let
+//            factTiming = profile.factTimingForPeriod(.today),
+//            let plannedTiming = profile.plannedTimingInPeriod(.today, sinceDate: Date()) {
+//            
+//            setupLabels(factTiming, plannedTiming: plannedTiming)
+//            setupProgress(factTiming.saved, planned: plannedTiming.save, activityType: .routine)
+//            setupProgress(factTiming.spent, planned: plannedTiming.spend, activityType: .goal)
+//        }
     }
     
-    fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {
-        let format = ".0"
-
-        routineProgressLabel.text = "\(factTiming.0.format(format))"
-        goalsProgressLabel.text = "\(factTiming.1.format(format))"
-        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
-        goalsTargetLabel.text = "\(plannedTiming.1.format(format))"
-    }
+//    fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {
+//        let format = ".0"
+//
+//        routineProgressLabel.text = "\(factTiming.0.format(format))"
+//        goalsProgressLabel.text = "\(factTiming.1.format(format))"
+//        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
+//        goalsTargetLabel.text = "\(plannedTiming.1.format(format))"
+//    }
 
     
     fileprivate func setupProgress(_ fact: Double, planned: Double, activityType: ActivityType) {
