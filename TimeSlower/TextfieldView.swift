@@ -8,6 +8,9 @@
 
 import Foundation
 import ReactiveSwift
+import ReactiveObjC
+import ReactiveObjCBridge
+import Result
 
 /** 
  Class that represents a view with JVFloatLabeledTextField. Depending on set type,
@@ -71,19 +74,21 @@ class TextfieldView: UIView {
     }
     
     fileprivate func setupEvents() {
-//        let textDirectSignal = textField.rac_valuesForKeyPath("text", observer: self).toSignalProducer()
-//        let textInputSignal = textField.rac_textSignal().toSignalProducer()        
-//        
-//        combineLatest([textDirectSignal, textInputSignal])
-//            .map({ (strings) -> Bool in
-//                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
-//                return combinedString.characters.count > 0
-//            })
-//            .skipRepeats()
-//            .startWithNext { [weak self] (valid) in
-//                self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
-//                self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
-//        }
+        let textDirectSignal = textField.rac_values(forKeyPath: "text", observer: self).toSignalProducer()
+        let textInputSignal = textField.rac_textSignal().toSignalProducer()
+        
+        SignalProducer.combineLatest([textDirectSignal, textInputSignal])
+            .map { (strings) -> Bool in
+                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
+                return combinedString.characters.count > 0
+            }
+            .skipRepeats()
+            .startWithResult { [weak self] (result) in
+                if let valid = result.value {
+                    self?.textField.textColor = valid ? UIColor.darkGray() : UIColor.lightGray()
+                    self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
+                }
+            }
     }
     
     fileprivate func setupDesign() {

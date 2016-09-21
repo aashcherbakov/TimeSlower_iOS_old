@@ -23,8 +23,8 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.isNavigationBarHidden = true
-        bindViewModel()
     }
     
     fileprivate func bindViewModel() {
