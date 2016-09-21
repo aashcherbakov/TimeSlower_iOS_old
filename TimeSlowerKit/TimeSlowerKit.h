@@ -2,8 +2,8 @@
 //  TimeSlowerKit.h
 //  TimeSlowerKit
 //
-//  Created by Oleksandr Shcherbakov on 10/22/15.
-//  Copyright © 2015 Oleksandr Shcherbakov. All rights reserved.
+//  Created by Oleksandr Shcherbakov on 9/1/16.
+//  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
