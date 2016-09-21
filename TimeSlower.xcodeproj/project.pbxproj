@@ -138,6 +138,7 @@
 		F0A613731D347F870051743C /* MotivationStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A613721D347F870051743C /* MotivationStatsView.swift */; };
 		F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A76E231D91586C0096208E /* NSObject+Extension.swift */; };
 		F0A76E251D915E3F0096208E /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDAA671D90C81E0090D7E3 /* FakeCoreDataStack.swift */; };
+		F0A76E271D9215B70096208E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0A76E261D9215B70096208E /* Home.storyboard */; };
 		F0A9F9C91CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift */; };
 		F0A9F9CA1CDE7CD000809BA2 /* ActivityOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9F9C81CDE7CD000809BA2 /* ActivityOld.swift */; };
 		F0C0DC2D1C78E88D005EC490 /* EditActivityNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */; };
@@ -482,6 +483,7 @@
 		F0A613701D347F340051743C /* MotivationStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotivationStatsView.xib; sourceTree = "<group>"; };
 		F0A613721D347F870051743C /* MotivationStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationStatsView.swift; sourceTree = "<group>"; };
 		F0A76E231D91586C0096208E /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		F0A76E261D9215B70096208E /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		F0A9F9C71CDE7CD000809BA2 /* Activity+CoreDataPropertiesOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataPropertiesOld.swift"; sourceTree = "<group>"; };
 		F0A9F9C81CDE7CD000809BA2 /* ActivityOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityOld.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0C0DC2C1C78E88D005EC490 /* EditActivityNameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityNameView.xib; sourceTree = "<group>"; };
@@ -715,6 +717,8 @@
 		F009AE551BD9C5F8007F38A9 /* TimeSlower */ = {
 			isa = PBXGroup;
 			children = (
+				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
+				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
@@ -897,8 +901,8 @@
 		F009AF101BDAD6DF007F38A9 /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
-				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F009AF2D1BDAE577007F38A9 /* ViewControllers */,
+				F0A76E261D9215B70096208E /* Home.storyboard */,
 			);
 			name = "Home Screen";
 			sourceTree = "<group>";
@@ -932,7 +936,6 @@
 		F009AF2D1BDAE577007F38A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
 				F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */,
 				F0A577341D4EC1A900D2039A /* Views */,
@@ -1868,6 +1871,7 @@
 				F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */,
 				F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */,
 				F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */,
+				F0A76E271D9215B70096208E /* Home.storyboard in Resources */,
 				F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */,
 				F0F20F2D1CCC0FA600F7DAA7 /* Menu.storyboard in Resources */,
 				F0F9BBCB1D3A9CDD00920EF8 /* MotivationControl.xib in Resources */,

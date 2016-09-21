@@ -13,20 +13,19 @@ import TimeSlowerKit
 class MainNavigationController: UINavigationController {
     
     fileprivate var profile: Profile?
+    fileprivate let dataStore = DataStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupInitialController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        profile = fetchProfile()
-        if viewControllers.first is ProfileEditingVC {
-            if profile != nil {
-                setupInitialController()
-            }
-        }
+        
+        profile = fetchProfile()
+        resetInitialControllerIfNeeded()
     }
     
     // MARK: - Private Functions
@@ -34,19 +33,35 @@ class MainNavigationController: UINavigationController {
     fileprivate func setupInitialController() {
         let rootController: UIViewController
         
-        if profile != nil {
-            let homeController: HomeViewController = ControllerFactory.createController()
-//            homeController.profile = profile
-            rootController = homeController
+        if let profile = profile {
+            rootController = homeViewController(withProfile: profile)
         } else {
-            let profileController: ProfileEditingVC = ControllerFactory.createController()
-            rootController = profileController
+            rootController = profileEditController()
         }
         
         setViewControllers([rootController], animated: false)
     }
     
-//    fileprivate func fetchProfile() -> Profile? {
-//        return coreDataStack.sharedInstance.fetchProfile()
-//    }
+    fileprivate func fetchProfile() -> Profile? {
+        let profile: Profile? = dataStore.retrieve("")
+        return profile
+    }
+    
+    private func resetInitialControllerIfNeeded() {
+        if viewControllers.first is ProfileEditingVC && profile != nil {
+            setupInitialController()
+        }
+    }
+    
+    private func homeViewController(withProfile profile: Profile) -> UIViewController {
+        let homeController: HomeViewController = ControllerFactory.createController()
+        homeController.profile?.value = profile
+        return homeController
+    }
+    
+    private func profileEditController() -> UIViewController {
+        let profileController: ProfileEditingVC = ControllerFactory.createController()
+        return profileController
+
+    }
 }

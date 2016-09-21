@@ -26,6 +26,7 @@ struct ControllerFactory {
         static let profile = "Profile"
         static let main = "Main"
         static let motivaton = "Motivation"
+        static let home = "Home"
     }
     
     /**
@@ -62,7 +63,7 @@ struct ControllerFactory {
         case is ProfileEditingVC.Type: return Constants.profile
         case is ProfileStatsVC.Type: return Constants.profile
         case is MotivationViewController.Type: return Constants.motivaton
-        case is HomeViewController.Type: return Constants.main
+        case is HomeViewController.Type: return Constants.home
         case is ActivityStatsVC.Type: return Constants.activities
 
         default: return nil
