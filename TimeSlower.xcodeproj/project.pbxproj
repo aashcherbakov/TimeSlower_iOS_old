@@ -10,6 +10,9 @@
 		896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */; };
 		896B842F1C1714C000C786E7 /* FakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */; };
 		896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */; };
+		89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEB91DA00B8900703F5E /* JVFloatLabeledTextField.m */; };
+		89BDDEBF1DA00B8900703F5E /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEBB1DA00B8900703F5E /* JVFloatLabeledTextView.m */; };
+		89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEBD1DA00B8900703F5E /* NSString+TextDirectionality.m */; };
 		89E9C7891D9341F5008D18A0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77B1D9341F5008D18A0 /* Activity.swift */; };
 		89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */; };
 		89E9C78C1D9341F5008D18A0 /* ActivityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77E1D9341F5008D18A0 /* ActivityConverter.swift */; };
@@ -204,9 +207,6 @@
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */; };
 		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
 		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
-		F0DB8A351D8F6F4900B6E176 /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DB8A231D8F6F4900B6E176 /* JVFloatLabeledTextField.m */; };
-		F0DB8A361D8F6F4900B6E176 /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DB8A251D8F6F4900B6E176 /* JVFloatLabeledTextView.m */; };
-		F0DB8A371D8F6F4900B6E176 /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DB8A271D8F6F4900B6E176 /* NSString+TextDirectionality.m */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -233,6 +233,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		89BDDEB61DA00AA600703F5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0CDAA081D90C69F0090D7E3;
+			remoteInfo = TimeSlowerDataBase;
+		};
 		F009AE6B1BD9C5F8007F38A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
@@ -312,6 +319,12 @@
 		896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellTests.swift; sourceTree = "<group>"; };
 		896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FakeStoryboard.storyboard; sourceTree = "<group>"; };
 		896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeControllerWithTableView.swift; sourceTree = "<group>"; };
+		89BDDEB81DA00B8900703F5E /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVFloatLabeledTextField.h; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextField.h; sourceTree = SOURCE_ROOT; };
+		89BDDEB91DA00B8900703F5E /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVFloatLabeledTextField.m; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextField.m; sourceTree = SOURCE_ROOT; };
+		89BDDEBA1DA00B8900703F5E /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVFloatLabeledTextView.h; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextView.h; sourceTree = SOURCE_ROOT; };
+		89BDDEBB1DA00B8900703F5E /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVFloatLabeledTextView.m; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextView.m; sourceTree = SOURCE_ROOT; };
+		89BDDEBC1DA00B8900703F5E /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+TextDirectionality.h"; path = "TimeSlower/JVFloatLabeledTextField/NSString+TextDirectionality.h"; sourceTree = SOURCE_ROOT; };
+		89BDDEBD1DA00B8900703F5E /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+TextDirectionality.m"; path = "TimeSlower/JVFloatLabeledTextField/NSString+TextDirectionality.m"; sourceTree = SOURCE_ROOT; };
 		89E9C77B1D9341F5008D18A0 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
 		89E9C77D1D9341F5008D18A0 /* ActivityAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapterTests.swift; sourceTree = "<group>"; };
@@ -518,12 +531,6 @@
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
 		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
-		F0DB8A221D8F6F4900B6E176 /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
-		F0DB8A231D8F6F4900B6E176 /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
-		F0DB8A241D8F6F4900B6E176 /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
-		F0DB8A251D8F6F4900B6E176 /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
-		F0DB8A261D8F6F4900B6E176 /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextDirectionality.h"; sourceTree = "<group>"; };
-		F0DB8A271D8F6F4900B6E176 /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextDirectionality.m"; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -1283,12 +1290,12 @@
 		F0DB8A211D8F6F4900B6E176 /* JVFloatLabeledTextField */ = {
 			isa = PBXGroup;
 			children = (
-				F0DB8A221D8F6F4900B6E176 /* JVFloatLabeledTextField.h */,
-				F0DB8A231D8F6F4900B6E176 /* JVFloatLabeledTextField.m */,
-				F0DB8A241D8F6F4900B6E176 /* JVFloatLabeledTextView.h */,
-				F0DB8A251D8F6F4900B6E176 /* JVFloatLabeledTextView.m */,
-				F0DB8A261D8F6F4900B6E176 /* NSString+TextDirectionality.h */,
-				F0DB8A271D8F6F4900B6E176 /* NSString+TextDirectionality.m */,
+				89BDDEB81DA00B8900703F5E /* JVFloatLabeledTextField.h */,
+				89BDDEB91DA00B8900703F5E /* JVFloatLabeledTextField.m */,
+				89BDDEBA1DA00B8900703F5E /* JVFloatLabeledTextView.h */,
+				89BDDEBB1DA00B8900703F5E /* JVFloatLabeledTextView.m */,
+				89BDDEBC1DA00B8900703F5E /* NSString+TextDirectionality.h */,
+				89BDDEBD1DA00B8900703F5E /* NSString+TextDirectionality.m */,
 			);
 			name = JVFloatLabeledTextField;
 			path = "../../Downloads/JVFloatLabeledTextField-master/JVFloatLabeledTextField/JVFloatLabeledTextField";
@@ -1565,6 +1572,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				89BDDEB71DA00AA600703F5E /* PBXTargetDependency */,
 			);
 			name = TimeSlowerKit;
 			productName = TimeSlowerKit;
@@ -1664,7 +1672,7 @@
 					F0CDAA081D90C69F0090D7E3 = {
 						CreatedOnToolsVersion = 8.0;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					F0CDAA101D90C69F0090D7E3 = {
 						CreatedOnToolsVersion = 8.0;
@@ -1824,7 +1832,7 @@
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
 				F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */,
 				F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */,
-				F0DB8A351D8F6F4900B6E176 /* JVFloatLabeledTextField.m in Sources */,
+				89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */,
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
@@ -1854,7 +1862,7 @@
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
 				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
-				F0DB8A371D8F6F4900B6E176 /* NSString+TextDirectionality.m in Sources */,
+				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
@@ -1883,7 +1891,7 @@
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
 				F0A613731D347F870051743C /* MotivationStatsView.swift in Sources */,
 				F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */,
-				F0DB8A361D8F6F4900B6E176 /* JVFloatLabeledTextView.m in Sources */,
+				89BDDEBF1DA00B8900703F5E /* JVFloatLabeledTextView.m in Sources */,
 				F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
@@ -2034,6 +2042,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		89BDDEB71DA00AA600703F5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0CDAA081D90C69F0090D7E3 /* TimeSlowerDataBase */;
+			targetProxy = 89BDDEB61DA00AA600703F5E /* PBXContainerItemProxy */;
+		};
 		F009AE6C1BD9C5F8007F38A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F009AE521BD9C5F8007F38A9 /* TimeSlower */;
@@ -2373,9 +2386,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2402,9 +2416,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
