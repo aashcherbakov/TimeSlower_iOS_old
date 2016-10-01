@@ -18,17 +18,23 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBOutlet weak var propertiesTableView: UITableView!
     @IBOutlet weak var genderSelector: GenderSelector!
     
+    private var dataSource: ProfileEditingDataSource?
+    
     var viewModel: ProfileEditingViewModel?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        dataSource = ProfileEditingDataSource(withTableView: propertiesTableView)
+        propertiesTableView.dataSource = dataSource
+        
         navigationController?.isNavigationBarHidden = true
     }
     
     fileprivate func bindViewModel() {
-        viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
+//        viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
         
         if let selectedGenderValue = viewModel?.selectedGender?.rawValue {
             genderSelector.setSelectedGender(selectedGenderValue)

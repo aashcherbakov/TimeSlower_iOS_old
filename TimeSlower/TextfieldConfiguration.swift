@@ -18,6 +18,8 @@ protocol TextfieldConfiguration {
     var icon: UIImage? { get }
 }
 
+// MARK: - Activity
+
 /**
  *  Configuration for TextfiledView to display Name
  */
@@ -65,5 +67,28 @@ struct NotificationsTextfield: TextfieldConfiguration {
     var placeholder: String = "Notifications"
     var iconHighlighted: UIImage? = UIImage(named: "notificationIconBlack")
     var icon: UIImage? = UIImage(named: "notificationIcon")
+    var textFieldInteractionEnabled: Bool = false
+}
+
+// MARK: - Profile
+
+struct ProfileNameTextfield: TextfieldConfiguration {
+    var placeholder: String = "Your name"
+    var iconHighlighted: UIImage? = UIImage(named: "nameIconBlack")
+    var icon: UIImage? = UIImage(named: "nameIcon")
+    var textFieldInteractionEnabled: Bool = true
+}
+
+struct ProfileBirthdayTextfield: TextfieldConfiguration {
+    var placeholder: String = "Date of birth"
+    var iconHighlighted: UIImage? = UIImage(named: "birthdayIconBlack")
+    var icon: UIImage? = UIImage(named: "birthdayIcon")
+    var textFieldInteractionEnabled: Bool = false
+}
+
+struct ProfileCountryTextfield: TextfieldConfiguration {
+    var placeholder: String = "Country you live in"
+    var iconHighlighted: UIImage? = UIImage(named: "countryIconBlack")
+    var icon: UIImage? = UIImage(named: "countryIcon")
     var textFieldInteractionEnabled: Bool = false
 }

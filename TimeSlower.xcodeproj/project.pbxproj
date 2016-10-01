@@ -13,6 +13,12 @@
 		89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEB91DA00B8900703F5E /* JVFloatLabeledTextField.m */; };
 		89BDDEBF1DA00B8900703F5E /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEBB1DA00B8900703F5E /* JVFloatLabeledTextView.m */; };
 		89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEBD1DA00B8900703F5E /* NSString+TextDirectionality.m */; };
+		89BDDEC31DA0119600703F5E /* ProfileNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC11DA0119600703F5E /* ProfileNameCell.swift */; };
+		89BDDEC41DA0119600703F5E /* ProfileNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BDDEC21DA0119600703F5E /* ProfileNameCell.xib */; };
+		89BDDEC61DA01C4700703F5E /* ProfileEditingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */; };
+		89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC71DA01EDB00703F5E /* ProfileEditingCell.swift */; };
+		89BDDECB1DA0222F00703F5E /* ProfileBirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */; };
+		89BDDECC1DA0222F00703F5E /* ProfileBirthdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */; };
 		89E9C7891D9341F5008D18A0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77B1D9341F5008D18A0 /* Activity.swift */; };
 		89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */; };
 		89E9C78C1D9341F5008D18A0 /* ActivityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77E1D9341F5008D18A0 /* ActivityConverter.swift */; };
@@ -325,6 +331,12 @@
 		89BDDEBB1DA00B8900703F5E /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVFloatLabeledTextView.m; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextView.m; sourceTree = SOURCE_ROOT; };
 		89BDDEBC1DA00B8900703F5E /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+TextDirectionality.h"; path = "TimeSlower/JVFloatLabeledTextField/NSString+TextDirectionality.h"; sourceTree = SOURCE_ROOT; };
 		89BDDEBD1DA00B8900703F5E /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+TextDirectionality.m"; path = "TimeSlower/JVFloatLabeledTextField/NSString+TextDirectionality.m"; sourceTree = SOURCE_ROOT; };
+		89BDDEC11DA0119600703F5E /* ProfileNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNameCell.swift; sourceTree = "<group>"; };
+		89BDDEC21DA0119600703F5E /* ProfileNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileNameCell.xib; sourceTree = "<group>"; };
+		89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingDataSource.swift; sourceTree = "<group>"; };
+		89BDDEC71DA01EDB00703F5E /* ProfileEditingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCell.swift; sourceTree = "<group>"; };
+		89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayCell.swift; sourceTree = "<group>"; };
+		89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBirthdayCell.xib; sourceTree = "<group>"; };
 		89E9C77B1D9341F5008D18A0 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
 		89E9C77D1D9341F5008D18A0 /* ActivityAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapterTests.swift; sourceTree = "<group>"; };
@@ -1332,8 +1344,14 @@
 			isa = PBXGroup;
 			children = (
 				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
+				89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */,
 				F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */,
 				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
+				89BDDEC71DA01EDB00703F5E /* ProfileEditingCell.swift */,
+				89BDDEC11DA0119600703F5E /* ProfileNameCell.swift */,
+				89BDDEC21DA0119600703F5E /* ProfileNameCell.xib */,
+				89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */,
+				89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -1719,12 +1737,14 @@
 				F009AF831BDB1935007F38A9 /* ChartView.xib in Resources */,
 				F009AF8C1BDB1935007F38A9 /* ListTypeSelector.xib in Resources */,
 				F009AF881BDB1935007F38A9 /* DefaultActivitySelector.xib in Resources */,
+				89BDDECC1DA0222F00703F5E /* ProfileBirthdayCell.xib in Resources */,
 				F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */,
 				F0D71F381C793C5900B8473C /* EditActivityBasisView.xib in Resources */,
 				F009AE641BD9C5F8007F38A9 /* LaunchScreen.storyboard in Resources */,
 				F0A613711D347F340051743C /* MotivationStatsView.xib in Resources */,
 				F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */,
 				F093E24C1C7A43C800E245C4 /* EditActivityNotificationsView.xib in Resources */,
+				89BDDEC41DA0119600703F5E /* ProfileNameCell.xib in Resources */,
 				F009AF191BDADE19007F38A9 /* SourceSansPro-Bold.ttf in Resources */,
 				F0A76E271D9215B70096208E /* Home.storyboard in Resources */,
 				F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */,
@@ -1825,6 +1845,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
+				89BDDEC61DA01C4700703F5E /* ProfileEditingDataSource.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */,
@@ -1838,12 +1859,14 @@
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
+				89BDDEC31DA0119600703F5E /* ProfileNameCell.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
 				F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */,
 				F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */,
 				F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */,
+				89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */,
 				F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
@@ -1853,6 +1876,7 @@
 				F0E95F5A1D451D79006D8410 /* Timer.swift in Sources */,
 				F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */,
 				F0F9BBD01D3AB88F00920EF8 /* MotivationDotsCollectionViewCell.swift in Sources */,
+				89BDDECB1DA0222F00703F5E /* ProfileBirthdayCell.swift in Sources */,
 				F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,

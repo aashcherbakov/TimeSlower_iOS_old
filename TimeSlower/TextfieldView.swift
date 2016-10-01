@@ -29,6 +29,7 @@ class TextfieldView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet fileprivate var view: UIView!
     
+    var text = MutableProperty<String?>(nil)
     var config: TextfieldConfiguration!
     
     // MARK: - Lifecycle
