@@ -11,7 +11,8 @@ import Foundation
 internal protocol ProfileEditingCell: class {
     
     weak var textfieldView: TextfieldView! { get }
-    
+    weak var textfieldViewHeight: NSLayoutConstraint! { get }
+
     func setup(withConfiguration config: TextfieldConfiguration)
     
 }

@@ -9,10 +9,12 @@
 import UIKit
 import ReactiveSwift
 
+/// ProfileEditingCell that displays TextfieldView. Implements UITextFiledDelegate
 class ProfileNameCell: UITableViewCell, ProfileEditingCell {
 
     @IBOutlet weak var textfieldView: TextfieldView!
-    
+    @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
+
     var selectedValue = MutableProperty<String?>(nil)
     
     override func awakeFromNib() {

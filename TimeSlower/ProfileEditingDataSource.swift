@@ -8,36 +8,40 @@
 
 import UIKit
 
+
+/// DataSource responsible for providing data to ProfileEditing view controller
 class ProfileEditingDataSource: NSObject {
     
     private weak var tableView: UITableView!
+    
     fileprivate let rowStructure: [ProfileEditingCell.Type] = [
-        ProfileNameCell.self
+        ProfileNameCell.self, ProfileBirthdayCell.self, ProfileCountryCell.self
     ]
     
     init(withTableView tableView: UITableView) {
         self.tableView = tableView
-       
         super.init()
-        
         registerCells()
     }
     
     private func registerCells() {
         tableView.register(UINib(nibName: ProfileNameCell.className, bundle: nil), forCellReuseIdentifier: ProfileNameCell.className)
+        tableView.register(UINib(nibName: ProfileBirthdayCell.className, bundle: nil), forCellReuseIdentifier: ProfileBirthdayCell.className)
+        tableView.register(UINib(nibName: ProfileCountryCell.className, bundle: nil), forCellReuseIdentifier: ProfileCountryCell.className)
     }
     
     fileprivate func configuration(forType type: ProfileEditingCell.Type) -> TextfieldConfiguration? {
         
         switch type {
-        case is ProfileNameCell.Type:
-            return ProfileNameTextfield()
-        default:
-            return nil
+        case is ProfileNameCell.Type: return ProfileNameTextfield()
+        case is ProfileBirthdayCell.Type: return ProfileBirthdayTextfield()
+        case is ProfileCountryCell.Type: return ProfileCountryTextfield()
+        default: return nil
         }
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ProfileEditingDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
