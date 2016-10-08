@@ -23,17 +23,17 @@ protocol ObservableControlCell {
      
      - returns: SignalProducer with selected value
      */
-    func signalForValueChange() -> SignalProducer<AnyObject?, NSError>?
+    func signalForValueChange() -> SignalProducer<Any?, NSError>?
 }
 
 extension ObservableControlCell {
-    func signalForValueChange() -> SignalProducer<AnyObject?, NSError>? {
+    func signalForValueChange() -> SignalProducer<Any?, NSError>? {
         return control.valueSignal()
     }
 }
 
 class ObservableControl: UIControl {
-    func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    func valueSignal() -> SignalProducer<Any?, NSError>? {
         fatalError("Must be overridden")
     }
     

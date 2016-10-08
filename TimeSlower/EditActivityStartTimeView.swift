@@ -24,7 +24,7 @@ class EditActivityStartTimeView: ObservableControl {
     
     /// Selected date. Observable
     dynamic var selectedValue: Date?
-    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
     fileprivate var timer: Timer?
     
     // MARK: - Overridden Methods
@@ -47,7 +47,7 @@ class EditActivityStartTimeView: ObservableControl {
         }
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NSError>? {
         return valueChangedSignal
     }
     
@@ -72,41 +72,41 @@ class EditActivityStartTimeView: ObservableControl {
     }
     
     fileprivate func setupEvents() {
-//        datePicker.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (datePicker) in
-//                guard let picker = datePicker as? UIDatePicker else {
-//                    return
-//                }
-//                self?.selectedValue = picker.date
-//                self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
-//        }
-//        
-//        valueChangedSignal = delayedProducer()
+        datePicker.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (datePicker) in
+                guard let picker = datePicker.value as? UIDatePicker else {
+                    return
+                }
+                self?.selectedValue = picker.date
+                self?.textfieldView.setText(self?.shortDateFormatter.string(from: picker.date))
+        }
+        
+        valueChangedSignal = delayedProducer()
     }
     
-//    fileprivate func delayedProducer() -> SignalProducer<AnyObject?, NSError> {
-//        return SignalProducer { [weak self] (observer, _) in
-//            
-//            self?.rac_valuesForKeyPath("selectedValue", observer: self)
-//                .startWith(self?.datePicker)
-//                .toSignalProducer()
-//                .on(completed: {
-//                        observer.sendCompleted()
-//                        self?.timer?.terminate()
-//                    },
-//                    next: { (value) in
-//                        if let value = value as? NSDate {
-//                            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
-//                        }
-//
-//                        self?.timer?.terminate()
-//                        self?.timer = Timer(1) {
-//                            observer.sendNext(value)
-//                        }
-//                        
-//                        self?.timer?.start()
-//                })
-//                .start()
-//        }
-//    }
+    fileprivate func delayedProducer() -> SignalProducer<Any?, NSError> {
+        return SignalProducer { [weak self] (observer, _) in
+            
+            self?.rac_values(forKeyPath: "selectedValue", observer: self)
+                .start(with: self?.datePicker)
+                .toSignalProducer()
+                .on(value: { (value) in
+                    if let value = value as? Date {
+                        self?.textfieldView.setText(self?.shortDateFormatter.string(from: value as Date))
+                    }
+                    
+                    self?.timer?.terminate()
+                    self?.timer = Timer(1) {
+                        observer.send(value: value)
+                    }
+                    
+                    self?.timer?.start()
+                    },
+                    completed: {
+                        observer.sendCompleted()
+                        self?.timer?.terminate()
+                })
+                .start()
+        }
+    }
 }

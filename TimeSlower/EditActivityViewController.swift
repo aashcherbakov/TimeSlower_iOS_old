@@ -59,14 +59,14 @@ internal class EditActivityVC: UIViewController {
     var selectedNotifications: Bool? = true
     var selectedTimeToSave: Int?
     
-    var nameSignal: SignalProducer<AnyObject?, NSError>?
-    var basisSignal: SignalProducer<AnyObject?, NSError>?
-    var startTimeSignal: SignalProducer<AnyObject?, NSError>?
-    var durationSignal: SignalProducer<AnyObject?, NSError>?
-    var notificationsSignal: SignalProducer<AnyObject?, NSError>?
-    var timeToSaveSignal: SignalProducer<AnyObject?, NSError>?
+    var nameSignal: SignalProducer<Any?, NSError>?
+    var basisSignal: SignalProducer<Any?, NSError>?
+    var startTimeSignal: SignalProducer<Any?, NSError>?
+    var durationSignal: SignalProducer<Any?, NSError>?
+    var notificationsSignal: SignalProducer<Any?, NSError>?
+    var timeToSaveSignal: SignalProducer<Any?, NSError>?
     
-    var valueSignals = [SignalProducer<AnyObject?, NSError>]()
+    var valueSignals = [SignalProducer<Any?, NSError>]()
     var initialValuesForCells: [AnyObject?]?
     fileprivate var footerView: UIView?
     
@@ -199,31 +199,34 @@ internal class EditActivityVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-//        rac_valuesForKeyPath("activity", observer: self).toSignalProducer().startWithNext { [weak self] (_) in
-//            self?.setupData()
-//            
-//        }
+        rac_values(forKeyPath: "activity", observer: self).toSignalProducer().startWithResult { [weak self] (result) in
+            self?.setupData()
+        }
         
         changeTimeSaverVisibilityWhenCellExpands()
         trackTimeSaverValueChanges()
     }
     
     fileprivate func changeTimeSaverVisibilityWhenCellExpands() {
-//        rac_valuesForKeyPath("lastExpandedCellIndex", observer: self).toSignalProducer()
-//            .startWithNext { [weak self] (value) in
-//                if self?.editingState == .FullHouse {
-//                    self?.timeSaverView.alpha = value == nil ? 1 : 0
-//                }
-//        }
+        rac_values(forKeyPath: "lastExpandedCellIndex", observer: self).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let editingState = self?.editingState, let value = result.value else {
+                    return
+                }
+                
+                if editingState == .fullHouse {
+                    self?.timeSaverView.alpha = value == nil ? 1 : 0
+                }
+        }
     }
     
     fileprivate func trackTimeSaverValueChanges() {
-//        timeSaverView.rac_values(forKeyPath: "selectedValue", observer: self).start(with: timeSaverView)
-//            .toSignalProducer()
-//            .startWithNext { [weak self] (timeToSave) in
-//                guard let timeToSave = timeToSave as? Endurance else { return }
-//                self?.selectedTimeToSave = timeToSave.minutes()
-//        }
+        timeSaverView.rac_values(forKeyPath: "selectedValue", observer: self).start(with: timeSaverView)
+            .toSignalProducer()
+            .startWithResult { [weak self] (timeToSave) in
+                guard let timeToSave = timeToSave.value as? Endurance else { return }
+                self?.selectedTimeToSave = timeToSave.minutes()
+        }
     }
     
     fileprivate func mapValueSignals() {
@@ -242,20 +245,20 @@ internal class EditActivityVC: UIViewController {
             return
         }
         
-//        durationSignal.startWithNext { [weak self] (value) in
-//            guard let duration = value as? Endurance else { return }
-//            self?.timeSaverView.selectedDuration = duration
-//        }
-//        
-//        SignalProducer.combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
-//            .startWithNext { [weak self] (name, basis, startTime, duration, notification) in
-//                self?.selectedName = name as? String
-//                self?.selectedBasis = basis as? [Int]
-//                self?.selectedStartTime = startTime as? NSDate as Date?
-//                self?.selectedDuration = duration as? Endurance
-//                self?.selectedNotifications = notification as? Bool
-//                self?.moveToNextEditingState()
-//        }
+        durationSignal.startWithResult { [weak self] (result) in
+            guard let duration = result.value as? Endurance else { return }
+            self?.timeSaverView.selectedDuration?.value = duration
+        }
+        
+        SignalProducer.combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
+            .startWithResult { [weak self] (results) in // name, basis, startTime, duration, notification
+                self?.selectedName = results.value?.0 as? String
+                self?.selectedBasis = results.value?.1 as? [Int]
+                self?.selectedStartTime = results.value?.2 as? NSDate as Date?
+                self?.selectedDuration = results.value?.3 as? Endurance
+                self?.selectedNotifications = results.value?.4 as? Bool
+                self?.moveToNextEditingState()
+        }
     }
     
     // MARK: - Update state
@@ -399,13 +402,13 @@ extension EditActivityVC: UITableViewDataSource {
             cell.control.setInitialValue(values[(indexPath as NSIndexPath).row])
         }
         
-//        cell.control.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-//            .observeOn(UIScheduler())
-//            .startWithNext { [weak self] (_) in
-//                if let cell = cell as? UITableViewCell {
-//                    self?.expandedCellIndex = self?.tableView.indexPathForCell(cell)
-//                }
-//        }
+        cell.control.rac_signal(for: .touchUpInside).toSignalProducer()
+            .observe(on: UIScheduler())
+            .startWithResult { [weak self] (result) in
+                if let cell = cell as? UITableViewCell {
+                    self?.expandedCellIndex = self?.tableView.indexPath(for: cell)
+            }
+        }
         
         valueSignals.insert(valueSignal, at: indexPath.row)
         mapValueSignalsForIndexPath(indexPath)

@@ -51,38 +51,38 @@ class TimeSaver: UIView {
     fileprivate func setupEvents() {
         slider.minimumValue = 1.0
 
-//        rac_valuesForKeyPath("selectedDuration", observer: self).toSignalProducer()
-//            .startWithNext { [weak self] (duration) in
-//                guard let
-//                    duration = duration as? Endurance,
-//                    let suggestedSaving = self?.minumumSavingForDuration(duration)
-//                else {
-//                    return
-//                }
-//                
-//                self?.slider.minimumValue = duration.period == .Hours ? Float(Constants.minimumMinutesToSave) : 1.0
-//                
-//                if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
-//                    self?.selectedValue = Endurance(value: suggestedSaving, period: duration.period)
-//                
-//                }
-//                
-//                self?.slider.maximumValue = Float(duration.value)
-//
-//        }
-//        
-//        rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
-//            .startWithNext { [weak self] (value) in
-//                guard let value = value as? Endurance, let duration = self?.selectedDuration else { return }
-//                self?.timeLabel.text = "\(value.value) \(duration.period.description())"
-//                self?.slider.setValue(Float(value.value), animated: true)
-//        }
-//        
-//        slider.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (slider) in
-//                guard let slider = slider as? UISlider, let duration = self?.selectedDuration else { return }
-//                self?.selectedValue = Endurance(value: Int(slider.value), period: duration.period)
-//        }
+        rac_values(forKeyPath: "selectedDuration", observer: self).toSignalProducer()
+            .startWithResult { [weak self] (duration) in
+                guard let
+                    duration = duration.value as? Endurance,
+                    let suggestedSaving = self?.minumumSavingForDuration(duration)
+                else {
+                    return
+                }
+                
+                self?.slider.minimumValue = duration.period == .hours ? Float(Constants.minimumMinutesToSave) : 1.0
+                
+                if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
+                    self?.selectedValue?.value = Endurance(value: suggestedSaving, period: duration.period)
+                
+                }
+                
+                self?.slider.maximumValue = Float(duration.value)
+
+        }
+        
+        rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let endurance = result.value as? Endurance, let duration = self?.selectedDuration?.value else { return }
+                self?.timeLabel.text = "\(endurance.value) \(duration.period.description())"
+                self?.slider.setValue(Float(endurance.value), animated: true)
+        }
+        
+        slider.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (slider) in
+                guard let slider = slider.value as? UISlider, let duration = self?.selectedDuration?.value else { return }
+                self?.selectedValue?.value = Endurance(value: Int(slider.value), period: duration.period)
+        }
     }
     
     fileprivate func minumumSavingForDuration(_ duration: Endurance) -> Int {

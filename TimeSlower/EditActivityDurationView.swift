@@ -42,7 +42,7 @@ class EditActivityDurationView: ObservableControl {
     fileprivate let hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     fileprivate var currentPeriod: Period = .minutes
 
-    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
 
     // MARK: - Overriden Methods
     
@@ -61,13 +61,13 @@ class EditActivityDurationView: ObservableControl {
         updateValueFromPicker(pickerView)
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NSError>? {
         return valueChangedSignal
     }
     
     override func setInitialValue(_ value: AnyObject?) {
         if let duration = value as? Endurance {
-//            selectedValue?.value = duration.value
+            selectedValue?.value = duration
             textfieldView.setText("Duration: \(duration.value) \(duration.period.description())")
             setPickerViewToValue(duration.value, period: duration.period)
         }
@@ -91,7 +91,7 @@ class EditActivityDurationView: ObservableControl {
         pickerView.delegate = self
         pickerView.dataSource = self
         
-//        valueChangedSignal = rac_valuesForKeyPath("selectedValue", observer: self).toSignalProducer()
+        valueChangedSignal = rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
     }
     
     fileprivate func setPickerViewToValue(_ value: Int, period: Period) {

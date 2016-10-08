@@ -39,7 +39,7 @@ class EditActivityBasisView: ObservableControl {
     
     /// Value that is being tracked from EditActivityViewController
     dynamic var selectedValue: [Int]?
-    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
     
     // MARK: - Overridden Methods
     
@@ -55,7 +55,7 @@ class EditActivityBasisView: ObservableControl {
         sendActions(for: .touchUpInside)
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NSError>? {
         return valueChangedSignal
     }
     
@@ -83,44 +83,44 @@ class EditActivityBasisView: ObservableControl {
     }
     
     fileprivate func setupEvents() {
-//        valueChangedSignal = delayedValueSignalProducer()
+        valueChangedSignal = delayedValueSignalProducer()
         
-//        basisSelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (value) in
-//                guard let selector = value as? BasisSelector else { return }
-//                self?.updateBasis(selector.selectedIndex)
-//        }
-//        
-//        daySelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (value) in
-//                guard let selector = value as? DaySelector else { return }
-//                
-//                self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
-//                self?.selectedBasis = selector.selectedBasis
-//                self?.selectedValue = Array(selector.selectedDays)
-//        }
+        basisSelector.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let selector = result.value as? BasisSelector else { return }
+                self?.updateBasis(selector.selectedIndex)
+        }
+        
+        daySelector.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let selector = result.value as? DaySelector else { return }
+                
+                self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
+                self?.selectedBasis = selector.selectedBasis
+                self?.selectedValue = Array(selector.selectedDays)
+        }
     }
     
-//    fileprivate func delayedValueSignalProducer() -> SignalProducer<AnyObject?, NSError> {
-//        return SignalProducer { [weak self] (observer, _) in
-//            
-//            self?.rac_valuesForKeyPath("selectedValue", observer: self)
-//                .toSignalProducer()
-//                .on(completed: {
-//                        observer.sendCompleted()
-//                        self?.timer?.terminate()
-//                    },
-//                    next: { (value) in
-//                        self?.timer?.terminate()
-//                        self?.timer = Timer(1) {
-//                            observer.sendNext(value)
-//                        }
-//                        
-//                        self?.timer?.start()
-//                })
-//                .start()
-//        }
-//    }
+    fileprivate func delayedValueSignalProducer() -> SignalProducer<Any?, NSError> {
+        return SignalProducer { [weak self] (observer, _) in
+            
+            self?.rac_values(forKeyPath: "selectedValue", observer: self)
+                .toSignalProducer()
+                .on(starting: { (value) in
+                    self?.timer?.terminate()
+                    self?.timer = Timer(1) {
+                        observer.send(value: value)
+                    }
+                    
+                    self?.timer?.start()
+                    },
+                    completed: {
+                        observer.sendCompleted()
+                        self?.timer?.terminate()
+                })
+                .start()
+        }
+    }
 
     fileprivate func updateBasis(_ index: Int?) {
         guard let index = index else { return }

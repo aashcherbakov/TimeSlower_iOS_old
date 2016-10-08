@@ -26,7 +26,7 @@ class EditActivityNameView: ObservableControl {
     @IBOutlet var view: UIView!
 
     dynamic var selectedValue: String?
-    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
 
     // MARK: - Overridden
     
@@ -42,7 +42,7 @@ class EditActivityNameView: ObservableControl {
         defaultActivitySelectorView.setupCollectionViewItemSize()
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NSError>? {
         return valueChangedSignal
     }
     
@@ -64,19 +64,19 @@ class EditActivityNameView: ObservableControl {
         
         let signal = rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
         
-//        valueChangedSignal = signal
-//        
-//        valueChangedSignal?.startWithNext { [weak self] (value) in
-//            guard let value = value as? String else { return }
-//            self?.textFieldView.setText(value)
-//        }
-//        
-//        defaultActivitySelectorView.rac_signal(for: .valueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (_) in
-//                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
-//                self?.sendActions(for: .touchUpInside)
-//                self?.selectedValue = name
-//        }
+        valueChangedSignal = signal
+        
+        valueChangedSignal?.startWithResult { [weak self] (result) in
+            guard let value = result.value as? String else { return }
+            self?.textFieldView.setText(value)
+        }
+        
+        defaultActivitySelectorView.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
+                self?.sendActions(for: .touchUpInside)
+                self?.selectedValue = name
+        }
         
         textFieldView.textField.delegate = self
     }

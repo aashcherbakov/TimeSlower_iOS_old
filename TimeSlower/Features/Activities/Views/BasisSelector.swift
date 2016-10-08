@@ -70,16 +70,16 @@ class BasisSelector: UIControl {
     }
     
     fileprivate func subscribeToValueChangeForOptionView(_ optionView: BasisOptionView) {
-//        optionView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-//            .startWithNext { [weak self] (value) in
-//                guard let option = value as? BasisOptionView,
-//                    let weakSelf = self else { return }
-//                
-//                if let optionIndex = weakSelf.basisOptionsViews.indexOf(option) {
-//                    weakSelf.selectedIndex = option.optionSelected ? optionIndex : nil
-//                    weakSelf.resetButtonsForSelectedIndex(optionIndex)
-//                }
-//        }
+        optionView.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let option = result.value as? BasisOptionView,
+                    let weakSelf = self else { return }
+                
+                if let optionIndex = weakSelf.basisOptionsViews.index(of: option) {
+                    weakSelf.selectedIndex = option.optionSelected ? optionIndex : nil
+                    weakSelf.resetButtonsForSelectedIndex(optionIndex)
+                }
+        }
     }
     
     fileprivate func resetButtonsForSelectedIndex(_ index: Int) {

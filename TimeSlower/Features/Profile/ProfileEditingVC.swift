@@ -110,7 +110,7 @@ class ProfileEditingVC: UIViewController {
     }
     
     private func moveToCreateActivityIfNeeded() {
-        if let hasActivities = dataSource?.profileHasNoActivities(), hasActivities == false {
+        if let hasNoActivities = dataSource?.profileHasNoActivities(), hasNoActivities == true {
             createFirstActivity()
         } else {
             dismissController()

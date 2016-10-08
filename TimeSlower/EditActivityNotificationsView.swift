@@ -22,7 +22,7 @@ class EditActivityNotificationsView: ObservableControl {
     /// Bool true if notification switch is on
     dynamic var selectedValue: NSNumber = true
     
-    fileprivate var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
     
     // MARK: - Overridden Methods
     
@@ -34,7 +34,7 @@ class EditActivityNotificationsView: ObservableControl {
         setupDesign()
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NSError>? {
         return valueChangedSignal
     }
     
@@ -62,16 +62,16 @@ class EditActivityNotificationsView: ObservableControl {
     }
     
     fileprivate func setupEvents() {
-//        valueChangedSignal = notificationSwitch.rac_signalForControlEvents(.ValueChanged).startWith(notificationSwitch).toSignalProducer().map({ (value) -> NSNumber? in
-//            guard let switcher = value as? UISwitch else { return nil }
-//            return switcher.on
-//        })
-//        
-//        valueChangedSignal?.startWithNext { [weak self] (value) in
-//            guard let value = value as? Bool else { return }
-//            self?.selectedValue = value as NSNumber
-//            self?.updateTextFieldForSwitch(value)
-//        }
+        valueChangedSignal = notificationSwitch.rac_signal(for: .valueChanged).start(with: notificationSwitch).toSignalProducer().map({ (value) -> NSNumber? in
+            guard let switcher = value as? UISwitch else { return nil }
+            return switcher.isOn as NSNumber?
+        })
+        
+        valueChangedSignal?.startWithResult { [weak self] (result) in
+            guard let value = result.value as? Bool else { return }
+            self?.selectedValue = value as NSNumber
+            self?.updateTextFieldForSwitch(value)
+        }
     }
     
     fileprivate func updateTextFieldForSwitch(_ on: Bool) {
