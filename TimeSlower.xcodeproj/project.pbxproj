@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */; };
 		896B842F1C1714C000C786E7 /* FakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */; };
 		896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */; };
 		89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEB91DA00B8900703F5E /* JVFloatLabeledTextField.m */; };
@@ -212,7 +211,6 @@
 		F0D71F381C793C5900B8473C /* EditActivityBasisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D71F371C793C5900B8473C /* EditActivityBasisView.xib */; };
 		F0D71F3A1C7A233900B8473C /* EditActivityStartTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D71F391C7A233900B8473C /* EditActivityStartTimeView.xib */; };
 		F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D71F3B1C7A234B00B8473C /* EditActivityStartTimeView.swift */; };
-		F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */; };
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */; };
 		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
 		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
@@ -222,13 +220,11 @@
 		F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E95F391D43C1C9006D8410 /* MotivationIllustrator.swift */; };
 		F0E95F5A1D451D79006D8410 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E95F591D451D79006D8410 /* Timer.swift */; };
 		F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EA8CBC1C712E9500B11252 /* Float+extension.swift */; };
-		F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */; };
 		F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A431C5ECB26009B974A /* StateMachine.swift */; };
 		F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */; };
 		F0F20F2D1CCC0FA600F7DAA7 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */; };
 		F0F20F301CCD355F00F7DAA7 /* EditActivityNameViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F20F2F1CCD355F00F7DAA7 /* EditActivityNameViewTests.swift */; };
 		F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F20F311CCD430100F7DAA7 /* EditActivityBasisViewTests.swift */; };
-		F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */; };
 		F0F78C7D1C35EA1500A7B150 /* GenderSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */; };
 		F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */; };
 		F0F9BBCB1D3A9CDD00920EF8 /* MotivationControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F9BBCA1D3A9CDD00920EF8 /* MotivationControl.xib */; };
@@ -325,7 +321,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellTests.swift; sourceTree = "<group>"; };
 		896B842E1C1714C000C786E7 /* FakeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FakeStoryboard.storyboard; sourceTree = "<group>"; };
 		896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeControllerWithTableView.swift; sourceTree = "<group>"; };
 		89BDDEB81DA00B8900703F5E /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVFloatLabeledTextField.h; path = TimeSlower/JVFloatLabeledTextField/JVFloatLabeledTextField.h; sourceTree = SOURCE_ROOT; };
@@ -545,7 +540,6 @@
 		F0D71F371C793C5900B8473C /* EditActivityBasisView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityBasisView.xib; sourceTree = "<group>"; };
 		F0D71F391C7A233900B8473C /* EditActivityStartTimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityStartTimeView.xib; sourceTree = "<group>"; };
 		F0D71F3B1C7A234B00B8473C /* EditActivityStartTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityStartTimeView.swift; sourceTree = "<group>"; };
-		F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModelTests.swift; sourceTree = "<group>"; };
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
 		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
@@ -555,13 +549,11 @@
 		F0E95F391D43C1C9006D8410 /* MotivationIllustrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotivationIllustrator.swift; sourceTree = "<group>"; };
 		F0E95F591D451D79006D8410 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		F0EA8CBC1C712E9500B11252 /* Float+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+extension.swift"; sourceTree = "<group>"; };
-		F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewModel.swift; sourceTree = "<group>"; };
 		F0EB8A431C5ECB26009B974A /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
 		F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		F0F20F2F1CCD355F00F7DAA7 /* EditActivityNameViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivityNameViewTests.swift; sourceTree = "<group>"; };
 		F0F20F311CCD430100F7DAA7 /* EditActivityBasisViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditActivityBasisViewTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfigTests.swift; sourceTree = "<group>"; };
 		F0F78C7C1C35EA1500A7B150 /* GenderSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelector.xib; sourceTree = "<group>"; };
 		F0F78C7E1C35EA3300A7B150 /* GenderSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelector.swift; sourceTree = "<group>"; };
 		F0F9BBCA1D3A9CDD00920EF8 /* MotivationControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotivationControl.xib; sourceTree = "<group>"; };
@@ -635,16 +627,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		896B842D1C17139F00C786E7 /* ProfileTests */ = {
-			isa = PBXGroup;
-			children = (
-				896B842B1C17139900C786E7 /* ProfileEditingCellTests.swift */,
-				F0F78C781C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift */,
-				F0D86CEB1C36213D00EFA971 /* ProfileEditingViewModelTests.swift */,
-			);
-			name = ProfileTests;
-			sourceTree = "<group>";
-		};
 		89E9C7D71D93424E008D18A0 /* ActivityAdapter */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,7 +844,6 @@
 				F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */,
 				896B84301C1714F100C786E7 /* FakeControllerWithTableView.swift */,
 				F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */,
-				896B842D1C17139F00C786E7 /* ProfileTests */,
 			);
 			path = TimeSlowerTests;
 			sourceTree = "<group>";
@@ -1367,7 +1348,6 @@
 				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
 				89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */,
 				89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */,
-				F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */,
 				F0C2FF791DA06B6500CB79CB /* Cells */,
 			);
 			name = "Edit Profile";
@@ -1905,7 +1885,6 @@
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
-				F0EB7BDE1BEFCA7600173D5D /* ProfileEditingViewModel.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
@@ -1950,8 +1929,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				896B842C1C17139900C786E7 /* ProfileEditingCellTests.swift in Sources */,
-				F0D86CEC1C36213D00EFA971 /* ProfileEditingViewModelTests.swift in Sources */,
 				F0F9BBD71D3ABD8C00920EF8 /* MotivationControlTests.swift in Sources */,
 				F0F20F301CCD355F00F7DAA7 /* EditActivityNameViewTests.swift in Sources */,
 				F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */,
@@ -1962,7 +1939,6 @@
 				F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */,
 				F0C2F6171C682F13006B7D81 /* DaySelectorTests.swift in Sources */,
 				F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */,
-				F0F78C791C35DD0600A7B150 /* ProfileEditingCellConfigTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
