@@ -12,7 +12,8 @@ internal protocol ProfileEditingCell: class {
     
     weak var textfieldView: TextfieldView! { get }
     weak var textfieldViewHeight: NSLayoutConstraint! { get }
-
+    weak var delegate: ProfileEditingCellDelegate? { get set }
+    
     func setup(withConfiguration config: TextfieldConfiguration)
     
 }

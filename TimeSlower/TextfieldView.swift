@@ -98,8 +98,14 @@ class TextfieldView: UIView {
         textField.floatingLabelActiveTextColor = UIColor.purpleRed()
         textField.floatingLabelTextColor = UIColor.purpleRed()
         textField.font = UIFont.sourceSansRegular()
-        textField.textColor = UIColor.lightGray()
         textField.placeholderYPadding = Constants.placeholderYPadding
+        
+        if let text = textField.text {
+            textField.textColor = text.characters.count > 0 ? UIColor.darkGray() : UIColor.lightGray()
+        } else {
+            textField.textColor = UIColor.lightGray()
+        }
+
     }
 }
 

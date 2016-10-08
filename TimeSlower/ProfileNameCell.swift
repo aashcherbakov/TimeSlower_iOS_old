@@ -7,30 +7,28 @@
 //
 
 import UIKit
-import ReactiveSwift
 
 /// ProfileEditingCell that displays TextfieldView. Implements UITextFiledDelegate
 class ProfileNameCell: UITableViewCell, ProfileEditingCell {
 
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
-
-    var selectedValue = MutableProperty<String?>(nil)
+    weak var delegate: ProfileEditingCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         textfieldView.textField.delegate = self
     }
-    
 }
 
+// MARK: - UITextFieldDelegate
 extension ProfileNameCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text, text.characters.count > 0 else {
             return false
         }
         
-        selectedValue.value = text
+        delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
         return true
     }
 }

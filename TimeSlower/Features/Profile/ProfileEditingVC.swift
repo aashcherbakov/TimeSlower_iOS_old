@@ -20,63 +20,131 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     
     private var dataSource: ProfileEditingDataSource?
     
-    var viewModel: ProfileEditingViewModel?
+    fileprivate struct Constants {
+        static let collapsedCellHeight = 0 as CGFloat
+        static let expandedCellHeight = 220 as CGFloat
+        static let defaultCellHeight = 50 as CGFloat
+    }
+    
+    enum Row: Int {
+        case Name
+        case Birthday
+        case Country
+        
+        func cellHeight(_ expanded: Bool) -> CGFloat {
+            switch self {
+            case .Name:
+                return Constants.defaultCellHeight 
+            case .Birthday, .Country:
+                return expanded ? Constants.expandedCellHeight : Constants.defaultCellHeight
+            }
+        }
+    }
+    
+    fileprivate var selectedCellIndex: IndexPath?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        dataSource = ProfileEditingDataSource(withTableView: propertiesTableView)
+        dataSource = ProfileEditingDataSource(withTableView: propertiesTableView, delegate: self)
         propertiesTableView.dataSource = dataSource
-        
+        propertiesTableView.delegate = self
         navigationController?.isNavigationBarHidden = true
-    }
-    
-    fileprivate func bindViewModel() {
-//        viewModel = ProfileEditingViewModel(withTableView: self.propertiesTableView)
-        
-        if let selectedGenderValue = viewModel?.selectedGender?.rawValue {
-            genderSelector.setSelectedGender(selectedGenderValue)
-        }
-        
-        if let avatar = viewModel?.selectedAvatar {
-            avatarImage.image = avatar
-            setupImageViewForAvatar()
-        }
-        
-//        genderSelector.rx_controlEvents(.ValueChanged)
-//            .subscribeNext { [weak self] (value) -> Void in
-//                if let index = self?.genderSelector.selectedSegmentIndex {
-//                    self?.viewModel?.userDidPickGender(index)
-//                }
-//            }
-//            .addDisposableTo(disposable)
     }
     
     //MARK: - ACTIONS
 
     @IBAction func onSaveButton() {
-        if let reason = viewModel?.userDidMissData() {
-            viewModel?.reloadTableView()
-            postAlertOnLackOfInfo(reason)
-        } else {
-            viewModel?.saveProfile()
-//            if viewModel?.profile?.activities.count == 0 {
-//                createFirstActivity()
-//            } else {
-//                dismissController()
-//            }
-        }
+    }
+    
+    @IBAction func avatarButtonPressed() {
+        presentPhotoPicker()
     }
     
     fileprivate func createFirstActivity() {
         let activityController: EditActivityVC = ControllerFactory.createController()
-        activityController.userProfile = viewModel?.profile
         present(activityController, animated: true, completion: nil)
     }
     
-    @IBAction func avatarButtonPressed() {
+    // MARK: - Navigation
+    
+    func postAlertOnLackOfInfo(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func dismissController() {
+        if navigationController != nil {
+            _ = navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension ProfileEditingVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if selectedCellIndex != indexPath {
+            selectedCellIndex = indexPath
+        } else {
+            selectedCellIndex = nil
+        }
+        
+        resignFirstResponder()
+        UIView.animate(withDuration: 0.3) {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let row = Row(rawValue: indexPath.row) else {
+            return Constants.collapsedCellHeight
+        }
+        
+        if selectedCellIndex == nil {
+            return Constants.defaultCellHeight
+        } else if selectedCellIndex == indexPath {
+            return row.cellHeight(true)
+        } else {
+            return Constants.collapsedCellHeight
+        }
+    }
+}
+
+extension ProfileEditingVC: ProfileEditingDataSourceDelegate {
+    func profileEditingDataSourceDidUpdateValue() {
+        if let currentRow = selectedCellIndex?.row, currentRow + 1 < 3 {
+            let nextCellIndex = IndexPath(row: currentRow + 1, section: 0)
+            propertiesTableView.selectRow(at: nextCellIndex, animated: true, scrollPosition: .middle)
+        }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var image = info[UIImagePickerControllerEditedImage] as? UIImage
+        if image == nil { image = info[UIImagePickerControllerOriginalImage] as? UIImage }
+        
+        if let selectedImage = image {
+            setupImageViewForAvatar()
+            avatarImage.image = selectedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func presentPhotoPicker() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
             let photoPicker = UIImagePickerController()
             photoPicker.sourceType = .photoLibrary
@@ -86,42 +154,9 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    func postAlertOnLackOfInfo(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func setupImageViewForAvatar() {
+    fileprivate func setupImageViewForAvatar() {
         avatarImage.contentMode = .scaleAspectFit
         avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
         avatarImage.clipsToBounds = true
-    }
-    
-    fileprivate func dismissController() {
-        if navigationController != nil {
-            navigationController?.popViewController(animated: true)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
-    }
-}
-
-extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var image = info[UIImagePickerControllerEditedImage] as? UIImage
-        if image == nil { image = info[UIImagePickerControllerOriginalImage] as? UIImage }
-        
-        if let selectedImage = image {
-            setupImageViewForAvatar()
-            avatarImage.image = selectedImage
-            viewModel?.userDidPickAvatar(selectedImage)
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }

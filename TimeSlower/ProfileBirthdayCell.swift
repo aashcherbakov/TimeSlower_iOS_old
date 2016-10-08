@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TimeSlowerKit
 
 /// ProfileEditingCell that displays date picker and TextfieldView
 class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
@@ -14,10 +15,15 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    weak var delegate: ProfileEditingCellDelegate?
+    
+    @IBAction func didSelectDate(_ sender: UIDatePicker) {
+        let date = StaticDateFormatter.shortDateAndTimeFormatter.string(from: sender.date)
+        
+        delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
+        textfieldView.setText(date)
     }
     
 }
+

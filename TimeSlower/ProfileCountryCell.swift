@@ -15,9 +15,22 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     @IBOutlet weak var countryPicker: CountryPicker!
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
 
+    /// ProfileEditingCellDelegate
+    weak var delegate: ProfileEditingCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        countryPicker.delegate = self
     }
-    
+}
+
+
+// MARK: - CountryPickerDelegate
+extension ProfileCountryCell: CountryPickerDelegate {
+    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+        
+        textfieldView.setText(name)
+        delegate?.profileEditingCellDidUpdateValue(value: name, type: .Country)
+    }
 }

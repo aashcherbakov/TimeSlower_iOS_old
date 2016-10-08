@@ -8,18 +8,7 @@
 
 import UIKit
 
-/**
- Enum of strings that descrybes cell type
- 
- - Name:     to enter name
- - Country:  to select country
- - Birthday: to select birthday
- */
-enum ProfileEditingCellType: String {
-    case Name = "name"
-    case Country = "country"
-    case Birthday = "birthday"
-}
+
 
 class ProfileEditingTableViewCell: UITableViewCell {
     
