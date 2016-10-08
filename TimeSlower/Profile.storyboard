@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -382,7 +382,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="280" id="Ctv-jh-TQw"/>
+                                    <constraint firstAttribute="height" constant="280" id="Ctv-jh-TQw"/>
                                     <constraint firstAttribute="trailing" secondItem="yHS-iq-Gsm" secondAttribute="trailing" id="RVn-Ke-bll"/>
                                     <constraint firstItem="yHS-iq-Gsm" firstAttribute="leading" secondItem="RMp-2L-xEV" secondAttribute="leading" id="Rv7-q0-mRS"/>
                                     <constraint firstItem="zcv-dr-FUO" firstAttribute="top" secondItem="RMp-2L-xEV" secondAttribute="top" id="aWr-sr-Ffn"/>
@@ -394,8 +394,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6J-Jo-CYZ" userLabel="navigationBarView">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Create your profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYE-57-GJL">
-                                        <frame key="frameInset" minX="233" minY="11" width="136" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYE-57-GJL">
                                         <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -501,30 +500,21 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="avatarFrameView" destination="RLU-6Z-Lt1" id="xKO-Uo-VZh"/>
+                        <outlet property="avatarFrameView" destination="RLU-6Z-Lt1" id="T00-wR-Maf"/>
                         <outlet property="avatarImage" destination="HrX-rP-kZD" id="8iG-F7-Acn"/>
-                        <outlet property="avatarInnerView" destination="9tr-P1-3lI" id="xef-g8-aZO"/>
-                        <outlet property="avatarViewHeight" destination="uek-Ec-7e2" id="Q8F-MB-Oaj"/>
-                        <outlet property="backgroundImageHeight" destination="Ctv-jh-TQw" id="r9h-Fw-OHO"/>
-                        <outlet property="buttonDownOffset" destination="YLJ-ak-eEw" id="wuu-v5-lA4"/>
+                        <outlet property="avatarInnerView" destination="9tr-P1-3lI" id="99a-vG-iR7"/>
+                        <outlet property="avatarViewHeight" destination="uek-Ec-7e2" id="mhY-Jk-ePN"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
-                        <outlet property="distanceFromNavBar" destination="T29-WK-D4E" id="5FR-wL-IQJ"/>
                         <outlet property="genderSelector" destination="htb-Qx-cAM" id="a6u-GO-JjV"/>
-                        <outlet property="genderViewHeight" destination="6Et-Rd-hlq" id="ENK-Oy-iej"/>
+                        <outlet property="headerViewHeight" destination="Ctv-jh-TQw" id="3bF-te-YFg"/>
                         <outlet property="propertiesTableView" destination="foh-Ph-JO1" id="82A-gt-d9v"/>
-                        <outlet property="propertiesView" destination="Rk7-qw-Qvc" id="v4o-sO-j4F"/>
-                        <outlet property="titleLabel" destination="vYE-57-GJL" id="zuf-XN-fDL"/>
                         <segue destination="lew-Bl-GjO" kind="unwind" identifier="SaveProfileAndReturnToProfileStats" unwindAction="dismissProfileEditingController:" id="kGh-aX-JgU"/>
                         <segue destination="lew-Bl-GjO" kind="unwind" identifier="ProfileCreated" unwindAction="profileCreated:" id="bMX-Vx-53J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCT-bH-FKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lew-Bl-GjO" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="DCf-qt-Xmf">
-                    <connections>
-                        <action selector="propertisViewTapped:" destination="fg1-P1-bxr" id="GEF-Kb-0uB"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="DCf-qt-Xmf"/>
             </objects>
             <point key="canvasLocation" x="418" y="-929"/>
         </scene>

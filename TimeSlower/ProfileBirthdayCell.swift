@@ -16,10 +16,23 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     
+    private let dateFormatter = StaticDateFormatter.shortDateAndTimeFormatter
+    
     weak var delegate: ProfileEditingCellDelegate?
     
+    func setDefaultValue() {
+        if textfieldView.text.value == nil {
+            textfieldView.setText(dateFormatter.string(from: datePicker.date))
+        }
+    }
+    
+    func saveValue() {
+        let date = dateFormatter.string(from: datePicker.date)
+        delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
+    }
+    
     @IBAction func didSelectDate(_ sender: UIDatePicker) {
-        let date = StaticDateFormatter.shortDateAndTimeFormatter.string(from: sender.date)
+        let date = dateFormatter.string(from: sender.date)
         
         delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
         textfieldView.setText(date)

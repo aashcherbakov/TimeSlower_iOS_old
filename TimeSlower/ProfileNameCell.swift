@@ -25,6 +25,20 @@ class ProfileNameCell: UITableViewCell, ProfileEditingCell {
         super.touchesEnded(touches, with: event)
         textfieldView.textField.becomeFirstResponder()
     }
+    
+    func setDefaultValue() {
+        // name has no default value
+    }
+    
+    func saveValue() {
+        guard let text = textfieldView.textField.text, text.characters.count > 0 else {
+            return
+        }
+        
+        delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
+        textfieldView.textField.resignFirstResponder()
+
+    }
 }
 
 // MARK: - UITextFieldDelegate

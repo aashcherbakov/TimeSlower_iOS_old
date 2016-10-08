@@ -94,7 +94,6 @@
 		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; };
 		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; };
 		F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */; };
-		F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */; };
 		F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */; };
 		F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */; };
 		F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */; };
@@ -424,7 +423,6 @@
 		F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVC.swift; path = Features/Activities/ListOfActivitiesVC.swift; sourceTree = "<group>"; };
 		F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVCConstraints.swift; path = Features/Activities/ListOfActivitiesVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditingVC.swift; path = Features/Profile/ProfileEditingVC.swift; sourceTree = "<group>"; };
-		F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditingVCConstraints.swift; path = Features/Profile/ProfileEditingVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVC.swift; path = Features/Profile/ProfileStatsVC.swift; sourceTree = "<group>"; };
 		F009AF511BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVCConstraints.swift; path = Features/Profile/ProfileStatsVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF561BDB10FF007F38A9 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
@@ -1370,7 +1368,6 @@
 				89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */,
 				89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */,
 				F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */,
-				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
 				F0C2FF791DA06B6500CB79CB /* Cells */,
 			);
 			name = "Edit Profile";
@@ -1944,7 +1941,6 @@
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
 				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
-				F009AF531BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift in Sources */,
 				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
 			);

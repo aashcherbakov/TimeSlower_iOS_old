@@ -7,16 +7,20 @@
 //
 
 import UIKit
-import CoreData
 import MobileCoreServices
 import TimeSlowerKit
+import ReactiveSwift
 
-class ProfileEditingVC: ProfileEditingVCConstraints {
+class ProfileEditingVC: UIViewController {
     
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var propertiesTableView: UITableView!
     @IBOutlet weak var genderSelector: GenderSelector!
+    @IBOutlet weak var avatarViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var avatarFrameView: UIView!
+    @IBOutlet weak var avatarInnerView: UIView!
+    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     
     fileprivate var dataSource: ProfileEditingDataSource?
     fileprivate var avatarPicker: AvatarPicker?
@@ -25,6 +29,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         static let collapsedCellHeight = 0 as CGFloat
         static let expandedCellHeight = 220 as CGFloat
         static let defaultCellHeight = 50 as CGFloat
+        static let headerHeightScale = 0.26 as CGFloat
     }
     
     enum Row: Int {
@@ -45,6 +50,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     fileprivate var selectedCellIndex: IndexPath?
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,26 +60,68 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         propertiesTableView.dataSource = dataSource
         propertiesTableView.delegate = self
         navigationController?.isNavigationBarHidden = true
+        
+        subscribeToGenderSelector()
+        setCircleFormToAvatarImageView()
+        setupHeaderViewHeight()
+    }
+    
+    private func setupHeaderViewHeight() {
+        headerViewHeight.constant = ScreenHight().rawValue * Constants.headerHeightScale
+    }
+    
+    private func setCircleFormToAvatarImageView() {
+        avatarFrameView.layer.cornerRadius = avatarViewHeight.constant / 2
+        avatarFrameView.layer.borderWidth = 1.0
+        avatarFrameView.layer.borderColor = UIColor.purpleRed().cgColor
+        avatarInnerView.layer.cornerRadius = avatarInnerView.bounds.height / 2
+    }
+    
+    private func subscribeToGenderSelector() {
+        genderSelector.rac_signal(for: .valueChanged).toSignalProducer().startWithResult { [weak self] (result) in
+            if let selector = result.value as? GenderSelector, let value = selector.selectedSegmentIndex, let gender = Gender(rawValue: value) {
+                self?.dataSource?.gender = gender
+            }
+        }
     }
     
     //MARK: - ACTIONS
 
     @IBAction func onSaveButton() {
+        if selectedCellIndex != nil {
+            moveToNextCellIfNeeded()
+            return
+        }
+        
+        saveProfile()
+        moveToCreateActivityIfNeeded()
+    }
+    
+    private func saveProfile() {
+        if let missingValue = dataSource?.missingData() {
+            postAlertOnLackOfInfo(missingValue)
+        } else {
+            dataSource?.saveProfile()
+        }
+    }
+    
+    private func moveToCreateActivityIfNeeded() {
+        if let hasActivities = dataSource?.profileHasNoActivities(), hasActivities == false {
+            createFirstActivity()
+        } else {
+            dismissController()
+        }
     }
     
     @IBAction func avatarButtonPressed() {
         presentPhotoPicker()
     }
     
-    fileprivate func createFirstActivity() {
-        let activityController: EditActivityVC = ControllerFactory.createController()
-        present(activityController, animated: true, completion: nil)
-    }
-    
     // MARK: - Navigation
     
     fileprivate func postAlertOnLackOfInfo(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let alertText = "Oops, some data is missing: \"\(message)\""
+        let alert = UIAlertController(title: "Error", message: alertText, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -84,10 +132,9 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    fileprivate func setupImageViewForAvatar() {
-        avatarImage.contentMode = .scaleAspectFit
-        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
-        avatarImage.clipsToBounds = true
+    fileprivate func createFirstActivity() {
+        let activityController: EditActivityVC = ControllerFactory.createController()
+        present(activityController, animated: true, completion: nil)
     }
     
     fileprivate func dismissController() {
@@ -98,6 +145,14 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
+    fileprivate func setupImageViewForAvatar() {
+        avatarImage.contentMode = .scaleAspectFit
+        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
+        avatarImage.clipsToBounds = true
+    }
+
+    // MARK: - TableView update
+    
     fileprivate func updateTableViewLayout() {
         UIView.animate(withDuration: 0.3) { [unowned self] in
             self.propertiesTableView.beginUpdates()
@@ -105,29 +160,36 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         }
     }
     
-    fileprivate func moveToNextCell() {
-        selectedCellIndex = nextRowIndex(fromSelectedIndex: selectedCellIndex)
+    private func setDefaultValue(forCellAtIndex index: IndexPath?) {
+        if let index = index, let cell = propertiesTableView.cellForRow(at: index) as? ProfileEditingCell {
+            cell.setDefaultValue()
+        }
     }
     
-    // MARK: - Private
-
-    private func nextRowIndex(fromSelectedIndex currentIndex: IndexPath?) -> IndexPath? {
-        guard
-            let totalRows = dataSource?.numberOfRows(),
-            let currentIndex = currentIndex
-        else {
-            return nil
+    fileprivate func saveValueInCell(forIndexPath indexPath: IndexPath?) {
+        if let indexPath = indexPath, let cell = propertiesTableView.cellForRow(at: indexPath) as? ProfileEditingCell {
+            cell.saveValue()
         }
-
-        let nextRow = currentIndex.row + 1
-        return nextRow < totalRows ? IndexPath(row: nextRow, section: 0) : nil
     }
-}
-
-// MARK: - UITableViewDelegate
-extension ProfileEditingVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    fileprivate func moveToNextCellIfNeeded() {
+        guard let dataSource = dataSource else { return }
         
+        if let _ = dataSource.missingData() {
+            saveValueInCell(forIndexPath: selectedCellIndex)
+        } else {
+            selectedCellIndex = nil
+            updateTableViewLayout()
+        }
+    }
+    
+    fileprivate func moveToNextCell() {
+        selectedCellIndex = nextRowIndex(fromSelectedIndex: selectedCellIndex)
+        setDefaultValue(forCellAtIndex: selectedCellIndex)
+        updateTableViewLayout()
+    }
+    
+    fileprivate func focusOn(cellInPath indexPath: IndexPath?) {
         if selectedCellIndex != indexPath {
             selectedCellIndex = indexPath
         } else {
@@ -136,6 +198,32 @@ extension ProfileEditingVC: UITableViewDelegate {
         
         resignFirstResponder()
         updateTableViewLayout()
+    }
+    
+    // MARK: - Private
+
+    private func nextRowIndex(fromSelectedIndex currentIndex: IndexPath?) -> IndexPath? {
+        guard let totalRows = dataSource?.numberOfRows(), let currentIndex = currentIndex else {
+            return nil
+        }
+
+        let nextRow = currentIndex.row + 1
+        return nextRow < totalRows ? IndexPath(row: nextRow, section: 0) : nil
+    }
+
+}
+
+// MARK: - ProfileEditingDataSourceDelegate
+extension ProfileEditingVC: ProfileEditingDataSourceDelegate {
+    func profileEditingDataSourceDidUpdateValue() {
+        moveToNextCell()
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension ProfileEditingVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        focusOn(cellInPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -153,25 +241,6 @@ extension ProfileEditingVC: UITableViewDelegate {
     }
 }
 
-// MARK: - ProfileEditingDataSourceDelegate
-extension ProfileEditingVC: ProfileEditingDataSourceDelegate {
-    
-    func profileEditingDataSourceDidUpdateValue() {
-        guard let dataSource = dataSource else {
-            return
-        }
-        
-        if dataSource.missingData() != nil {
-            moveToNextCell()
-        } else {
-            selectedCellIndex = nil
-        }
-        
-        updateTableViewLayout()
-    }
-    
-}
-
 // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -179,6 +248,7 @@ extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControl
         if let selectedImage = avatarPicker?.image(fromInfo: info) {
             setupImageViewForAvatar()
             avatarImage.image = selectedImage
+            dataSource?.image = selectedImage
         }
         
         dismiss(animated: true, completion: nil)

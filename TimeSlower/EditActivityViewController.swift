@@ -8,6 +8,8 @@
 
 import UIKit
 import ReactiveSwift
+import ReactiveObjC
+import ReactiveObjCBridge
 import TimeSlowerKit
 
 /// Controller that is responsible for editing/entering information about given activity
@@ -216,7 +218,7 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func trackTimeSaverValueChanges() {
-//        timeSaverView.rac_valuesForKeyPath("selectedValue", observer: self).startWith(timeSaverView)
+//        timeSaverView.rac_values(forKeyPath: "selectedValue", observer: self).start(with: timeSaverView)
 //            .toSignalProducer()
 //            .startWithNext { [weak self] (timeToSave) in
 //                guard let timeToSave = timeToSave as? Endurance else { return }

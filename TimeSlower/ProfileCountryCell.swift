@@ -23,6 +23,16 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
         
         countryPicker.delegate = self
     }
+    
+    func setDefaultValue() {
+        if textfieldView.text.value == nil {
+            textfieldView.setText(countryPicker.selectedCountryName)
+        }
+    }
+    
+    func saveValue() {
+        delegate?.profileEditingCellDidUpdateValue(value: countryPicker.selectedCountryName, type: .Country)
+    }
 }
 
 
