@@ -458,7 +458,6 @@
                                     <constraint firstItem="9tr-P1-3lI" firstAttribute="top" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="ZNE-AJ-BDr"/>
                                     <constraint firstAttribute="width" secondItem="Bdh-9b-u4y" secondAttribute="width" id="rJM-bB-clN"/>
                                     <constraint firstItem="HrX-rP-kZD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="tRP-YC-c1g"/>
-                                    <constraint firstAttribute="height" constant="134" id="uek-Ec-7e2"/>
                                     <constraint firstAttribute="trailing" secondItem="9tr-P1-3lI" secondAttribute="trailing" constant="8" id="zQo-u6-k4I"/>
                                 </constraints>
                             </view>
@@ -503,7 +502,6 @@
                         <outlet property="avatarFrameView" destination="RLU-6Z-Lt1" id="T00-wR-Maf"/>
                         <outlet property="avatarImage" destination="HrX-rP-kZD" id="8iG-F7-Acn"/>
                         <outlet property="avatarInnerView" destination="9tr-P1-3lI" id="99a-vG-iR7"/>
-                        <outlet property="avatarViewHeight" destination="uek-Ec-7e2" id="mhY-Jk-ePN"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
                         <outlet property="genderSelector" destination="htb-Qx-cAM" id="a6u-GO-JjV"/>
                         <outlet property="headerViewHeight" destination="Ctv-jh-TQw" id="3bF-te-YFg"/>

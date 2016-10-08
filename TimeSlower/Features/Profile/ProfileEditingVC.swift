@@ -17,7 +17,6 @@ class ProfileEditingVC: UIViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var propertiesTableView: UITableView!
     @IBOutlet weak var genderSelector: GenderSelector!
-    @IBOutlet weak var avatarViewHeight: NSLayoutConstraint!
     @IBOutlet weak var avatarFrameView: UIView!
     @IBOutlet weak var avatarInnerView: UIView!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
@@ -29,7 +28,7 @@ class ProfileEditingVC: UIViewController {
         static let collapsedCellHeight = 0 as CGFloat
         static let expandedCellHeight = 220 as CGFloat
         static let defaultCellHeight = 50 as CGFloat
-        static let headerHeightScale = 0.26 as CGFloat
+        static let headerHeightScale = 0.40 as CGFloat
     }
     
     enum Row: Int {
@@ -62,6 +61,11 @@ class ProfileEditingVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
         
         subscribeToGenderSelector()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         setCircleFormToAvatarImageView()
         setupHeaderViewHeight()
     }
@@ -71,7 +75,7 @@ class ProfileEditingVC: UIViewController {
     }
     
     private func setCircleFormToAvatarImageView() {
-        avatarFrameView.layer.cornerRadius = avatarViewHeight.constant / 2
+        avatarFrameView.layer.cornerRadius = avatarFrameView.bounds.height / 2
         avatarFrameView.layer.borderWidth = 1.0
         avatarFrameView.layer.borderColor = UIColor.purpleRed().cgColor
         avatarInnerView.layer.cornerRadius = avatarInnerView.bounds.height / 2
@@ -147,7 +151,7 @@ class ProfileEditingVC: UIViewController {
     
     fileprivate func setupImageViewForAvatar() {
         avatarImage.contentMode = .scaleAspectFit
-        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
+        avatarImage.layer.cornerRadius = (avatarFrameView.bounds.height - 18) / 2
         avatarImage.clipsToBounds = true
     }
 
