@@ -19,6 +19,7 @@
 		89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC71DA01EDB00703F5E /* ProfileEditingCell.swift */; };
 		89BDDECB1DA0222F00703F5E /* ProfileBirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */; };
 		89BDDECC1DA0222F00703F5E /* ProfileBirthdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */; };
+		89CB9EC51DA9487B00BB2C2A /* AvatarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */; };
 		89E9C7891D9341F5008D18A0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77B1D9341F5008D18A0 /* Activity.swift */; };
 		89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */; };
 		89E9C78C1D9341F5008D18A0 /* ActivityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77E1D9341F5008D18A0 /* ActivityConverter.swift */; };
@@ -340,6 +341,7 @@
 		89BDDEC71DA01EDB00703F5E /* ProfileEditingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCell.swift; sourceTree = "<group>"; };
 		89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayCell.swift; sourceTree = "<group>"; };
 		89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBirthdayCell.xib; sourceTree = "<group>"; };
+		89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPicker.swift; sourceTree = "<group>"; };
 		89E9C77B1D9341F5008D18A0 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
 		89E9C77D1D9341F5008D18A0 /* ActivityAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapterTests.swift; sourceTree = "<group>"; };
@@ -1365,6 +1367,7 @@
 			isa = PBXGroup;
 			children = (
 				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
+				89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */,
 				89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */,
 				F0EB7BDD1BEFCA7600173D5D /* ProfileEditingViewModel.swift */,
 				F009AF4F1BDB10A6007F38A9 /* ProfileEditingVCConstraints.swift */,
@@ -1884,6 +1887,7 @@
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
 				F009AF891BDB1935007F38A9 /* DefaultActivitySelectorCell.swift in Sources */,
 				F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */,
+				89CB9EC51DA9487B00BB2C2A /* AvatarPicker.swift in Sources */,
 				F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */,
 				89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */,
 				F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */,

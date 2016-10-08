@@ -19,7 +19,8 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBOutlet weak var genderSelector: GenderSelector!
     
     fileprivate var dataSource: ProfileEditingDataSource?
-    
+    fileprivate var avatarPicker: AvatarPicker?
+
     fileprivate struct Constants {
         static let collapsedCellHeight = 0 as CGFloat
         static let expandedCellHeight = 220 as CGFloat
@@ -48,6 +49,8 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
         super.viewDidLoad()
         
         dataSource = ProfileEditingDataSource(withTableView: propertiesTableView, delegate: self)
+        avatarPicker = AvatarPicker(withDelegate: self)
+        
         propertiesTableView.dataSource = dataSource
         propertiesTableView.delegate = self
         navigationController?.isNavigationBarHidden = true
@@ -69,10 +72,22 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     
     // MARK: - Navigation
     
-    func postAlertOnLackOfInfo(_ message: String) {
+    fileprivate func postAlertOnLackOfInfo(_ message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func presentPhotoPicker() {
+        if let imagePicker = avatarPicker?.photoPicker() {
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func setupImageViewForAvatar() {
+        avatarImage.contentMode = .scaleAspectFit
+        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
+        avatarImage.clipsToBounds = true
     }
     
     fileprivate func dismissController() {
@@ -157,14 +172,11 @@ extension ProfileEditingVC: ProfileEditingDataSourceDelegate {
     
 }
 
-
 // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var image = info[UIImagePickerControllerEditedImage] as? UIImage
-        if image == nil { image = info[UIImagePickerControllerOriginalImage] as? UIImage }
         
-        if let selectedImage = image {
+        if let selectedImage = avatarPicker?.image(fromInfo: info) {
             setupImageViewForAvatar()
             avatarImage.image = selectedImage
         }
@@ -174,21 +186,5 @@ extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControl
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    fileprivate func presentPhotoPicker() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-            let photoPicker = UIImagePickerController()
-            photoPicker.sourceType = .photoLibrary
-            photoPicker.delegate = self
-            photoPicker.allowsEditing = true
-            present(photoPicker, animated: true, completion: nil)
-        }
-    }
-    
-    fileprivate func setupImageViewForAvatar() {
-        avatarImage.contentMode = .scaleAspectFit
-        avatarImage.layer.cornerRadius = (avatarViewHeight.constant - 18) / 2
-        avatarImage.clipsToBounds = true
     }
 }
