@@ -54,6 +54,18 @@ class ProfileEditingDataSource: NSObject {
         registerCells()
     }
     
+    func numberOfRows() -> Int {
+        return rowStructure.count
+    }
+    
+    func missingData() -> String? {
+        guard let _ = name else { return "Name" }
+        guard let _ = country else { return "Country" }
+        guard let _ = birthday else { return "Birthday" }
+        
+        return nil
+    }
+    
     private func registerCells() {
         tableView.register(UINib(nibName: ProfileNameCell.className, bundle: nil),
                            forCellReuseIdentifier: ProfileNameCell.className)
@@ -74,6 +86,7 @@ class ProfileEditingDataSource: NSObject {
     }
 }
 
+// MARK: - ProfileEditingCellDelegate
 extension ProfileEditingDataSource: ProfileEditingCellDelegate {
     func profileEditingCellDidUpdateValue(value: String, type: ProfileEditingCellType) {
         switch type {

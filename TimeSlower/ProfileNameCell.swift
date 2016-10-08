@@ -18,6 +18,12 @@ class ProfileNameCell: UITableViewCell, ProfileEditingCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         textfieldView.textField.delegate = self
+        textfieldView.isUserInteractionEnabled = false
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        textfieldView.textField.becomeFirstResponder()
     }
 }
 
@@ -29,6 +35,7 @@ extension ProfileNameCell: UITextFieldDelegate {
         }
         
         delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
+        textfieldView.textField.resignFirstResponder()
         return true
     }
 }

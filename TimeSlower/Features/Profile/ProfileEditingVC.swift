@@ -18,7 +18,7 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     @IBOutlet weak var propertiesTableView: UITableView!
     @IBOutlet weak var genderSelector: GenderSelector!
     
-    private var dataSource: ProfileEditingDataSource?
+    fileprivate var dataSource: ProfileEditingDataSource?
     
     fileprivate struct Constants {
         static let collapsedCellHeight = 0 as CGFloat
@@ -46,7 +46,6 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         dataSource = ProfileEditingDataSource(withTableView: propertiesTableView, delegate: self)
         propertiesTableView.dataSource = dataSource
@@ -83,8 +82,34 @@ class ProfileEditingVC: ProfileEditingVCConstraints {
             dismiss(animated: true, completion: nil)
         }
     }
+    
+    fileprivate func updateTableViewLayout() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            self.propertiesTableView.beginUpdates()
+            self.propertiesTableView.endUpdates()
+        }
+    }
+    
+    fileprivate func moveToNextCell() {
+        selectedCellIndex = nextRowIndex(fromSelectedIndex: selectedCellIndex)
+    }
+    
+    // MARK: - Private
+
+    private func nextRowIndex(fromSelectedIndex currentIndex: IndexPath?) -> IndexPath? {
+        guard
+            let totalRows = dataSource?.numberOfRows(),
+            let currentIndex = currentIndex
+        else {
+            return nil
+        }
+
+        let nextRow = currentIndex.row + 1
+        return nextRow < totalRows ? IndexPath(row: nextRow, section: 0) : nil
+    }
 }
 
+// MARK: - UITableViewDelegate
 extension ProfileEditingVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -95,11 +120,7 @@ extension ProfileEditingVC: UITableViewDelegate {
         }
         
         resignFirstResponder()
-        UIView.animate(withDuration: 0.3) {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
-        
+        updateTableViewLayout()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -117,14 +138,25 @@ extension ProfileEditingVC: UITableViewDelegate {
     }
 }
 
+// MARK: - ProfileEditingDataSourceDelegate
 extension ProfileEditingVC: ProfileEditingDataSourceDelegate {
+    
     func profileEditingDataSourceDidUpdateValue() {
-        if let currentRow = selectedCellIndex?.row, currentRow + 1 < 3 {
-            let nextCellIndex = IndexPath(row: currentRow + 1, section: 0)
-            propertiesTableView.selectRow(at: nextCellIndex, animated: true, scrollPosition: .middle)
+        guard let dataSource = dataSource else {
+            return
         }
+        
+        if dataSource.missingData() != nil {
+            moveToNextCell()
+        } else {
+            selectedCellIndex = nil
+        }
+        
+        updateTableViewLayout()
     }
+    
 }
+
 
 // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
