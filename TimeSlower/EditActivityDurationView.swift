@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveSwift
+import Result
 import TimeSlowerKit
 
 /// UITableViewCell subclass to edit duration of activity
@@ -31,7 +32,7 @@ class EditActivityDurationView: ObservableControl {
     // MARK: - Properties
     
     /// Duration of activity in minutes. Observable.
-    var selectedValue: MutableProperty<Endurance>?
+    var selectedValue = MutableProperty<Endurance?>(nil)
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var textfieldView: TextfieldView!
@@ -42,7 +43,7 @@ class EditActivityDurationView: ObservableControl {
     fileprivate let hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     fileprivate var currentPeriod: Period = .minutes
 
-    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
 
     // MARK: - Overriden Methods
     
@@ -61,13 +62,13 @@ class EditActivityDurationView: ObservableControl {
         updateValueFromPicker(pickerView)
     }
     
-    override func valueSignal() -> SignalProducer<Any?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
     override func setInitialValue(_ value: AnyObject?) {
         if let duration = value as? Endurance {
-            selectedValue?.value = duration
+            selectedValue.value = duration
             textfieldView.setText("Duration: \(duration.value) \(duration.period.description())")
             setPickerViewToValue(duration.value, period: duration.period)
         }
@@ -91,7 +92,10 @@ class EditActivityDurationView: ObservableControl {
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        valueChangedSignal = rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
+        valueChangedSignal = selectedValue.producer
+            .flatMap(.latest, transform: { (duration) -> SignalProducer<Any?, NoError> in
+                return SignalProducer(value: duration)
+            })
     }
     
     fileprivate func setPickerViewToValue(_ value: Int, period: Period) {
@@ -103,7 +107,7 @@ class EditActivityDurationView: ObservableControl {
     
     fileprivate func updateValueFromPicker(_ pickerView: UIPickerView) {
         let values = getValuesFromPickerView(pickerView)
-        if selectedValue?.value.value != values.value {
+        if selectedValue.value?.value != values.value {
             self.updateSelectedValueWithDuration(values.value, period: values.period)
         }
     }
@@ -120,7 +124,7 @@ class EditActivityDurationView: ObservableControl {
     }
     
     fileprivate func updateSelectedValueWithDuration(_ duration: Int, period: Period) {
-        selectedValue?.value = Endurance(value: duration, period: period)
+        selectedValue.value = Endurance(value: duration, period: period)
         textfieldView.setText("Duration: \(duration) \(period.description())")
     }
 }

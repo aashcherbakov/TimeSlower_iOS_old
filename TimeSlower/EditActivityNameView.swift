@@ -25,8 +25,8 @@ class EditActivityNameView: ObservableControl {
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet var view: UIView!
 
-    dynamic var selectedValue: String?
-    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
+    var selectedValue = MutableProperty<String?>(nil)
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
 
     // MARK: - Overridden
     
@@ -42,13 +42,13 @@ class EditActivityNameView: ObservableControl {
         defaultActivitySelectorView.setupCollectionViewItemSize()
     }
     
-    override func valueSignal() -> SignalProducer<Any?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
     override func setInitialValue(_ value: AnyObject?) {
         if let value = value as? String {
-            selectedValue = value
+            selectedValue.value = value
         }
     }
     
@@ -62,9 +62,10 @@ class EditActivityNameView: ObservableControl {
     
     fileprivate func setupEvents() {
         
-        let signal = rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
-        
-        valueChangedSignal = signal
+        valueChangedSignal = selectedValue.producer
+            .flatMap(.latest, transform: { (string) -> SignalProducer<Any?, NoError> in
+                return SignalProducer(value: string)
+            })
         
         valueChangedSignal?.startWithResult { [weak self] (result) in
             guard let value = result.value as? String else { return }
@@ -75,7 +76,7 @@ class EditActivityNameView: ObservableControl {
             .startWithResult { [weak self] (result) in
                 guard let name = self?.defaultActivitySelectorView.selectedActivityName else { return }
                 self?.sendActions(for: .touchUpInside)
-                self?.selectedValue = name
+                self?.selectedValue.value = name
         }
         
         textFieldView.textField.delegate = self

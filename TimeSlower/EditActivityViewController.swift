@@ -10,6 +10,7 @@ import UIKit
 import ReactiveSwift
 import ReactiveObjC
 import ReactiveObjCBridge
+import Result
 import TimeSlowerKit
 
 /// Controller that is responsible for editing/entering information about given activity
@@ -59,14 +60,14 @@ internal class EditActivityVC: UIViewController {
     var selectedNotifications: Bool? = true
     var selectedTimeToSave: Int?
     
-    var nameSignal: SignalProducer<Any?, NSError>?
-    var basisSignal: SignalProducer<Any?, NSError>?
-    var startTimeSignal: SignalProducer<Any?, NSError>?
-    var durationSignal: SignalProducer<Any?, NSError>?
-    var notificationsSignal: SignalProducer<Any?, NSError>?
-    var timeToSaveSignal: SignalProducer<Any?, NSError>?
+    var nameSignal: SignalProducer<Any?, NoError>?
+    var basisSignal: SignalProducer<Any?, NoError>?
+    var startTimeSignal: SignalProducer<Any?, NoError>?
+    var durationSignal: SignalProducer<Any?, NoError>?
+    var notificationsSignal: SignalProducer<Any?, NoError>?
+    var timeToSaveSignal: SignalProducer<Any?, NoError>?
     
-    var valueSignals = [SignalProducer<Any?, NSError>]()
+    var valueSignals = [SignalProducer<Any?, NoError>]()
     var initialValuesForCells: [AnyObject?]?
     fileprivate var footerView: UIView?
     
@@ -199,7 +200,7 @@ internal class EditActivityVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        rac_values(forKeyPath: "activity", observer: self).toSignalProducer().startWithResult { [weak self] (result) in
+        activity?.producer.startWithResult { [weak self] (result) in
             self?.setupData()
         }
         
@@ -221,10 +222,9 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func trackTimeSaverValueChanges() {
-        timeSaverView.rac_values(forKeyPath: "selectedValue", observer: self).start(with: timeSaverView)
-            .toSignalProducer()
+        timeSaverView.selectedValue?.producer
             .startWithResult { [weak self] (timeToSave) in
-                guard let timeToSave = timeToSave.value as? Endurance else { return }
+                guard let timeToSave = timeToSave.value else { return }
                 self?.selectedTimeToSave = timeToSave.minutes()
         }
     }
@@ -410,8 +410,14 @@ extension EditActivityVC: UITableViewDataSource {
             }
         }
         
-        valueSignals.insert(valueSignal, at: indexPath.row)
+        if indexPath.row < valueSignals.count {
+            valueSignals.insert(valueSignal, at: indexPath.row)
+        } else {
+            valueSignals.append(valueSignal)
+        }
+        
         mapValueSignalsForIndexPath(indexPath)
+        print("Cell created: \(cell)")
         return cell as! UITableViewCell
     }
     

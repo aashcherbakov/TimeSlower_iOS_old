@@ -51,31 +51,23 @@ class TimeSaver: UIView {
     fileprivate func setupEvents() {
         slider.minimumValue = 1.0
 
-        rac_values(forKeyPath: "selectedDuration", observer: self).toSignalProducer()
-            .startWithResult { [weak self] (duration) in
-                guard let
-                    duration = duration.value as? Endurance,
-                    let suggestedSaving = self?.minumumSavingForDuration(duration)
-                else {
-                    return
-                }
-                
-                self?.slider.minimumValue = duration.period == .hours ? Float(Constants.minimumMinutesToSave) : 1.0
-                
-                if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
-                    self?.selectedValue?.value = Endurance(value: suggestedSaving, period: duration.period)
-                
-                }
-                
-                self?.slider.maximumValue = Float(duration.value)
-
+        selectedDuration?.producer.startWithResult { [weak self] (result) in
+            guard let duration = result.value, let suggestedSaving = self?.minumumSavingForDuration(duration) else {
+                return
+            }
+            
+            self?.slider.minimumValue = duration.period == .hours ? Float(Constants.minimumMinutesToSave) : 1.0
+            if self?.selectedValue == nil || Float(duration.value) != self?.slider.maximumValue {
+                self?.selectedValue?.value = Endurance(value: suggestedSaving, period: duration.period)
+            }
+            
+            self?.slider.maximumValue = Float(duration.value)
         }
         
-        rac_values(forKeyPath: "selectedValue", observer: self).toSignalProducer()
-            .startWithResult { [weak self] (result) in
-                guard let endurance = result.value as? Endurance, let duration = self?.selectedDuration?.value else { return }
-                self?.timeLabel.text = "\(endurance.value) \(duration.period.description())"
-                self?.slider.setValue(Float(endurance.value), animated: true)
+        selectedValue?.producer.startWithResult { [weak self] (result) in
+            guard let endurance = result.value, let duration = self?.selectedDuration?.value else { return }
+            self?.timeLabel.text = "\(endurance.value) \(duration.period.description())"
+            self?.slider.setValue(Float(endurance.value), animated: true)
         }
         
         slider.rac_signal(for: .valueChanged).toSignalProducer()

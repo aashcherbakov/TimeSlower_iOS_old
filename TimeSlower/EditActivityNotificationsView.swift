@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveSwift
+import Result
 
 /// UITableViewCell subclass to turn on/off notifications for activity
 class EditActivityNotificationsView: ObservableControl {
@@ -22,7 +23,7 @@ class EditActivityNotificationsView: ObservableControl {
     /// Bool true if notification switch is on
     dynamic var selectedValue: NSNumber = true
     
-    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     
     // MARK: - Overridden Methods
     
@@ -34,7 +35,7 @@ class EditActivityNotificationsView: ObservableControl {
         setupDesign()
     }
     
-    override func valueSignal() -> SignalProducer<Any?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
@@ -62,10 +63,16 @@ class EditActivityNotificationsView: ObservableControl {
     }
     
     fileprivate func setupEvents() {
-        valueChangedSignal = notificationSwitch.rac_signal(for: .valueChanged).start(with: notificationSwitch).toSignalProducer().map({ (value) -> NSNumber? in
-            guard let switcher = value as? UISwitch else { return nil }
-            return switcher.isOn as NSNumber?
-        })
+        
+        let switchSignal = notificationSwitch.rac_signal(for: .valueChanged)
+            .toSignalProducer()
+            .map { (value) -> NSNumber? in
+                guard let switcher = value as? UISwitch else { return nil }
+                return switcher.isOn as NSNumber
+            }
+            .flatMapError { SignalProducer<Any?, NoError>(value: $0.code) }
+        
+        valueChangedSignal = switchSignal
         
         valueChangedSignal?.startWithResult { [weak self] (result) in
             guard let value = result.value as? Bool else { return }

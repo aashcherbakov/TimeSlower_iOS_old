@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveSwift
 import TimeSlowerKit
+import Result
 
 /// UITableViewCell subclass to edit start time of activity
 class EditActivityStartTimeView: ObservableControl {
@@ -24,7 +25,7 @@ class EditActivityStartTimeView: ObservableControl {
     
     /// Selected date. Observable
     dynamic var selectedValue: Date?
-    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     fileprivate var timer: Timer?
     
     // MARK: - Overridden Methods
@@ -47,7 +48,7 @@ class EditActivityStartTimeView: ObservableControl {
         }
     }
     
-    override func valueSignal() -> SignalProducer<Any?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
@@ -84,7 +85,7 @@ class EditActivityStartTimeView: ObservableControl {
         valueChangedSignal = delayedProducer()
     }
     
-    fileprivate func delayedProducer() -> SignalProducer<Any?, NSError> {
+    fileprivate func delayedProducer() -> SignalProducer<Any?, NoError> {
         return SignalProducer { [weak self] (observer, _) in
             
             self?.rac_values(forKeyPath: "selectedValue", observer: self)

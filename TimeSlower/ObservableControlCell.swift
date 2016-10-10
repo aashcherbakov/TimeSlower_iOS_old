@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveSwift
+import Result
 
 /**
  *  Cell that contains ObservableControl as subview and alows to subscribe to value changes and touches
@@ -23,17 +24,17 @@ protocol ObservableControlCell {
      
      - returns: SignalProducer with selected value
      */
-    func signalForValueChange() -> SignalProducer<Any?, NSError>?
+    func signalForValueChange() -> SignalProducer<Any?, NoError>?
 }
 
 extension ObservableControlCell {
-    func signalForValueChange() -> SignalProducer<Any?, NSError>? {
+    func signalForValueChange() -> SignalProducer<Any?, NoError>? {
         return control.valueSignal()
     }
 }
 
 class ObservableControl: UIControl {
-    func valueSignal() -> SignalProducer<Any?, NSError>? {
+    func valueSignal() -> SignalProducer<Any?, NoError>? {
         fatalError("Must be overridden")
     }
     

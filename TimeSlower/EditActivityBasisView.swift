@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveSwift
 import TimeSlowerKit
+import Result
 
 /**
  UITableViewCell subclass that allows user to select activity basis.
@@ -39,7 +40,7 @@ class EditActivityBasisView: ObservableControl {
     
     /// Value that is being tracked from EditActivityViewController
     dynamic var selectedValue: [Int]?
-    fileprivate var valueChangedSignal: SignalProducer<Any?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     
     // MARK: - Overridden Methods
     
@@ -55,7 +56,7 @@ class EditActivityBasisView: ObservableControl {
         sendActions(for: .touchUpInside)
     }
     
-    override func valueSignal() -> SignalProducer<Any?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
@@ -101,7 +102,7 @@ class EditActivityBasisView: ObservableControl {
         }
     }
     
-    fileprivate func delayedValueSignalProducer() -> SignalProducer<Any?, NSError> {
+    fileprivate func delayedValueSignalProducer() -> SignalProducer<Any?, NoError> {
         return SignalProducer { [weak self] (observer, _) in
             
             self?.rac_values(forKeyPath: "selectedValue", observer: self)
