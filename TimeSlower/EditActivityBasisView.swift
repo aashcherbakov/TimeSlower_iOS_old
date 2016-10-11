@@ -39,7 +39,8 @@ class EditActivityBasisView: ObservableControl {
     fileprivate var timer: Timer?
     
     /// Value that is being tracked from EditActivityViewController
-    dynamic var selectedValue: [Int]?
+    dynamic var selectedValue: [Int]? 
+    
     fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     
     // MARK: - Overridden Methods
@@ -105,9 +106,11 @@ class EditActivityBasisView: ObservableControl {
     fileprivate func delayedValueSignalProducer() -> SignalProducer<Any?, NoError> {
         return SignalProducer { [weak self] (observer, _) in
             
+            
             self?.rac_values(forKeyPath: "selectedValue", observer: self)
                 .toSignalProducer()
-                .on(starting: { (value) in
+                .on(
+                value: { (value) in
                     self?.timer?.terminate()
                     self?.timer = Timer(1) {
                         observer.send(value: value)
@@ -115,9 +118,9 @@ class EditActivityBasisView: ObservableControl {
                     
                     self?.timer?.start()
                     },
-                    completed: {
-                        observer.sendCompleted()
-                        self?.timer?.terminate()
+                completed: {
+                    observer.sendCompleted()
+                    self?.timer?.terminate()
                 })
                 .start()
         }

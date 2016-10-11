@@ -91,6 +91,7 @@ class EditActivityNameView: ObservableControl {
 extension EditActivityNameView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendActions(for: .touchUpInside)
+        selectedValue.value = textField.text
         return true
     }
     

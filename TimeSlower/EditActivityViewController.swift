@@ -69,6 +69,7 @@ internal class EditActivityVC: UIViewController {
     
     var valueSignals = [SignalProducer<Any?, NoError>]()
     var initialValuesForCells: [AnyObject?]?
+    
     fileprivate var footerView: UIView?
     
     dynamic fileprivate var lastExpandedCellIndex: IndexPath?
@@ -239,26 +240,54 @@ internal class EditActivityVC: UIViewController {
     
     fileprivate func startTrackingValueChanges() {
         guard
-            let nameSignal = nameSignal, let basisSignal = basisSignal, let startTimeSignal = startTimeSignal,
-            let durationSignal = durationSignal, let notificationsSignal = notificationsSignal
+            let nameSignal = nameSignal,
+            let basisSignal = basisSignal,
+            let startTimeSignal = startTimeSignal,
+            let durationSignal = durationSignal,
+            let notificationsSignal = notificationsSignal
         else {
             return
+        }
+        
+
+        
+        nameSignal.startWithValues { [weak self] (value) in
+            self?.selectedName = value as? String
+            self?.moveToNextEditingState()
+        }
+        
+        basisSignal.startWithValues { [weak self] (value) in
+            self?.selectedBasis = value as? [Int]
+            self?.moveToNextEditingState()
+        }
+        
+        startTimeSignal.startWithValues { [weak self] (value) in
+            self?.selectedStartTime = value as? Date
+            self?.moveToNextEditingState()
         }
         
         durationSignal.startWithResult { [weak self] (result) in
             guard let duration = result.value as? Endurance else { return }
             self?.timeSaverView.selectedDuration?.value = duration
+            self?.selectedDuration = duration
+            self?.moveToNextEditingState()
         }
         
-        SignalProducer.combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
-            .startWithResult { [weak self] (results) in // name, basis, startTime, duration, notification
-                self?.selectedName = results.value?.0 as? String
-                self?.selectedBasis = results.value?.1 as? [Int]
-                self?.selectedStartTime = results.value?.2 as? NSDate as Date?
-                self?.selectedDuration = results.value?.3 as? Endurance
-                self?.selectedNotifications = results.value?.4 as? Bool
-                self?.moveToNextEditingState()
+        notificationsSignal.startWithValues { [weak self] (value) in
+            self?.selectedNotifications = value as? Bool
+            self?.moveToNextEditingState()
         }
+        
+        
+//        combinedSignals = SignalProducer.combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
+//            .startWithValues { [weak self] (name, basis, startTime, duration, notification) in
+//                self?.selectedName = name as? String
+//                self?.selectedBasis = basis as? [Int]
+//                self?.selectedStartTime = startTime as? Date
+//                self?.selectedDuration = duration as? Endurance
+//                self?.selectedNotifications = notification as? Bool
+//                self?.moveToNextEditingState()
+//            }
     }
     
     // MARK: - Update state
@@ -417,7 +446,6 @@ extension EditActivityVC: UITableViewDataSource {
         }
         
         mapValueSignalsForIndexPath(indexPath)
-        print("Cell created: \(cell)")
         return cell as! UITableViewCell
     }
     
