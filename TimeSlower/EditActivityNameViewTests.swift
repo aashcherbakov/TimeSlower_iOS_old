@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import TimeSlower
+import ReactiveSwift
 
 class EditActivityNameViewTests: XCTestCase {
     
@@ -29,7 +30,7 @@ class EditActivityNameViewTests: XCTestCase {
     
     func test_initialSetupOfView() {
         // then
-        XCTAssertNil(sut.selectedValue,
+        XCTAssertNil(sut.selectedValue.value,
                        "it should set selected name to nil")
         XCTAssertTrue(sut.textFieldView.config is NameTextfield,
                       "it should set textfield type to Basis")
@@ -37,7 +38,7 @@ class EditActivityNameViewTests: XCTestCase {
     
     func test_selectedNameIsSetFromOutside() {
         // when
-        sut.selectedValue = "Alex"
+        sut.selectedValue.value = "Alex"
         
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Alex",
@@ -46,7 +47,7 @@ class EditActivityNameViewTests: XCTestCase {
     
     func test_whenUserTappedDoneOnKeyboard() {
         // given
-        sut.selectedValue = "Alex"
+        sut.selectedValue.value = "Alex"
         
         // when
         sut.textFieldView.textField.resignFirstResponder()
@@ -54,7 +55,7 @@ class EditActivityNameViewTests: XCTestCase {
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Alex",
                        "it should set textfield text to Alex")
-        XCTAssertEqual(sut.selectedValue, "Alex",
+        XCTAssertEqual(sut.selectedValue.value, "Alex",
                        "it should set selected value to Alex")
     }
 }

@@ -131,8 +131,15 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func createActivity() {
-        guard let name = selectedName, let basis = selectedBasis, let startTime = selectedStartTime, let duration = selectedDuration,
-            let notifications = selectedNotifications, let timeToSave = selectedTimeToSave, let profile = userProfile else {
+        guard
+            let name = selectedName,
+            let basis = selectedBasis,
+            let startTime = selectedStartTime,
+            let duration = selectedDuration,
+            let notifications = selectedNotifications,
+            let timeToSave = selectedTimeToSave,
+            let profile = userProfile else {
+                
             // TODO: submit notification that something is missing
             return
         }
@@ -143,7 +150,14 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func saveActivity() {
-        guard let activity = activity, let name = selectedName, let basis = selectedBasis, let startTime = selectedStartTime, let duration = selectedDuration, let notifications = selectedNotifications, let timeToSave = selectedTimeToSave else {
+        guard
+            let activity = activity,
+            let name = selectedName,
+            let basis = selectedBasis,
+            let startTime = selectedStartTime,
+            let duration = selectedDuration,
+            let notifications = selectedNotifications,
+            let timeToSave = selectedTimeToSave else {
                 return
         }
         
@@ -223,10 +237,10 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func trackTimeSaverValueChanges() {
-        timeSaverView.selectedValue?.producer
+        timeSaverView.selectedValue.producer
             .startWithResult { [weak self] (timeToSave) in
                 guard let timeToSave = timeToSave.value else { return }
-                self?.selectedTimeToSave = timeToSave.minutes()
+                self?.selectedTimeToSave = timeToSave?.minutes()
         }
     }
     
@@ -248,9 +262,7 @@ internal class EditActivityVC: UIViewController {
         else {
             return
         }
-        
-
-        
+    
         nameSignal.startWithValues { [weak self] (value) in
             self?.selectedName = value as? String
             self?.moveToNextEditingState()
@@ -268,7 +280,7 @@ internal class EditActivityVC: UIViewController {
         
         durationSignal.startWithResult { [weak self] (result) in
             guard let duration = result.value as? Endurance else { return }
-            self?.timeSaverView.selectedDuration?.value = duration
+            self?.timeSaverView.selectedDuration.value = duration
             self?.selectedDuration = duration
             self?.moveToNextEditingState()
         }
@@ -277,17 +289,6 @@ internal class EditActivityVC: UIViewController {
             self?.selectedNotifications = value as? Bool
             self?.moveToNextEditingState()
         }
-        
-        
-//        combinedSignals = SignalProducer.combineLatest(nameSignal, basisSignal, startTimeSignal, durationSignal, notificationsSignal)
-//            .startWithValues { [weak self] (name, basis, startTime, duration, notification) in
-//                self?.selectedName = name as? String
-//                self?.selectedBasis = basis as? [Int]
-//                self?.selectedStartTime = startTime as? Date
-//                self?.selectedDuration = duration as? Endurance
-//                self?.selectedNotifications = notification as? Bool
-//                self?.moveToNextEditingState()
-//            }
     }
     
     // MARK: - Update state
@@ -419,15 +420,15 @@ extension EditActivityVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let
-            editRow = EditRow(rawValue: (indexPath as NSIndexPath).row),
+        guard
+            let editRow = EditRow(rawValue: (indexPath as NSIndexPath).row),
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: editRow.expandableCellType())) as? ObservableControlCell,
             let valueSignal = cell.signalForValueChange()
         else {
             return UITableViewCell()
         }
         
-        if let values = initialValuesForCells , values.count == Constants.numberOfRows {
+        if let values = initialValuesForCells, values.count == Constants.numberOfRows {
             cell.control.setInitialValue(values[(indexPath as NSIndexPath).row])
         }
         
