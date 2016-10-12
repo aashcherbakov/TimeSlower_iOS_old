@@ -58,6 +58,10 @@ public struct Activity: Persistable {
         self.averageSuccess = averageSuccess
         self.stats = stats
     }
+    
+    public func basis() -> Basis {
+        return Basis.basisFromWeekdays(days)
+    }
 }
 
 /**

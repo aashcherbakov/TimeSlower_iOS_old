@@ -27,10 +27,6 @@ class MotivationViewController: UIViewController {
         }
     }
     
-    @IBAction func editButtonTapped(_ sender: AnyObject) {
-        
-    }
-    
     @IBAction func okButtonTapped(_ sender: AnyObject) {
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
@@ -49,7 +45,7 @@ class MotivationViewController: UIViewController {
         guard let activity = activity else { return }
         
         activityNameLabel.text = activity.name
-//        activityBasisLabel.text = activity.activityBasis().description()
+        activityBasisLabel.text = activity.basis().description()
         
         summaryLabel.attributedText = motivationDescriptionForActivity(activity)
         
@@ -66,15 +62,14 @@ class MotivationViewController: UIViewController {
     // MARK: - Private Functions
     
     fileprivate func descriptionForActivityBasis(_ activity: Activity) -> String {
-//        guard let basis = Basis(rawValue: activity.basis.intValue) else { return "" }
-//        switch basis {
-//        case .random:
-//            return "\(activity.days.count) days a week"
-//        case .daily: return "daily"
-//        case .weekends: return "on weekends"
-//        case .workdays: return "during workdays"
-//        }
-        return ""
+        let basis = activity.basis()
+        
+        switch basis {
+        case .random: return "\(activity.days.count) days a week"
+        case .daily: return "daily"
+        case .weekends: return "on weekends"
+        case .workdays: return "during workdays"
+        }
     }
     
     fileprivate func setupMotivationControlWithActivity(_ activity: Activity) {
@@ -90,7 +85,7 @@ class MotivationViewController: UIViewController {
     // TODO: move to activity?
     fileprivate func motivationDescriptionForActivity(_ activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
-        let duration = String(activity.timing.timeToSave)
+        let duration = String(Int(activity.timing.timeToSave))
         let basis = descriptionForActivityBasis(activity)
         let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercased()
         
@@ -120,9 +115,8 @@ class MotivationViewController: UIViewController {
     
     // TODO: move to activity?
     fileprivate func lifeStatsForActivity(_ activity: Activity) -> LifetimeStats {
-//        let days = activity.profile.numberOfDaysTillEndOfLifeSinceDate(Date())
-//        let hours = TimeCalculator().totalHours(inDays: days, duration: activity.timing.timeToSave.intValue, busyDays: activity.days.count)
-        return LifetimeStats(withHours: NSNumber(value: 0))
+        let hours = activity.stats.summHours
+        return LifetimeStats(withHours: NSNumber(value: hours))
     }
     
     fileprivate func sharingImageForActivity(_ activity: Activity) -> UIImage {
