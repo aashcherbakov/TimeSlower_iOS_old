@@ -55,7 +55,7 @@ class MainNavigationController: UINavigationController {
     
     private func homeViewController(withProfile profile: Profile) -> UIViewController {
         let homeController: HomeViewController = ControllerFactory.createController()
-        homeController.profile?.value = profile
+        homeController.profile.value = profile
         return homeController
     }
     

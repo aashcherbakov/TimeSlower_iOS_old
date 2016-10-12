@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -49,30 +48,20 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Qr-6W-U4U" userLabel="Legend View">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Used min. / Planned to use" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LA1-i9-z8b">
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
-                                                <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved min. / Planned to save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZI-MX-jMW">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Saved min. / Planned to save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZI-MX-jMW">
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                                 <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="routineLegend" translatesAutoresizingMaskIntoConstraints="NO" id="TUQ-ve-UUW"/>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goalLegend" translatesAutoresizingMaskIntoConstraints="NO" id="3g3-nm-7Jw"/>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="dZI-MX-jMW" firstAttribute="leading" secondItem="TUQ-ve-UUW" secondAttribute="trailing" constant="8" id="6gc-aD-Yc9"/>
-                                            <constraint firstItem="TUQ-ve-UUW" firstAttribute="centerX" secondItem="3g3-nm-7Jw" secondAttribute="centerX" id="SJ2-DK-TEj"/>
+                                            <constraint firstItem="dZI-MX-jMW" firstAttribute="centerY" secondItem="1Qr-6W-U4U" secondAttribute="centerY" id="Q8M-Mc-9UY"/>
                                             <constraint firstAttribute="centerX" secondItem="dZI-MX-jMW" secondAttribute="centerX" constant="-10" id="hab-AN-jC3"/>
-                                            <constraint firstAttribute="centerY" secondItem="LA1-i9-z8b" secondAttribute="top" constant="-2" id="mVG-e9-zce"/>
-                                            <constraint firstItem="LA1-i9-z8b" firstAttribute="leading" secondItem="3g3-nm-7Jw" secondAttribute="trailing" constant="8" id="rON-zy-BKX"/>
-                                            <constraint firstAttribute="centerY" secondItem="dZI-MX-jMW" secondAttribute="bottom" constant="2" id="tRH-dN-5db"/>
                                             <constraint firstItem="TUQ-ve-UUW" firstAttribute="centerY" secondItem="dZI-MX-jMW" secondAttribute="centerY" id="uOJ-zw-yvz"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="67" id="wNC-pL-cls"/>
                                             <constraint firstAttribute="height" constant="67" id="yBn-H5-Jwc"/>
-                                            <constraint firstItem="LA1-i9-z8b" firstAttribute="centerY" secondItem="3g3-nm-7Jw" secondAttribute="centerY" constant="0.5" id="ySi-FP-yl2"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -150,7 +139,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="goalLegend" width="10" height="11"/>
         <image name="menuIcon" width="24" height="16"/>
         <image name="routineLegend" width="10" height="11"/>
         <image name="whiteCurve" width="320" height="30"/>

@@ -26,8 +26,8 @@ internal class HomeViewController: UIViewController {
     @IBOutlet fileprivate(set) weak var closestActivityDisplay: ClosestActivityDisplay!
     @IBOutlet fileprivate(set) weak var circleSatsView: CircleStatsView!
     
-    var profile: MutableProperty<Profile>?
-    var closestActivity: MutableProperty<Activity>?
+    var profile = MutableProperty<Profile?>(nil)
+    var closestActivity = MutableProperty<Activity?>(nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +46,12 @@ internal class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func controlFlowButtonTapped(_ sender: UIButton) {
-        guard let activity = closestActivity else { return }
+        guard let activity = closestActivity.value else { return }
         
         if sender.titleLabel?.text == Constants.startNowButtonTitle {
-            startActivity(activity.value)
+            startActivity(activity)
         } else if sender.titleLabel?.text == Constants.finishNowButtonTitle {
-            finishActivity(activity.value)
+            finishActivity(activity)
 //            closestActivity = profile?.value.findCurrentActivity()
         }
     }
@@ -88,11 +88,10 @@ internal class HomeViewController: UIViewController {
     // MARK: - Private Functions - Design
     
     fileprivate func setupEvents() {
-//        rac_valuesForKeyPath("profile", observer: self).toSignalProducer()
-//            .startWithNext { [weak self] (_) in
-//                self?.setupClosestActvityDisplay()
-//                self?.setupControlFlowButton()
-//        }
+        profile.producer.startWithValues { [weak self] (profile) in
+            self?.setupClosestActvityDisplay()
+            self?.setupControlFlowButton()
+        }
     }
     
     fileprivate func setupDesign() {
@@ -104,7 +103,7 @@ internal class HomeViewController: UIViewController {
         controlFlowButton.layer.cornerRadius = Constants.controlFlowButtonHeight / 2
         controlFlowButtonHeight.constant = Constants.controlFlowButtonHeight
 
-        if let closestActivity = closestActivity {
+        if let closestActivity = closestActivity.value {
 //            let buttonTitle = closestActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
 //            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
             controlFlowButton.isEnabled = true

@@ -200,6 +200,9 @@
 		F0C2FF7D1DA06B9000CB79CB /* ProfileCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */; };
 		F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */; };
 		F0C2FF811DAE7C5900CB79CB /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */; };
+		F0C2FF841DAED6C800CB79CB /* ActivityScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */; };
+		F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */; };
+		F0C2FF891DAED96E00CB79CB /* FakeActivityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */; };
 		F0CC66CE1D90CD3700D21BA4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */; };
 		F0CC66CF1D90CD3700D21BA4 /* BaseDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */; };
 		F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */; };
@@ -529,6 +532,9 @@
 		F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCountryCell.xib; sourceTree = "<group>"; };
 		F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHeight.swift; sourceTree = "<group>"; };
 		F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
+		F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityScheduler.swift; sourceTree = "<group>"; };
+		F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySchedulerTests.swift; sourceTree = "<group>"; };
+		F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeActivityFactory.swift; sourceTree = "<group>"; };
 		F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/TestHelper.swift; sourceTree = "<group>"; };
 		F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseDataStoreTest.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/BaseDataStoreTest.swift; sourceTree = "<group>"; };
 		F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
@@ -867,6 +873,8 @@
 				89E9C7F71D934486008D18A0 /* TimeMachine */,
 				89E9C7A31D934215008D18A0 /* ProfileStatsCalculator.swift */,
 				89E9C7A41D934215008D18A0 /* ProfileStatsCalculatorTests.swift */,
+				F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */,
+				F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */,
 				89E9C7AB1D934215008D18A0 /* StaticDateFormatter.swift */,
 				89E9C7AE1D934215008D18A0 /* SuccessCalculator.swift */,
 				89E9C7AF1D934215008D18A0 /* SuccessCalculatorTests.swift */,
@@ -883,6 +891,7 @@
 			children = (
 				F009AED71BD9CEA4007F38A9 /* Info.plist */,
 				F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */,
+				F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */,
 				F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */,
 				F0A76E6A1D9372240096208E /* FakeCoreDataStack.swift */,
 			);
@@ -965,9 +974,7 @@
 				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
 				F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */,
 				F0A577341D4EC1A900D2039A /* Views */,
-				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
-				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
-				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
+				F0C2FF821DAECECB00CB79CB /* Unused */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1175,6 +1182,16 @@
 				F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		F0C2FF821DAECECB00CB79CB /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
+				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
+				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		F0CDAA0A1D90C69F0090D7E3 /* TimeSlowerDataBase */ = {
@@ -1959,6 +1976,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F062A34C1D2AB2F200933E09 /* NSString+Extension.swift in Sources */,
+				F0C2FF841DAED6C800CB79CB /* ActivityScheduler.swift in Sources */,
 				89E9C7D11D934224008D18A0 /* Timing.swift in Sources */,
 				89E9C7911D9341F5008D18A0 /* Constants.swift in Sources */,
 				89E9C7C41D934215008D18A0 /* StaticDateFormatter.swift in Sources */,
@@ -2000,7 +2018,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				89E9C7DE1D9342D8008D18A0 /* ProfileAdapterTests.swift in Sources */,
+				F0C2FF891DAED96E00CB79CB /* FakeActivityFactory.swift in Sources */,
 				89E9C7E61D9343BF008D18A0 /* DataStoreTests.swift in Sources */,
+				F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */,
 				89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */,
 				89E9C7EF1D934422008D18A0 /* StatsTests.swift in Sources */,
 				F0A76E6B1D9372240096208E /* FakeCoreDataStack.swift in Sources */,

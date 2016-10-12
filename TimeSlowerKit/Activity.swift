@@ -19,6 +19,7 @@ public struct Activity: Persistable {
     public let notifications: Bool
     public let averageSuccess: Double
     
+    private let timeMachine = TimeMachine()
     
     public init(withLifetimeDays
         lifetimeDays: Int,
@@ -61,6 +62,18 @@ public struct Activity: Persistable {
     
     public func basis() -> Basis {
         return Basis.basisFromWeekdays(days)
+    }
+    
+    public func startsLaterThen(date: Date) -> Bool {
+        let updatedStartTime = timeMachine.updatedTime(timing.startTime, forDate: date)
+        return updatedStartTime.compare(date) == .orderedDescending
+    }
+    
+    public func startsEarlierThen(activity: Activity) -> Bool {
+        let date = Date()
+        let currentActivityStartTime = timeMachine.updatedTime(timing.startTime, forDate: date)
+        let otherActivityStartTime = timeMachine.updatedTime(activity.timing.startTime, forDate: date)
+        return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
     }
 }
 

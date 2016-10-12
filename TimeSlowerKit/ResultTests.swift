@@ -26,12 +26,11 @@ class ResultTests: XCTestCase {
         testFinishDate = shortTimeFormatter.date(from: "8/21/16, 10:45 AM")
        
         testTiming = Timing(
-            duration: Endurance(value: 40, period: .minutes),
-            alarmTime: Date(),
+            withDuration: Endurance(value: 40, period: .minutes),
             startTime: testStartDate,
-            finishTime: testFinishDate,
-            manuallyStarted: nil,
-            timeToSave: 10)
+            timeToSave: 10,
+            alarmTime: Date(),
+            manuallyStarted: testFinishDate)
     }
     
     override func tearDown() {

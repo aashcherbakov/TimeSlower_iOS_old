@@ -27,10 +27,7 @@ class CircleStatsVC: UIViewController {
     var period: PastPeriod!
     var pageIndex: Int!
     
-    @IBOutlet weak var circleProgress: CircleProgress! {
-        didSet {
-        }
-    }
+    @IBOutlet weak var circleProgress: CircleProgress! 
     @IBOutlet weak var innerCircle: CircleProgress! {
         didSet {
             innerCircle.progressColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)

@@ -105,8 +105,6 @@ class DaySelectorTests: XCTestCase {
         // then
         XCTAssertTrue(areAllButtonsSelected(inArray: sut.dayButtons),
             "it should reset all buttons to selected state")
-        XCTAssertTrue(allButtonsHaveCircleForms(sut.dayButtons),
-            "it should rerender all buttons to circles")
         XCTAssertEqual(sut.dayButtons.count, 7,
             "it should have 7 active buttons")
     }

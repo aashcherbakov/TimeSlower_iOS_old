@@ -57,12 +57,11 @@ class ResultAdapterTests: BaseDataStoreTest {
     
     func fakeTiming() -> Timing {
         return Timing(
-            duration: fakeEndurance(),
-            alarmTime: NSDate() as Date,
+            withDuration: fakeEndurance(),
             startTime: tenThirtyAM(),
-            finishTime: elevenTenAM(),
-            manuallyStarted: nil,
-            timeToSave: 10)
+            timeToSave: 10,
+            alarmTime: NSDate() as Date,
+            manuallyStarted: nil)
     }
     
     func fakeEndurance() -> Endurance {

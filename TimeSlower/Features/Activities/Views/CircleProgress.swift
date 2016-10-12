@@ -75,7 +75,6 @@ class CircleProgress: UIView {
             animationTimer = nil
         }
         
-        
         if animated {
             animateProgressBarChangeFrom(0.0, endProgress:CGFloat(progress), duration:Constants.animationDuration)
         } else {
@@ -145,8 +144,10 @@ class CircleProgress: UIView {
         
         context.setFillColor(trackColor.cgColor)
         context.beginPath()
-//        CGContextAddArc(context, center.x, center.y, radius, progressAngle.degreesToRadians, (startAngle + 360).degreesToRadians, 0)
-//        CGContextAddArc(context, center.x, center.y, radius - progressBarWidth, (startAngle + 360).degreesToRadians, progressAngle.degreesToRadians, 1)
+        
+        let point = CGPoint(x: center.x, y: center.y)
+        context.addArc(center: point, radius: radius, startAngle: progressAngle.degreesToRadians, endAngle: (startAngle + 360).degreesToRadians, clockwise: false)
+        context.addArc(center: point, radius: radius - progressBarWidth, startAngle: (startAngle + 360).degreesToRadians, endAngle: progressAngle.degreesToRadians, clockwise: true)
         context.closePath()
         context.fillPath()
     }
