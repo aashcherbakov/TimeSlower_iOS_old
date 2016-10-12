@@ -19,6 +19,7 @@ internal class EditActivityVC: UIViewController {
     fileprivate struct Constants {
         static let numberOfRows = 5
         static let defaultCellHeight: CGFloat = 50
+        static let iPhone5CellHeight: CGFloat = 40
     }
     
     /**
@@ -43,6 +44,7 @@ internal class EditActivityVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeSaverView: TimeSaver!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeSaverViewHeight: NSLayoutConstraint!
     
     var flow: Flow?
     var editingState: EditingState?
@@ -168,10 +170,12 @@ internal class EditActivityVC: UIViewController {
     // MARK: - Private Functions
     
     fileprivate func setupDesign() {
+        setupTimeSaverHeight()
+        
         if activity != nil {
             flow = .editing
             editingState = .fullHouse
-//            timeSaverView.selectedDuration = activity?.timing.duration
+//            timeSaverView.selectedDuration = activity?.value.timing.duration
 //            timeSaverView.selectedValue = Endurance(value: Int((activity?.timing.timeToSave.int32Value)!), period: (activity?.timing.duration.period)!)
         } else {
             flow = .creating
@@ -183,6 +187,15 @@ internal class EditActivityVC: UIViewController {
         footerView = tableFooterView()
         tableView.tableFooterView = footerView
         titleLabel.text = (activity != nil) ? "Edit activity" : "New activity"
+    }
+    
+    private func setupTimeSaverHeight() {
+        switch ScreenHight() {
+        case .iPhone5:
+            timeSaverViewHeight.constant = 100
+        default:
+            timeSaverViewHeight.constant = 140
+        }
     }
     
     fileprivate func setupData() {
@@ -199,7 +212,9 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func tableFooterView() -> UIView {
-        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
+        let screenHeight = ScreenHight()
+        let height = screenHeight == ScreenHight.iPhone5 ? Constants.iPhone5CellHeight : Constants.defaultCellHeight
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
         let image = UIImage(named: "whiteCurve")
         let view = UIView(frame: frame)
         let imageView = UIImageView(frame: frame)

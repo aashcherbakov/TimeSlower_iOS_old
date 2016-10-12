@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="SourceSansPro-Regular.ttf">
+        <array key="SourceSansPro-Regular.ttf">
             <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DaySelector" customModule="TimeSlower">
@@ -49,129 +45,121 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-ja-6gy" userLabel="backButton">
-                    <rect key="frame" x="-10" y="0.0" width="28" height="67"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="HeH-Fb-Uqu"/>
                     </constraints>
-                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" image="backIconGray">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAn-gP-tIo">
-                    <rect key="frame" x="18" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AAn-gP-tIo" secondAttribute="height" multiplier="1:1" id="CWT-gL-ipX"/>
                         <constraint firstAttribute="width" constant="28" id="jMC-dH-wwK"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="wMP-AT-nvk"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bd5-1r-wiI">
-                    <rect key="frame" x="52" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="VVv-mK-WCE"/>
                         <constraint firstAttribute="width" secondItem="bd5-1r-wiI" secondAttribute="height" multiplier="1:1" id="yUf-ws-DH4"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="b7G-jH-DfJ"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-Mh-gg6">
-                    <rect key="frame" x="86" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="zSw-Mh-gg6" secondAttribute="height" multiplier="1:1" id="Dxj-io-eaz"/>
                         <constraint firstAttribute="width" constant="28" id="ehR-MO-u9i"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="uMe-Ig-WEe"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-i3-1ca">
-                    <rect key="frame" x="120" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="0UF-4P-go5"/>
                         <constraint firstAttribute="width" secondItem="Sgd-i3-1ca" secondAttribute="height" multiplier="1:1" id="tz8-sN-uST"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="V8s-By-7cg"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROr-qo-8PK">
-                    <rect key="frame" x="154" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="L2y-lA-PGi"/>
                         <constraint firstAttribute="width" secondItem="ROr-qo-8PK" secondAttribute="height" multiplier="1:1" id="ib3-B7-Cme"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="HyE-ff-cjB"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-Qf-EBo">
-                    <rect key="frame" x="188" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="uYW-Qf-EBo" secondAttribute="height" multiplier="1:1" id="OHZ-Yd-y8g"/>
                         <constraint firstAttribute="width" constant="28" id="wFS-bQ-ars"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="Xgh-eP-jei"/>
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-TQ-3B4">
-                    <rect key="frame" x="222" y="20" width="28" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="789-BH-uro"/>
                         <constraint firstAttribute="width" secondItem="e3f-TQ-3B4" secondAttribute="height" multiplier="1:1" id="eMc-UR-3KF"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="daySelected:" destination="-1" eventType="touchUpInside" id="Jha-3h-1rm"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="e3f-TQ-3B4" firstAttribute="leading" secondItem="uYW-Qf-EBo" secondAttribute="trailing" constant="6" id="0pu-TT-rpm"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e3f-TQ-3B4" secondAttribute="trailing" constant="8" id="AOO-Ve-Kdo"/>
@@ -187,7 +175,7 @@
                 <constraint firstItem="uYW-Qf-EBo" firstAttribute="centerY" secondItem="e3f-TQ-3B4" secondAttribute="centerY" id="eEN-7e-iEK"/>
                 <constraint firstItem="AAn-gP-tIo" firstAttribute="leading" secondItem="8hd-ja-6gy" secondAttribute="trailing" id="gfB-rp-cmz"/>
                 <constraint firstItem="zSw-Mh-gg6" firstAttribute="centerY" secondItem="bd5-1r-wiI" secondAttribute="centerY" id="hhu-Da-nPs"/>
-                <constraint firstItem="8hd-ja-6gy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-10" id="oAV-Xr-MOn"/>
+                <constraint firstItem="8hd-ja-6gy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="oAV-Xr-MOn"/>
                 <constraint firstItem="Sgd-i3-1ca" firstAttribute="centerY" secondItem="ROr-qo-8PK" secondAttribute="centerY" id="odq-X4-hEw"/>
                 <constraint firstItem="bd5-1r-wiI" firstAttribute="leading" secondItem="AAn-gP-tIo" secondAttribute="trailing" constant="6" id="p2U-fm-VgI"/>
                 <constraint firstItem="bd5-1r-wiI" firstAttribute="centerY" secondItem="AAn-gP-tIo" secondAttribute="centerY" id="yQr-d0-c1b"/>
@@ -199,10 +187,10 @@
                     <exclude reference="AOO-Ve-Kdo"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="396" y="588.5"/>
+            <point key="canvasLocation" x="-67" y="438"/>
         </view>
     </objects>
     <resources>
-        <image name="backIconGray" width="9" height="16"/>
+        <image name="backIconGray" width="7" height="12"/>
     </resources>
 </document>
