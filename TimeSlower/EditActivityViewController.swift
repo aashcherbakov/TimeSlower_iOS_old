@@ -74,6 +74,8 @@ internal class EditActivityVC: UIViewController {
     
     fileprivate var footerView: UIView?
     
+    private let activityStore = ActivityStore()
+    
     dynamic fileprivate var lastExpandedCellIndex: IndexPath?
     fileprivate var expandedCellIndex: IndexPath? {
         willSet {
@@ -112,43 +114,52 @@ internal class EditActivityVC: UIViewController {
     }
     
     @IBAction func okButtonTapped(_ sender: AnyObject) {
-        if flow == .creating && editingState == .fullHouse {
-            if expandedCellIndex == nil {
-                createActivity()
-                showStatsInActivityMotivationVC()
+        if creatingFlowIsFinished() {
+            if allCellsAreCollapsed() {
+                createActivityAndMoveToStats()
             } else {
-                expandedCellIndex = nil
+                collapseAllCells()
             }
             
         } else if flow == .editing {
-            if expandedCellIndex == nil {
+            if allCellsAreCollapsed() {
                 saveActivity()
-                showStatsInActivityMotivationVC()
+//                showStatsInActivityMotivationVC()
             } else {
-                expandedCellIndex = nil
+                collapseAllCells()
             }
         } else {
             forceMoveToNextControl()
         }
     }
     
-    fileprivate func createActivity() {
-        guard
-            let name = selectedName,
-            let basis = selectedBasis,
-            let startTime = selectedStartTime,
-            let duration = selectedDuration,
-            let notifications = selectedNotifications,
-            let timeToSave = selectedTimeToSave,
-            let profile = userProfile else {
-                
-            // TODO: submit notification that something is missing
-            return
+    private func createActivityAndMoveToStats() {
+        if let activity = createActivity() {
+            showMotivation(forActivity: activity)
+        } else {
+            // present alert with missing data
         }
-        
-        // TODO: switch to check type
-//        activity = Activity.createActivityWithType(.routine, name: name, selectedDays: basis, startTime: startTime,
-//            duration: duration, notifications: notifications, timeToSave: timeToSave, forProfile: profile)
+    }
+    
+    private func collapseAllCells() {
+        expandedCellIndex = nil
+    }
+    
+    private func creatingFlowIsFinished() -> Bool {
+        return flow == .creating && editingState == .fullHouse
+    }
+    
+    private func allCellsAreCollapsed() -> Bool {
+        return expandedCellIndex == nil
+    }
+    
+    fileprivate func createActivity() -> Activity? {
+        if let newActivity = activityStore.createActivity(withName: selectedName, selectedDays: selectedBasis, startTime: selectedStartTime, duration: selectedDuration, timeToSave: selectedTimeToSave, notifications: selectedNotifications) {
+            
+            return newActivity
+        } else {
+            return nil
+        }
     }
     
     fileprivate func saveActivity() {
@@ -346,13 +357,10 @@ internal class EditActivityVC: UIViewController {
         control.textFieldView.textField.resignFirstResponder()
     }
     
-    fileprivate func showStatsInActivityMotivationVC() {
-        guard let activity = activity else {
-            return
-        }
+    fileprivate func showMotivation(forActivity activity: Activity) {
         
         let motivationVC: MotivationViewController = ControllerFactory.createController()
-        motivationVC.setupWithActivity(activity.value)
+        motivationVC.setupWithActivity(activity)
         
         if let navigationController = navigationController {
             navigationController.pushViewController(motivationVC, animated: true)

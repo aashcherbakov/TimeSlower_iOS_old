@@ -199,6 +199,7 @@
 		F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF7A1DA06B9000CB79CB /* ProfileCountryCell.swift */; };
 		F0C2FF7D1DA06B9000CB79CB /* ProfileCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */; };
 		F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */; };
+		F0C2FF811DAE7C5900CB79CB /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */; };
 		F0CC66CE1D90CD3700D21BA4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */; };
 		F0CC66CF1D90CD3700D21BA4 /* BaseDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */; };
 		F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */; };
@@ -527,6 +528,7 @@
 		F0C2FF7A1DA06B9000CB79CB /* ProfileCountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCountryCell.swift; sourceTree = "<group>"; };
 		F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCountryCell.xib; sourceTree = "<group>"; };
 		F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHeight.swift; sourceTree = "<group>"; };
+		F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
 		F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/TestHelper.swift; sourceTree = "<group>"; };
 		F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseDataStoreTest.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/BaseDataStoreTest.swift; sourceTree = "<group>"; };
 		F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
@@ -1413,6 +1415,7 @@
 				F07974B71D04CDD000B72168 /* Cells */,
 				F0EB8A3C1C4ABE0A009B974A /* Views */,
 				F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */,
+				F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */,
 				F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */,
 				F062A3451D29B16100933E09 /* ObservableControlCell.swift */,
 				F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */,
@@ -1868,6 +1871,7 @@
 				F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */,
 				89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */,
 				F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */,
+				F0C2FF811DAE7C5900CB79CB /* ActivityStore.swift in Sources */,
 				F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,

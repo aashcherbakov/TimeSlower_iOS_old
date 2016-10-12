@@ -71,13 +71,13 @@ internal struct ActivityConverter: PersistableConverter {
     
     fileprivate func timingFromTimingData(_ data: TimingData) -> Timing {
         let duration = enduranceFromContinuation(data.duration)
+        
         return Timing(
-            duration: duration,
-            alarmTime: data.alarmTime,
+            withDuration: duration,
             startTime: data.startTime,
-            finishTime: data.finishTime,
-            manuallyStarted: data.manuallyStarted,
-            timeToSave: data.timeToSave)
+            timeToSave: data.timeToSave,
+            alarmTime: data.alarmTime,
+            manuallyStarted: data.manuallyStarted)
     }
     
     fileprivate func timingDataFromTiming(_ timing: Timing) -> TimingData {

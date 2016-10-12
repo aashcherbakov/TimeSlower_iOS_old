@@ -50,4 +50,5 @@ public struct DataStore {
         let adapter = ActivityAdapter(withCoreDataStack: coreDataStack)
         return adapter.activities(forDate: date, type: type)
     }
+    
 }
