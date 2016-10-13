@@ -25,12 +25,17 @@ public struct DataStore {
      
      - returns: Persistable object translated from entity
      */
-    public func create<T: Persistable>(_ object: T, withParent parent: T? = nil) {
+    public func create<T: Persistable, U: Persistable>(_ object: T, withParent parent: U) {
+        let adapter = adapterFactory.adapter(T.self)
+        _ = adapter.createObject(object, parent: parent)
+    }
+    
+    public func create<T: Persistable>(_ object: T) {
         let adapter = adapterFactory.adapter(T.self)
         adapter.createObject(object)
     }
     
-    public func update<T: Persistable>(_ object: Persistable) -> T {
+    public func update<T: Persistable>(_ object: T) -> T {
         let adapter = adapterFactory.adapter(T.self)
         let updated: T = adapter.updateObject(object)
         return updated

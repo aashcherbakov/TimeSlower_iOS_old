@@ -31,4 +31,8 @@ public struct Timing {
         
         return startTime.addingTimeInterval(duration.seconds())
     }
+    
+    public func update(withManuallyStarted started: Date?) -> Timing {
+        return Timing(withDuration: duration, startTime: startTime, timeToSave: timeToSave, alarmTime: alarmTime, manuallyStarted: started)
+    }
 }

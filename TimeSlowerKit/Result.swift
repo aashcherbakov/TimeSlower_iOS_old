@@ -42,10 +42,16 @@ public struct Result: Persistable {
     
     // MARK: - Public
     
-    public init(withActivity activity: Activity) {
+    public init(withActivity activity: Activity, factFinish: Date = Date()) {
         let timing = activity.timing
-        startTime = timing.startTime as Date
-        finishTime = (timing.manuallyStarted ?? timing.finishTime) as Date
+        startTime = timing.startTime
+        
+        if let _ = timing.manuallyStarted {
+            finishTime = factFinish
+        } else {
+            self.finishTime = timing.finishTime
+        }
+        
         duration = timeMachine.minutesFromStart(startTime, toFinish: finishTime)
         success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: finishTime)
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)

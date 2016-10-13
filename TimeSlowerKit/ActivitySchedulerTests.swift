@@ -64,7 +64,7 @@ class ActivitySchedulerTests: BaseDataStoreTest {
     }
     
 
-    func test_nextClosestActivity_none() {
+    func test_nextClosestActivity() {
         let ten = shortTimeFormatter.date(from: "10/11/2016, 10:00 AM")!
         let tenThirty = shortTimeFormatter.date(from: "10/11/2016, 10:30 AM")!
         
@@ -75,5 +75,25 @@ class ActivitySchedulerTests: BaseDataStoreTest {
         XCTAssertNotNil(nextClosestActivity)
         XCTAssertEqual(nextClosestActivity?.name, activity.name)
         XCTAssertEqual(nextClosestActivity?.timing.startTime, activity.timing.startTime)
+    }
+    
+    func test_currentActivity() {
+        let tenFifteen = shortTimeFormatter.date(from: "10/18/2016, 10:45 AM")!
+        let activity = factory.fakeActivity()
+        fakeDataStore.create(activity)
+        
+        let current = sut.currentActivity(date: tenFifteen)
+        XCTAssertNotNil(current)
+        XCTAssertEqual(current?.name, activity.name)
+        XCTAssertEqual(current?.timing.startTime, activity.timing.startTime)
+    }
+    
+    func test_currentActivity_none() {
+        let tenFifteen = shortTimeFormatter.date(from: "10/18/2016, 10:30 AM")!
+        let activity = factory.fakeActivity()
+        fakeDataStore.create(activity)
+        
+        let current = sut.currentActivity(date: tenFifteen)
+        XCTAssertNil(current)
     }
 }

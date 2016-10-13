@@ -65,6 +65,15 @@ public struct FakeActivityFactory {
             manuallyStarted: nil)
     }
     
+    
+    /// Returns activity
+    /// - name:         "Morning shower"
+    /// - days:         [.first, .second, .third]
+    /// - startTime:    "8/10/2016, 10:30 AM"
+    /// - duration:     40 minutes
+    /// - timeToSave:   10 minutes
+    ///
+    /// - returns: Activity
     func fakeActivity() -> Activity {
         return Activity(withLifetimeDays: 18105,
                         name: "Morning shower",

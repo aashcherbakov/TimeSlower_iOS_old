@@ -46,7 +46,7 @@ class ResultTests: XCTestCase {
     func test_init() {
         let testActivity = Activity(withLifetimeDays: 18105, name: "Blah", type: .routine, days: [], timing: testTiming, notifications: false)
         
-        let result = Result(withActivity: testActivity)
+        let result = Result(withActivity: testActivity, factFinish: testFinishDate)
         
         XCTAssertEqual(result.startTime, testStartDate)
         XCTAssertEqual(result.finishTime, testFinishDate)

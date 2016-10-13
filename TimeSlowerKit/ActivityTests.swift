@@ -7,29 +7,41 @@
 //
 
 import XCTest
+@testable import TimeSlowerKit
 
-class ActivityTests: XCTestCase {
+class ActivityTests: BaseDataStoreTest {
 
+    var sut: Activity!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = FakeActivityFactory().fakeActivity()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
         super.tearDown()
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_startsLaterThenDate() {
+        let date = shortTimeFormatter.date(from: "10/18/2016, 10:00 AM")!
+        XCTAssertTrue(sut.startsLaterThen(date: date))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_startsLaterThenDate_false() {
+        let date = shortTimeFormatter.date(from: "10/18/2016, 12:00 PM")!
+        XCTAssertFalse(sut.startsLaterThen(date: date))
     }
-
+    
+    func test_startEarlierThenActivity_false() {
+        let earlyDate = shortTimeFormatter.date(from: "10/15/2016, 8:00 AM")!
+        let earlyActivity = FakeActivityFactory().fakeActivity(startTime: earlyDate)
+        XCTAssertFalse(sut.startsEarlierThen(activity: earlyActivity))
+    }
+    
+    func test_startEarlierThenActivity_true() {
+        let laterDate = shortTimeFormatter.date(from: "10/20/2016, 10:31 AM")!
+        let laterActivity = FakeActivityFactory().fakeActivity(startTime: laterDate)
+        XCTAssertTrue(sut.startsEarlierThen(activity: laterActivity))
+    }
 }

@@ -60,20 +60,55 @@ public struct Activity: Persistable {
         self.stats = stats
     }
     
+    public func update(withTiming newTiming: Timing) -> Activity {
+        return Activity(withStats: stats, name: name, type: type, days: days, timing: newTiming, notifications: notifications, averageSuccess: averageSuccess, resourceId: resourceId)
+    }
+    
+    
+    /// Returns basis constructed of weekdays
+    ///
+    /// - returns: Basis instance
     public func basis() -> Basis {
         return Basis.basisFromWeekdays(days)
     }
     
+    public func isGoingNow(date: Date = Date()) -> Bool {
+        return startsEarlierThen(date: date) && endsLaterThen(date: date)
+    }
+    
+    public func startsEarlierThen(date: Date) -> Bool {
+        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
+        return updatedStartTime.compare(date) == .orderedAscending
+    }
+    
     public func startsLaterThen(date: Date) -> Bool {
-        let updatedStartTime = timeMachine.updatedTime(timing.startTime, forDate: date)
+        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
         return updatedStartTime.compare(date) == .orderedDescending
+    }
+    
+    public func endsLaterThen(date: Date) -> Bool {
+        let updatedFinishTime = timeMachine.updatedTime(finishTime(), forDate: date)
+        return updatedFinishTime.compare(date) == .orderedDescending
     }
     
     public func startsEarlierThen(activity: Activity) -> Bool {
         let date = Date()
-        let currentActivityStartTime = timeMachine.updatedTime(timing.startTime, forDate: date)
-        let otherActivityStartTime = timeMachine.updatedTime(activity.timing.startTime, forDate: date)
+        let currentActivityStartTime = timeMachine.updatedTime(startTime(), forDate: date)
+        let otherActivityStartTime = timeMachine.updatedTime(activity.startTime(), forDate: date)
         return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
+    }
+    
+    public func startTime() -> Date {
+        return timing.manuallyStarted ?? timing.startTime
+    }
+    
+    public func finishTime() -> Date {
+        var factFinishTime = timing.finishTime
+        if let manuallyStarted = timing.manuallyStarted {
+            factFinishTime = manuallyStarted.addingTimeInterval(timing.duration.seconds())
+        }
+        
+        return factFinishTime
     }
 }
 
