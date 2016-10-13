@@ -46,7 +46,7 @@ public final class StaticDateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         dateFormatter.locale = Locale.current
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         return dateFormatter
     }()

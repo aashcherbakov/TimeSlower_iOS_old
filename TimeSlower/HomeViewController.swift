@@ -16,6 +16,7 @@ internal class HomeViewController: UIViewController {
         static let controlFlowButtonHeight: CGFloat = 48
         static let startNowButtonTitle = "Start now"
         static let finishNowButtonTitle = "Finish now"
+        static let noActivitiesButtonTitle = "Create Activity"
     }
     
     let transitionManager = MenuTransitionManager()
@@ -47,7 +48,12 @@ internal class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func controlFlowButtonTapped(_ sender: UIButton) {
-        guard let activity = closestActivity.value else { return }
+        guard let activity = closestActivity.value else {
+            if sender.titleLabel?.text == Constants.noActivitiesButtonTitle {
+                createNewActivity()
+            }
+            return
+        }
         
         if sender.titleLabel?.text == Constants.startNowButtonTitle {
             startActivity(activity)
@@ -114,19 +120,18 @@ internal class HomeViewController: UIViewController {
         setupClosestActvityDisplay()
         setupControlFlowButton()
         
+        navigationItem.title = StaticDateFormatter.fullDateFormatter.string(from: Date())
     }
     
-    fileprivate func setupControlFlowButton() {
+    private func setupControlFlowButton() {
         controlFlowButton.layer.cornerRadius = Constants.controlFlowButtonHeight / 2
         controlFlowButtonHeight.constant = Constants.controlFlowButtonHeight
 
         if let closestActivity = closestActivity.value {
             let buttonTitle = closestActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
-            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
-            controlFlowButton.isEnabled = true
+            controlFlowButton.setTitle(buttonTitle, for: .normal)
         } else {
-            controlFlowButton.setTitle("No activities", for: .disabled)
-            controlFlowButton.isEnabled = false
+            controlFlowButton.setTitle(Constants.noActivitiesButtonTitle, for: .normal)
         }
     }
     
@@ -139,9 +144,15 @@ internal class HomeViewController: UIViewController {
     
     // MARK: - Private Function - Navigation
     
-    fileprivate func showStatsControllerForActivity(_ activity: Activity) {
+    private func showStatsControllerForActivity(_ activity: Activity) {
         let controller: ActivityStatsVC = ControllerFactory.createController()
         controller.activity = activity
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func createNewActivity() {
+        let controller: EditActivityVC = ControllerFactory.createController()
+        controller.userProfile = profile.value
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

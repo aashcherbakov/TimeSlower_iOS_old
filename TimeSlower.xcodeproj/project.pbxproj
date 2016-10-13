@@ -218,6 +218,8 @@
 		F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */; };
 		F0D8F5BD1C384FB000D41C78 /* TextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */; };
 		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
+		F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */; };
+		F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -551,6 +553,8 @@
 		F0D86D2B1C376A8200EFA971 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		F0D8F5BC1C384FB000D41C78 /* TextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldView.xib; sourceTree = "<group>"; };
 		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
+		F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCalculator.swift; sourceTree = "<group>"; };
+		F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCalculatorTests.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -876,6 +880,8 @@
 				F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */,
 				F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */,
 				89E9C7AB1D934215008D18A0 /* StaticDateFormatter.swift */,
+				F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */,
+				F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */,
 				89E9C7AE1D934215008D18A0 /* SuccessCalculator.swift */,
 				89E9C7AF1D934215008D18A0 /* SuccessCalculatorTests.swift */,
 				89E9C7831D9341F5008D18A0 /* Constants.swift */,
@@ -1993,6 +1999,7 @@
 				F009AF571BDB10FF007F38A9 /* NSObject+Extension.swift in Sources */,
 				89E9C7B91D934215008D18A0 /* ProfileAdapter.swift in Sources */,
 				89E9C7CB1D934215008D18A0 /* TimeMachine.swift in Sources */,
+				F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */,
 				89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */,
 				89E9C7B61D934215008D18A0 /* Persistable.swift in Sources */,
 				89E9C78F1D9341F5008D18A0 /* Basis.swift in Sources */,
@@ -2019,6 +2026,7 @@
 			files = (
 				89E9C7DE1D9342D8008D18A0 /* ProfileAdapterTests.swift in Sources */,
 				F0C2FF891DAED96E00CB79CB /* FakeActivityFactory.swift in Sources */,
+				F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */,
 				89E9C7E61D9343BF008D18A0 /* DataStoreTests.swift in Sources */,
 				F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */,
 				89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */,

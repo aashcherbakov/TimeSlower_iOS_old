@@ -56,6 +56,8 @@ public struct Result: Persistable {
         success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: finishTime)
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)
         stringDate = dateFormatter.string(from: finishTime)
+        
+        // TODO: update average success for activity
         self.activity = activity
         
         resourceId = UUID().uuidString

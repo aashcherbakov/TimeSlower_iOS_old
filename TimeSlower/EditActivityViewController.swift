@@ -103,6 +103,13 @@ internal class EditActivityVC: UIViewController {
         setupDesign()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(EditActivityVC.backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
     // MARK: - Actions
     
     @IBAction func backButtonTapped(_ sender: AnyObject) {
