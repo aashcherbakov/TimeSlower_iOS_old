@@ -30,7 +30,7 @@ class CircleStatsVC: UIViewController {
     @IBOutlet weak var circleProgress: CircleProgress! 
     @IBOutlet weak var innerCircle: CircleProgress! {
         didSet {
-            innerCircle.progressColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
+            innerCircle.progressTintColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
         }
     }
     @IBOutlet weak var savedTimeLabel: UILabel!
@@ -47,11 +47,11 @@ class CircleStatsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabels()
-        circleProgress.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
-        innerCircle.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
-
-        circleProgress.setProgress(0.7, animated: true)
-        innerCircle.setProgress(0.3, animated: true)
+//        circleProgress.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
+//        innerCircle.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
+//
+//        circleProgress.setProgress(0.7, animated: true)
+//        innerCircle.setProgress(0.3, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

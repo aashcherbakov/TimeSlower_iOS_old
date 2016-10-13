@@ -64,6 +64,4 @@ class ResultTests: XCTestCase {
         XCTAssertEqual(success, 100, "it should have 100% success")
     }
     
-
-
 }

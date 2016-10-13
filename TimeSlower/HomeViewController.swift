@@ -20,6 +20,7 @@ internal class HomeViewController: UIViewController {
     
     let transitionManager = MenuTransitionManager()
     let activityListTransitionManager = ListTransitionManager()
+    let scheduler = ActivityScheduler()
 
     @IBOutlet fileprivate(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
     @IBOutlet fileprivate(set) weak var controlFlowButton: UIButton!
@@ -52,7 +53,7 @@ internal class HomeViewController: UIViewController {
             startActivity(activity)
         } else if sender.titleLabel?.text == Constants.finishNowButtonTitle {
             finishActivity(activity)
-//            closestActivity = profile?.value.findCurrentActivity()
+            closestActivity.value = scheduler.nextClosestActivity()
         }
     }
     
@@ -66,23 +67,38 @@ internal class HomeViewController: UIViewController {
     // MARK: - Private Functions - ActivityDisplay
     
     fileprivate func startActivity(_ activity: Activity) {
-//        activity.timing.manuallyStarted = Date()
+        closestActivity.value = scheduler.start(activity: activity)
+        
         //TODO: update notifications for today
         setupClosestActvityDisplay()
         setupControlFlowButton()
     }
     
     fileprivate func finishActivity(_ activity: Activity) {
-//        activity.finishWithResult()
+        let finishedActivity = scheduler.finish(activity: activity)
+        
+        // TODO: update notifications
 //        activity.deleteScheduledNotificationsForCurrentActivity()
 //        activity.scheduleRestorationTimer()
-//        showStatsControllerForActivity(activity)
+        showStatsControllerForActivity(finishedActivity)
     }
     
     fileprivate func setupClosestActvityDisplay() {
-//        closestActivity = profile?.findCurrentActivity()        
-//        closestActivityDisplay.setupWithActivity(closestActivity)
-//        circleSatsView.displayProgressForProfile(closestActivity?.profile)
+        guard let profile = profile.value else {
+            return
+        }
+        
+        let activity = closestActivityForToday()
+        closestActivityDisplay.setupWithActivity(activity)
+        circleSatsView.displayProgressForProfile(profile)
+    }
+    
+    private func closestActivityForToday() -> Activity? {
+        if let activity = scheduler.currentActivity() {
+            return activity
+        } else {
+            return scheduler.nextClosestActivity()
+        }
     }
 
     // MARK: - Private Functions - Design
@@ -97,6 +113,7 @@ internal class HomeViewController: UIViewController {
     fileprivate func setupDesign() {
         setupClosestActvityDisplay()
         setupControlFlowButton()
+        
     }
     
     fileprivate func setupControlFlowButton() {
@@ -104,8 +121,8 @@ internal class HomeViewController: UIViewController {
         controlFlowButtonHeight.constant = Constants.controlFlowButtonHeight
 
         if let closestActivity = closestActivity.value {
-//            let buttonTitle = closestActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
-//            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
+            let buttonTitle = closestActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
+            controlFlowButton.setTitle(buttonTitle, for: UIControlState())
             controlFlowButton.isEnabled = true
         } else {
             controlFlowButton.setTitle("No activities", for: .disabled)

@@ -96,4 +96,12 @@ class ActivitySchedulerTests: BaseDataStoreTest {
         let current = sut.currentActivity(date: tenFifteen)
         XCTAssertNil(current)
     }
+    
+    func test_startActivity() {
+        
+    }
+    
+    func test_finishActivity() {
+        
+    }
 }

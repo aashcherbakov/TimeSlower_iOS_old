@@ -62,8 +62,8 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     
     func setupCircleProgress() {
 //        circleProgress.progress = activity.stats.averageSuccess.doubleValue
-        circleProgress.progressBarWidth = 14
-        circleProgress.progressColor = UIColor.purpleRed()
+//        circleProgress.progressBarWidth = 14
+//        circleProgress.progressColor = UIColor.purpleRed()
     }
     
     //MARK: - ACTION

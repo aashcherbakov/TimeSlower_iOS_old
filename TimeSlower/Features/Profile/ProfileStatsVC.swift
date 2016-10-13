@@ -64,9 +64,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     
     func setupCircles() {
         for circle in [routinesCircle, goalsCircle] {
-            circle?.progressBarWidth = 2
-            circle?.progressColor = UIColor.white
-            circle?.trackColor = UIColor.darkRed()
+//            circle?.progressBarWidth = 2
+            circle?.trackTintColor = UIColor.white
+            circle?.progressTintColor = UIColor.darkRed()
         }
         
         // TODO: here we should come from date of first use

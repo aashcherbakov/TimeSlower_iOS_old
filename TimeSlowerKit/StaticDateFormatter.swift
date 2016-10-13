@@ -41,4 +41,13 @@ public final class StaticDateFormatter {
         dateFormatter.timeStyle = .short
         return dateFormatter
     }()
+    
+    public static let fullDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        return dateFormatter
+    }()
 }

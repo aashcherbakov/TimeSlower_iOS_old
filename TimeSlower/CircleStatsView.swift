@@ -14,12 +14,10 @@ class CircleStatsView: UIView {
     typealias SummTiming = (Double, Double)
     
     @IBOutlet fileprivate(set) weak var view: UIView!
-    @IBOutlet fileprivate(set) weak var goalsCircle: CircleProgress!
-    @IBOutlet fileprivate(set) weak var routinesCircle: CircleProgress!
+    @IBOutlet fileprivate(set) weak var routinesCurcle: CircleProgress!
     @IBOutlet fileprivate(set) weak var routineProgressLabel: UILabel!
     @IBOutlet fileprivate(set) weak var routinesTargetLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var goalsProgressLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var goalsTargetLabel: UILabel!
+    @IBOutlet private(set) weak var successLabel: CircleProgress!
     
     // MARK: - Overridden
     
@@ -33,15 +31,10 @@ class CircleStatsView: UIView {
         setupXib()
     }
     
-    func displayProgressForProfile(_ profile: Profile?) {
-//        guard let profile = profile else {
-//            fatalError("No profile found, database programming error")
-//        }
-        
+    func displayProgressForProfile(_ profile: Profile) {
+        routinesCurcle.updateProgress(0.7)
         setupCircleDesign()
-        
-        
-//        setupDataForProfile(profile)
+        setupDataForProfile(profile)
     }
     
     // MARK: - Private Functions
@@ -53,7 +46,7 @@ class CircleStatsView: UIView {
     }
     
     fileprivate func setupCircleDesign() {
-        routinesCircle.progressColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
+        routinesCurcle.progressTintColor = UIColor.purpleRed()
     }
     
     fileprivate func setupDataForProfile(_ profile: Profile) {
@@ -68,14 +61,12 @@ class CircleStatsView: UIView {
 //        }
     }
     
-//    fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {
-//        let format = ".0"
-//
-//        routineProgressLabel.text = "\(factTiming.0.format(format))"
-//        goalsProgressLabel.text = "\(factTiming.1.format(format))"
-//        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
-//        goalsTargetLabel.text = "\(plannedTiming.1.format(format))"
-//    }
+    fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {
+        let format = ".0"
+
+        routineProgressLabel.text = "\(factTiming.0.format(format))"
+        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
+    }
 
     
     fileprivate func setupProgress(_ fact: Double, planned: Double, activityType: ActivityType) {
@@ -84,14 +75,11 @@ class CircleStatsView: UIView {
             result = fact * 100 / planned
         }
         
-        circleForActivityType(activityType).setProgress(result, animated: true)
+        circleForActivityType(activityType).updateProgress(CGFloat(result))
     }
     
     fileprivate func circleForActivityType(_ type: ActivityType) -> CircleProgress {
-        switch type {
-        case .routine: return routinesCircle
-        case .goal: return goalsCircle
-        }
+        return routinesCurcle
     }
 }
 

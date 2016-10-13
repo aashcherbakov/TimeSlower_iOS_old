@@ -41,14 +41,15 @@ internal final class ClosestActivityDisplay: UIView {
     // MARK: - Internal Functions
     
     func setupWithActivity(_ activity: Activity?) {
-       
-        if let activity = activity {
-            launchTimerForActivity(activity)
-            setupLabelsForActivity(activity)
-        }
+        launchTimerForActivity(activity)
+        setupLabelsForActivity(activity)
     }
     
-    func launchTimerForActivity(_ activity: Activity) {
+    func launchTimerForActivity(_ activity: Activity?) {
+        guard let activity = activity else {
+            return
+        }
+        
         if let timer = timer {
             if !timer.counting {
                 setupTimerCountdownForActivity(activity)
@@ -106,15 +107,16 @@ internal final class ClosestActivityDisplay: UIView {
     
     fileprivate func setupLabelsForActivity(_ activity: Activity?) {
         if let activity = activity {
-//            nameLabel.text = activity.name.uppercased()
-//            titleLabel.text = activity.isGoingNow() ?
-//                Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
-//            statusLabel.text = activity.isGoingNow() ?
-//                Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
+            nameLabel.text = activity.name.uppercased()
+            titleLabel.text = activity.isGoingNow() ?
+                Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
+            statusLabel.text = activity.isGoingNow() ?
+                Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
-            nameLabel.text = "Create an activity first"
+            nameLabel.text = "No activities for today 😳"
             titleLabel.text = ""
             timerLabel.text = ""
+            statusLabel.text = ""
         }
     }
 }
