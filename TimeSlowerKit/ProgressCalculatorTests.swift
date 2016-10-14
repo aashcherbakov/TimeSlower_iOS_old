@@ -18,13 +18,11 @@ class ProgressCalculatorTests: BaseDataStoreTest {
     override func setUp() {
         super.setUp()
         
-        let profile = TestHelper().fakeProfile()
         dataStore = DataStore(withCoreDataStack: fakeCoreDataStack)
-        sut = ProgressCalculator(withProfile: profile, dataStore: dataStore)
+        sut = ProgressCalculator(withDataStore: dataStore)
         fakeActivity = FakeActivityFactory().fakeActivity()
         
         dataStore.create(fakeActivity)
-        dataStore.create(profile)
 
     }
     

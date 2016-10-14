@@ -22,7 +22,6 @@ open class ActivityEntity: ManagedObject {
     @NSManaged open var averageSuccess: NSNumber
     @NSManaged open var resourceId: String
 
-    
     public enum ActivityType: Int {
         case routine
         case goal

@@ -16,22 +16,21 @@ public struct RoutineProgress {
 }
 
 public struct ProgressCalculator {
-    private let profile: Profile
     private let dataStore: DataStore
     private let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
-    public init(withProfile profile: Profile, dataStore: DataStore = DataStore()) {
-        self.profile = profile
+    public init(withDataStore dataStore: DataStore = DataStore()) {
         self.dataStore = dataStore
     }
     
     public func progressForDate(date: Date = Date()) -> RoutineProgress {
         let activities = dataStore.activities(forDate: date, type: .routine)
         let stringDate = dateFormatter.string(from: date)
-        
+                
         if let results: [Result] = dataStore.retrieveAll(stringDate) {
+            let timeToSave = totalTimeToSave(fromActivities: activities)
             let routineResults = resultsForToday(results: results, activities: activities)
-            let routineProgress = routineProgressFromResults(results: routineResults)
+            let routineProgress = routineProgressFromResults(results: routineResults, plannedToSave: timeToSave)
             return routineProgress
         }
         
@@ -40,14 +39,20 @@ public struct ProgressCalculator {
     
     // MARK: - Private Functions
     
-    private func routineProgressFromResults(results: [Result]) -> RoutineProgress {
+    private func totalTimeToSave(fromActivities activities: [Activity]) -> Double {
+        var timeToSave = 0.0
+        for activity in activities {
+            timeToSave += activity.timeToSave()
+        }
+        return timeToSave
+    }
+    
+    private func routineProgressFromResults(results: [Result], plannedToSave: Double) -> RoutineProgress {
         var totalSuccess = 0.0
         var savedTime = 0.0
-        var plannedToSave = 0.0
         
         for result in results {
             totalSuccess += result.success
-            plannedToSave += result.activity.timeToSave()
             if let saved = result.savedTime {
                 savedTime += saved
             }

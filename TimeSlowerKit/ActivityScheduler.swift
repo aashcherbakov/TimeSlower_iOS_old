@@ -39,6 +39,8 @@ public struct ActivityScheduler {
         let activities = dataStore.activities(forDate: date, type: .routine)
         var closestActivity: Activity?
         
+        // filter activity by having results
+        
         for activity in activities {
             if activity.startsLaterThen(date: date) {
                 closestActivity = closestOfActivities(current: closestActivity, next: activity)
