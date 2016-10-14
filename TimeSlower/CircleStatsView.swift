@@ -17,7 +17,7 @@ class CircleStatsView: UIView {
     @IBOutlet fileprivate(set) weak var routinesCurcle: CircleProgress!
     @IBOutlet fileprivate(set) weak var routineProgressLabel: UILabel!
     @IBOutlet fileprivate(set) weak var routinesTargetLabel: UILabel!
-    @IBOutlet private(set) weak var successLabel: CircleProgress!
+    @IBOutlet private(set) weak var successLabel: UILabel!
     
     // MARK: - Overridden
     
@@ -31,10 +31,10 @@ class CircleStatsView: UIView {
         setupXib()
     }
     
-    func displayProgressForProfile(_ profile: Profile) {
-        routinesCurcle.updateProgress(0.7)
+    func displayProgress(progress: RoutineProgress) {
+        routinesCurcle.updateProgress(CGFloat(progress.success / 100))
         setupCircleDesign()
-        setupDataForProfile(profile)
+        displayProgressNumbers(progress: progress)
     }
     
     // MARK: - Private Functions
@@ -49,16 +49,10 @@ class CircleStatsView: UIView {
         routinesCurcle.progressTintColor = UIColor.purpleRed()
     }
     
-    fileprivate func setupDataForProfile(_ profile: Profile) {
-
-//        if let
-//            factTiming = profile.factTimingForPeriod(.today),
-//            let plannedTiming = profile.plannedTimingInPeriod(.today, sinceDate: Date()) {
-//            
-//            setupLabels(factTiming, plannedTiming: plannedTiming)
-//            setupProgress(factTiming.saved, planned: plannedTiming.save, activityType: .routine)
-//            setupProgress(factTiming.spent, planned: plannedTiming.spend, activityType: .goal)
-//        }
+    private func displayProgressNumbers(progress: RoutineProgress) {
+        routineProgressLabel.text = "\(progress.savedTime)"
+        routinesTargetLabel.text = "\(progress.plannedTime)"
+        successLabel.text = "\(progress.success)"
     }
     
     fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {

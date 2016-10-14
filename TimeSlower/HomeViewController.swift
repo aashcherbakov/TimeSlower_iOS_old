@@ -21,6 +21,7 @@ internal class HomeViewController: UIViewController {
     
     let transitionManager = MenuTransitionManager()
     let activityListTransitionManager = ListTransitionManager()
+    var progressCalculator: ProgressCalculator!
     let scheduler = ActivityScheduler()
 
     @IBOutlet fileprivate(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
@@ -33,6 +34,10 @@ internal class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let profile = profile.value {
+            progressCalculator = ProgressCalculator(withProfile: profile)
+        }
         
         setupDesign()
         setupEvents()
@@ -90,13 +95,9 @@ internal class HomeViewController: UIViewController {
     }
     
     fileprivate func setupClosestActvityDisplay() {
-        guard let profile = profile.value else {
-            return
-        }
-        
         let activity = closestActivityForToday()
         closestActivityDisplay.setupWithActivity(activity)
-        circleSatsView.displayProgressForProfile(profile)
+        displayProgress()
     }
     
     private func closestActivityForToday() -> Activity? {
@@ -111,9 +112,15 @@ internal class HomeViewController: UIViewController {
     
     fileprivate func setupEvents() {
         profile.producer.startWithValues { [weak self] (profile) in
-            self?.setupClosestActvityDisplay()
-            self?.setupControlFlowButton()
+            if let profile = profile {
+                self?.setupClosestActvityDisplay()
+                self?.setupControlFlowButton()
+            }
         }
+    }
+    
+    private func displayProgress() {
+        circleSatsView.displayProgress(progress: progressCalculator.progressForDate())
     }
     
     fileprivate func setupDesign() {

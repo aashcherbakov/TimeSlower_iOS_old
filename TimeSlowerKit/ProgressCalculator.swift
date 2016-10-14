@@ -20,7 +20,7 @@ public struct ProgressCalculator {
     private let dataStore: DataStore
     private let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
-    init(withProfile profile: Profile, dataStore: DataStore = DataStore()) {
+    public init(withProfile profile: Profile, dataStore: DataStore = DataStore()) {
         self.profile = profile
         self.dataStore = dataStore
     }
@@ -53,7 +53,11 @@ public struct ProgressCalculator {
             }
         }
         
-        let averageSuccess = totalSuccess / Double(results.count)
+        var averageSuccess = totalSuccess
+        if results.count > 0 {
+            averageSuccess = totalSuccess / Double(results.count)
+        }
+        
         return RoutineProgress(success: averageSuccess, savedTime: savedTime, plannedTime: plannedToSave)
     }
     

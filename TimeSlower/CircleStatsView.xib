@@ -20,7 +20,7 @@
                 <outlet property="routineProgressLabel" destination="Pvh-Ce-2Xe" id="LbX-jw-d6v"/>
                 <outlet property="routinesCurcle" destination="8dY-8C-N9R" id="tUM-fe-4Po"/>
                 <outlet property="routinesTargetLabel" destination="ox2-d4-Uh7" id="mb0-0W-BZf"/>
-                <outlet property="successLabel" destination="8dY-8C-N9R" id="JaP-0R-8Pf"/>
+                <outlet property="successLabel" destination="YhR-Mb-dbU" id="fp3-Lw-3x6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6XY-mc-nGh"/>
             </connections>
         </placeholder>
