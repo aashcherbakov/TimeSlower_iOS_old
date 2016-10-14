@@ -18,6 +18,7 @@ public struct Activity: Persistable {
     public let stats: Stats
     public let notifications: Bool
     public let averageSuccess: Double
+    public var results: Set<Result>
     
     private let timeMachine = TimeMachine()
     
@@ -27,7 +28,7 @@ public struct Activity: Persistable {
         type: ActivityType,
         days: [Weekday],
         timing: Timing,
-        notifications: Bool) {
+        notifications: Bool, results: Set<Result> = []) {
         
         self.resourceId = UUID().uuidString
         self.name = name
@@ -36,7 +37,7 @@ public struct Activity: Persistable {
         self.timing = timing
         self.notifications = notifications
         self.averageSuccess = 0
-        
+        self.results = results
         self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
     
@@ -48,7 +49,7 @@ public struct Activity: Persistable {
         timing: Timing,
         notifications: Bool,
         averageSuccess: Double,
-        resourceId: String) {
+        resourceId: String, results: Set<Result>) {
         
         self.resourceId = resourceId
         self.name = name
@@ -58,10 +59,34 @@ public struct Activity: Persistable {
         self.notifications = notifications
         self.averageSuccess = averageSuccess
         self.stats = stats
+        self.results = results
     }
     
     public func update(withTiming newTiming: Timing) -> Activity {
-        return Activity(withStats: stats, name: name, type: type, days: days, timing: newTiming, notifications: notifications, averageSuccess: averageSuccess, resourceId: resourceId)
+        return Activity(
+            withStats: stats,
+            name: name,
+            type: type,
+            days: days,
+            timing: newTiming,
+            notifications:
+            notifications,
+            averageSuccess: averageSuccess,
+            resourceId: resourceId,
+            results: results)
+    }
+    
+    public mutating func updateWithResults(results: Set<Result>) {
+        self.results = results
+    }
+    
+    public func isDone(forDate date: Date = Date()) -> Bool {
+        let searchString = StaticDateFormatter.shortDateNoTimeFromatter.string(from: date)
+        let resultsForToday = results.filter { (result) -> Bool in
+            return result.stringDate == searchString
+        }
+        
+        return resultsForToday.count > 0
     }
     
     public func startTime(inDate date: Date = Date()) -> Date {
@@ -104,7 +129,7 @@ public struct Activity: Persistable {
     }
     
     public func isGoingNow(date: Date = Date()) -> Bool {
-        return startsEarlierThen(date: date) && endsLaterThen(date: date)
+        return startsEarlierThen(date: date) && endsLaterThen(date: date) && !isDone(forDate: date)
     }
     
     public func startsEarlierThen(date: Date) -> Bool {

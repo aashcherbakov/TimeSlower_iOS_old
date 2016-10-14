@@ -8,7 +8,10 @@
 
 import CoreData
 
-open class ManagedObject: NSManagedObject {
+open class ManagedObject: NSManagedObject, NSCopying {
     
+    public func copy(with zone: NSZone? = nil) -> Any {
+        return type(of:self).init(context: self.managedObjectContext!)
+    }
 }
 

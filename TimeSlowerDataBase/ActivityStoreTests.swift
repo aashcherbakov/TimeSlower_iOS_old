@@ -32,7 +32,6 @@ class ActivityStoreTests: BaseDataStoreTest {
         XCTAssertEqual(activity.notifications, false)
         XCTAssertEqual(activity.timing.duration.value, 0)
         XCTAssertEqual(activity.stats.summDays, 0)
-        XCTAssertNil(activity.results)
     }
     
     func test_createEntity() {

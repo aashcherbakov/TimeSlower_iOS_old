@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 open class ActivityEntity: ManagedObject {
 
     @NSManaged open var name: String
@@ -18,7 +17,7 @@ open class ActivityEntity: ManagedObject {
     @NSManaged open var timing: TimingData
     @NSManaged open var stats: StatsData
     @NSManaged open var notifications: NSNumber
-    @NSManaged open var results: [ResultEntity]?
+    @NSManaged open var results: NSSet
     @NSManaged open var averageSuccess: NSNumber
     @NSManaged open var resourceId: String
 

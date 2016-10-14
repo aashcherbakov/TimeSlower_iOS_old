@@ -22,7 +22,8 @@ internal struct ActivityConverter: PersistableConverter {
         let timing = timingFromTimingData(entity.timing)
         let stats = statsFromStatsData(entity.stats)
         
-        let activity = Activity(
+        
+        var activity = Activity(
             withStats: stats,
             name: entity.name,
             type: activityType,
@@ -30,8 +31,11 @@ internal struct ActivityConverter: PersistableConverter {
             timing: timing,
             notifications: entity.notifications.boolValue,
             averageSuccess: entity.averageSuccess.doubleValue,
-            resourceId: entity.resourceId)
+            resourceId: entity.resourceId,
+            results: [])
         
+        let results = resultsFromEntities(resultEntities: entity.results as? Set<ResultEntity>, activity: activity)
+        activity.updateWithResults(results: results)
         return activity
     }
 
@@ -52,6 +56,16 @@ internal struct ActivityConverter: PersistableConverter {
     }
     
     // MARK: - Private Functions
+    
+    private func resultsFromEntities(resultEntities: Set<ResultEntity>?, activity: Activity) -> Set<Result> {
+        let resultsConverter = ResultConverter()
+        if let resultEntities = resultEntities,
+            let results = resultsConverter.objectsFromEntities(Array(resultEntities), parent: activity) as? [Result] {
+            return Set(results)
+        }
+        
+        return []
+    }
     
     fileprivate func weekdaysFromDays(_ days: [Day]) -> [Weekday] {
         return days.map { (day) -> Weekday in

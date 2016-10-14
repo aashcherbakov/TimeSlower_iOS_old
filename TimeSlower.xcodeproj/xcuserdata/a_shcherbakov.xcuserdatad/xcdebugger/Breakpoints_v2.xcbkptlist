@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/HomeViewController.swift"
-            timestampString = "498151560.20039"
+            filePath = "TimeSlowerKit/ResultConverter.swift"
+            timestampString = "498173527.806452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "setupClosestActvityDisplay()"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "objectsFromEntities(_:parent:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,45 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/HomeViewController.swift"
-            timestampString = "498152000.518261"
+            filePath = "TimeSlowerKit/ActivityConverter.swift"
+            timestampString = "498173527.806452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "startActivity(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeSlower/HomeViewController.swift"
-            timestampString = "498152002.466492"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "finishActivity(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeSlowerKit/ProgressCalculator.swift"
-            timestampString = "498152185.68567"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "progressForDate(date:)"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "resultsFromEntities(resultEntities:activity:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

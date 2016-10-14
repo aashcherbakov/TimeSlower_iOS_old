@@ -66,6 +66,7 @@ extension ResultEntity: ManagedObjectType {
             fatalError("Parent should be ActivityEntity")
         }
         
+        activity.results.adding(self)
         self.activity = activity
     }
 }

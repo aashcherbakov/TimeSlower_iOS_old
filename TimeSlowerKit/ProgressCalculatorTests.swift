@@ -39,9 +39,6 @@ class ProgressCalculatorTests: BaseDataStoreTest {
         let result1 = Result(withActivity: fakeActivity, factFinish: resultTime)
         dataStore.create(result1, withParent: fakeActivity)
         
-        let savedResult: Result = dataStore.retrieve("10/11/16")!
-        XCTAssertNotNil(savedResult)
-        
         let success = sut.progressForDate(date: searchDate)
         XCTAssertNotNil(success)
         XCTAssertEqual(success.plannedTime, 10)

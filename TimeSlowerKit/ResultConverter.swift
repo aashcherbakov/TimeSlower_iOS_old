@@ -11,18 +11,19 @@ import TimeSlowerDataBase
 internal struct ResultConverter: PersistableConverter {
     
     func objectFromEntity(_ entity: ManagedObject, parentObject: Persistable?) -> Persistable {
-//        guard let activity = parentObject as? Activity else {
-//            print(parentObject)
-//            fatalError("Wrong entity")
-//        }
         
         guard let resultEntity = entity as? ResultEntity else {
             fatalError("Wrong entity")
         }
         
-        let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil) as! Activity
-        let result = Result(withActivity: activity, factFinish: resultEntity.finishTime)
-        return result
+        if let parent = parentObject as? Activity {
+            let result = Result(withActivity: parent, factFinish: resultEntity.finishTime)
+            return result
+        } else {
+            let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil) as! Activity
+            let result = Result(withActivity: activity, factFinish: resultEntity.finishTime)
+            return result
+        }
     }
     
     
@@ -42,7 +43,7 @@ internal struct ResultConverter: PersistableConverter {
             resourceId: object.resourceId)
     }
     
-    public func objectsFromEntities(_ entities: [ManagedObject]) -> [Persistable] {
+    public func objectsFromEntities(_ entities: [ManagedObject], parent: Persistable?) -> [Persistable] {
         guard let resultEntities = entities as? [ResultEntity] else {
             assertionFailure("Passed entities are not of ResultEntity type")
             return []
@@ -50,9 +51,14 @@ internal struct ResultConverter: PersistableConverter {
         
         var results: [Persistable] = []
         for resultEntity in resultEntities {
-            let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil)
-            let object = objectFromEntity(resultEntity, parentObject: activity)
-            results.append(object)
+            if let parent = parent {
+                let object = objectFromEntity(resultEntity, parentObject: parent)
+                results.append(object)
+            } else {
+                let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil)
+                let object = objectFromEntity(resultEntity, parentObject: activity)
+                results.append(object)
+            }
         }
         
         return results

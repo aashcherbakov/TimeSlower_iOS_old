@@ -100,4 +100,14 @@ public struct Result: Persistable {
     }
 }
 
+extension Result: Equatable {
+    public static func ==(left: Result, right: Result) -> Bool {
+        return left.resourceId == right.resourceId
+    }
+}
 
+extension Result: Hashable {
+    public var hashValue: Int {
+        return resourceId.hashValue
+    }
+}
