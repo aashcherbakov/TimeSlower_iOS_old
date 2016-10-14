@@ -84,6 +84,14 @@ class ProfileAdapterTests: BaseDataStoreTest {
     
     // Helpers
     
+    
+    /// Profile
+    /// - name:     "Anonymous"
+    /// - country:  "United States"
+    /// - birthday: "3/28/1987"
+    /// - gender:   .male
+    /// - maxAge:   60
+    /// - returns: Profile
     func createFakeProfile() -> Profile {
         return Profile(
             name: "Anonymous", 
@@ -92,7 +100,6 @@ class ProfileAdapterTests: BaseDataStoreTest {
             gender: .male, 
             maxAge: 60, 
             photo: nil)
-
     }
 
     

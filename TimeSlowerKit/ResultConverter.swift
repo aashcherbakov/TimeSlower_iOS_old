@@ -11,11 +11,17 @@ import TimeSlowerDataBase
 internal struct ResultConverter: PersistableConverter {
     
     func objectFromEntity(_ entity: ManagedObject, parentObject: Persistable?) -> Persistable {
-        guard let activity = parentObject as? Activity else {
+//        guard let activity = parentObject as? Activity else {
+//            print(parentObject)
+//            fatalError("Wrong entity")
+//        }
+        
+        guard let resultEntity = entity as? ResultEntity else {
             fatalError("Wrong entity")
         }
         
-        let result = Result(withActivity: activity)
+        let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil) as! Activity
+        let result = Result(withActivity: activity, factFinish: resultEntity.finishTime)
         return result
     }
     
@@ -34,5 +40,21 @@ internal struct ResultConverter: PersistableConverter {
             success: object.success, 
             date: object.finishTime, 
             resourceId: object.resourceId)
+    }
+    
+    public func objectsFromEntities(_ entities: [ManagedObject]) -> [Persistable] {
+        guard let resultEntities = entities as? [ResultEntity] else {
+            assertionFailure("Passed entities are not of ResultEntity type")
+            return []
+        }
+        
+        var results: [Persistable] = []
+        for resultEntity in resultEntities {
+            let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil)
+            let object = objectFromEntity(resultEntity, parentObject: activity)
+            results.append(object)
+        }
+        
+        return results
     }
 }

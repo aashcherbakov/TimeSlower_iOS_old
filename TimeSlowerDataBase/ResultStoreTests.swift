@@ -72,6 +72,19 @@ class ResultStoreTests: BaseDataStoreTest {
         XCTAssertEqual(updatedResult.stringDate, "8/29/1999")
     }
     
+    func test_retrieveEntities() {
+        let result1: ResultEntity = sut.createEntity(withParent: parentActivity)
+        let result2: ResultEntity = sut.createEntity(withParent: parentActivity)
+        let _: ResultEntity = sut.updateEntity(result1, configuration: configuration())
+        let _: ResultEntity = sut.updateEntity(result2, configuration: configuration())
+
+        let result: ResultEntity = sut.entityForKey("8/29/1999")!
+        XCTAssertEqual(result.stringDate, "8/29/1999")
+        
+        let results: [ResultEntity] = sut.entitiesForKey("8/29/1999")!
+        XCTAssertEqual(results.count, 2)
+    }
+    
     // MARK: - Helper functions
     
     func configuration() -> ResultConfiguration {

@@ -15,7 +15,7 @@ public struct FakeActivityFactory {
 
     
     static func fakeEndurance() -> Endurance {
-        return Endurance(value: 30, period: .minutes)
+        return Endurance(value: 40, period: .minutes)
     }
     
     static func fakeStats() -> Stats {

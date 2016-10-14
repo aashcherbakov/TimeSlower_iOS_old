@@ -30,7 +30,7 @@ class ResultTests: XCTestCase {
             startTime: testStartDate,
             timeToSave: 10,
             alarmTime: Date(),
-            manuallyStarted: testFinishDate)
+            manuallyStarted: testStartDate)
     }
     
     override func tearDown() {

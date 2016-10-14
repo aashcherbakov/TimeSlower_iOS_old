@@ -43,19 +43,18 @@ public struct Result: Persistable {
     // MARK: - Public
     
     public init(withActivity activity: Activity, factFinish: Date = Date()) {
-        let timing = activity.timing
-        startTime = timing.startTime
+        let timing = activity.getTiming()
         
-        if let _ = timing.manuallyStarted {
-            finishTime = factFinish
-        } else {
-            self.finishTime = timing.finishTime
-        }
+        startTime = activity.startTime(inDate: factFinish)
+        finishTime = factFinish
         
-        duration = timeMachine.minutesFromStart(startTime, toFinish: finishTime)
-        success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: finishTime)
+        duration = timeMachine.minutesFromStart(startTime, toFinish: factFinish)
+        
+        success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: factFinish)
+        
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)
-        stringDate = dateFormatter.string(from: finishTime)
+        
+        stringDate = dateFormatter.string(from: factFinish)
         
         // TODO: update average success for activity
         self.activity = activity
@@ -94,7 +93,7 @@ public struct Result: Persistable {
     
     fileprivate static func factSavedTimeForActivity(_ activity: Activity, factDuration: Double) -> Double {
         if activity.type == .routine {
-            return Double(activity.timing.duration.minutes()) - factDuration
+            return Double(activity.duration().minutes()) - factDuration
         } else {
             return factDuration
         }

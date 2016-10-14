@@ -36,6 +36,8 @@ public protocol EntityStore {
      */
     func entityForKey<T: ManagedObjectType>(_ key: String) -> T?
     
+    func entitiesForKey<T: ManagedObject>(_ key: String) -> [T]? where T: ManagedObjectType
+    
     /**
      Updates given entity with provided entity configuration. Has default implementation.
      
@@ -47,11 +49,11 @@ public protocol EntityStore {
      */
     func updateEntity<T: ManagedObjectType>(_ entity: T, configuration: EntityConfiguration) -> T
     
-    
     func deleteEntity<T: ManagedObjectType>(_ entity: T)
+    
 }
 
-extension EntityStore {
+public extension EntityStore {
     
     public func createEntity<T: ManagedObject>(withParent parent: ManagedObject? = nil) -> T where T: ManagedObjectType {
         let entity: T = context.insertObject()
@@ -72,6 +74,19 @@ extension EntityStore {
             return nil
         }
     }
+    
+    public func entitiesForKey<T: ManagedObject>(_ key: String) -> [T]? where T: ManagedObjectType {
+        let predicate = NSPredicate(format: "\(T.singleSearchKey) == %@", key)
+        let request = T.sortedFetchRequestWithPredicate(predicate)
+        
+        do {
+            let entities = try context.fetch(request) as? [T]
+            return entities
+        } catch {
+            return nil
+        }
+    }
+
     
     public func updateEntity<T: ManagedObjectType>(_ entity: T, configuration: EntityConfiguration) -> T {
         entity.updateWithConfiguration(configuration)

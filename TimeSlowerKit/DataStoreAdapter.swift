@@ -25,6 +25,8 @@ public protocol DataStoreAdapter {
     
     func retrieveObject<T: Persistable>(_ key: String) -> T?
     
+    func retrieveObjects<T: Persistable>(_ key: String) -> [T]?
+    
     func updateObject<T: Persistable>(_ object: Persistable) -> T
     
     func deleteObject<T: Persistable>(_ object: T)

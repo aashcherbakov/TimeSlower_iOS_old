@@ -45,6 +45,14 @@ extension GenericAdapter {
         
         return nil
     }
+        
+    public func retrieveObjects<T: Persistable>(_ key: String) -> [T]? {
+        if let entities: [EntityType] = creator.entitiesForKey(key) {
+            return converter.objectsFromEntities(entities) as? [T]
+        }
+        
+        return nil
+    }
     
     public func updateObject<T: Persistable>(_ object: Persistable) -> T {
         guard let entity: EntityType = creator.entityForKey(object.searchKey) else {

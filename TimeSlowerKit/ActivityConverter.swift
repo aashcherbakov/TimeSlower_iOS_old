@@ -44,7 +44,7 @@ internal struct ActivityConverter: PersistableConverter {
             name: object.name, 
             type: object.type.rawValue, 
             days: dayNumbersFromWeekdays(object.days), 
-            timing: timingDataFromTiming(object.timing), 
+            timing: timingDataFromTiming(object.getTiming()),
             stats: statsDataFromStats(object.stats), 
             notifications: object.notifications, 
             averageSuccess: object.averageSuccess, 

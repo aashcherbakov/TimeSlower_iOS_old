@@ -7,29 +7,52 @@
 //
 
 import XCTest
+@testable import TimeSlowerKit
 
-class ProgressCalculatorTests: XCTestCase {
+class ProgressCalculatorTests: BaseDataStoreTest {
+    
+    var sut: ProgressCalculator!
+    var fakeActivity: Activity!
+    var dataStore: DataStore!
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let profile = TestHelper().fakeProfile()
+        dataStore = DataStore(withCoreDataStack: fakeCoreDataStack)
+        sut = ProgressCalculator(withProfile: profile, dataStore: dataStore)
+        fakeActivity = FakeActivityFactory().fakeActivity()
+        
+        dataStore.create(fakeActivity)
+        dataStore.create(profile)
+
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        fakeActivity = nil
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_progressForDate() {
+        let resultTime = shortTimeFormatter.date(from: "10/11/16, 11:00 AM")!
+        let searchDate = shortDateFormatter.date(from: "10/11/16")!
+
+        let result1 = Result(withActivity: fakeActivity, factFinish: resultTime)
+        dataStore.create(result1, withParent: fakeActivity)
+        
+        let savedResult: Result = dataStore.retrieve("10/11/16")!
+        XCTAssertNotNil(savedResult)
+        
+        let success = sut.progressForDate(date: searchDate)
+        XCTAssertNotNil(success)
+        XCTAssertEqual(success.plannedTime, 10)
+        XCTAssertEqual(success.savedTime, 10)
+        XCTAssertEqual(success.success, 100)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_progressForDate_success() {
+        
     }
     
 }

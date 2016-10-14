@@ -74,7 +74,7 @@ class ActivitySchedulerTests: BaseDataStoreTest {
         let nextClosestActivity = sut.nextClosestActivity(forDate: ten)
         XCTAssertNotNil(nextClosestActivity)
         XCTAssertEqual(nextClosestActivity?.name, activity.name)
-        XCTAssertEqual(nextClosestActivity?.timing.startTime, activity.timing.startTime)
+        XCTAssertEqual(nextClosestActivity?.startTime(inDate: tenThirty), activity.startTime(inDate: tenThirty))
     }
     
     func test_currentActivity() {
@@ -85,7 +85,7 @@ class ActivitySchedulerTests: BaseDataStoreTest {
         let current = sut.currentActivity(date: tenFifteen)
         XCTAssertNotNil(current)
         XCTAssertEqual(current?.name, activity.name)
-        XCTAssertEqual(current?.timing.startTime, activity.timing.startTime)
+        XCTAssertEqual(current?.startTime(inDate: tenFifteen), activity.startTime(inDate: tenFifteen))
     }
     
     func test_currentActivity_none() {

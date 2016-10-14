@@ -78,14 +78,14 @@ class MotivationViewController: UIViewController {
     }
     
     fileprivate func setupStatsViewWithActivity(_ activity: Activity) {
-        let startTime = dateFormatter.string(from: activity.timing.startTime)
-        activityStatsView.setupWithStartTime(startTime, duration: activity.timing.duration.shortDescription())
+        let startTime = dateFormatter.string(from: activity.startTime())
+        activityStatsView.setupWithStartTime(startTime, duration: activity.duration().shortDescription())
     }
     
     // TODO: move to activity?
     fileprivate func motivationDescriptionForActivity(_ activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
-        let duration = String(Int(activity.timing.timeToSave))
+        let duration = String(Int(activity.timeToSave()))
         let basis = descriptionForActivityBasis(activity)
         let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercased()
         

@@ -14,7 +14,7 @@ public struct Activity: Persistable {
     public let name: String
     public let type: ActivityType
     public let days: [Weekday]
-    public let timing: Timing
+    private let timing: Timing
     public let stats: Stats
     public let notifications: Bool
     public let averageSuccess: Double
@@ -64,6 +64,37 @@ public struct Activity: Persistable {
         return Activity(withStats: stats, name: name, type: type, days: days, timing: newTiming, notifications: notifications, averageSuccess: averageSuccess, resourceId: resourceId)
     }
     
+    public func startTime(inDate date: Date = Date()) -> Date {
+        let startTime = timing.manuallyStarted ?? timing.startTime
+        return timeMachine.updatedTime(startTime, forDate: date)
+    }
+    
+    public func finishTime(inDate date: Date = Date()) -> Date {
+        var factFinishTime = timing.finishTime
+        if let manuallyStarted = timing.manuallyStarted {
+            factFinishTime = manuallyStarted.addingTimeInterval(timing.duration.seconds())
+        }
+        
+        return timeMachine.updatedTime(factFinishTime, forDate: date)
+    }
+    
+    public func timeToSave() -> Double {
+        return timing.timeToSave
+    }
+    
+    public func updateTiming(withManuallyStarted started: Date?) -> Timing {
+        return timing.update(withManuallyStarted: started)
+    }
+
+    public func duration() -> Endurance {
+        return timing.duration
+    }
+    /// Should only be used for copying object, not accessed directly
+    ///
+    /// - returns: Timing that is private property of Activity
+    public func getTiming() -> Timing {
+        return timing
+    }
     
     /// Returns basis constructed of weekdays
     ///
@@ -98,18 +129,7 @@ public struct Activity: Persistable {
         return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
     }
     
-    public func startTime() -> Date {
-        return timing.manuallyStarted ?? timing.startTime
-    }
-    
-    public func finishTime() -> Date {
-        var factFinishTime = timing.finishTime
-        if let manuallyStarted = timing.manuallyStarted {
-            factFinishTime = manuallyStarted.addingTimeInterval(timing.duration.seconds())
-        }
-        
-        return factFinishTime
-    }
+
 }
 
 /**
