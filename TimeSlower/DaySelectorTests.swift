@@ -29,7 +29,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToDaily() {
         // given
-        sut.selectedBasis = Basis.Daily
+        sut.selectedBasis = Basis.daily
                 
         // then
         XCTAssertEqual(sut.selectedDays.count, 7,
@@ -40,7 +40,7 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBasisIsSetToWeekends() {
         // given
-        sut.selectedBasis = Basis.Weekends
+        sut.selectedBasis = Basis.weekends
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
@@ -49,64 +49,62 @@ class DaySelectorTests: XCTestCase {
     
     func testThat_whenBackButtonIsTapped() {
         // given
-        sut.selectedBasis = Basis.Weekends
+        sut.selectedBasis = Basis.weekends
         
         // when
-        sut.backButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        sut.backButton.sendActions(for: UIControlEvents.touchUpInside)
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 2,
             "it should have 2 selected days in the set")
-        XCTAssertEqual(sut.selectedDays, [Weekday.First.rawValue, Weekday.Seventh.rawValue],
+        XCTAssertEqual(sut.selectedDays, [Weekday.first.rawValue, Weekday.seventh.rawValue],
                            "it should contain sunday and saturday")
     }
     
     func testThat_whenDayIsDesected() {
         // given
-        sut.selectedBasis = Basis.Workdays
+        sut.selectedBasis = Basis.workdays
         
         // when
         let mondayButton = buttonWithName("Mon", fromArray: sut.dayButtons)
         XCTAssertNotNil(mondayButton)
-        mondayButton?.sendActionsForControlEvents(.TouchUpInside)
+        mondayButton?.sendActions(for: .touchUpInside)
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 4,
             "it should still contain 4 other days")
-        XCTAssertFalse(mondayButton!.selected,
+        XCTAssertFalse(mondayButton!.isSelected,
             "it should leave button deselected")
     }
     
     func testThat_whenDayIsDeselected() {
         // given
-        sut.selectedBasis = Basis.Weekends
+        sut.selectedBasis = Basis.weekends
         deselectAllButtons(sut.dayButtons)
         
         // when
         let sundayButton = buttonWithName("Sun", fromArray: sut.dayButtons)
         XCTAssertNotNil(sundayButton)
-        sundayButton?.sendActionsForControlEvents(.TouchUpInside)
+        sundayButton?.sendActions(for: .touchUpInside)
         
         // then
         XCTAssertEqual(sut.selectedDays.count, 6,
             "it should be the only day selected")
-        XCTAssertTrue(sundayButton!.selected,
+        XCTAssertTrue(sundayButton!.isSelected,
             "it should leave button selected")
     }
     
     func testThat_whenBasisIsReset() {
         // given
-        sut.selectedBasis = Basis.Workdays
+        sut.selectedBasis = Basis.workdays
         
         // when
         selectDays(["Mon", "Tue"], fromArray: sut.dayButtons)
-        sut.selectedBasis = Basis.Daily
+        sut.selectedBasis = Basis.daily
         
         // then
         XCTAssertTrue(areAllButtonsSelected(inArray: sut.dayButtons),
             "it should reset all buttons to selected state")
-        XCTAssertTrue(allButtonsHaveCircleForms(sut.dayButtons),
-            "it should rerender all buttons to circles")
         XCTAssertEqual(sut.dayButtons.count, 7,
             "it should have 7 active buttons")
     }
@@ -117,12 +115,12 @@ class DaySelectorTests: XCTestCase {
     func areAllButtonsSelected(inArray buttons: [UIButton]) -> Bool {
         var allButtonsSelected = true
         for button in buttons {
-            allButtonsSelected = button.selected
+            allButtonsSelected = button.isSelected
         }
         return allButtonsSelected
     }
     
-    func buttonWithName(name: String, fromArray buttons: [UIButton]) -> UIButton? {
+    func buttonWithName(_ name: String, fromArray buttons: [UIButton]) -> UIButton? {
         for button in buttons {
             if button.titleLabel?.text == name {
                 return button
@@ -131,20 +129,20 @@ class DaySelectorTests: XCTestCase {
         return nil
     }
     
-    func deselectAllButtons(buttons: [UIButton]) {
+    func deselectAllButtons(_ buttons: [UIButton]) {
         for button in buttons {
-            button.sendActionsForControlEvents(.TouchUpInside)
+            button.sendActions(for: .touchUpInside)
         }
     }
     
-    func selectDays(days: [String], fromArray buttons: [UIButton]) {
+    func selectDays(_ days: [String], fromArray buttons: [UIButton]) {
         for day in days {
             let button = buttonWithName(day, fromArray: buttons)
-            button?.sendActionsForControlEvents(.TouchUpInside)
+            button?.sendActions(for: .touchUpInside)
         }
     }
     
-    func allButtonsHaveCircleForms(buttons: [UIButton]) -> Bool {
+    func allButtonsHaveCircleForms(_ buttons: [UIButton]) -> Bool {
         let goodRadius = buttons[0].bounds.height / 2
         for button in buttons {
             if button.layer.cornerRadius != goodRadius {

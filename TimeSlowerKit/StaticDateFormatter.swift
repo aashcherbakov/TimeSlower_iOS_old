@@ -1,40 +1,53 @@
 //
 //  StaticDateFormatter.swift
-//  TimeSlower
+//  TimeSlowerKit
 //
-//  Created by Oleksandr Shcherbakov on 8/14/16.
+//  Created by Oleksandr Shcherbakov on 9/2/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
-/// Class that holds singletons to predefined static NSDateFormatter instances. 
+import Foundation
+
+import Foundation
+
+/// Class that holds singletons to predefined static NSDateFormatter instances.
 public final class StaticDateFormatter {
     
-    private init() { } // This prevents others from using the default initializer
+    fileprivate init() { } // This prevents others from using the default initializer
     
-    public static let shortDateNoTimeFromatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.locale = NSLocale.currentLocale()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
+    public static let shortDateNoTimeFromatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .short
         return dateFormatter
     }()
     
-    public static let shortTimeNoDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.locale = NSLocale.currentLocale()
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .NoStyle
+    public static let shortTimeNoDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
         return dateFormatter
     }()
     
-    public static let shortDateAndTimeFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.locale = NSLocale.currentLocale()
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+    public static let shortDateAndTimeFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
+    
+    public static let fullDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
         return dateFormatter
     }()
 }

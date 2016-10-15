@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="236" id="KGk-i7-Jjw" customClass="ProfileBirthdayCell" customModule="TimeSlower" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="235"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1t-3j-gB9" customClass="TextfieldView" customModule="TimeSlower" customModuleProvider="target">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="ecm-Vn-5lC"/>
+                        </constraints>
+                    </view>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL0-Ei-9ai">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="Aym-Hv-4E2"/>
+                        </constraints>
+                        <date key="date" timeIntervalSinceReferenceDate="-434353542.11697501">
+                            <!--1987-03-28 18:14:17 +0000-->
+                        </date>
+                        <connections>
+                            <action selector="didSelectDate:" destination="KGk-i7-Jjw" eventType="valueChanged" id="3wL-e4-ppB"/>
+                        </connections>
+                    </datePicker>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="B1t-3j-gB9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7ea-j9-ttB"/>
+                    <constraint firstItem="B1t-3j-gB9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Svs-zl-9Ae"/>
+                    <constraint firstItem="lL0-Ei-9ai" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UK5-th-vse"/>
+                    <constraint firstItem="lL0-Ei-9ai" firstAttribute="top" secondItem="B1t-3j-gB9" secondAttribute="bottom" id="hZo-FY-CoF"/>
+                    <constraint firstAttribute="trailing" secondItem="B1t-3j-gB9" secondAttribute="trailing" id="hg2-yF-azo"/>
+                    <constraint firstItem="lL0-Ei-9ai" firstAttribute="centerX" secondItem="B1t-3j-gB9" secondAttribute="centerX" id="wz9-pn-rYL"/>
+                    <constraint firstAttribute="trailing" secondItem="lL0-Ei-9ai" secondAttribute="trailing" id="zYH-QX-7zA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="datePicker" destination="lL0-Ei-9ai" id="hpo-k3-qGO"/>
+                <outlet property="textfieldView" destination="B1t-3j-gB9" id="f0T-11-1hl"/>
+                <outlet property="textfieldViewHeight" destination="ecm-Vn-5lC" id="K1W-qW-Qs2"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="150"/>
+        </tableViewCell>
+    </objects>
+</document>

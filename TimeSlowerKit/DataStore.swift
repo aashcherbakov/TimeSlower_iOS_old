@@ -1,68 +1,64 @@
 //
 //  DataStore.swift
-//  TimeSlower
+//  TimeSlowerKit
 //
-//  Created by Oleksandr Shcherbakov on 8/28/16.
+//  Created by Oleksandr Shcherbakov on 9/1/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
-/**
- *  Struct responsible for retrieving life expectacy data from included documents.
- */
-internal struct DataStore {
+import Foundation
+import UIKit
+import TimeSlowerDataBase
+
+public struct DataStore {
     
-    /**
-     Reads ISOCodes file and returns a dictionary with keys for country names and values as codes
-     
-     - returns: [String:String]
-     */
-    func countryCodesDictionary() -> [String:String] {
-        let path = NSBundle(identifier: "oneLastDay.TimeSlowerKit")!.pathForResource("ISOCodes", ofType: "txt")
-        let ISOCodes: NSString?
-        do {
-            ISOCodes = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        } catch _ as NSError {
-            ISOCodes = nil
-        }
-        
-        var dictionary = [String:String]()
-        let components = ISOCodes!.componentsSeparatedByString("\r")
-        
-        for str in components {
-            let countryData = str.componentsSeparatedByString("/")
-            dictionary[countryData[1]] = countryData[0]
-        }
-        
-        return dictionary
+    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let adapterFactory: AdapterFactory
+
+    public init(withCoreDataStack stack: CoreDataStack = CoreDataStack.sharedInstance) {
+        coreDataStack = stack
+        adapterFactory = AdapterFactory(coreDataStack: stack)
     }
     
     /**
-     Reads LifeExpacity2013 file and returns dictionary with countries as keys and values for 
-     life expacity for man and woman
+     Creating entity in data base and returns persistable object
      
-     - returns: [String:[String:String]]
+     - returns: Persistable object translated from entity
      */
-    func lifeExpacityDictionary() -> [String:[String:String]] {
-        let bundle = NSBundle(identifier: "oneLastDay.TimeSlowerKit")
-        let path = bundle!.pathForResource("LifeExpacity2013", ofType: "txt")
-        let contentsOfFile: NSString?
-        do {
-            contentsOfFile = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        } catch _ as NSError {
-            contentsOfFile = nil
-        }
-        let countryLines = contentsOfFile?.componentsSeparatedByString("\n") as [String]!
-        
-        var allCountries = [String:[String:String]]()
-        for string in countryLines {
-            if string != "" {
-                let countryData = string.componentsSeparatedByString("/")
-                let countryDataDictionary = ["Average": countryData[2], "Male": countryData[3], "Female": countryData[5]]
-                let countryName = countryData[1]
-                allCountries[countryName] = countryDataDictionary
-            }
-        }
-        return allCountries
+    public func create<T: Persistable, U: Persistable>(_ object: T, withParent parent: U) {
+        let adapter = adapterFactory.adapter(T.self)
+        adapter.createObject(object, parent: parent)
+    }
+    
+    public func create<T: Persistable>(_ object: T) {
+        let adapter = adapterFactory.adapter(T.self)
+        adapter.createObject(object)
+    }
+    
+    public func update<T: Persistable>(_ object: T) -> T {
+        let adapter = adapterFactory.adapter(T.self)
+        let updated: T = adapter.updateObject(object)
+        return updated
+    }
+    
+    public func delete<T: Persistable>(_ object: T) {
+        let adapter = adapterFactory.adapter(T.self)
+        adapter.deleteObject(object)
+    }
+    
+    public func retrieve<T: Persistable>(_ key: String) -> T? {
+        let adapter = adapterFactory.adapter(T.self)
+        return adapter.retrieveObject(key)
+    }
+    
+    public func retrieveAll<T: Persistable>(_ key: String) -> [T]? {
+        let adapter = adapterFactory.adapter(T.self)
+        return adapter.retrieveObjects(key)
+    }
+    
+    public func activities(forDate date: Date, type: ActivityType) -> [Activity] {
+        let adapter = ActivityAdapter(withCoreDataStack: coreDataStack)
+        return adapter.activities(forDate: date, type: type)
     }
     
 }

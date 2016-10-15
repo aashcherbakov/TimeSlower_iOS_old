@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
+import Result
 
 /// UITableViewCell subclass to turn on/off notifications for activity
 class EditActivityNotificationsView: ObservableControl {
@@ -22,7 +23,7 @@ class EditActivityNotificationsView: ObservableControl {
     /// Bool true if notification switch is on
     dynamic var selectedValue: NSNumber = true
     
-    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     
     // MARK: - Overridden Methods
     
@@ -34,47 +35,53 @@ class EditActivityNotificationsView: ObservableControl {
         setupDesign()
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
-    override func setInitialValue(value: AnyObject?) {
+    override func setInitialValue(_ value: AnyObject?) {
         if let value = value as? NSNumber {
             selectedValue = value
             updateTextFieldForSwitch(value.boolValue)
-            notificationSwitch.on = value.boolValue
+            notificationSwitch.isOn = value.boolValue
         }
     }
     
     // MARK: - Setup Methods
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityNotificationsView.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(EditActivityNotificationsView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         textfieldView.setupWithConfig(NotificationsTextfield())
         notificationSwitch.onTintColor = UIColor.purpleRed()
-        notificationSwitch.on = true
-        updateTextFieldForSwitch(notificationSwitch.on)
+        notificationSwitch.isOn = true
+        updateTextFieldForSwitch(notificationSwitch.isOn)
     }
     
-    private func setupEvents() {
-        valueChangedSignal = notificationSwitch.rac_signalForControlEvents(.ValueChanged).startWith(notificationSwitch).toSignalProducer().map({ (value) -> NSNumber? in
-            guard let switcher = value as? UISwitch else { return nil }
-            return switcher.on
-        })
+    fileprivate func setupEvents() {
         
-        valueChangedSignal?.startWithNext { [weak self] (value) in
-            guard let value = value as? Bool else { return }
-            self?.selectedValue = value
+        let switchSignal = notificationSwitch.rac_signal(for: .valueChanged)
+            .toSignalProducer()
+            .map { (value) -> NSNumber? in
+                guard let switcher = value as? UISwitch else { return nil }
+                return switcher.isOn as NSNumber
+            }
+            .flatMapError { SignalProducer<Any?, NoError>(value: $0.code) }
+        
+        valueChangedSignal = switchSignal
+        
+        valueChangedSignal?.startWithResult { [weak self] (result) in
+            guard let value = result.value as? Bool else { return }
+            self?.selectedValue = value as NSNumber
             self?.updateTextFieldForSwitch(value)
         }
     }
     
-    private func updateTextFieldForSwitch(on: Bool) {
+    fileprivate func updateTextFieldForSwitch(_ on: Bool) {
         let text = on ? "on" : "off"
         textfieldView.setText(text)
     }

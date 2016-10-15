@@ -9,17 +9,17 @@
 import Foundation
 
 internal class Timer: NSObject {
-    private let block: () -> Void
-    private var timer: NSTimer?
-    private let interval: Double
+    fileprivate let block: () -> Void
+    fileprivate var timer: Foundation.Timer?
+    fileprivate let interval: Double
     
-    init(_ interval: Double, block: () -> ()) {
+    init(_ interval: Double, block: @escaping () -> ()) {
         self.block = block
         self.interval = interval
     }
     
     func start() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: #selector(Timer.invokeBlock), userInfo: nil, repeats: false)
+        timer = Foundation.Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(Timer.invokeBlock), userInfo: nil, repeats: false)
     }
     
     func invokeBlock() {

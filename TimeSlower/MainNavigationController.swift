@@ -12,43 +12,56 @@ import TimeSlowerKit
 /// UINavigationController subclass responsible for setting up initial controller on launch.
 class MainNavigationController: UINavigationController {
     
-    private var profile: Profile?
+    fileprivate var profile: Profile?
+    fileprivate let dataStore = DataStore()
     
-    lazy var coreDataStack = CoreDataStack.self
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupInitialController()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         profile = fetchProfile()
-        if viewControllers.first is ProfileEditingVC {
-            if profile != nil {
-                setupInitialController()
-            }
-        }
+        resetInitialControllerIfNeeded()
     }
     
     // MARK: - Private Functions
     
-    private func setupInitialController() {
+    fileprivate func setupInitialController() {
         let rootController: UIViewController
         
         if let profile = profile {
-            let homeController: HomeViewController = ControllerFactory.createController()
-            homeController.profile = profile
-            rootController = homeController
+            rootController = homeViewController(withProfile: profile)
         } else {
-            let profileController: ProfileEditingVC = ControllerFactory.createController()
-            rootController = profileController
+            rootController = profileEditController()
         }
         
         setViewControllers([rootController], animated: false)
     }
     
-    private func fetchProfile() -> Profile? {
-        return coreDataStack.sharedInstance.fetchProfile()
+    fileprivate func fetchProfile() -> Profile? {
+        let profile: Profile? = dataStore.retrieve("")
+        return profile
+    }
+    
+    private func resetInitialControllerIfNeeded() {
+        if viewControllers.first is ProfileEditingVC && profile != nil {
+            setupInitialController()
+        }
+    }
+    
+    private func homeViewController(withProfile profile: Profile) -> UIViewController {
+        let homeController: HomeViewController = ControllerFactory.createController()
+        homeController.profile.value = profile
+        return homeController
+    }
+    
+    private func profileEditController() -> UIViewController {
+        let profileController: ProfileEditingVC = ControllerFactory.createController()
+        return profileController
+
     }
 }

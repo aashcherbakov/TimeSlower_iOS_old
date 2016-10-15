@@ -30,7 +30,7 @@ class BasisSelectorTests: XCTestCase {
     
     func test_buttonTouch() {
         // when
-        sut.dailyOptionView.button.sendActionsForControlEvents(.TouchUpInside)
+        sut.dailyOptionView.button.sendActions(for: .touchUpInside)
         
         // then
         XCTAssertEqual(sut.selectedIndex, 0,
@@ -43,7 +43,7 @@ class BasisSelectorTests: XCTestCase {
     
     func test_setRandomBasis() {
         // when
-        sut.updateSegmentedIndexForBasis(.Random)
+        sut.updateSegmentedIndexForBasis(.random)
         
         // then
         XCTAssertFalse(sut.dailyOptionView.optionSelected,
@@ -59,7 +59,7 @@ class BasisSelectorTests: XCTestCase {
         sut.workdaysOptionView.optionSelected = true
         
         // when
-        sut.weekendsOptionView.button.sendActionsForControlEvents(.TouchUpInside)
+        sut.weekendsOptionView.button.sendActions(for: .touchUpInside)
         
         // then
         XCTAssertEqual(sut.selectedIndex, 2,

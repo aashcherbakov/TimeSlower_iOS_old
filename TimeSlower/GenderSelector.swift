@@ -10,9 +10,9 @@ import UIKit
 
 class GenderSelector: UIControl {
     
-    @IBOutlet private weak var view: UIView!
-    @IBOutlet private weak var femaleButton: UIButton!
-    @IBOutlet private weak var maleButton: UIButton!
+    @IBOutlet fileprivate weak var view: UIView!
+    @IBOutlet fileprivate weak var femaleButton: UIButton!
+    @IBOutlet fileprivate weak var maleButton: UIButton!
     
     var selectedSegmentIndex: Int?
     
@@ -21,17 +21,17 @@ class GenderSelector: UIControl {
         setupXib()
     }
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("GenderSelector", owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed("GenderSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
     /// Returns 0 for male, 1 for female and nil if none is selected
     func selectedGender() -> Int? {
-        if maleButton.selected {
+        if maleButton.isSelected {
             return 0
-        } else if femaleButton.selected {
+        } else if femaleButton.isSelected {
             return 1
         } else {
             return nil
@@ -39,26 +39,26 @@ class GenderSelector: UIControl {
     }
     
     /// Sets male (0) or female (1) button selected
-    func setSelectedGender(selected: Int) {
+    func setSelectedGender(_ selected: Int) {
         switch selected {
-        case 0: maleButton.selected = true
-        case 1: femaleButton.selected = true
+        case 0: maleButton.isSelected = true
+        case 1: femaleButton.isSelected = true
         default: return
         }
     }
 
-    @IBAction private func genderButtonTapped(sender: UIButton) {
-        sender.selected = !sender.selected
+    @IBAction fileprivate func genderButtonTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
         
-        if sender.selected {
+        if sender.isSelected {
             if sender.tag == 0 { // male button
-                femaleButton.selected = !maleButton.selected
+                femaleButton.isSelected = !maleButton.isSelected
             } else {
-                maleButton.selected = !femaleButton.selected
+                maleButton.isSelected = !femaleButton.isSelected
             }
         }
         
         selectedSegmentIndex = sender.tag
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
     }
 }

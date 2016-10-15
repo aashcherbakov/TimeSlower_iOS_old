@@ -11,7 +11,7 @@ import Foundation
 protocol ExpandableCell {
     static var expandedHeight: CGFloat { get }
     static func defaultHeight() -> CGFloat
-    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat
+    static func heightForState(_ state: EditActivityVC.EditingState) -> CGFloat
 }
 
 extension ExpandableCell where Self : UITableViewCell {

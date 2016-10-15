@@ -10,7 +10,7 @@ import UIKit
 import TimeSlowerKit
 
 protocol CircleStatsDelegate {
-    func pageControllerDidChangeToPage(index: Int)
+    func pageControllerDidChangeToPage(_ index: Int)
 }
 
 class CircleStatsVC: UIViewController {
@@ -27,13 +27,10 @@ class CircleStatsVC: UIViewController {
     var period: PastPeriod!
     var pageIndex: Int!
     
-    @IBOutlet weak var circleProgress: CircleProgress! {
-        didSet {
-        }
-    }
+    @IBOutlet weak var circleProgress: CircleProgress! 
     @IBOutlet weak var innerCircle: CircleProgress! {
         didSet {
-            innerCircle.progressColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
+            innerCircle.progressTintColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
         }
     }
     @IBOutlet weak var savedTimeLabel: UILabel!
@@ -50,14 +47,14 @@ class CircleStatsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabels()
-        circleProgress.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
-        innerCircle.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
-
-        circleProgress.setProgress(0.7, animated: true)
-        innerCircle.setProgress(0.3, animated: true)
+//        circleProgress.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
+//        innerCircle.progressBarWidth = circleProgress.bounds.height * Constants.circleBoldnessScele
+//
+//        circleProgress.setProgress(0.7, animated: true)
+//        innerCircle.setProgress(0.3, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         delegate.pageControllerDidChangeToPage(pageIndex)
     }
@@ -73,15 +70,15 @@ class CircleStatsVC: UIViewController {
     
     
     func setupLabels() {
-        
-        let factTiming = profile.factTimingForPeriod(period)
-        let plannedTiming = profile.plannedTimingInPeriod(period, sinceDate: NSDate())
-        let format = ".0"
-        
-        savedTimeLabel.text = "\(factTiming!.0.format(format))"
-        usedTimeLabel.text = "\(factTiming!.1.format(format))"
-        plannedToSaveLabel.text = "\(plannedTiming!.0.format(format))"
-        plannedToUseLabel.text = "\(plannedTiming!.1.format(format))"
+//        
+//        let factTiming = profile.factTimingForPeriod(period)
+//        let plannedTiming = profile.plannedTimingInPeriod(period, sinceDate: Date())
+//        let format = ".0"
+//        
+//        savedTimeLabel.text = "\(factTiming!.0.format(format))"
+//        usedTimeLabel.text = "\(factTiming!.1.format(format))"
+//        plannedToSaveLabel.text = "\(plannedTiming!.0.format(format))"
+//        plannedToUseLabel.text = "\(plannedTiming!.1.format(format))"
         
     }
 }

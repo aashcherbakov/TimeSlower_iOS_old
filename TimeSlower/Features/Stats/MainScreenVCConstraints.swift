@@ -26,7 +26,7 @@ class MainScreenVCConstraints: UIViewController {
     @IBOutlet weak var offsetFromLegend: NSLayoutConstraint!
     @IBOutlet weak var buttonDownOffset: NSLayoutConstraint!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPageDotsColors()
     }
@@ -35,7 +35,7 @@ class MainScreenVCConstraints: UIViewController {
         let pageController = UIPageControl.appearance()
         pageController.pageIndicatorTintColor = UIColor.lightGray()
         pageController.currentPageIndicatorTintColor = UIColor.purpleRed()
-        pageController.backgroundColor = UIColor.clearColor()
+        pageController.backgroundColor = UIColor.clear
     }
 
     override func updateViewConstraints() {

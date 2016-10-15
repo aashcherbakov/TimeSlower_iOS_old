@@ -37,7 +37,7 @@ class ProfileStatsVCConstraints: UIViewController {
         lifetimeBalanceHeight.constant = kUsableViewHeight * Constants.lifetimeBalanceScale
         circlesViewHeight.constant = kUsableViewHeight * Constants.circlesViewScale
         buttonVerticalOffset.constant = kUsableViewHeight * Constants.buttonOffsetScale
-        redBackgroundHeight.constant = UIScreen.mainScreen().bounds.height * Constants.redBackgroundScale
+        redBackgroundHeight.constant = UIScreen.main.bounds.height * Constants.redBackgroundScale
         innerBlockHeight.constant = kUsableViewHeight * Constants.innerClockBlockScale
     }
     

@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 
 class FakeControllerWithCustomViews: UIViewController, FakeController {
+
     @IBOutlet weak var basisSelector: BasisSelector!
     @IBOutlet weak var daySelector: DaySelector!
     @IBOutlet weak var textfieldView: TextfieldView!

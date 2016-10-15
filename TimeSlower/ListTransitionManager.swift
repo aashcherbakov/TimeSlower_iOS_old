@@ -10,48 +10,48 @@ import Foundation
 
 class ListTransitionManager: UIPercentDrivenInteractiveTransition {
     
-    private enum TransitionDirection {
-        case Onstage
-        case Offstage
+    fileprivate enum TransitionDirection {
+        case onstage
+        case offstage
     }
     
     var sourceController: UIViewController? { didSet { setupEnterGesture() } }
     var activityListController: UIViewController? { didSet { setupExitGesture() } }
     
-    private var presenting = false
-    private var interactive = false
-    private var enterGesture: UIPanGestureRecognizer?
-    private var exitGesture: UIPanGestureRecognizer?
+    fileprivate var presenting = false
+    fileprivate var interactive = false
+    fileprivate var enterGesture: UIPanGestureRecognizer?
+    fileprivate var exitGesture: UIPanGestureRecognizer?
     
-    private let screenHeight = UIScreen.mainScreen().bounds.height
+    fileprivate let screenHeight = UIScreen.main.bounds.height
     
-    func handleOnstagePan(pan: UIPanGestureRecognizer) {
-        handleTransitionInDirection(.Onstage, recognizer: pan)
+    func handleOnstagePan(_ pan: UIPanGestureRecognizer) {
+        handleTransitionInDirection(.onstage, recognizer: pan)
     }
     
-    func handleOffstagePan(pan: UIPanGestureRecognizer) {
-        handleTransitionInDirection(.Offstage, recognizer: pan)
+    func handleOffstagePan(_ pan: UIPanGestureRecognizer) {
+        handleTransitionInDirection(.offstage, recognizer: pan)
     }
     
-    private func setupEnterGesture() {
+    fileprivate func setupEnterGesture() {
         let enterGesture = UIPanGestureRecognizer()
         enterGesture.addTarget(self, action: #selector(ListTransitionManager.handleOnstagePan(_:)))
         sourceController?.view.addGestureRecognizer(enterGesture)
     }
     
-    private func setupExitGesture() {
+    fileprivate func setupExitGesture() {
         let exitGesture = UIPanGestureRecognizer()
         exitGesture.addTarget(self, action: #selector(ListTransitionManager.handleOffstagePan(_:)))
         activityListController?.view.addGestureRecognizer(exitGesture)
     }
     
-    private func handleTransitionInDirection(direction: TransitionDirection, recognizer: UIPanGestureRecognizer) {
+    fileprivate func handleTransitionInDirection(_ direction: TransitionDirection, recognizer: UIPanGestureRecognizer) {
         
         let progress = progressForPanGesture(inRecognizer: recognizer, direction: direction)
         guard progress > 0 else {
-            if recognizer.state == .Ended {
+            if recognizer.state == .ended {
                 interactive = false
-                cancelInteractiveTransition()
+                cancel()
             }
             return
         }
@@ -59,23 +59,23 @@ class ListTransitionManager: UIPercentDrivenInteractiveTransition {
         handleRecognizerState(recognizer.state, withProgress: progress, direction: direction)
     }
     
-    private func progressForPanGesture(inRecognizer recognizer: UIPanGestureRecognizer, direction: TransitionDirection) -> CGFloat {
+    fileprivate func progressForPanGesture(inRecognizer recognizer: UIPanGestureRecognizer, direction: TransitionDirection) -> CGFloat {
         
         guard let view = recognizer.view else { return 0 }
-        let screenTranslationAdjustment: CGFloat = direction == .Onstage ? 0.5 : -0.5
-        let translation = recognizer.translationInView(view)
-        return -translation.y / CGRectGetHeight(view.bounds) * screenTranslationAdjustment
+        let screenTranslationAdjustment: CGFloat = direction == .onstage ? 0.5 : -0.5
+        let translation = recognizer.translation(in: view)
+        return -translation.y / view.bounds.height * screenTranslationAdjustment
     }
     
-    private func handleRecognizerState(state: UIGestureRecognizerState, withProgress
+    fileprivate func handleRecognizerState(_ state: UIGestureRecognizerState, withProgress
         progress: CGFloat, direction: TransitionDirection) {
         switch state {
-        case .Began:
+        case .began:
             interactive = true
             presentController(forDirection: direction)
             
-        case .Changed:
-            updateInteractiveTransition(progress)
+        case .changed:
+            update(progress)
             
         default: // .Canceled, .Ended etc.
             interactive = false
@@ -83,46 +83,45 @@ class ListTransitionManager: UIPercentDrivenInteractiveTransition {
         }
     }
     
-    private func presentController(forDirection direction: TransitionDirection) {
-        if direction == .Onstage {
+    fileprivate func presentController(forDirection direction: TransitionDirection) {
+        if direction == .onstage {
             guard let currentVC = sourceController as? HomeViewController else {
                 return
             }
             
             let listController: ListOfActivitiesVC = ControllerFactory.createController()
-            listController.profile = currentVC.profile
+//            listController.profile = currentVC.profile
             listController.presentedModally = true
             let navigationController = UINavigationController(rootViewController: listController)
             navigationController.transitioningDelegate = currentVC.activityListTransitionManager
             
             activityListController = navigationController
-            sourceController?.presentViewController(navigationController, animated: true, completion: nil)
+            sourceController?.present(navigationController, animated: true, completion: nil)
         } else {
-            activityListController?.dismissViewControllerAnimated(true, completion: nil)
+            activityListController?.dismiss(animated: true, completion: nil)
         }
     }
     
-    private func finishTransition(withProgress progress: CGFloat, direction: TransitionDirection) {
-        let minTransition: CGFloat = direction == .Onstage ? 0.1 : 0.1
+    fileprivate func finishTransition(withProgress progress: CGFloat, direction: TransitionDirection) {
+        let minTransition: CGFloat = direction == .onstage ? 0.1 : 0.1
         if progress > minTransition {
-            finishInteractiveTransition()
+            finish()
         } else {
-            cancelInteractiveTransition()
+            cancel()
         }
     }
 }
 
 extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        guard let
-            container = transitionContext.containerView(),
-            controllers = controllersFromContext(transitionContext)
-            else {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let container = transitionContext.containerView
+
+        guard let controllers = controllersFromContext(transitionContext) else {
                 return
         }
         
@@ -130,8 +129,8 @@ extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
         let topController = !presenting ? controllers.destination : controllers.top
         topController.view.layer.shadowOpacity = 0.8
         
-        let menuView = menuController.view
-        let topView = topController.view
+        let menuView = menuController.view!
+        let topView = topController.view!
         
         if presenting {
             menuView.transform = offStage(screenHeight)
@@ -141,7 +140,7 @@ extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
         container.addSubview(topView)
         
         // This variable has to be initialized before calling animateInteractiveTransition
-        let duration = transitionDuration(transitionContext)
+        let duration = transitionDuration(using: transitionContext)
         
         animateIntractiveTransition(
             inContext: transitionContext,
@@ -151,14 +150,14 @@ extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
             isPresenting: presenting)
     }
     
-    private func animateIntractiveTransition(
+    fileprivate func animateIntractiveTransition(
         inContext transitionContext: UIViewControllerContextTransitioning,
-                  duration: NSTimeInterval,
+                  duration: TimeInterval,
                   menuView: UIView,
                   topView: UIView,
                   isPresenting: Bool) {
         
-        UIView.animateWithDuration(duration, delay: 0.0,
+        UIView.animate(withDuration: duration, delay: 0.0,
                                    usingSpringWithDamping: 0.9,
                                    initialSpringVelocity: 0.2,
                                    options: [],
@@ -171,45 +170,45 @@ extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
     
     // MARK: - Transformation Helpers
     
-    private func performViewTransformations(ifPresenting presenting: Bool, menuView: UIView, topView: UIView) {
+    fileprivate func performViewTransformations(ifPresenting presenting: Bool, menuView: UIView, topView: UIView) {
         if presenting {
-            menuView.transform = CGAffineTransformIdentity
+            menuView.transform = CGAffineTransform.identity
             topView.transform = self.offStage(-screenHeight)
         } else {
-            topView.transform = CGAffineTransformIdentity
+            topView.transform = CGAffineTransform.identity
             menuView.transform = self.offStage(screenHeight)
         }
     }
     
-    private func offStage(amount: CGFloat) -> CGAffineTransform {
-        return CGAffineTransformMakeTranslation(0, amount)
+    fileprivate func offStage(_ amount: CGFloat) -> CGAffineTransform {
+        return CGAffineTransform(translationX: 0, y: amount)
     }
     
     
     // MARK: - Transition Context manipulations
     
-    private func completeInteractiveTransition(inContext transitionContext: UIViewControllerContextTransitioning, isPresenting: Bool) {
+    fileprivate func completeInteractiveTransition(inContext transitionContext: UIViewControllerContextTransitioning, isPresenting: Bool) {
         guard let controllers = self.controllersFromContext(transitionContext) else { return }
         
-        if transitionContext.transitionWasCancelled() {
-            controllers.top.view.userInteractionEnabled = true
-            controllers.destination.view.userInteractionEnabled = false
+        if transitionContext.transitionWasCancelled {
+            controllers.top.view.isUserInteractionEnabled = true
+            controllers.destination.view.isUserInteractionEnabled = false
             transitionContext.completeTransition(false)
-            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.top.view)
+            UIApplication.shared.keyWindow?.addSubview(controllers.top.view)
         } else {
-            controllers.top.view.userInteractionEnabled = false
-            controllers.destination.view.userInteractionEnabled = true
+            controllers.top.view.isUserInteractionEnabled = false
+            controllers.destination.view.isUserInteractionEnabled = true
             transitionContext.completeTransition(true)
-            UIApplication.sharedApplication().keyWindow?.addSubview(controllers.destination.view)
+            UIApplication.shared.keyWindow?.addSubview(controllers.destination.view)
         }
     }
     
-    private func controllersFromContext(transitionContext: UIViewControllerContextTransitioning) ->
+    fileprivate func controllersFromContext(_ transitionContext: UIViewControllerContextTransitioning) ->
         (top: UIViewController, destination: UIViewController)? {
             
             guard let
-                topController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-                destinationController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+                topController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+                let destinationController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
                 else {
                     return nil
             }
@@ -219,26 +218,26 @@ extension ListTransitionManager: UIViewControllerAnimatedTransitioning {
 
 extension ListTransitionManager: UIViewControllerTransitioningDelegate {
     
-    func animationControllerForPresentedController(
-        presented: UIViewController,
-        presentingController presenting: UIViewController,
-                             sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.presenting = true
         return self
     }
     
-    func animationControllerForDismissedController(
-        dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(
+        forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.presenting = false
         return self
     }
     
-    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning)
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
             return interactive ? self : nil
     }
     
-    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning)
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
             return interactive ? self : nil
     }

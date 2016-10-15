@@ -25,49 +25,49 @@ class BasisTests: XCTestCase {
     
     func test_basisFromWeekends() {
         // given
-        let days: [Weekday] = [.First, .Seventh]
+        let days: [Weekday] = [.first, .seventh]
         
         // when
         let basis = Basis.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, Basis.Weekends,
+        XCTAssertEqual(basis, Basis.weekends,
                        "it should be weekends basis")
     }
     
     func test_basisFromWorkdays() {
         // given
-        let days: [Weekday] = [.Second, .Third, .Forth, .Fifth, .Sixth]
+        let days: [Weekday] = [.second, .third, .forth, .fifth, .sixth]
         
         // when
         let basis = Basis.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, Basis.Workdays,
+        XCTAssertEqual(basis, Basis.workdays,
                        "it should be weekends basis")
     }
     
     func test_basisFromDaily() {
         // given
-        let days: [Weekday] = [.First, .Second, .Third, .Forth, .Fifth, .Sixth, .Seventh]
+        let days: [Weekday] = [.first, .second, .third, .forth, .fifth, .sixth, .seventh]
         
         // when
         let basis = Basis.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, Basis.Daily,
+        XCTAssertEqual(basis, Basis.daily,
                        "it should be weekends basis")
     }
     
     func test_basisFromRandom() {
         // given
-        let days: [Weekday] = [.First, .Sixth, .Seventh]
+        let days: [Weekday] = [.first, .sixth, .seventh]
         
         // when
         let basis = Basis.basisFromWeekdays(days)
         
         // then
-        XCTAssertEqual(basis, Basis.Random,
+        XCTAssertEqual(basis, Basis.random,
                        "it should be weekends basis")
     }
 

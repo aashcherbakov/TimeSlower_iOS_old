@@ -19,7 +19,7 @@ public extension ReusableViewCell {
     
     /// Default reuse identifier is set with the class name.
     static var reuseIdentifier: String {
-        return String(self)
+        return String(describing: self)
     }
 }
 
@@ -34,14 +34,14 @@ public extension UITableView {
      - returns: The table view cell.
      */
     public func dequeueReusableCell<T: ReusableViewCell>() -> T {
-        guard let cell = self.dequeueReusableCellWithIdentifier(T.reuseIdentifier) as? T else {
+        guard let cell = self.dequeueReusableCell(withIdentifier: T.reuseIdentifier) as? T else {
                 fatalError("No table view cell could be dequeued with identifier \(T.reuseIdentifier)")
             }
         return cell
     }
     
-    public func registerReusableCell(type: AnyClass) {
-        let identifier = NSStringFromClass(type).componentsSeparatedByString(".").last!
-        registerNib(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+    public func registerReusableCell(_ type: AnyClass) {
+        let identifier = NSStringFromClass(type).components(separatedBy: ".").last!
+        register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
     }
 }

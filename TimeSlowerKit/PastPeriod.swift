@@ -14,15 +14,15 @@
  - LastYear:  Last year
  */
 public enum PastPeriod: Int {
-    case Today
-    case LastMonth
-    case LastYear
+    case today
+    case lastMonth
+    case lastYear
     
-    public func stringForPeriod(period: PastPeriod) -> String {
+    public func stringForPeriod(_ period: PastPeriod) -> String {
         switch period {
-        case .Today: return "Today"
-        case .LastMonth: return "Last month"
-        case .LastYear: return "Last year"
+        case .today: return "Today"
+        case .lastMonth: return "Last month"
+        case .lastYear: return "Last year"
         }
     }
 }

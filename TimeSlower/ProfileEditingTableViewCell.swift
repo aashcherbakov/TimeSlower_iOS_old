@@ -7,24 +7,8 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import RxBlocking
-import PureLayout
-import JVFloatLabeledTextField
 
-/**
- Enum of strings that descrybes cell type
- 
- - Name:     to enter name
- - Country:  to select country
- - Birthday: to select birthday
- */
-enum ProfileEditingCellType: String {
-    case Name = "name"
-    case Country = "country"
-    case Birthday = "birthday"
-}
+
 
 class ProfileEditingTableViewCell: UITableViewCell {
     
@@ -35,11 +19,11 @@ class ProfileEditingTableViewCell: UITableViewCell {
      - Editing: cell contains data
      */
     enum EditingState {
-        case Default
-        case Editing
+        case `default`
+        case editing
     }
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let placeholderYPadding: CGFloat = -6.0
     }
     
@@ -52,34 +36,33 @@ class ProfileEditingTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     
     
-    private let disposable = DisposeBag()
-    private var type: ProfileEditingCellType?
-    private var config: ProfileEditingCellConfig?
+    fileprivate var type: ProfileEditingCellType?
+    fileprivate var config: ProfileEditingCellConfig?
     
-    private var selectedValue: AnyObject? {
+    fileprivate var selectedValue: AnyObject? {
         didSet {
             guard let type = type else { return }
-            let state: EditingState = selectedValue != nil ? .Editing : .Default
+            let state: EditingState = selectedValue != nil ? .editing : .default
             updateTextFieldWithValue(selectedValue)
             config?.updateValue(selectedValue, forType: type)
             updateDesignForState(state, cellType: type)
         }
     }
     
-    private lazy var countryPicker: CountryPicker? = {
+    fileprivate lazy var countryPicker: CountryPicker? = {
         guard let countryPicker = self.config?.defaultCountryPicker() else { return nil }
         countryPicker.delegate = self
-        self.selectedValue = countryPicker.selectedCountryName
+        self.selectedValue = countryPicker.selectedCountryName as AnyObject?
         return countryPicker
     }()
     
-    private lazy var datePicker: UIDatePicker? = {
+    fileprivate lazy var datePicker: UIDatePicker? = {
         guard let datePicker = self.config?.defatultDatePicker() else { return nil }
-        datePicker.rx_date
-            .subscribeNext { [weak self] (date) -> Void in
-                self?.selectedValue = date
-            }
-            .addDisposableTo(self.disposable)
+//        datePicker.rx_date
+//            .subscribeNext { [weak self] (date) -> Void in
+//                self?.selectedValue = date
+//            }
+//            .addDisposableTo(self.disposable)
         return datePicker
     }()
     
@@ -90,7 +73,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
         setupEvents()
     }
     
-    func setupWith(type type: ProfileEditingCellType, config: ProfileEditingCellConfig) {
+    func setupWith(_ type: ProfileEditingCellType, config: ProfileEditingCellConfig) {
         self.type = type
         self.config = config
         setupDesign()
@@ -99,7 +82,7 @@ class ProfileEditingTableViewCell: UITableViewCell {
     
     // MARK: Internal Methods
     
-    func setExpended(expended: Bool) {
+    func setExpended(_ expended: Bool) {
         if expended {
             setupPickerView(forType: type)
         } 
@@ -111,23 +94,23 @@ class ProfileEditingTableViewCell: UITableViewCell {
     
     // MARK: - Setup Methods
     
-    private func setupEvents() {
-        textField.rx_text
-            .subscribeNext { [weak self] (text) -> Void in
-                self?.selectedValue = text.characters.count > 0 ? text : nil
-            }
-            .addDisposableTo(disposable)
+    fileprivate func setupEvents() {
+//        textField.rx_text
+//            .subscribeNext { [weak self] (text) -> Void in
+//                self?.selectedValue = text.characters.count > 0 ? text : nil
+//            }
+//            .addDisposableTo(disposable)
     }
     
-    private func setupData() {
+    fileprivate func setupData() {
         guard let type = type else { return }
         selectedValue = config?.preparedValueForType(type)
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         textField.delegate = self
-        textField.userInteractionEnabled = (type == .Name)
-        textField.placeholder = type?.rawValue.capitalizedString
+        textField.isUserInteractionEnabled = (type == .Name)
+        textField.placeholder = type?.rawValue.capitalized
         textField.floatingLabelActiveTextColor = UIColor.darkRed()
         textField.floatingLabelTextColor = UIColor.darkRed()
         textField.font = UIFont.sourceSansRegular()
@@ -136,13 +119,13 @@ class ProfileEditingTableViewCell: UITableViewCell {
         separatorLineHeight.constant = kDefaultSeparatorHeight
         
         if let cellType = type {
-            iconImageView.image = config?.iconForCellType(cellType, forState: .Default)
+            iconImageView.image = config?.iconForCellType(cellType, forState: .default)
         }
     }
     
     // MARK: - Private Functions
     
-    private func setupPickerView(forType type: ProfileEditingCellType?) {
+    fileprivate func setupPickerView(forType type: ProfileEditingCellType?) {
         guard let type = type else { return }
         
         var picker: UIView!
@@ -153,32 +136,31 @@ class ProfileEditingTableViewCell: UITableViewCell {
         }
         
         viewForPicker.addSubview(picker)
-        picker.autoCenterInSuperview()
     }
     
-    private func updateTextFieldWithValue(value: AnyObject?) {
+    fileprivate func updateTextFieldWithValue(_ value: AnyObject?) {
         if let string = value as? String {
             textField.text = string
-        } else if let date = value as? NSDate {
-            textField.text = config?.shortDateFormatter.stringFromDate(date)
+        } else if let date = value as? Date {
+            textField.text = config?.shortDateFormatter.string(from: date)
         }        
     }
     
-    private func updateDesignForState(cellState: EditingState?, cellType: ProfileEditingCellType?) {
-        guard let type = cellType, state = cellState else { return }
+    fileprivate func updateDesignForState(_ cellState: EditingState?, cellType: ProfileEditingCellType?) {
+        guard let type = cellType, let state = cellState else { return }
         iconImageView.image = config?.iconForCellType(type, forState: state)
         textField.textColor = config?.textColorForState(state)
     }
 }
 
 extension ProfileEditingTableViewCell : CountryPickerDelegate {
-    func countryPicker(picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-        selectedValue = name
+    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+        selectedValue = name as AnyObject?
     }
 }
 
 extension ProfileEditingTableViewCell: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

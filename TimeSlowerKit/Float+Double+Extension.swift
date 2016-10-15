@@ -9,13 +9,13 @@
 import Foundation
 
 extension Float {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
+    func format(_ f: String) -> String {
+        return NSString(format: "%\(f)f" as NSString, self) as String
     }
 }
 
 extension Double {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
+    func format(_ f: String) -> String {
+        return NSString(format: "%\(f)f" as NSString, self) as String
     }
 }

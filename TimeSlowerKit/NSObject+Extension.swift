@@ -13,11 +13,11 @@ public extension NSObject{
     
     /// Class helper variable to return the name of the class without the namespace
     public class var className: String{
-        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+        return NSStringFromClass(self).components(separatedBy: ".").last!
     }
     
     /// Helper variable to return the name of the class without the namespace
     public var className: String{
-        return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        return NSStringFromClass(type(of: self)).components(separatedBy: ".").last!
     }
 }

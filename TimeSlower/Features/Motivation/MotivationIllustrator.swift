@@ -10,7 +10,7 @@ import Foundation
 
 struct MotivationIllustrator {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let dotsImageHeight: CGFloat = 30
         static let dotsImageWidth: CGFloat = 160
         static let firstColumnXScale: CGFloat = 0.16
@@ -34,55 +34,55 @@ struct MotivationIllustrator {
         UIGraphicsBeginImageContextWithOptions(backgroundImage.size, false, 0)
         
         // Add background
-        backgroundImage.drawInRect(CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height))
+        backgroundImage.draw(in: CGRect(x: 0, y: 0, width: backgroundImage.size.width, height: backgroundImage.size.height))
         
         // Add description
-        descripton.drawInRect(frameForDescription(descripton))
+        descripton.draw(in: frameForDescription(descripton))
         
         let offset = backgroundImage.size.height * Constants.lineYOffsetScale
 
         // Add strings
         let labels = labelsForStats(stats)
         for label in labels {
-            let index = labels.indexOf(label)!
+            let index = labels.index(of: label)!
             let labelX = backgroundImage.size.width * Constants.firstColumnXScale
             let labelY = backgroundImage.size.height * Constants.firstLineYScale + CGFloat(index) * offset
-            label.drawInRect(CGRectMake(labelX, labelY, label.size().width, label.size().height))
+            label.draw(in: CGRect(x: labelX, y: labelY, width: label.size().width, height: label.size().height))
         }
         
         // Add dots
-        let frame = CGRectMake(0, 0, Constants.dotsImageWidth, Constants.dotsImageHeight)
+        let frame = CGRect(x: 0, y: 0, width: Constants.dotsImageWidth, height: Constants.dotsImageHeight)
         let images = imagesForStats(stats, originalFrame: frame)
         for image in images {
-            let index = images.indexOf(image)!
+            let index = images.index(of: image)!
             let imageX = backgroundImage.size.width * Constants.secondColumnXScale
             let imageY = backgroundImage.size.height * Constants.firstLineYScale + CGFloat(index) * offset
-            image.drawInRect(CGRectMake(imageX, imageY, image.size.width, image.size.height))
+            image.draw(in: CGRect(x: imageX, y: imageY, width: image.size.width, height: image.size.height))
         }
         
         // Save and return
         let imageToShare = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return imageToShare
+        return imageToShare!
     }
     
-    private func frameForDescription(description: NSAttributedString) -> CGRect {
+    fileprivate func frameForDescription(_ description: NSAttributedString) -> CGRect {
         let preferedWidth = description.size().width * 0.7
         let preferedHeight = description.size().height * 2
         let descriptionX = backgroundImage.size.width / 2 - preferedWidth / 2
         let descriptionY = backgroundImage.size.height * Constants.descriptionYScale
-        let descriptionFrame = CGRectMake(descriptionX, descriptionY, preferedWidth, preferedHeight)
+        let descriptionFrame = CGRect(x: descriptionX, y: descriptionY, width: preferedWidth, height: preferedHeight)
         return descriptionFrame
     }
     
-    private func labelsForStats(stats: LifetimeStats) -> [NSAttributedString] {
+    fileprivate func labelsForStats(_ stats: LifetimeStats) -> [NSAttributedString] {
         var strings = [NSAttributedString]()
         
         strings.append(stats.monthsAttributedDescription())
         strings.append(stats.daysAttributedDescription())
         
-        if stats.summYears.integerValue >= 1 {
-            strings.insert(stats.yearsAttributedDescription(), atIndex: 0)
+        if stats.summYears.int32Value >= 1 {
+            strings.insert(stats.yearsAttributedDescription(), at: 0)
         } else {
             strings.append(stats.hoursAttributedDescription())
         }
@@ -90,26 +90,26 @@ struct MotivationIllustrator {
         return strings
     }
     
-    private func imagesForStats(stats: LifetimeStats, originalFrame: CGRect) -> [UIImage] {
+    fileprivate func imagesForStats(_ stats: LifetimeStats, originalFrame: CGRect) -> [UIImage] {
         var images = [UIImage]()
         
-        images.append(Motivator.imageWithDotsAmount(dots: stats.summMonth.integerValue, inFrame: originalFrame))
-        images.append(Motivator.imageWithDotsAmount(dots: stats.summDays.integerValue, inFrame: originalFrame))
+        images.append(Motivator.imageWithDotsAmount(stats.summMonth.intValue, inFrame: originalFrame))
+        images.append(Motivator.imageWithDotsAmount(stats.summDays.intValue, inFrame: originalFrame))
         
-        if stats.summYears.integerValue >= 1 {
-            images.insert(Motivator.imageWithDotsAmount(dots: stats.summYears.integerValue, inFrame: originalFrame), atIndex: 0)
+        if stats.summYears.int32Value >= 1 {
+            images.insert(Motivator.imageWithDotsAmount(stats.summYears.intValue, inFrame: originalFrame), at: 0)
         } else {
-            images.append(Motivator.imageWithDotsAmount(dots: stats.summHours.integerValue, inFrame: originalFrame))
+            images.append(Motivator.imageWithDotsAmount(stats.summHours.intValue, inFrame: originalFrame))
         }
         
         return images
     }
     
-    private func secondColumnX() -> CGFloat {
+    fileprivate func secondColumnX() -> CGFloat {
         return backgroundImage.size.width / 2
     }
     
-    private func firstColumnx() -> CGFloat {
+    fileprivate func firstColumnx() -> CGFloat {
         return backgroundImage.size.width * Constants.firstColumnXScale
     }
 }

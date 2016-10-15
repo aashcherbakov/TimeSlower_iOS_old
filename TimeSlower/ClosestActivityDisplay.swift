@@ -11,20 +11,20 @@ import TimeSlowerKit
 
 internal final class ClosestActivityDisplay: UIView {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let currentStatusCurrentActivity = "Current activity"
         static let currentStatusNextActivity = "Next activity"
         static let timingStatusStartsIn = "starts in"
         static let timingStatusFinishesIn = "finishes in"
     }
     
-    @IBOutlet private(set) weak var view: UIView!
-    @IBOutlet private(set) weak var titleLabel: UILabel!
-    @IBOutlet private(set) weak var nameLabel: UILabel!
-    @IBOutlet private(set) weak var statusLabel: UILabel!
-    @IBOutlet private(set) weak var timerLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var view: UIView!
+    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var nameLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var statusLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var timerLabel: UILabel!
     
-    private var timer: MZTimerLabel?
+    fileprivate var timer: MZTimerLabel?
     
     // MARK: - Overridden
     
@@ -40,15 +40,18 @@ internal final class ClosestActivityDisplay: UIView {
     
     // MARK: - Internal Functions
     
-    func setupWithActivity(activity: Activity?) {
-       
-        if let activity = activity {
-            launchTimerForActivity(activity)
-            setupLabelsForActivity(activity)
-        }
+    func setupWithActivity(_ activity: Activity?) {
+        launchTimerForActivity(activity)
+        setupLabelsForActivity(activity)
     }
     
-    func launchTimerForActivity(activity: Activity) {
+    func launchTimerForActivity(_ activity: Activity?) {
+        guard let activity = activity else {
+            timer?.removeFromSuperview()
+            timer = nil
+            return
+        }
+        
         if let timer = timer {
             if !timer.counting {
                 setupTimerCountdownForActivity(activity)
@@ -60,24 +63,25 @@ internal final class ClosestActivityDisplay: UIView {
         }
     }
     
-    func restartTimerForActivity(activity: Activity) {
-        let timeTillFinalDate = activity.timing.nextActionTime()
+    func restartTimerForActivity(_ activity: Activity) {
+        let nextActionTime = activity.nextActionTime()
         let timeTillEndOfCountdown = timer?.getTimeRemaining()
-        
+        let timeTillFinalDate = nextActionTime.timeIntervalSinceNow
+       
         if timeTillFinalDate != timeTillEndOfCountdown {
             reloadTimerForActivity(activity)
         }
     }
     
-    func setupTimerCountdownForActivity(activity: Activity) {
+    func setupTimerCountdownForActivity(_ activity: Activity) {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
         
         if let timer = timer {
-            timer.setCountDownToDate(activity.timing.nextActionTime())
+            timer.setCountDownTo(activity.nextActionTime())
             timer.resetTimerAfterFinish = false
             
-            let timerSecondsToSet = activity.timing.nextActionTime().timeIntervalSinceNow
-            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
+            let timerSecondsToSet = activity.nextActionTime().timeIntervalSinceNow
+            timer.timeFormat = (timerSecondsToSet > 60*60) ? "HH:mm:ss" : "mm:ss:SS"
             
             if timerSecondsToSet > 60*60*24 {
                 let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
@@ -88,7 +92,7 @@ internal final class ClosestActivityDisplay: UIView {
         }
     }
     
-    func reloadTimerForActivity(activity: Activity) {
+    func reloadTimerForActivity(_ activity: Activity) {
         if timer != nil {
             timer?.removeFromSuperview()
             timer = nil
@@ -98,23 +102,24 @@ internal final class ClosestActivityDisplay: UIView {
     
     // MARK: - Private Functions
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(ClosestActivityDisplay.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(ClosestActivityDisplay.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupLabelsForActivity(activity: Activity?) {
+    fileprivate func setupLabelsForActivity(_ activity: Activity?) {
         if let activity = activity {
-            nameLabel.text = activity.name.uppercaseString
+            nameLabel.text = activity.name.uppercased()
             titleLabel.text = activity.isGoingNow() ?
                 Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
             statusLabel.text = activity.isGoingNow() ?
                 Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
-            nameLabel.text = "Create an activity first"
+            nameLabel.text = "No activities for today 😳"
             titleLabel.text = ""
             timerLabel.text = ""
+            statusLabel.text = ""
         }
     }
 }

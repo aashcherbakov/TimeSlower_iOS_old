@@ -13,8 +13,8 @@ import Foundation
  */
 public struct TimeMachine {
     
-    private let dateFormatter = StaticDateFormatter.self
-    private let calendar: NSCalendar
+    fileprivate let dateFormatter = StaticDateFormatter.self
+    fileprivate let calendar: Calendar
     
     /**
      Initializer
@@ -23,7 +23,7 @@ public struct TimeMachine {
      
      - returns: calendar used for calculations
      */
-    public init(calendar: NSCalendar = NSCalendar.currentCalendar()) {
+    public init(calendar: Calendar = Calendar.current) {
         self.calendar = calendar
     }
     
@@ -35,11 +35,11 @@ public struct TimeMachine {
      
      - returns: NSDate for next occurance of given weekday
      */
-    public func nextOccuranceOfWeekday(weekday: Weekday, fromDate date: NSDate) -> NSDate {
+    public func nextOccuranceOfWeekday(_ weekday: Weekday, fromDate date: Date) -> Date {
         let fromWeekday = Weekday.createFromDate(date)
         let difference = intervalFromDay(fromWeekday.rawValue, toDay: weekday.rawValue)
         let timeIntervalToAdd = difference * kSecondsInDay
-        return NSDate(timeInterval: timeIntervalToAdd, sinceDate: date)
+        return Date(timeInterval: timeIntervalToAdd, since: date)
     }
     
     /**
@@ -50,16 +50,16 @@ public struct TimeMachine {
      
      - returns: NSDate N days before given date
      */
-    public func startDateForPeriod(period: PastPeriod, sinceDate date: NSDate) -> NSDate {
-        let componentsFromToday = calendar.components([.Year, .Month, .Day, .Hour, .Minute], fromDate: date)
+    public func startDateForPeriod(_ period: PastPeriod, sinceDate date: Date) -> Date {
+        var componentsFromToday = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute], from: date)
         
         switch period {
-        case .Today: break
-        case .LastMonth: componentsFromToday.month = componentsFromToday.month - 1
-        case .LastYear: componentsFromToday.year = componentsFromToday.year - 1
+        case .today: break
+        case .lastMonth: componentsFromToday.month = componentsFromToday.month! - 1
+        case .lastYear: componentsFromToday.year = componentsFromToday.year! - 1
         }
         
-        return calendar.dateFromComponents(componentsFromToday)!
+        return calendar.date(from: componentsFromToday)!
     }
     
     /**
@@ -70,10 +70,10 @@ public struct TimeMachine {
      
      - returns: Int with number of days
      */
-    public func numberOfDaysInPeriod(period: PastPeriod, fromDate date: NSDate) -> Int {
+    public func numberOfDaysInPeriod(_ period: PastPeriod, fromDate date: Date) -> Int {
         let startDate = startDateForPeriod(period, sinceDate: date)
-        let components = calendar.components(NSCalendarUnit.Day, fromDate: date, toDate: startDate, options: [])
-        return abs(components.day)
+        let components = (calendar as NSCalendar).components(NSCalendar.Unit.day, from: date, to: startDate, options: [])
+        return abs(components.day!)
     }
     
     /**
@@ -84,14 +84,14 @@ public struct TimeMachine {
      
      - returns: NSDate with passed time.
      */
-    public func updatedTime(time: NSDate, forDate: NSDate) -> NSDate {
-        let oldDateComponents = NSCalendar.currentCalendar().components([.Hour, .Minute], fromDate: time)
-        let newDateComponents = NSCalendar.currentCalendar().components([.Month, .Day, .Year], fromDate: forDate)
+    public func updatedTime(_ time: Date, forDate: Date) -> Date {
+        let oldDateComponents = (Calendar.current as NSCalendar).components([.hour, .minute], from: time)
+        var newDateComponents = (Calendar.current as NSCalendar).components([.month, .day, .year], from: forDate)
         
         newDateComponents.hour = oldDateComponents.hour
         newDateComponents.minute = oldDateComponents.minute
         
-        return NSCalendar.currentCalendar().dateFromComponents(newDateComponents)!
+        return Calendar.current.date(from: newDateComponents)!
     }
     
     /**
@@ -102,14 +102,14 @@ public struct TimeMachine {
      
      - returns: Double that represents number of minutes between given dates
      */
-    public func minutesFromStart(start: NSDate, toFinish finish: NSDate) -> Double {
-        let timeFromStartToFinish = start.timeIntervalSinceDate(finish)
+    public func minutesFromStart(_ start: Date, toFinish finish: Date) -> Double {
+        let timeFromStartToFinish = start.timeIntervalSince(finish)
         return abs(timeFromStartToFinish) / 60
     }
     
     // MARK: - Private Methods
     
-    private func intervalFromDay(fromDay: Int, toDay: Int) -> Double {
+    fileprivate func intervalFromDay(_ fromDay: Int, toDay: Int) -> Double {
         var difference: Double
         
         if toDay < fromDay {

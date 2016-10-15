@@ -13,13 +13,11 @@ class CircleStatsView: UIView {
     
     typealias SummTiming = (Double, Double)
     
-    @IBOutlet private(set) weak var view: UIView!
-    @IBOutlet private(set) weak var goalsCircle: CircleProgress!
-    @IBOutlet private(set) weak var routinesCircle: CircleProgress!
-    @IBOutlet private(set) weak var routineProgressLabel: UILabel!
-    @IBOutlet private(set) weak var routinesTargetLabel: UILabel!
-    @IBOutlet private(set) weak var goalsProgressLabel: UILabel!
-    @IBOutlet private(set) weak var goalsTargetLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var view: UIView!
+    @IBOutlet fileprivate(set) weak var routinesCurcle: CircleProgress!
+    @IBOutlet fileprivate(set) weak var routineProgressLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var routinesTargetLabel: UILabel!
+    @IBOutlet private(set) weak var successLabel: UILabel!
     
     // MARK: - Overridden
     
@@ -33,65 +31,41 @@ class CircleStatsView: UIView {
         setupXib()
     }
     
-    func displayProgressForProfile(profile: Profile?) {
-//        guard let profile = profile else {
-//            fatalError("No profile found, database programming error")
-//        }
-        
+    func displayProgress(progress: RoutineProgress) {
+        routinesCurcle.updateProgress(CGFloat(progress.success / 100))
         setupCircleDesign()
-        
-        
-//        setupDataForProfile(profile)
+        displayProgressNumbers(progress: progress)
     }
     
     // MARK: - Private Functions
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(CircleStatsView.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(CircleStatsView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupCircleDesign() {
-        routinesCircle.progressColor = UIColor(red: 255/255, green: 136/255, blue: 104/255, alpha: 1)
+    fileprivate func setupCircleDesign() {
+        routinesCurcle.progressTintColor = UIColor.purpleRed()
     }
     
-    private func setupDataForProfile(profile: Profile) {
-
-        if let
-            factTiming = profile.factTimingForPeriod(.Today),
-            plannedTiming = profile.plannedTimingInPeriod(.Today, sinceDate: NSDate()) {
-            
-            setupLabels(factTiming: factTiming, plannedTiming: plannedTiming)
-            setupProgress(fact: factTiming.saved, planned: plannedTiming.save, activityType: .Routine)
-            setupProgress(fact: factTiming.spent, planned: plannedTiming.spend, activityType: .Goal)
-        }
+    private func displayProgressNumbers(progress: RoutineProgress) {
+        routineProgressLabel.text = String(format: "%.0f", progress.savedTime)
+        routinesTargetLabel.text = String(format: "%.0f", progress.plannedTime) + " m."
+        successLabel.text = String(format: "%.1f", progress.success) + "%"
     }
     
-    private func setupLabels(factTiming factTiming: SummTiming, plannedTiming: SummTiming) {
-        let format = ".0"
-
-        routineProgressLabel.text = "\(factTiming.0.format(format))"
-        goalsProgressLabel.text = "\(factTiming.1.format(format))"
-        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
-        goalsTargetLabel.text = "\(plannedTiming.1.format(format))"
-    }
-
-    
-    private func setupProgress(fact fact: Double, planned: Double, activityType: ActivityType) {
+    fileprivate func setupProgress(_ fact: Double, planned: Double, activityType: ActivityType) {
         var result: Double = 0
         if planned > 0 {
             result = fact * 100 / planned
         }
         
-        circleForActivityType(activityType).setProgress(result, animated: true)
+        circleForActivityType(activityType).updateProgress(CGFloat(result))
     }
     
-    private func circleForActivityType(type: ActivityType) -> CircleProgress {
-        switch type {
-        case .Routine: return routinesCircle
-        case .Goal: return goalsCircle
-        }
+    fileprivate func circleForActivityType(_ type: ActivityType) -> CircleProgress {
+        return routinesCurcle
     }
 }
 

@@ -40,7 +40,7 @@ class EditActivityBasisViewTests: XCTestCase {
     
     func test_selectedValueSetFromOutside() {
         // when
-        sut.selectedBasis = Basis.Weekends
+        sut.selectedBasis = Basis.weekends
         
         // then
         XCTAssertEqual(sut.textFieldView.textField.text, "Saturday and Sunday",

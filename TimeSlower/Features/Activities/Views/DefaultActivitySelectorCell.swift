@@ -21,7 +21,7 @@ class DefaultActivitySelectorCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let screenHeight = CGRectGetHeight(UIScreen.mainScreen().bounds)
+        let screenHeight = UIScreen.main.bounds.height
         let imageHeightMultiplier: CGFloat = screenHeight > 568 ? 0.57 : 0.5
         imageViewHeight.constant = contentView.bounds.height * imageHeightMultiplier
         backgroundCircle.layer.cornerRadius = imageViewHeight.constant / 2

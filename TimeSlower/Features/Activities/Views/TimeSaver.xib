@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="SourceSansPro-Regular.ttf">
+        <array key="SourceSansPro-Regular.ttf">
             <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeSaver" customModule="TimeSlower" customModuleProvider="target">
@@ -23,29 +24,24 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-gd-24l">
-                    <rect key="frame" x="40" y="75" width="520" height="20"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-gd-24l"/>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MmT-sh-XmS">
-                    <rect key="frame" x="38" y="70" width="524" height="31"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" image="YES"/>
                     </accessibility>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9T-2k-96a">
-                    <rect key="frame" x="270" y="33" width="62" height="28"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="22"/>
-                    <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW MUCH TIME YOU WANT TO SAVE?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4B-Cx-bMC">
-                    <rect key="frame" x="197" y="8" width="206" height="17"/>
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
-                    <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="v4B-Cx-bMC" secondAttribute="centerX" id="0Xj-DU-RyQ"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="centerX" secondItem="Y9T-2k-96a" secondAttribute="centerX" constant="-1" id="3Gg-YG-bie"/>
@@ -57,19 +53,11 @@
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="top" secondItem="v4B-Cx-bMC" secondAttribute="bottom" constant="8" id="TqK-oM-OHY"/>
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="centerX" secondItem="MmT-sh-XmS" secondAttribute="centerX" constant="1" id="Wxc-Os-Nmd"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MmT-sh-XmS" secondAttribute="bottom" id="hWm-fg-yUT"/>
-                <constraint firstItem="4hC-gd-24l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="mol-Y1-4ny"/>
                 <constraint firstAttribute="trailing" secondItem="MmT-sh-XmS" secondAttribute="trailing" constant="40" id="wYP-4s-hDq"/>
-                <constraint firstAttribute="trailing" secondItem="4hC-gd-24l" secondAttribute="trailing" constant="35" id="xqR-Cb-Efk"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="zal-7z-FAA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="mol-Y1-4ny"/>
-                    <exclude reference="xqR-Cb-Efk"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="540" y="88.5"/>
         </view>
     </objects>

@@ -18,27 +18,27 @@ import Foundation
  - Random:   random days
  */
 public enum Basis: Int {
-    case Daily
-    case Workdays
-    case Weekends
-    case Random
+    case daily
+    case workdays
+    case weekends
+    case random
     
     public func description() -> String {
         switch self {
-        case .Daily: return "Every single day"
-        case .Workdays: return "Monday - Friday"
-        case .Weekends: return "Saturday and Sunday"
-        case .Random: return "Random days"
+        case .daily: return "Every single day"
+        case .workdays: return "Monday - Friday"
+        case .weekends: return "Saturday and Sunday"
+        case .random: return "Random days"
         }
     }
     
     /// Number of days basis ocupies in a week. Used to convert days to basis and vise versa
     public var numberOfDaysInWeek: Int {
         switch self {
-        case .Daily: return 7
-        case .Workdays: return 5
-        case .Weekends: return 2
-        case .Random: return 0
+        case .daily: return 7
+        case .workdays: return 5
+        case .weekends: return 2
+        case .random: return 0
         }
     }
     
@@ -49,7 +49,7 @@ public enum Basis: Int {
      
      - returns: Basis instance
      */
-    public static func basisFromDays(days: [Int]) -> Basis {
+    public static func basisFromDays(_ days: [Int]) -> Basis {
         return basisFromWeekdays(days.map({ (day) -> Weekday in
             guard let weekday = Weekday(rawValue: day) else {
                 fatalError("Could not convert day's number representetion to weekday")
@@ -65,7 +65,7 @@ public enum Basis: Int {
      
      - returns: [Int]
      */
-    public static func daysFromBasis(basis: Basis) -> [Int] {
+    public static func daysFromBasis(_ basis: Basis) -> [Int] {
         let weekdays = Weekday.weekdaysForBasis(basis)
         return weekdays.map({ (weekday) -> Int in
             return weekday.rawValue
@@ -80,30 +80,30 @@ public enum Basis: Int {
      
      - returns: Basis case
      */
-    public static func basisFromWeekdays(weekdays: [Weekday]) -> Basis {
-        if shouldDays(weekdays, representBasis: .Weekends) {
-            return .Weekends
-        } else if shouldDays(weekdays, representBasis: .Workdays) {
-            return .Workdays
+    public static func basisFromWeekdays(_ weekdays: [Weekday]) -> Basis {
+        if shouldDays(weekdays, representBasis: .weekends) {
+            return .weekends
+        } else if shouldDays(weekdays, representBasis: .workdays) {
+            return .workdays
         } else if weekdays.count == 7 {
-            return .Daily
+            return .daily
         } else {
-            return .Random
+            return .random
         }
     }
     
     // MARK: - Private Functions
     
-    private static func shouldDays(days: [Weekday], representBasis basis: Basis) -> Bool {
+    fileprivate static func shouldDays(_ days: [Weekday], representBasis basis: Basis) -> Bool {
         guard days.count == basis.numberOfDaysInWeek else {
             return false
         }
         
-        if basis == .Daily || basis == .Random {
+        if basis == .daily || basis == .random {
             return true
         }
         
-        let shouldBeWorkday = basis == .Workdays
+        let shouldBeWorkday = basis == .workdays
         for day in days {
             if day.isWorkday != shouldBeWorkday {
                 return false

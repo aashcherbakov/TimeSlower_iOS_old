@@ -20,10 +20,10 @@ class MotivationControlTests: XCTestCase {
         super.setUp()
         
         let hours = TimeCalculator().totalHours(inDays: 14600, duration: 20, busyDays: 7)
-        stats = LifetimeStats(withHours: hours)
+        stats = LifetimeStats(withHours: NSNumber(value: hours))
         
         let years = TimeCalculator().totalHours(inDays: 14600, duration: 120, busyDays: 7)
-        yearStats = LifetimeStats(withHours: years)
+        yearStats = LifetimeStats(withHours: NSNumber(value: years))
         
         let controller: FakeControllerWithCustomViews = FakeStoryboardLoader.testViewController()
         sut = controller.motivationControl
@@ -41,14 +41,14 @@ class MotivationControlTests: XCTestCase {
         XCTAssertNotNil(sut.collectionView)
         XCTAssertNotNil(sut.collectionView.delegate)
         XCTAssertNotNil(sut.collectionView.dataSource)
-        XCTAssertEqual(sut.view.frame.size, CGSizeMake(202, 150))
+        XCTAssertEqual(sut.view.frame.size, CGSize(width: 202, height: 150))
     }
     
     func test_collectionViewSetup() {
         sut.setupWithLifetimeStats(stats, shareDelegate: FakeShareDelegate())
         XCTAssertNotNil(sut.stats)
-        XCTAssertEqual(sut.collectionView.numberOfItemsInSection(0), 4, "it should have 4 cells")
-        XCTAssertEqual(sut.cellTypes!, [.Months, .Days, .Hours, .Share])
+        XCTAssertEqual(sut.collectionView.numberOfItems(inSection: 0), 4, "it should have 4 cells")
+        XCTAssertEqual(sut.cellTypes!, [.months, .days, .hours, .share])
     }
     
     // MARK: - Cell Order Layout
@@ -59,10 +59,10 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let firstIndex = NSIndexPath(forItem: 0, inSection: 0)
-        let firstCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: firstIndex) as! MotivationDotsCollectionViewCell
-        let lastIndex = NSIndexPath(forItem: 2, inSection: 0)
-        let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationDotsCollectionViewCell
+        let firstIndex = IndexPath(item: 0, section: 0)
+        let firstCell = sut.collectionView(sut.collectionView, cellForItemAt: firstIndex) as! MotivationDotsCollectionViewCell
+        let lastIndex = IndexPath(item: 2, section: 0)
+        let lastCell = sut.collectionView(sut.collectionView, cellForItemAt: lastIndex) as! MotivationDotsCollectionViewCell
 
         // then
         XCTAssertEqual(firstCell.periodLabel.text, "MONTHS")
@@ -77,10 +77,10 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let firstIndex = NSIndexPath(forItem: 0, inSection: 0)
-        let firstCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: firstIndex) as! MotivationDotsCollectionViewCell
-        let lastIndex = NSIndexPath(forItem: 2, inSection: 0)
-        let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationDotsCollectionViewCell
+        let firstIndex = IndexPath(item: 0, section: 0)
+        let firstCell = sut.collectionView(sut.collectionView, cellForItemAt: firstIndex) as! MotivationDotsCollectionViewCell
+        let lastIndex = IndexPath(item: 2, section: 0)
+        let lastCell = sut.collectionView(sut.collectionView, cellForItemAt: lastIndex) as! MotivationDotsCollectionViewCell
         
         // then
         XCTAssertEqual(firstCell.periodLabel.text, "YEARS")
@@ -96,8 +96,8 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let lastIndex = NSIndexPath(forItem: 3, inSection: 0)
-        let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationShareCollectionViewCell
+        let lastIndex = IndexPath(item: 3, section: 0)
+        let lastCell = sut.collectionView(sut.collectionView, cellForItemAt: lastIndex) as! MotivationShareCollectionViewCell
         
         // then
         XCTAssertEqual(lastCell.topLabel.text, "6.8 MONTHS")
@@ -111,8 +111,8 @@ class MotivationControlTests: XCTestCase {
         sut.collectionView.reloadData()
         
         // when
-        let lastIndex = NSIndexPath(forItem: 3, inSection: 0)
-        let lastCell = sut.collectionView(sut.collectionView, cellForItemAtIndexPath: lastIndex) as! MotivationShareCollectionViewCell
+        let lastIndex = IndexPath(item: 3, section: 0)
+        let lastCell = sut.collectionView(sut.collectionView, cellForItemAt: lastIndex) as! MotivationShareCollectionViewCell
 
         // then
         XCTAssertEqual(lastCell.topLabel.text, "3.4 YEARS")
@@ -122,7 +122,7 @@ class MotivationControlTests: XCTestCase {
 }
 
 private struct FakeShareDelegate: ActivityShareDelegate {
-    private func shareMotivationImage() {
+    fileprivate func shareMotivationImage() {
         
     }
 }

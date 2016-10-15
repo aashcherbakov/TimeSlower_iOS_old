@@ -11,15 +11,15 @@ import TimeSlowerKit
 
 class MenuVC: UIViewController {
     
-    private enum MenuOptions: Int {
-        case Profile = 1
-        case CreateActivity
-        case AllActivities
-        case RateApp
-        case Feedback
+    fileprivate enum MenuOptions: Int {
+        case profile = 1
+        case createActivity
+        case allActivities
+        case rateApp
+        case feedback
     }
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let avatarBackgroundScale: CGFloat = 0.21
         static let cellHeightScale: CGFloat = 0.08
         static let firstCellOffsetScale: CGFloat = 0.04
@@ -37,7 +37,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var avatarBackground: UIView!
     
-    private var profile: Profile?
+    fileprivate var profile: Profile?
     
     // MARK: - Overridden
     
@@ -58,58 +58,58 @@ class MenuVC: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func menuOptionTapped(sender: UIButton) {
+    @IBAction func menuOptionTapped(_ sender: UIButton) {
         guard let selectedOption = MenuOptions(rawValue: sender.tag) else {
             return
         }
         presentControllerFromMenu(selectedOption)
     }
     
-    @IBAction func dismissMenu(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismissMenu(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private Methods 
     
     // MARK: - Navigation
     
-    private func presentControllerFromMenu(option: MenuOptions) {
+    fileprivate func presentControllerFromMenu(_ option: MenuOptions) {
         guard let transition = transitioningDelegate as? MenuTransitionManager else {
             return
         }
         
         if let controller = controllerForOption(option) {
             transition.sourceViewController?.navigationController?.pushViewController(controller, animated: false)
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    private func controllerForOption(option: MenuOptions) -> UIViewController? {
+    fileprivate func controllerForOption(_ option: MenuOptions) -> UIViewController? {
         switch option {
-        case .Profile:
+        case .profile:
             return profileStatsController()
-        case .CreateActivity:
+        case .createActivity:
             return createActivityController()
-        case .AllActivities:
+        case .allActivities:
             return activityListController()
         default:
             return nil
         }
     }
     
-    private func profileStatsController() -> UIViewController {
+    fileprivate func profileStatsController() -> UIViewController {
         let profileController: ProfileStatsVC = ControllerFactory.createController()
         profileController.profile = profile
         return profileController
     }
     
-    private func activityListController() -> UIViewController {
+    fileprivate func activityListController() -> UIViewController {
         let listController: ListOfActivitiesVC = ControllerFactory.createController()
         listController.profile = profile
         return listController
     }
     
-    private func createActivityController() -> UIViewController {
+    fileprivate func createActivityController() -> UIViewController {
         let controller: EditActivityVC = ControllerFactory.createController()
         controller.userProfile = profile
         return controller
@@ -117,32 +117,32 @@ class MenuVC: UIViewController {
     
     // MARK: - Design
 
-    private func setupDesign() {
-        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
-            return
-        }
-        
-        self.profile = profile
-        nameLabel.text = profile.name.uppercaseString
-        countryLabel.text = profile.country.capitalizedString
-        
-        if let photoData = profile.photo {
-            avatarImageView.image = UIImage(data: photoData)
-        }
+    fileprivate func setupDesign() {
+//        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
+//            return
+//        }
+//        
+//        self.profile = profile
+//        nameLabel.text = profile.name.uppercased()
+//        countryLabel.text = profile.country.capitalized
+//        
+//        if let photoData = profile.photo {
+//            avatarImageView.image = UIImage(data: photoData)
+//        }
 
     }
 
-    private func setupDefaultConstraints() {
-        let height = UIScreen.mainScreen().bounds.height
+    fileprivate func setupDefaultConstraints() {
+        let height = UIScreen.main.bounds.height
         avatarBackgroundHeight.constant = height * Constants.avatarBackgroundScale
         cellHeight.constant = height * Constants.cellHeightScale
         firstCellOffset.constant = height * Constants.firstCellOffsetScale
     }
     
-    private func setupAvatarForm() {
+    fileprivate func setupAvatarForm() {
         avatarBackground.layer.cornerRadius = avatarBackgroundHeight.constant / 2
         avatarBackground.layer.borderWidth = 1
-        avatarBackground.layer.borderColor = UIColor.darkRed().CGColor
+        avatarBackground.layer.borderColor = UIColor.darkRed().cgColor
         avatarImageView.layer.cornerRadius = (avatarBackgroundHeight.constant - 8) / 2
         avatarImageView.clipsToBounds = true
     }

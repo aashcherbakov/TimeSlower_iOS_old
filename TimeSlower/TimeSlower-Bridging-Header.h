@@ -5,4 +5,10 @@
 #import "CountryPicker.h"
 #import "MZTimerLabel.h"
 
-#import <JVFloatLabeledTextField/JVFloatLabeledTextField.h>
+#import "JVFloatLabeledTextField.h"
+#import "NSString+TextDirectionality.h"
+#import "JVFloatLabeledTextView.h"
+
+
+
+

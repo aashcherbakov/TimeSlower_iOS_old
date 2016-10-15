@@ -1,210 +1,203 @@
 //
 //  Activity.swift
-//  TimeSlower
+//  TimeSlowerKit
 //
-//  Created by Oleksandr Shcherbakov on 5/7/16.
+//  Created by Oleksandr Shcherbakov on 9/3/16.
 //  Copyright © 2016 Oleksandr Shcherbakov. All rights reserved.
 //
 
 import Foundation
-import CoreData
 
-/// NSManagedObject subclass that stores information about user activity
-public class Activity: NSManagedObject, Persistable {
+public struct Activity: Persistable {
     
+    public let resourceId: String
+    public let name: String
+    public let type: ActivityType
+    public let days: [Weekday]
+    public let stats: Stats
+    public let notifications: Bool
+    public let averageSuccess: Double
+    private(set) public var results: Set<Result>
+    private let timing: Timing
+
     private let timeMachine = TimeMachine()
     
-    // TODO: convert properties of activity to Enum
-    public class func typeWithEnum(type: ActivityType) -> NSNumber {
-        return NSNumber(integer: type.rawValue)
-    }
-    
-    public class func basisWithEnum(basis: Basis) -> NSNumber {
-        return NSNumber(integer: basis.rawValue)
-    }
+    public init(withLifetimeDays
+        lifetimeDays: Int,
+        name: String,
+        type: ActivityType,
+        days: [Weekday],
+        timing: Timing,
+        notifications: Bool, results: Set<Result> = []) {
         
-    /**
-     Mark activity as manually started. finishWithResult method must be called after.
-     */
-    public func startActivity() {
-        timing.manuallyStarted = NSDate()
+        self.resourceId = UUID().uuidString
+        self.name = name
+        self.type = type
+        self.days = days
+        self.timing = timing
+        self.notifications = notifications
+        self.averageSuccess = 0
+        self.results = results
+        self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
     
-    /**
-     Creates DayResult and assigns it to activity. Also, sets manuallyStarted property to nil.
-     */
-    public func finishWithResult() {
-        DayResults.newResultWithDate(NSDate(), forActivity: self)
-        timing.manuallyStarted = nil
+    public init(withStats
+        stats: Stats,
+        name: String,
+        type: ActivityType,
+        days: [Weekday],
+        timing: Timing,
+        notifications: Bool,
+        averageSuccess: Double,
+        resourceId: String, results: Set<Result>) {
+        
+        self.resourceId = resourceId
+        self.name = name
+        self.type = type
+        self.days = days
+        self.timing = timing
+        self.notifications = notifications
+        self.averageSuccess = averageSuccess
+        self.stats = stats
+        self.results = results
     }
     
-    // MARK: - Comparing activities
-    
-    /**
-     Compares two activities base on their next action time.
-     
-     - parameter otherActivity: Activity instance to which you compare current one
-     
-     - returns: NSComparisonResult. Descending if current activity is earlier.
-     */
-    public func compareBasedOnNextActionTime(otherActivity: Activity) -> NSComparisonResult {
-        let currentActivityTime = timing.nextActionTime()
-        let otherActivityTime = otherActivity.timing.nextActionTime()
-        return currentActivityTime.compare(otherActivityTime)
+    public func update(withTiming newTiming: Timing) -> Activity {
+        return Activity(
+            withStats: stats,
+            name: name,
+            type: type,
+            days: days,
+            timing: newTiming,
+            notifications:
+            notifications,
+            averageSuccess: averageSuccess,
+            resourceId: resourceId,
+            results: results)
     }
     
-    /**
-     Checks if activity is happening in given Weekday
-     
-     - parameter weekday: Weekday to check
-     
-     - returns: True if days of activity has this weekday
-     */
-    public func fitsWeekday(weekday: Weekday) -> Bool {
-        let fit = days.filter { (day) -> Bool in
-            guard let day = day as? Day else { return false }
-            return day.name == weekday.shortName
+    public mutating func updateWithResults(results: Set<Result>) {
+        self.results = results
+    }
+    
+    public func isDone(forDate date: Date = Date()) -> Bool {
+        let searchString = StaticDateFormatter.shortDateNoTimeFromatter.string(from: date)
+        let resultsForToday = results.filter { (result) -> Bool in
+            return result.stringDate == searchString
         }
         
-        return fit.count > 0
+        return resultsForToday.count > 0
     }
     
-    /**
-     Checks if activity is occupying given period of time
-     
-     - parameter start:  NSDate for start of period
-     - parameter finish: NSDate for finish
-     
-     - returns: True if period is occupied
-     */
-    public func occupiesTimeBetween(start: NSDate, finish: NSDate) -> Bool {
-        let updatedStartTime = timeMachine.updatedTime(timing.startTime, forDate: start)
-        let updatedFinishTime = timeMachine.updatedTime(timing.finishTime, forDate: finish)
-
-        if start < updatedFinishTime && updatedStartTime < finish {
-            return true
-        }
-
-        return false
-    }
-    
-    // MARK: - Persistance
-    
-    /**
-     Creates Activity instance and saves it in Profile's context
-     
-     - parameter type:          ActivityType - goal or routine
-     - parameter name:          String for name
-     - parameter selectedDays:  Array of Integers from 0 to 6
-     - parameter startTime:     NSDate
-     - parameter duration:      ActivityDuration instance
-     - parameter notifications: True for enabled notifications
-     - parameter timeToSave:    Int for minutes to be saved
-     - parameter profile:       Profile instance
-     
-     - returns: Activity instance
-     */
-    public static func createActivityWithType(type: ActivityType, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int, forProfile profile: Profile) -> Activity {
-        
-        let activity = Activity.newActivityForProfile(profile, ofType: type)
-        activity.name = name
-        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = Basis.basisFromDays(selectedDays).rawValue
-        activity.timing.startTime = startTime
-        activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
-        activity.timing.duration = duration
-        activity.timing.timeToSave = timeToSave
-        activity.notifications = notifications
-        activity.stats.updateStatsForDate(NSDate())
-        
-        Activity.saveContext(activity.managedObjectContext)
-        
-        return activity
-    }
-    
-    public static func updateActivityWithParameters(activity: Activity, name: String, selectedDays: [Int], startTime: NSDate, duration: ActivityDuration, notifications: Bool, timeToSave: Int) {
-        
-        activity.name = name
-        activity.days = Day.dayEntitiesFromSelectedDays(selectedDays, forActivity: activity)
-        activity.basis = Basis.basisFromDays(selectedDays).rawValue
-        activity.timing.startTime = startTime
-        activity.timing.finishTime = updateFinishTimeWithDuration(duration, fromStartTime: startTime)
-        activity.timing.duration = duration
-        activity.timing.timeToSave = timeToSave
-        activity.notifications = notifications
-        activity.stats.updateStatsForDate(NSDate())
-        
-        Activity.saveContext(activity.managedObjectContext)
-    }
-    
-    // MARK: - Fetch Results
-    
-    public func allResultsPredicateForPeriod(period: PastPeriod) -> NSPredicate {
-        let calendar = TimeMachine()
-        let timePredicate = NSPredicate(format: "raughDate > %@", calendar.startDateForPeriod(period, sinceDate: NSDate()))
-        let namePredicate = NSPredicate(format: "activity.name == %@", name)
-        
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, timePredicate])
-    }
-    
-    
-    // MARK: - Notifications
-    
-    public func userInfoForActivity() -> [NSObject : AnyObject] {
-        return ["activityName" : name]
-    }
-    
-    public func startTimerNotificationMessage() -> String {
-        var message = ""
-        if isRoutine() {
-            message = "Your goal: save \(timing.timeToSave) min. (or months \(stats.summMonths) of your lifetime"
+    public func nextActionTime(forDate date: Date = Date()) -> Date {
+        if isDone(forDate: date) {
+            let nextDate = nextActionDay(fromDate: date)
+            return startTime(inDate: nextDate)
+        } else if isGoingNow() {
+            return finishTime()
         } else {
-            message = "Your goal: spend \(timing.duration) min."
+            return startTime()
         }
-        return message
     }
     
-    /// Can't be assigned to a Goal (no snooze for a Goal)
-    public func finishTimeNotificationMessage() -> String {
-        return "\(timing.timeToSave) min. left till the end. In order to save \(stats.summMonths) month of your lifetime, you have to finish it now"
+    public func nextActionDay(fromDate date: Date = Date()) -> Date {
+        let currentDay = Weekday.createFromDate(date)
+        
+        let nextDayOptions = days.filter { (weekday) -> Bool in
+            return weekday.rawValue != currentDay.rawValue
+        }
+        
+        let nextDay = Weekday.closestDay(nextDayOptions, toDay: currentDay)
+        let daysInBetween = numberOfDaysTillDay(day: nextDay.rawValue, fromDay: currentDay.rawValue)
+        let nextActionDay = date.addingTimeInterval(Double(daysInBetween * 24 * 60 * 60))
+        return nextActionDay
     }
     
-    public func lastCallNotificationMessage() -> String {
-        return isRoutine() ? "There is no time lest to save on this activity. Try to finish earlier next time." : "Time's up for today! You can finish now"
+    public func numberOfDaysTillDay(day: Int, fromDay: Int) -> Int {
+        if day < fromDay {
+            return 7 - (fromDay - day)
+        } else if day > fromDay {
+            return day - fromDay
+        } else {
+            return 7
+        }
+    }
+    
+    public func startTime(inDate date: Date = Date()) -> Date {
+        let startTime = timing.manuallyStarted ?? timing.startTime
+        return timeMachine.updatedTime(startTime, forDate: date)
+    }
+    
+    public func finishTime(inDate date: Date = Date()) -> Date {
+        var factFinishTime = timing.finishTime
+        if let manuallyStarted = timing.manuallyStarted {
+            factFinishTime = manuallyStarted.addingTimeInterval(timing.duration.seconds())
+        }
+        
+        return timeMachine.updatedTime(factFinishTime, forDate: date)
+    }
+    
+    public func timeToSave() -> Double {
+        return timing.timeToSave
+    }
+    
+    public func updateTiming(withManuallyStarted started: Date?) -> Timing {
+        return timing.update(withManuallyStarted: started)
     }
 
-    
-    // MARK: - Private Methods
-    
-    private static func newActivityForProfile(userProfile: Profile, ofType: ActivityType) -> Activity {
-        guard let
-            context = userProfile.managedObjectContext,
-            entity = NSEntityDescription.entityForName(Activity.className, inManagedObjectContext: context)
-            else {
-                fatalError("Attempt to create activity with profile that is not in managed object context")
-        }
-        
-        let activity = Activity(entity: entity, insertIntoManagedObjectContext: context)
-        activity.type = Activity.typeWithEnum(ofType)
-        activity.profile = userProfile
-        activity.stats = Stats.newStatsForActivity(activity: activity)
-        activity.timing = Timing.newTimingForActivity(activity: activity)
-        
-        Activity.saveContext(context)
-        return activity
+    public func duration() -> Endurance {
+        return timing.duration
     }
     
-    private static func updateFinishTimeWithDuration(duration: ActivityDuration, fromStartTime startTime: NSDate) -> NSDate {
-        return startTime.dateByAddingTimeInterval(duration.seconds())
+    /// Should only be used for copying object, not accessed directly
+    ///
+    /// - returns: Timing that is private property of Activity
+    public func getTiming() -> Timing {
+        return timing
     }
     
-    /// Workaround method for be used only in UnitTesting
-    public func unitTesting_allResultsForPeriod(period: PastPeriod) -> [DayResults] {
-        let fetchRequest = NSFetchRequest(entityName: "DayResults")
-        fetchRequest.predicate = allResultsPredicateForPeriod(period)
-        
-        let results = try! managedObjectContext!.executeFetchRequest(fetchRequest) as! [DayResults]
-        
-        return results
+    /// Returns basis constructed of weekdays
+    ///
+    /// - returns: Basis instance
+    public func basis() -> Basis {
+        return Basis.basisFromWeekdays(days)
+    }
+    
+    public func isGoingNow(date: Date = Date()) -> Bool {
+        return startsEarlierThen(date: date) && endsLaterThen(date: date) && !isDone(forDate: date)
+    }
+    
+    public func startsEarlierThen(date: Date) -> Bool {
+        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
+        return updatedStartTime.compare(date) == .orderedAscending
+    }
+    
+    public func startsLaterThen(date: Date) -> Bool {
+        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
+        return updatedStartTime.compare(date) == .orderedDescending
+    }
+    
+    public func endsLaterThen(date: Date) -> Bool {
+        let updatedFinishTime = timeMachine.updatedTime(finishTime(), forDate: date)
+        return updatedFinishTime.compare(date) == .orderedDescending
+    }
+    
+    public func startsEarlierThen(activity: Activity) -> Bool {
+        let date = Date()
+        let currentActivityStartTime = timeMachine.updatedTime(startTime(), forDate: date)
+        let otherActivityStartTime = timeMachine.updatedTime(activity.startTime(), forDate: date)
+        return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
     }
 }
+
+/**
+ Enum that describes Activity Type - currently Routine or Goal
+ 
+ - Routine: Routine - daily activity on which user ought to save time
+ - Goal:    Goal - activity that user wants to spend time on
+ */
+public enum ActivityType: Int {
+    case routine
+    case goal
+}
+

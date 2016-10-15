@@ -11,13 +11,13 @@ import Foundation
 class EditBasisCell: UITableViewCell, ObservableControlCell, ExpandableCell {
     
     @IBOutlet weak var control: ObservableControl!
-    static let screenHeight = UIScreen.mainScreen().bounds.height
+    static let screenHeight = UIScreen.main.bounds.height
 
-    static let expandedHeight: CGFloat = round(0.19 * screenHeight)
+    static let expandedHeight: CGFloat = round(0.24 * screenHeight)
     
-    static func heightForState(state: EditActivityVC.EditingState) -> CGFloat {
+    static func heightForState(_ state: EditActivityVC.EditingState) -> CGFloat {
         switch state {
-        case .Name:
+        case .name:
             return 0
         default:
             return defaultHeight()

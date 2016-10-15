@@ -18,12 +18,12 @@ class ChartView: UIView {
     var lastWeekDaynames = [String]()
     var values = [Double]()
     
-    private var max = 0
-    private var min = 0
-    private var graphYScale: CGFloat!
-    private var graphHeight: CGFloat!
-    private var sectionLength: CGFloat!
-    private let progressLine = UIBezierPath()
+    fileprivate var max = 0
+    fileprivate var min = 0
+    fileprivate var graphYScale: CGFloat!
+    fileprivate var graphHeight: CGFloat!
+    fileprivate var sectionLength: CGFloat!
+    fileprivate let progressLine = UIBezierPath()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,14 +31,14 @@ class ChartView: UIView {
     }
     
     func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("ChartView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("ChartView", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
     func setupDaynameLabels() {
         if dayNameLabels.count > 0 {
-            var sortedLabels = dayNameLabels.sort { $0.tag < $1.tag }
+            var sortedLabels = dayNameLabels.sorted { $0.tag < $1.tag }
             for i in 0 ..< sortedLabels.count {
                 sortedLabels[i].text = lastWeekDaynames[i]
             }
@@ -59,28 +59,28 @@ class ChartView: UIView {
         let firstPoint = findFirstPoint()
         addPoint(firstPoint)
         
-        progressLine.moveToPoint(firstPoint)
+        progressLine.move(to: firstPoint)
         progressLine.lineWidth = 2.0
-        progressLine.lineCapStyle = CGLineCap.Round
-        progressLine.lineJoinStyle = CGLineJoin.Round
+        progressLine.lineCapStyle = CGLineCap.round
+        progressLine.lineJoinStyle = CGLineJoin.round
         
         buildProgressLineFromPoint(firstPoint)
-        animateChartLine(progressLine.CGPath)
+        animateChartLine(progressLine.cgPath)
     }
     
     func findFirstPoint() -> CGPoint {
         let xPosition: CGFloat = sectionLength / 2
         let yPosition = graphHeight - (graphHeight * (CGFloat(values[0]) / graphYScale))
-        return CGPointMake(xPosition, yPosition)
+        return CGPoint(x: xPosition, y: yPosition)
     }
     
-    func buildProgressLineFromPoint(startPoint: CGPoint) {
+    func buildProgressLineFromPoint(_ startPoint: CGPoint) {
         for i in 1 ..< values.count {
             let nextX = startPoint.x + (sectionLength * CGFloat(i))
             let nextY = graphHeight - (graphHeight * (CGFloat(values[i]) / graphYScale))
-            let nextPoint = CGPointMake(nextX, nextY)
-            progressLine.addLineToPoint(nextPoint)
-            progressLine.moveToPoint(nextPoint)
+            let nextPoint = CGPoint(x: nextX, y: nextY)
+            progressLine.addLine(to: nextPoint)
+            progressLine.move(to: nextPoint)
             addPoint(nextPoint)
         }
     }
@@ -98,25 +98,25 @@ class ChartView: UIView {
     
     func defineGraphScale() {
         graphYScale = (CGFloat(max) > 100) ? CGFloat(max) : 100
-        graphHeight = CGRectGetHeight(chartView.frame)
+        graphHeight = chartView.frame.height
         sectionLength = (chartView.frame.width) / 7
     }
     
-    func addPoint(point: CGPoint) {
-        let pointView = UIView(frame: CGRectMake(5, 5, 8, 8))
+    func addPoint(_ point: CGPoint) {
+        let pointView = UIView(frame: CGRect(x: 5, y: 5, width: 8, height: 8))
         pointView.center = point
         pointView.layer.masksToBounds = true
         pointView.layer.cornerRadius = 4
-        pointView.layer.backgroundColor = UIColor.whiteColor().CGColor
+        pointView.layer.backgroundColor = UIColor.white.cgColor
         chartView.addSubview(pointView)
     }
     
-    func animateChartLine(path: CGPathRef) {
+    func animateChartLine(_ path: CGPath) {
         let chartLine: CAShapeLayer = newChartLine()
         chartView.layer.addSublayer(chartLine)
         chartLine.path = path
-        chartLine.strokeColor = UIColor.whiteColor().CGColor
-        chartLine.addAnimation(newPathAnimation(), forKey: "strokeEndAnimation")
+        chartLine.strokeColor = UIColor.white.cgColor
+        chartLine.add(newPathAnimation(), forKey: "strokeEndAnimation")
         chartLine.strokeEnd = 1.0
     }
     
@@ -126,7 +126,7 @@ class ChartView: UIView {
         let chartLine = CAShapeLayer()
         chartLine.lineCap = kCALineCapRound
         chartLine.lineJoin = kCALineJoinBevel
-        chartLine.fillColor = UIColor.whiteColor().CGColor
+        chartLine.fillColor = UIColor.white.cgColor
         chartLine.lineWidth = 2.0
         chartLine.strokeEnd = 0.0
         return chartLine

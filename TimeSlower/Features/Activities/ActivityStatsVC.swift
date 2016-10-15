@@ -37,54 +37,54 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         setup()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if activity != nil {
             launchTimer()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         drawProgressView()
     }
     
     func setup() {
         activityNameLabel.text = activity.name
-        activityBasisLabel.text = activity.activityBasis().description()
-        timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
+//        activityBasisLabel.text = activity.activityBasis().description()
+//        timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
         
         let format = ".0"
-        successLabel.text = "\(activity.stats.averageSuccess.doubleValue.format(format))"
+//        successLabel.text = "\(activity.stats.averageSuccess.doubleValue.format(format))"
         setupCircleProgress()
         launchTimer()
         defineStartOrFinishButtonTitle()
     }
     
     func setupCircleProgress() {
-        circleProgress.progress = activity.stats.averageSuccess.doubleValue
-        circleProgress.progressBarWidth = 14
-        circleProgress.progressColor = UIColor.purpleRed()
+//        circleProgress.progress = activity.stats.averageSuccess.doubleValue
+//        circleProgress.progressBarWidth = 14
+//        circleProgress.progressColor = UIColor.purpleRed()
     }
     
     //MARK: - ACTION
     
-    @IBAction func onBackButton(sender: UIButton) {
+    @IBAction func onBackButton(_ sender: UIButton) {
         if let navController = navigationController {
-            navController.popViewControllerAnimated(true)
+            navController.popViewController(animated: true)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func startOrFinishButtonPressed(sender: UIButton) {
+    @IBAction func startOrFinishButtonPressed(_ sender: UIButton) {
         if sender.titleLabel?.text == Constants.startButtonTitle {
-            activity.startActivity()
+//            activity.startActivity()
             scheduleFinishTimerForActivity()
             clearTimer()
             setupTimerCountdown()
         } else if sender.titleLabel?.text == Constants.finishButtonTitle {
-            activity.finishWithResult()
-            activity.deleteNonStandardNotifications()
+//            activity.finishWithResult()
+//            activity.deleteNonStandardNotifications()
             clearTimer()
             setup()
             drawProgressView()
@@ -94,23 +94,23 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func scheduleFinishTimerForActivity() {
-        if activity.isRoutine() {
-            activity.scheduleFinishTimerNotification()
-        } else {
-            activity.scheduleLastCallTimerNotification()
-        }
+//        if activity.isRoutine() {
+//            activity.scheduleFinishTimerNotification()
+//        } else {
+//            activity.scheduleLastCallTimerNotification()
+//        }
     }
     
     func defineStartOrFinishButtonTitle() {
-        if !activity.isDoneForToday() {
-            let buttonTitle = activity.isGoingNow() ? Constants.finishButtonTitle : Constants.startButtonTitle
-            flowControlButton.setTitle(buttonTitle, forState: .Normal)
-            flowControlButton.alpha = 1.0
-            flowControlButton.userInteractionEnabled = true
-        } else {
-            flowControlButton.alpha = 0.0
-            flowControlButton.userInteractionEnabled = false
-        }
+//        if !activity.isDoneForToday() {
+//            let buttonTitle = activity.isGoingNow() ? Constants.finishButtonTitle : Constants.startButtonTitle
+//            flowControlButton.setTitle(buttonTitle, for: UIControlState())
+//            flowControlButton.alpha = 1.0
+//            flowControlButton.isUserInteractionEnabled = true
+//        } else {
+//            flowControlButton.alpha = 0.0
+//            flowControlButton.isUserInteractionEnabled = false
+//        }
     }
 
     // MARK: - TIMER
@@ -137,11 +137,11 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func restartTimerIfActivityChanged() {
-        let intervalTillAction = round(activity.timing.nextActionTime().timeIntervalSinceNow)
-        let intervalFromTimer = round(timer.getTimeRemaining())
-        if intervalTillAction != intervalFromTimer {
-            reloadTimer()
-        }
+//        let intervalTillAction = round(activity.timing.nextActionTime().timeIntervalSinceNow)
+//        let intervalFromTimer = round(timer.getTimeRemaining())
+//        if intervalTillAction != intervalFromTimer {
+//            reloadTimer()
+//        }
     }
     
     func reloadTimer() {
@@ -160,19 +160,19 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     //MARK: - GRAPH
     
     func drawProgressView() {
-        let lastResults = activity.lastWeekResults()
-        
-        if lastResults.count > 0 {
-            setValuesAndLabelsForGraph(lastResults)
-            chartView.strokeChart()
-        }
+//        let lastResults = activity.lastWeekResults()
+//        
+//        if lastResults.count > 0 {
+//            setValuesAndLabelsForGraph(lastResults)
+//            chartView.strokeChart()
+//        }
     }
     
     
-    func setValuesAndLabelsForGraph(lastResults: [DayResults]) {
+    func setValuesAndLabelsForGraph(_ lastResults: [Result]) {
         for result in lastResults {
             lastWeekDayNames.append(result.shortDayNameForDate())
-            lastWeekResultValues.append(result.daySuccessForTiming(activity.timing))
+//            lastWeekResultValues.append(result.daySuccessForTiming(activity.timing))
         }
         
         addMissingResultsValuesAndLabels(lastResults)
@@ -181,30 +181,30 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         chartView.lastWeekDaynames = lastWeekDayNames
     }
     
-    func addMissingResultsValuesAndLabels(lastResults: [DayResults]) {
+    func addMissingResultsValuesAndLabels(_ lastResults: [Result]) {
         if lastResults.count < 7 {
             let vacantDaysLeft = 7 - lastWeekResultValues.count
             for _ in 0 ..< (7 - lastResults.count) {
-                lastWeekResultValues.insert(0.0, atIndex: 0)
+                lastWeekResultValues.insert(0.0, at: 0)
             }
             
-            let lastDay = DayResults.standardDateFormatter().dateFromString(lastResults.last!.date)
-            let components = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: lastDay!)
-            for _ in 0 ..< vacantDaysLeft {
-                components.day -= 1
-                let nextDate = NSCalendar.currentCalendar().dateFromComponents(components)
-                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), atIndex: 0)
-            }
+//            let lastDay = Result.standardDateFormatter().date(from: lastResults.last!.date)
+//            var components = (Calendar.current as NSCalendar).components([.year, .month, .day], from: lastDay!)
+//            for _ in 0 ..< vacantDaysLeft {
+//                components.day! -= 1
+//                let nextDate = Calendar.current.date(from: components)
+//                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), at: 0)
+//            }
         }
     }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditActivity" {
-            if let vc = segue.destinationViewController as? EditActivityVC {
-                vc.activity = self.activity
+            if let vc = segue.destination as? EditActivityVC {
+                vc.activity?.value = self.activity
             }
         }
     }

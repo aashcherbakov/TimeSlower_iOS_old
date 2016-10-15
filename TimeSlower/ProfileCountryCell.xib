@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="226" id="KGk-i7-Jjw" customClass="ProfileCountryCell" customModule="TimeSlower" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="226"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="225"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOV-8H-3IJ" customClass="TextfieldView" customModule="TimeSlower" customModuleProvider="target">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="L5o-TT-PkO"/>
+                        </constraints>
+                    </view>
+                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUN-1h-dB1" customClass="CountryPicker">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="z9s-In-j9h"/>
+                        </constraints>
+                    </pickerView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="AUN-1h-dB1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7I3-dv-dII"/>
+                    <constraint firstItem="AUN-1h-dB1" firstAttribute="top" secondItem="mOV-8H-3IJ" secondAttribute="bottom" id="QCE-vn-FmJ"/>
+                    <constraint firstItem="mOV-8H-3IJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XgU-vR-k2V"/>
+                    <constraint firstAttribute="trailing" secondItem="mOV-8H-3IJ" secondAttribute="trailing" id="YyC-hg-XJF"/>
+                    <constraint firstItem="mOV-8H-3IJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gfP-ai-aNq"/>
+                    <constraint firstAttribute="trailing" secondItem="AUN-1h-dB1" secondAttribute="trailing" id="sS8-7C-Tqg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="countryPicker" destination="AUN-1h-dB1" id="4Vk-Tc-lcO"/>
+                <outlet property="textfieldView" destination="mOV-8H-3IJ" id="XJv-jS-eZa"/>
+                <outlet property="textfieldViewHeight" destination="L5o-TT-PkO" id="jcD-tC-Oo2"/>
+            </connections>
+            <point key="canvasLocation" x="27" y="138"/>
+        </tableViewCell>
+    </objects>
+</document>

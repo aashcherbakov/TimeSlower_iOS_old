@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 import TimeSlowerKit
+import Result
 
 /**
  UITableViewCell subclass that allows user to select activity basis.
@@ -35,11 +36,12 @@ class EditActivityBasisView: ObservableControl {
         }
     }
     
-    private var timer: Timer?
+    fileprivate var timer: Timer?
     
     /// Value that is being tracked from EditActivityViewController
-    dynamic var selectedValue: [Int]?
-    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
+    dynamic var selectedValue: [Int]? 
+    
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
     
     // MARK: - Overridden Methods
     
@@ -50,16 +52,16 @@ class EditActivityBasisView: ObservableControl {
         setupDesign()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        sendActionsForControlEvents(.TouchUpInside)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        sendActions(for: .touchUpInside)
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
-    override func setInitialValue(value: AnyObject?) {
+    override func setInitialValue(_ value: AnyObject?) {
         if let value = value as? [Int] {
             selectedValue = value
             let basis = Basis.basisFromDays(value)
@@ -71,29 +73,29 @@ class EditActivityBasisView: ObservableControl {
     
     // MARK: - Setup Methods
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityBasisView.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(EditActivityBasisView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         textFieldView.setupWithConfig(BasisTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
-    private func setupEvents() {
+    fileprivate func setupEvents() {
         valueChangedSignal = delayedValueSignalProducer()
         
-        basisSelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let selector = value as? BasisSelector else { return }
+        basisSelector.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let selector = result.value as? BasisSelector else { return }
                 self?.updateBasis(selector.selectedIndex)
         }
         
-        daySelector.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let selector = value as? DaySelector else { return }
+        daySelector.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let selector = result.value as? DaySelector else { return }
                 
                 self?.basisSelector.updateSegmentedIndexForBasis(selector.selectedBasis)
                 self?.selectedBasis = selector.selectedBasis
@@ -101,30 +103,32 @@ class EditActivityBasisView: ObservableControl {
         }
     }
     
-    private func delayedValueSignalProducer() -> SignalProducer<AnyObject?, NSError> {
+    fileprivate func delayedValueSignalProducer() -> SignalProducer<Any?, NoError> {
         return SignalProducer { [weak self] (observer, _) in
             
-            self?.rac_valuesForKeyPath("selectedValue", observer: self)
+            
+            self?.rac_values(forKeyPath: "selectedValue", observer: self)
                 .toSignalProducer()
-                .on(completed: {
-                        observer.sendCompleted()
-                        self?.timer?.terminate()
+                .on(
+                value: { (value) in
+                    self?.timer?.terminate()
+                    self?.timer = Timer(1) {
+                        observer.send(value: value)
+                    }
+                    
+                    self?.timer?.start()
                     },
-                    next: { (value) in
-                        self?.timer?.terminate()
-                        self?.timer = Timer(1) {
-                            observer.sendNext(value)
-                        }
-                        
-                        self?.timer?.start()
+                completed: {
+                    observer.sendCompleted()
+                    self?.timer?.terminate()
                 })
                 .start()
         }
     }
 
-    private func updateBasis(index: Int?) {
+    fileprivate func updateBasis(_ index: Int?) {
         guard let index = index else { return }
-        if let newBasis = Basis(rawValue: index) where selectedBasis != newBasis {
+        if let newBasis = Basis(rawValue: index) , selectedBasis != newBasis {
             daySelector.selectedBasis = newBasis
             selectedBasis = newBasis
             selectedValue = Basis.daysFromBasis(newBasis)

@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 import TimeSlowerKit
+import Result
 
 /// UITableViewCell subclass to edit start time of activity
 class EditActivityStartTimeView: ObservableControl {
@@ -20,12 +21,12 @@ class EditActivityStartTimeView: ObservableControl {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet weak var textfieldViewHeightConstraint: NSLayoutConstraint!
-    private let shortDateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
+    fileprivate let shortDateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
     /// Selected date. Observable
-    dynamic var selectedValue: NSDate?
-    private var valueChangedSignal: SignalProducer<AnyObject?, NSError>?
-    private var timer: Timer?
+    dynamic var selectedValue: Date?
+    fileprivate var valueChangedSignal: SignalProducer<Any?, NoError>?
+    fileprivate var timer: Timer?
     
     // MARK: - Overridden Methods
     
@@ -37,22 +38,22 @@ class EditActivityStartTimeView: ObservableControl {
         setupEvents()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        sendActionsForControlEvents(.TouchUpInside)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        sendActions(for: .touchUpInside)
 
-        textfieldView.setText(shortDateFormatter.stringFromDate(datePicker.date))
+        textfieldView.setText(shortDateFormatter.string(from: datePicker.date))
         if datePicker.date != selectedValue {
             selectedValue = datePicker.date
         }
     }
     
-    override func valueSignal() -> SignalProducer<AnyObject?, NSError>? {
+    override func valueSignal() -> SignalProducer<Any?, NoError>? {
         return valueChangedSignal
     }
     
-    override func setInitialValue(value: AnyObject?) {
-        if let value = value as? NSDate {
+    override func setInitialValue(_ value: AnyObject?) {
+        if let value = value as? Date {
             selectedValue = value
             datePicker.setDate(value, animated: false)
         }
@@ -60,51 +61,51 @@ class EditActivityStartTimeView: ObservableControl {
     
     // MARK: - Setup Methods
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(EditActivityStartTimeView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         textfieldView.setupWithConfig(StartTimeTextfield())
         separatorLineHeight.constant = kDefaultSeparatorHeight
     }
     
-    private func setupEvents() {
-        datePicker.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (datePicker) in
-                guard let picker = datePicker as? UIDatePicker else {
+    fileprivate func setupEvents() {
+        datePicker.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (datePicker) in
+                guard let picker = datePicker.value as? UIDatePicker else {
                     return
                 }
                 self?.selectedValue = picker.date
-                self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(picker.date))
+                self?.textfieldView.setText(self?.shortDateFormatter.string(from: picker.date))
         }
         
         valueChangedSignal = delayedProducer()
     }
     
-    private func delayedProducer() -> SignalProducer<AnyObject?, NSError> {
+    fileprivate func delayedProducer() -> SignalProducer<Any?, NoError> {
         return SignalProducer { [weak self] (observer, _) in
             
-            self?.rac_valuesForKeyPath("selectedValue", observer: self)
-                .startWith(self?.datePicker)
+            self?.rac_values(forKeyPath: "selectedValue", observer: self)
+                .start(with: self?.datePicker)
                 .toSignalProducer()
-                .on(completed: {
+                .on(value: { (value) in
+                    if let value = value as? Date {
+                        self?.textfieldView.setText(self?.shortDateFormatter.string(from: value as Date))
+                    }
+                    
+                    self?.timer?.terminate()
+                    self?.timer = Timer(1) {
+                        observer.send(value: value)
+                    }
+                    
+                    self?.timer?.start()
+                    },
+                    completed: {
                         observer.sendCompleted()
                         self?.timer?.terminate()
-                    },
-                    next: { (value) in
-                        if let value = value as? NSDate {
-                            self?.textfieldView.setText(self?.shortDateFormatter.stringFromDate(value))
-                        }
-
-                        self?.timer?.terminate()
-                        self?.timer = Timer(1) {
-                            observer.sendNext(value)
-                        }
-                        
-                        self?.timer?.start()
                 })
                 .start()
         }

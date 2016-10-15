@@ -8,124 +8,165 @@
 
 import UIKit
 import TimeSlowerKit
-import ReactiveCocoa
+import ReactiveSwift
 
 internal class HomeViewController: UIViewController {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let controlFlowButtonHeight: CGFloat = 48
         static let startNowButtonTitle = "Start now"
         static let finishNowButtonTitle = "Finish now"
+        static let noActivitiesButtonTitle = "Create Activity"
+    }
+    
+    private enum ActionButtonState: String {
+        case Start = "Start now"
+        case Finish = "Finish now"
+        case Create = "Create Activity"
     }
     
     let transitionManager = MenuTransitionManager()
     let activityListTransitionManager = ListTransitionManager()
+    let progressCalculator = ProgressCalculator()
+    let scheduler = ActivityScheduler()
 
-    @IBOutlet private(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
-    @IBOutlet private(set) weak var controlFlowButton: UIButton!
-    @IBOutlet private(set) weak var closestActivityDisplay: ClosestActivityDisplay!
-    @IBOutlet private(set) weak var circleSatsView: CircleStatsView!
+    @IBOutlet fileprivate(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
+    @IBOutlet fileprivate(set) weak var controlFlowButton: UIButton!
+    @IBOutlet fileprivate(set) weak var closestActivityDisplay: ClosestActivityDisplay!
+    @IBOutlet fileprivate(set) weak var circleSatsView: CircleStatsView!
     
-    dynamic var profile: Profile?
-    dynamic var closestActivity: Activity?
-
+    var profile = MutableProperty<Profile?>(nil)
+    var closestActivity = MutableProperty<Activity?>(nil)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+        
+        setupData()
+        setupDesign()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupDesign()
         setupEvents()
-        transitionManager.sourceViewController = self
-        activityListTransitionManager.sourceController = self
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNavigationBar()
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func controlFlowButtonTapped(sender: UIButton) {
-        guard let activity = closestActivity else { return }
-        
-        if sender.titleLabel?.text == Constants.startNowButtonTitle {
-            startActivity(activity)
-        } else if sender.titleLabel?.text == Constants.finishNowButtonTitle {
-            finishActivity(activity)
-            closestActivity = profile?.findCurrentActivity()
-        }
-    }
-    
-    @IBAction func openMenu(sender: UIBarButtonItem) {
-        let menuVC: MenuVC = ControllerFactory.createController()
-        menuVC.transitioningDelegate = transitionManager
-        transitionManager.menuViewController = menuVC
-        presentViewController(menuVC, animated: true, completion: nil)
-    }
-    
-    // MARK: - Private Functions - ActivityDisplay
-    
-    private func startActivity(activity: Activity) {
-        activity.timing.manuallyStarted = NSDate()
-        //TODO: update notifications for today
+    private func setupData() {
         setupClosestActvityDisplay()
-        setupControlFlowButton()
-    }
-    
-    private func finishActivity(activity: Activity) {
-        activity.finishWithResult()
-        activity.deleteScheduledNotificationsForCurrentActivity()
-        activity.scheduleRestorationTimer()
-        showStatsControllerForActivity(activity)
-    }
-    
-    private func setupClosestActvityDisplay() {
-        closestActivity = profile?.findCurrentActivity()        
-        closestActivityDisplay.setupWithActivity(closestActivity)
-        circleSatsView.displayProgressForProfile(closestActivity?.profile)
-    }
-
-    // MARK: - Private Functions - Design
-    
-    private func setupEvents() {
-        rac_valuesForKeyPath("profile", observer: self).toSignalProducer()
-            .startWithNext { [weak self] (_) in
-                self?.setupClosestActvityDisplay()
-                self?.setupControlFlowButton()
-        }
+        displayProgress()
     }
     
     private func setupDesign() {
-        setupClosestActvityDisplay()
         setupControlFlowButton()
+    }
+    
+    private func setupEvents() {
+        transitionManager.sourceViewController = self
+        activityListTransitionManager.sourceController = self
+        
+        closestActivity.producer.startWithValues { [weak self] (activity) in
+            self?.updateButtonTitle(forActivity: activity)
+        }
+    }
+    
+    private func updateButtonTitle(forActivity activity: Activity?) {
+        if let activity = activity {
+            let buttonTitle = activity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
+            controlFlowButton.setTitle(buttonTitle, for: .normal)
+        } else {
+            controlFlowButton.setTitle(Constants.noActivitiesButtonTitle, for: .normal)
+        }
+    }
+    
+    private func setupClosestActvityDisplay() {
+        let activity = closestActivityForToday()
+        closestActivity.value = activity
+        closestActivityDisplay.setupWithActivity(activity)
+    }
+    
+    private func displayProgress() {
+        circleSatsView.displayProgress(progress: progressCalculator.progressForDate())
     }
     
     private func setupControlFlowButton() {
         controlFlowButton.layer.cornerRadius = Constants.controlFlowButtonHeight / 2
         controlFlowButtonHeight.constant = Constants.controlFlowButtonHeight
-
-        if let closestActivity = closestActivity {
-            let buttonTitle = closestActivity.isGoingNow() ? Constants.finishNowButtonTitle : Constants.startNowButtonTitle
-            controlFlowButton.setTitle(buttonTitle, forState: .Normal)
-            controlFlowButton.enabled = true
-        } else {
-            controlFlowButton.setTitle("No activities", forState: .Disabled)
-            controlFlowButton.enabled = false
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func controlFlowButtonTapped(_ sender: UIButton) {
+        guard let text = sender.titleLabel?.text, let buttonState = ActionButtonState(rawValue: text) else {
+            return
+        }
+        switch buttonState {
+        case .Create: showCreateNewActivity()
+        case .Start: startActivity(closestActivity.value)
+        case .Finish: finishActivity(closestActivity.value)
         }
     }
     
-    private func setupNavigationBar() {
+    @IBAction func openMenu(_ sender: UIBarButtonItem) {
+        showMenue()
+    }
+    
+    private func closestActivityForToday() -> Activity? {
+        if let activity = scheduler.currentActivity() {
+            return activity
+        } else {
+            return scheduler.nextClosestActivity()
+        }
+    }
+    
+    // MARK: - Private Functions - ActivityDisplay
+    
+    private func startActivity(_ activity: Activity?) {
+        guard let activity = activity else { return }
+        
+        closestActivity.value = scheduler.start(activity: activity)
+        
+        setupClosestActvityDisplay()
+        setupControlFlowButton()
+    }
+    
+    private func finishActivity(_ activity: Activity?) {
+        guard let activity = activity else { return }
+        let finishedActivity = scheduler.finish(activity: activity)
+        
+//        activity.deleteScheduledNotificationsForCurrentActivity()
+//        activity.scheduleRestorationTimer()
+        showStatsControllerForActivity(finishedActivity)
+    }
+
+    // MARK: - Private Functions - Design
+
+    fileprivate func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
+        navigationItem.title = StaticDateFormatter.fullDateFormatter.string(from: Date())
     }
     
     // MARK: - Private Function - Navigation
     
-    private func showStatsControllerForActivity(activity: Activity) {
+    private func showMenue() {
+        let menuVC: MenuVC = ControllerFactory.createController()
+        menuVC.transitioningDelegate = transitionManager
+        transitionManager.menuViewController = menuVC
+        present(menuVC, animated: true, completion: nil)
+    }
+    
+    private func showStatsControllerForActivity(_ activity: Activity) {
         let controller: ActivityStatsVC = ControllerFactory.createController()
         controller.activity = activity
-        presentViewController(controller, animated: true, completion: nil)
+        present(controller, animated: true, completion: nil)
+    }
+    
+    private func showCreateNewActivity() {
+        let controller: EditActivityVC = ControllerFactory.createController()
+        controller.userProfile = profile.value
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

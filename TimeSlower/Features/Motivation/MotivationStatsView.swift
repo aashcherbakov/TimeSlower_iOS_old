@@ -10,11 +10,11 @@ import UIKit
 
 internal final class MotivationStatsView: UIView {
 
-    @IBOutlet private(set) weak var view: UIView!
-    @IBOutlet private(set) weak var startTimeTitleLabel: UILabel!
-    @IBOutlet private(set) weak var durationTitleLabel: UILabel!
-    @IBOutlet private(set) weak var startTimeLabel: UILabel!
-    @IBOutlet private(set) weak var durationLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var view: UIView!
+    @IBOutlet fileprivate(set) weak var startTimeTitleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var durationTitleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var startTimeLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var durationLabel: UILabel!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,12 +22,12 @@ internal final class MotivationStatsView: UIView {
     }
     
     func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(MotivationStatsView.className, owner: self, options: nil)
+        Bundle.main.loadNibNamed(MotivationStatsView.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
     
-    func setupWithStartTime(startTime: String, duration: String) {
+    func setupWithStartTime(_ startTime: String, duration: String) {
         startTimeLabel.text = startTime
         durationLabel.text = duration
     }

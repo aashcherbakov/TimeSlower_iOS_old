@@ -14,9 +14,9 @@ class MotivationDotsCollectionViewCell: UICollectionViewCell, MotivationControlC
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var periodLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    private(set) var period: Period?
+    fileprivate(set) var period: Period?
     
-    func setupWithStats(stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate) {
+    func setupWithStats(_ stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate) {
         guard let period = period else { return }
 
         self.period = period
@@ -25,21 +25,21 @@ class MotivationDotsCollectionViewCell: UICollectionViewCell, MotivationControlC
         
     }
     
-    private func valueFromStats(stats: LifetimeStats, forPeriod period: Period) -> String {
+    fileprivate func valueFromStats(_ stats: LifetimeStats, forPeriod period: Period) -> String {
         switch period {
-        case .Hours: return stats.hoursValueString()
-        case .Days: return stats.daysValueString()
-        case .Months: return stats.monthsValueString()
-        case .Years: return stats.yearsValueString()
+        case .hours: return stats.hoursValueString()
+        case .days: return stats.daysValueString()
+        case .months: return stats.monthsValueString()
+        case .years: return stats.yearsValueString()
             
         default:
             return ""
         }
     }
     
-    private func setupWithImage(image: UIImage?, value: String, period: String) {
+    fileprivate func setupWithImage(_ image: UIImage?, value: String, period: String) {
         valueLabel.text = value
-        periodLabel.text = period.uppercaseString
+        periodLabel.text = period.uppercased()
         imageView.image = image
     }
 }

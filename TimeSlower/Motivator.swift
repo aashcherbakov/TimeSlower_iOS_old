@@ -13,7 +13,7 @@ public final class Motivator {
     
     static let circleHeightScale: CGFloat = 7
     
-    class func imageWithDotsAmount(dots dots: Int, inFrame frame: CGRect) -> UIImage {
+    class func imageWithDotsAmount(_ dots: Int, inFrame frame: CGRect) -> UIImage {
         var numDots = dots
         
         // We often have more than 2000 dots but it's expensive to draw and no one can see tiny dots
@@ -25,7 +25,7 @@ public final class Motivator {
         let viewWidth = viewSize.width
         let viewHeight = viewSize.height
                 
-        let sideSizeAndName: (length: CGFloat, name: String) = Motivator.largestSideOfRect(height: viewHeight, width: viewWidth, numberOfRects: CGFloat(numDots))
+        let sideSizeAndName: (length: CGFloat, name: String) = Motivator.largestSideOfRect(viewHeight, width: viewWidth, numberOfRects: CGFloat(numDots))
         
         let sideA = sideSizeAndName.length
         let largestSideName = sideSizeAndName.name
@@ -42,12 +42,12 @@ public final class Motivator {
         let longSide = max(sideA, sideB)
         
         // Optimal size of image is needed to center image layout. If there is one dot, optimal size is a dot frame.
-        var optimalSize = CGSizeMake(shortSide * longestSideSections, shortSide * shortestSideSections)
+        var optimalSize = CGSize(width: shortSide * longestSideSections, height: shortSide * shortestSideSections)
         if dots == 1 {
-            optimalSize = CGSizeMake(shortSide, shortSide)
+            optimalSize = CGSize(width: shortSide, height: shortSide)
         }
         
-        UIGraphicsBeginImageContextWithOptions(optimalSize, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(optimalSize, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
         
         // Draw circles here
@@ -66,11 +66,11 @@ public final class Motivator {
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
     
     // Black Magic
-    public class func largestSideOfRect(height height: CGFloat, width: CGFloat, numberOfRects rectsTotal: CGFloat) -> (CGFloat, String) {
+    public class func largestSideOfRect(_ height: CGFloat, width: CGFloat, numberOfRects rectsTotal: CGFloat) -> (CGFloat, String) {
         var sx: CGFloat
         var sy: CGFloat
         
@@ -94,21 +94,21 @@ public final class Motivator {
     }
     
     // Simple drawing method
-    private class func addCircle(longSide: CGFloat, shortSide: CGFloat, longSection: Int, shortSection: Int,
+    fileprivate class func addCircle(_ longSide: CGFloat, shortSide: CGFloat, longSection: Int, shortSection: Int,
                                  inContext context: CGContext?, totalCircles: Int) {
         
         let x = shortSide * CGFloat(longSection)
         let y = shortSide * CGFloat(shortSection)
         let width = shortSide
         let length = longSide
-        let rect = CGRectMake(x, y, width, length)
+        let rect = CGRect(x: x, y: y, width: width, height: length)
         let newOriginX = rect.origin.x
-        let smallerRect = CGRectMake(newOriginX, rect.origin.y, shortSide, shortSide)
+        let smallerRect = CGRect(x: newOriginX, y: rect.origin.y, width: shortSide, height: shortSide)
         let inset = shortSide / 10
-        let circleRect = CGRectInset(smallerRect, inset, inset)
+        let circleRect = smallerRect.insetBy(dx: inset, dy: inset)
         
-        CGContextSetRGBFillColor(context, 255, 255, 255, 1)
-        CGContextFillEllipseInRect(context, circleRect)
+        context?.setFillColor(red: 255, green: 255, blue: 255, alpha: 1)
+        context?.fillEllipse(in: circleRect)
     }
     
 }

@@ -25,35 +25,35 @@ protocol MotivationControlCell {
      - parameter period:   Period of time that represents amount of dots
      - parameter delegate: delegate for social sharing
      */
-    func setupWithStats(stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate)
+    func setupWithStats(_ stats: LifetimeStats, image: UIImage?, period: Period?, delegate: MotivationShareDelegate)
 }
 
 /// UIControl subclass that displays user lifetime stats with circle images. Reusable.
 internal class MotivationControl: UIControl {
     
     enum MotivationCellType: Int {
-        case Years
-        case Months
-        case Days
-        case Hours
-        case Share
+        case years
+        case months
+        case days
+        case hours
+        case share
     }
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let numberOfCells = 4
         static let dotsImageWidthMultiplier: CGFloat = 0.8
         static let dotsImageHeightMultiplier: CGFloat = 0.2
     }
     
-    @IBOutlet private(set) weak var pageControl: UIPageControl!
-    @IBOutlet private(set) weak var view: UIView!
-    @IBOutlet private(set) weak var collectionView: UICollectionView!
-    private(set) var stats: LifetimeStats?
-    private(set) var cellTypes: [MotivationCellType]?
-    private(set) var dotsImages = [UIImage]()
-    private(set) var delegate: ActivityShareDelegate?
+    @IBOutlet fileprivate(set) weak var pageControl: UIPageControl!
+    @IBOutlet fileprivate(set) weak var view: UIView!
+    @IBOutlet fileprivate(set) weak var collectionView: UICollectionView!
+    fileprivate(set) var stats: LifetimeStats?
+    fileprivate(set) var cellTypes: [MotivationCellType]?
+    fileprivate(set) var dotsImages = [UIImage]()
+    fileprivate(set) var delegate: ActivityShareDelegate?
     
-    private var currentPage: Int {
+    fileprivate var currentPage: Int {
         get {
             return Int(collectionView.contentOffset.x / view.bounds.size.width)
         }
@@ -71,7 +71,7 @@ internal class MotivationControl: UIControl {
     
     // MARK: - Internal Functions
     
-    func setupWithLifetimeStats(stats: LifetimeStats, shareDelegate: ActivityShareDelegate) {
+    func setupWithLifetimeStats(_ stats: LifetimeStats, shareDelegate: ActivityShareDelegate) {
         self.delegate = shareDelegate
         self.stats = stats
         let types = cellTypesForStats(stats)
@@ -84,20 +84,20 @@ internal class MotivationControl: UIControl {
     
     // MARK: - Private Functions
     
-    private func setupPageDotsColors() {
+    fileprivate func setupPageDotsColors() {
         let pageController = UIPageControl.appearance()
         pageController.pageIndicatorTintColor = UIColor.darkRed()
-        pageController.currentPageIndicatorTintColor = UIColor.whiteColor()
-        pageController.backgroundColor = UIColor.clearColor()
+        pageController.currentPageIndicatorTintColor = UIColor.white
+        pageController.backgroundColor = UIColor.clear
     }
     
-    private func createImages(forStats stats: LifetimeStats, inCellTypes cellTypes: [MotivationCellType]) -> [UIImage] {
+    fileprivate func createImages(forStats stats: LifetimeStats, inCellTypes cellTypes: [MotivationCellType]) -> [UIImage] {
         guard dotsImages.count == 0 else { return dotsImages }
         
         var images = [UIImage]()
         for type in cellTypes {
             if let numberOfDots = numberOfDotsForCellType(type, stats: stats) {
-                let image = Motivator.imageWithDotsAmount(dots: numberOfDots, inFrame: frameForDotsImage())
+                let image = Motivator.imageWithDotsAmount(numberOfDots, inFrame: frameForDotsImage())
                 images.append(image)
             }
         }
@@ -105,66 +105,66 @@ internal class MotivationControl: UIControl {
         return images
     }
     
-    private func frameForDotsImage() -> CGRect {
-        let screenSize = UIScreen.mainScreen().bounds.size
-        return CGRectMake(0, 0, round(screenSize.width * Constants.dotsImageWidthMultiplier),
-                          round(screenSize.height * Constants.dotsImageHeightMultiplier))
+    fileprivate func frameForDotsImage() -> CGRect {
+        let screenSize = UIScreen.main.bounds.size
+        return CGRect(x: 0, y: 0, width: round(screenSize.width * Constants.dotsImageWidthMultiplier),
+                          height: round(screenSize.height * Constants.dotsImageHeightMultiplier))
     }
     
-    private func numberOfDotsForCellType(cellType: MotivationCellType, stats: LifetimeStats) -> Int? {
+    fileprivate func numberOfDotsForCellType(_ cellType: MotivationCellType, stats: LifetimeStats) -> Int? {
         switch cellType {
-        case .Years: return stats.summYears.integerValue
-        case .Months: return stats.summMonth.integerValue
-        case .Days: return stats.summDays.integerValue
-        case .Hours: return stats.summHours.integerValue
+        case .years: return stats.summYears.intValue
+        case .months: return stats.summMonth.intValue
+        case .days: return stats.summDays.intValue
+        case .hours: return stats.summHours.intValue
         default: return nil
         }
     }
     
-    private func setupXib() {
-        NSBundle.mainBundle().loadNibNamed(MotivationControl.className, owner: self, options: nil)
+    fileprivate func setupXib() {
+        Bundle.main.loadNibNamed(MotivationControl.className, owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.registerNib(UINib(nibName: MotivationDotsCollectionViewCell.className, bundle: nil),
+        collectionView.register(UINib(nibName: MotivationDotsCollectionViewCell.className, bundle: nil),
                                    forCellWithReuseIdentifier: MotivationDotsCollectionViewCell.className)
-        collectionView.registerNib(UINib(nibName: MotivationShareCollectionViewCell.className, bundle: nil),
+        collectionView.register(UINib(nibName: MotivationShareCollectionViewCell.className, bundle: nil),
                                    forCellWithReuseIdentifier: MotivationShareCollectionViewCell.className)
     }
     
-    private func cellTypesForStats(stats: LifetimeStats) -> [MotivationCellType] {
-        var cellTypes: [MotivationCellType] = [.Months, .Days]
+    fileprivate func cellTypesForStats(_ stats: LifetimeStats) -> [MotivationCellType] {
+        var cellTypes: [MotivationCellType] = [.months, .days]
         if stats.summYears.doubleValue > 1 {
-            cellTypes.insert(.Years, atIndex: 0)
+            cellTypes.insert(.years, at: 0)
         } else {
-            cellTypes.append(.Hours)
+            cellTypes.append(.hours)
         }
         
-        cellTypes.append(.Share)
+        cellTypes.append(.share)
         return cellTypes
     }
     
-    private func cellTypeForIndexPath(indexPath: NSIndexPath) -> MotivationControlCell.Type? {
-        guard let cellTypes = cellTypes where indexPath.item < cellTypes.count else {
+    fileprivate func cellTypeForIndexPath(_ indexPath: IndexPath) -> MotivationControlCell.Type? {
+        guard let cellTypes = cellTypes , (indexPath as NSIndexPath).item < cellTypes.count else {
             return nil
         }
         
-        let cellType = cellTypes[indexPath.item]
+        let cellType = cellTypes[(indexPath as NSIndexPath).item]
         
         switch cellType {
-        case .Share: return MotivationShareCollectionViewCell.self
+        case .share: return MotivationShareCollectionViewCell.self
         default: return MotivationDotsCollectionViewCell.self
         }
     }
     
-    private func periodForCellType(cellType: MotivationCellType) -> Period? {
+    fileprivate func periodForCellType(_ cellType: MotivationCellType) -> Period? {
         switch cellType {
-        case .Days: return Period.Days
-        case .Hours: return Period.Hours
-        case .Months: return Period.Months
-        case .Years: return Period.Years
+        case .days: return Period.days
+        case .hours: return Period.hours
+        case .months: return Period.months
+        case .years: return Period.years
         default: return nil
         }
     }
@@ -173,23 +173,23 @@ internal class MotivationControl: UIControl {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension MotivationControl: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return view.frame.size
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsZero
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
@@ -197,11 +197,11 @@ extension MotivationControl: UICollectionViewDelegateFlowLayout {
 // MARK: - UIScrollViewDelegate
 
 extension MotivationControl: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = currentPage
     }
     
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         pageControl.currentPage = currentPage
     }
 
@@ -210,21 +210,21 @@ extension MotivationControl: UIScrollViewDelegate {
 // MARK: - UICollectionViewDataSource
 
 extension MotivationControl: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Constants.numberOfCells
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let
             cellType = cellTypeForIndexPath(indexPath),
-            cellTypes = cellTypes,
-            stats = stats where indexPath.item < cellTypes.count
+            let cellTypes = cellTypes,
+            let stats = stats , (indexPath as NSIndexPath).item < cellTypes.count
         else {
             return UICollectionViewCell()
         }
         
-        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(cellType), forIndexPath: indexPath) as? MotivationControlCell {
-            let period = periodForCellType(cellTypes[indexPath.item])
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: cellType), for: indexPath) as? MotivationControlCell {
+            let period = periodForCellType(cellTypes[(indexPath as NSIndexPath).item])
             let image = imageForIndexPath(indexPath, fromArray: dotsImages)
             cell.setupWithStats(stats, image: image, period: period, delegate: self)
             return cell as! UICollectionViewCell
@@ -233,9 +233,9 @@ extension MotivationControl: UICollectionViewDataSource {
         return UICollectionViewCell()
     }
     
-    private func imageForIndexPath(indexPath: NSIndexPath, fromArray array: [UIImage]) -> UIImage? {
-        guard indexPath.item < array.count else { return nil }
-        return array[indexPath.item]
+    fileprivate func imageForIndexPath(_ indexPath: IndexPath, fromArray array: [UIImage]) -> UIImage? {
+        guard (indexPath as NSIndexPath).item < array.count else { return nil }
+        return array[(indexPath as NSIndexPath).item]
     }
 }
 

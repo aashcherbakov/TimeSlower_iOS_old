@@ -15,7 +15,7 @@ public struct TimeCalculator {
     
     public init() { }
     
-    private let standardWeekDaysNumber = 7.0
+    fileprivate let standardWeekDaysNumber = 7.0
     
     /**
      Converts duration of single day activity to duration per day weekly.
@@ -26,7 +26,7 @@ public struct TimeCalculator {
      
      - returns: Double for duration per day.
      */
-    public func durationPerDay(originalDuration: Int, busyDays: Int) -> Double {
+    public func durationPerDay(_ originalDuration: Int, busyDays: Int) -> Double {
         return (Double(originalDuration) * Double(busyDays)) / standardWeekDaysNumber
     }
     

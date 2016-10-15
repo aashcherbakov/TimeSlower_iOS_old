@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11201"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasisSelector" customModule="TimeSlower" customModuleProvider="target">
@@ -18,22 +20,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kD-gP-u7l" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
-                    <rect key="frame" x="20" y="0.0" width="127" height="48"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="750" constant="126.5" id="caH-NZ-zz2"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOB-KD-v5i" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
-                    <rect key="frame" x="290" y="0.0" width="126" height="48"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="750" constant="126.5" id="MFN-Zp-0jE"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpe-KC-LLQ" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
-                    <rect key="frame" x="155" y="0.0" width="127" height="48"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="750" constant="127" id="lE0-wr-8Rq"/>
+                    </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="eOB-KD-v5i" secondAttribute="bottom" id="0Cj-jV-Rrs"/>
-                <constraint firstItem="Vpe-KC-LLQ" firstAttribute="width" secondItem="eOB-KD-v5i" secondAttribute="width" id="7HL-cO-o7D"/>
                 <constraint firstItem="eOB-KD-v5i" firstAttribute="leading" secondItem="Vpe-KC-LLQ" secondAttribute="trailing" constant="8" id="Ays-1g-fus"/>
                 <constraint firstItem="Vpe-KC-LLQ" firstAttribute="leading" secondItem="7kD-gP-u7l" secondAttribute="trailing" constant="8" id="GoG-2J-6X9"/>
                 <constraint firstAttribute="bottom" secondItem="Vpe-KC-LLQ" secondAttribute="bottom" id="HFA-SX-pTy"/>
@@ -44,11 +51,10 @@
                 <constraint firstItem="7kD-gP-u7l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="20" id="e9M-a2-I9y"/>
                 <constraint firstItem="7kD-gP-u7l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ms9-Do-ztj"/>
                 <constraint firstAttribute="trailing" secondItem="eOB-KD-v5i" secondAttribute="trailing" constant="8" id="wAA-GV-uXo"/>
-                <constraint firstItem="Vpe-KC-LLQ" firstAttribute="width" secondItem="7kD-gP-u7l" secondAttribute="width" id="xqu-0w-E8l"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="526" y="25"/>
+            <point key="canvasLocation" x="-100" y="10"/>
         </view>
     </objects>
 </document>

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+@testable import TimeSlowerKit
 
 class FakeControllerWithTableView: UIViewController, FakeController {
 
     @IBOutlet weak var tableView: UITableView!
-
+    
 }

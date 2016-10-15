@@ -11,8 +11,8 @@ import UIKit
 class DefaultActivitySelector: UIControl {
 
     enum TypeToDisplay {
-        case Routines
-        case Goals
+        case routines
+        case goals
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -20,7 +20,7 @@ class DefaultActivitySelector: UIControl {
     
     var selectedSegmentIndex: Int? {
         didSet {
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
         }
     }
     var selectedActivityName: String?
@@ -31,8 +31,8 @@ class DefaultActivitySelector: UIControl {
     
     var typeToDisplay: TypeToDisplay! {
         didSet {
-            activityLabels = (typeToDisplay == .Routines) ? defaultRoutines : defaultGoals
-            activityImages = (typeToDisplay == .Routines) ? routinesImageNames : goalsImageNames
+            activityLabels = (typeToDisplay == .routines) ? defaultRoutines : defaultGoals
+            activityImages = (typeToDisplay == .routines) ? routinesImageNames : goalsImageNames
         }
     }
     
@@ -56,7 +56,7 @@ class DefaultActivitySelector: UIControl {
     }
     
     func setupXib() {
-        NSBundle.mainBundle().loadNibNamed("DefaultActivitySelector", owner: self, options: nil)
+        Bundle.main.loadNibNamed("DefaultActivitySelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
     }
@@ -65,8 +65,8 @@ class DefaultActivitySelector: UIControl {
      Method recalculates width after views are layed out. Needs to be called in layoutSubviews method of superview
      */
     func setupCollectionViewItemSize() {
-        let width = CGRectGetWidth(collectionView!.frame) / 3
-        let height = CGRectGetHeight(collectionView!.frame) / 2
+        let width = collectionView!.frame.width / 3
+        let height = collectionView!.frame.height / 2
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: height)
     }
@@ -74,39 +74,39 @@ class DefaultActivitySelector: UIControl {
 
 extension DefaultActivitySelector: UICollectionViewDataSource {
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if !nibLoaded {
             let nib = UINib(nibName: kDefaultActivityCellID, bundle: nil)
-            collectionView.registerNib(nib, forCellWithReuseIdentifier: kDefaultActivityCellID)
+            collectionView.register(nib, forCellWithReuseIdentifier: kDefaultActivityCellID)
             nibLoaded = true
         }
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kDefaultActivityCellID, forIndexPath: indexPath) as! DefaultActivitySelectorCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kDefaultActivityCellID, for: indexPath) as! DefaultActivitySelectorCell
 
-        cell.imageView.image = UIImage(named: routinesImageNames[indexPath.item])
-        cell.nameLabel.text = defaultRoutines[indexPath.item]
+        cell.imageView.image = UIImage(named: routinesImageNames[(indexPath as NSIndexPath).item])
+        cell.nameLabel.text = defaultRoutines[(indexPath as NSIndexPath).item]
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
 }
 
 extension DefaultActivitySelector: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! DefaultActivitySelectorCell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! DefaultActivitySelectorCell
         selectedActivityName = selectedCell.nameLabel.text
-        selectedSegmentIndex = indexPath.item
+        selectedSegmentIndex = (indexPath as NSIndexPath).item
         animateSelection(selectedCell)
     }
     
-    func animateSelection(selectedCell: DefaultActivitySelectorCell) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+    func animateSelection(_ selectedCell: DefaultActivitySelectorCell) {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
             selectedCell.backgroundCircle.backgroundColor = UIColor.purpleRed()
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 selectedCell.backgroundCircle.backgroundColor = UIColor.extraLightGray()
-        }
+        }) 
     }
 }

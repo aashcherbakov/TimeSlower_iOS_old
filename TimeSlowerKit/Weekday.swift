@@ -11,15 +11,15 @@
  first day is Sunday (US) while in others first day of week is Monday (Russia)
  */
 public enum Weekday: Int {
-    case First
-    case Second
-    case Third
-    case Forth
-    case Fifth
-    case Sixth
-    case Seventh
+    case first
+    case second
+    case third
+    case forth
+    case fifth
+    case sixth
+    case seventh
     
-    public static var calendar = NSCalendar.currentCalendar()
+    public static var calendar = Calendar.current
     
     /**
      Created a weekday from NSDate instance
@@ -28,20 +28,20 @@ public enum Weekday: Int {
      
      - returns: Weekday
      */
-    public static func createFromDate(date: NSDate) -> Weekday {
-        let day = calendar.component(.Weekday, fromDate: date)
+    public static func createFromDate(_ date: Date) -> Weekday {
+        let day = (calendar as NSCalendar).component(.weekday, from: date)
         return Weekday(rawValue: (day - 1) % 7)!
     }
     
     /// Short name of weekday retrived from NSDateFormatter method showrWeekdaySymbols
     public var shortName: String {
         let defaultDaysArray = StaticDateFormatter.shortDateNoTimeFromatter.shortWeekdaySymbols
-        return defaultDaysArray[self.rawValue]
+        return defaultDaysArray![self.rawValue]
     }
     
     /// Checks if current day is a workday or not
     public var isWorkday: Bool {
-        let range = Weekday.calendar.maximumRangeOfUnit(.Weekday)
+        let range = (Weekday.calendar as NSCalendar).maximumRange(of: .weekday)
         
         if rawValue == range.location - 1 || rawValue == range.length - 1 {
             return false
@@ -51,27 +51,15 @@ public enum Weekday: Int {
     }
     
     /**
-     Creates array of weekdays based given dateFormatter using shortWeekdaySymbols property.
+     Converts date to weekday and returns short name of the day
      
-     - parameter dateFormatter: NSDateFormatter
+     - parameter date: NSDate of which we want to know name
      
-     - returns: array of Weekday instances
+     - returns: String with name
      */
-    private static func daysForWeek(dateFormatter: NSDateFormatter) -> [Weekday] {
-        var weekdays = [Weekday]()
-        
-        let dayNames = dateFormatter.shortWeekdaySymbols
-        for weekday in dayNames {
-            guard let index = dayNames.indexOf(weekday) else {
-                return weekdays
-            }
-            
-            if let day = Weekday(rawValue: index) {
-                weekdays.append(day)
-            }
-        }
-        
-        return weekdays
+    public static func shortDayNameForDate(_ date: Date) -> String {
+        let weekday = Weekday.createFromDate(date)
+        return weekday.shortName
     }
     
     /**
@@ -82,7 +70,7 @@ public enum Weekday: Int {
      
      - returns: next closest day
      */
-    public static func closestDay(days: [Weekday], toDay: Weekday) -> Weekday {
+    public static func closestDay(_ days: [Weekday], toDay: Weekday) -> Weekday {
         guard days.count > 0 else {
             fatalError("Empty array passed as an argument")
         }
@@ -117,54 +105,55 @@ public enum Weekday: Int {
         }
     }
     
-    /**
-     Converts date to weekday and returns short name of the day
-     
-     - parameter date: NSDate of which we want to know name
-     
-     - returns: String with name
-     */
-    public static func shortDayNameForDate(date: NSDate) -> String {
-        let weekday = Weekday.createFromDate(date)
-        return weekday.shortName
-    }
-
-}
-
-extension Weekday { // TimeSlower model dependent methods
-    /**
-     Converts Set of Days stored in Activity to array of Weekdays
-     
-     - parameter days: Set<Day>
-     
-     - returns: Array of Weeday instances
-     */
-    public static func weekdaysFromSetOfDays(days: Set<Day>) -> [Weekday] {
-        var busyWeekdays = [Weekday]()
-        
-        for day in days {
-            if let weekday = Weekday(rawValue: day.number.integerValue) {
-                busyWeekdays.append(weekday)
-            }
-        }
-        
-        return busyWeekdays
-    }
     
-    public static func weekdaysForBasis(basis: Basis) -> [Weekday] {
+    
+    /**
+     Creates array of Weekdays for given basis
+     
+     - parameter basis: Basis instance
+     
+     - returns: Array of Weekdays
+     */
+    public static func weekdaysForBasis(_ basis: Basis) -> [Weekday] {
         var weekdays = [Weekday]()
         let defaultDaysArray: [Weekday] = daysForWeek(StaticDateFormatter.shortDateAndTimeFormatter)
-        
+
         switch basis {
-        case .Daily, .Random:
+        case .daily, .random:
             weekdays = defaultDaysArray
-            
-        case .Workdays, .Weekends:
-            let shouldBeWorkday = basis == .Workdays
+
+        case .workdays, .weekends:
+            let shouldBeWorkday = basis == .workdays
             for day in defaultDaysArray {
                 if day.isWorkday == shouldBeWorkday {
                     weekdays.append(day)
                 }
+            }
+        }
+
+        return weekdays
+    }
+    
+    // MARK: Private Functions
+
+    /**
+     Creates array of weekdays based given dateFormatter using shortWeekdaySymbols property.
+     
+     - parameter dateFormatter: NSDateFormatter
+     
+     - returns: array of Weekday instances
+     */
+    fileprivate static func daysForWeek(_ dateFormatter: DateFormatter) -> [Weekday] {
+        var weekdays = [Weekday]()
+        
+        let dayNames = dateFormatter.shortWeekdaySymbols
+        for weekday in dayNames! {
+            guard let index = dayNames?.index(of: weekday) else {
+                return weekdays
+            }
+            
+            if let day = Weekday(rawValue: index) {
+                weekdays.append(day)
             }
         }
         

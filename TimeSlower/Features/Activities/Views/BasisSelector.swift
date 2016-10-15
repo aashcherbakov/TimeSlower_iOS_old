@@ -8,25 +8,25 @@
 
 import UIKit
 import TimeSlowerKit
-import ReactiveCocoa
+import ReactiveSwift
 
 /// UIControl subclass used to select activity basis on high level: Daily, Workdays or Weekends
 class BasisSelector: UIControl {
 
     // MARK: - Properties
     
-    @IBOutlet private(set) var view: UIView!
+    @IBOutlet fileprivate(set) var view: UIView!
     @IBOutlet weak var dailyOptionView: BasisOptionView!
     @IBOutlet weak var workdaysOptionView: BasisOptionView!
     @IBOutlet weak var weekendsOptionView: BasisOptionView!
     
     var selectedIndex: Int? {
         didSet {
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
         }
     }
     
-    private var basisOptionsViews: [BasisOptionView] = []
+    fileprivate var basisOptionsViews: [BasisOptionView] = []
     
     // MARK: - Overridden Methods
     
@@ -38,8 +38,8 @@ class BasisSelector: UIControl {
     
     // MARK: - Internal Methods
     
-    func updateSegmentedIndexForBasis(basis: Basis) {
-        guard basis != .Random else {
+    func updateSegmentedIndexForBasis(_ basis: Basis) {
+        guard basis != .random else {
             resetOptionViews(basisOptionsViews)
             return
         }
@@ -51,8 +51,8 @@ class BasisSelector: UIControl {
     
     // MARK: - Setup Methods
     
-    private func setupDesign() {
-        NSBundle.mainBundle().loadNibNamed("BasisSelector", owner: self, options: nil)
+    fileprivate func setupDesign() {
+        Bundle.main.loadNibNamed("BasisSelector", owner: self, options: nil)
         bounds = view.bounds
         addSubview(view)
         
@@ -63,34 +63,34 @@ class BasisSelector: UIControl {
         basisOptionsViews = [dailyOptionView, workdaysOptionView, weekendsOptionView]
     }
 
-    private func setupEvents() {
+    fileprivate func setupEvents() {
         for optionView in basisOptionsViews {
             subscribeToValueChangeForOptionView(optionView)
         }
     }
     
-    private func subscribeToValueChangeForOptionView(optionView: BasisOptionView) {
-        optionView.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
-            .startWithNext { [weak self] (value) in
-                guard let option = value as? BasisOptionView,
-                    weakSelf = self else { return }
+    fileprivate func subscribeToValueChangeForOptionView(_ optionView: BasisOptionView) {
+        optionView.rac_signal(for: .valueChanged).toSignalProducer()
+            .startWithResult { [weak self] (result) in
+                guard let option = result.value as? BasisOptionView,
+                    let weakSelf = self else { return }
                 
-                if let optionIndex = weakSelf.basisOptionsViews.indexOf(option) {
+                if let optionIndex = weakSelf.basisOptionsViews.index(of: option) {
                     weakSelf.selectedIndex = option.optionSelected ? optionIndex : nil
                     weakSelf.resetButtonsForSelectedIndex(optionIndex)
                 }
         }
     }
     
-    private func resetButtonsForSelectedIndex(index: Int) {
+    fileprivate func resetButtonsForSelectedIndex(_ index: Int) {
         var optionsToDeselect = basisOptionsViews
         if optionsToDeselect.count > index {
-            optionsToDeselect.removeAtIndex(index)
+            optionsToDeselect.remove(at: index)
         }
         resetOptionViews(optionsToDeselect)
     }
     
-    private func resetOptionViews(optionViews: [BasisOptionView]) {
+    fileprivate func resetOptionViews(_ optionViews: [BasisOptionView]) {
         for option in optionViews {
             option.optionSelected = false
         }
