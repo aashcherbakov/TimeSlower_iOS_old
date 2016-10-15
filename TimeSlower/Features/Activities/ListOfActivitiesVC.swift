@@ -26,7 +26,6 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         static let createActivitySegue = "Create New Activity"
     }
     
-    @IBOutlet weak var typeSelector: TypeSelector!
     @IBOutlet weak var listTypeSelector: ListTypeSelector!
     @IBOutlet weak var createActivityButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -53,7 +52,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), for: .valueChanged)
+//        typeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.typeDidChange(_:)), for: .valueChanged)
         listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), for: .valueChanged)
         createActivityButton.layer.cornerRadius = buttonHeight.constant / 2
         navigationController?.delegate = nil
