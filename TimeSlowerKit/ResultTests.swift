@@ -64,4 +64,10 @@ class ResultTests: XCTestCase {
         XCTAssertEqual(success, 100, "it should have 100% success")
     }
     
+    func test_factSavedTimeForActivity() {
+        let activity = FakeActivityFactory().fakeActivity()
+        let result = Result(withActivity: activity, factFinish: testFinishDate)
+        XCTAssertEqual(result.duration, 15)
+        XCTAssertEqual(result.savedTime, 25)
+    }
 }

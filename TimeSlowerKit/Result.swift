@@ -53,13 +53,32 @@ public struct Result: Persistable {
         success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: factFinish)
         
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)
-        
         stringDate = dateFormatter.string(from: factFinish)
         
         // TODO: update average success for activity
         self.activity = activity
         
         resourceId = UUID().uuidString
+    }
+    
+    public init(
+        withDate stringDate: String,
+        startTime: Date,
+        finishTime: Date,
+        duration: Double,
+        success: Double,
+        savedTime: Double?,
+        activity: Activity,
+        resourceId: String) {
+        
+        self.stringDate = stringDate
+        self.startTime = startTime
+        self.finishTime = finishTime
+        self.duration = duration
+        self.success = success
+        self.savedTime = savedTime
+        self.activity = activity
+        self.resourceId = resourceId
     }
     
     /**
@@ -89,15 +108,14 @@ public struct Result: Persistable {
         return successCalculator(startTime, finishTime, duration, goal)
     }
     
-    // MARK: - Private Functions
-    
-    fileprivate static func factSavedTimeForActivity(_ activity: Activity, factDuration: Double) -> Double {
+    public static func factSavedTimeForActivity(_ activity: Activity, factDuration: Double) -> Double {
         if activity.type == .routine {
             return Double(activity.duration().minutes()) - factDuration
         } else {
             return factDuration
         }
     }
+
 }
 
 extension Result: Equatable {

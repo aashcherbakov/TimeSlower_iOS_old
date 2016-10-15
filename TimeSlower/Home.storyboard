@@ -60,8 +60,7 @@
                                             <constraint firstItem="dZI-MX-jMW" firstAttribute="centerY" secondItem="1Qr-6W-U4U" secondAttribute="centerY" id="Q8M-Mc-9UY"/>
                                             <constraint firstAttribute="centerX" secondItem="dZI-MX-jMW" secondAttribute="centerX" constant="-10" id="hab-AN-jC3"/>
                                             <constraint firstItem="TUQ-ve-UUW" firstAttribute="centerY" secondItem="dZI-MX-jMW" secondAttribute="centerY" id="uOJ-zw-yvz"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="67" id="wNC-pL-cls"/>
-                                            <constraint firstAttribute="height" constant="67" id="yBn-H5-Jwc"/>
+                                            <constraint firstAttribute="height" constant="40" id="wNC-pL-cls"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -86,7 +85,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvx-1f-qoA" userLabel="Next Activity block" customClass="ClosestActivityDisplay" customModule="TimeSlower" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="107" id="bEE-cJ-0iY"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="107" id="bEE-cJ-0iY"/>
                                 </constraints>
                             </view>
                         </subviews>

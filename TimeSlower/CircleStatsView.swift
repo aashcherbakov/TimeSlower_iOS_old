@@ -50,18 +50,10 @@ class CircleStatsView: UIView {
     }
     
     private func displayProgressNumbers(progress: RoutineProgress) {
-        routineProgressLabel.text = "\(progress.savedTime)"
-        routinesTargetLabel.text = "\(progress.plannedTime)"
-        successLabel.text = "\(progress.success)"
+        routineProgressLabel.text = String(format: "%.0f", progress.savedTime)
+        routinesTargetLabel.text = String(format: "%.0f", progress.plannedTime) + " m."
+        successLabel.text = String(format: "%.1f", progress.success) + "%"
     }
-    
-    fileprivate func setupLabels(_ factTiming: SummTiming, plannedTiming: SummTiming) {
-        let format = ".0"
-
-        routineProgressLabel.text = "\(factTiming.0.format(format))"
-        routinesTargetLabel.text = "\(plannedTiming.0.format(format))"
-    }
-
     
     fileprivate func setupProgress(_ fact: Double, planned: Double, activityType: ActivityType) {
         var result: Double = 0

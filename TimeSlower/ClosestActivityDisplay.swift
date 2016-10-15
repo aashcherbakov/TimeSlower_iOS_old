@@ -81,7 +81,7 @@ internal final class ClosestActivityDisplay: UIView {
             timer.resetTimerAfterFinish = false
             
             let timerSecondsToSet = activity.nextActionTime().timeIntervalSinceNow
-            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
+            timer.timeFormat = (timerSecondsToSet > 60*60) ? "HH:mm:ss" : "mm:ss:SS"
             
             if timerSecondsToSet > 60*60*24 {
                 let hours = round((timerSecondsToSet - 60*60) / 60 / 60)

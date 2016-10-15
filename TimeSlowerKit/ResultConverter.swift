@@ -16,14 +16,23 @@ internal struct ResultConverter: PersistableConverter {
             fatalError("Wrong entity")
         }
         
+        var activity: Activity
         if let parent = parentObject as? Activity {
-            let result = Result(withActivity: parent, factFinish: resultEntity.finishTime)
-            return result
+            activity = parent
         } else {
-            let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil) as! Activity
-            let result = Result(withActivity: activity, factFinish: resultEntity.finishTime)
-            return result
+            activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil) as! Activity
         }
+        
+        let result = Result(
+            withDate: resultEntity.stringDate,
+            startTime: resultEntity.startTime,
+            finishTime: resultEntity.finishTime,
+            duration: resultEntity.duration.doubleValue,
+            success: resultEntity.success.doubleValue,
+            savedTime: resultEntity.savedTime?.doubleValue,
+            activity: activity,
+            resourceId: resultEntity.resourceId)
+        return result
     }
     
     
@@ -51,14 +60,8 @@ internal struct ResultConverter: PersistableConverter {
         
         var results: [Persistable] = []
         for resultEntity in resultEntities {
-            if let parent = parent {
-                let object = objectFromEntity(resultEntity, parentObject: parent)
-                results.append(object)
-            } else {
-                let activity = ActivityConverter().objectFromEntity(resultEntity.activity, parentObject: nil)
-                let object = objectFromEntity(resultEntity, parentObject: activity)
-                results.append(object)
-            }
+            let object = objectFromEntity(resultEntity, parentObject: parent)
+            results.append(object)
         }
         
         return results
