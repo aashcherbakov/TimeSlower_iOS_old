@@ -33,14 +33,27 @@ internal final class ListOfActivitiesDataSource: NSObject {
         super.init()
         
         tableView.dataSource = self
-        
+    }
+    
+    func updateData() {
         loadData()
     }
     
+    /// Displays activities of selected basis, reload table view
+    ///
+    /// - parameter basis: BasisToDisplay
     func displayActivities(forBasis basis: BasisToDisplay) {
         basisToDisplay = basis
         tableView.reloadData()
     }
+    
+    func delete(activity: Activity) {
+        removeActivityFromAllLists(activity: activity)
+        // TODO: delete results for activity
+        dataStore.delete(activity)
+    }
+    
+    // MARK: - Private Functions
     
     private func loadData() {
         allActivities = dataStore.activities(forDate: nil, type: .routine)
@@ -50,12 +63,12 @@ internal final class ListOfActivitiesDataSource: NSObject {
     
     private func findActivitiesForToday() -> [Activity] {
         let weekday = Weekday.createFromDate(Date())
-        
-        if let activities = allActivities {
-            return activities.filter { $0.days.contains(weekday) }
-        }
-        
-        return []
+        return allActivities?.filter { $0.days.contains(weekday) } ?? []
+    }
+    
+    private func removeActivityFromAllLists(activity: Activity) {
+        allActivities = allActivities?.filter { $0.resourceId != activity.resourceId }
+        activitiesForToday = activitiesForToday?.filter { $0.resourceId != activity.resourceId }
     }
     
     fileprivate func activitiesForBasis(basis: BasisToDisplay) -> [Activity] {
@@ -86,5 +99,18 @@ extension ListOfActivitiesDataSource: UITableViewDataSource {
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? StandardActivityCell, let activity = cell.activity {
+            tableView.beginUpdates()
+            delete(activity: activity)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.endUpdates()
+        }
     }
 }

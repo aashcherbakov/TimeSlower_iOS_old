@@ -42,6 +42,7 @@ internal class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
+        // TODO: implement delegate to avoid reloading data on each appearance
         setupData()
         setupDesign()
     }

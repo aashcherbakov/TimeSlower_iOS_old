@@ -30,12 +30,15 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     var typeToDisplay: TypeToDisplay = .bothTypes
     var basisToDisplay: BasisToDisplay = .today
     
-    private var dataSource: ListOfActivitiesDataSource!
+    fileprivate var dataSource: ListOfActivitiesDataSource!
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // TODO: implement delegate to avoid reloading data on each appearance
+        dataSource.updateData()
+        dataSource.displayActivities(forBasis: basisToDisplay)
     }
     
     override func viewDidLoad() {
@@ -90,7 +93,6 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
         tableView.estimatedRowHeight = 60.0
     }
     
-    
     // MARK: - Navigation
     
     private func showEditActivityVC() {
@@ -100,7 +102,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     
     private func dismissViewController() {
         if navigationController != nil {
-            navigationController?.popViewController(animated: true)
+            let _ = navigationController?.popViewController(animated: true)
         }
         
         if presentedModally {
@@ -114,6 +116,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
 // MARK: - Table view data source
 extension ListOfActivitiesVC: UITableViewDelegate {
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? StandardActivityCell {
@@ -124,13 +127,5 @@ extension ListOfActivitiesVC: UITableViewDelegate {
     }
 
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        tableView.beginUpdates()
-//        let activityToDelete = activitiesToDisplay[(indexPath as NSIndexPath).row]
-//        activitiesToDisplay.remove(at: (indexPath as NSIndexPath).row)
-//        CoreDataStack.sharedInstance.managedObjectContext?.delete(activityToDelete)
-//        CoreDataStack.sharedInstance.saveContext()
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        tableView.endUpdates()
-    }
+
 }
