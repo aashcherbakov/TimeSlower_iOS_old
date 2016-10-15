@@ -25,7 +25,7 @@ internal struct ActivityAdapter: GenericAdapter, DataStoreAdapter {
     }
     
 
-    public func activities(forDate date: Date, type: ActivityType) -> [Activity] {
+    public func activities(forDate date: Date?, type: ActivityType) -> [Activity] {
         
         return (creator as! ActivityStore)
             .activities(forDate: date, ofType: ActivityEntity.ActivityType(rawValue: type.rawValue)!)

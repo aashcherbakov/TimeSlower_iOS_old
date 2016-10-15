@@ -105,7 +105,6 @@ class MenuVC: UIViewController {
     
     fileprivate func activityListController() -> UIViewController {
         let listController: ListOfActivitiesVC = ControllerFactory.createController()
-        listController.profile = profile
         return listController
     }
     

@@ -23,11 +23,14 @@ public struct ActivityStore: EntityStore {
         return activities 
     }
     
-    public func activities(forDate date: Date, ofType type: ActivityEntity.ActivityType) -> [ActivityEntity] {
+    public func activities(forDate date: Date?, ofType type: ActivityEntity.ActivityType) -> [ActivityEntity] {
         let activities = allActivities()
         
-        let day = Day.createFromDate(date)
+        guard let date = date else {
+            return activities
+        }
         
+        let day = Day.createFromDate(date)
         return activities.filter { (entity) -> Bool in
             return entity.type.intValue == type.rawValue && entity.days.contains(day)
         }
