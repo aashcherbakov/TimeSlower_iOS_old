@@ -14,12 +14,12 @@ public struct Activity: Persistable {
     public let name: String
     public let type: ActivityType
     public let days: [Weekday]
-    private let timing: Timing
     public let stats: Stats
     public let notifications: Bool
     public let averageSuccess: Double
-    public var results: Set<Result>
-    
+    private(set) public var results: Set<Result>
+    private let timing: Timing
+
     private let timeMachine = TimeMachine()
     
     public init(withLifetimeDays
@@ -89,6 +89,40 @@ public struct Activity: Persistable {
         return resultsForToday.count > 0
     }
     
+    public func nextActionTime(forDate date: Date = Date()) -> Date {
+        if isDone(forDate: date) {
+            let nextDate = nextActionDay(fromDate: date)
+            return startTime(inDate: nextDate)
+        } else if isGoingNow() {
+            return finishTime()
+        } else {
+            return startTime()
+        }
+    }
+    
+    public func nextActionDay(fromDate date: Date = Date()) -> Date {
+        let currentDay = Weekday.createFromDate(date)
+        
+        let nextDayOptions = days.filter { (weekday) -> Bool in
+            return weekday.rawValue != currentDay.rawValue
+        }
+        
+        let nextDay = Weekday.closestDay(nextDayOptions, toDay: currentDay)
+        let daysInBetween = numberOfDaysTillDay(day: nextDay.rawValue, fromDay: currentDay.rawValue)
+        let nextActionDay = date.addingTimeInterval(Double(daysInBetween * 24 * 60 * 60))
+        return nextActionDay
+    }
+    
+    public func numberOfDaysTillDay(day: Int, fromDay: Int) -> Int {
+        if day < fromDay {
+            return 7 - (fromDay - day)
+        } else if day > fromDay {
+            return day - fromDay
+        } else {
+            return 7
+        }
+    }
+    
     public func startTime(inDate date: Date = Date()) -> Date {
         let startTime = timing.manuallyStarted ?? timing.startTime
         return timeMachine.updatedTime(startTime, forDate: date)
@@ -114,6 +148,7 @@ public struct Activity: Persistable {
     public func duration() -> Endurance {
         return timing.duration
     }
+    
     /// Should only be used for copying object, not accessed directly
     ///
     /// - returns: Timing that is private property of Activity
@@ -153,8 +188,6 @@ public struct Activity: Persistable {
         let otherActivityStartTime = timeMachine.updatedTime(activity.startTime(), forDate: date)
         return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
     }
-    
-
 }
 
 /**

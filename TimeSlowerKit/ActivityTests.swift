@@ -63,4 +63,22 @@ class ActivityTests: BaseDataStoreTest {
         let isDone = sut.isDone(forDate: date)
         XCTAssertTrue(isDone)
     }
+    
+    func test_nextActionDay_monday() {
+        let friday = shortTimeFormatter.date(from: "10/14/2016, 10:00 AM")!
+        let monday = shortTimeFormatter.date(from: "10/16/2016, 10:00 AM")!
+        XCTAssertEqual(sut.nextActionDay(fromDate: friday), monday)
+    }
+    
+    func test_nextActionDay_inAWeek() {
+        let wednesday = shortTimeFormatter.date(from: "10/12/2016, 10:00 AM")!
+        let monday = shortTimeFormatter.date(from: "10/16/2016, 10:00 AM")!
+        XCTAssertEqual(sut.nextActionDay(fromDate: wednesday), monday)
+    }
+    
+    func test_nextActionDay_nextDay() {
+        let monday = shortTimeFormatter.date(from: "10/10/2016, 10:00 AM")!
+        let tuesday = shortTimeFormatter.date(from: "10/11/2016, 10:00 AM")!
+        XCTAssertEqual(sut.nextActionDay(fromDate: monday), tuesday)
+    }
 }

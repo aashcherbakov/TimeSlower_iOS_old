@@ -47,6 +47,8 @@ internal final class ClosestActivityDisplay: UIView {
     
     func launchTimerForActivity(_ activity: Activity?) {
         guard let activity = activity else {
+            timer?.removeFromSuperview()
+            timer = nil
             return
         }
         
@@ -62,29 +64,30 @@ internal final class ClosestActivityDisplay: UIView {
     }
     
     func restartTimerForActivity(_ activity: Activity) {
-//        let timeTillFinalDate = activity.timing.nextActionTime()
-//        let timeTillEndOfCountdown = timer?.getTimeRemaining()
-//        
-//        if timeTillFinalDate != timeTillEndOfCountdown {
-//            reloadTimerForActivity(activity)
-//        }
+        let nextActionTime = activity.nextActionTime()
+        let timeTillEndOfCountdown = timer?.getTimeRemaining()
+        let timeTillFinalDate = nextActionTime.timeIntervalSinceNow
+       
+        if timeTillFinalDate != timeTillEndOfCountdown {
+            reloadTimerForActivity(activity)
+        }
     }
     
     func setupTimerCountdownForActivity(_ activity: Activity) {
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
         
         if let timer = timer {
-//            timer.setCountDownTo(activity.timing.nextActionTime())
-//            timer.resetTimerAfterFinish = false
-//            
-//            let timerSecondsToSet = activity.timing.nextActionTime().timeIntervalSinceNow
-//            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
-//            
-//            if timerSecondsToSet > 60*60*24 {
-//                let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
-//                timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
-//            }
-//            
+            timer.setCountDownTo(activity.nextActionTime())
+            timer.resetTimerAfterFinish = false
+            
+            let timerSecondsToSet = activity.nextActionTime().timeIntervalSinceNow
+            timer.timeFormat = (timerSecondsToSet > 60*60) ? "mm:ss:SS" : "HH:mm:ss"
+            
+            if timerSecondsToSet > 60*60*24 {
+                let hours = round((timerSecondsToSet - 60*60) / 60 / 60)
+                timer.timeFormat = NSString(format: "%@:mm:ss", hours.format(".0")) as String
+            }
+            
             timer.start()
         }
     }

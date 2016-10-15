@@ -105,6 +105,8 @@ public enum Weekday: Int {
         }
     }
     
+    
+    
     /**
      Creates array of Weekdays for given basis
      
