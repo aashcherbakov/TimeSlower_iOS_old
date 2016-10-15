@@ -27,28 +27,13 @@ class StandardActivityCell: UITableViewCell {
 
     func setupLabels() {
         nameLabel.text = activity.name.uppercased()
-//        startTimeLabel.text = dateFormatter.string(from: activity.updatedStartTime())
+        startTimeLabel.text = StaticDateFormatter.shortTimeNoDateFormatter.string(from: activity.nextActionTime())
+        
 //        if activity.isDoneForToday() {
 //            savingsView.alpha = 1.0
 //            let result = activity.stats.fastFactSavedForPeriod(.today)
 //            factSavedTimeLabel.text = "\(result)"
 //            plannedToSaveLabel.text = "\(activity.timing.timeToSave.int32Value)"
-//            
 //        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        return formatter
-    }()
-    
-
 }

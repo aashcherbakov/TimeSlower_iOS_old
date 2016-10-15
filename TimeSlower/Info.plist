@@ -43,5 +43,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to take your picture for avatar</string>
+	<key>notification</key>
+	<string></string>
 </dict>
 </plist>
