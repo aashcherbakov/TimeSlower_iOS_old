@@ -56,7 +56,7 @@ public struct ProgressCalculator {
             }
         }
         
-        let totalSuccess = savedTime / 100 * plannedToSave
+        let totalSuccess = savedTime / plannedToSave * 100
         
         return RoutineProgress(success: totalSuccess, savedTime: savedTime, plannedTime: plannedToSave)
     }

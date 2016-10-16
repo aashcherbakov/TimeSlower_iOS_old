@@ -18,7 +18,7 @@ internal enum NotificationType {
 internal protocol LocalNotification {
     var activity: Activity { get }
     var repeats: Bool { get }
-    
+    var type: NotificationType { get }
     func title() -> String
     func body() -> String
     func date() -> Date
@@ -45,6 +45,7 @@ internal struct NotificationFactory {
 
 internal struct StartNotification: LocalNotification {
     
+    let type = NotificationType.Start
     let activity: Activity
     let repeats = true
     
@@ -68,6 +69,7 @@ internal struct StartNotification: LocalNotification {
 
 internal struct FinishNotification: LocalNotification {
     
+    let type = NotificationType.Finish
     let activity: Activity
     let repeats = false
 
@@ -80,7 +82,8 @@ internal struct FinishNotification: LocalNotification {
     }
     
     func body() -> String {
-        return "If you finish now, you will save \(activity.stats.summMonths) months of your life 🙄"
+        let time = String(format: "%.1f", activity.stats.summMonths)
+        return "If you finish now, you will save \(time) months of your life 🙄"
     }
     
     func date() -> Date {

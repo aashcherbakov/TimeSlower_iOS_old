@@ -70,10 +70,11 @@ internal struct ActivityStore {
     
     private func timing(withStartTime startTime: Date, duration: Endurance, timeToSave: Int) -> Timing {
         let alarmTime = alarmTimeFromStart(startTime: startTime, duration: duration, timeToSave: timeToSave)
+        let toSave = NSNumber(value: timeToSave)
         let timing = Timing(
             withDuration: duration,
             startTime: startTime,
-            timeToSave: Double(timeToSave),
+            timeToSave: toSave.doubleValue,
             alarmTime: alarmTime)
         return timing
     }

@@ -64,18 +64,31 @@ internal struct NotificationScheduler {
     }
     
     private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
-        let trigger = notificationTrigger(forDate: notification.date(), repeats: notification.repeats)
+        let trigger = notificationTrigger(forDate: notification.date(), repeats: notification.repeats, type: notification.type)
         print(trigger)
         let content = contentForNotification(notification: notification, category: category)
         print(content)
         return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     }
     
-    private func notificationTrigger(forDate date: Date, repeats: Bool) -> UNCalendarNotificationTrigger {
+    
+    private func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {
+        switch type {
+        case .Start: return dateTrigger(forDate: date, repeats: repeats)
+        case .Finish: return timeTrigger(forDate: date, repeats: repeats)
+        }
+    }
+    
+    private func dateTrigger(forDate date: Date, repeats: Bool) -> UNCalendarNotificationTrigger {
         let components = dateComponents(fromDate: date)
         print(components)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
         return trigger
+    }
+    
+    private func timeTrigger(forDate date: Date, repeats: Bool) -> UNTimeIntervalNotificationTrigger {
+        let interval = date.timeIntervalSinceNow
+        return UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
     }
     
     private func contentForNotification(notification: LocalNotification, category: String) -> UNMutableNotificationContent {

@@ -41,61 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/NotificationScheduler.swift"
-            timestampString = "498276944.490256"
+            filePath = "TimeSlowerKit/Activity.swift"
+            timestampString = "498326553.571343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "addRequest(request:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TimeSlower.NotificationScheduler.((addRequest in _C920FB6667DBC20C8DA8C809C9EDDCEC) (request : __ObjC.UNNotificationRequest) -&gt; ()).(closure #1)"
-                  moduleName = "TimeSlower"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/NotificationScheduler.swift"
-                  timestampString = "498322210.026134"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TimeSlower.NotificationScheduler.((addRequest in _C920FB6667DBC20C8DA8C809C9EDDCEC) (request : __ObjC.UNNotificationRequest) -&gt; ()).(closure #1)"
-                  moduleName = "TimeSlower"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower/TimeSlower/NotificationScheduler.swift"
-                  timestampString = "498322210.028852"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeSlower/NotificationScheduler.swift"
-            timestampString = "498321960.918788"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "notificationRequest(forNotification:identifier:category:)"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "alarmTime(inDate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/NotificationScheduler.swift"
-            timestampString = "498322208.858357"
+            filePath = "TimeSlower/ActivityStore.swift"
+            timestampString = "498327127.690469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "notificationTrigger(forDate:repeats:)"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "createActivity(withName:selectedDays:startTime:duration:timeToSave:notifications:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/AppDelegate.swift"
-            timestampString = "498322189.307706"
+            filePath = "TimeSlower/ActivityStore.swift"
+            timestampString = "498327587.948506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "timing(withStartTime:duration:timeToSave:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
