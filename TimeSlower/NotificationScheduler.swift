@@ -19,7 +19,7 @@ internal struct NotificationScheduler {
     ///
     /// - parameter activity:         Activity
     /// - parameter notificationType: NotificationType
-    func schedulrForActivity(activity: Activity, notificationType: NotificationType) {
+    func scheduleForActivity(activity: Activity, notificationType: NotificationType) {
         
         let notification = NotificationFactory().notificarion(ofType: notificationType, forActivity: activity)
         let categoryIdentifier = responder.categoryIdentifierForType(notificationType: notificationType)

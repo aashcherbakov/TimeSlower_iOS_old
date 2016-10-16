@@ -29,6 +29,7 @@ internal class HomeViewController: UIViewController {
     let activityListTransitionManager = ListTransitionManager()
     let progressCalculator = ProgressCalculator()
     let scheduler = ActivityScheduler()
+    let notificationScheduler = NotificationScheduler()
 
     @IBOutlet fileprivate(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
     @IBOutlet fileprivate(set) weak var controlFlowButton: UIButton!
@@ -127,6 +128,7 @@ internal class HomeViewController: UIViewController {
         
         closestActivity.value = scheduler.start(activity: activity)
         
+        notificationScheduler.scheduleForActivity(activity: activity, notificationType: .Finish)
         setupClosestActvityDisplay()
         setupControlFlowButton()
     }
