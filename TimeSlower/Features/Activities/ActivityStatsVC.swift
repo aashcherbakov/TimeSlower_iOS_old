@@ -50,20 +50,19 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     
     func setup() {
         activityNameLabel.text = activity.name
-//        activityBasisLabel.text = activity.activityBasis().description()
-//        timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
+        activityBasisLabel.text = activity.basis().description()
+        timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
         
-        let format = ".0"
-//        successLabel.text = "\(activity.stats.averageSuccess.doubleValue.format(format))"
+        successLabel.text = String(format: "%.1f", activity.averageSuccess)
         setupCircleProgress()
         launchTimer()
         defineStartOrFinishButtonTitle()
     }
     
     func setupCircleProgress() {
-//        circleProgress.progress = activity.stats.averageSuccess.doubleValue
-//        circleProgress.progressBarWidth = 14
-//        circleProgress.progressColor = UIColor.purpleRed()
+        circleProgress.updateProgress(CGFloat(activity.averageSuccess))
+        circleProgress.thicknessRatio = 0.02
+        circleProgress.progressTintColor = UIColor.purpleRed()
     }
     
     //MARK: - ACTION
@@ -94,23 +93,19 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func scheduleFinishTimerForActivity() {
-//        if activity.isRoutine() {
-//            activity.scheduleFinishTimerNotification()
-//        } else {
-//            activity.scheduleLastCallTimerNotification()
-//        }
+
     }
     
     func defineStartOrFinishButtonTitle() {
-//        if !activity.isDoneForToday() {
-//            let buttonTitle = activity.isGoingNow() ? Constants.finishButtonTitle : Constants.startButtonTitle
-//            flowControlButton.setTitle(buttonTitle, for: UIControlState())
-//            flowControlButton.alpha = 1.0
-//            flowControlButton.isUserInteractionEnabled = true
-//        } else {
-//            flowControlButton.alpha = 0.0
-//            flowControlButton.isUserInteractionEnabled = false
-//        }
+        if !activity.isDone() {
+            let buttonTitle = activity.isGoingNow() ? Constants.finishButtonTitle : Constants.startButtonTitle
+            flowControlButton.setTitle(buttonTitle, for: UIControlState())
+            flowControlButton.alpha = 1.0
+            flowControlButton.isUserInteractionEnabled = true
+        } else {
+            flowControlButton.alpha = 0.0
+            flowControlButton.isUserInteractionEnabled = false
+        }
     }
 
     // MARK: - TIMER
@@ -137,11 +132,11 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func restartTimerIfActivityChanged() {
-//        let intervalTillAction = round(activity.timing.nextActionTime().timeIntervalSinceNow)
-//        let intervalFromTimer = round(timer.getTimeRemaining())
-//        if intervalTillAction != intervalFromTimer {
-//            reloadTimer()
-//        }
+        let intervalTillAction = round(activity.nextActionTime().timeIntervalSinceNow)
+        let intervalFromTimer = round(timer.getTimeRemaining())
+        if intervalTillAction != intervalFromTimer {
+            reloadTimer()
+        }
     }
     
     func reloadTimer() {
@@ -160,19 +155,19 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     //MARK: - GRAPH
     
     func drawProgressView() {
-//        let lastResults = activity.lastWeekResults()
-//        
-//        if lastResults.count > 0 {
-//            setValuesAndLabelsForGraph(lastResults)
-//            chartView.strokeChart()
-//        }
+        let lastResults = activity.lastWeekResults()
+        
+        if lastResults.count > 0 {
+            setValuesAndLabelsForGraph(lastResults)
+            chartView.strokeChart()
+        }
     }
     
     
     func setValuesAndLabelsForGraph(_ lastResults: [Result]) {
         for result in lastResults {
             lastWeekDayNames.append(result.shortDayNameForDate())
-//            lastWeekResultValues.append(result.daySuccessForTiming(activity.timing))
+            lastWeekResultValues.append(result.success)
         }
         
         addMissingResultsValuesAndLabels(lastResults)
@@ -188,13 +183,13 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
                 lastWeekResultValues.insert(0.0, at: 0)
             }
             
-//            let lastDay = Result.standardDateFormatter().date(from: lastResults.last!.date)
-//            var components = (Calendar.current as NSCalendar).components([.year, .month, .day], from: lastDay!)
-//            for _ in 0 ..< vacantDaysLeft {
-//                components.day! -= 1
-//                let nextDate = Calendar.current.date(from: components)
-//                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), at: 0)
-//            }
+            let lastDay = StaticDateFormatter.shortDateNoTimeFromatter.date(from: lastResults.last!.stringDate)
+            var components = (Calendar.current as NSCalendar).components([.year, .month, .day], from: lastDay!)
+            for _ in 0 ..< vacantDaysLeft {
+                components.day! -= 1
+                let nextDate = Calendar.current.date(from: components)
+                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), at: 0)
+            }
         }
     }
     

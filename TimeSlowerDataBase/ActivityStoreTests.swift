@@ -69,7 +69,6 @@ class ActivityStoreTests: BaseDataStoreTest {
         
         XCTAssertEqual(updatedEntity.name, "Shower", "it should not change name")
         XCTAssertEqual(updatedEntity.days, [Day(number: 0), Day(number: 6)])
-        XCTAssertEqual(updatedEntity.averageSuccess, 80)
         XCTAssertEqual(updatedEntity.notifications, true)
         XCTAssertEqual(updatedEntity.timing.startTime, startTime)
         XCTAssertEqual(updatedEntity.timing.finishTime, finishTime)
@@ -140,7 +139,7 @@ class ActivityStoreTests: BaseDataStoreTest {
             timing: timing,
             stats: stats,
             notifications: false,
-            averageSuccess: 0, resourceId: "333333")
+            resourceId: "333333")
         
         let activity: ActivityEntity = sut.createEntity()
         let activityWithData: ActivityEntity = sut.updateEntity(activity, configuration: configuration)
@@ -161,7 +160,6 @@ class ActivityStoreTests: BaseDataStoreTest {
             timing: timing,
             stats: stats,
             notifications: true,
-            averageSuccess: 80,
             resourceId: "333333")
     }
 }

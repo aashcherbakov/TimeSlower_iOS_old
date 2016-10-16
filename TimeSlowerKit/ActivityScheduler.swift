@@ -93,6 +93,9 @@ public struct ActivityScheduler {
         let newActivity = activity.update(withTiming: newTiming)
         let updatedActivity = dataStore.update(newActivity)
         dataStore.create(result, withParent: updatedActivity)
+        if let activityWithResults: Activity = dataStore.retrieve(updatedActivity.resourceId) {
+            return activityWithResults
+        }
         return updatedActivity
     }
     

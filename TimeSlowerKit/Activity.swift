@@ -18,7 +18,6 @@ public struct Activity: Persistable {
     public let notifications: Bool
     public let averageSuccess: Double
     private(set) public var results: Set<Result>
-    private(set) public var lastResults: [Result]
     private let timing: Timing
     private let totalResults: Int
 
@@ -40,7 +39,6 @@ public struct Activity: Persistable {
         self.notifications = notifications
         self.averageSuccess = 0
         self.results = results
-        self.lastResults = []
         self.totalResults = 0
         self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
@@ -55,7 +53,6 @@ public struct Activity: Persistable {
         averageSuccess: Double,
         resourceId: String,
         results: Set<Result>,
-        lastResults: [Result],
         totalResults: Int) {
         
         self.resourceId = resourceId
@@ -67,7 +64,6 @@ public struct Activity: Persistable {
         self.averageSuccess = averageSuccess
         self.stats = stats
         self.results = results
-        self.lastResults = lastResults
         self.totalResults = totalResults
         
     }
@@ -83,16 +79,19 @@ public struct Activity: Persistable {
             averageSuccess: averageSuccess,
             resourceId: resourceId,
             results: results,
-            lastResults: lastResults,
             totalResults: totalResults)
+    }
+    
+    public func lastWeekResults() -> [Result] {
+        // TODO: find faster way to get last 7 results
+        let sortedResults = results.sorted { $0.finishTime.compare($1.finishTime) == .orderedDescending }
+        
+        let firstSeven = Array(sortedResults.prefix(7))
+        return firstSeven
     }
     
     public mutating func updateWithResults(results: Set<Result>) {
         self.results = results
-    }
-    
-    public mutating func updateWithLastResults(results: [Result]) {
-        self.lastResults = results
     }
     
     public func isDone(forDate date: Date = Date()) -> Bool {

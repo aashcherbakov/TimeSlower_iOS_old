@@ -32,13 +32,10 @@ internal struct ActivityConverter: PersistableConverter {
             notifications: entity.notifications.boolValue,
             averageSuccess: entity.averageSuccess.doubleValue,
             resourceId: entity.resourceId,
-            results: [], lastResults: [], totalResults: entity.totalResults.intValue)
+            results: [], totalResults: entity.totalResults.intValue)
         
         let results = resultsFromEntities(resultEntities: entity.results as? Set<ResultEntity>, activity: activity)
         activity.updateWithResults(results: results)
-        
-        let lastResults = lastResultsFromEntities(resultEntities: entity.lastResults, activity: activity)
-        activity.updateWithLastResults(results: lastResults)
         
         return activity
     }
@@ -55,21 +52,10 @@ internal struct ActivityConverter: PersistableConverter {
             timing: timingDataFromTiming(object.getTiming()),
             stats: statsDataFromStats(object.stats), 
             notifications: object.notifications, 
-            averageSuccess: object.averageSuccess, 
             resourceId: object.resourceId)
     }
     
     // MARK: - Private Functions
-    
-    private func lastResultsFromEntities(resultEntities: [ResultEntity], activity: Activity) -> [Result] {
-        let resultsConverter = ResultConverter()
-        if resultEntities.count > 0 {
-            if let results = resultsConverter.objectsFromEntities(resultEntities, parent: activity) as? [Result] {
-                return results
-            }
-        }
-        return []
-    }
     
     private func resultsFromEntities(resultEntities: Set<ResultEntity>?, activity: Activity) -> Set<Result> {
         let resultsConverter = ResultConverter()

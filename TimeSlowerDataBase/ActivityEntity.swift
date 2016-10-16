@@ -22,7 +22,6 @@ open class ActivityEntity: ManagedObject {
     
     @NSManaged open var averageSuccess: NSNumber
     @NSManaged open var totalResults: NSNumber
-    @NSManaged open var lastResults: [ResultEntity]
 
     public enum ActivityType: Int {
         case routine
@@ -58,7 +57,6 @@ extension ActivityEntity: ManagedObjectType {
         days = daysWithNumbers(configuration.days)
         timing = configuration.timing
         stats = configuration.stats
-        averageSuccess = NSNumber(value: configuration.averageSuccess)
         if resourceId == "" {
             resourceId = configuration.resourceId
         }
@@ -70,7 +68,6 @@ extension ActivityEntity: ManagedObjectType {
     
     public func addResult(result: ResultEntity) {
         updateAverageSuccess(withResult: result)
-        updateLastResults(result: result)
         incrementTotalResultsNumber()
     }
     
@@ -84,15 +81,7 @@ extension ActivityEntity: ManagedObjectType {
     private func incrementTotalResultsNumber() {
         totalResults = NSNumber(value: totalResults.intValue + 1)
     }
-    
-    private func updateLastResults(result: ResultEntity) {
-        if lastResults.count < 7 {
-            lastResults.append(result)
-        } else {
-            let _ = lastResults.remove(at: 0)
-            lastResults.append(result)
-        }
-    }
+
     
     // MARK: - Private
     
