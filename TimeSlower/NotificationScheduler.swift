@@ -87,6 +87,9 @@ internal struct NotificationScheduler {
     }
     
     private func timeTrigger(forDate date: Date, repeats: Bool) -> UNTimeIntervalNotificationTrigger {
+        print("Passed date: \(date)")
+        print("Current date: \(Date())")
+        print("Interval: \(date.timeIntervalSinceNow)")
         let interval = date.timeIntervalSinceNow
         return UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
     }

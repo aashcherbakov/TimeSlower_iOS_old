@@ -127,11 +127,12 @@ internal class HomeViewController: UIViewController {
     private func startActivity(_ activity: Activity?) {
         guard let activity = activity else { return }
         
-        closestActivity.value = scheduler.start(activity: activity)
-        
-        notificationScheduler.scheduleForActivity(activity: activity, notificationType: .Finish)
+        let startedActivity = scheduler.start(activity: activity)
+        notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish)
+        closestActivity.value = startedActivity
         setupClosestActvityDisplay()
         setupControlFlowButton()
+        
     }
     
     private func finishActivity(_ activity: Activity?) {

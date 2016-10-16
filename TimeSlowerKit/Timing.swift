@@ -14,10 +14,10 @@ public struct Timing {
     public let startTime: Date
     public let finishTime: Date
     public var manuallyStarted: Date?
-    public let timeToSave: Double
+    public let timeToSave: Int
     
     
-    public init(withDuration duration: Endurance, startTime: Date, timeToSave: Double, alarmTime: Date, manuallyStarted: Date? = nil) {
+    public init(withDuration duration: Endurance, startTime: Date, timeToSave: Int, alarmTime: Date, manuallyStarted: Date? = nil) {
         self.duration = duration
         self.startTime = startTime
         self.finishTime = Timing.finishTime(fromStart: startTime, duration: duration)

@@ -15,7 +15,7 @@ open class TimingData: NSObject {
     open let alarmTime: Date
     open let startTime: Date
     open let finishTime: Date
-    open let timeToSave: Double
+    open let timeToSave: Int
     open var manuallyStarted: Date?
     
     public required init?(coder aDecoder: NSCoder) {
@@ -24,10 +24,10 @@ open class TimingData: NSObject {
         self.startTime = aDecoder.decodeObject(forKey: "startTime") as! Date
         self.finishTime = aDecoder.decodeObject(forKey: "finishTime") as! Date
         self.manuallyStarted = aDecoder.decodeObject(forKey: "alarmTime") as? Date
-        self.timeToSave = aDecoder.decodeDouble(forKey: "timeToSave")
+        self.timeToSave = aDecoder.decodeInteger(forKey: "timeToSave")
     }
     
-    public init(duration: Continuation, alarmTime: Date, startTime: Date, timeToSave: Double, manuallyStarted: Date? = nil) {
+    public init(duration: Continuation, alarmTime: Date, startTime: Date, timeToSave: Int, manuallyStarted: Date? = nil) {
         self.duration = duration
         self.alarmTime = alarmTime
         self.startTime = startTime

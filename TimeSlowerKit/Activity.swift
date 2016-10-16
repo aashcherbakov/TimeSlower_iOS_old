@@ -142,11 +142,14 @@ public struct Activity: Persistable {
             return finishTime()
         }
         
-        return started.addingTimeInterval(timing.duration.seconds() - (timeToSave() * 60))
+        let durationInSeconds = timing.duration.seconds()
+        let timeToSaveInSeconds = timeToSave() * 60
+        let timeInterval = durationInSeconds - timeToSaveInSeconds
+        return started.addingTimeInterval(timeInterval)
     }
     
     public func timeToSave() -> Double {
-        return timing.timeToSave
+        return Double(timing.timeToSave)
     }
     
     public func updateTiming(withManuallyStarted started: Date?) -> Timing {

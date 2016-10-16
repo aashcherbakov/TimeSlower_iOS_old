@@ -74,7 +74,7 @@ internal class EditActivityVC: UIViewController {
     
     fileprivate var footerView: UIView?
     
-    private let activityStore = ActivityStore()
+    private let activityStore = ActivityCreator()
     
     dynamic fileprivate var lastExpandedCellIndex: IndexPath?
     fileprivate var expandedCellIndex: IndexPath? {

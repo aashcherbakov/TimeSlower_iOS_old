@@ -51,7 +51,7 @@ public struct FakeActivityFactory {
         timeToSave: Int = 10,
         manuallyStarted: Date? = nil) -> Timing {
         
-        return Timing(withDuration: duration, startTime: startTime, timeToSave: Double(timeToSave), alarmTime: startTime, manuallyStarted: manuallyStarted)
+        return Timing(withDuration: duration, startTime: startTime, timeToSave: timeToSave, alarmTime: startTime, manuallyStarted: manuallyStarted)
     }
     
     // Basic

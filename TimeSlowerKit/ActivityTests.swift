@@ -89,5 +89,6 @@ class ActivityTests: BaseDataStoreTest {
         let startedActivity = sut.update(withTiming: timing)
         sut = startedActivity
         XCTAssertEqual(sut.alarmTime(inDate: tuesday), alarmTime)
+        XCTAssertEqual(timing.manuallyStarted, tuesday)
     }
 }
