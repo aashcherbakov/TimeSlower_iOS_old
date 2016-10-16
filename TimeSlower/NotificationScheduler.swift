@@ -13,7 +13,7 @@ import TimeSlowerKit
 internal struct NotificationScheduler {
     
     private let notificationCenter = UNUserNotificationCenter.current()
-    
+    private let responder = NotificationResponder()
     
     /// Schedules notification for activity of specified type
     ///
@@ -22,8 +22,8 @@ internal struct NotificationScheduler {
     func schedulrForActivity(activity: Activity, notificationType: NotificationType) {
         
         let notification = NotificationFactory().notificarion(ofType: notificationType, forActivity: activity)
-        
-        let request = notificationRequest(forNotification: notification, identifier: "Test Notification")
+        let categoryIdentifier = responder.categoryIdentifierForType(notificationType: notificationType)
+        let request = notificationRequest(forNotification: notification, identifier: "Test Notification", category: categoryIdentifier)
         
         notificationCenter.getNotificationSettings { (settings) in
             if settings.authorizationStatus != .authorized {
@@ -63,9 +63,9 @@ internal struct NotificationScheduler {
         }
     }
     
-    private func notificationRequest(forNotification notification: LocalNotification, identifier: String) -> UNNotificationRequest {
+    private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
         let trigger = notificationTrigger(forDate: notification.date(), repeats: notification.repeats)
-        let content = contentForNotification(notification: notification)
+        let content = contentForNotification(notification: notification, category: category)
         return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     }
     
@@ -75,11 +75,13 @@ internal struct NotificationScheduler {
         return trigger
     }
     
-    private func contentForNotification(notification: LocalNotification) -> UNMutableNotificationContent {
+    private func contentForNotification(notification: LocalNotification, category: String) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = notification.title()
         content.body = notification.body()
         content.sound = UNNotificationSound.default()
+        content.categoryIdentifier = category
+        
         return content
     }
     

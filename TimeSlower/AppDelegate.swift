@@ -7,15 +7,20 @@
 //
 
 import UIKit
-import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let notificationResponder = NotificationResponder()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        UNUserNotificationCenter.current().delegate = notificationResponder
+        
+        
         return true
     }
 
