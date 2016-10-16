@@ -3,11 +3,13 @@
     <entity name="ActivityEntity" representedClassName=".ActivityEntity" syncable="YES">
         <attribute name="averageSuccess" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="days" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="lastResults" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notifications" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="resourceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stats" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
         <attribute name="timing" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+        <attribute name="totalResults" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ResultEntity" inverseName="activity" inverseEntity="ResultEntity" syncable="YES"/>
     </entity>
@@ -33,7 +35,7 @@
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ActivityEntity" inverseName="results" inverseEntity="ActivityEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ActivityEntity" positionX="4194" positionY="-4932" width="128" height="178"/>
+        <element name="ActivityEntity" positionX="4194" positionY="-4932" width="128" height="210"/>
         <element name="ProfileEntity" positionX="3924" positionY="-4968" width="128" height="165"/>
         <element name="ResultEntity" positionX="4102" positionY="-4645" width="128" height="180"/>
     </elements>

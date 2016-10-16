@@ -67,6 +67,8 @@ extension ResultEntity: ManagedObjectType {
         }
         
         activity.results.adding(self)
+        
+        // TODO: update average success for activity
         self.activity = activity
     }
 }

@@ -18,7 +18,9 @@ public struct Activity: Persistable {
     public let notifications: Bool
     public let averageSuccess: Double
     private(set) public var results: Set<Result>
+    private(set) public var lastResults: [Result]
     private let timing: Timing
+    private let totalResults: Int
 
     private let timeMachine = TimeMachine()
     
@@ -38,6 +40,8 @@ public struct Activity: Persistable {
         self.notifications = notifications
         self.averageSuccess = 0
         self.results = results
+        self.lastResults = []
+        self.totalResults = 0
         self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
     
@@ -49,7 +53,10 @@ public struct Activity: Persistable {
         timing: Timing,
         notifications: Bool,
         averageSuccess: Double,
-        resourceId: String, results: Set<Result>) {
+        resourceId: String,
+        results: Set<Result>,
+        lastResults: [Result],
+        totalResults: Int) {
         
         self.resourceId = resourceId
         self.name = name
@@ -60,6 +67,9 @@ public struct Activity: Persistable {
         self.averageSuccess = averageSuccess
         self.stats = stats
         self.results = results
+        self.lastResults = lastResults
+        self.totalResults = totalResults
+        
     }
     
     public func update(withTiming newTiming: Timing) -> Activity {
@@ -69,15 +79,20 @@ public struct Activity: Persistable {
             type: type,
             days: days,
             timing: newTiming,
-            notifications:
-            notifications,
+            notifications: notifications,
             averageSuccess: averageSuccess,
             resourceId: resourceId,
-            results: results)
+            results: results,
+            lastResults: lastResults,
+            totalResults: totalResults)
     }
     
     public mutating func updateWithResults(results: Set<Result>) {
         self.results = results
+    }
+    
+    public mutating func updateWithLastResults(results: [Result]) {
+        self.lastResults = results
     }
     
     public func isDone(forDate date: Date = Date()) -> Bool {
