@@ -142,7 +142,7 @@ public struct Activity: Persistable {
             return finishTime()
         }
         
-        return started.addingTimeInterval(timing.duration.seconds())
+        return started.addingTimeInterval(timing.duration.seconds() - (timeToSave() * 60))
     }
     
     public func timeToSave() -> Double {

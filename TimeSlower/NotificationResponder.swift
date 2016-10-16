@@ -36,7 +36,7 @@ internal final class NotificationResponder: NSObject {
         return Constants.finishCategory
     }
     
-    func finishCategory() -> UNNotificationCategory {
+    private func finishCategory() -> UNNotificationCategory {
         let finishAction = UNNotificationAction(identifier: Constants.finishActionIdentifier, title: Constants.finishActionTitle, options: [])
         let cancelAction = UNNotificationAction(identifier: Constants.finishCancelIdentifier, title: Constants.finishCancelTitle, options: [])
         let category = UNNotificationCategory(identifier: Constants.finishCategory, actions: [finishAction, cancelAction], intentIdentifiers: [], options: [])

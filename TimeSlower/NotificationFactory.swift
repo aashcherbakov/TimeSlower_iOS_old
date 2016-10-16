@@ -46,7 +46,7 @@ internal struct NotificationFactory {
 internal struct StartNotification: LocalNotification {
     
     let activity: Activity
-    let repeats = false
+    let repeats = true
     
     init(withActivity activity: Activity) {
         self.activity = activity
@@ -69,7 +69,7 @@ internal struct StartNotification: LocalNotification {
 internal struct FinishNotification: LocalNotification {
     
     let activity: Activity
-    let repeats = true
+    let repeats = false
 
     init(withActivity activity: Activity) {
         self.activity = activity

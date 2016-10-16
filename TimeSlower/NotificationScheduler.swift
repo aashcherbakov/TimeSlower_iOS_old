@@ -65,12 +65,15 @@ internal struct NotificationScheduler {
     
     private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
         let trigger = notificationTrigger(forDate: notification.date(), repeats: notification.repeats)
+        print(trigger)
         let content = contentForNotification(notification: notification, category: category)
+        print(content)
         return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     }
     
     private func notificationTrigger(forDate date: Date, repeats: Bool) -> UNCalendarNotificationTrigger {
         let components = dateComponents(fromDate: date)
+        print(components)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
         return trigger
     }
@@ -88,14 +91,8 @@ internal struct NotificationScheduler {
     private func dateComponents(fromDate date: Date) -> DateComponents {
         let calendar = Calendar.current
         let components = calendar.dateComponents(in: .current, from: date)
-        return DateComponents(
-            calendar: calendar,
-            timeZone: .current,
-            month: components.month,
-            day: components.day,
-            hour: components.hour,
-            minute: components.minute,
-            weekday: components.weekday)
+        return DateComponents(calendar: calendar, timeZone: components.timeZone, era: components.era, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute, second: components.second, nanosecond: components.nanosecond, weekday: components.weekday, weekdayOrdinal: components.weekdayOrdinal, quarter: components.quarter, weekOfMonth: components.weekOfMonth, weekOfYear: components.weekOfYear, yearForWeekOfYear: components.yearForWeekOfYear)
+        
     }
     
 }

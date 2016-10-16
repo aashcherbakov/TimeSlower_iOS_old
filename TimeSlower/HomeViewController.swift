@@ -35,6 +35,7 @@ internal class HomeViewController: UIViewController {
     @IBOutlet fileprivate(set) weak var controlFlowButton: UIButton!
     @IBOutlet fileprivate(set) weak var closestActivityDisplay: ClosestActivityDisplay!
     @IBOutlet fileprivate(set) weak var circleSatsView: CircleStatsView!
+    @IBOutlet weak var closestActivityDisplayHeight: NSLayoutConstraint!
     
     var profile = MutableProperty<Profile?>(nil)
     var closestActivity = MutableProperty<Activity?>(nil)
