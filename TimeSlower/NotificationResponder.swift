@@ -13,6 +13,8 @@ import TimeSlowerKit
 internal final class NotificationResponder: NSObject {
     
     private let notificationCenter = UNUserNotificationCenter.current()
+    fileprivate let scheduler = ActivityScheduler()
+    fileprivate let dataStore = DataStore()
     
     fileprivate struct Constants {
         // Actions
@@ -41,14 +43,34 @@ internal final class NotificationResponder: NSObject {
         return category
     }
     
+    private func activityForId(identifier: String) -> Activity? {
+        let activity: Activity? = dataStore.retrieve(identifier)
+        return activity
+    }
+    
+    private func finishActivity(withIdentifier identifier: String) {
+        if let activity = activityForId(identifier: identifier) {
+            let _ = scheduler.finish(activity: activity)
+            // TODO: navigate to results page
+        }
+    }
+    
+    fileprivate func finishActivityFromResponse(response: UNNotificationResponse) {
+        let userInfo = response.notification.request.content.userInfo
+        if let resourceId = userInfo[kActivityResourceId] as? String {
+            finishActivity(withIdentifier: resourceId)
+        }
+    }
+    
 }
 
 extension NotificationResponder: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         if response.actionIdentifier == Constants.finishActionIdentifier {
-            
+            finishActivityFromResponse(response: response)
         }
         
     }
+
 }

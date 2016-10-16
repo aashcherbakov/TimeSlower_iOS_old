@@ -22,8 +22,14 @@ internal protocol LocalNotification {
     func title() -> String
     func body() -> String
     func date() -> Date
-    
+    func userInfo() -> [AnyHashable : Any]
     init(withActivity activity: Activity)
+}
+
+extension LocalNotification {
+    func userInfo() -> [AnyHashable : Any] {
+        return [ kActivityResourceId : activity.resourceId ]
+    }
 }
 
 internal struct NotificationFactory {
@@ -57,6 +63,7 @@ internal struct StartNotification: LocalNotification {
     func date() -> Date {
         return activity.nextActionTime()
     }
+    
 }
 
 internal struct FinishNotification: LocalNotification {
@@ -79,5 +86,6 @@ internal struct FinishNotification: LocalNotification {
     func date() -> Date {
         return activity.alarmTime()
     }
+    
 }
 

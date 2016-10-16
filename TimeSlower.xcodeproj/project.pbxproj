@@ -221,6 +221,7 @@
 		F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
 		F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
 		F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
+		F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932731DB3068100EA0274 /* ActivityCurator.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -557,6 +558,7 @@
 		F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
 		F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationResponder.swift; sourceTree = "<group>"; };
+		F0D932731DB3068100EA0274 /* ActivityCurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCurator.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 				89E9C7A41D934215008D18A0 /* ProfileStatsCalculatorTests.swift */,
 				F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */,
 				F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */,
+				F0D932731DB3068100EA0274 /* ActivityCurator.swift */,
 				89E9C7AB1D934215008D18A0 /* StaticDateFormatter.swift */,
 				F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */,
 				F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */,
@@ -2005,6 +2008,7 @@
 				89E9C7CB1D934215008D18A0 /* TimeMachine.swift in Sources */,
 				F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */,
 				89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */,
+				F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */,
 				89E9C7B61D934215008D18A0 /* Persistable.swift in Sources */,
 				89E9C78F1D9341F5008D18A0 /* Basis.swift in Sources */,
 				89E9C7921D9341F5008D18A0 /* DataStore.swift in Sources */,
