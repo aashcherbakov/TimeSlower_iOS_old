@@ -321,9 +321,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXv-ra-lsp" userLabel="Edit Button">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="tXv-ra-lsp" secondAttribute="height" multiplier="19:22" id="OE5-Hi-giP"/>
+                                        </constraints>
                                         <state key="normal" image="editIcon">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editActivity:" destination="jPD-Cn-qLc" eventType="touchUpInside" id="qa0-hh-oNx"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5J-YM-eae">
                                         <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="13"/>
@@ -334,9 +340,11 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="ZWL-YD-lpK" secondAttribute="bottom" constant="-5" id="5VM-RM-5Wm"/>
+                                    <constraint firstItem="tXv-ra-lsp" firstAttribute="top" secondItem="S19-6G-QYI" secondAttribute="top" id="7ca-rx-VOB"/>
                                     <constraint firstItem="U5J-YM-eae" firstAttribute="top" secondItem="ZWL-YD-lpK" secondAttribute="bottom" id="7tQ-vl-ILO"/>
+                                    <constraint firstAttribute="bottom" secondItem="tXv-ra-lsp" secondAttribute="bottom" id="E6w-Nw-8H4"/>
                                     <constraint firstAttribute="centerY" secondItem="F1p-0x-Qw7" secondAttribute="centerY" id="ETv-fA-F3I"/>
-                                    <constraint firstAttribute="trailing" secondItem="tXv-ra-lsp" secondAttribute="trailing" constant="20" id="FDN-XJ-Jcg"/>
+                                    <constraint firstAttribute="trailing" secondItem="tXv-ra-lsp" secondAttribute="trailing" constant="16" id="FDN-XJ-Jcg"/>
                                     <constraint firstAttribute="centerX" secondItem="ZWL-YD-lpK" secondAttribute="centerX" id="GLR-bK-KV1"/>
                                     <constraint firstItem="ZWL-YD-lpK" firstAttribute="centerX" secondItem="U5J-YM-eae" secondAttribute="centerX" id="IzO-HJ-vTS"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Zd0-5C-UuE"/>
@@ -515,6 +523,7 @@
                         <outlet property="graphViewHeight" destination="TCT-oI-gC3" id="VBw-Zm-zm2"/>
                         <outlet property="statsViewHeight" destination="Dmo-Jv-RGH" id="5x1-NY-a5K"/>
                         <outlet property="successLabel" destination="5Cs-zz-N5a" id="Z8W-fS-nbO"/>
+                        <outlet property="timerImage" destination="6RO-fy-R38" id="unW-S2-tHb"/>
                         <outlet property="timerLabel" destination="6ML-ob-mMP" id="lMY-Hu-y1H"/>
                         <outlet property="timerStatusLabel" destination="skd-8Y-IIC" id="M8i-uN-NR8"/>
                     </connections>

@@ -15,5 +15,18 @@ public struct ResultStore: EntityStore {
     public init(withCoreDataStack stack: CoreDataStack) {
         context = stack.managedObjectContext
     }
+    
+    public func resultsForActivity(activity: ActivityEntity) -> [ResultEntity] {
+        let request = NSFetchRequest<ResultEntity>(entityName: ResultEntity.entityName)
+        let predicate = NSPredicate(format: "activity.resourceId == %@", activity.resourceId)
+        request.predicate = predicate
+        
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            return []
+        }
+    }
 }
 

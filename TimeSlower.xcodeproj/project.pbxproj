@@ -196,7 +196,7 @@
 		F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF7A1DA06B9000CB79CB /* ProfileCountryCell.swift */; };
 		F0C2FF7D1DA06B9000CB79CB /* ProfileCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */; };
 		F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */; };
-		F0C2FF811DAE7C5900CB79CB /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */; };
+		F0C2FF811DAE7C5900CB79CB /* ActivityCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF801DAE7C5900CB79CB /* ActivityCreator.swift */; };
 		F0C2FF841DAED6C800CB79CB /* ActivityScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */; };
 		F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */; };
 		F0C2FF891DAED96E00CB79CB /* FakeActivityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */; };
@@ -532,7 +532,7 @@
 		F0C2FF7A1DA06B9000CB79CB /* ProfileCountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCountryCell.swift; sourceTree = "<group>"; };
 		F0C2FF7B1DA06B9000CB79CB /* ProfileCountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCountryCell.xib; sourceTree = "<group>"; };
 		F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHeight.swift; sourceTree = "<group>"; };
-		F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
+		F0C2FF801DAE7C5900CB79CB /* ActivityCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCreator.swift; sourceTree = "<group>"; };
 		F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityScheduler.swift; sourceTree = "<group>"; };
 		F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySchedulerTests.swift; sourceTree = "<group>"; };
 		F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeActivityFactory.swift; sourceTree = "<group>"; };
@@ -1444,7 +1444,7 @@
 				F07974B71D04CDD000B72168 /* Cells */,
 				F0EB8A3C1C4ABE0A009B974A /* Views */,
 				F06A00561CFC89E70056EE93 /* EditActivityViewController.swift */,
-				F0C2FF801DAE7C5900CB79CB /* ActivityStore.swift */,
+				F0C2FF801DAE7C5900CB79CB /* ActivityCreator.swift */,
 				F06A00581CFD040C0056EE93 /* EditActivityViewControllerTests.swift */,
 				F062A3451D29B16100933E09 /* ObservableControlCell.swift */,
 				F062A3471D29B19400933E09 /* ExpandableCellProtocol.swift */,
@@ -1900,7 +1900,7 @@
 				F0D71F361C793C4E00B8473C /* EditActivityBasisView.swift in Sources */,
 				89BDDEC81DA01EDB00703F5E /* ProfileEditingCell.swift in Sources */,
 				F0C2FF7F1DA0709600CB79CB /* ScreenHeight.swift in Sources */,
-				F0C2FF811DAE7C5900CB79CB /* ActivityStore.swift in Sources */,
+				F0C2FF811DAE7C5900CB79CB /* ActivityCreator.swift in Sources */,
 				F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,

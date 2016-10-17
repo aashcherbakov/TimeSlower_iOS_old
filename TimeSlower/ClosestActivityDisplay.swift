@@ -111,10 +111,9 @@ internal final class ClosestActivityDisplay: UIView {
     fileprivate func setupLabelsForActivity(_ activity: Activity?) {
         if let activity = activity {
             nameLabel.text = activity.name.uppercased()
-            titleLabel.text = activity.isGoingNow() ?
-                Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
-            statusLabel.text = activity.isGoingNow() ?
-                Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
+            
+            titleLabel.text = activity.isGoingNow() ? Constants.currentStatusCurrentActivity : Constants.currentStatusNextActivity
+            statusLabel.text = activity.isGoingNow() ? Constants.timingStatusFinishesIn : Constants.timingStatusStartsIn
         } else {
             nameLabel.text = "No activities for today 😳"
             titleLabel.text = ""

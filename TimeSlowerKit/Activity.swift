@@ -19,6 +19,7 @@ public struct Activity: Persistable {
     public let averageSuccess: Double
     private(set) public var results: Set<Result>
     private let timing: Timing
+    private let totalResults: Int
 
     private let timeMachine = TimeMachine()
     
@@ -38,6 +39,7 @@ public struct Activity: Persistable {
         self.notifications = notifications
         self.averageSuccess = 0
         self.results = results
+        self.totalResults = 0
         self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
     
@@ -49,7 +51,9 @@ public struct Activity: Persistable {
         timing: Timing,
         notifications: Bool,
         averageSuccess: Double,
-        resourceId: String, results: Set<Result>) {
+        resourceId: String,
+        results: Set<Result>,
+        totalResults: Int) {
         
         self.resourceId = resourceId
         self.name = name
@@ -60,6 +64,8 @@ public struct Activity: Persistable {
         self.averageSuccess = averageSuccess
         self.stats = stats
         self.results = results
+        self.totalResults = totalResults
+        
     }
     
     public func update(withTiming newTiming: Timing) -> Activity {
@@ -69,11 +75,19 @@ public struct Activity: Persistable {
             type: type,
             days: days,
             timing: newTiming,
-            notifications:
-            notifications,
+            notifications: notifications,
             averageSuccess: averageSuccess,
             resourceId: resourceId,
-            results: results)
+            results: results,
+            totalResults: totalResults)
+    }
+    
+    public func lastWeekResults() -> [Result] {
+        // TODO: find faster way to get last 7 results
+        let sortedResults = results.sorted { $0.finishTime.compare($1.finishTime) == .orderedDescending }
+        
+        let firstSeven = Array(sortedResults.prefix(7))
+        return firstSeven
     }
     
     public mutating func updateWithResults(results: Set<Result>) {

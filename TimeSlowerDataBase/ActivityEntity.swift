@@ -18,8 +18,10 @@ open class ActivityEntity: ManagedObject {
     @NSManaged open var stats: StatsData
     @NSManaged open var notifications: NSNumber
     @NSManaged open var results: NSSet
-    @NSManaged open var averageSuccess: NSNumber
     @NSManaged open var resourceId: String
+    
+    @NSManaged open var averageSuccess: NSNumber
+    @NSManaged open var totalResults: NSNumber
 
     public enum ActivityType: Int {
         case routine
@@ -55,7 +57,6 @@ extension ActivityEntity: ManagedObjectType {
         days = daysWithNumbers(configuration.days)
         timing = configuration.timing
         stats = configuration.stats
-        averageSuccess = NSNumber(value: configuration.averageSuccess)
         if resourceId == "" {
             resourceId = configuration.resourceId
         }
@@ -65,7 +66,26 @@ extension ActivityEntity: ManagedObjectType {
         // no parent needed
     }
     
+    public func addResult(result: ResultEntity) {
+        updateAverageSuccess(withResult: result)
+        incrementTotalResultsNumber()
+    }
+    
+    private func updateAverageSuccess(withResult result: ResultEntity) {
+        let totalSuccess = averageSuccess.doubleValue * totalResults.doubleValue
+        let updatedSuccess = totalSuccess + result.success.doubleValue
+        let newAverage = updatedSuccess / (totalResults.doubleValue + 1)
+        averageSuccess = NSNumber(value: newAverage)
+    }
+    
+    private func incrementTotalResultsNumber() {
+        totalResults = NSNumber(value: totalResults.intValue + 1)
+    }
+
+    
     // MARK: - Private
+    
+    
     
     fileprivate func daysWithNumbers(_ numbers: [Int]) -> [Day] {
         return numbers.map { (number) -> Day in

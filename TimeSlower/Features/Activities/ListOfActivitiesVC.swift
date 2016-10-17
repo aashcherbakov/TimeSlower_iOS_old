@@ -116,13 +116,13 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
 // MARK: - Table view data source
 extension ListOfActivitiesVC: UITableViewDelegate {
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? StandardActivityCell {
-            let editActivityVC: EditActivityVC = ControllerFactory.createController()
-//            editActivityVC.activity = cell.activity
-            navigationController?.pushViewController(editActivityVC, animated: true)
+            
+            let statsVC: ActivityStatsVC = ControllerFactory.createController()
+            statsVC.activity = cell.activity
+            navigationController?.pushViewController(statsVC, animated: true)
         }
     }
 

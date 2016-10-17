@@ -11,7 +11,7 @@ import Foundation
 public struct ActivityScheduler {
     
     private let dataStore: DataStore
-    
+
     /// Initializer
     ///
     /// - parameter dataStore: Default value = DataStore()
@@ -78,6 +78,7 @@ public struct ActivityScheduler {
     public func start(activity: Activity, time: Date = Date()) -> Activity {
         let newTiming = activity.updateTiming(withManuallyStarted: time)
         let newActivity = activity.update(withTiming: newTiming)
+        
         return dataStore.update(newActivity)
     }
     
@@ -93,6 +94,10 @@ public struct ActivityScheduler {
         let newActivity = activity.update(withTiming: newTiming)
         let updatedActivity = dataStore.update(newActivity)
         dataStore.create(result, withParent: updatedActivity)
+        
+        if let activityWithResults: Activity = dataStore.retrieve(updatedActivity.resourceId) {
+            return activityWithResults
+        }
         return updatedActivity
     }
     

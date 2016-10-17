@@ -21,6 +21,7 @@ open class ResultEntity: ManagedObject {
     @NSManaged open var date: Date
     @NSManaged open var activity: ActivityEntity
     @NSManaged open var resourceId: String
+    
 }
 
 extension ResultEntity: ManagedObjectType {
@@ -59,6 +60,8 @@ extension ResultEntity: ManagedObjectType {
         if resourceId == "" {
             resourceId = configuration.resourceId
         }
+        
+        activity.addResult(result: self)
     }
     
     public func setParent(_ parent: ManagedObject?) {
@@ -66,7 +69,6 @@ extension ResultEntity: ManagedObjectType {
             fatalError("Parent should be ActivityEntity")
         }
         
-        activity.results.adding(self)
         self.activity = activity
     }
 }
