@@ -156,6 +156,7 @@ internal class HomeViewController: UIViewController {
     private func showMenue() {
         let menuVC: MenuVC = ControllerFactory.createController()
         menuVC.transitioningDelegate = transitionManager
+        menuVC.profile = profile.value
         transitionManager.menuViewController = menuVC
         present(menuVC, animated: true, completion: nil)
     }

@@ -37,7 +37,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var avatarBackground: UIView!
     
-    fileprivate var profile: Profile?
+    var profile: Profile?
     
     // MARK: - Overridden
     
@@ -117,18 +117,13 @@ class MenuVC: UIViewController {
     // MARK: - Design
 
     fileprivate func setupDesign() {
-//        guard let profile = CoreDataStack.sharedInstance.fetchProfile() else {
-//            return
-//        }
-//        
-//        self.profile = profile
-//        nameLabel.text = profile.name.uppercased()
-//        countryLabel.text = profile.country.capitalized
-//        
-//        if let photoData = profile.photo {
-//            avatarImageView.image = UIImage(data: photoData)
-//        }
-
+        guard let profile = profile else {
+            return
+        }
+        
+        nameLabel.text = profile.name.uppercased()
+        countryLabel.text = profile.country.capitalized
+        avatarImageView.image = profile.photo
     }
 
     fileprivate func setupDefaultConstraints() {

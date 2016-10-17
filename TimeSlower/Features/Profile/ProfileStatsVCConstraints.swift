@@ -25,23 +25,16 @@ class ProfileStatsVCConstraints: UIViewController {
     @IBOutlet weak var innerBlockHeight: NSLayoutConstraint!
     
     
-    @IBOutlet weak var newActivityButton: UIButton!
-
     override func updateViewConstraints() {
         super.updateViewConstraints()
         setupDefaultConstraints()
-        customizeNewActivityButton()
     }
     
     func setupDefaultConstraints() {
         lifetimeBalanceHeight.constant = kUsableViewHeight * Constants.lifetimeBalanceScale
         circlesViewHeight.constant = kUsableViewHeight * Constants.circlesViewScale
-        buttonVerticalOffset.constant = kUsableViewHeight * Constants.buttonOffsetScale
         redBackgroundHeight.constant = UIScreen.main.bounds.height * Constants.redBackgroundScale
         innerBlockHeight.constant = kUsableViewHeight * Constants.innerClockBlockScale
     }
     
-    func customizeNewActivityButton() {
-        newActivityButton.layer.cornerRadius = newActivityButton.bounds.height / 2
-    }
 }
