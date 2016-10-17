@@ -17,12 +17,14 @@ public struct Activity: Persistable {
     public let stats: Stats
     public let notifications: Bool
     public let averageSuccess: Double
+    public let totalTimeSaved: Double
+    public let totalResults: Int
     private(set) public var results: Set<Result>
     private let timing: Timing
-    private let totalResults: Int
 
     private let timeMachine = TimeMachine()
     
+    /// Initializer for creating activity from scratch
     public init(withLifetimeDays
         lifetimeDays: Int,
         name: String,
@@ -40,9 +42,11 @@ public struct Activity: Persistable {
         self.averageSuccess = 0
         self.results = results
         self.totalResults = 0
+        self.totalTimeSaved = 0
         self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
     }
     
+    /// Initializer for converting activity from Data Base
     public init(withStats
         stats: Stats,
         name: String,
@@ -53,7 +57,8 @@ public struct Activity: Persistable {
         averageSuccess: Double,
         resourceId: String,
         results: Set<Result>,
-        totalResults: Int) {
+        totalResults: Int,
+        totalTimeSaved: Double) {
         
         self.resourceId = resourceId
         self.name = name
@@ -65,7 +70,7 @@ public struct Activity: Persistable {
         self.stats = stats
         self.results = results
         self.totalResults = totalResults
-        
+        self.totalTimeSaved = totalTimeSaved
     }
     
     public func update(withTiming newTiming: Timing) -> Activity {
@@ -79,7 +84,8 @@ public struct Activity: Persistable {
             averageSuccess: averageSuccess,
             resourceId: resourceId,
             results: results,
-            totalResults: totalResults)
+            totalResults: totalResults,
+            totalTimeSaved: totalTimeSaved)
     }
     
     public func lastWeekResults() -> [Result] {

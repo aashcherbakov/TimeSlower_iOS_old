@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeSlower/Features/Activities/ActivityStatsVC.swift"
-            timestampString = "498360697.295184"
+            timestampString = "498408816.925577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "setupTimerCountdown()"
             landmarkType = "7">
          </BreakpointContent>

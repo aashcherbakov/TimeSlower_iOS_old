@@ -20,10 +20,8 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     @IBOutlet weak var userGreatingLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var avatarFrameView: UIView!
-    
     @IBOutlet weak var totalHoursSavedLabel: UILabel!
     @IBOutlet weak var totalHoursSpentLabel: UILabel!
-    
     @IBOutlet weak var routinesCircle: CircleProgress!
     @IBOutlet weak var goalsCircle: CircleProgress!
     

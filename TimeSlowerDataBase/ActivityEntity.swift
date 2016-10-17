@@ -22,6 +22,7 @@ open class ActivityEntity: ManagedObject {
     
     @NSManaged open var averageSuccess: NSNumber
     @NSManaged open var totalResults: NSNumber
+    @NSManaged open var totalTimeSaved: NSNumber
 
     public enum ActivityType: Int {
         case routine
@@ -67,11 +68,18 @@ extension ActivityEntity: ManagedObjectType {
     }
     
     public func addResult(result: ResultEntity) {
-        updateAverageSuccess(withResult: result)
+        updateAverageSuccess(result)
+        updateTotalTimeSaved(result)
         incrementTotalResultsNumber()
     }
     
-    private func updateAverageSuccess(withResult result: ResultEntity) {
+    private func updateTotalTimeSaved(_ result: ResultEntity) {
+        guard let newSavedTime = result.savedTime else { return }
+        let newValue = totalTimeSaved.doubleValue + newSavedTime.doubleValue
+        totalTimeSaved = NSNumber(value: newValue)
+    }
+    
+    private func updateAverageSuccess(_ result: ResultEntity) {
         let totalSuccess = averageSuccess.doubleValue * totalResults.doubleValue
         let updatedSuccess = totalSuccess + result.success.doubleValue
         let newAverage = updatedSuccess / (totalResults.doubleValue + 1)

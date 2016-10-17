@@ -32,7 +32,9 @@ internal struct ActivityConverter: PersistableConverter {
             notifications: entity.notifications.boolValue,
             averageSuccess: entity.averageSuccess.doubleValue,
             resourceId: entity.resourceId,
-            results: [], totalResults: entity.totalResults.intValue)
+            results: [],
+            totalResults: entity.totalResults.intValue,
+            totalTimeSaved: entity.totalTimeSaved.doubleValue)
         
         let results = resultsFromEntities(resultEntities: entity.results as? Set<ResultEntity>, activity: activity)
         activity.updateWithResults(results: results)
