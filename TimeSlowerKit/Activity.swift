@@ -137,8 +137,19 @@ public struct Activity: Persistable {
         return timeMachine.updatedTime(factFinishTime, forDate: date)
     }
     
+    public func alarmTime(inDate date: Date = Date()) -> Date {
+        guard let started = timing.manuallyStarted else {
+            return finishTime()
+        }
+        
+        let durationInSeconds = timing.duration.seconds()
+        let timeToSaveInSeconds = timeToSave() * 60
+        let timeInterval = durationInSeconds - timeToSaveInSeconds
+        return started.addingTimeInterval(timeInterval)
+    }
+    
     public func timeToSave() -> Double {
-        return timing.timeToSave
+        return Double(timing.timeToSave)
     }
     
     public func updateTiming(withManuallyStarted started: Date?) -> Timing {

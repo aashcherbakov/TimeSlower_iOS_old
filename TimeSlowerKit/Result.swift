@@ -105,7 +105,7 @@ public struct Result: Persistable {
         let successCalculator = SuccessCalculator().successForActivityType(activityType)
         let duration = Double(timing.duration.minutes())
         let goal = timing.timeToSave
-        return successCalculator(startTime, finishTime, duration, goal)
+        return successCalculator(startTime, finishTime, duration, Double(goal))
     }
     
     public static func factSavedTimeForActivity(_ activity: Activity, factDuration: Double) -> Double {

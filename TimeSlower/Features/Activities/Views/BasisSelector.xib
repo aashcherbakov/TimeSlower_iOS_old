@@ -19,10 +19,10 @@
             <rect key="frame" x="0.0" y="0.0" width="424" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kD-gP-u7l" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7kD-gP-u7l" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" priority="750" constant="126.5" id="caH-NZ-zz2"/>
+                        <constraint firstAttribute="width" priority="750" constant="100" id="caH-NZ-zz2"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOB-KD-v5i" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
@@ -34,7 +34,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpe-KC-LLQ" customClass="BasisOptionView" customModule="TimeSlower" customModuleProvider="target">
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" priority="750" constant="127" id="lE0-wr-8Rq"/>
+                        <constraint firstAttribute="width" priority="760" constant="127" id="lE0-wr-8Rq"/>
                     </constraints>
                 </view>
             </subviews>
@@ -42,15 +42,16 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="eOB-KD-v5i" secondAttribute="bottom" id="0Cj-jV-Rrs"/>
                 <constraint firstItem="eOB-KD-v5i" firstAttribute="leading" secondItem="Vpe-KC-LLQ" secondAttribute="trailing" constant="8" id="Ays-1g-fus"/>
+                <constraint firstItem="Vpe-KC-LLQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" priority="750" id="CHx-3E-f3D"/>
                 <constraint firstItem="Vpe-KC-LLQ" firstAttribute="leading" secondItem="7kD-gP-u7l" secondAttribute="trailing" constant="8" id="GoG-2J-6X9"/>
                 <constraint firstAttribute="bottom" secondItem="Vpe-KC-LLQ" secondAttribute="bottom" id="HFA-SX-pTy"/>
                 <constraint firstItem="eOB-KD-v5i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hu0-6a-E9Q"/>
                 <constraint firstItem="Vpe-KC-LLQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IGP-UH-Mpq"/>
                 <constraint firstAttribute="bottom" secondItem="7kD-gP-u7l" secondAttribute="bottom" id="NYt-gk-ztB"/>
                 <constraint firstItem="7kD-gP-u7l" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UAf-bo-5k6"/>
-                <constraint firstItem="7kD-gP-u7l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="20" id="e9M-a2-I9y"/>
+                <constraint firstItem="7kD-gP-u7l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="20" id="e9M-a2-I9y"/>
                 <constraint firstItem="7kD-gP-u7l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ms9-Do-ztj"/>
-                <constraint firstAttribute="trailing" secondItem="eOB-KD-v5i" secondAttribute="trailing" constant="8" id="wAA-GV-uXo"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eOB-KD-v5i" secondAttribute="trailing" id="wAA-GV-uXo"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

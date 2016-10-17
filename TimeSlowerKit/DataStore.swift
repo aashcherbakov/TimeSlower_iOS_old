@@ -56,9 +56,8 @@ public struct DataStore {
         return adapter.retrieveObjects(key)
     }
     
-    public func activities(forDate date: Date, type: ActivityType) -> [Activity] {
+    public func activities(forDate date: Date?, type: ActivityType) -> [Activity] {
         let adapter = ActivityAdapter(withCoreDataStack: coreDataStack)
         return adapter.activities(forDate: date, type: type)
     }
-    
 }

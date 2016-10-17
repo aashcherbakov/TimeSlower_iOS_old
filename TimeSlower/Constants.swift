@@ -27,4 +27,5 @@ let kActivityStoryboard = "Activities"
 
 let kNumberOfDaysInWeek = 7
 
+let kActivityResourceId = "resourceId"
 

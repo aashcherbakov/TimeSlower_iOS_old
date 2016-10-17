@@ -81,4 +81,14 @@ class ActivityTests: BaseDataStoreTest {
         let tuesday = shortTimeFormatter.date(from: "10/11/2016, 10:00 AM")!
         XCTAssertEqual(sut.nextActionDay(fromDate: monday), tuesday)
     }
+    
+    func test_alarmTime() {
+        let tuesday = shortTimeFormatter.date(from: "10/11/2016, 10:00 AM")!
+        let alarmTime = shortTimeFormatter.date(from: "10/11/2016, 10:30 AM")!
+        let timing = sut.updateTiming(withManuallyStarted: tuesday)
+        let startedActivity = sut.update(withTiming: timing)
+        sut = startedActivity
+        XCTAssertEqual(sut.alarmTime(inDate: tuesday), alarmTime)
+        XCTAssertEqual(timing.manuallyStarted, tuesday)
+    }
 }

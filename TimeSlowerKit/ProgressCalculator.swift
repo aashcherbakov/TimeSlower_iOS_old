@@ -48,22 +48,17 @@ public struct ProgressCalculator {
     }
     
     private func routineProgressFromResults(results: [Result], plannedToSave: Double) -> RoutineProgress {
-        var totalSuccess = 0.0
         var savedTime = 0.0
         
         for result in results {
-            totalSuccess += result.success
             if let saved = result.savedTime {
                 savedTime += saved
             }
         }
         
-        var averageSuccess = totalSuccess
-        if results.count > 0 {
-            averageSuccess = totalSuccess / Double(results.count)
-        }
+        let totalSuccess = savedTime / plannedToSave * 100
         
-        return RoutineProgress(success: averageSuccess, savedTime: savedTime, plannedTime: plannedToSave)
+        return RoutineProgress(success: totalSuccess, savedTime: savedTime, plannedTime: plannedToSave)
     }
     
     private func resultsForToday(results: [Result], activities: [Activity]) -> [Result] {

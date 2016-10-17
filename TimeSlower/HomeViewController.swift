@@ -29,11 +29,13 @@ internal class HomeViewController: UIViewController {
     let activityListTransitionManager = ListTransitionManager()
     let progressCalculator = ProgressCalculator()
     let scheduler = ActivityScheduler()
+    let notificationScheduler = NotificationScheduler()
 
     @IBOutlet fileprivate(set) weak var controlFlowButtonHeight: NSLayoutConstraint!
     @IBOutlet fileprivate(set) weak var controlFlowButton: UIButton!
     @IBOutlet fileprivate(set) weak var closestActivityDisplay: ClosestActivityDisplay!
     @IBOutlet fileprivate(set) weak var circleSatsView: CircleStatsView!
+    @IBOutlet weak var closestActivityDisplayHeight: NSLayoutConstraint!
     
     var profile = MutableProperty<Profile?>(nil)
     var closestActivity = MutableProperty<Activity?>(nil)
@@ -42,6 +44,7 @@ internal class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
+        // TODO: implement delegate to avoid reloading data on each appearance
         setupData()
         setupDesign()
     }
@@ -124,10 +127,12 @@ internal class HomeViewController: UIViewController {
     private func startActivity(_ activity: Activity?) {
         guard let activity = activity else { return }
         
-        closestActivity.value = scheduler.start(activity: activity)
-        
+        let startedActivity = scheduler.start(activity: activity)
+        notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish)
+        closestActivity.value = startedActivity
         setupClosestActvityDisplay()
         setupControlFlowButton()
+        
     }
     
     private func finishActivity(_ activity: Activity?) {

@@ -57,7 +57,6 @@ struct ControllerFactory {
     fileprivate static func storyboardId<T>(forType type: T) -> String? {
         switch type {
         case is MenuVC.Type: return Constants.menu
-        case is MainScreenVC.Type: return Constants.main
         case is EditActivityVC.Type: return Constants.activities
         case is ListOfActivitiesVC.Type: return Constants.activities
         case is ProfileEditingVC.Type: return Constants.profile

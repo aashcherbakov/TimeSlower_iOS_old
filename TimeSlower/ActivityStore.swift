@@ -9,7 +9,7 @@
 import Foundation
 import TimeSlowerKit
 
-internal struct ActivityStore {
+internal final class ActivityCreator {
     
     private let dataStore: DataStore
     
@@ -70,10 +70,11 @@ internal struct ActivityStore {
     
     private func timing(withStartTime startTime: Date, duration: Endurance, timeToSave: Int) -> Timing {
         let alarmTime = alarmTimeFromStart(startTime: startTime, duration: duration, timeToSave: timeToSave)
+        
         let timing = Timing(
             withDuration: duration,
             startTime: startTime,
-            timeToSave: Double(timeToSave),
+            timeToSave: timeToSave,
             alarmTime: alarmTime)
         return timing
     }

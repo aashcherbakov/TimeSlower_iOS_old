@@ -79,9 +79,6 @@
 		F009AF1B1BDADE19007F38A9 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */; };
 		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; };
 		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; };
-		F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */; };
-		F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF271BDAE571007F38A9 /* MainScreenVC.swift */; };
-		F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */; };
 		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
 		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; };
 		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; };
@@ -220,6 +217,11 @@
 		F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */; };
 		F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */; };
 		F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */; };
+		F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */; };
+		F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
+		F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
+		F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
+		F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932731DB3068100EA0274 /* ActivityCurator.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -410,9 +412,6 @@
 		F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Regular.ttf"; path = "Fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Semibold.ttf"; path = "Fonts/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
 		F009AF211BDAE39F007F38A9 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuVC.swift; path = Features/Menu/ViewControllers/MenuVC.swift; sourceTree = "<group>"; };
-		F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleStatsVC.swift; path = Features/Stats/CircleStatsVC.swift; sourceTree = "<group>"; };
-		F009AF271BDAE571007F38A9 /* MainScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenVC.swift; path = Features/Stats/MainScreenVC.swift; sourceTree = "<group>"; };
-		F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenVCConstraints.swift; path = Features/Stats/MainScreenVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Double+Extension.swift"; sourceTree = "<group>"; };
 		F009AF321BDB0E1D007F38A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -555,6 +554,11 @@
 		F0D8F5BF1C384FE600D41C78 /* TextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldView.swift; sourceTree = "<group>"; };
 		F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCalculator.swift; sourceTree = "<group>"; };
 		F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCalculatorTests.swift; sourceTree = "<group>"; };
+		F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListOfActivitiesDataSource.swift; sourceTree = "<group>"; };
+		F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
+		F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationResponder.swift; sourceTree = "<group>"; };
+		F0D932731DB3068100EA0274 /* ActivityCurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCurator.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -837,6 +841,7 @@
 			children = (
 				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
+				F0D932701DB2F3ED00EA0274 /* LocalNotifications */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
 				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
@@ -879,6 +884,7 @@
 				89E9C7A41D934215008D18A0 /* ProfileStatsCalculatorTests.swift */,
 				F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */,
 				F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */,
+				F0D932731DB3068100EA0274 /* ActivityCurator.swift */,
 				89E9C7AB1D934215008D18A0 /* StaticDateFormatter.swift */,
 				F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */,
 				F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */,
@@ -980,7 +986,6 @@
 				F0A5772E1D4D5E1200D2039A /* HomeViewController.swift */,
 				F0A577391D4ED1FF00D2039A /* ListTransitionManager.swift */,
 				F0A577341D4EC1A900D2039A /* Views */,
-				F0C2FF821DAECECB00CB79CB /* Unused */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1025,6 +1030,7 @@
 				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
 				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
 				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
+				F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */,
 				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
 			);
 			name = ViewControllers;
@@ -1190,16 +1196,6 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		F0C2FF821DAECECB00CB79CB /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				F009AF251BDAE571007F38A9 /* CircleStatsVC.swift */,
-				F009AF271BDAE571007F38A9 /* MainScreenVC.swift */,
-				F009AF281BDAE571007F38A9 /* MainScreenVCConstraints.swift */,
-			);
-			name = Unused;
-			sourceTree = "<group>";
-		};
 		F0CDAA0A1D90C69F0090D7E3 /* TimeSlowerDataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1324,6 +1320,16 @@
 				F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		F0D932701DB2F3ED00EA0274 /* LocalNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
+				F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */,
+				F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */,
+			);
+			name = LocalNotifications;
 			sourceTree = "<group>";
 		};
 		F0DB8A211D8F6F4900B6E176 /* JVFloatLabeledTextField */ = {
@@ -1875,12 +1881,12 @@
 				F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */,
 				F0A613681D347E060051743C /* MotivationViewController.swift in Sources */,
 				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
-				F009AF2B1BDAE571007F38A9 /* MainScreenVC.swift in Sources */,
 				F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */,
 				F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */,
 				89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */,
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
+				F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
@@ -1908,7 +1914,6 @@
 				F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */,
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
-				F009AF291BDAE571007F38A9 /* CircleStatsVC.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
@@ -1916,6 +1921,7 @@
 				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
+				F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
@@ -1924,6 +1930,8 @@
 				F062A3461D29B16100933E09 /* ObservableControlCell.swift in Sources */,
 				F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */,
 				F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */,
+				F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */,
+				F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
@@ -1934,7 +1942,6 @@
 				F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */,
 				F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
-				F009AF2C1BDAE571007F38A9 /* MainScreenVCConstraints.swift in Sources */,
 				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,
 				F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */,
 				F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */,
@@ -2001,6 +2008,7 @@
 				89E9C7CB1D934215008D18A0 /* TimeMachine.swift in Sources */,
 				F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */,
 				89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */,
+				F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */,
 				89E9C7B61D934215008D18A0 /* Persistable.swift in Sources */,
 				89E9C78F1D9341F5008D18A0 /* Basis.swift in Sources */,
 				89E9C7921D9341F5008D18A0 /* DataStore.swift in Sources */,

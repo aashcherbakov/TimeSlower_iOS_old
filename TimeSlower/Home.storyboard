@@ -85,7 +85,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvx-1f-qoA" userLabel="Next Activity block" customClass="ClosestActivityDisplay" customModule="TimeSlower" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="107" id="bEE-cJ-0iY"/>
+                                    <constraint firstAttribute="height" constant="107" id="bEE-cJ-0iY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -128,6 +128,7 @@
                     <connections>
                         <outlet property="circleSatsView" destination="ZoM-qx-ewP" id="JKS-Sk-MZo"/>
                         <outlet property="closestActivityDisplay" destination="yvx-1f-qoA" id="DfU-IY-P27"/>
+                        <outlet property="closestActivityDisplayHeight" destination="bEE-cJ-0iY" id="g8L-TZ-MRp"/>
                         <outlet property="controlFlowButton" destination="gix-zg-sb7" id="cMl-gP-UGK"/>
                         <outlet property="controlFlowButtonHeight" destination="4XP-xJ-hUO" id="kpD-t3-aDd"/>
                     </connections>
