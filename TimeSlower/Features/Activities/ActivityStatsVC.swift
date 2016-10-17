@@ -102,6 +102,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
             setupTimerCountdown()
         } else if sender.titleLabel?.text == Constants.finishButtonTitle {
             self.activity = scheduler.finish(activity: activity)
+            progressBarReady = false
             clearTimer()
             setup()
             drawProgressView()

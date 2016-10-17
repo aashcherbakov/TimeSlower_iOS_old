@@ -20,24 +20,20 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     @IBOutlet weak var userGreatingLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var avatarFrameView: UIView!
+    @IBOutlet weak var savedTimeLabel: UILabel!
+    @IBOutlet weak var successLabel: UILabel!
+    @IBOutlet weak var savedTimeCircle: CircleProgress!
+    @IBOutlet weak var successCircle: CircleProgress!
+    @IBOutlet weak var newActivityButton: UIButton!
     
-    @IBOutlet weak var totalHoursSavedLabel: UILabel!
-    @IBOutlet weak var totalHoursSpentLabel: UILabel!
-    
-    @IBOutlet weak var routinesCircle: CircleProgress!
-    @IBOutlet weak var goalsCircle: CircleProgress!
-    
+    private let dataStore = DataStore()
     
     var countdownTimer: MZTimerLabel!
-    var profile: Profile! {
-        didSet {
-            // TODO: overall stats
-//            profileStats = profile.timeStatsForPeriod(.Lifetime)
-        }
-    }
-    
-//    var profileStats: Profile.DailyStats!
+    var profile: Profile?
 
+    private var savedTime: Double = 0
+    private var success: Double = 0
+    private var expirationDate = Date()
     
     //MARK: - Lifecycle
     
@@ -45,57 +41,76 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
 
-        if profile != nil {
-            setup()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setup()
-    }
-    
-    func setup() {
-        setupLabels()
-        setupAvatarForm()
-        setupCircles()
+        setupData()
+        setupDesign()
         launchTimer()
     }
     
-    func setupCircles() {
-        for circle in [routinesCircle, goalsCircle] {
-//            circle?.progressBarWidth = 2
-            circle?.trackTintColor = UIColor.white
-            circle?.progressTintColor = UIColor.darkRed()
+    private func setupData() {
+        guard let profile = profile else {
+            return
         }
         
-        // TODO: here we should come from date of first use
-//        let routineProgress = profileStats.factSaved / (profileStats.plannedToSave / 60)
-//        routinesCircle.progress = routineProgress > 0 ? routineProgress : 0
-//        
-//        let goalProgress = profileStats.factSpent / (profileStats.plannedToSpend / 60)
-//        goalsCircle.progress = goalProgress > 0 ? goalProgress : 0
+        let allActivities = dataStore.activities(forDate: nil, type: .routine)
+        
+        savedTime = totalSaved(fromActivities: allActivities)
+        success = averageSuccess(fromActivities: allActivities)
+        expirationDate = profile.dateOfApproximateLifeEnd()
     }
     
-
-    func setupLabels() {
-        let format = ".0"
-//        totalHoursSavedLabel.text = "\(profileStats.factSaved.format(format))"
-//        totalHoursSpentLabel.text = "\(profileStats.factSpent.format(format))"
-//        userGreatingLabel.text = "Hello " + profile.name
-//        
-//        if let photoData = profile.photo {
-//            avatarImageView.image = UIImage(data: photoData)
-//        }
+    private func totalSaved(fromActivities activities: [Activity]) -> Double {
+        guard activities.count > 0 else { return 0 }
+        return activities.map { (activity) -> Double in
+            return activity.totalTimeSaved
+        }.reduce(0, +)
     }
     
-    func setupAvatarForm() {
+    private func averageSuccess(fromActivities activities: [Activity]) -> Double {
+        guard activities.count > 0 else { return 0 }
+        let totalSuccess = activities.map { (activity) -> Double in
+            return activity.averageSuccess
+            }.reduce(0, +)
+        
+        return totalSuccess / Double(activities.count)
+    }
+    
+    private func setupDesign() {
+        displaySavedTime()
+        displayAverageSuccess()
+        displayGreeting()
+        setupAvatarForm()
+        displayAvatar()
+    }
+    
+    private func displaySavedTime() {
+        savedTimeLabel.text = String(format: "%.1f", savedTime)
+        savedTimeCircle.thicknessRatio = 0.05
+        savedTimeCircle.updateProgress(CGFloat(success))
+    }
+    
+    private func displayAverageSuccess() {
+        successLabel.text = String(format: "%.1f", success) + "%"
+        successCircle.thicknessRatio = 0.05
+        successCircle.updateProgress(CGFloat(success))
+    }
+    
+    private func displayGreeting() {
+        guard let profile = profile else { return }
+        userGreatingLabel.text = "Hello \(profile.name)"
+    }
+    
+    private func displayAvatar() {
+        avatarImageView.image = profile?.photo
+    }
+    
+    private func setupAvatarForm() {
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
         avatarImageView.clipsToBounds = true
         avatarFrameView.layer.cornerRadius = avatarFrameView.bounds.height / 2
         avatarFrameView.layer.borderWidth = 1
         avatarFrameView.layer.borderColor = UIColor.darkRed().cgColor
     }
+
     
     //MARK: Action
     
@@ -140,13 +155,13 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     }
     
     func setupTimerCountdown() {
-//        countdownTimer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-//        countdownTimer.setCountDownTo(profile?.dateOfDeath)
-//        countdownTimer.resetTimerAfterFinish = false
-//        
-//        let timerSecondsToSet = profile?.dateOfDeath.timeIntervalSinceNow
-//        countdownTimer.timeFormat = NSString(format: "%.0f:mm:ss", round((timerSecondsToSet! - 60*60) / 60 / 60)) as String
-//        countdownTimer.start()
+        countdownTimer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
+        countdownTimer.setCountDownTo(expirationDate)
+        countdownTimer.resetTimerAfterFinish = false
+        
+        let timerSecondsToSet = expirationDate.timeIntervalSinceNow
+        countdownTimer.timeFormat = NSString(format: "%.0f:mm:ss", round((timerSecondsToSet - 60*60) / 60 / 60)) as String
+        countdownTimer.start()
     }
     
     func reloadTimer() {
@@ -156,7 +171,6 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
             setupTimerCountdown()
         }
     }
-    
 
     
     // MARK: - Navigation

@@ -47,11 +47,8 @@ public struct Result: Persistable {
         
         startTime = activity.startTime(inDate: factFinish)
         finishTime = factFinish
-        
         duration = timeMachine.minutesFromStart(startTime, toFinish: factFinish)
-        
         success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: factFinish)
-        
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)
         stringDate = dateFormatter.string(from: factFinish)
         

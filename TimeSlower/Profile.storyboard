@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -72,7 +72,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOn-Vy-0O2" userLabel="avatarFrame">
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-oe-rrS"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-oe-rrS"/>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -89,6 +89,7 @@
                                                     <constraint firstItem="GrO-A3-XIy" firstAttribute="centerY" secondItem="jOn-Vy-0O2" secondAttribute="centerY" constant="-0.5" id="3qJ-mg-uX6"/>
                                                     <constraint firstAttribute="centerX" secondItem="GrO-A3-XIy" secondAttribute="centerX" constant="-111" id="4s7-D5-t3Z"/>
                                                     <constraint firstAttribute="bottom" secondItem="jOn-Vy-0O2" secondAttribute="bottom" constant="8" id="DEh-2I-OFl"/>
+                                                    <constraint firstItem="GrO-A3-XIy" firstAttribute="centerX" secondItem="0BU-bz-OeU" secondAttribute="centerX" priority="750" id="I5L-XJ-R21"/>
                                                     <constraint firstAttribute="centerY" secondItem="GrO-A3-XIy" secondAttribute="centerY" id="IGN-7t-LMh"/>
                                                     <constraint firstItem="GrO-A3-XIy" firstAttribute="leading" secondItem="jOn-Vy-0O2" secondAttribute="trailing" constant="8" id="YCS-A6-ooE"/>
                                                     <constraint firstItem="GrO-A3-XIy" firstAttribute="leading" secondItem="jOn-Vy-0O2" secondAttribute="trailing" constant="8" id="aPN-4E-maX"/>
@@ -142,12 +143,12 @@
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUTINES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcW-Dm-jrH">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcW-Dm-jrH">
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hours saved" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgR-oH-8MP">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgR-oH-8MP">
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="0.56862745100000001" green="0.16078431369999999" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -176,17 +177,17 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvn-1F-sxY" userLabel="circleView" customClass="CircleProgress" customModule="TimeSlower" customModuleProvider="target">
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6532" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQd-6I-gqX">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQd-6I-gqX">
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="20"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOALS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4B-Mm-44k">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4B-Mm-44k">
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hours spent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkh-Vl-p8e">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="average" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkh-Vl-p8e">
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="0.56862745100000001" green="0.16078431369999999" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -225,19 +226,17 @@
                                             <constraint firstAttribute="trailing" secondItem="btH-rf-erk" secondAttribute="trailing" id="yQx-fT-Ze3"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSB-Bb-h4P">
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OmT-Q8-ug8">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="LkJ-I0-2ZU"/>
-                                            <constraint firstAttribute="width" constant="160" id="hTr-7x-brx"/>
+                                            <constraint firstAttribute="width" constant="160" id="ZcO-Lb-nR5"/>
+                                            <constraint firstAttribute="height" constant="48" id="az1-eg-4aX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="16"/>
-                                        <state key="normal" title="+   NEW ACTIVITY">
-                                            <color key="titleColor" red="0.93725490199999995" green="0.3294117647" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.93725490199999995" green="0.3294117647" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="+   NEW ACTIVITY" backgroundImage="whiteButtonBackground">
+                                            <color key="titleColor" red="0.83529411760000005" green="0.1960784314" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onNewActivityButton:" destination="Evs-iJ-fF4" eventType="touchUpInside" id="Ue7-uB-K53"/>
+                                            <action selector="onNewActivityButton:" destination="Evs-iJ-fF4" eventType="touchUpInside" id="sid-Xr-U54"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -251,9 +250,9 @@
                                     <constraint firstItem="KgS-kM-has" firstAttribute="top" secondItem="zZf-UR-Dny" secondAttribute="top" id="Nl1-Jq-gzP"/>
                                     <constraint firstAttribute="trailing" secondItem="8gt-Lr-MdD" secondAttribute="trailing" id="RU8-n7-CYL"/>
                                     <constraint firstAttribute="trailing" secondItem="Cn1-aB-AFx" secondAttribute="trailing" id="RUS-tz-Om5"/>
-                                    <constraint firstAttribute="centerX" secondItem="qSB-Bb-h4P" secondAttribute="centerX" id="TgW-MB-Az3"/>
+                                    <constraint firstItem="OmT-Q8-ug8" firstAttribute="centerX" secondItem="8gt-Lr-MdD" secondAttribute="centerX" id="Xi1-8V-5uH"/>
                                     <constraint firstAttribute="trailing" secondItem="KgS-kM-has" secondAttribute="trailing" id="bMC-G7-KQD"/>
-                                    <constraint firstItem="qSB-Bb-h4P" firstAttribute="top" secondItem="Cn1-aB-AFx" secondAttribute="bottom" constant="25" id="cXU-zB-xMU"/>
+                                    <constraint firstItem="OmT-Q8-ug8" firstAttribute="top" secondItem="Cn1-aB-AFx" secondAttribute="bottom" constant="25" id="ciw-3Z-6eD"/>
                                     <constraint firstAttribute="bottom" secondItem="8gt-Lr-MdD" secondAttribute="bottom" id="dm7-1q-teH"/>
                                     <constraint firstItem="Cn1-aB-AFx" firstAttribute="leading" secondItem="zZf-UR-Dny" secondAttribute="leading" id="fcv-5E-Ha4"/>
                                     <constraint firstItem="8gt-Lr-MdD" firstAttribute="leading" secondItem="zZf-UR-Dny" secondAttribute="leading" id="gZk-nK-qrD"/>
@@ -271,7 +270,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Based on average life length of male in USA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIz-Hv-1oU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Based on average life length in USA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIz-Hv-1oU">
                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -343,17 +342,16 @@
                     <connections>
                         <outlet property="avatarFrameView" destination="jOn-Vy-0O2" id="6Ga-HV-lJ5"/>
                         <outlet property="avatarImageView" destination="9rh-oe-rrS" id="TS0-PH-cOx"/>
-                        <outlet property="buttonVerticalOffset" destination="cXU-zB-xMU" id="YkU-Xs-yiE"/>
                         <outlet property="circlesViewHeight" destination="1Bx-cO-k6i" id="WEL-Kf-k8d"/>
-                        <outlet property="goalsCircle" destination="lvn-1F-sxY" id="s2F-Ra-k4Z"/>
                         <outlet property="innerBlockHeight" destination="hzd-JN-XP0" id="2rd-e7-T90"/>
                         <outlet property="lifetimeBalanceHeight" destination="oWo-LH-3lx" id="dAy-jV-m8c"/>
-                        <outlet property="newActivityButton" destination="qSB-Bb-h4P" id="Her-Ek-BoW"/>
+                        <outlet property="newActivityButton" destination="OmT-Q8-ug8" id="4bd-uX-ofy"/>
                         <outlet property="redBackgroundHeight" destination="jhp-8E-p6C" id="upc-hX-tAp"/>
-                        <outlet property="routinesCircle" destination="FQs-cF-5xy" id="gfL-cA-cfV"/>
+                        <outlet property="savedTimeCircle" destination="FQs-cF-5xy" id="jrQ-KT-f1Y"/>
+                        <outlet property="savedTimeLabel" destination="wm9-O4-ail" id="nej-pl-4w6"/>
+                        <outlet property="successCircle" destination="lvn-1F-sxY" id="8M0-6b-3XG"/>
+                        <outlet property="successLabel" destination="nQd-6I-gqX" id="vkh-G6-4Vu"/>
                         <outlet property="timerLabel" destination="SQb-9o-qfD" id="64z-xw-rgQ"/>
-                        <outlet property="totalHoursSavedLabel" destination="wm9-O4-ail" id="VHY-BT-fJo"/>
-                        <outlet property="totalHoursSpentLabel" destination="nQd-6I-gqX" id="kKw-51-Ne0"/>
                         <outlet property="userGreatingLabel" destination="GrO-A3-XIy" id="7eW-ca-psc"/>
                     </connections>
                 </viewController>
@@ -524,6 +522,7 @@
         <image name="editIconWhite" width="18" height="18"/>
         <image name="infoIcon" width="10" height="10"/>
         <image name="okButton" width="50" height="50"/>
+        <image name="whiteButtonBackground" width="375" height="494"/>
         <image name="whiteCurve" width="320" height="30"/>
     </resources>
 </document>
