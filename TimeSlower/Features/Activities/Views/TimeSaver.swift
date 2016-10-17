@@ -90,6 +90,10 @@ class TimeSaver: UIView {
     }
     
     private func minumumSavingForDuration(_ duration: Endurance) -> Int {
+        if let existingValue = selectedValue.value {
+            return existingValue.minutes()
+        }
+        
         let suggestedSaving = duration.value / 4
         let minimum = minSaving(forPeriod: duration.period)
         

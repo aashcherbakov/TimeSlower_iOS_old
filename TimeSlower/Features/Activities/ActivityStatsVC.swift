@@ -235,7 +235,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
 
     private func showEdit(activity: Activity) {
         let editController: EditActivityVC = ControllerFactory.createController()
-        editController.activity?.value = activity
+        editController.activity.value = activity
         if let navigationController = navigationController {
             navigationController.pushViewController(editController, animated: true)
         } else {

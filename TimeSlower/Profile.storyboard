@@ -93,7 +93,6 @@
                                                     <constraint firstAttribute="centerY" secondItem="GrO-A3-XIy" secondAttribute="centerY" id="IGN-7t-LMh"/>
                                                     <constraint firstItem="GrO-A3-XIy" firstAttribute="leading" secondItem="jOn-Vy-0O2" secondAttribute="trailing" constant="8" id="YCS-A6-ooE"/>
                                                     <constraint firstItem="GrO-A3-XIy" firstAttribute="leading" secondItem="jOn-Vy-0O2" secondAttribute="trailing" constant="8" id="aPN-4E-maX"/>
-                                                    <constraint firstAttribute="trailing" secondItem="GrO-A3-XIy" secondAttribute="trailing" id="dz9-RV-h4I"/>
                                                     <constraint firstItem="jOn-Vy-0O2" firstAttribute="top" secondItem="0BU-bz-OeU" secondAttribute="top" constant="9" id="h8y-c0-hF2"/>
                                                     <constraint firstItem="jOn-Vy-0O2" firstAttribute="leading" secondItem="0BU-bz-OeU" secondAttribute="leading" id="q8r-hy-8Wh"/>
                                                     <constraint firstItem="jOn-Vy-0O2" firstAttribute="leading" secondItem="0BU-bz-OeU" secondAttribute="leading" id="v1Z-n0-ivQ"/>
