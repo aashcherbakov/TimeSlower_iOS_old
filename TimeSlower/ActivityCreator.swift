@@ -63,6 +63,37 @@ internal final class ActivityCreator {
         return activity
     }
     
+    func saveActivity(
+        activity: Activity?,
+        name: String?,
+        selectedDays: [Int]?,
+        startTime: Date?,
+        duration: Endurance?,
+        timeToSave: Int?,
+        notifications: Bool?) -> Activity? {
+        
+        guard
+            let activity = activity,
+            let name = name,
+            let selectedDays = selectedDays,
+            let startTime = startTime,
+            let duration = duration,
+            let timeToSave = timeToSave,
+            let notifications = notifications
+            else {
+                return nil
+        }
+
+        let days = weekdaysWith(numbers: selectedDays)
+        let activityTiming = timing(withStartTime: startTime, duration: duration, timeToSave: timeToSave)
+        
+        let updatedActivity = Activity(withStats: activity.stats, name: name, type: activity.type, days: days, timing: activityTiming, notifications: notifications, averageSuccess: activity.averageSuccess, resourceId: activity.resourceId, results: activity.results, totalResults: activity.totalResults, totalTimeSaved: activity.totalTimeSaved)
+        
+        return dataStore.update(updatedActivity)
+    }
+    
+    // MARK: - Private Functions
+    
     private func alarmTimeFromStart(startTime: Date, duration: Endurance, timeToSave: Int) -> Date {
         let timeInterval = duration.seconds() - Double(timeToSave * 60)
         return startTime.addingTimeInterval(timeInterval)

@@ -90,7 +90,7 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="iSi-z6-Krx" firstAttribute="leading" secondItem="xnY-bw-hOP" secondAttribute="leading" id="A5t-Go-5j6"/>
-                                            <constraint firstItem="iSi-z6-Krx" firstAttribute="top" secondItem="xnY-bw-hOP" secondAttribute="top" constant="32" id="Jzb-0c-g6C"/>
+                                            <constraint firstItem="iSi-z6-Krx" firstAttribute="top" secondItem="xnY-bw-hOP" secondAttribute="top" constant="20" id="Jzb-0c-g6C"/>
                                             <constraint firstAttribute="trailing" secondItem="iSi-z6-Krx" secondAttribute="trailing" id="meS-T2-2VY"/>
                                         </constraints>
                                     </view>
@@ -105,7 +105,7 @@
                                     <constraint firstAttribute="trailing" secondItem="BPQ-bP-Hps" secondAttribute="trailing" id="aJa-qP-CTl"/>
                                     <constraint firstItem="xnY-bw-hOP" firstAttribute="top" secondItem="5CL-S0-5d0" secondAttribute="top" id="cFU-Cn-3fT"/>
                                     <constraint firstAttribute="bottom" secondItem="BPQ-bP-Hps" secondAttribute="bottom" id="iBP-5l-Aev"/>
-                                    <constraint firstAttribute="height" constant="148" id="iZa-da-9oD"/>
+                                    <constraint firstAttribute="height" constant="114" id="iZa-da-9oD"/>
                                     <constraint firstItem="BPQ-bP-Hps" firstAttribute="leading" secondItem="5CL-S0-5d0" secondAttribute="leading" id="pdS-w9-9de"/>
                                     <constraint firstItem="BPQ-bP-Hps" firstAttribute="leading" secondItem="5CL-S0-5d0" secondAttribute="leading" id="twB-93-2Zu"/>
                                     <constraint firstAttribute="trailing" secondItem="BPQ-bP-Hps" secondAttribute="trailing" id="xRa-kU-ecd"/>
