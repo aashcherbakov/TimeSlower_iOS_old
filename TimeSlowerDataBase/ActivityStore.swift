@@ -12,9 +12,11 @@ import CoreData
 
 public struct ActivityStore: EntityStore {
     public let context: NSManagedObjectContext
+    private let stack: CoreDataStack
     
     public init(withCoreDataStack stack: CoreDataStack) {
         context = stack.managedObjectContext
+        self.stack = stack
     }
     
     public func allActivities() -> [ActivityEntity] {
@@ -33,6 +35,24 @@ public struct ActivityStore: EntityStore {
         let day = Day.createFromDate(date)
         return activities.filter { (entity) -> Bool in
             return entity.type.intValue == type.rawValue && entity.days.contains(day)
+        }
+    }
+    
+    public func deleteEntity<T: ManagedObjectType>(_ entity: T) {
+        guard let object = entity as? ActivityEntity else {
+            fatalError("Passed entity is not a NSManagedObject subclass")
+        }
+        
+        removeResultsForActivity(activity: object)
+        context.delete(object)
+        context.saveOrRollback()
+    }
+    
+    private func removeResultsForActivity(activity: ActivityEntity) {
+        let resultsStore = ResultStore(withCoreDataStack: stack)
+        let results = resultsStore.resultsForActivity(activity: activity)
+        for result in results {
+            context.delete(result)
         }
     }
 }

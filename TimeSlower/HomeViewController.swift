@@ -138,9 +138,6 @@ internal class HomeViewController: UIViewController {
     private func finishActivity(_ activity: Activity?) {
         guard let activity = activity else { return }
         let finishedActivity = scheduler.finish(activity: activity)
-        
-//        activity.deleteScheduledNotificationsForCurrentActivity()
-//        activity.scheduleRestorationTimer()
         showStatsControllerForActivity(finishedActivity)
     }
 

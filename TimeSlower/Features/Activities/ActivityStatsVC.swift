@@ -24,12 +24,16 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     @IBOutlet weak var flowControlButton: UIButton!
     @IBOutlet weak var chartView: ChartView!
     @IBOutlet weak var circleProgress: CircleProgress!
+    @IBOutlet weak var timerImage: UIImageView!
     
-    var activity: Activity!
-    var timer: MZTimerLabel!
-    var lastWeekDayNames = [String]()
-    var lastWeekResultValues = [Double]()
-    
+    var activity: Activity?
+    private var timer: MZTimerLabel?
+    private var lastWeekDayNames = [String]()
+    private var lastWeekResultValues = [Double]()
+    private let scheduler = ActivityScheduler()
+    private let notificationScheduler = NotificationScheduler()
+    private var progressBarReady = false
+
     //MARK: - LIFECYCLE
     
     override func viewDidLoad() {
@@ -49,6 +53,8 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func setup() {
+        guard let activity = self.activity else { return }
+        
         activityNameLabel.text = activity.name
         activityBasisLabel.text = activity.basis().description()
         timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
@@ -60,6 +66,8 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func setupCircleProgress() {
+        guard let activity = self.activity else { return }
+        
         circleProgress.updateProgress(CGFloat(activity.averageSuccess))
         circleProgress.thicknessRatio = 0.02
         circleProgress.progressTintColor = UIColor.purpleRed()
@@ -75,15 +83,25 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         }
     }
     
+    @IBAction func editActivity(_ sender: AnyObject) {
+        guard let activity = activity else {
+            return
+        }
+        
+        showEdit(activity: activity)
+    }
+    
     @IBAction func startOrFinishButtonPressed(_ sender: UIButton) {
+        guard let activity = self.activity else { return }
+        
         if sender.titleLabel?.text == Constants.startButtonTitle {
-//            activity.startActivity()
-            scheduleFinishTimerForActivity()
+            let startedActivity = scheduler.start(activity: activity)
+            notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish)
+            self.activity = startedActivity
             clearTimer()
             setupTimerCountdown()
         } else if sender.titleLabel?.text == Constants.finishButtonTitle {
-//            activity.finishWithResult()
-//            activity.deleteNonStandardNotifications()
+            self.activity = scheduler.finish(activity: activity)
             clearTimer()
             setup()
             drawProgressView()
@@ -92,26 +110,30 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         defineStartOrFinishButtonTitle()
     }
     
-    func scheduleFinishTimerForActivity() {
-
-    }
-    
     func defineStartOrFinishButtonTitle() {
+        guard let activity = self.activity else { return }
+
         if !activity.isDone() {
             let buttonTitle = activity.isGoingNow() ? Constants.finishButtonTitle : Constants.startButtonTitle
             flowControlButton.setTitle(buttonTitle, for: UIControlState())
             flowControlButton.alpha = 1.0
             flowControlButton.isUserInteractionEnabled = true
+            timerStatusLabel.alpha = 1.0
+            timerImage.alpha = 1.0
+            timerLabel.alpha = 1.0
         } else {
             flowControlButton.alpha = 0.0
             flowControlButton.isUserInteractionEnabled = false
+            timerStatusLabel.alpha = 0.0
+            timerImage.alpha = 0.0
+            timerLabel.alpha = 0.0
         }
     }
 
     // MARK: - TIMER
     
     func launchTimer() {
-        if timer != nil {
+        if let timer = self.timer {
             if !timer.counting {
                 setupTimerCountdown()
             } else {
@@ -123,15 +145,21 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
     
     func setupTimerCountdown() {
+        
+        guard let activity = self.activity else { return }
+
         if timer != nil {
-            timer.removeFromSuperview()
+            timer?.removeFromSuperview()
             timer = nil
         }
+        
         timer = MZTimerLabel(label: timerLabel, andTimerType: MZTimerLabelTypeTimer)
-        timer.setupStandardTimerForActivity(activity)
+        timer?.setupStandardTimerForActivity(activity)
     }
     
     func restartTimerIfActivityChanged() {
+        guard let activity = self.activity, let timer = self.timer else { return }
+
         let intervalTillAction = round(activity.nextActionTime().timeIntervalSinceNow)
         let intervalFromTimer = round(timer.getTimeRemaining())
         if intervalTillAction != intervalFromTimer {
@@ -141,30 +169,36 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     
     func reloadTimer() {
         if timer != nil {
-            timer.removeFromSuperview()
+            timer?.removeFromSuperview()
             timer = nil
             setupTimerCountdown()
         }
     }
     
     func clearTimer() {
-        timer.pause()
+        timer?.pause()
+        timer?.removeFromSuperview()
         timer = nil
     }
     
     //MARK: - GRAPH
     
-    func drawProgressView() {
-        let lastResults = activity.lastWeekResults()
-        
-        if lastResults.count > 0 {
-            setValuesAndLabelsForGraph(lastResults)
-            chartView.strokeChart()
+    private func drawProgressView() {
+        guard let activity = self.activity else { return }
+
+        if !progressBarReady {
+            let lastResults = activity.lastWeekResults()
+            
+            if lastResults.count > 0 {
+                setValuesAndLabelsForGraph(lastResults)
+                chartView.strokeChart()
+            }
+            
+            progressBarReady = true
         }
     }
     
-    
-    func setValuesAndLabelsForGraph(_ lastResults: [Result]) {
+    private func setValuesAndLabelsForGraph(_ lastResults: [Result]) {
         for result in lastResults {
             lastWeekDayNames.append(result.shortDayNameForDate())
             lastWeekResultValues.append(result.success)
@@ -176,33 +210,36 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         chartView.lastWeekDaynames = lastWeekDayNames
     }
     
-    func addMissingResultsValuesAndLabels(_ lastResults: [Result]) {
+    private func addMissingResultsValuesAndLabels(_ lastResults: [Result]) {
         if lastResults.count < 7 {
             let vacantDaysLeft = 7 - lastWeekResultValues.count
-            for _ in 0 ..< (7 - lastResults.count) {
-                lastWeekResultValues.insert(0.0, at: 0)
-            }
             
-            let lastDay = StaticDateFormatter.shortDateNoTimeFromatter.date(from: lastResults.last!.stringDate)
-            var components = (Calendar.current as NSCalendar).components([.year, .month, .day], from: lastDay!)
-            for _ in 0 ..< vacantDaysLeft {
-                components.day! -= 1
-                let nextDate = Calendar.current.date(from: components)
-                lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), at: 0)
+            if vacantDaysLeft > 0 {
+                for _ in 0 ..< (7 - lastResults.count) {
+                    lastWeekResultValues.insert(0.0, at: 0)
+                }
+                
+                let lastDay = StaticDateFormatter.shortDateNoTimeFromatter.date(from: lastResults.last!.stringDate)
+                var components = (Calendar.current as NSCalendar).components([.year, .month, .day], from: lastDay!)
+                for _ in 0 ..< vacantDaysLeft {
+                    components.day! -= 1
+                    let nextDate = Calendar.current.date(from: components)
+                    lastWeekDayNames.insert(Weekday.shortDayNameForDate(nextDate!), at: 0)
+                }
             }
         }
     }
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditActivity" {
-            if let vc = segue.destination as? EditActivityVC {
-                vc.activity?.value = self.activity
-            }
+    private func showEdit(activity: Activity) {
+        let editController: EditActivityVC = ControllerFactory.createController()
+        editController.activity?.value = activity
+        if let navigationController = navigationController {
+            navigationController.pushViewController(editController, animated: true)
+        } else {
+            present(editController, animated: true, completion: nil)
         }
     }
-    
 
 }

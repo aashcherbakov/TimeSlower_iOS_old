@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeSlower/Features/Activities/ActivityStatsVC.swift"
-            timestampString = "498347924.122268"
+            timestampString = "498360697.295184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "setup()"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "setupTimerCountdown()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlowerDataBase/ActivityEntity.swift"
-            timestampString = "498348372.320677"
+            filePath = "TimeSlower/Features/Activities/Views/TimerExtension.swift"
+            timestampString = "498360157.252822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "updateAverageSuccess(withResult:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeSlowerDataBase/ResultEntity.swift"
-            timestampString = "498348478.872314"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "updateWithConfiguration(_:)"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "setupStandardTimerForActivity(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
