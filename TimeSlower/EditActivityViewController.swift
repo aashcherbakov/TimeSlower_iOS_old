@@ -49,7 +49,7 @@ internal class EditActivityVC: UIViewController {
     var flow: Flow?
     var editingState: EditingState?
     var userProfile: Profile?
-    var activity: MutableProperty<Activity>?
+    var activity = MutableProperty<Activity?>(nil)
     
     typealias StateType = EditingState
     fileprivate var machine: StateMachine<EditActivityVC>!
@@ -130,8 +130,9 @@ internal class EditActivityVC: UIViewController {
             
         } else if flow == .editing {
             if allCellsAreCollapsed() {
-                saveActivity()
-//                showStatsInActivityMotivationVC()
+                if let updatedActivity = saveActivity() {
+                    showMotivation(forActivity: updatedActivity)
+                }
             } else {
                 collapseAllCells()
             }
@@ -169,20 +170,13 @@ internal class EditActivityVC: UIViewController {
         }
     }
     
-    fileprivate func saveActivity() {
-        guard
-            let activity = activity,
-            let name = selectedName,
-            let basis = selectedBasis,
-            let startTime = selectedStartTime,
-            let duration = selectedDuration,
-            let notifications = selectedNotifications,
-            let timeToSave = selectedTimeToSave else {
-                return
+    fileprivate func saveActivity() -> Activity? {
+        if let updatedActivity = activityStore.saveActivity(activity: activity.value, name: selectedName, selectedDays: selectedBasis, startTime: selectedStartTime, duration: selectedDuration, timeToSave: selectedTimeToSave, notifications: selectedNotifications) {
+            activity.value = updatedActivity
+            return updatedActivity
         }
         
-//        Activity.updateActivityWithParameters(activity, name: name, selectedDays: basis, startTime: startTime,
-//            duration: duration, notifications: notifications, timeToSave: timeToSave)
+        return nil
     }
     
     // MARK: - Private Functions
@@ -190,11 +184,14 @@ internal class EditActivityVC: UIViewController {
     fileprivate func setupDesign() {
         setupTimeSaverHeight()
         
-        if activity != nil {
+        if let activity = activity.value {
             flow = .editing
             editingState = .fullHouse
-//            timeSaverView.selectedDuration = activity?.value.timing.duration
-//            timeSaverView.selectedValue = Endurance(value: Int((activity?.timing.timeToSave.int32Value)!), period: (activity?.timing.duration.period)!)
+            timeSaverView.selectedDuration.value = activity.duration()
+            let toSave = Int(activity.timeToSave())
+            let toSaveValue = Endurance(value: toSave, period: activity.duration().period)
+            timeSaverView.selectedValue.value = toSaveValue
+            print("Set time saver value to \(toSaveValue)")
         } else {
             flow = .creating
             editingState = .name
@@ -204,7 +201,7 @@ internal class EditActivityVC: UIViewController {
         
         footerView = tableFooterView()
         tableView.tableFooterView = footerView
-        titleLabel.text = (activity != nil) ? "Edit activity" : "New activity"
+        titleLabel.text = (activity.value != nil) ? "Edit activity" : "New activity"
     }
     
     private func setupTimeSaverHeight() {
@@ -217,15 +214,15 @@ internal class EditActivityVC: UIViewController {
     }
     
     fileprivate func setupData() {
-        if let activity = activity {
-//            selectedName = activity.name
-//            selectedBasis = Day.daysIntegerRepresentation(activity.days as? Set<Day>)
-//            selectedStartTime = activity.timing.startTime
-//            selectedDuration = activity.timing.duration
-//            selectedNotifications = activity.notifications.boolValue
-//            selectedTimeToSave = activity.timing.timeToSave.intValue
+        if let activity = activity.value {
+            selectedName = activity.name
+            selectedBasis = Weekday.dayNumbers(fromWeekdays: activity.days)
+            selectedStartTime = activity.startTime()
+            selectedDuration = activity.duration()
+            selectedNotifications = activity.notifications
+            selectedTimeToSave = Int(activity.timeToSave())
             
-//            initialValuesForCells = [selectedName as Optional<AnyObject>, selectedBasis as Optional<AnyObject>, selectedStartTime as Optional<AnyObject>, selectedDuration, selectedNotifications as Optional<AnyObject>]
+            initialValuesForCells = [selectedName as Optional<AnyObject>, selectedBasis as Optional<AnyObject>, selectedStartTime as Optional<AnyObject>, selectedDuration as Optional<AnyObject>, selectedNotifications as Optional<AnyObject>]
         }
     }
     
@@ -248,7 +245,7 @@ internal class EditActivityVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        activity?.producer.startWithResult { [weak self] (result) in
+        activity.producer.startWithResult { [weak self] (result) in
             self?.setupData()
         }
         

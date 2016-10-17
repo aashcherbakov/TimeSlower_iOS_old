@@ -134,6 +134,10 @@ public enum Weekday: Int {
         return weekdays
     }
     
+    public static func dayNumbers(fromWeekdays weekdays: [Weekday]) -> [Int] {
+        return weekdays.map { $0.rawValue }
+    }
+    
     // MARK: Private Functions
 
     /**
