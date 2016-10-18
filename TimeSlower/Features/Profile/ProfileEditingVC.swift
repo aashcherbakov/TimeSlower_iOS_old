@@ -23,6 +23,8 @@ class ProfileEditingVC: UIViewController {
     
     fileprivate var dataSource: ProfileEditingDataSource?
     fileprivate var avatarPicker: AvatarPicker?
+    
+    var profile: Profile?
 
     fileprivate struct Constants {
         static let collapsedCellHeight = 0 as CGFloat
@@ -54,6 +56,16 @@ class ProfileEditingVC: UIViewController {
         super.viewDidLoad()
         
         dataSource = ProfileEditingDataSource(withTableView: propertiesTableView, delegate: self)
+        
+        if let profile = profile {
+            dataSource?.setup(withProfile: profile)
+            genderSelector.setSelectedGender(profile.gender.rawValue)
+            
+            if let photo = profile.photo {
+                avatarImage.image = photo
+            }
+        }
+        
         avatarPicker = AvatarPicker(withDelegate: self)
         
         propertiesTableView.dataSource = dataSource
@@ -68,6 +80,8 @@ class ProfileEditingVC: UIViewController {
         
         setCircleFormToAvatarImageView()
         setupHeaderViewHeight()
+        
+        setupImageViewForAvatar()
     }
     
     private func setupHeaderViewHeight() {
@@ -105,7 +119,7 @@ class ProfileEditingVC: UIViewController {
         if let missingValue = dataSource?.missingData() {
             postAlertOnLackOfInfo(missingValue)
         } else {
-            dataSource?.saveProfile()
+            dataSource?.saveProfile(profile: profile)
         }
     }
     
@@ -145,7 +159,7 @@ class ProfileEditingVC: UIViewController {
         if navigationController != nil {
             _ = navigationController?.popViewController(animated: true)
         } else {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true)
         }
     }
     

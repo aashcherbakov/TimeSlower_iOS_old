@@ -26,7 +26,9 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     
     func setDefaultValue() {
         if textfieldView.text.value == nil {
-            textfieldView.setText(countryPicker.selectedCountryName)
+            textfieldView.setText("United States")
+            countryPicker.setSelectedCountryName("United States", animated: false)
+
         }
     }
     

@@ -17,6 +17,7 @@ internal protocol ProfileEditingCell: class {
     func setup(withConfiguration config: TextfieldConfiguration)
     func setDefaultValue()
     func saveValue()
+    func setValue(value: String)
 }
 
 extension ProfileEditingCell {
@@ -24,5 +25,8 @@ extension ProfileEditingCell {
     func setup(withConfiguration config: TextfieldConfiguration) {
         textfieldView.setupWithConfig(config)
     }
-        
+    
+    func setValue(value: String) {
+        textfieldView.setText(value)
+    }
 }

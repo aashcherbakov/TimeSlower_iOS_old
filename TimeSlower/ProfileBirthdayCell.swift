@@ -16,7 +16,7 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     @IBOutlet weak var textfieldView: TextfieldView!
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     
-    private let dateFormatter = StaticDateFormatter.shortDateAndTimeFormatter
+    private let dateFormatter = StaticDateFormatter.fullDateFormatter
     
     weak var delegate: ProfileEditingCellDelegate?
     
@@ -33,9 +33,8 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     
     @IBAction func didSelectDate(_ sender: UIDatePicker) {
         let date = dateFormatter.string(from: sender.date)
-        
-        delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
         textfieldView.setText(date)
+        delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
     }
     
 }

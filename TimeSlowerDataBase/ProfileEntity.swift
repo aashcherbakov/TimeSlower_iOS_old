@@ -43,7 +43,13 @@ open class ProfileEntity: ManagedObject {
         let lifeInContries = LocalDataReader().lifeExpacityDictionary()
         let keyForTopDictionary = profile.country.capitalized.replacingOccurrences(of: " ", with: "", options: [], range: nil)
         let keyForInnerDictionary = ProfileEntity.Gender(rawValue: profile.gender.intValue)!.description()
-        return (lifeInContries[keyForTopDictionary]![keyForInnerDictionary]! as NSString).doubleValue
+        
+        if let country = lifeInContries[keyForTopDictionary], let genderAge = country[keyForInnerDictionary], let doubleValue = Double(genderAge) {
+            
+            return doubleValue
+        }
+        
+        return 76
     }
     
     // MARK: - Private
