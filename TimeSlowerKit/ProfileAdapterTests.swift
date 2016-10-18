@@ -36,7 +36,6 @@ class ProfileAdapterTests: BaseDataStoreTest {
         XCTAssertEqual(profile.country, "United States")
         XCTAssertEqual(profile.dateOfBirth, shortDateFormatter.date(from: "3/28/1987"))
         XCTAssertEqual(profile.gender, Gender.male)
-        XCTAssertEqual(profile.maxAge, 0.0)
         XCTAssertNil(profile.photo)
     }
 
@@ -65,7 +64,6 @@ class ProfileAdapterTests: BaseDataStoreTest {
         XCTAssertEqual(profile.country, "United States")
         XCTAssertEqual(profile.dateOfBirth, shortDateFormatter.date(from: "3/28/1987"))
         XCTAssertEqual(profile.gender, Gender.male)
-        XCTAssertEqual(profile.maxAge, 0.0)
         XCTAssertNil(profile.photo)
     }
     
@@ -77,7 +75,6 @@ class ProfileAdapterTests: BaseDataStoreTest {
         XCTAssertEqual(profile.country, "United States")
         XCTAssertEqual(profile.dateOfBirth, shortDateFormatter.date(from: "3/28/1987"))
         XCTAssertEqual(profile.gender, Gender.male)
-        XCTAssertEqual(profile.maxAge, 0.0)
         XCTAssertNil(profile.photo)
 
     }

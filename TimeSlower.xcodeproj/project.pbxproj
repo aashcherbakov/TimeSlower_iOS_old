@@ -200,8 +200,6 @@
 		F0C2FF841DAED6C800CB79CB /* ActivityScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */; };
 		F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */; };
 		F0C2FF891DAED96E00CB79CB /* FakeActivityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */; };
-		F0CC66CE1D90CD3700D21BA4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */; };
-		F0CC66CF1D90CD3700D21BA4 /* BaseDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */; };
 		F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */; };
 		F0CDAA031D8F838E0090D7E3 /* ReactiveObjCBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */; };
 		F0CDAA121D90C69F0090D7E3 /* TimeSlowerDataBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CDAA091D90C69F0090D7E3 /* TimeSlowerDataBase.framework */; };
@@ -222,6 +220,8 @@
 		F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
 		F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
 		F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932731DB3068100EA0274 /* ActivityCurator.swift */; };
+		F0DB53251DB5B6FA00A48F01 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */; };
+		F0DB53271DB5B6FF00A48F01 /* BaseCoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -536,8 +536,6 @@
 		F0C2FF831DAED6C800CB79CB /* ActivityScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityScheduler.swift; sourceTree = "<group>"; };
 		F0C2FF851DAED6DB00CB79CB /* ActivitySchedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySchedulerTests.swift; sourceTree = "<group>"; };
 		F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeActivityFactory.swift; sourceTree = "<group>"; };
-		F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/TestHelper.swift; sourceTree = "<group>"; };
-		F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseDataStoreTest.swift; path = ../../../TimeSlowerKit/TimeSlowerKitTests/BaseDataStoreTest.swift; sourceTree = "<group>"; };
 		F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
 		F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjCBridge.framework; path = Carthage/Build/iOS/ReactiveObjCBridge.framework; sourceTree = "<group>"; };
 		F0CDAA091D90C69F0090D7E3 /* TimeSlowerDataBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimeSlowerDataBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -559,6 +557,8 @@
 		F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
 		F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationResponder.swift; sourceTree = "<group>"; };
 		F0D932731DB3068100EA0274 /* ActivityCurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCurator.swift; sourceTree = "<group>"; };
+		F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoreDataTest.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -902,9 +902,9 @@
 			isa = PBXGroup;
 			children = (
 				F009AED71BD9CEA4007F38A9 /* Info.plist */,
-				F0CC66CC1D90CD3700D21BA4 /* TestHelper.swift */,
 				F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */,
-				F0CC66CD1D90CD3700D21BA4 /* BaseDataStoreTest.swift */,
+				F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */,
+				F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */,
 				F0A76E6A1D9372240096208E /* FakeCoreDataStack.swift */,
 			);
 			path = TimeSlowerKitTests;
@@ -2037,22 +2037,22 @@
 				F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */,
 				89E9C7E61D9343BF008D18A0 /* DataStoreTests.swift in Sources */,
 				F0C2FF871DAED87200CB79CB /* ActivitySchedulerTests.swift in Sources */,
+				F0DB53271DB5B6FF00A48F01 /* BaseCoreDataTest.swift in Sources */,
 				89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */,
 				89E9C7EF1D934422008D18A0 /* StatsTests.swift in Sources */,
 				F0A76E6B1D9372240096208E /* FakeCoreDataStack.swift in Sources */,
 				89E9C7F51D934474008D18A0 /* TimeCalculatorTests.swift in Sources */,
+				F0DB53251DB5B6FA00A48F01 /* TestHelper.swift in Sources */,
 				F0A76E641D9370580096208E /* ProfileStatsCalculatorTests.swift in Sources */,
 				89E9C7E91D9343E4008D18A0 /* TimingTests.swift in Sources */,
 				89E9C7F61D93447C008D18A0 /* SuccessCalculatorTests.swift in Sources */,
 				89E9C7E01D934306008D18A0 /* ResultAdapterTests.swift in Sources */,
 				89E9C7ED1D93440A008D18A0 /* ProfileTests.swift in Sources */,
 				89E9C7F21D934455008D18A0 /* BasisTests.swift in Sources */,
-				F0CC66CE1D90CD3700D21BA4 /* TestHelper.swift in Sources */,
 				89E9C7EB1D9343F2008D18A0 /* ResultTests.swift in Sources */,
 				89E9C7E71D9343D9008D18A0 /* WeekdayTests.swift in Sources */,
 				89E9C7D81D93425D008D18A0 /* ActivityAdapterTests.swift in Sources */,
 				89E9C7DA1D934276008D18A0 /* ActivityTests.swift in Sources */,
-				F0CC66CF1D90CD3700D21BA4 /* BaseDataStoreTest.swift in Sources */,
 				89E9C7E21D934336008D18A0 /* EnduranceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2268,7 +2268,7 @@
 				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1lastday.timeslower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeSlower/TimeSlower-Bridging-Header.h";
@@ -2293,7 +2293,7 @@
 				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oneLastDay.TimeSlower;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1lastday.timeslower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeSlower/TimeSlower-Bridging-Header.h";
