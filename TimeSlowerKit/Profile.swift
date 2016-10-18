@@ -77,6 +77,6 @@ public struct Profile: Persistable {
      */
     public func numberOfDaysTillEndOfLifeSinceDate(_ date: Date) -> Int {
         let components = calendar.dateComponents([.day], from: date, to: dateOfApproximateLifeEnd())
-        return components.day!
+        return abs(components.day!)
     }
 }

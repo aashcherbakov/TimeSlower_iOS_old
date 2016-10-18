@@ -104,7 +104,7 @@ class ProfileEditingDataSource: NSObject {
             country: country,
             dateOfBirth: dateOfBirth,
             gender: gender,
-            maxAge: profile != nil ? profile!.maxAge : 0,
+            maxAge: profile != nil ? profile!.maxAge : 76,
             photo: image,
             resourceId: profile != nil ? profile!.resourceId : nil)
         

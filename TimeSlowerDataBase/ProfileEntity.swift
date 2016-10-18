@@ -45,7 +45,6 @@ open class ProfileEntity: ManagedObject {
         let keyForInnerDictionary = ProfileEntity.Gender(rawValue: profile.gender.intValue)!.description()
         
         if let country = lifeInContries[keyForTopDictionary], let genderAge = country[keyForInnerDictionary], let doubleValue = Double(genderAge) {
-            
             return doubleValue
         }
         
@@ -83,8 +82,8 @@ extension ProfileEntity: ManagedObjectType {
     
     public func setDefaultPropertiesForObject() {
         name = "Anonymous"
-        birthday = defaultBirthday()
-        country = defaultCountry()
+        birthday = Date()
+        country = ""
         gender = 0
         dateOfDeath = Date()
         resourceId = ""

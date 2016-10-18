@@ -27,7 +27,7 @@ public struct TimeCalculator {
      - returns: Double for duration per day.
      */
     public func durationPerDay(_ originalDuration: Int, busyDays: Int) -> Double {
-        return (Double(originalDuration) * Double(busyDays)) / standardWeekDaysNumber
+        return abs((Double(originalDuration) * Double(busyDays)) / standardWeekDaysNumber)
     }
     
     /**
