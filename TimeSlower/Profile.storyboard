@@ -55,6 +55,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V81-vo-B8s">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="V81-vo-B8s" secondAttribute="height" multiplier="9:11" id="NUz-3a-zkl"/>
+                                                </constraints>
                                                 <state key="normal" image="editIconWhite">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,7 +75,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOn-Vy-0O2" userLabel="avatarFrame">
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-oe-rrS"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="AE.png" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-oe-rrS"/>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -108,6 +111,8 @@
                                         <constraints>
                                             <constraint firstAttribute="centerY" secondItem="V81-vo-B8s" secondAttribute="centerY" id="1HP-dZ-91g"/>
                                             <constraint firstAttribute="trailing" secondItem="V81-vo-B8s" secondAttribute="trailing" constant="20" symbolic="YES" id="2Xg-Bw-qGR"/>
+                                            <constraint firstItem="V81-vo-B8s" firstAttribute="top" secondItem="8tT-aN-m3N" secondAttribute="top" id="9yI-Qu-cn8"/>
+                                            <constraint firstAttribute="bottom" secondItem="V81-vo-B8s" secondAttribute="bottom" id="Iwy-cf-bpf"/>
                                             <constraint firstItem="vxb-qN-Cob" firstAttribute="leading" secondItem="8tT-aN-m3N" secondAttribute="leading" id="KBU-DO-U4I"/>
                                             <constraint firstAttribute="height" secondItem="vxb-qN-Cob" secondAttribute="height" id="Rwj-7X-gs3"/>
                                             <constraint firstAttribute="centerX" secondItem="0BU-bz-OeU" secondAttribute="centerX" id="bDI-u3-ar8"/>
@@ -426,11 +431,11 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLU-6Z-Lt1" userLabel="avatarBackgroundView">
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tr-P1-3lI" userLabel="grayBackground">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tr-P1-3lI" userLabel="grayBackground">
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatarPickerImage" translatesAutoresizingMaskIntoConstraints="NO" id="HrX-rP-kZD"/>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdh-9b-u4y" userLabel="photoPickerButton">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdh-9b-u4y" userLabel="photoPickerButton">
                                         <state key="normal">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -515,6 +520,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AE.png" width="40" height="30"/>
         <image name="avatarPickerImage" width="33" height="26"/>
         <image name="backIconWhite" width="9" height="15"/>
         <image name="bigRedBackground" width="375" height="494"/>

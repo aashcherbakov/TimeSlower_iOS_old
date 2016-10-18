@@ -37,7 +37,6 @@ class ProfileNameCell: UITableViewCell, ProfileEditingCell {
         
         delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
         textfieldView.textField.resignFirstResponder()
-
     }
 }
 

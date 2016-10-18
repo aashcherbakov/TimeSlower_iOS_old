@@ -46,6 +46,10 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         launchTimer()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupAvatarForm()
+    }
     private func setupData() {
         guard let profile = profile else {
             return
@@ -78,7 +82,6 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         displaySavedTime()
         displayAverageSuccess()
         displayGreeting()
-        setupAvatarForm()
         displayAvatar()
     }
     
@@ -126,9 +129,9 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     }
 
     @IBAction func onEditButton(_ sender: UIButton) {
-        if let editProfileVC = storyboard?.instantiateViewController(withIdentifier: ProfileEditingVC.className) as? ProfileEditingVC {
-            navigationController?.pushViewController(editProfileVC, animated: true)
-        }
+        let editProfileVC: ProfileEditingVC = ControllerFactory.createController()
+        editProfileVC.profile = profile
+        present(editProfileVC, animated: true, completion: nil)
     }
     
     //MARK: - Timer setup

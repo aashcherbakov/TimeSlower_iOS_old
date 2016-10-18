@@ -51,7 +51,10 @@ class ProfileEditingDataSource: NSObject {
         ProfileCountryCell.self
     ]
     
+    fileprivate var profileData = [String]()
+    
     private var dataStore = DataStore()
+    fileprivate var profile: Profile?
     
     init(withTableView tableView: UITableView, delegate: ProfileEditingDataSourceDelegate) {
         self.delegate = delegate
@@ -60,12 +63,30 @@ class ProfileEditingDataSource: NSObject {
         registerCells()
     }
     
-    func saveProfile() {
-        if let profile = fetchProfile() {
-            let _: Profile = dataStore.update(profile)
+    func setup(withProfile profile: Profile) {
+        self.profile = profile
+        
+        name = profile.name
+        country = profile.country
+        let birthdayString = StaticDateFormatter.fullDateFormatter.string(from: profile.dateOfBirth)
+        birthday = birthdayString
+        gender = profile.gender
+        image = profile.photo
+        
+        profileData = [profile.name, birthdayString, profile.country]
+    }
+    
+    func saveProfile(profile: Profile?) {
+        if let profile = profile {
+            if let updatedProfile = newProfile(fromProfile: profile) {
+                let savedProfile: Profile = dataStore.update(updatedProfile)
+                self.profile = savedProfile
+            }
+            
         } else {
             if let profile = newProfile(fromProfile: nil) {
                 dataStore.create(profile)
+                self.profile = profile
             }
         }
     }
@@ -73,7 +94,7 @@ class ProfileEditingDataSource: NSObject {
     private func newProfile(fromProfile profile: Profile?) -> Profile? {
         guard
             let name = name, let country = country, let birthday = birthday, let gender = gender,
-            let dateOfBirth = StaticDateFormatter.shortDateAndTimeFormatter.date(from: birthday)
+            let dateOfBirth = StaticDateFormatter.fullDateFormatter.date(from: birthday)
         else {
             return nil
         }
@@ -90,13 +111,8 @@ class ProfileEditingDataSource: NSObject {
         return updatedProfile
     }
     
-    private func fetchProfile() -> Profile? {
-        let profile: Profile? = dataStore.retrieve("")
-        return profile
-    }
-    
     func profileHasNoActivities() -> Bool {
-        return true
+        return dataStore.activities(forDate: nil, type: .routine).count == 0
     }
     
     /// Convenience method to check number of rows from ViewController
@@ -162,8 +178,12 @@ extension ProfileEditingDataSource: UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: identifier, for: indexPath) as? ProfileEditingCell {
-           
+            
             setupCell(cell, type: cellType)
+            if profile != nil && profileData.count > indexPath.row {
+                cell.setValue(value: profileData[indexPath.row])
+            }
+            
             return cell as! UITableViewCell
         }
         
@@ -173,6 +193,7 @@ extension ProfileEditingDataSource: UITableViewDataSource {
     func setupCell(_ cell: ProfileEditingCell, type: ProfileEditingCell.Type) {
         let config = configuration(forType: type)
         cell.setup(withConfiguration: config)
+        
         cell.delegate = self
     }
     
