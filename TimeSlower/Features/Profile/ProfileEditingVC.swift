@@ -202,6 +202,11 @@ class ProfileEditingVC: UIViewController {
     }
     
     fileprivate func moveToNextCell() {
+        guard profile == nil else {
+            selectedCellIndex = nil
+            updateTableViewLayout()
+            return
+        }
         selectedCellIndex = nextRowIndex(fromSelectedIndex: selectedCellIndex)
         setDefaultValue(forCellAtIndex: selectedCellIndex)
         updateTableViewLayout()

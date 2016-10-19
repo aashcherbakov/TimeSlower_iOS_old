@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -21,12 +21,18 @@
                             <constraint firstAttribute="height" constant="50" id="ecm-Vn-5lC"/>
                         </constraints>
                     </view>
-                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL0-Ei-9ai">
+                    <datePicker contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL0-Ei-9ai">
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="Aym-Hv-4E2"/>
                         </constraints>
                         <date key="date" timeIntervalSinceReferenceDate="-434353542.11697501">
                             <!--1987-03-28 18:14:17 +0000-->
+                        </date>
+                        <date key="minimumDate" timeIntervalSinceReferenceDate="-2240571600">
+                            <!--1930-01-01 11:00:00 +0000-->
+                        </date>
+                        <date key="maximumDate" timeIntervalSinceReferenceDate="504874800">
+                            <!--2016-12-31 11:00:00 +0000-->
                         </date>
                         <connections>
                             <action selector="didSelectDate:" destination="KGk-i7-Jjw" eventType="valueChanged" id="3wL-e4-ppB"/>
@@ -37,11 +43,11 @@
                 <constraints>
                     <constraint firstItem="B1t-3j-gB9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7ea-j9-ttB"/>
                     <constraint firstItem="B1t-3j-gB9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Svs-zl-9Ae"/>
-                    <constraint firstItem="lL0-Ei-9ai" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UK5-th-vse"/>
+                    <constraint firstItem="lL0-Ei-9ai" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" priority="750" id="UK5-th-vse"/>
                     <constraint firstItem="lL0-Ei-9ai" firstAttribute="top" secondItem="B1t-3j-gB9" secondAttribute="bottom" id="hZo-FY-CoF"/>
                     <constraint firstAttribute="trailing" secondItem="B1t-3j-gB9" secondAttribute="trailing" id="hg2-yF-azo"/>
                     <constraint firstItem="lL0-Ei-9ai" firstAttribute="centerX" secondItem="B1t-3j-gB9" secondAttribute="centerX" id="wz9-pn-rYL"/>
-                    <constraint firstAttribute="trailing" secondItem="lL0-Ei-9ai" secondAttribute="trailing" id="zYH-QX-7zA"/>
+                    <constraint firstAttribute="trailing" secondItem="lL0-Ei-9ai" secondAttribute="trailing" priority="750" id="zYH-QX-7zA"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
