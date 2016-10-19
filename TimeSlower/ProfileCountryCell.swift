@@ -17,6 +17,7 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
 
     /// ProfileEditingCellDelegate
     weak var delegate: ProfileEditingCellDelegate?
+    fileprivate var timer: Timer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,15 +26,19 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     }
     
     func setDefaultValue() {
-        if textfieldView.text.value == nil {
+        if textfieldView.textField.text == "" {
             textfieldView.setText("United States")
             countryPicker.setSelectedCountryName("United States", animated: false)
-
         }
     }
     
     func saveValue() {
         delegate?.profileEditingCellDidUpdateValue(value: countryPicker.selectedCountryName, type: .Country)
+    }
+    
+    func setValue(value: String) {
+        textfieldView.setText(value)
+        countryPicker.setSelectedCountryName(value, animated: true)
     }
 }
 
@@ -41,8 +46,15 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
 // MARK: - CountryPickerDelegate
 extension ProfileCountryCell: CountryPickerDelegate {
     func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-        
         textfieldView.setText(name)
-        delegate?.profileEditingCellDidUpdateValue(value: name, type: .Country)
+        
+        timer?.terminate()
+        timer = Timer(1) { [weak self] in
+            self?.delegate?.profileEditingCellDidUpdateValue(value: name, type: .Country)
+
+            self?.timer?.terminate()
+        }
+        
+        timer?.start()
     }
 }

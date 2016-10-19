@@ -15,6 +15,8 @@ class ProfileNameCell: UITableViewCell, ProfileEditingCell {
     @IBOutlet weak var textfieldViewHeight: NSLayoutConstraint!
     weak var delegate: ProfileEditingCellDelegate?
     
+    fileprivate var timer: Timer?
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         textfieldView.textField.delegate = self
@@ -38,6 +40,10 @@ class ProfileNameCell: UITableViewCell, ProfileEditingCell {
         delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
         textfieldView.textField.resignFirstResponder()
     }
+    
+    func setValue(value: String) {
+        textfieldView.setText(value)
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -47,8 +53,15 @@ extension ProfileNameCell: UITextFieldDelegate {
             return false
         }
         
-        delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
         textfieldView.textField.resignFirstResponder()
+        
+        timer?.terminate()
+        timer = Timer(0.3) { [weak self] in
+            self?.delegate?.profileEditingCellDidUpdateValue(value: text, type: .Name)
+            self?.timer?.terminate()
+        }
+        
+        timer?.start()
         return true
     }
 }

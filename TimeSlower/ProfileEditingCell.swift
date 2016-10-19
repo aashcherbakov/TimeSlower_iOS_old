@@ -25,8 +25,5 @@ extension ProfileEditingCell {
     func setup(withConfiguration config: TextfieldConfiguration) {
         textfieldView.setupWithConfig(config)
     }
-    
-    func setValue(value: String) {
-        textfieldView.setText(value)
-    }
+
 }

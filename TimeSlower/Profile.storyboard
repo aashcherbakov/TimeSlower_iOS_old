@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -480,8 +480,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RMp-2L-xEV" secondAttribute="trailing" id="0HQ-Dg-eOD"/>
                             <constraint firstItem="Rk7-qw-Qvc" firstAttribute="top" secondItem="RMp-2L-xEV" secondAttribute="bottom" id="3YQ-a8-48y"/>
-                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" constant="50" id="3d5-sI-k1t"/>
-                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" constant="50" id="73b-2n-7Eo"/>
+                            <constraint firstAttribute="trailing" secondItem="Rk7-qw-Qvc" secondAttribute="trailing" id="3d5-sI-k1t"/>
+                            <constraint firstItem="Rk7-qw-Qvc" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="73b-2n-7Eo"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="top" secondItem="IlO-XD-Drd" secondAttribute="top" id="9Hh-1w-Jnt"/>
                             <constraint firstItem="RMp-2L-xEV" firstAttribute="leading" secondItem="IlO-XD-Drd" secondAttribute="leading" id="Av3-89-TbI"/>
                             <constraint firstAttribute="trailing" secondItem="htb-Qx-cAM" secondAttribute="trailing" id="IvY-Lq-VpD"/>
