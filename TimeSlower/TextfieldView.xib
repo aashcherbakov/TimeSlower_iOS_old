@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextfieldView">
             <connections>
+                <outlet property="defaultValueButton" destination="Ssv-mK-eqV" id="uED-Yj-Dlk"/>
                 <outlet property="imageView" destination="PnW-1p-yDd" id="fLp-JU-1ss"/>
                 <outlet property="textField" destination="dwh-dw-9Gs" id="9Pk-pa-QSs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="298-y0-6kB"/>
@@ -18,21 +24,35 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="activityNameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-1p-yDd"/>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-dw-9Gs" customClass="JVFloatLabeledTextField">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="activityNameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-1p-yDd"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-dw-9Gs" customClass="JVFloatLabeledTextField">
                     <gestureRecognizers/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ssv-mK-eqV">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="4yg-Ma-P7j"/>
+                        <constraint firstAttribute="width" constant="63" id="9uY-AE-79P"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
+                    <state key="normal" title="USE DEFAULT">
+                        <color key="titleColor" red="0.83529411760000005" green="0.1960784314" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onDefaultButton:" destination="-1" eventType="touchUpInside" id="h0d-Sf-4KR"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="PnW-1p-yDd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2Q6-P1-x5T"/>
+                <constraint firstItem="Ssv-mK-eqV" firstAttribute="leading" secondItem="dwh-dw-9Gs" secondAttribute="trailing" constant="8" id="3xS-wS-JbF"/>
                 <constraint firstAttribute="bottom" secondItem="dwh-dw-9Gs" secondAttribute="bottom" constant="8" id="CNC-0S-mcS"/>
-                <constraint firstAttribute="trailing" secondItem="dwh-dw-9Gs" secondAttribute="trailing" constant="8" id="Dnh-Fi-5IJ"/>
-                <constraint firstItem="dwh-dw-9Gs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PnW-1p-yDd" secondAttribute="trailing" constant="8" symbolic="YES" id="LrP-tI-6ja"/>
                 <constraint firstItem="dwh-dw-9Gs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="OfL-ER-Xvk"/>
+                <constraint firstAttribute="trailing" secondItem="Ssv-mK-eqV" secondAttribute="trailing" priority="750" constant="20" id="mSP-C0-Xy0"/>
+                <constraint firstItem="Ssv-mK-eqV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qjG-LJ-i5S"/>
                 <constraint firstItem="PnW-1p-yDd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="sUf-Y6-x7i"/>
                 <constraint firstItem="dwh-dw-9Gs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="44" id="wcM-5U-mOv"/>
             </constraints>

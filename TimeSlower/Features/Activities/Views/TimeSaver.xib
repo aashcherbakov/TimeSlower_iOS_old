@@ -35,7 +35,7 @@
                     <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW MUCH TIME YOU WANT TO SAVE?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4B-Cx-bMC">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's try to cut some time from this routine and see how much could you save..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4B-Cx-bMC">
                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                     <color key="textColor" red="0.1764705882" green="0.16862745100000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -43,7 +43,6 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="v4B-Cx-bMC" secondAttribute="centerX" id="0Xj-DU-RyQ"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="centerX" secondItem="Y9T-2k-96a" secondAttribute="centerX" constant="-1" id="3Gg-YG-bie"/>
                 <constraint firstItem="4hC-gd-24l" firstAttribute="width" secondItem="MmT-sh-XmS" secondAttribute="width" id="3bS-zE-IcF"/>
                 <constraint firstItem="4hC-gd-24l" firstAttribute="centerX" secondItem="MmT-sh-XmS" secondAttribute="centerX" id="GST-2j-lg2"/>
@@ -51,9 +50,11 @@
                 <constraint firstItem="MmT-sh-XmS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="PdQ-bJ-HTj"/>
                 <constraint firstItem="MmT-sh-XmS" firstAttribute="top" secondItem="Y9T-2k-96a" secondAttribute="bottom" constant="9" id="SRG-uP-PBk"/>
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="top" secondItem="v4B-Cx-bMC" secondAttribute="bottom" constant="8" id="TqK-oM-OHY"/>
+                <constraint firstItem="v4B-Cx-bMC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="VY1-BZ-hno"/>
                 <constraint firstItem="Y9T-2k-96a" firstAttribute="centerX" secondItem="MmT-sh-XmS" secondAttribute="centerX" constant="1" id="Wxc-Os-Nmd"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MmT-sh-XmS" secondAttribute="bottom" id="hWm-fg-yUT"/>
                 <constraint firstAttribute="trailing" secondItem="MmT-sh-XmS" secondAttribute="trailing" constant="40" id="wYP-4s-hDq"/>
+                <constraint firstAttribute="trailing" secondItem="v4B-Cx-bMC" secondAttribute="trailing" constant="20" id="zUd-j3-MIF"/>
                 <constraint firstItem="v4B-Cx-bMC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="zal-7z-FAA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

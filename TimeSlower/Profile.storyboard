@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Evs-iJ-fF4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -11,6 +11,9 @@
     <customFonts key="customFonts">
         <array key="SourceSansPro-Bold.ttf">
             <string>SourceSansPro-Bold</string>
+        </array>
+        <array key="SourceSansPro-Light.ttf">
+            <string>SourceSansPro-Light</string>
         </array>
         <array key="SourceSansPro-Regular.ttf">
             <string>SourceSansPro-Regular</string>
@@ -29,7 +32,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PSP-37-CHz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4oQ-Cx-jnb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZf-UR-Dny" userLabel="redBackground">
@@ -424,9 +427,21 @@
                                     <constraint firstAttribute="trailing" secondItem="foh-Ph-JO1" secondAttribute="trailing" id="rc5-hQ-ZxS"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htb-Qx-cAM" userLabel="genderBar" customClass="GenderSelector" customModule="TimeSlower" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htb-Qx-cAM" userLabel="genderBar">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your birthday and country will be used to calculate life expactancy and analize your time spending patterns" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-He-Pe0">
+                                        <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="11"/>
+                                        <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="6Et-Rd-hlq"/>
+                                    <constraint firstItem="LBd-He-Pe0" firstAttribute="leading" secondItem="htb-Qx-cAM" secondAttribute="leading" constant="56" id="2N7-5x-D46"/>
+                                    <constraint firstAttribute="height" constant="80" id="6Et-Rd-hlq"/>
+                                    <constraint firstItem="LBd-He-Pe0" firstAttribute="top" secondItem="htb-Qx-cAM" secondAttribute="top" constant="8" id="DB3-oE-4eP"/>
+                                    <constraint firstAttribute="trailing" secondItem="LBd-He-Pe0" secondAttribute="trailing" constant="56" id="UJU-vi-bBD"/>
+                                    <constraint firstAttribute="bottom" secondItem="LBd-He-Pe0" secondAttribute="bottom" constant="8" id="rWE-8l-Mmv"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLU-6Z-Lt1" userLabel="avatarBackgroundView">
@@ -447,19 +462,19 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RLU-6Z-Lt1" secondAttribute="height" multiplier="1:1" id="9XO-zY-t52"/>
-                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="AEH-U0-X4l"/>
+                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="leading" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="AEH-U0-X4l"/>
                                     <constraint firstAttribute="centerY" secondItem="HrX-rP-kZD" secondAttribute="centerY" id="BVp-Fj-a0V"/>
                                     <constraint firstAttribute="centerY" secondItem="Bdh-9b-u4y" secondAttribute="centerY" id="K3t-Mu-5TL"/>
                                     <constraint firstAttribute="height" secondItem="Bdh-9b-u4y" secondAttribute="height" id="P2B-u2-n6B"/>
                                     <constraint firstAttribute="bottom" secondItem="9tr-P1-3lI" secondAttribute="bottom" constant="8" id="Sa3-Hq-ktm"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HrX-rP-kZD" secondAttribute="bottom" constant="8" id="Sar-3d-9DH"/>
+                                    <constraint firstAttribute="bottom" secondItem="HrX-rP-kZD" secondAttribute="bottom" constant="8" id="Sar-3d-9DH"/>
                                     <constraint firstAttribute="centerX" secondItem="Bdh-9b-u4y" secondAttribute="centerX" id="UEg-BS-oK1"/>
                                     <constraint firstAttribute="centerX" secondItem="HrX-rP-kZD" secondAttribute="centerX" id="VFX-AU-eye"/>
                                     <constraint firstItem="9tr-P1-3lI" firstAttribute="leading" secondItem="RLU-6Z-Lt1" secondAttribute="leading" constant="8" id="Wfh-2q-Ru6"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HrX-rP-kZD" secondAttribute="trailing" constant="8" id="YFG-o2-j0X"/>
+                                    <constraint firstAttribute="trailing" secondItem="HrX-rP-kZD" secondAttribute="trailing" constant="8" id="YFG-o2-j0X"/>
                                     <constraint firstItem="9tr-P1-3lI" firstAttribute="top" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="ZNE-AJ-BDr"/>
                                     <constraint firstAttribute="width" secondItem="Bdh-9b-u4y" secondAttribute="width" id="rJM-bB-clN"/>
-                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="tRP-YC-c1g"/>
+                                    <constraint firstItem="HrX-rP-kZD" firstAttribute="top" secondItem="RLU-6Z-Lt1" secondAttribute="top" constant="8" id="tRP-YC-c1g"/>
                                     <constraint firstAttribute="trailing" secondItem="9tr-P1-3lI" secondAttribute="trailing" constant="8" id="zQo-u6-k4I"/>
                                 </constraints>
                             </view>
@@ -505,7 +520,6 @@
                         <outlet property="avatarImage" destination="HrX-rP-kZD" id="8iG-F7-Acn"/>
                         <outlet property="avatarInnerView" destination="9tr-P1-3lI" id="99a-vG-iR7"/>
                         <outlet property="changeAvatarButton" destination="Bdh-9b-u4y" id="NL9-18-B94"/>
-                        <outlet property="genderSelector" destination="htb-Qx-cAM" id="a6u-GO-JjV"/>
                         <outlet property="headerViewHeight" destination="Ctv-jh-TQw" id="3bF-te-YFg"/>
                         <outlet property="propertiesTableView" destination="foh-Ph-JO1" id="82A-gt-d9v"/>
                         <segue destination="lew-Bl-GjO" kind="unwind" identifier="SaveProfileAndReturnToProfileStats" unwindAction="dismissProfileEditingController:" id="kGh-aX-JgU"/>
@@ -516,18 +530,18 @@
                 <exit id="lew-Bl-GjO" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="DCf-qt-Xmf"/>
             </objects>
-            <point key="canvasLocation" x="418" y="-929"/>
+            <point key="canvasLocation" x="417.60000000000002" y="-929.2353823088456"/>
         </scene>
     </scenes>
     <resources>
         <image name="AE.png" width="40" height="30"/>
-        <image name="avatarPickerImage" width="33" height="26"/>
-        <image name="backIconWhite" width="9" height="15"/>
-        <image name="bigRedBackground" width="375" height="494"/>
-        <image name="editIconWhite" width="18" height="18"/>
+        <image name="avatarPickerImage" width="44" height="34"/>
+        <image name="backIconWhite" width="9" height="16"/>
+        <image name="bigRedBackground" width="414" height="545"/>
+        <image name="editIconWhite" width="24" height="24"/>
         <image name="infoIcon" width="10" height="10"/>
-        <image name="okButton" width="50" height="50"/>
-        <image name="whiteButtonBackground" width="375" height="494"/>
-        <image name="whiteCurve" width="320" height="30"/>
+        <image name="okButton" width="100" height="100"/>
+        <image name="whiteButtonBackground" width="203" height="48"/>
+        <image name="whiteCurve" width="426" height="40"/>
     </resources>
 </document>

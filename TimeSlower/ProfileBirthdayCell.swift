@@ -8,6 +8,7 @@
 
 import UIKit
 import TimeSlowerKit
+import ReactiveSwift
 
 /// ProfileEditingCell that displays date picker and TextfieldView
 class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
@@ -18,6 +19,17 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     
     private let dateFormatter = StaticDateFormatter.fullDateFormatter
     private var timer: Timer?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textfieldView.text.producer.startWithValues { [weak self] (text) in
+            guard let text = text, let date = self?.dateFormatter.date(from: text) else { return }
+            self?.datePicker.setDate(date, animated: true)
+            self?.delegate?.profileEditingCellDidUpdateValue(value: text, type: .Birthday)
+            
+        }
+    }
     
     weak var delegate: ProfileEditingCellDelegate?
     

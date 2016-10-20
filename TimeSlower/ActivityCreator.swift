@@ -60,6 +60,7 @@ internal final class ActivityCreator {
             notifications: notifications)
         
         dataStore.create(activity)
+        
         return activity
     }
     

@@ -16,6 +16,18 @@ protocol TextfieldConfiguration {
     var textFieldInteractionEnabled: Bool { get }
     var iconHighlighted: UIImage? { get }
     var icon: UIImage? { get }
+    var shouldShowDefaultButton: Bool { get }
+    var defaultValue: String? { get }
+}
+
+extension TextfieldConfiguration {
+    var shouldShowDefaultButton: Bool {
+        return false
+    }
+    
+    var defaultValue: String? {
+        return nil
+    }
 }
 
 // MARK: - Activity
@@ -84,6 +96,8 @@ struct ProfileBirthdayTextfield: TextfieldConfiguration {
     var iconHighlighted: UIImage? = UIImage(named: "birthdayIconBlack")
     var icon: UIImage? = UIImage(named: "birthdayIcon")
     var textFieldInteractionEnabled: Bool = false
+    var shouldShowDefaultButton: Bool = true
+    var defaultValue: String? = "Mar 28, 1987"
 }
 
 struct ProfileCountryTextfield: TextfieldConfiguration {
@@ -91,4 +105,6 @@ struct ProfileCountryTextfield: TextfieldConfiguration {
     var iconHighlighted: UIImage? = UIImage(named: "countryIconBlack")
     var icon: UIImage? = UIImage(named: "countryIcon")
     var textFieldInteractionEnabled: Bool = false
+    var shouldShowDefaultButton: Bool = true
+    var defaultValue: String = "United States"
 }

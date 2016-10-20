@@ -28,6 +28,7 @@ class TextfieldView: UIView {
     @IBOutlet weak var textField: JVFloatLabeledTextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet fileprivate var view: UIView!
+    @IBOutlet weak var defaultValueButton: UIButton!
     
     var text = MutableProperty<String?>(nil)
     var config: TextfieldConfiguration!
@@ -74,6 +75,17 @@ class TextfieldView: UIView {
         addSubview(view)
     }
     
+    @IBAction private func onDefaultButton(_ sender: AnyObject) {
+        textField.text = config.defaultValue
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        defaultValueButton.layer.borderWidth = 1
+        defaultValueButton.layer.borderColor = UIColor.purpleRed().cgColor
+        defaultValueButton.layer.cornerRadius = 3
+    }
+    
     fileprivate func setupEvents() {
         let textDirectSignal = textField.rac_values(forKeyPath: "text", observer: self).toSignalProducer()
         let textInputSignal = textField.rac_textSignal().toSignalProducer()
@@ -90,6 +102,16 @@ class TextfieldView: UIView {
                     self?.imageView.image = valid ? self?.config.iconHighlighted : self?.config.icon
                 }
             }
+        
+        SignalProducer.combineLatest([textDirectSignal, textInputSignal])
+            .map { (strings) -> String in
+                let combinedString = strings.reduce("") { $0 + ($1 as! String) }
+                return combinedString
+            }
+            .startWithResult { [weak self] (string) in
+                guard let input = string.value, input.characters.count > 0 else { return }
+                self?.text.value = string.value
+            }
     }
     
     fileprivate func setupDesign() {
@@ -99,6 +121,8 @@ class TextfieldView: UIView {
         textField.floatingLabelTextColor = UIColor.purpleRed()
         textField.font = UIFont.sourceSansRegular()
         textField.placeholderYPadding = Constants.placeholderYPadding
+        
+        defaultValueButton.alpha = config.shouldShowDefaultButton ? 1 : 0
         
         if let text = textField.text {
             textField.textColor = text.characters.count > 0 ? UIColor.darkGray() : UIColor.lightGray()

@@ -16,7 +16,6 @@ class ProfileEditingVC: UIViewController {
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var propertiesTableView: UITableView!
-    @IBOutlet weak var genderSelector: GenderSelector!
     @IBOutlet weak var avatarFrameView: UIView!
     @IBOutlet weak var avatarInnerView: UIView!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
@@ -59,7 +58,6 @@ class ProfileEditingVC: UIViewController {
         
         if let profile = profile {
             dataSource?.setup(withProfile: profile)
-            genderSelector.setSelectedGender(profile.gender.rawValue)
             
             if let photo = profile.photo {
                 avatarImage.image = photo
@@ -71,8 +69,6 @@ class ProfileEditingVC: UIViewController {
         propertiesTableView.dataSource = dataSource
         propertiesTableView.delegate = self
         navigationController?.isNavigationBarHidden = true
-        
-        subscribeToGenderSelector()
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,13 +91,6 @@ class ProfileEditingVC: UIViewController {
         avatarInnerView.layer.cornerRadius = avatarInnerView.bounds.height / 2
     }
     
-    private func subscribeToGenderSelector() {
-        genderSelector.rac_signal(for: .valueChanged).toSignalProducer().startWithResult { [weak self] (result) in
-            if let selector = result.value as? GenderSelector, let value = selector.selectedSegmentIndex, let gender = Gender(rawValue: value) {
-                self?.dataSource?.gender = gender
-            }
-        }
-    }
     
     //MARK: - ACTIONS
 
