@@ -197,7 +197,6 @@ class ProfileEditingVC: UIViewController {
             return
         }
         selectedCellIndex = nextRowIndex(fromSelectedIndex: selectedCellIndex)
-        setDefaultValue(forCellAtIndex: selectedCellIndex)
         updateTableViewLayout()
     }
     

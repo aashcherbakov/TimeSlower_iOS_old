@@ -23,6 +23,12 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
         super.awakeFromNib()
         
         countryPicker.delegate = self
+        
+        textfieldView.text.producer.startWithValues { [weak self] (text) in
+            guard let text = text else { return }
+            self?.countryPicker.setSelectedCountryName(text, animated: true)
+            self?.delegate?.profileEditingCellDidUpdateValue(value: text, type: .Country)
+        }
     }
     
     func setDefaultValue() {

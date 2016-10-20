@@ -106,5 +106,5 @@ struct ProfileCountryTextfield: TextfieldConfiguration {
     var icon: UIImage? = UIImage(named: "countryIcon")
     var textFieldInteractionEnabled: Bool = false
     var shouldShowDefaultButton: Bool = true
-    var defaultValue: String = "United States"
+    var defaultValue: String? = "United States"
 }

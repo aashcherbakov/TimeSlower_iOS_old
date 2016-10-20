@@ -21,7 +21,7 @@ class EditActivityStartTimeView: ObservableControl {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var separatorLineHeight: NSLayoutConstraint!
     @IBOutlet weak var textfieldViewHeightConstraint: NSLayoutConstraint!
-    fileprivate let shortDateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
+    fileprivate let shortDateFormatter = StaticDateFormatter.shortTimeNoDateFormatter
     
     /// Selected date. Observable
     dynamic var selectedValue: Date?

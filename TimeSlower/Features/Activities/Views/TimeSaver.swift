@@ -138,7 +138,10 @@ class TimeSaver: UIView {
     
     private func updateSlider(withValue value: Float, period: Period) {
         slider.setValue(value, animated: true)
-        timeLabel.text = "\(Int(value)) \(period.description())"
+        let value = "\(Int(value)) \(period.description())"
+        let fullString = "Let's try to cut \(value) from this routine and see how much time could you seve in life..."
+        
+        timeLabel.text = fullString
     }
 
 }

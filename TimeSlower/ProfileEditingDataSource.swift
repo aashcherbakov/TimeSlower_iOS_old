@@ -43,7 +43,6 @@ class ProfileEditingDataSource: NSObject {
     fileprivate var birthday: String?
     
     var image: UIImage?
-    var gender: Gender?
     
     fileprivate let rowStructure: [ProfileEditingCell.Type] = [
         ProfileNameCell.self,
@@ -70,7 +69,6 @@ class ProfileEditingDataSource: NSObject {
         country = profile.country
         let birthdayString = StaticDateFormatter.fullDateFormatter.string(from: profile.dateOfBirth)
         birthday = birthdayString
-        gender = profile.gender
         image = profile.photo
         
         profileData = [profile.name, birthdayString, profile.country]
