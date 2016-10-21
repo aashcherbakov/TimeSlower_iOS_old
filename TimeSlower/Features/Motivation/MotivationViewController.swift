@@ -17,7 +17,7 @@ class MotivationViewController: UIViewController {
     @IBOutlet weak var motivationControl: MotivationControl!
     @IBOutlet weak var activityStatsView: MotivationStatsView!
     fileprivate(set) var activity: Activity?
-    fileprivate let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
+    fileprivate let dateFormatter = StaticDateFormatter.shortTimeNoDateFormatter
     
     @IBAction func backButtonTapped(_ sender: AnyObject) {
         if let navigationController = navigationController {
@@ -31,7 +31,7 @@ class MotivationViewController: UIViewController {
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         } else {
-            dismiss(animated: true, completion: nil)
+            view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -57,6 +57,11 @@ class MotivationViewController: UIViewController {
         super.updateViewConstraints()
         motivationControl.setNeedsLayout()
         motivationControl.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Private Functions
