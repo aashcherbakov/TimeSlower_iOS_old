@@ -20,10 +20,11 @@ public protocol GenericAdapter {
 
 extension GenericAdapter {
     
-    public func createObject<T: Persistable>(_ object: T) {
+    public func createObject<T: Persistable>(_ object: T) -> T {
         let entity: EntityType = creator.createEntity(withParent: nil)
         let configuration = converter.configurationFromObject(object)
-        let _: EntityType = creator.updateEntity(entity, configuration: configuration)
+        let updated: EntityType = creator.updateEntity(entity, configuration: configuration)
+        return updated as! T
     }
     
     public func createObject<T: Persistable, U: Persistable>(_ object: T, parent: U) -> T {

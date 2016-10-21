@@ -63,6 +63,7 @@
 		89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B31D934215008D18A0 /* TimeMachineTests.swift */; };
 		89E9C7F51D934474008D18A0 /* TimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B11D934215008D18A0 /* TimeCalculatorTests.swift */; };
 		89E9C7F61D93447C008D18A0 /* SuccessCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AF1D934215008D18A0 /* SuccessCalculatorTests.swift */; };
+		89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA900C1DBA49CA0004464D /* ProfileCreator.swift */; };
 		F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */; };
 		F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */; };
 		F009AE5C1BD9C5F8007F38A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */; };
@@ -389,6 +390,7 @@
 		89E9C7CF1D934224008D18A0 /* TimingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingTests.swift; sourceTree = "<group>"; };
 		89E9C7D31D93422D008D18A0 /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		89E9C7D41D93422D008D18A0 /* WeekdayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTests.swift; sourceTree = "<group>"; };
+		89EA900C1DBA49CA0004464D /* ProfileCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCreator.swift; sourceTree = "<group>"; };
 		F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerFactory.swift; path = Features/Shared/ControllerFactory.swift; sourceTree = "<group>"; };
 		F009AE531BD9C5F8007F38A9 /* TimeSlower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1379,6 +1381,7 @@
 				F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */,
 				89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */,
 				89BDDEC51DA01C4700703F5E /* ProfileEditingDataSource.swift */,
+				89EA900C1DBA49CA0004464D /* ProfileCreator.swift */,
 				F0C2FF791DA06B6500CB79CB /* Cells */,
 			);
 			name = "Edit Profile";
@@ -1919,6 +1922,7 @@
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
+				89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */,

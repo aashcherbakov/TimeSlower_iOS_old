@@ -22,6 +22,13 @@ enum ProfileEditingCellType: String {
     case Birthday = "birthday"
 }
 
+struct ProfileData {
+    let name: String
+    let birthday: String
+    let country: String
+    let image: UIImage?
+}
+
 /// Protocol that is used to pass data of specified CellType to delegate
 protocol ProfileEditingCellDelegate: class {
     func profileEditingCellDidUpdateValue(value: String, type: ProfileEditingCellType)
@@ -74,39 +81,12 @@ class ProfileEditingDataSource: NSObject {
         profileData = [profile.name, birthdayString, profile.country]
     }
     
-    func saveProfile(profile: Profile?) {
-        if let profile = profile {
-            if let updatedProfile = newProfile(fromProfile: profile) {
-                let savedProfile: Profile = dataStore.update(updatedProfile)
-                self.profile = savedProfile
-            }
-            
-        } else {
-            if let profile = newProfile(fromProfile: nil) {
-                dataStore.create(profile)
-                self.profile = profile
-            }
-        }
-    }
-    
-    private func newProfile(fromProfile profile: Profile?) -> Profile? {
-        guard
-            let name = name, let country = country, let birthday = birthday,
-            let dateOfBirth = StaticDateFormatter.fullDateFormatter.date(from: birthday)
-        else {
-            return nil
-        }
-        
-        let updatedProfile = Profile(
-            name: name,
-            country: country,
-            dateOfBirth: dateOfBirth,
-            gender: .female,
-            maxAge: profile != nil ? profile!.maxAge : 76,
-            photo: image,
-            resourceId: profile != nil ? profile!.resourceId : nil)
-        
-        return updatedProfile
+    func profileProperties() -> ProfileData {
+        return ProfileData(
+            name: name ?? "",
+            birthday: birthday ?? "",
+            country: country ?? "",
+            image: image)
     }
     
     func profileHasNoActivities() -> Bool {

@@ -50,7 +50,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         super.viewDidLayoutSubviews()
         setupAvatarForm()
     }
-    private func setupData() {
+    fileprivate func setupData() {
         guard let profile = profile else {
             return
         }
@@ -78,7 +78,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         return totalSuccess / Double(activities.count)
     }
     
-    private func setupDesign() {
+    fileprivate func setupDesign() {
         displaySavedTime()
         displayAverageSuccess()
         displayGreeting()
@@ -131,6 +131,7 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     @IBAction func onEditButton(_ sender: UIButton) {
         let editProfileVC: ProfileEditingVC = ControllerFactory.createController()
         editProfileVC.profile = profile
+        editProfileVC.delegate = self
         present(editProfileVC, animated: true, completion: nil)
     }
     
@@ -180,7 +181,6 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     @IBAction func dismissProfileEditingController(_ segue: UIStoryboardSegue) { }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == Constants.createActivitySegue {
             if let vc = segue.destination as? EditActivityVC {
                 vc.userProfile = profile
@@ -188,5 +188,13 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
         }
     }
     
+}
 
+extension ProfileStatsVC: ProfileEditingDelegate {
+    func didUpdate(profile: Profile) {
+        self.profile = profile
+        setupData()
+        setupDesign()
+        launchTimer()
+    }
 }

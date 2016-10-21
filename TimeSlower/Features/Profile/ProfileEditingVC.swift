@@ -11,7 +11,11 @@ import MobileCoreServices
 import TimeSlowerKit
 import ReactiveSwift
 
-class ProfileEditingVC: UIViewController {
+internal protocol ProfileEditingDelegate {
+    func didUpdate(profile: Profile)
+}
+
+internal final class ProfileEditingVC: UIViewController {
     
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
@@ -22,8 +26,10 @@ class ProfileEditingVC: UIViewController {
     
     fileprivate var dataSource: ProfileEditingDataSource?
     fileprivate var avatarPicker: AvatarPicker?
+    private let profileCreator = ProfileCreator()
     
     var profile: Profile?
+    var delegate: ProfileEditingDelegate?
 
     fileprivate struct Constants {
         static let collapsedCellHeight = 0 as CGFloat
@@ -100,16 +106,31 @@ class ProfileEditingVC: UIViewController {
             return
         }
         
-        saveProfile()
-        moveToCreateActivityIfNeeded()
-    }
-    
-    private func saveProfile() {
         if let missingValue = dataSource?.missingData() {
             postAlertOnLackOfInfo(missingValue)
         } else {
-            dataSource?.saveProfile(profile: profile)
+            let savedProfile = saveProfile()
+            delegate?.didUpdate(profile: savedProfile)
+            self.profile = savedProfile
+            moveToCreateActivityIfNeeded()
         }
+    }
+    
+    private func saveProfile() -> Profile {
+        guard let dataSource = dataSource else { fatalError("Data source not initialized") }
+
+        var savedProfile: Profile
+        if let profile = profile {
+            savedProfile = profileCreator.saveProfile(profile: profile)
+        } else {
+            let properties = dataSource.profileProperties()
+            savedProfile = profileCreator.createProfile(
+                withName: properties.name,
+                country: properties.country,
+                birthday: properties.birthday,
+                image: properties.image)
+        }
+        return savedProfile
     }
     
     private func moveToCreateActivityIfNeeded() {
