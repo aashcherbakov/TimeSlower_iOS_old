@@ -40,6 +40,12 @@ class TextfieldView: UIView {
         setupXib()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupDefaultButtonLayer()
+        updateDefaultButtonVisibility()
+    }
+    
     // MARK: - Internal Methods
     
     /**
@@ -67,26 +73,21 @@ class TextfieldView: UIView {
         }
     }
     
-    // MARK: - Private Methods
-    
-    fileprivate func setupXib() {
-        Bundle.main.loadNibNamed(TextfieldView.className, owner: self, options: nil)
-        bounds = view.bounds
-        addSubview(view)
-    }
+    // MARK: - Actions
     
     @IBAction private func onDefaultButton(_ sender: AnyObject) {
         textField.text = config.defaultValue
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        defaultValueButton.layer.borderWidth = 1
-        defaultValueButton.layer.borderColor = UIColor.purpleRed().cgColor
-        defaultValueButton.layer.cornerRadius = 3
+    // MARK: - Private Methods
+    
+    private func setupXib() {
+        Bundle.main.loadNibNamed(TextfieldView.className, owner: self, options: nil)
+        bounds = view.bounds
+        addSubview(view)
     }
     
-    fileprivate func setupEvents() {
+    private func setupEvents() {
         let textDirectSignal = textField.rac_values(forKeyPath: "text", observer: self).toSignalProducer()
         let textInputSignal = textField.rac_textSignal().toSignalProducer()
         
@@ -111,10 +112,15 @@ class TextfieldView: UIView {
             .startWithResult { [weak self] (string) in
                 guard let input = string.value, input.characters.count > 0 else { return }
                 self?.text.value = string.value
+                self?.defaultValueButton.alpha = 0
             }
     }
     
-    fileprivate func setupDesign() {
+    private func updateDefaultButtonVisibility() {
+        defaultValueButton.alpha = shouldDisplayDefaultValueButton() ? 1 : 0
+    }
+    
+    private func setupDesign() {
         textField.isUserInteractionEnabled = config.textFieldInteractionEnabled
         textField.placeholder = config.placeholder
         textField.floatingLabelActiveTextColor = UIColor.purpleRed()
@@ -122,14 +128,25 @@ class TextfieldView: UIView {
         textField.font = UIFont.sourceSansRegular()
         textField.placeholderYPadding = Constants.placeholderYPadding
         
-        defaultValueButton.alpha = config.shouldShowDefaultButton ? 1 : 0
         
         if let text = textField.text {
             textField.textColor = text.characters.count > 0 ? UIColor.darkGray() : UIColor.lightGray()
         } else {
             textField.textColor = UIColor.lightGray()
         }
-
+    }
+    
+    private func setupDefaultButtonLayer() {
+        defaultValueButton.layer.borderWidth = 1
+        defaultValueButton.layer.borderColor = UIColor.purpleRed().cgColor
+        defaultValueButton.layer.cornerRadius = 3
+    }
+    
+    private func shouldDisplayDefaultValueButton() -> Bool {
+        guard let text = textField.text else { return true }
+        
+        let textfieldIsEmpty = text.characters.count == 0
+        return textfieldIsEmpty && config.shouldShowDefaultButton
     }
 }
 
