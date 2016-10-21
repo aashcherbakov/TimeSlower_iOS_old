@@ -387,7 +387,9 @@ extension EditActivityVC: StateMachineDelegate {
         case (.name, .basis): return selectedName != nil
         case (.basis, .startTime): return selectedBasis != nil
         case (.startTime, .duration): return selectedStartTime != nil
-        case (.duration, .fullHouse): return selectedDuration != nil
+        case (.duration, .fullHouse):
+            expandedCellIndex = nil
+            return selectedDuration != nil
         default: return false
         }
     }
