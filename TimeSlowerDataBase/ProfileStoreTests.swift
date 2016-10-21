@@ -43,16 +43,12 @@ class ProfileStoreTests: BaseDataStoreTest {
     }
 
     func test_createEntity_defaultSettings() {
-        // given
-        let birthday = shortDateFormatter.date(from: "3/28/1987")
-        
         // when
         let profile: ProfileEntity = sut.createEntity()
         
         // then
         XCTAssertEqual(profile.name, "Anonymous")
-        XCTAssertEqual(profile.birthday, birthday)
-        XCTAssertEqual(profile.country, "United States")
+        XCTAssertEqual(profile.country, "")
         XCTAssertEqual(profile.gender, 0)
         XCTAssertNotNil(profile.dateOfDeath)
     }
@@ -95,7 +91,7 @@ class ProfileStoreTests: BaseDataStoreTest {
     
     
     func test_maxYearsLeftForProfile() {
-        XCTAssertEqual(testProfileEntity.maxYearsForProfile(testProfileEntity), 77.4, "Max years should be 77.4")
+        XCTAssertEqual(testProfileEntity.maxYearsForProfile(testProfileEntity), 76, "Max years should be 77.4")
     }
     
 

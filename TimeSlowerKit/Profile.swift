@@ -79,4 +79,19 @@ public struct Profile: Persistable {
         let components = calendar.dateComponents([.day], from: date, to: dateOfApproximateLifeEnd())
         return abs(components.day!)
     }
+    
+    public static func defaultBirthday() -> Date {
+        var components = DateComponents()
+        components.year = 1987
+        components.month = 3
+        components.day = 28
+        components.calendar = .current
+        
+        if let date = Calendar.current.date(from: components) {
+            return date
+        } else {
+            assertionFailure("Could not create date from components")
+            return Date()
+        }
+    }
 }

@@ -19,7 +19,7 @@ import TimeSlowerDataBase
  */
 public protocol DataStoreAdapter {
     
-    func createObject<T: Persistable>(_ object: T)
+    func createObject<T: Persistable>(_ object: T) -> T
     
     func createObject<T: Persistable, U: Persistable>(_ object: T, parent: U) -> T
     
