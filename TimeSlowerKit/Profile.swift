@@ -38,6 +38,17 @@ public struct Profile: Persistable {
         self.resourceId = resourceId ?? UUID().uuidString
     }
     
+    public init(fromProfile profile: Profile, name: String, dateOfBirth: Date, country: String, photo: UIImage?) {
+    
+        self.name = name
+        self.dateOfBirth = dateOfBirth
+        self.country = country
+        self.photo = photo
+        self.resourceId = profile.resourceId
+        self.maxAge = profile.maxAge
+        self.gender = profile.gender
+    }
+    
     /**
      Returns user age.
      

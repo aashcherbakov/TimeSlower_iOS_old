@@ -18,9 +18,11 @@ internal struct ProfileCreator {
         self.dataStore = dataStore
     }
     
-    func saveProfile(profile: Profile) -> Profile {
-        let updatedProfile = dataStore.update(profile)
-        return updatedProfile
+    func saveProfile(profile: Profile, withProperties properties: ProfileData) -> Profile {
+        let updatedBirthday = getProfileDateOfBirth(fromString: properties.birthday)
+        let updatedProfile = Profile(fromProfile: profile, name: properties.name, dateOfBirth: updatedBirthday, country: properties.country, photo: properties.image)
+        let savedProfile = dataStore.update(updatedProfile)
+        return savedProfile
     }
     
     func createProfile(withName name: String, country: String, birthday: String, image: UIImage?) -> Profile {
@@ -34,7 +36,7 @@ internal struct ProfileCreator {
             maxAge: 77.4,
             photo: image)
         
-        let newProfile = dataStore.create(profile)
+        let newProfile: Profile = dataStore.create(profile)
         return newProfile
     }
     
