@@ -53,7 +53,7 @@ internal final class ProfileEditingVC: UIViewController {
         }
     }
     
-    fileprivate var selectedCellIndex: IndexPath?
+    fileprivate var selectedCellIndex: IndexPath? 
     
     //MARK: - Lifecycle
     
@@ -187,12 +187,6 @@ internal final class ProfileEditingVC: UIViewController {
         }
     }
     
-    private func setDefaultValue(forCellAtIndex index: IndexPath?) {
-        if let index = index, let cell = propertiesTableView.cellForRow(at: index) as? ProfileEditingCell {
-            cell.setDefaultValue()
-        }
-    }
-    
     fileprivate func saveValueInCell(forIndexPath indexPath: IndexPath?) {
         if let indexPath = indexPath, let cell = propertiesTableView.cellForRow(at: indexPath) as? ProfileEditingCell {
             cell.saveValue()
@@ -205,6 +199,7 @@ internal final class ProfileEditingVC: UIViewController {
         saveValueInCell(forIndexPath: selectedCellIndex)
 
         if let _ = dataSource.missingData() {
+            
         } else {
             selectedCellIndex = nil
             updateTableViewLayout()
@@ -235,11 +230,11 @@ internal final class ProfileEditingVC: UIViewController {
     // MARK: - Private
 
     private func nextRowIndex(fromSelectedIndex currentIndex: IndexPath?) -> IndexPath? {
-        guard let totalRows = dataSource?.numberOfRows(), let currentIndex = currentIndex else {
-            return nil
+        guard let totalRows = dataSource?.numberOfRows(), let current = currentIndex else {
+            return currentIndex
         }
 
-        let nextRow = currentIndex.row + 1
+        let nextRow = current.row + 1
         return nextRow < totalRows ? IndexPath(row: nextRow, section: 0) : nil
     }
 
