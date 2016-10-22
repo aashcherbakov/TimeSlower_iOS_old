@@ -18,8 +18,16 @@ import TimeSlowerKit
  */
 enum ProfileEditingCellType: String {
     case Name = "name"
-    case Country = "country"
     case Birthday = "birthday"
+    case Country = "country"
+    
+    func index() -> Int {
+        switch self {
+        case .Name: return 0
+        case .Birthday: return 1
+        case .Country: return 2
+        }
+    }
 }
 
 struct ProfileData {
@@ -138,6 +146,11 @@ extension ProfileEditingDataSource: ProfileEditingCellDelegate {
         case .Name: name = value
         case .Birthday: birthday = value
         case .Country: country = value
+        }
+        
+        let index = type.index()
+        if profileData.count > index {
+            profileData[index] = value
         }
         
         delegate?.profileEditingDataSourceDidUpdateValue()

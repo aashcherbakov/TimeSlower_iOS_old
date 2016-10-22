@@ -82,7 +82,6 @@ internal final class ProfileEditingVC: UIViewController {
         
         setCircleFormToAvatarImageView()
         setupHeaderViewHeight()
-        
         setupImageViewForAvatar()
     }
     
@@ -119,11 +118,11 @@ internal final class ProfileEditingVC: UIViewController {
     private func saveProfile() -> Profile {
         guard let dataSource = dataSource else { fatalError("Data source not initialized") }
 
+        let properties = dataSource.profileProperties()
         var savedProfile: Profile
         if let profile = profile {
-            savedProfile = profileCreator.saveProfile(profile: profile)
+            savedProfile = profileCreator.saveProfile(profile: profile, withProperties: properties)
         } else {
-            let properties = dataSource.profileProperties()
             savedProfile = profileCreator.createProfile(
                 withName: properties.name,
                 country: properties.country,
@@ -202,9 +201,10 @@ internal final class ProfileEditingVC: UIViewController {
     
     fileprivate func moveToNextCellIfNeeded() {
         guard let dataSource = dataSource else { return }
-        
+
+        saveValueInCell(forIndexPath: selectedCellIndex)
+
         if let _ = dataSource.missingData() {
-            saveValueInCell(forIndexPath: selectedCellIndex)
         } else {
             selectedCellIndex = nil
             updateTableViewLayout()

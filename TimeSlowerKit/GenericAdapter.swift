@@ -24,7 +24,7 @@ extension GenericAdapter {
         let entity: EntityType = creator.createEntity(withParent: nil)
         let configuration = converter.configurationFromObject(object)
         let updated: EntityType = creator.updateEntity(entity, configuration: configuration)
-        return updated as! T
+        return converter.objectFromEntity(updated, parentObject: nil) as! T
     }
     
     public func createObject<T: Persistable, U: Persistable>(_ object: T, parent: U) -> T {
@@ -34,9 +34,8 @@ extension GenericAdapter {
         
         let childEntity: EntityType = creator.createEntity(withParent: parentEntity)
         let configuration = converter.configurationFromObject(object)
-        let _: EntityType = creator.updateEntity(childEntity, configuration: configuration)
-        
-        return object
+        let updated: EntityType = creator.updateEntity(childEntity, configuration: configuration)
+        return converter.objectFromEntity(updated, parentObject: parent) as! T
     }
     
     public func retrieveObject<T: Persistable>(_ key: String) -> T? {

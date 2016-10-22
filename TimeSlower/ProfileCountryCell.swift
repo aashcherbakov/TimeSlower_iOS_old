@@ -32,7 +32,7 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     }
     
     func setDefaultValue() {
-        if textfieldView.textField.text == "" {
+        if textfieldView.textField.text == nil || textfieldView.textField.text == "" {
             textfieldView.setText("United States")
             countryPicker.setSelectedCountryName("United States", animated: false)
         }
