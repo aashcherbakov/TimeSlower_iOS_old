@@ -21,7 +21,8 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        countryPicker.setSelectedCountryName("United States", animated: false)
+
         countryPicker.delegate = self
         
         textfieldView.text.producer.startWithValues { [weak self] (text) in
@@ -29,6 +30,7 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
             self?.countryPicker.setSelectedCountryName(text, animated: true)
             self?.delegate?.profileEditingCellDidUpdateValue(value: text, type: .Country)
         }
+        
     }
     
     func setDefaultValue() {

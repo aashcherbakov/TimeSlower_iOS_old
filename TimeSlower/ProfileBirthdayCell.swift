@@ -26,9 +26,18 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
         textfieldView.text.producer.startWithValues { [weak self] (text) in
             guard let text = text, let date = self?.dateFormatter.date(from: text) else { return }
             self?.datePicker.setDate(date, animated: true)
-            self?.delegate?.profileEditingCellDidUpdateValue(value: text, type: .Birthday)
-            
+            self?.notifyDelegate(ofNewValue: text)
         }
+    }
+    
+    private func notifyDelegate(ofNewValue value: String) {
+        timer?.terminate()
+        timer = Timer(1) { [weak self] in
+            self?.delegate?.profileEditingCellDidUpdateValue(value: value, type: .Birthday)
+            self?.timer?.terminate()
+        }
+        
+        timer?.start()
     }
     
     weak var delegate: ProfileEditingCellDelegate?
@@ -54,14 +63,6 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     @IBAction func didSelectDate(_ sender: UIDatePicker) {
         let date = dateFormatter.string(from: sender.date)
         textfieldView.setText(date)
-        
-        timer?.terminate()
-        timer = Timer(1) { [weak self] in
-            self?.delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
-            self?.timer?.terminate()
-        }
-        
-        timer?.start()
     }
     
 }
