@@ -43,7 +43,6 @@ class ProfileEditingDataSource: NSObject {
     fileprivate var birthday: String?
     
     var image: UIImage?
-    var gender: Gender?
     
     fileprivate let rowStructure: [ProfileEditingCell.Type] = [
         ProfileNameCell.self,
@@ -70,7 +69,6 @@ class ProfileEditingDataSource: NSObject {
         country = profile.country
         let birthdayString = StaticDateFormatter.fullDateFormatter.string(from: profile.dateOfBirth)
         birthday = birthdayString
-        gender = profile.gender
         image = profile.photo
         
         profileData = [profile.name, birthdayString, profile.country]
@@ -93,7 +91,7 @@ class ProfileEditingDataSource: NSObject {
     
     private func newProfile(fromProfile profile: Profile?) -> Profile? {
         guard
-            let name = name, let country = country, let birthday = birthday, let gender = gender,
+            let name = name, let country = country, let birthday = birthday,
             let dateOfBirth = StaticDateFormatter.fullDateFormatter.date(from: birthday)
         else {
             return nil
@@ -103,7 +101,7 @@ class ProfileEditingDataSource: NSObject {
             name: name,
             country: country,
             dateOfBirth: dateOfBirth,
-            gender: gender,
+            gender: .female,
             maxAge: profile != nil ? profile!.maxAge : 76,
             photo: image,
             resourceId: profile != nil ? profile!.resourceId : nil)
@@ -129,7 +127,6 @@ class ProfileEditingDataSource: NSObject {
         guard let _ = name else { return "Name" }
         guard let _ = country else { return "Country" }
         guard let _ = birthday else { return "Birthday" }
-        guard let _ = gender else { return "Gender" }
         
         return nil
     }
