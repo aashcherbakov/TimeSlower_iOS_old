@@ -89,7 +89,7 @@ class ActivitySchedulerTests: BaseDataStoreTest {
     }
     
     func test_currentActivity_none() {
-        let tenFifteen = shortTimeFormatter.date(from: "10/18/2016, 10:30 AM")!
+        let tenFifteen = shortTimeFormatter.date(from: "10/18/2016, 10:29 AM")!
         let activity = factory.fakeActivity()
         fakeDataStore.create(activity)
         
@@ -98,7 +98,15 @@ class ActivitySchedulerTests: BaseDataStoreTest {
     }
     
     func test_startActivity() {
+        let tenThirty = shortTimeFormatter.date(from: "10/18/2016, 10:30 AM")!
+        let activity = factory.fakeActivity()
+        let createdActivity = fakeDataStore.create(activity)
+
+        let startedActivity = sut.start(activity: createdActivity, time: tenThirty)
+        XCTAssertEqual(startedActivity.getTiming().manuallyStarted, tenThirty)
         
+        let currentActivity = sut.currentActivity(date: tenThirty)
+        XCTAssertEqual(startedActivity.resourceId, currentActivity?.resourceId)        
     }
     
     func test_finishActivity() {
