@@ -19,7 +19,6 @@
             <connections>
                 <outlet property="routineProgressLabel" destination="Pvh-Ce-2Xe" id="LbX-jw-d6v"/>
                 <outlet property="routinesCurcle" destination="8dY-8C-N9R" id="tUM-fe-4Po"/>
-                <outlet property="routinesTargetLabel" destination="ox2-d4-Uh7" id="mb0-0W-BZf"/>
                 <outlet property="successLabel" destination="YhR-Mb-dbU" id="fp3-Lw-3x6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6XY-mc-nGh"/>
             </connections>
@@ -36,16 +35,6 @@
                             <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pvh-Ce-2Xe">
-                            <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="19"/>
-                            <color key="textColor" red="0.81568627449999997" green="0.2156862745" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox2-d4-Uh7">
-                            <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="19"/>
-                            <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJU-x9-rK1">
                             <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="17"/>
                             <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,25 +45,21 @@
                             <color key="textColor" red="0.98039215690000003" green="0.45098039220000002" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRU-Hb-qqG">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pvh-Ce-2Xe">
                             <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="19"/>
-                            <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.81568627449999997" green="0.2156862745" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="HRU-Hb-qqG" firstAttribute="centerX" secondItem="aej-4g-zFj" secondAttribute="centerX" id="Aqe-Ju-ncK"/>
-                        <constraint firstItem="ox2-d4-Uh7" firstAttribute="leading" secondItem="HRU-Hb-qqG" secondAttribute="trailing" id="D1V-rP-Zul"/>
                         <constraint firstItem="YhR-Mb-dbU" firstAttribute="top" secondItem="TJU-x9-rK1" secondAttribute="bottom" id="GPi-Sw-hUd"/>
                         <constraint firstAttribute="centerY" secondItem="Pvh-Ce-2Xe" secondAttribute="bottom" constant="8" id="JzF-18-6ZS"/>
                         <constraint firstAttribute="centerY" secondItem="TJU-x9-rK1" secondAttribute="top" id="SZ1-Uv-ySY"/>
-                        <constraint firstItem="HRU-Hb-qqG" firstAttribute="baseline" secondItem="ox2-d4-Uh7" secondAttribute="baseline" id="dh0-5F-CiO"/>
-                        <constraint firstItem="HRU-Hb-qqG" firstAttribute="leading" secondItem="Pvh-Ce-2Xe" secondAttribute="trailing" id="eg7-ir-11t"/>
+                        <constraint firstItem="Pvh-Ce-2Xe" firstAttribute="centerX" secondItem="aej-4g-zFj" secondAttribute="centerX" id="gWF-96-XJM"/>
                         <constraint firstAttribute="centerX" secondItem="TJU-x9-rK1" secondAttribute="centerX" id="h2E-gy-I6p"/>
                         <constraint firstItem="YhR-Mb-dbU" firstAttribute="centerX" secondItem="TJU-x9-rK1" secondAttribute="centerX" id="jF8-mv-poW"/>
                         <constraint firstItem="Pvh-Ce-2Xe" firstAttribute="top" secondItem="aej-4g-zFj" secondAttribute="bottom" id="jTA-XE-ojm"/>
-                        <constraint firstItem="HRU-Hb-qqG" firstAttribute="baseline" secondItem="Pvh-Ce-2Xe" secondAttribute="baseline" id="osN-cZ-eUX"/>
                         <constraint firstAttribute="centerX" secondItem="aej-4g-zFj" secondAttribute="centerX" id="zMn-hM-vQf"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

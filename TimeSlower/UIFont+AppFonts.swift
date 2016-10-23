@@ -21,4 +21,7 @@ extension UIFont {
         return UIFont(name: "SourceSansPro-Regular", size: size)!
     }
     
+    class func mainSemibold(_ size: CGFloat) -> UIFont {
+        return UIFont(name: "SourceSansPro-Semibold", size: size)!
+    }
 }
