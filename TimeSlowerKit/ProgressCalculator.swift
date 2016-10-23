@@ -42,7 +42,7 @@ public struct ProgressCalculator {
     private func totalTimeToSave(fromActivities activities: [Activity]) -> Double {
         var timeToSave = 0.0
         for activity in activities {
-            timeToSave += activity.timeToSave()
+            timeToSave += activity.minutesToSave()
         }
         return timeToSave
     }

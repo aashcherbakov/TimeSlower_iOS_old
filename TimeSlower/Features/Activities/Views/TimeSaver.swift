@@ -91,7 +91,7 @@ class TimeSaver: UIView {
     
     private func minumumSavingForDuration(_ duration: Endurance) -> Int {
         if let existingValue = selectedValue.value {
-            return existingValue.minutes()
+            return existingValue.period == .hours ? existingValue.hours() : existingValue.minutes()
         }
         
         let suggestedSaving = duration.value / 4
