@@ -91,4 +91,37 @@ class ActivityTests: BaseDataStoreTest {
         XCTAssertEqual(sut.alarmTime(inDate: tuesday), alarmTime)
         XCTAssertEqual(timing.manuallyStarted, tuesday)
     }
+    
+    func test_startsEarlierThenDate() {
+        let elevenOcklock = shortTimeFormatter.date(from: "10/11/2016, 11:00 AM")!
+        let startsEarlier = sut.startsEarlierThen(date: elevenOcklock)
+        XCTAssertTrue(startsEarlier)
+    }
+    
+    func test_isGoingNow_true() {
+        let elevenOcklock = shortTimeFormatter.date(from: "10/11/2016, 11:00 AM")!
+        let isGoingNow = sut.isGoingNow(date: elevenOcklock)
+        XCTAssertTrue(isGoingNow)
+    }
+    
+    func test_isGoingNow_evening() {
+        let elevenOcklock = shortTimeFormatter.date(from: "10/11/2016, 11:00 PM")!
+        let tenForty = shortTimeFormatter.date(from: "10/11/2016, 10:40 PM")!
+
+        let timing = Timing(withDuration: FakeActivityFactory.fakeEndurance(), startTime: tenForty, timeToSave: 15, alarmTime: tenForty)
+        sut = sut.update(withTiming: timing)
+        let isGoingNow = sut.isGoingNow(date: elevenOcklock)
+        XCTAssertTrue(isGoingNow)
+    }
+    
+    func test_isGoingNow_manuallyStarted_true() {
+        let eightOcklock = shortTimeFormatter.date(from: "10/11/2016, 8:00 AM")!
+        let eightTwanty = shortTimeFormatter.date(from: "10/11/2016, 8:20 AM")!
+
+        let timing = Timing(withDuration: FakeActivityFactory.fakeEndurance(), startTime: sut.startTime(), timeToSave: 15, alarmTime: sut.startTime(), manuallyStarted: eightOcklock)
+        sut = sut.update(withTiming: timing)
+        let isGoingNow = sut.isGoingNow(date: eightTwanty)
+        XCTAssertTrue(isGoingNow)
+    }
+    
 }

@@ -59,7 +59,7 @@ public struct ActivityScheduler {
     /// - returns: Activity?
     public func currentActivity(date: Date = Date()) -> Activity? {
         let activities = dataStore.activities(forDate: date, type: .routine)
-    
+        
         for activity in activities {
             if activity.isGoingNow(date: date) {
                 return activity
@@ -78,8 +78,9 @@ public struct ActivityScheduler {
     public func start(activity: Activity, time: Date = Date()) -> Activity {
         let newTiming = activity.updateTiming(withManuallyStarted: time)
         let newActivity = activity.update(withTiming: newTiming)
-        
-        return dataStore.update(newActivity)
+        let updatedActivity = dataStore.update(newActivity)
+        print("Updated activity: \(updatedActivity)")
+        return updatedActivity
     }
     
     /// Creates a result for activity and saves it to data base. Removes manuallyStarted marter.
@@ -93,13 +94,15 @@ public struct ActivityScheduler {
         let newTiming = activity.updateTiming(withManuallyStarted: nil)
         let newActivity = activity.update(withTiming: newTiming)
         let updatedActivity = dataStore.update(newActivity)
-        dataStore.create(result, withParent: updatedActivity)
+        let _ = dataStore.create(result, withParent: updatedActivity)
         
         if let activityWithResults: Activity = dataStore.retrieve(updatedActivity.resourceId) {
             return activityWithResults
         }
         return updatedActivity
     }
+    
+    
     
     // MARK: - Private 
     

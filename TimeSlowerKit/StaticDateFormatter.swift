@@ -17,7 +17,7 @@ public final class StaticDateFormatter {
     
     public static let shortDateNoTimeFromatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = .short
@@ -26,7 +26,7 @@ public final class StaticDateFormatter {
     
     public static let shortTimeNoDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
@@ -35,7 +35,7 @@ public final class StaticDateFormatter {
     
     public static let shortDateAndTimeFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
@@ -44,7 +44,7 @@ public final class StaticDateFormatter {
     
     public static let fullDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none

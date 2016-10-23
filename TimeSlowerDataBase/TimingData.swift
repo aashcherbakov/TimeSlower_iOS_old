@@ -23,7 +23,7 @@ open class TimingData: NSObject {
         self.alarmTime = aDecoder.decodeObject(forKey: "alarmTime") as! Date
         self.startTime = aDecoder.decodeObject(forKey: "startTime") as! Date
         self.finishTime = aDecoder.decodeObject(forKey: "finishTime") as! Date
-        self.manuallyStarted = aDecoder.decodeObject(forKey: "alarmTime") as? Date
+        self.manuallyStarted = aDecoder.decodeObject(forKey: "manuallyStarted") as? Date
         self.timeToSave = aDecoder.decodeInteger(forKey: "timeToSave")
     }
     

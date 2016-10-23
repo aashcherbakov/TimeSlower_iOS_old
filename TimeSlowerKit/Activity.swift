@@ -195,29 +195,34 @@ public struct Activity: Persistable {
     }
     
     public func isGoingNow(date: Date = Date()) -> Bool {
-        return startsEarlierThen(date: date) && endsLaterThen(date: date) && !isDone(forDate: date)
+        let startsBefore = startsEarlierThen(date: date)
+        let endsAfter = endsLaterThen(date: date)
+        let notDoneYet = !isDone(forDate: date)
+        
+        print("Activity: \(name), start time: \(startTime())")
+        print("Activity: \(name), starts before \(startsBefore), ends after \(endsAfter), not done yet \(notDoneYet), date: \(date)")
+        return startsBefore && endsAfter && notDoneYet
     }
     
     public func startsEarlierThen(date: Date) -> Bool {
-        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
-        return updatedStartTime.compare(date) == .orderedAscending
+        print("Given date: \(date)")
+        print("Start time: \(startTime(inDate: date))")
+        print("Original start time: \(timing.startTime)")
+        print("Manually started: \(timing.manuallyStarted)")
+        return startTime(inDate: date).compare(date) == .orderedAscending || startTime(inDate: date).compare(date) == .orderedSame
     }
     
     public func startsLaterThen(date: Date) -> Bool {
-        let updatedStartTime = timeMachine.updatedTime(startTime(), forDate: date)
-        return updatedStartTime.compare(date) == .orderedDescending
+        return startTime(inDate: date).compare(date) == .orderedDescending
     }
     
     public func endsLaterThen(date: Date) -> Bool {
-        let updatedFinishTime = timeMachine.updatedTime(finishTime(), forDate: date)
-        return updatedFinishTime.compare(date) == .orderedDescending
+        return finishTime(inDate: date).compare(date) == .orderedDescending
     }
     
     public func startsEarlierThen(activity: Activity) -> Bool {
         let date = Date()
-        let currentActivityStartTime = timeMachine.updatedTime(startTime(), forDate: date)
-        let otherActivityStartTime = timeMachine.updatedTime(activity.startTime(), forDate: date)
-        return currentActivityStartTime.compare(otherActivityStartTime) == .orderedAscending
+        return startTime(inDate: date).compare(activity.startTime(inDate: date)) == .orderedAscending
     }
 }
 
