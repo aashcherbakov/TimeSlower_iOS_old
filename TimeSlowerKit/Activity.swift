@@ -31,7 +31,8 @@ public struct Activity: Persistable {
         type: ActivityType,
         days: [Weekday],
         timing: Timing,
-        notifications: Bool, results: Set<Result> = []) {
+        notifications: Bool,
+        results: Set<Result> = []) {
         
         self.resourceId = UUID().uuidString
         self.name = name
@@ -43,7 +44,7 @@ public struct Activity: Persistable {
         self.results = results
         self.totalResults = 0
         self.totalTimeSaved = 0
-        self.stats = Stats(withDuration: timing.duration.minutes(), busyDays: days.count, totalDays: lifetimeDays)
+        self.stats = Stats(withDuration: timing.timeToSave, busyDays: days.count, totalDays: lifetimeDays)
     }
     
     /// Initializer for converting activity from Data Base
