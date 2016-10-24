@@ -217,12 +217,15 @@
 		F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */; };
 		F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */; };
 		F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */; };
-		F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
-		F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
-		F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
 		F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932731DB3068100EA0274 /* ActivityCurator.swift */; };
 		F0DB53251DB5B6FA00A48F01 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */; };
 		F0DB53271DB5B6FF00A48F01 /* BaseCoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */; };
+		F0DB532B1DBD8DAE00A48F01 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
+		F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
+		F0DB532D1DBD8DB600A48F01 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
+		F0DB532F1DBD90D500A48F01 /* LocalNotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */; };
+		F0DB53311DBD914000A48F01 /* StartNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53301DBD914000A48F01 /* StartNotification.swift */; };
+		F0DB53331DBD915E00A48F01 /* FinishNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53321DBD915E00A48F01 /* FinishNotification.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -561,6 +564,9 @@
 		F0D932731DB3068100EA0274 /* ActivityCurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCurator.swift; sourceTree = "<group>"; };
 		F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoreDataTest.swift; sourceTree = "<group>"; };
+		F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationProtocol.swift; sourceTree = "<group>"; };
+		F0DB53301DBD914000A48F01 /* StartNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartNotification.swift; sourceTree = "<group>"; };
+		F0DB53321DBD915E00A48F01 /* FinishNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishNotification.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -1330,6 +1336,9 @@
 				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
 				F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */,
 				F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */,
+				F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */,
+				F0DB53301DBD914000A48F01 /* StartNotification.swift */,
+				F0DB53321DBD915E00A48F01 /* FinishNotification.swift */,
 			);
 			name = LocalNotifications;
 			sourceTree = "<group>";
@@ -1887,13 +1896,14 @@
 				F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */,
 				F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */,
 				89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */,
+				F0DB532F1DBD90D500A48F01 /* LocalNotificationProtocol.swift in Sources */,
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
-				F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				89BDDEC31DA0119600703F5E /* ProfileNameCell.swift in Sources */,
+				F0DB53331DBD915E00A48F01 /* FinishNotification.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
@@ -1909,6 +1919,7 @@
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
+				F0DB532B1DBD8DAE00A48F01 /* NotificationScheduler.swift in Sources */,
 				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
 				F0E95F5A1D451D79006D8410 /* Timer.swift in Sources */,
 				F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */,
@@ -1919,13 +1930,14 @@
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
+				F0DB532D1DBD8DB600A48F01 /* NotificationFactory.swift in Sources */,
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
 				89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
+				F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
-				F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
@@ -1935,11 +1947,11 @@
 				F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */,
 				F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */,
 				F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */,
-				F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
 				F0A577381D4EC21B00D2039A /* CircleStatsView.swift in Sources */,
+				F0DB53311DBD914000A48F01 /* StartNotification.swift in Sources */,
 				F0F9BBD41D3AB8A000920EF8 /* MotivationShareCollectionViewCell.swift in Sources */,
 				F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,

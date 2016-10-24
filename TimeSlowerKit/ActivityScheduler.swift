@@ -99,6 +99,8 @@ public struct ActivityScheduler {
         if let activityWithResults: Activity = dataStore.retrieve(updatedActivity.resourceId) {
             return activityWithResults
         }
+        
+        
         return updatedActivity
     }
     

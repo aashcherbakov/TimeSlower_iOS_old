@@ -10,21 +10,25 @@ import Foundation
 import UserNotifications
 import TimeSlowerKit
 
-internal struct NotificationScheduler {
+
+internal class NotificationScheduler {
     
     private let notificationCenter = UNUserNotificationCenter.current()
-    private let responder = NotificationResponder()
     
     /// Schedules notification for activity of specified type
     ///
     /// - parameter activity:         Activity
     /// - parameter notificationType: NotificationType
     func scheduleForActivity(activity: Activity, notificationType: NotificationType) {
-        
-        let notification = NotificationFactory().notificarion(ofType: notificationType, forActivity: activity)
-        let categoryIdentifier = responder.categoryIdentifierForType(notificationType: notificationType)
-        let request = notificationRequest(forNotification: notification, identifier: "Test Notification", category: categoryIdentifier)
-        
+        let notifications = NotificationFactory().notifications(ofType: notificationType, forActivity: activity)
+        let categoryIdentifier = NotificationResponder().categoryIdentifierForType(notificationType: notificationType)
+        for notification in notifications {
+            let request = notificationRequest(forNotification: notification, identifier: notification.identifier(), category: categoryIdentifier)
+            scheduleWithRequest(request: request)
+        }
+    }
+    
+    private func scheduleWithRequest(request: UNNotificationRequest) {
         notificationCenter.getNotificationSettings { (settings) in
             if settings.authorizationStatus != .authorized {
                 self.askForPermissionAndAdd(request: request)
@@ -32,6 +36,29 @@ internal struct NotificationScheduler {
                 self.addRequest(request: request)
             }
         }
+    }
+    
+    func cancelNotification(forActivity activity: Activity, notificationType: NotificationType) {
+        
+        let identifiers = identifiersForActivity(activity: activity, notificationType: notificationType)
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    func identifiersForActivity(activity: Activity, notificationType: NotificationType) -> [String] {
+        
+        var identifiers = [String]()
+        switch notificationType {
+        case .Start:
+            for weekday in activity.days {
+                let identifier = "\(activity.resourceId)+\(weekday.shortName)"
+                identifiers.append(identifier)
+            }
+        default:
+            let finishIdentifer = "\(activity.resourceId)+finish"
+            identifiers.append(finishIdentifer)
+        }
+        
+        return identifiers
     }
     
     private func askForPermissionAndAdd(request: UNNotificationRequest) {
@@ -55,7 +82,6 @@ internal struct NotificationScheduler {
     }
     
     private func addRequest(request: UNNotificationRequest) {
-        notificationCenter.removeAllPendingNotificationRequests()
         notificationCenter.add(request) { (error) in
             if let error = error {
                 print("Uh oh! Error with notification scheduler: \(error)")

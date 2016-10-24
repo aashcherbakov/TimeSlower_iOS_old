@@ -101,7 +101,9 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
             clearTimer()
             setupTimerCountdown()
         } else if sender.titleLabel?.text == Constants.finishButtonTitle {
-            self.activity = scheduler.finish(activity: activity)
+            let finishedActivity = scheduler.finish(activity: activity)
+            self.activity = finishedActivity
+            notificationScheduler.cancelNotification(forActivity: finishedActivity, notificationType: .Finish)
             progressBarReady = false
             clearTimer()
             setup()

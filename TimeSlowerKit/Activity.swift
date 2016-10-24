@@ -209,17 +209,16 @@ public struct Activity: Persistable {
         let startsBefore = startsEarlierThen(date: date)
         let endsAfter = endsLaterThen(date: date)
         let notDoneYet = !isDone(forDate: date)
-        
-        print("Activity: \(name), start time: \(startTime())")
-        print("Activity: \(name), starts before \(startsBefore), ends after \(endsAfter), not done yet \(notDoneYet), date: \(date)")
         return startsBefore && endsAfter && notDoneYet
     }
     
+    public func isUnfinished(forDate date: Date = Date()) -> Bool {
+        let started = timing.manuallyStarted != nil
+        let pastDue = endsEarlierThen(date: date)
+        return started && pastDue
+    }
+    
     public func startsEarlierThen(date: Date) -> Bool {
-        print("Given date: \(date)")
-        print("Start time: \(startTime(inDate: date))")
-        print("Original start time: \(timing.startTime)")
-        print("Manually started: \(timing.manuallyStarted)")
         return startTime(inDate: date).compare(date) == .orderedAscending || startTime(inDate: date).compare(date) == .orderedSame
     }
     
@@ -229,6 +228,10 @@ public struct Activity: Persistable {
     
     public func endsLaterThen(date: Date) -> Bool {
         return finishTime(inDate: date).compare(date) == .orderedDescending
+    }
+    
+    public func endsEarlierThen(date: Date) -> Bool {
+        return finishTime(inDate: date).compare(date) == .orderedAscending
     }
     
     public func startsEarlierThen(activity: Activity) -> Bool {

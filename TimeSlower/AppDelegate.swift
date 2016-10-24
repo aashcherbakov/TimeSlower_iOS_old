@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import TimeSlowerKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UNUserNotificationCenter.current().delegate = notificationResponder
         notificationResponder.registerNotificationCategories()
+        
+        ActivityCurator().cleanUpManuallyStarted()
         
         return true
     }
