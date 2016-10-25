@@ -150,12 +150,9 @@ public struct Activity: Persistable {
     }
     
     public func finishTime(inDate date: Date = Date()) -> Date {
-        var factFinishTime = timing.finishTime
-        if let manuallyStarted = timing.manuallyStarted {
-            factFinishTime = manuallyStarted.addingTimeInterval(timing.duration.seconds())
-        }
-        
-        return timeMachine.updatedTime(factFinishTime, forDate: date)
+        let startingPoint = startTime(inDate: date)
+        let finishTime = startingPoint.addingTimeInterval(timing.duration.seconds())
+        return finishTime
     }
     
     public func alarmTime(inDate date: Date = Date()) -> Date {

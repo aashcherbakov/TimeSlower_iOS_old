@@ -83,7 +83,6 @@
 		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
 		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; };
 		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; };
-		F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */; };
 		F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF361BDB0F45007F38A9 /* Activities.storyboard */; };
 		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; };
 		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
@@ -99,7 +98,6 @@
 		F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */; };
 		F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF641BDB13E5007F38A9 /* CircularTimer.m */; };
 		F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */; };
-		F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */; };
 		F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */; };
 		F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */; };
 		F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6E1BDB1935007F38A9 /* ChartView.swift */; };
@@ -420,7 +418,6 @@
 		F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Double+Extension.swift"; sourceTree = "<group>"; };
 		F009AF321BDB0E1D007F38A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F009AF361BDB0F45007F38A9 /* Activities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		F009AF381BDB0FEA007F38A9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVC.swift; path = Features/Activities/ActivityStatsVC.swift; sourceTree = "<group>"; };
@@ -440,7 +437,6 @@
 		F009AF641BDB13E5007F38A9 /* CircularTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircularTimer.m; path = Features/Shared/CircularTimer.m; sourceTree = "<group>"; };
 		F009AF651BDB13E5007F38A9 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZTimerLabel.h; path = Features/Shared/MZTimerLabel.h; sourceTree = "<group>"; };
 		F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZTimerLabel.m; path = Features/Shared/MZTimerLabel.m; sourceTree = "<group>"; };
-		F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegister.swift; sourceTree = "<group>"; };
 		F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BasisSelector.swift; path = Features/Activities/Views/BasisSelector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasisSelector.xib; path = Features/Activities/Views/BasisSelector.xib; sourceTree = "<group>"; };
 		F009AF6E1BDB1935007F38A9 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartView.swift; path = Features/Activities/Views/ChartView.swift; sourceTree = "<group>"; };
@@ -851,8 +847,6 @@
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F0D932701DB2F3ED00EA0274 /* LocalNotifications */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
-				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
-				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
 				F08B51C61C83936D008C6E8B /* Extensions */,
 				F009AF0D1BDAD6C5007F38A9 /* Features */,
@@ -1959,7 +1953,6 @@
 				F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
 				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,
-				F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */,
 				F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */,
 				F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */,
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
@@ -1969,7 +1962,6 @@
 				F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
-				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
 				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
 			);

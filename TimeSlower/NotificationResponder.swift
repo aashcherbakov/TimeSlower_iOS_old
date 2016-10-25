@@ -19,31 +19,51 @@ internal final class NotificationResponder: NSObject {
     
     fileprivate struct Constants {
         // Actions
-        static let finishActionTitle = "Finish now"
+        static let finishActionTitle = "Finish Now"
         static let finishActionIdentifier = "finishNow"
-        static let finishCancelTitle = "Not now"
-        static let finishCancelIdentifier = "notNow"
+        
+        static let cancelTitle = "Not now"
+        static let cancelIdentifier = "notNow"
+        
+        static let startActionTitle = "Start Now"
+        static let startActionIdentifier = "startNow"
         
         // Category
-        static let finishCategory = "finishCategory"
+        static let finishCategoryId = "finishCategory"
+        static let startCategoryId = "startCategory"
     }
     
     func registerNotificationCategories() {
         let finish = finishCategory()
-        notificationCenter.setNotificationCategories([finish])
+        let start = startCategory()
+        notificationCenter.setNotificationCategories([finish, start])
     }
     
     func categoryIdentifierForType(notificationType: NotificationType) -> String {
-        return Constants.finishCategory
+        switch notificationType {
+        case .Start: return Constants.startCategoryId
+        case .Finish: return Constants.finishCategoryId
+        }
     }
     
     // MARK: - Private
     
     private func finishCategory() -> UNNotificationCategory {
         let finishAction = UNNotificationAction(identifier: Constants.finishActionIdentifier, title: Constants.finishActionTitle, options: [])
-        let cancelAction = UNNotificationAction(identifier: Constants.finishCancelIdentifier, title: Constants.finishCancelTitle, options: [])
-        let category = UNNotificationCategory(identifier: Constants.finishCategory, actions: [finishAction, cancelAction], intentIdentifiers: [], options: [])
+        let cancelAction = defaultCancelAction()
+        let category = UNNotificationCategory(identifier: Constants.finishCategoryId, actions: [finishAction, cancelAction], intentIdentifiers: [], options: [])
         return category
+    }
+    
+    private func startCategory() -> UNNotificationCategory {
+        let startAction = UNNotificationAction(identifier: Constants.startActionIdentifier, title: Constants.startActionTitle, options: [])
+        let cancelAction = defaultCancelAction()
+        let category = UNNotificationCategory(identifier: Constants.startCategoryId, actions: [startAction, cancelAction], intentIdentifiers: [], options: [])
+        return category
+    }
+    
+    private func defaultCancelAction() -> UNNotificationAction {
+        return UNNotificationAction(identifier: Constants.cancelIdentifier, title: Constants.cancelTitle, options: [])
     }
     
     private func activityForId(identifier: String) -> Activity? {
@@ -54,7 +74,14 @@ internal final class NotificationResponder: NSObject {
     private func finishActivity(withIdentifier identifier: String) {
         if let activity = activityForId(identifier: identifier) {
             let finishedActivity = scheduler.finish(activity: activity)
-            notificationScheduler.cancelNotification(forActivity: finishedActivity, notificationType: .Finish)
+            // TODO: navigate to results page
+        }
+    }
+    
+    private func startActivity(withIdentifier identifier: String) {
+        if let activity = activityForId(identifier: identifier) {
+            let startedActivity = scheduler.start(activity: activity)
+            notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish)
             // TODO: navigate to results page
         }
     }
@@ -66,13 +93,24 @@ internal final class NotificationResponder: NSObject {
         }
     }
     
+    fileprivate func startActivityFromResponse(response: UNNotificationResponse) {
+        let userInfo = response.notification.request.content.userInfo
+        if let resourceId = userInfo[kActivityResourceId] as? String {
+            startActivity(withIdentifier: resourceId)
+        }
+    }
+    
 }
 
 extension NotificationResponder: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        if response.actionIdentifier == Constants.finishActionIdentifier {
+        switch response.actionIdentifier {
+        case Constants.finishActionIdentifier:
             finishActivityFromResponse(response: response)
+        case Constants.startActionIdentifier:
+            startActivityFromResponse(response: response)
+        default: return
         }
     }
 
