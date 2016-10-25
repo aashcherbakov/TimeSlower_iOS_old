@@ -59,9 +59,7 @@ internal final class ActivityCreator {
             timing: activityTiming,
             notifications: notifications)
         
-        dataStore.create(activity)
-        
-        return activity
+        return dataStore.create(activity)
     }
     
     func saveActivity(
@@ -87,8 +85,20 @@ internal final class ActivityCreator {
 
         let days = weekdaysWith(numbers: selectedDays)
         let activityTiming = timing(withStartTime: startTime, duration: duration, timeToSave: timeToSave)
+        let stats = Stats(withDuration: timeToSave, busyDays: days.count, totalDays: totalDaysForProfile())
         
-        let updatedActivity = Activity(withStats: activity.stats, name: name, type: activity.type, days: days, timing: activityTiming, notifications: notifications, averageSuccess: activity.averageSuccess, resourceId: activity.resourceId, results: activity.results, totalResults: activity.totalResults, totalTimeSaved: activity.totalTimeSaved)
+        let updatedActivity = Activity(
+            withStats: stats,
+            name: name,
+            type: activity.type,
+            days: days,
+            timing: activityTiming,
+            notifications: notifications,
+            averageSuccess: activity.averageSuccess,
+            resourceId: activity.resourceId,
+            results: activity.results,
+            totalResults: activity.totalResults,
+            totalTimeSaved: activity.totalTimeSaved)
         
         return dataStore.update(updatedActivity)
     }
