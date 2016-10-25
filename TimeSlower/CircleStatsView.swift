@@ -16,7 +16,6 @@ class CircleStatsView: UIView {
     @IBOutlet fileprivate(set) weak var view: UIView!
     @IBOutlet fileprivate(set) weak var routinesCurcle: CircleProgress!
     @IBOutlet fileprivate(set) weak var routineProgressLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var routinesTargetLabel: UILabel!
     @IBOutlet private(set) weak var successLabel: UILabel!
     
     // MARK: - Overridden
@@ -50,8 +49,20 @@ class CircleStatsView: UIView {
     }
     
     private func displayProgressNumbers(progress: RoutineProgress) {
-        routineProgressLabel.text = String(format: "%.0f", progress.savedTime)
-        routinesTargetLabel.text = String(format: "%.0f", progress.plannedTime) + " m."
+        let savedTime = String(format: "%.0f", progress.savedTime)
+        let plannedToSave = String(format: "%.0f", progress.plannedTime)
+        let labelText = "\(savedTime) / \(plannedToSave)" as NSString
+        
+        let font = UIFont.mainSemibold(19)
+        let mutableAttributedString = NSMutableAttributedString(string: labelText as String, attributes: [
+            NSFontAttributeName : font,
+            NSForegroundColorAttributeName : UIColor.purpleRed()
+        ])
+        
+        let lineRange = labelText.range(of: "/ \(plannedToSave)")
+        mutableAttributedString.addAttributes([ NSForegroundColorAttributeName : UIColor.lightGray() ], range: lineRange)
+        
+        routineProgressLabel.attributedText = mutableAttributedString
         successLabel.text = String(format: "%.1f", progress.success) + "%"
     }
     

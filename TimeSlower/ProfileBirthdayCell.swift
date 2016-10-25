@@ -50,7 +50,7 @@ class ProfileBirthdayCell: UITableViewCell, ProfileEditingCell {
     
     func saveValue() {
         let date = dateFormatter.string(from: datePicker.date)
-        delegate?.profileEditingCellDidUpdateValue(value: date, type: .Birthday)
+        textfieldView.setText(date)
     }
     
     func setValue(value: String) {

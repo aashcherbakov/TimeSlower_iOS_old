@@ -101,6 +101,7 @@ internal final class ProfileEditingVC: UIViewController {
 
     @IBAction func onSaveButton() {
         if selectedCellIndex != nil {
+            
             moveToNextCellIfNeeded()
             return
         }

@@ -91,8 +91,9 @@ class MotivationViewController: UIViewController {
     fileprivate func motivationDescriptionForActivity(_ activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
         let duration = String(Int(activity.timeToSave()))
+        let period = activity.duration().period.description()
         let basis = descriptionForActivityBasis(activity)
-        let description = "cutting \(duration) minutes of \(activity.name) \(basis) will save in your lifetime:".uppercased()
+        let description = "cutting \(duration) \(period) of \(activity.name) \(basis) will save in your lifetime:".uppercased()
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

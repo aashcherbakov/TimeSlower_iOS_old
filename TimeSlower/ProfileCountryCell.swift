@@ -41,7 +41,7 @@ class ProfileCountryCell: UITableViewCell, ProfileEditingCell {
     }
     
     func saveValue() {
-        delegate?.profileEditingCellDidUpdateValue(value: countryPicker.selectedCountryName, type: .Country)
+        textfieldView.setText(countryPicker.selectedCountryName)
     }
     
     func setValue(value: String) {

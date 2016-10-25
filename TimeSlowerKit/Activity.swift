@@ -170,6 +170,16 @@ public struct Activity: Persistable {
     }
     
     public func timeToSave() -> Double {
+        let period = timing.duration.period
+        switch period {
+        case .hours:
+            return Double(timing.timeToSave / 60)
+        default:
+            return Double(timing.timeToSave)
+        }
+    }
+    
+    public func minutesToSave() -> Double {
         return Double(timing.timeToSave)
     }
     
