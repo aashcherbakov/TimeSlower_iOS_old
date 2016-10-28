@@ -20,32 +20,19 @@ internal class NotificationScheduler {
     /// - parameter activity:         Activity
     /// - parameter notificationType: NotificationType
     func scheduleForActivity(activity: Activity, notificationType: NotificationType) {
-        let notifications = NotificationFactory().notifications(ofType: notificationType, forActivity: activity)
-        let categoryIdentifier = NotificationResponder().categoryIdentifierForType(notificationType: notificationType)
-        for notification in notifications {
-            let request = notificationRequest(forNotification: notification, identifier: notification.identifier(), category: categoryIdentifier)
+        let requests = NotificationFactory().notificationRequests(forType: notificationType, activity: activity)
+        
+        for request in requests {
             scheduleWithRequest(request: request)
         }
     }
     
-    private func scheduleWithRequest(request: UNNotificationRequest) {
-        notificationCenter.getNotificationSettings { (settings) in
-            if settings.authorizationStatus != .authorized {
-                self.askForPermissionAndAdd(request: request)
-            } else {
-                self.addRequest(request: request)
-            }
-        }
-    }
-    
     func cancelNotification(forActivity activity: Activity, notificationType: NotificationType) {
-        
         let identifiers = identifiersForActivity(activity: activity, notificationType: notificationType)
         notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     
     func identifiersForActivity(activity: Activity, notificationType: NotificationType) -> [String] {
-        
         var identifiers = [String]()
         switch notificationType {
         case .Start:
@@ -59,6 +46,19 @@ internal class NotificationScheduler {
         }
         
         return identifiers
+    }
+    
+    
+    // MARK: - Private
+
+    private func scheduleWithRequest(request: UNNotificationRequest) {
+        notificationCenter.getNotificationSettings { (settings) in
+            if settings.authorizationStatus != .authorized {
+                self.askForPermissionAndAdd(request: request)
+            } else {
+                self.addRequest(request: request)
+            }
+        }
     }
     
     private func askForPermissionAndAdd(request: UNNotificationRequest) {
@@ -88,53 +88,4 @@ internal class NotificationScheduler {
             }
         }
     }
-    
-    private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
-        let trigger = notificationTrigger(forDate: notification.date(), repeats: notification.repeats, type: notification.type)
-        print(trigger)
-        let content = contentForNotification(notification: notification, category: category)
-        print(content)
-        return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-    }
-    
-    
-    private func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {
-        switch type {
-        case .Start: return dateTrigger(forDate: date, repeats: repeats)
-        case .Finish: return timeTrigger(forDate: date, repeats: repeats)
-        }
-    }
-    
-    private func dateTrigger(forDate date: Date, repeats: Bool) -> UNCalendarNotificationTrigger {
-        let components = dateComponents(fromDate: date)
-        print(components)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
-        return trigger
-    }
-    
-    private func timeTrigger(forDate date: Date, repeats: Bool) -> UNTimeIntervalNotificationTrigger {
-        let interval = date.timeIntervalSinceNow
-        return UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
-    }
-    
-    private func contentForNotification(notification: LocalNotification, category: String) -> UNMutableNotificationContent {
-        let content = UNMutableNotificationContent()
-        content.title = notification.title()
-        content.body = notification.body()
-        content.sound = UNNotificationSound.default()
-        content.categoryIdentifier = category
-        
-        return content
-    }
-    
-    private func dateComponents(fromDate date: Date) -> DateComponents {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents(in: .current, from: date)
-        return DateComponents(calendar: calendar, timeZone: components.timeZone, era: components.era, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute, second: components.second, nanosecond: components.nanosecond, weekday: components.weekday, weekdayOrdinal: components.weekdayOrdinal, quarter: components.quarter, weekOfMonth: components.weekOfMonth, weekOfYear: components.weekOfYear, yearForWeekOfYear: components.yearForWeekOfYear)
-    }
-    
-//    private func dateComponentsForRepeatingDate(date: Date) -> DateComponents {
-//        
-//    }
-//    
 }

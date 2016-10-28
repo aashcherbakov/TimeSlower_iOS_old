@@ -8,6 +8,7 @@
 
 import Foundation
 import TimeSlowerKit
+import UserNotifications
 
 internal struct StartNotification: LocalNotification {
     
@@ -37,4 +38,19 @@ internal struct StartNotification: LocalNotification {
         return "\(activity.resourceId)+\(weekday.shortName)"
     }
     
+    func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {
+        
+        let components = dateComponents(fromDate: date)
+        print(components)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
+        return trigger
+    }
+    
+    
+    private func dateComponents(fromDate date: Date) -> DateComponents {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(in: .current, from: date)
+        return DateComponents(calendar: calendar, timeZone: components.timeZone, era: components.era, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute, second: components.second, nanosecond: components.nanosecond, weekday: components.weekday, weekdayOrdinal: components.weekdayOrdinal, quarter: components.quarter, weekOfMonth: components.weekOfMonth, weekOfYear: components.weekOfYear, yearForWeekOfYear: components.yearForWeekOfYear)
+    }
+
 }

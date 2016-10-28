@@ -8,6 +8,7 @@
 
 import Foundation
 import TimeSlowerKit
+import UserNotifications
 
 internal struct FinishNotification: LocalNotification {
     
@@ -34,6 +35,12 @@ internal struct FinishNotification: LocalNotification {
     
     func identifier() -> String {
         return "\(activity.resourceId)+finish"
+    }
+    
+    func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {
+        
+        let interval = date.timeIntervalSinceNow
+        return UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
     }
     
 }

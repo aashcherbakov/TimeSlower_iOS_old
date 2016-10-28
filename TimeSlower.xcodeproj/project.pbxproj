@@ -19,6 +19,7 @@
 		89BDDECB1DA0222F00703F5E /* ProfileBirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */; };
 		89BDDECC1DA0222F00703F5E /* ProfileBirthdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */; };
 		89CB9EC51DA9487B00BB2C2A /* AvatarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */; };
+		89E782651DC386EC007B017A /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E782641DC386EC007B017A /* NotificationConstants.swift */; };
 		89E9C7891D9341F5008D18A0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77B1D9341F5008D18A0 /* Activity.swift */; };
 		89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */; };
 		89E9C78C1D9341F5008D18A0 /* ActivityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77E1D9341F5008D18A0 /* ActivityConverter.swift */; };
@@ -346,6 +347,7 @@
 		89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayCell.swift; sourceTree = "<group>"; };
 		89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBirthdayCell.xib; sourceTree = "<group>"; };
 		89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPicker.swift; sourceTree = "<group>"; };
+		89E782641DC386EC007B017A /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		89E9C77B1D9341F5008D18A0 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
 		89E9C77D1D9341F5008D18A0 /* ActivityAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapterTests.swift; sourceTree = "<group>"; };
@@ -1328,6 +1330,7 @@
 			isa = PBXGroup;
 			children = (
 				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
+				89E782641DC386EC007B017A /* NotificationConstants.swift */,
 				F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */,
 				F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */,
 				F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */,
@@ -1923,6 +1926,7 @@
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
+				89E782651DC386EC007B017A /* NotificationConstants.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
 				F0DB532D1DBD8DB600A48F01 /* NotificationFactory.swift in Sources */,
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
