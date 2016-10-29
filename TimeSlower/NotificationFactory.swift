@@ -17,20 +17,19 @@ internal enum NotificationType {
 
 internal struct NotificationFactory {
     
-    func notifications(ofType type: NotificationType, forActivity activity: Activity) -> [LocalNotification] {
-        switch type {
-        case .Start: return startNotifications(forActivity: activity)
-        case .Finish: return [FinishNotification(withActivity: activity)]
-        }
-    }
-    
     func notificationRequests(forType type: NotificationType, activity: Activity) -> [UNNotificationRequest] {
-        
         let notifications = self.notifications(ofType: type, forActivity: activity)
         let requests = notifications.map { (notification) -> UNNotificationRequest in
             return notification.request
         }
         return requests
+    }
+    
+    private func notifications(ofType type: NotificationType, forActivity activity: Activity) -> [LocalNotification] {
+        switch type {
+        case .Start: return startNotifications(forActivity: activity)
+        case .Finish: return [FinishNotification(withActivity: activity)]
+        }
     }
     
     private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
@@ -47,7 +46,6 @@ internal struct NotificationFactory {
         content.body = notification.body()
         content.sound = UNNotificationSound.default()
         content.categoryIdentifier = category
-        
         return content
     }
 

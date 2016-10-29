@@ -125,10 +125,46 @@ class WeekdayTests: XCTestCase {
                        "it should be 5 days in array")
     }
     
-//    func test_weekdaysFromSetOfDays() {
-//        let weekdays = Set(Weekday.weekdaysFromSetOfDays(testActivity.days as! Set<Day>))
-//        let expectedWeekdays = Set(Weekday.weekdaysForBasis(.Daily))
-//        XCTAssertEqual(weekdays, expectedWeekdays, "it should have all 7 days there")
-//        XCTAssertEqual(weekdays.count, expectedWeekdays.count)
-//    }
+    func test_nextDate_nextSunday_nowFriday() {
+        let day = Weekday.first // sunday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/28/2016")! // friday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/30/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+    
+    func test_nextDate_nextTuesday_nowFriday() {
+        let day = Weekday.third // tuesday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/28/2016")! // friday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "11/1/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+
+    func test_nextDate_nextWednesday_nowFriday() {
+        let day = Weekday.forth // wednesday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/28/2016")! // friday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "11/2/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+    
+    func test_nextDate_nextSunday_nowSaturday() {
+        let day = Weekday.first // sunday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/29/2016")! // friday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/30/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+    
+    func test_nextDate_nextSunday_nowSunday() {
+        let day = Weekday.first // sunday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/30/2016")! // friday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "11/6/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+    
+    func test_nextDate_nextMonday_nowSunday() {
+        let day = Weekday.second // monday
+        let date = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/30/2016")! // sunday
+        let nextDate = StaticDateFormatter.shortDateNoTimeFromatter.date(from: "10/31/2016")!
+        XCTAssertEqual(day.nextDate(fromDay: date), nextDate)
+    }
+
 }
