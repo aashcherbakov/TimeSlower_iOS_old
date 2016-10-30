@@ -9,6 +9,7 @@
 import UIKit
 import TimeSlowerKit
 import ReactiveSwift
+import MessageUI
 
 internal class HomeViewController: UIViewController {
     
@@ -194,5 +195,11 @@ internal class HomeViewController: UIViewController {
         let controller: EditActivityVC = ControllerFactory.createController()
         controller.userProfile = profile.value
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

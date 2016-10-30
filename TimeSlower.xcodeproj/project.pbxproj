@@ -128,6 +128,7 @@
 		F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */; };
 		F01B18681DC69E2000A4CC44 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01B18661DC69E2000A4CC44 /* Fabric.framework */; };
 		F01B18691DC69E2000A4CC44 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01B18671DC69E2000A4CC44 /* Crashlytics.framework */; };
+		F01B186B1DC6A32600A4CC44 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B186A1DC6A32600A4CC44 /* Navigator.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
@@ -471,6 +472,7 @@
 		F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStartTimeCell.swift; sourceTree = "<group>"; };
 		F01B18661DC69E2000A4CC44 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F01B18671DC69E2000A4CC44 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		F01B186A1DC6A32600A4CC44 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
@@ -855,6 +857,7 @@
 			children = (
 				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
+				F01B186A1DC6A32600A4CC44 /* Navigator.swift */,
 				F0D932701DB2F3ED00EA0274 /* LocalNotifications */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
@@ -1962,6 +1965,7 @@
 				89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */,
+				F01B186B1DC6A32600A4CC44 /* Navigator.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,

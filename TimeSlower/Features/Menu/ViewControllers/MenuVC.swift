@@ -8,6 +8,7 @@
 
 import UIKit
 import TimeSlowerKit
+import MessageUI
 
 class MenuVC: UIViewController {
     
@@ -62,7 +63,13 @@ class MenuVC: UIViewController {
         guard let selectedOption = MenuOptions(rawValue: sender.tag) else {
             return
         }
-        presentControllerFromMenu(selectedOption)
+        
+        switch selectedOption {
+        case .rateApp:
+            Navigator().openAppStorePage()
+        default:
+            presentControllerFromMenu(selectedOption)
+        }
     }
     
     @IBAction func dismissMenu(_ sender: AnyObject) {
@@ -81,6 +88,15 @@ class MenuVC: UIViewController {
         if let controller = controllerForOption(option) {
             transition.sourceViewController?.navigationController?.pushViewController(controller, animated: false)
             dismiss(animated: true, completion: nil)
+        }
+        
+        if option == .feedback {
+            if let emailController = emailComposer() {
+                
+                dismiss(animated: true, completion: {
+                    transition.sourceViewController?.present(emailController, animated: true, completion: nil)
+                })
+            }
         }
     }
     
@@ -112,6 +128,19 @@ class MenuVC: UIViewController {
         let controller: EditActivityVC = ControllerFactory.createController()
         controller.userProfile = profile
         return controller
+    }
+    
+    fileprivate func emailComposer() -> MFMailComposeViewController? {
+        guard let transition = transitioningDelegate as? MenuTransitionManager else {
+            return nil
+        }
+        
+        if let composer = Navigator().mailComposer() {
+            composer.mailComposeDelegate = transition.sourceViewController as? MFMailComposeViewControllerDelegate
+            return composer
+        } else {
+            return nil
+        }
     }
     
     // MARK: - Design
