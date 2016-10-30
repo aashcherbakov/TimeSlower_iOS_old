@@ -195,6 +195,6 @@ extension ProfileStatsVC: ProfileEditingDelegate {
         self.profile = profile
         setupData()
         setupDesign()
-        launchTimer()
+        launchTimer()        
     }
 }

@@ -29,3 +29,5 @@ let kNumberOfDaysInWeek = 7
 
 let kActivityResourceId = "resourceId"
 
+
+let kProfileUpdatedNotification = "profile_updated_notification"

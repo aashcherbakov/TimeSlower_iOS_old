@@ -40,13 +40,15 @@ internal class HomeViewController: UIViewController {
     var profile = MutableProperty<Profile?>(nil)
     var closestActivity = MutableProperty<Activity?>(nil)
     
+    // MARK: - Overridden 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        
+        updateProfile()
         observeReturningToForeground()
-        // TODO: implement delegate to avoid reloading data on each appearance
         resetData()
+        // TODO: implement delegate to avoid reloading data on each appearance
     }
     
     override func viewDidLoad() {
@@ -59,9 +61,36 @@ internal class HomeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func observeReturningToForeground() {
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(resetData), name: .UIApplicationWillEnterForeground, object: nil)
+    // MARK: - Actions
+    
+    @IBAction func controlFlowButtonTapped(_ sender: UIButton) {
+        guard let text = sender.titleLabel?.text, let buttonState = ActionButtonState(rawValue: text) else {
+            return
+        }
+        switch buttonState {
+        case .Create: showCreateNewActivity()
+        case .Start: startActivity(closestActivity.value)
+        case .Finish: finishActivity(closestActivity.value)
+        }
+    }
+    
+    @IBAction func openMenu(_ sender: UIBarButtonItem) {
+        showMenue()
+    }
+    
+    func resetData() {
+        setupData()
+        setupDesign()
+    }
+    
+    // MARK: - Private - Setup
+    
+    private func closestActivityForToday() -> Activity? {
+        if let activity = scheduler.currentActivity() {
+            return activity
+        } else {
+            return scheduler.nextClosestActivity()
+        }
     }
     
     private func setupData() {
@@ -76,16 +105,9 @@ internal class HomeViewController: UIViewController {
     private func setupEvents() {
         transitionManager.sourceViewController = self
         activityListTransitionManager.sourceController = self
-        
-        
         closestActivity.producer.startWithValues { [weak self] (activity) in
             self?.updateButtonTitle(forActivity: activity)
         }
-    }
-    
-    func resetData() {
-        setupData()
-        setupDesign()
     }
     
     private func updateButtonTitle(forActivity activity: Activity?) {
@@ -112,29 +134,14 @@ internal class HomeViewController: UIViewController {
         controlFlowButtonHeight.constant = Constants.controlFlowButtonHeight
     }
     
-    // MARK: - Actions
-    
-    @IBAction func controlFlowButtonTapped(_ sender: UIButton) {
-        guard let text = sender.titleLabel?.text, let buttonState = ActionButtonState(rawValue: text) else {
-            return
-        }
-        switch buttonState {
-        case .Create: showCreateNewActivity()
-        case .Start: startActivity(closestActivity.value)
-        case .Finish: finishActivity(closestActivity.value)
-        }
+    private func observeReturningToForeground() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(resetData), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
-    @IBAction func openMenu(_ sender: UIBarButtonItem) {
-        showMenue()
-    }
-    
-    private func closestActivityForToday() -> Activity? {
-        if let activity = scheduler.currentActivity() {
-            return activity
-        } else {
-            return scheduler.nextClosestActivity()
-        }
+    private func updateProfile() {
+        let updatedProfile: Profile? = DataStore().retrieve("")
+        profile.value = updatedProfile
     }
     
     // MARK: - Private Functions - ActivityDisplay

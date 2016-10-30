@@ -126,6 +126,8 @@
 		F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7B1D1737E900437E42 /* BasisOptionView.swift */; };
 		F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */; };
 		F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */; };
+		F01B18681DC69E2000A4CC44 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01B18661DC69E2000A4CC44 /* Fabric.framework */; };
+		F01B18691DC69E2000A4CC44 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01B18671DC69E2000A4CC44 /* Crashlytics.framework */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
@@ -467,6 +469,8 @@
 		F0115F7B1D1737E900437E42 /* BasisOptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisOptionView.swift; sourceTree = "<group>"; };
 		F0115F7D1D25BA5100437E42 /* EditBasisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasisCell.swift; sourceTree = "<group>"; };
 		F0115F7F1D25BACA00437E42 /* EditStartTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStartTimeCell.swift; sourceTree = "<group>"; };
+		F01B18661DC69E2000A4CC44 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		F01B18671DC69E2000A4CC44 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
@@ -595,7 +599,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F01B18681DC69E2000A4CC44 /* Fabric.framework in Frameworks */,
 				F0CDAA1E1D90C69F0090D7E3 /* TimeSlowerDataBase.framework in Frameworks */,
+				F01B18691DC69E2000A4CC44 /* Crashlytics.framework in Frameworks */,
 				F009AEA11BD9CBA2007F38A9 /* TimeSlowerKit.framework in Frameworks */,
 				F09308981D8F562A008FFE1E /* Result.framework in Frameworks */,
 				F09308961D8F5627008FFE1E /* ReactiveSwift.framework in Frameworks */,
@@ -1133,6 +1139,8 @@
 		F09308921D8F5623008FFE1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F01B18661DC69E2000A4CC44 /* Fabric.framework */,
+				F01B18671DC69E2000A4CC44 /* Crashlytics.framework */,
 				F0CDAA021D8F838E0090D7E3 /* ReactiveObjCBridge.framework */,
 				F0CDAA001D8F838A0090D7E3 /* ReactiveObjC.framework */,
 				F0DB8A211D8F6F4900B6E176 /* JVFloatLabeledTextField */,
@@ -1570,7 +1578,8 @@
 				F009AE511BD9C5F8007F38A9 /* Resources */,
 				F009AEA61BD9CBA2007F38A9 /* Embed Frameworks */,
 				F0EB7BB11BEFBA1F00173D5D /* CopyFiles */,
-				F09308991D8F5637008FFE1E /* ShellScript */,
+				F09308991D8F5637008FFE1E /* Run Script */,
+				F01B18651DC69DBF00A4CC44 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1862,7 +1871,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F09308991D8F5637008FFE1E /* ShellScript */ = {
+		F01B18651DC69DBF00A4CC44 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 2f2a32b6c842607eafc3a70f4a0061ed808e58ff 73a9f0092ad1505ea1a0f891e8eb5240bb7515bfa71cb2b02813f079f27cf2d6";
+		};
+		F09308991D8F5637008FFE1E /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1873,6 +1895,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveObjCBridge.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveObjC.framework",
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2281,6 +2304,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2306,6 +2330,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TimeSlower/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
