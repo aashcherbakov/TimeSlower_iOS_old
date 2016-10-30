@@ -12,36 +12,9 @@ import TimeSlowerKit
 
 internal final class NotificationResponder: NSObject {
     
-    private let notificationCenter = UNUserNotificationCenter.current()
+    private let notificationScheduler = NotificationScheduler()
     fileprivate let scheduler = ActivityScheduler()
     fileprivate let dataStore = DataStore()
-    
-    fileprivate struct Constants {
-        // Actions
-        static let finishActionTitle = "Finish now"
-        static let finishActionIdentifier = "finishNow"
-        static let finishCancelTitle = "Not now"
-        static let finishCancelIdentifier = "notNow"
-        
-        // Category
-        static let finishCategory = "finishCategory"
-    }
-    
-    func registerNotificationCategories() {
-        let finish = finishCategory()
-        notificationCenter.setNotificationCategories([finish])
-    }
-    
-    func categoryIdentifierForType(notificationType: NotificationType) -> String {
-        return Constants.finishCategory
-    }
-    
-    private func finishCategory() -> UNNotificationCategory {
-        let finishAction = UNNotificationAction(identifier: Constants.finishActionIdentifier, title: Constants.finishActionTitle, options: [])
-        let cancelAction = UNNotificationAction(identifier: Constants.finishCancelIdentifier, title: Constants.finishCancelTitle, options: [])
-        let category = UNNotificationCategory(identifier: Constants.finishCategory, actions: [finishAction, cancelAction], intentIdentifiers: [], options: [])
-        return category
-    }
     
     private func activityForId(identifier: String) -> Activity? {
         let activity: Activity? = dataStore.retrieve(identifier)
@@ -50,7 +23,15 @@ internal final class NotificationResponder: NSObject {
     
     private func finishActivity(withIdentifier identifier: String) {
         if let activity = activityForId(identifier: identifier) {
-            let _ = scheduler.finish(activity: activity)
+            let finishedActivity = scheduler.finish(activity: activity)
+            // TODO: navigate to results page
+        }
+    }
+    
+    private func startActivity(withIdentifier identifier: String, completionHandler: @escaping () -> ()) {
+        if let activity = activityForId(identifier: identifier) {
+            let startedActivity = scheduler.start(activity: activity)
+            notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish, completionHandler: completionHandler)
             // TODO: navigate to results page
         }
     }
@@ -62,15 +43,29 @@ internal final class NotificationResponder: NSObject {
         }
     }
     
+    fileprivate func startActivityFromResponse(response: UNNotificationResponse, completionHandler: @escaping () -> ()) {
+        let userInfo = response.notification.request.content.userInfo
+        if let resourceId = userInfo[kActivityResourceId] as? String {
+            startActivity(withIdentifier: resourceId, completionHandler: completionHandler)
+        }
+    }
+    
 }
 
 extension NotificationResponder: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        if response.actionIdentifier == Constants.finishActionIdentifier {
+        switch response.actionIdentifier {
+        case kFinishActionIdentifier:
             finishActivityFromResponse(response: response)
+            completionHandler()
+        case kStartActionIdentifier:
+            startActivityFromResponse(response: response, completionHandler: completionHandler)
+        default:
+            completionHandler()
+            return
         }
-        
+
     }
 
 }

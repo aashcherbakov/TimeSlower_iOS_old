@@ -50,6 +50,8 @@ internal final class ListOfActivitiesDataSource: NSObject {
     func delete(activity: Activity) {
         removeActivityFromAllLists(activity: activity)
         // TODO: delete results for activity
+        NotificationScheduler().cancelNotification(forActivity: activity, notificationType: .Start)
+        NotificationScheduler().cancelNotification(forActivity: activity, notificationType: .Finish)
         dataStore.delete(activity)
     }
     

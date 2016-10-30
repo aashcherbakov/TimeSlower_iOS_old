@@ -19,6 +19,7 @@
 		89BDDECB1DA0222F00703F5E /* ProfileBirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */; };
 		89BDDECC1DA0222F00703F5E /* ProfileBirthdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */; };
 		89CB9EC51DA9487B00BB2C2A /* AvatarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */; };
+		89E782651DC386EC007B017A /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E782641DC386EC007B017A /* NotificationConstants.swift */; };
 		89E9C7891D9341F5008D18A0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77B1D9341F5008D18A0 /* Activity.swift */; };
 		89E9C78A1D9341F5008D18A0 /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */; };
 		89E9C78C1D9341F5008D18A0 /* ActivityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C77E1D9341F5008D18A0 /* ActivityConverter.swift */; };
@@ -83,7 +84,6 @@
 		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
 		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; };
 		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; };
-		F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */; };
 		F009AF371BDB0F45007F38A9 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF361BDB0F45007F38A9 /* Activities.storyboard */; };
 		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; };
 		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
@@ -99,7 +99,6 @@
 		F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF5E1BDB12D9007F38A9 /* CountryPicker.m */; };
 		F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF641BDB13E5007F38A9 /* CircularTimer.m */; };
 		F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */; };
-		F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */; };
 		F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */; };
 		F009AF811BDB1935007F38A9 /* BasisSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */; };
 		F009AF821BDB1935007F38A9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF6E1BDB1935007F38A9 /* ChartView.swift */; };
@@ -120,6 +119,7 @@
 		F009AF911BDB1935007F38A9 /* TimeSaver.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */; };
 		F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */; };
 		F009AF931BDB1935007F38A9 /* TypeSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */; };
+		F01084531DC5741800F802DA /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01084521DC5741800F802DA /* NotificationRegistrator.swift */; };
 		F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */; };
 		F0115F781D17349300437E42 /* BasisSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0115F771D17349300437E42 /* BasisSelectorTests.swift */; };
 		F0115F7A1D1737DB00437E42 /* BasisOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0115F791D1737DB00437E42 /* BasisOptionView.xib */; };
@@ -217,12 +217,15 @@
 		F0D932241DAFEF8500EA0274 /* ProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932231DAFEF8500EA0274 /* ProgressCalculator.swift */; };
 		F0D932261DAFEF9F00EA0274 /* ProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932251DAFEF9F00EA0274 /* ProgressCalculatorTests.swift */; };
 		F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */; };
-		F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
-		F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
-		F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
 		F0D932741DB3068100EA0274 /* ActivityCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932731DB3068100EA0274 /* ActivityCurator.swift */; };
 		F0DB53251DB5B6FA00A48F01 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */; };
 		F0DB53271DB5B6FF00A48F01 /* BaseCoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */; };
+		F0DB532B1DBD8DAE00A48F01 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */; };
+		F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */; };
+		F0DB532D1DBD8DB600A48F01 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */; };
+		F0DB532F1DBD90D500A48F01 /* LocalNotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */; };
+		F0DB53311DBD914000A48F01 /* StartNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53301DBD914000A48F01 /* StartNotification.swift */; };
+		F0DB53331DBD915E00A48F01 /* FinishNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB53321DBD915E00A48F01 /* FinishNotification.swift */; };
 		F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */; };
 		F0E0D38F1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */; };
 		F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */; };
@@ -345,6 +348,7 @@
 		89BDDEC91DA0222F00703F5E /* ProfileBirthdayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayCell.swift; sourceTree = "<group>"; };
 		89BDDECA1DA0222F00703F5E /* ProfileBirthdayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBirthdayCell.xib; sourceTree = "<group>"; };
 		89CB9EC41DA9487B00BB2C2A /* AvatarPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPicker.swift; sourceTree = "<group>"; };
+		89E782641DC386EC007B017A /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		89E9C77B1D9341F5008D18A0 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		89E9C77C1D9341F5008D18A0 /* ActivityAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
 		89E9C77D1D9341F5008D18A0 /* ActivityAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAdapterTests.swift; sourceTree = "<group>"; };
@@ -417,7 +421,6 @@
 		F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Double+Extension.swift"; sourceTree = "<group>"; };
 		F009AF321BDB0E1D007F38A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F009AF361BDB0F45007F38A9 /* Activities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		F009AF381BDB0FEA007F38A9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVC.swift; path = Features/Activities/ActivityStatsVC.swift; sourceTree = "<group>"; };
@@ -437,7 +440,6 @@
 		F009AF641BDB13E5007F38A9 /* CircularTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircularTimer.m; path = Features/Shared/CircularTimer.m; sourceTree = "<group>"; };
 		F009AF651BDB13E5007F38A9 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZTimerLabel.h; path = Features/Shared/MZTimerLabel.h; sourceTree = "<group>"; };
 		F009AF661BDB13E5007F38A9 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZTimerLabel.m; path = Features/Shared/MZTimerLabel.m; sourceTree = "<group>"; };
-		F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegister.swift; sourceTree = "<group>"; };
 		F009AF6C1BDB1935007F38A9 /* BasisSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BasisSelector.swift; path = Features/Activities/Views/BasisSelector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F009AF6D1BDB1935007F38A9 /* BasisSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasisSelector.xib; path = Features/Activities/Views/BasisSelector.xib; sourceTree = "<group>"; };
 		F009AF6E1BDB1935007F38A9 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartView.swift; path = Features/Activities/Views/ChartView.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 		F009AF7D1BDB1935007F38A9 /* TimeSaver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimeSaver.xib; path = Features/Activities/Views/TimeSaver.xib; sourceTree = "<group>"; };
 		F009AF7E1BDB1935007F38A9 /* TypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelector.swift; path = Features/Activities/Views/TypeSelector.swift; sourceTree = "<group>"; };
 		F009AF7F1BDB1935007F38A9 /* TypeSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TypeSelector.xib; path = Features/Activities/Views/TypeSelector.xib; sourceTree = "<group>"; };
+		F01084521DC5741800F802DA /* NotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegistrator.swift; sourceTree = "<group>"; };
 		F01102F01C3486DF00B663D6 /* ProfileEditingCellConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingCellConfig.swift; sourceTree = "<group>"; };
 		F0115F771D17349300437E42 /* BasisSelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasisSelectorTests.swift; sourceTree = "<group>"; };
 		F0115F791D1737DB00437E42 /* BasisOptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasisOptionView.xib; sourceTree = "<group>"; };
@@ -561,6 +564,9 @@
 		F0D932731DB3068100EA0274 /* ActivityCurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCurator.swift; sourceTree = "<group>"; };
 		F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoreDataTest.swift; sourceTree = "<group>"; };
+		F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationProtocol.swift; sourceTree = "<group>"; };
+		F0DB53301DBD914000A48F01 /* StartNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartNotification.swift; sourceTree = "<group>"; };
+		F0DB53321DBD915E00A48F01 /* FinishNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishNotification.swift; sourceTree = "<group>"; };
 		F0E0D38C1C67AF7F0087EC10 /* TextfieldViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldViewTests.swift; sourceTree = "<group>"; };
 		F0E0D38E1C67B9C30087EC10 /* FakeControllerWithCustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FakeControllerWithCustomViews.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F0E0D3901C67BCE50087EC10 /* FakeStoryboardLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStoryboardLoader.swift; sourceTree = "<group>"; };
@@ -845,8 +851,6 @@
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F0D932701DB2F3ED00EA0274 /* LocalNotifications */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
-				F009AF6A1BDB18E3007F38A9 /* NotificationRegister.swift */,
-				F009AF341BDB0E9D007F38A9 /* NotificationManager.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
 				F08B51C61C83936D008C6E8B /* Extensions */,
 				F009AF0D1BDAD6C5007F38A9 /* Features */,
@@ -1328,8 +1332,13 @@
 			isa = PBXGroup;
 			children = (
 				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
+				89E782641DC386EC007B017A /* NotificationConstants.swift */,
 				F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */,
+				F01084521DC5741800F802DA /* NotificationRegistrator.swift */,
 				F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */,
+				F0DB532E1DBD90D500A48F01 /* LocalNotificationProtocol.swift */,
+				F0DB53301DBD914000A48F01 /* StartNotification.swift */,
+				F0DB53321DBD915E00A48F01 /* FinishNotification.swift */,
 			);
 			name = LocalNotifications;
 			sourceTree = "<group>";
@@ -1887,13 +1896,14 @@
 				F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */,
 				F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */,
 				89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */,
+				F0DB532F1DBD90D500A48F01 /* LocalNotificationProtocol.swift in Sources */,
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
-				F0D9326D1DB2E36700EA0274 /* NotificationScheduler.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
 				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				89BDDEC31DA0119600703F5E /* ProfileNameCell.swift in Sources */,
+				F0DB53331DBD915E00A48F01 /* FinishNotification.swift in Sources */,
 				F009AF801BDB1935007F38A9 /* BasisSelector.swift in Sources */,
 				F0E95F3A1D43C1C9006D8410 /* MotivationIllustrator.swift in Sources */,
 				F01102F11C3486DF00B663D6 /* ProfileEditingCellConfig.swift in Sources */,
@@ -1907,8 +1917,10 @@
 				F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
+				F01084531DC5741800F802DA /* NotificationRegistrator.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */,
 				F009AF671BDB13E5007F38A9 /* CircularTimer.m in Sources */,
+				F0DB532B1DBD8DAE00A48F01 /* NotificationScheduler.swift in Sources */,
 				F0EB8A441C5ECB26009B974A /* StateMachine.swift in Sources */,
 				F0E95F5A1D451D79006D8410 /* Timer.swift in Sources */,
 				F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */,
@@ -1918,14 +1930,16 @@
 				F009AF681BDB13E5007F38A9 /* MZTimerLabel.m in Sources */,
 				F009AF871BDB1935007F38A9 /* DefaultActivitySelector.swift in Sources */,
 				F0F9BBCD1D3A9CF100920EF8 /* MotivationControl.swift in Sources */,
+				89E782651DC386EC007B017A /* NotificationConstants.swift in Sources */,
 				F0A5772D1D4D5C7800D2039A /* MainNavigationController.swift in Sources */,
+				F0DB532D1DBD8DB600A48F01 /* NotificationFactory.swift in Sources */,
 				F0A76E241D91586C0096208E /* NSObject+Extension.swift in Sources */,
 				F0115F801D25BACA00437E42 /* EditStartTimeCell.swift in Sources */,
 				89BDDEC01DA00B8900703F5E /* NSString+TextDirectionality.m in Sources */,
 				89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */,
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
+				F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */,
 				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
-				F0D932721DB2FD3200EA0274 /* NotificationResponder.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
@@ -1935,11 +1949,11 @@
 				F08B51C31C838FD4008C6E8B /* MenuTransitionManager.swift in Sources */,
 				F0C0DC2F1C78E8A6005EC490 /* EditActivityNameView.swift in Sources */,
 				F0D9326B1DB284A200EA0274 /* ListOfActivitiesDataSource.swift in Sources */,
-				F0D9326F1DB2EA6500EA0274 /* NotificationFactory.swift in Sources */,
 				F0F78C7F1C35EA3300A7B150 /* GenderSelector.swift in Sources */,
 				F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */,
 				F093E2481C7A40E400E245C4 /* EditActivityDurationView.swift in Sources */,
 				F0A577381D4EC21B00D2039A /* CircleStatsView.swift in Sources */,
+				F0DB53311DBD914000A48F01 /* StartNotification.swift in Sources */,
 				F0F9BBD41D3AB8A000920EF8 /* MotivationShareCollectionViewCell.swift in Sources */,
 				F0115F7E1D25BA5100437E42 /* EditBasisCell.swift in Sources */,
 				F009AF551BDB10A6007F38A9 /* ProfileStatsVCConstraints.swift in Sources */,
@@ -1947,7 +1961,6 @@
 				F07974C01D04CE6F00B72168 /* EditNameCell.swift in Sources */,
 				F009AF8B1BDB1935007F38A9 /* ListTypeSelector.swift in Sources */,
 				F0069C281CC5BE3900AD4607 /* ControllerFactory.swift in Sources */,
-				F009AF351BDB0E9D007F38A9 /* NotificationManager.swift in Sources */,
 				F009AF591BDB123A007F38A9 /* Motivator.swift in Sources */,
 				F009AF8D1BDB1935007F38A9 /* StandardActivityCell.swift in Sources */,
 				F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */,
@@ -1957,7 +1970,6 @@
 				F062A3481D29B19400933E09 /* ExpandableCellProtocol.swift in Sources */,
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
-				F009AF6B1BDB18E3007F38A9 /* NotificationRegister.swift in Sources */,
 				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
 			);

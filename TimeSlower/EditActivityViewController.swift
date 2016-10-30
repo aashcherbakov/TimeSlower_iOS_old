@@ -131,6 +131,7 @@ internal class EditActivityVC: UIViewController {
         } else if flow == .editing {
             if allCellsAreCollapsed() {
                 if let updatedActivity = saveActivity() {
+                    scheduleStartNotification(forActivity: updatedActivity)
                     showMotivation(forActivity: updatedActivity)
                 }
             } else {
@@ -141,8 +142,17 @@ internal class EditActivityVC: UIViewController {
         }
     }
     
+    private func scheduleStartNotification(forActivity activity: Activity) {
+        let notificationScheduler = NotificationScheduler()
+        notificationScheduler.cancelNotification(forActivity: activity, notificationType: .Start)
+        if activity.notifications {
+            notificationScheduler.scheduleForActivity(activity: activity, notificationType: .Start)
+        }
+    }
+    
     private func createActivityAndMoveToStats() {
         if let activity = createActivity() {
+            NotificationScheduler().scheduleForActivity(activity: activity, notificationType: .Start)
             showMotivation(forActivity: activity)
         } else {
             // present alert with missing data
@@ -191,7 +201,6 @@ internal class EditActivityVC: UIViewController {
             let toSave = Int(activity.timeToSave())
             let toSaveValue = Endurance(value: toSave, period: activity.duration().period)
             timeSaverView.selectedValue.value = toSaveValue
-            print("Set time saver value to \(toSaveValue)")
         } else {
             flow = .creating
             editingState = .name

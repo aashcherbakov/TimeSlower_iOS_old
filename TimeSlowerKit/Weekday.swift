@@ -20,6 +20,18 @@ public enum Weekday: Int {
     case seventh
     
     public static var calendar = Calendar.current
+
+    public func nextDate(fromDay day: Date = Date()) -> Date {
+        let fromDay = Weekday.createFromDate(day)
+        var difference: Int
+        if rawValue > fromDay.rawValue {
+            difference = rawValue - fromDay.rawValue
+        } else {
+            difference = 7 - fromDay.rawValue + rawValue
+        }
+        
+        return day.addingTimeInterval(Double(60 * 60 * 24 * difference))
+    }
     
     /**
      Created a weekday from NSDate instance
@@ -29,7 +41,7 @@ public enum Weekday: Int {
      - returns: Weekday
      */
     public static func createFromDate(_ date: Date) -> Weekday {
-        let day = (calendar as NSCalendar).component(.weekday, from: date)
+        let day = calendar.component(.weekday, from: date)
         return Weekday(rawValue: (day - 1) % 7)!
     }
     

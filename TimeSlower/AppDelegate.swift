@@ -8,18 +8,21 @@
 
 import UIKit
 import UserNotifications
+import TimeSlowerKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let notificationResponder = NotificationResponder()
+    private let notificationResponder = NotificationResponder()
+    private let notificationRegistrator = NotificationRegistrator()
+    private let activityCurator = ActivityCurator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         UNUserNotificationCenter.current().delegate = notificationResponder
-        notificationResponder.registerNotificationCategories()
+        notificationRegistrator.registerNotificationCategories()
         
         return true
     }
@@ -35,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        activityCurator.cleanUpManuallyStarted()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
