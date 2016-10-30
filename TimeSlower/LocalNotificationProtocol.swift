@@ -51,10 +51,11 @@ extension LocalNotification {
     
     private func contentForNotification() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = self.title()
-        content.body = self.body()
+        content.title = title()
+        content.body = body()
         content.sound = UNNotificationSound.default()
-        content.categoryIdentifier = self.categoryIdentifier.rawValue
+        content.categoryIdentifier = categoryIdentifier.rawValue
+        content.userInfo = userInfo()
         return content
     }
 }

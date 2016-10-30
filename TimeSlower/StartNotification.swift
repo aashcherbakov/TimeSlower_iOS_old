@@ -42,7 +42,6 @@ internal struct StartNotification: LocalNotification {
     func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {        
         let components = dateComponents(fromDate: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
-        print(trigger)
         return trigger
     }
     

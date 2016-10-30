@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeSlower/StartNotification.swift"
-            timestampString = "499463634.744595"
+            filePath = "TimeSlower/NotificationScheduler.swift"
+            timestampString = "499486226.846876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "notificationTrigger(forDate:repeats:type:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "addRequest(request:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeSlower/NotificationResponder.swift"
-            timestampString = "499463770.937509"
+            timestampString = "499486496.87161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "startActivity(withIdentifier:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.NotificationResponder.(startActivity in _D36583EDC28838CC033F92CE79A2C48A) (withIdentifier : Swift.String, completionHandler : () -&gt; ()) -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower2/TimeSlower/TimeSlower/NotificationResponder.swift"
+                  timestampString = "499486865.483872"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeSlower.NotificationResponder.(startActivity in _D36583EDC28838CC033F92CE79A2C48A) (withIdentifier : Swift.String, completionHandler : () -&gt; ()) -&gt; ()"
+                  moduleName = "TimeSlower"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_shcherbakov/Developer/TimeSlower2/TimeSlower/TimeSlower/NotificationResponder.swift"
+                  timestampString = "499486865.485867"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "652">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeSlower/NotificationResponder.swift"
+            timestampString = "499486587.917906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "startActivityFromResponse(response:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
