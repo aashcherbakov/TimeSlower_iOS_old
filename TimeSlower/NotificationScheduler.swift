@@ -30,7 +30,6 @@ internal class NotificationScheduler {
     func cancelNotification(forActivity activity: Activity, notificationType: NotificationType) {
         let identifiers = identifiersForActivity(activity: activity, notificationType: notificationType)
         notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
-        print("Canceled request for identifiers: \(identifiers)")
     }
     
     // MARK: - Private
@@ -67,15 +66,11 @@ internal class NotificationScheduler {
     
     private func addRequest(request: UNNotificationRequest, completionHandler: (() -> ())? = nil) {
         notificationCenter.add(request) { (error) in
-            UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
-                print("Total requests: \(requests.count)")
-            })
             
             if let error = error {
                 print("Uh oh! Error with notification scheduler: \(error)")
             }
             
-            print("Successfully added new notification request: \(request)")
             completionHandler?()
         }
     }

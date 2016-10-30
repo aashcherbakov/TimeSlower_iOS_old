@@ -20,7 +20,6 @@ internal struct ActivityConverter: PersistableConverter {
         
         let days = weekdaysFromDays(entity.days)
         let timing = timingFromTimingData(entity.timing)
-        print(timing)
         let stats = statsFromStatsData(entity.stats)
         
         

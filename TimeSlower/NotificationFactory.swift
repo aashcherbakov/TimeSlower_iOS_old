@@ -34,9 +34,7 @@ internal struct NotificationFactory {
     
     private func notificationRequest(forNotification notification: LocalNotification, identifier: String, category: String) -> UNNotificationRequest {
         let trigger = notification.notificationTrigger(forDate: notification.date(), repeats: notification.repeats, type: notification.type)
-        print(trigger)
         let content = contentForNotification(notification: notification, category: category)
-        print(content)
         return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     }
     

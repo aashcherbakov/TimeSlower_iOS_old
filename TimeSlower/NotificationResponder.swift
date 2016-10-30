@@ -31,7 +31,6 @@ internal final class NotificationResponder: NSObject {
     private func startActivity(withIdentifier identifier: String, completionHandler: @escaping () -> ()) {
         if let activity = activityForId(identifier: identifier) {
             let startedActivity = scheduler.start(activity: activity)
-            print("Handler: \(completionHandler)")
             notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish, completionHandler: completionHandler)
             // TODO: navigate to results page
         }

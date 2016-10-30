@@ -79,7 +79,6 @@ public struct ActivityScheduler {
         let newTiming = activity.updateTiming(withManuallyStarted: time)
         let newActivity = activity.update(withTiming: newTiming)
         let updatedActivity = dataStore.update(newActivity)
-        print("Updated activity: \(updatedActivity)")
         return updatedActivity
     }
     

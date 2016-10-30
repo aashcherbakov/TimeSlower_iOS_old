@@ -44,6 +44,7 @@ internal class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
+        observeReturningToForeground()
         // TODO: implement delegate to avoid reloading data on each appearance
         resetData()
     }
@@ -56,6 +57,11 @@ internal class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func observeReturningToForeground() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(resetData), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     private func setupData() {
@@ -71,7 +77,6 @@ internal class HomeViewController: UIViewController {
         transitionManager.sourceViewController = self
         activityListTransitionManager.sourceController = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(resetData), name: .UIApplicationWillEnterForeground, object: nil)
         
         closestActivity.producer.startWithValues { [weak self] (activity) in
             self?.updateButtonTitle(forActivity: activity)

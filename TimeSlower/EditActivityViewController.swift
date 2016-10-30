@@ -201,7 +201,6 @@ internal class EditActivityVC: UIViewController {
             let toSave = Int(activity.timeToSave())
             let toSaveValue = Endurance(value: toSave, period: activity.duration().period)
             timeSaverView.selectedValue.value = toSaveValue
-            print("Set time saver value to \(toSaveValue)")
         } else {
             flow = .creating
             editingState = .name
