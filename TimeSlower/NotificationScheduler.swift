@@ -14,6 +14,7 @@ import TimeSlowerKit
 internal class NotificationScheduler {
     
     private let notificationCenter = UNUserNotificationCenter.current()
+    private let userDefaults = UserDefaultsStore()
     
     /// Schedules notification for activity of specified type
     ///
@@ -30,6 +31,13 @@ internal class NotificationScheduler {
     func cancelNotification(forActivity activity: Activity, notificationType: NotificationType) {
         let identifiers = identifiersForActivity(activity: activity, notificationType: notificationType)
         notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    func cancelAllNotifications() {
+        if !userDefaults.hasScheduledLocalNotifications() {
+            notificationCenter.removeAllDeliveredNotifications()
+            notificationCenter.removeAllPendingNotificationRequests()
+        }
     }
     
     // MARK: - Private
@@ -65,11 +73,13 @@ internal class NotificationScheduler {
     }
     
     private func addRequest(request: UNNotificationRequest, completionHandler: (() -> ())? = nil) {
-        notificationCenter.add(request) { (error) in
+        notificationCenter.add(request) { [weak self] (error) in
             
             if let error = error {
                 print("Uh oh! Error with notification scheduler: \(error)")
             }
+            
+            self?.userDefaults.setHasScheduledLocalNotifications(value: true)
             
             completionHandler?()
         }
