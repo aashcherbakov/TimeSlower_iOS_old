@@ -289,6 +289,20 @@
 			remoteGlobalIDString = F009AE8B1BD9CBA2007F38A9;
 			remoteInfo = TimeSlowerKit;
 		};
+		F037E9E81DD0027A00852D18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E115947D1CFF1491007F8B4F;
+			remoteInfo = Mixpanel;
+		};
+		F037E9EA1DD0027A00852D18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E12782B31D4AB4B30025FB05;
+			remoteInfo = Mixpanel_tvOS;
+		};
 		F0CDAA131D90C69F0090D7E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
@@ -478,6 +492,7 @@
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
 		F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
+		F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mixpanel.xcodeproj; path = "mixpanel-swift/Mixpanel.xcodeproj"; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F062A3391D26CEBE00933E09 /* EditDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationCell.swift; sourceTree = "<group>"; };
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
@@ -829,6 +844,7 @@
 		F009AE4A1BD9C5F8007F38A9 = {
 			isa = PBXGroup;
 			children = (
+				F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */,
 				F009AE8D1BD9CBA2007F38A9 /* TimeSlowerKit */,
 				F009AE551BD9C5F8007F38A9 /* TimeSlower */,
 				F009AE6D1BD9C5F8007F38A9 /* TimeSlowerTests */,
@@ -1089,6 +1105,15 @@
 			children = (
 			);
 			name = "Concrete Subclasses";
+			sourceTree = "<group>";
+		};
+		F037E9E41DD0027900852D18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F037E9E91DD0027A00852D18 /* Mixpanel.framework */,
+				F037E9EB1DD0027A00852D18 /* Mixpanel.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F0495C371C6C21FB00AA746A /* Edit StartTime */ = {
@@ -1768,6 +1793,12 @@
 			mainGroup = F009AE4A1BD9C5F8007F38A9;
 			productRefGroup = F009AE541BD9C5F8007F38A9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F037E9E41DD0027900852D18 /* Products */;
+					ProjectRef = F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F009AE521BD9C5F8007F38A9 /* TimeSlower */,
@@ -1780,6 +1811,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F037E9E91DD0027A00852D18 /* Mixpanel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mixpanel.framework;
+			remoteRef = F037E9E81DD0027A00852D18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F037E9EB1DD0027A00852D18 /* Mixpanel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mixpanel.framework;
+			remoteRef = F037E9EA1DD0027A00852D18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F009AE511BD9C5F8007F38A9 /* Resources */ = {
