@@ -133,6 +133,7 @@
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
 		F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */; };
+		F037E9F01DD0108B00852D18 /* Mixpanel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F037E9E91DD0027A00852D18 /* Mixpanel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3391D26CEBE00933E09 /* EditDurationCell.swift */; };
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
@@ -334,6 +335,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F0CDAA1F1D90C69F0090D7E3 /* TimeSlowerDataBase.framework in Embed Frameworks */,
+				F037E9F01DD0108B00852D18 /* Mixpanel.framework in Embed Frameworks */,
 				F009AEA21BD9CBA2007F38A9 /* TimeSlowerKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -626,7 +628,6 @@
 				F09308961D8F5627008FFE1E /* ReactiveSwift.framework in Frameworks */,
 				F0CDAA031D8F838E0090D7E3 /* ReactiveObjCBridge.framework in Frameworks */,
 				F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */,
-				F037E9BE1DCFA42500852D18 /* Mixpanel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1618,6 +1619,7 @@
 			dependencies = (
 				F009AEA01BD9CBA2007F38A9 /* PBXTargetDependency */,
 				F0CDAA1D1D90C69F0090D7E3 /* PBXTargetDependency */,
+				F037E9F21DD0108B00852D18 /* PBXTargetDependency */,
 			);
 			name = TimeSlower;
 			productName = TimeSlower;
@@ -2222,6 +2224,10 @@
 			isa = PBXTargetDependency;
 			target = F009AE8B1BD9CBA2007F38A9 /* TimeSlowerKit */;
 			targetProxy = F009AED91BD9CEA4007F38A9 /* PBXContainerItemProxy */;
+		};
+		F037E9F21DD0108B00852D18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Mixpanel;
 		};
 		F0CDAA141D90C69F0090D7E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

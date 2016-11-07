@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "0BD5CD9D314C142BE5F07D30D0B21D325B97B45E" : 9223372036854775807,
+    "9F6F760EBAF3C2706B279FAF5F4F7BAEBB4671FD" : 9223372036854775807,
     "7533305DE8E8CF33AB3FE355227A84FA949FA597" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A9C8F8E7-FD6A-4F30-B654-8B4D224B4C59",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "0BD5CD9D314C142BE5F07D30D0B21D325B97B45E" : "..\/TimeSlowerKit",
+    "9F6F760EBAF3C2706B279FAF5F4F7BAEBB4671FD" : "TimeSlower\/mixpanel-swift\/",
     "7533305DE8E8CF33AB3FE355227A84FA949FA597" : "TimeSlower\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "TimeSlower",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/bitbucket.org\/alex_shcherbakov\/timeslower.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7533305DE8E8CF33AB3FE355227A84FA949FA597"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mixpanel\/mixpanel-swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9F6F760EBAF3C2706B279FAF5F4F7BAEBB4671FD"
     }
   ]
 }
