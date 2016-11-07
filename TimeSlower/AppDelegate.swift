@@ -11,6 +11,7 @@ import UserNotifications
 import TimeSlowerKit
 import Fabric
 import Crashlytics
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationRegistrator = NotificationRegistrator()
     private let notificationScheduler = NotificationScheduler()
     private let activityCurator = ActivityCurator()
+    private let mixpanelToken = "44a5e4e90cfed861628a715d764a6b2f"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = notificationResponder
         notificationRegistrator.registerNotificationCategories()
+        let mixpanel = Mixpanel.initialize(token: mixpanelToken)
+        mixpanel.track(event: "Some evening event")
         
         Fabric.with([Crashlytics.self])
         
