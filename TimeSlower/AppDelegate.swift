@@ -19,10 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private let notificationResponder = NotificationResponder()
     private let notificationRegistrator = NotificationRegistrator()
+    private let notificationScheduler = NotificationScheduler()
     private let activityCurator = ActivityCurator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        notificationScheduler.cancelAllNotifications()
+        
         UNUserNotificationCenter.current().delegate = notificationResponder
         notificationRegistrator.registerNotificationCategories()
         

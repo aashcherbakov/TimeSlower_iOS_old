@@ -132,6 +132,7 @@
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
+		F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3391D26CEBE00933E09 /* EditDurationCell.swift */; };
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
@@ -476,6 +477,7 @@
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
+		F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F062A3391D26CEBE00933E09 /* EditDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationCell.swift; sourceTree = "<group>"; };
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				F09308961D8F5627008FFE1E /* ReactiveSwift.framework in Frameworks */,
 				F0CDAA031D8F838E0090D7E3 /* ReactiveObjCBridge.framework in Frameworks */,
 				F0CDAA011D8F838A0090D7E3 /* ReactiveObjC.framework in Frameworks */,
+				F037E9BE1DCFA42500852D18 /* Mixpanel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +861,7 @@
 				F009AE5A1BD9C5F8007F38A9 /* Main.storyboard */,
 				F0A5772C1D4D5C7800D2039A /* MainNavigationController.swift */,
 				F01B186A1DC6A32600A4CC44 /* Navigator.swift */,
+				F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */,
 				F0D932701DB2F3ED00EA0274 /* LocalNotifications */,
 				F009AE561BD9C5F8007F38A9 /* AppDelegate.swift */,
 				F009AF321BDB0E1D007F38A9 /* Constants.swift */,
@@ -1926,6 +1930,7 @@
 				F009AF601BDB12D9007F38A9 /* CountryPicker.m in Sources */,
 				F009AF8F1BDB1935007F38A9 /* TimerExtension.swift in Sources */,
 				F0EB8A461C669FFA009B974A /* StateMachineDelegate.swift in Sources */,
+				F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */,
 				F0A5773A1D4ED1FF00D2039A /* ListTransitionManager.swift in Sources */,
 				F0A577331D4E447800D2039A /* ClosestActivityDisplay.swift in Sources */,
 				89BDDEC31DA0119600703F5E /* ProfileNameCell.swift in Sources */,
