@@ -18,8 +18,8 @@ public enum PastPeriod: Int {
     case lastMonth
     case lastYear
     
-    public func stringForPeriod(_ period: PastPeriod) -> String {
-        switch period {
+    public func toString() -> String {
+        switch self {
         case .today: return "Today"
         case .lastMonth: return "Last month"
         case .lastYear: return "Last year"

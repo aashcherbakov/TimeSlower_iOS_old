@@ -39,14 +39,15 @@ public struct Profile: Persistable {
     }
     
     public init(fromProfile profile: Profile, name: String, dateOfBirth: Date, country: String, photo: UIImage?) {
-    
-        self.name = name
-        self.dateOfBirth = dateOfBirth
-        self.country = country
-        self.photo = photo
-        self.resourceId = profile.resourceId
-        self.maxAge = profile.maxAge
-        self.gender = profile.gender
+        
+        self.init(
+            name: name,
+            country: country,
+            dateOfBirth: dateOfBirth,
+            gender: profile.gender,
+            maxAge: profile.maxAge,
+            photo: photo,
+            resourceId: profile.resourceId)
     }
     
     /**
@@ -91,6 +92,9 @@ public struct Profile: Persistable {
         return abs(components.day!)
     }
     
+    /// Returns Date for March 3, 1987.
+    ///
+    /// - Returns: Date instance.
     public static func defaultBirthday() -> Date {
         var components = DateComponents()
         components.year = 1987
@@ -100,9 +104,8 @@ public struct Profile: Persistable {
         
         if let date = Calendar.current.date(from: components) {
             return date
-        } else {
-            assertionFailure("Could not create date from components")
-            return Date()
         }
+        
+        return Date()
     }
 }

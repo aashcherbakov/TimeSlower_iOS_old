@@ -53,11 +53,6 @@ open class ProfileEntity: ManagedObject {
     
     // MARK: - Private
     
-    /// March 3 1987
-    fileprivate func defaultBirthday() -> Date {
-        return DefaultDateFormatter.shortDateNoTimeFromatter.date(from: "3/28/87")!
-    }
-    
     
     /// United States
     fileprivate func defaultCountry() -> String {

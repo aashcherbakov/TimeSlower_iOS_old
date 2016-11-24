@@ -134,6 +134,7 @@
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
 		F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */; };
 		F037E9F01DD0108B00852D18 /* Mixpanel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F037E9E91DD0027A00852D18 /* Mixpanel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F037E9FF1DE7956000852D18 /* FakeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9FE1DE7956000852D18 /* FakeFactory.swift */; };
 		F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */; };
 		F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A3391D26CEBE00933E09 /* EditDurationCell.swift */; };
 		F062A33C1D273D8100933E09 /* EditNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */; };
@@ -495,6 +496,7 @@
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
 		F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mixpanel.xcodeproj; path = "mixpanel-swift/Mixpanel.xcodeproj"; sourceTree = "<group>"; };
+		F037E9FE1DE7956000852D18 /* FakeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeFactory.swift; sourceTree = "<group>"; };
 		F05425A71C6FE95D001C81D0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		F062A3391D26CEBE00933E09 /* EditDurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationCell.swift; sourceTree = "<group>"; };
 		F062A33B1D273D8100933E09 /* EditNotificationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNotificationsCell.swift; sourceTree = "<group>"; };
@@ -846,10 +848,10 @@
 			isa = PBXGroup;
 			children = (
 				F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */,
-				F009AE8D1BD9CBA2007F38A9 /* TimeSlowerKit */,
 				F009AE551BD9C5F8007F38A9 /* TimeSlower */,
 				F009AE6D1BD9C5F8007F38A9 /* TimeSlowerTests */,
 				F009AE781BD9C5F8007F38A9 /* TimeSlowerUITests */,
+				F009AE8D1BD9CBA2007F38A9 /* TimeSlowerKit */,
 				F009AED41BD9CEA4007F38A9 /* TimeSlowerKitTests */,
 				F0CDAA0A1D90C69F0090D7E3 /* TimeSlowerDataBase */,
 				F0CDAA171D90C69F0090D7E3 /* TimeSlowerDataBaseTests */,
@@ -938,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				F009AED71BD9CEA4007F38A9 /* Info.plist */,
+				F037E9FE1DE7956000852D18 /* FakeFactory.swift */,
 				F0C2FF881DAED96E00CB79CB /* FakeActivityFactory.swift */,
 				F0DB53261DB5B6FF00A48F01 /* BaseCoreDataTest.swift */,
 				F0DB53241DB5B6FA00A48F01 /* TestHelper.swift */,
@@ -2149,6 +2152,7 @@
 				89E9C7F21D934455008D18A0 /* BasisTests.swift in Sources */,
 				89E9C7EB1D9343F2008D18A0 /* ResultTests.swift in Sources */,
 				89E9C7E71D9343D9008D18A0 /* WeekdayTests.swift in Sources */,
+				F037E9FF1DE7956000852D18 /* FakeFactory.swift in Sources */,
 				89E9C7D81D93425D008D18A0 /* ActivityAdapterTests.swift in Sources */,
 				89E9C7DA1D934276008D18A0 /* ActivityTests.swift in Sources */,
 				89E9C7E21D934336008D18A0 /* EnduranceTests.swift in Sources */,

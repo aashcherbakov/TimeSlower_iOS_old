@@ -91,7 +91,7 @@ class ProfileStoreTests: BaseDataStoreTest {
     
     
     func test_maxYearsLeftForProfile() {
-        XCTAssertEqual(testProfileEntity.maxYearsForProfile(testProfileEntity), 76, "Max years should be 77.4")
+        XCTAssertEqual(testProfileEntity.maxYearsForProfile(testProfileEntity), 76, "Max years should be 76")
     }
     
 
