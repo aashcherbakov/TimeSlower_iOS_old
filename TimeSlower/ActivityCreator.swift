@@ -16,7 +16,7 @@ internal final class ActivityCreator {
     init(withDataStore dataStore: DataStore = DataStore()) {
         self.dataStore = dataStore
     }
-    
+
     
     /// Creates Activity from given parameters.
     ///
@@ -94,11 +94,11 @@ internal final class ActivityCreator {
             days: days,
             timing: activityTiming,
             notifications: notifications,
-            averageSuccess: activity.averageSuccess,
+            averageSuccess: activity.stats.averageSuccess,
             resourceId: activity.resourceId,
             results: activity.results,
-            totalResults: activity.totalResults,
-            totalTimeSaved: activity.totalTimeSaved)
+            totalResults: activity.stats.totalResults,
+            totalTimeSaved: activity.stats.totalTimeSaved)
         
         return dataStore.update(updatedActivity)
     }
@@ -134,7 +134,7 @@ internal final class ActivityCreator {
             if let weekday = Weekday(rawValue: number) {
                 return weekday
             } else {
-                fatalError("Day number \(number) excedes number of days in week")
+                fatalError("Day number \(number) exceeds number of days in week")
             }
         }
     }
