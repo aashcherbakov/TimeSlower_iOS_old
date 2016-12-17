@@ -35,7 +35,7 @@ class ActivityAdapterTests: BaseDataStoreTest {
         XCTAssertEqual(activity.type, ActivityType.routine)
         XCTAssertEqual(activity.notifications, false)
         XCTAssertEqual(activity.days, [.first, .second, .third])
-        XCTAssertEqual(activity.averageSuccess, 0)
+        XCTAssertEqual(activity.stats.averageSuccess, 0)
     }
 
 }

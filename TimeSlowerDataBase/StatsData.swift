@@ -1,5 +1,5 @@
 //
-//  Stats.swift
+//  Estimates.swift
 //  TimeSlowerKit
 //
 //  Created by Oleksandr Shcherbakov on 9/3/16.

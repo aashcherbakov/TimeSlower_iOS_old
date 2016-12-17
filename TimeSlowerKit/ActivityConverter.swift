@@ -24,7 +24,7 @@ internal struct ActivityConverter: PersistableConverter {
         
         
         var activity = Activity(
-            withStats: stats,
+            withEstimates: stats,
             name: entity.name,
             type: activityType,
             days: days,
@@ -52,7 +52,7 @@ internal struct ActivityConverter: PersistableConverter {
             type: object.type.rawValue, 
             days: dayNumbersFromWeekdays(object.days), 
             timing: timingDataFromTiming(object.getTiming()),
-            stats: statsDataFromStats(object.stats), 
+            stats: statsDataFromStats(object.estimates),
             notifications: object.notifications, 
             resourceId: object.resourceId)
     }
@@ -106,20 +106,20 @@ internal struct ActivityConverter: PersistableConverter {
             manuallyStarted: timing.manuallyStarted)
     }
     
-    fileprivate func statsFromStatsData(_ data: StatsData) -> Stats {
-        return Stats(
+    fileprivate func statsFromStatsData(_ data: StatsData) -> Estimates {
+        return Estimates(
             hours: data.summHours,
             days: data.summDays,
             months: data.summMonths,
             years: data.summYears)
     }
     
-    fileprivate func statsDataFromStats(_ stats: Stats) -> StatsData {
+    fileprivate func statsDataFromStats(_ stats: Estimates) -> StatsData {
         return StatsData(
-            days: stats.summDays,
-            hours: stats.summHours, 
-            months: stats.summMonths, 
-            years: stats.summYears)
+            days: stats.sumDays,
+            hours: stats.sumHours,
+            months: stats.sumMonths,
+            years: stats.sumYears)
     }
     
     fileprivate func enduranceFromContinuation(_ continuation: Continuation) -> Endurance {

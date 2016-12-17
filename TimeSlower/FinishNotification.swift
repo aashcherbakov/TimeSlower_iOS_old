@@ -25,7 +25,7 @@ internal struct FinishNotification: LocalNotification {
     }
     
     func body() -> String {
-        let time = String(format: "%.1f", activity.stats.summMonths)
+        let time = String(format: "%.1f", activity.estimates.sumMonths)
         return "If you finish now, you will save \(time) months of your life 🙄"
     }
     

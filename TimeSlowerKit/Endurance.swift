@@ -23,7 +23,7 @@ public struct Endurance {
     
     /**
      Returns equivalent of value in seconds
-     
+
      - returns: Double for seconds in value
      */
     public func seconds() -> Double {

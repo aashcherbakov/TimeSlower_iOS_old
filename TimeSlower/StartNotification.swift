@@ -27,7 +27,7 @@ internal struct StartNotification: LocalNotification {
     }
     
     func body() -> String {
-        return "Remember, you wanted to spend \(activity.timeToSave()) less on it today"
+        return "Remember, you wanted to spend \(activity.minutesToSave()) less on it today"
     }
     
     func date() -> Date {

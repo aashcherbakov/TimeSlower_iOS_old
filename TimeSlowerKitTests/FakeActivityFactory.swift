@@ -18,8 +18,8 @@ public struct FakeActivityFactory {
         return Endurance(value: 40, period: .minutes)
     }
     
-    static func fakeStats() -> Stats {
-        return Stats(hours: 0, days: 0, months: 0, years: 0)
+    static func fakeStats() -> Estimates {
+        return Estimates(hours: 0, days: 0, months: 0, years: 0)
     }
     
     static func tenThirtyAM() -> Date {

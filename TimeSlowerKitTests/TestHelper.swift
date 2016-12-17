@@ -78,8 +78,8 @@ struct TestHelper {
         return Endurance(value: 30, period: .minutes)
     }
     
-    func fakeStats() -> Stats {
-        return Stats(hours: 0, days: 0, months: 0, years: 0)
+    func fakeStats() -> Estimates {
+        return Estimates(hours: 0, days: 0, months: 0, years: 0)
     }
     
     /// Profile

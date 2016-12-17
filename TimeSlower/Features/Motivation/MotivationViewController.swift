@@ -90,7 +90,7 @@ class MotivationViewController: UIViewController {
     // TODO: move to activity?
     fileprivate func motivationDescriptionForActivity(_ activity: Activity) -> NSAttributedString {
         // TODO: here will be a bug if we save hours
-        let duration = String(Int(activity.timeToSave()))
+        let duration = String(Int(activity.minutesToSave()))
         let period = activity.duration().period.description()
         let basis = descriptionForActivityBasis(activity)
         let description = "cutting \(duration) \(period) of \(activity.name) \(basis) will save in your lifetime:".uppercased()
@@ -121,7 +121,7 @@ class MotivationViewController: UIViewController {
     
     // TODO: move to activity?
     fileprivate func lifeStatsForActivity(_ activity: Activity) -> LifetimeStats {
-        let hours = activity.stats.summHours
+        let hours = activity.estimates.sumHours
         return LifetimeStats(withHours: NSNumber(value: hours))
     }
     

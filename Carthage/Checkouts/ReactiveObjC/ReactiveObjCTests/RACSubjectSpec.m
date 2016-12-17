@@ -29,7 +29,7 @@
 @implementation RACTestSubscriber
 
 - (instancetype)init {
-	self = [super init];
+	self = [super initWithWithEstimates];
 	_disposable = [RACDisposable new];
 	return self;
 }

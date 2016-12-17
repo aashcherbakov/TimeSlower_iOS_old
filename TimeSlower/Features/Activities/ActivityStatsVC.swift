@@ -59,7 +59,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
         activityBasisLabel.text = activity.basis().description()
         timerStatusLabel.text = (activity.isGoingNow()) ? "finishes in" : "starts in"
         
-        successLabel.text = String(format: "%.1f", activity.averageSuccess)
+        successLabel.text = String(format: "%.1f", activity.stats.averageSuccess)
         setupCircleProgress()
         launchTimer()
         defineStartOrFinishButtonTitle()
@@ -68,7 +68,7 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     func setupCircleProgress() {
         guard let activity = self.activity else { return }
         
-        circleProgress.updateProgress(CGFloat(activity.averageSuccess))
+        circleProgress.updateProgress(CGFloat(activity.stats.averageSuccess))
         circleProgress.thicknessRatio = 0.02
         circleProgress.progressTintColor = UIColor.purpleRed()
     }

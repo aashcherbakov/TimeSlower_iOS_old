@@ -42,7 +42,7 @@ class TimeMachineTests: XCTestCase {
         let correctNextSaturday = shortDateFromatter.date(from: "7/11/15, 10:00 AM")!
         
         let saturday = Weekday(rawValue: 6)!
-        let nextSaturday = timeMachine.nextOccuranceOfWeekday(saturday, fromDate: wednesdayDate)
+        let nextSaturday = timeMachine.nextOccurrenceOfWeekday(saturday, fromDate: wednesdayDate)
         XCTAssertEqual(nextSaturday, correctNextSaturday, "Next Saturday must be 11th")
     }
     
@@ -52,7 +52,7 @@ class TimeMachineTests: XCTestCase {
         
         let sunday = Weekday(rawValue: 0)!
 
-        let nextSunday = timeMachine.nextOccuranceOfWeekday(sunday, fromDate: saturdayDate!)
+        let nextSunday = timeMachine.nextOccurrenceOfWeekday(sunday, fromDate: saturdayDate!)
         XCTAssertEqual(nextSunday, correctNextSunday!, "Next Sunday must be 12th")
     }
     
@@ -62,7 +62,7 @@ class TimeMachineTests: XCTestCase {
         
         let sunday = Weekday(rawValue: 0)!
 
-        let nextSunday = timeMachine.nextOccuranceOfWeekday(sunday, fromDate: sundayDate!)
+        let nextSunday = timeMachine.nextOccurrenceOfWeekday(sunday, fromDate: sundayDate!)
         XCTAssertEqual(nextSunday, correctNextSunday!, "Next Sunday must be 19th")
     }
     
@@ -72,7 +72,7 @@ class TimeMachineTests: XCTestCase {
         
         let monday = Weekday(rawValue: 1)!
 
-        let nextMonday = timeMachine.nextOccuranceOfWeekday(monday, fromDate: fridayDate!)
+        let nextMonday = timeMachine.nextOccurrenceOfWeekday(monday, fromDate: fridayDate!)
         XCTAssertEqual(nextMonday, correctNextMonday!, "Next Monday must be 13th")
     }
     
@@ -82,7 +82,7 @@ class TimeMachineTests: XCTestCase {
         
         let saturday = Weekday(rawValue: 6)!
 
-        let nextSaturday = timeMachine.nextOccuranceOfWeekday(saturday, fromDate: sundayDate!)
+        let nextSaturday = timeMachine.nextOccurrenceOfWeekday(saturday, fromDate: sundayDate!)
         XCTAssertEqual(nextSaturday, correctNextWeekendDay!, "Next Weekendday must be 18th")
     }
     
@@ -92,7 +92,7 @@ class TimeMachineTests: XCTestCase {
         
         let thursday = Weekday(rawValue: 4)!
 
-        let nextThursday = timeMachine.nextOccuranceOfWeekday(thursday, fromDate: mondayDate!)
+        let nextThursday = timeMachine.nextOccurrenceOfWeekday(thursday, fromDate: mondayDate!)
         XCTAssertEqual(nextThursday, correctNextThursday!, "Next Thursday must be 18th")
     }
     

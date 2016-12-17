@@ -1,5 +1,5 @@
 ////
-////  Stats.swift
+////  Estimates.swift
 ////  TimeSlower2
 ////
 ////  Created by Aleksander Shcherbakov on 5/22/15.

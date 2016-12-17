@@ -23,7 +23,6 @@ internal struct ActivityAdapter: GenericAdapter, DataStoreAdapter {
         self.creator = ActivityStore(withCoreDataStack: stack)
         self.converter = ActivityConverter()
     }
-    
 
     public func activities(forDate date: Date?, type: ActivityType) -> [Activity] {
         

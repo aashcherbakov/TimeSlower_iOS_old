@@ -65,15 +65,15 @@ class ProfileStatsVC: ProfileStatsVCConstraints {
     private func totalSaved(fromActivities activities: [Activity]) -> Double {
         guard activities.count > 0 else { return 0 }
         return activities.map { (activity) -> Double in
-            return activity.totalTimeSaved
+            return activity.stats.totalTimeSaved
         }.reduce(0, +)
     }
     
     private func averageSuccess(fromActivities activities: [Activity]) -> Double {
         guard activities.count > 0 else { return 0 }
         let totalSuccess = activities.map { (activity) -> Double in
-            return activity.averageSuccess
-            }.reduce(0, +)
+            return activity.stats.averageSuccess
+        }.reduce(0, +)
         
         return totalSuccess / Double(activities.count)
     }

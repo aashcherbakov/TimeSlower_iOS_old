@@ -16,6 +16,7 @@ public struct Timing {
     public var manuallyStarted: Date?
     public let timeToSave: Int
     
+    private let timeMachine = TimeMachine()
     
     public init(withDuration duration: Endurance, startTime: Date, timeToSave: Int, alarmTime: Date, manuallyStarted: Date? = nil) {
         self.duration = duration
@@ -33,6 +34,30 @@ public struct Timing {
     }
     
     public func update(withManuallyStarted started: Date?) -> Timing {
-        return Timing(withDuration: duration, startTime: startTime, timeToSave: timeToSave, alarmTime: alarmTime, manuallyStarted: started)
+        return Timing(
+            withDuration: duration,
+            startTime: startTime, timeToSave: timeToSave, alarmTime: alarmTime, manuallyStarted: started)
+    }
+    
+    public func starts(inDate date: Date = Date()) -> Date {
+        let starts = manuallyStarted ?? startTime
+        return timeMachine.updatedTime(starts, forDate: date)
+    }
+
+    public func finishes(inDate date: Date = Date()) -> Date {
+        let startingPoint = starts(inDate: date)
+        let finishTime = startingPoint.addingTimeInterval(duration.seconds())
+        return finishTime
+    }
+
+    public func alarm(inDate date: Date = Date()) -> Date {
+        guard let started = manuallyStarted else {
+            return finishes(inDate: date)
+        }
+
+        let durationInSeconds = duration.seconds()
+        let timeToSaveInSeconds = Double(timeToSave) * 60
+        let timeInterval = durationInSeconds - timeToSaveInSeconds
+        return started.addingTimeInterval(timeInterval)
     }
 }

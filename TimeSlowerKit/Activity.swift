@@ -8,22 +8,31 @@
 
 import Foundation
 
+/// Activity
 public struct Activity: Persistable {
-    
+
+    // MARK: - Persistable
+
     public let resourceId: String
+
+    // MARK: - Activity
+
     public let name: String
     public let type: ActivityType
     public let days: [Weekday]
-    public let stats: Stats
     public let notifications: Bool
-    public let averageSuccess: Double
-    public let totalTimeSaved: Double
-    public let totalResults: Int
+    public let estimates: Estimates
+    public let stats: Stats
+    public let timing: Timing
+
+    // MARK: - Internal properties
+
     private(set) public var results: Set<Result>
-    private let timing: Timing
+
+    // MARK: - Private properties
 
     private let timeMachine = TimeMachine()
-    
+
     /// Initializer for creating activity from scratch
     public init(withLifetimeDays
         lifetimeDays: Int,
@@ -40,26 +49,23 @@ public struct Activity: Persistable {
         self.days = days
         self.timing = timing
         self.notifications = notifications
-        self.averageSuccess = 0
         self.results = results
-        self.totalResults = 0
-        self.totalTimeSaved = 0
-        self.stats = Stats(withDuration: timing.timeToSave, busyDays: days.count, totalDays: lifetimeDays)
+        self.stats = Stats(averageSuccess: 0, totalTimeSaved: 0, totalResults: 0)
+        self.estimates = Estimates(withDuration: timing.timeToSave, busyDays: days.count, totalDays: lifetimeDays)
     }
     
     /// Initializer for converting activity from Data Base
-    public init(withStats
-        stats: Stats,
-        name: String,
-        type: ActivityType,
-        days: [Weekday],
-        timing: Timing,
-        notifications: Bool,
-        averageSuccess: Double,
-        resourceId: String,
-        results: Set<Result>,
-        totalResults: Int,
-        totalTimeSaved: Double) {
+    public init(withEstimates estimates: Estimates,
+                name: String,
+                type: ActivityType,
+                days: [Weekday],
+                timing: Timing,
+                notifications: Bool,
+                averageSuccess: Double,
+                resourceId: String,
+                results: Set<Result>,
+                totalResults: Int,
+                totalTimeSaved: Double) {
         
         self.resourceId = resourceId
         self.name = name
@@ -67,31 +73,34 @@ public struct Activity: Persistable {
         self.days = days
         self.timing = timing
         self.notifications = notifications
-        self.averageSuccess = averageSuccess
-        self.stats = stats
+        self.estimates = estimates
         self.results = results
-        self.totalResults = totalResults
-        self.totalTimeSaved = totalTimeSaved
+        self.stats = Stats(
+            averageSuccess: averageSuccess,
+            totalTimeSaved: totalTimeSaved,
+            totalResults: totalResults)
     }
     
     public func update(withTiming newTiming: Timing) -> Activity {
         return Activity(
-            withStats: stats,
+            withEstimates: estimates,
             name: name,
             type: type,
             days: days,
             timing: newTiming,
             notifications: notifications,
-            averageSuccess: averageSuccess,
+            averageSuccess: stats.averageSuccess,
             resourceId: resourceId,
             results: results,
-            totalResults: totalResults,
-            totalTimeSaved: totalTimeSaved)
+            totalResults: stats.totalResults,
+            totalTimeSaved: stats.totalTimeSaved)
     }
     
     public func lastWeekResults() -> [Result] {
         // TODO: find faster way to get last 7 results
-        let sortedResults = results.sorted { $0.finishTime.compare($1.finishTime) == .orderedDescending }
+        let sortedResults = results.sorted {
+            $0.finishTime.compare($1.finishTime) == .orderedDescending
+        }
         
         let firstSeven = Array(sortedResults.prefix(7))
         return firstSeven
@@ -129,51 +138,24 @@ public struct Activity: Persistable {
         }
         
         let nextDay = Weekday.closestDay(nextDayOptions, toDay: currentDay)
-        let daysInBetween = numberOfDaysTillDay(day: nextDay.rawValue, fromDay: currentDay.rawValue)
-        let nextActionDay = date.addingTimeInterval(Double(daysInBetween * 24 * 60 * 60))
+        let daysInBetween = timeMachine.intervalFromDay(currentDay.rawValue, toDay: nextDay.rawValue)
+        let secondsInDay = 24 * 60 * 60
+        let nextActionDay = date.addingTimeInterval(daysInBetween * Double(secondsInDay))
         return nextActionDay
     }
-    
-    public func numberOfDaysTillDay(day: Int, fromDay: Int) -> Int {
-        if day < fromDay {
-            return 7 - (fromDay - day)
-        } else if day > fromDay {
-            return day - fromDay
-        } else {
-            return 7
-        }
-    }
-    
+
+    /// Returns activity start time in given date (today by default)
     public func startTime(inDate date: Date = Date()) -> Date {
-        let startTime = timing.manuallyStarted ?? timing.startTime
-        return timeMachine.updatedTime(startTime, forDate: date)
+        return timing.starts(inDate: date)
     }
-    
+
+    /// Returns activity finish time in given date (today by default)
     public func finishTime(inDate date: Date = Date()) -> Date {
-        let startingPoint = startTime(inDate: date)
-        let finishTime = startingPoint.addingTimeInterval(timing.duration.seconds())
-        return finishTime
+        return timing.finishes(inDate: date)
     }
-    
+
     public func alarmTime(inDate date: Date = Date()) -> Date {
-        guard let started = timing.manuallyStarted else {
-            return finishTime()
-        }
-        
-        let durationInSeconds = timing.duration.seconds()
-        let timeToSaveInSeconds = timeToSave() * 60
-        let timeInterval = durationInSeconds - timeToSaveInSeconds
-        return started.addingTimeInterval(timeInterval)
-    }
-    
-    public func timeToSave() -> Double {
-        let period = timing.duration.period
-        switch period {
-        case .hours:
-            return Double(timing.timeToSave / 60)
-        default:
-            return Double(timing.timeToSave)
-        }
+        return timing.alarm(inDate: date)
     }
     
     public func minutesToSave() -> Double {
@@ -233,7 +215,9 @@ public struct Activity: Persistable {
     
     public func startsEarlierThen(activity: Activity) -> Bool {
         let date = Date()
-        return startTime(inDate: date).compare(activity.startTime(inDate: date)) == .orderedAscending
+        let otherStartTime = activity.startTime(inDate: date)
+        let updatedStartTime = startTime(inDate: date)
+        return updatedStartTime.compare(otherStartTime) == .orderedAscending
     }
 }
 
@@ -247,4 +231,3 @@ public enum ActivityType: Int {
     case routine
     case goal
 }
-
