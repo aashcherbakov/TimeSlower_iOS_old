@@ -85,10 +85,10 @@ internal final class ActivityCreator {
 
         let days = weekdaysWith(numbers: selectedDays)
         let activityTiming = timing(withStartTime: startTime, duration: duration, timeToSave: timeToSave)
-        let stats = Stats(withDuration: timeToSave, busyDays: days.count, totalDays: totalDaysForProfile())
+        let stats = Estimates(withDuration: timeToSave, busyDays: days.count, totalDays: totalDaysForProfile())
         
         let updatedActivity = Activity(
-            withStats: stats,
+            withEstimates: stats,
             name: name,
             type: activity.type,
             days: days,

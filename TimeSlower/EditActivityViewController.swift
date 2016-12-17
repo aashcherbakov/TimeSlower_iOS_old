@@ -198,7 +198,7 @@ internal class EditActivityVC: UIViewController {
             flow = .editing
             editingState = .fullHouse
             timeSaverView.selectedDuration.value = activity.duration()
-            let toSave = Int(activity.timeToSave())
+            let toSave = Int(activity.minutesToSave())
             let toSaveValue = Endurance(value: toSave, period: activity.duration().period)
             timeSaverView.selectedValue.value = toSaveValue
         } else {
@@ -229,7 +229,7 @@ internal class EditActivityVC: UIViewController {
             selectedStartTime = activity.startTime()
             selectedDuration = activity.duration()
             selectedNotifications = activity.notifications
-            selectedTimeToSave = Int(activity.timeToSave())
+            selectedTimeToSave = Int(activity.minutesToSave())
             
             initialValuesForCells = [selectedName as Optional<AnyObject>, selectedBasis as Optional<AnyObject>, selectedStartTime as Optional<AnyObject>, selectedDuration as Optional<AnyObject>, selectedNotifications as Optional<AnyObject>]
         }

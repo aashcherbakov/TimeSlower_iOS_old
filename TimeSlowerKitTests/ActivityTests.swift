@@ -27,6 +27,8 @@ class ActivityTests: BaseDataStoreTest {
         super.tearDown()
     }
 
+    // MARK: - Comparing dates
+
     func test_startsLaterThenDate() {
         let date = shortTimeFormatter.date(from: "10/18/2016, 10:00 AM")!
         XCTAssertTrue(sut.startsLaterThen(date: date))
@@ -117,11 +119,14 @@ class ActivityTests: BaseDataStoreTest {
     func test_isGoingNow_manuallyStarted_true() {
         let eightOcklock = shortTimeFormatter.date(from: "10/11/2016, 8:00 AM")!
         let eightTwanty = shortTimeFormatter.date(from: "10/11/2016, 8:20 AM")!
-
         let timing = Timing(withDuration: FakeActivityFactory.fakeEndurance(), startTime: sut.startTime(), timeToSave: 15, alarmTime: sut.startTime(), manuallyStarted: eightOcklock)
         sut = sut.update(withTiming: timing)
         let isGoingNow = sut.isGoingNow(date: eightTwanty)
         XCTAssertTrue(isGoingNow)
     }
-    
+
+    func test_basis() {
+        XCTAssertEqual(sut.basis(), Basis.random)
+    }
+
 }

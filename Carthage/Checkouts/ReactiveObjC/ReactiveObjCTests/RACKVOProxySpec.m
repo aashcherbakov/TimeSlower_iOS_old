@@ -31,7 +31,7 @@
 @implementation TestObject
 
 - (instancetype)init {
-	if ((self = [super init])) {
+	if ((self = [super initWithWithEstimates])) {
 		pthread_mutex_init(&_mutex, nil);
 	}
 

@@ -2,7 +2,7 @@
 //  TimeMachine.swift
 //  TimeSlower2
 //
-//  Created by Aleksander Shcherbakov on 7/13/15.
+//  Created by Alexander Shcherbakov on 7/13/15.
 //  Copyright (c) 2015 1lastDay. All rights reserved.
 //
 
@@ -33,9 +33,9 @@ public struct TimeMachine {
      - parameter weekday: Weekday we are looking for
      - parameter date:    NSDate from which count starts.
      
-     - returns: NSDate for next occurance of given weekday
+     - returns: NSDate for next occurrence of given weekday
      */
-    public func nextOccuranceOfWeekday(_ weekday: Weekday, fromDate date: Date) -> Date {
+    public func nextOccurrenceOfWeekday(_ weekday: Weekday, fromDate date: Date) -> Date {
         let fromWeekday = Weekday.createFromDate(date)
         let difference = intervalFromDay(fromWeekday.rawValue, toDay: weekday.rawValue)
         let timeIntervalToAdd = difference * kSecondsInDay
@@ -106,10 +106,8 @@ public struct TimeMachine {
         let timeFromStartToFinish = start.timeIntervalSince(finish)
         return abs(timeFromStartToFinish) / 60
     }
-    
-    // MARK: - Private Methods
-    
-    fileprivate func intervalFromDay(_ fromDay: Int, toDay: Int) -> Double {
+
+    public func intervalFromDay(_ fromDay: Int, toDay: Int) -> Double {
         var difference: Double
         
         if toDay < fromDay {

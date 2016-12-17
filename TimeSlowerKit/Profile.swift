@@ -56,7 +56,7 @@ public struct Profile: Persistable {
      - returns: Double for user age
      */
     public func userAgeForDate(_ date: Date) -> Double {
-        let components = (calendar as NSCalendar).components(.year, from: dateOfBirth, to: date, options: [])
+        let components = calendar.dateComponents([.year], from: dateOfBirth, to: date)
         return Double(components.year!)
     }
     
@@ -72,7 +72,7 @@ public struct Profile: Persistable {
     /**
      Returns date of approximate death based of maximum years in chosen country with chosen gender
      
-     - returns: NSDate of avarage person's death
+     - returns: NSDate of average person's death
      */
     public func dateOfApproximateLifeEnd() -> Date {
         var components = DateComponents()
