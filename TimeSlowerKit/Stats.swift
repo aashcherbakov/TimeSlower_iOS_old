@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// Data structure to group average success, results and saved time in given activity.
 public struct Stats {
 
     public let averageSuccess: Double

@@ -89,7 +89,7 @@ class ListTransitionManager: UIPercentDrivenInteractiveTransition {
                 return
             }
             
-            let listController: ListOfActivitiesVC = ControllerFactory.createController()
+            let listController: ActivitiesList = ControllerFactory.createController()
             listController.presentedModally = true
             let navigationController = UINavigationController(rootViewController: listController)
             navigationController.transitioningDelegate = currentVC.activityListTransitionManager

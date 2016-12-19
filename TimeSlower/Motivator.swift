@@ -58,7 +58,6 @@ public final class Motivator {
                     break
                 } else {
                     addCircle(longSide, shortSide: shortSide, longSection: j, shortSection: i, inContext: context, totalCircles: totalCircles)
-                    
                     totalCircles += 1
                 }
             }

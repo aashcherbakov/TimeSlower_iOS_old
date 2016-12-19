@@ -8,6 +8,14 @@
 
 import Foundation
 
+public protocol Modem {
+    func dial(number: String) -> Bool
+    func disconnect() -> Bool
+    func send(message: String) -> Bool
+    func getConnectedPhoneNumber() -> String
+}
+
+
 /**
  *  Struct that describes single result for one given day in activity. Is created when activity is finished
  *  manually or automatically.

@@ -22,8 +22,10 @@ public protocol Persistable {
 // MARK: - Default implementation
 
 extension Persistable {
+
     public var searchKey: String {
         return resourceId
     }
+
 }
 

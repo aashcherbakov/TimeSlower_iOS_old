@@ -198,3 +198,12 @@ extension ProfileStatsVC: ProfileEditingDelegate {
         launchTimer()        
     }
 }
+
+extension ProfileStatsVC: Instantiatable {
+    
+    typealias SetupObject = Profile
+    
+    func setup(with object: Profile) {
+        profile = object
+    }
+}

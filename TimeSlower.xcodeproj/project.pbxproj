@@ -89,7 +89,7 @@
 		F009AF391BDB0FEA007F38A9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F009AF381BDB0FEA007F38A9 /* Profile.storyboard */; };
 		F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */; };
 		F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */; };
-		F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */; };
+		F009AF4B1BDB1061007F38A9 /* ActivitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF411BDB1061007F38A9 /* ActivitiesListViewController.swift */; };
 		F009AF4C1BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */; };
 		F009AF521BDB10A6007F38A9 /* ProfileEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */; };
 		F009AF541BDB10A6007F38A9 /* ProfileStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */; };
@@ -132,6 +132,10 @@
 		F01B186B1DC6A32600A4CC44 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B186A1DC6A32600A4CC44 /* Navigator.swift */; };
 		F021312B1C1526EE00C9B02E /* ProfileEditingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */; };
 		F021312C1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */; };
+		F02F4CB41E05EE7200F6614A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CB31E05EE7200F6614A /* Router.swift */; };
+		F02F4CB81E05F32600F6614A /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CB71E05F32600F6614A /* RouterTests.swift */; };
+		F02F4CBA1E06E7C200F6614A /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CB91E06E7C200F6614A /* Destination.swift */; };
+		F02F4CBC1E06E7E400F6614A /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CBB1E06E7E400F6614A /* PresentationStyle.swift */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
 		F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */; };
 		F037E9F01DD0108B00852D18 /* Mixpanel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F037E9E91DD0027A00852D18 /* Mixpanel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -450,7 +454,7 @@
 		F009AF381BDB0FEA007F38A9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVC.swift; path = Features/Activities/ActivityStatsVC.swift; sourceTree = "<group>"; };
 		F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityStatsVCConstraints.swift; path = Features/Activities/ActivityStatsVCConstraints.swift; sourceTree = "<group>"; };
-		F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVC.swift; path = Features/Activities/ListOfActivitiesVC.swift; sourceTree = "<group>"; };
+		F009AF411BDB1061007F38A9 /* ActivitiesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesListViewController.swift; path = Features/Activities/ActivitiesListViewController.swift; sourceTree = "<group>"; };
 		F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfActivitiesVCConstraints.swift; path = Features/Activities/ListOfActivitiesVCConstraints.swift; sourceTree = "<group>"; };
 		F009AF4E1BDB10A6007F38A9 /* ProfileEditingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditingVC.swift; path = Features/Profile/ProfileEditingVC.swift; sourceTree = "<group>"; };
 		F009AF501BDB10A6007F38A9 /* ProfileStatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStatsVC.swift; path = Features/Profile/ProfileStatsVC.swift; sourceTree = "<group>"; };
@@ -497,6 +501,10 @@
 		F01B186A1DC6A32600A4CC44 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		F02131291C1526EE00C9B02E /* ProfileEditingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditingTableViewCell.swift; sourceTree = "<group>"; };
 		F021312A1C1526EE00C9B02E /* ProfileEditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditingTableViewCell.xib; sourceTree = "<group>"; };
+		F02F4CB31E05EE7200F6614A /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		F02F4CB71E05F32600F6614A /* RouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
+		F02F4CB91E06E7C200F6614A /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		F02F4CBB1E06E7E400F6614A /* PresentationStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
 		F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mixpanel.xcodeproj; path = "mixpanel-swift/Mixpanel.xcodeproj"; sourceTree = "<group>"; };
@@ -1071,8 +1079,12 @@
 				F0EB8A431C5ECB26009B974A /* StateMachine.swift */,
 				F0E95F591D451D79006D8410 /* Timer.swift */,
 				F0EB8A451C669FFA009B974A /* StateMachineDelegate.swift */,
-				F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */,
 				F0C2FF7E1DA0709600CB79CB /* ScreenHeight.swift */,
+				F02F4CB31E05EE7200F6614A /* Router.swift */,
+				F02F4CB71E05F32600F6614A /* RouterTests.swift */,
+				F02F4CB91E06E7C200F6614A /* Destination.swift */,
+				F02F4CBB1E06E7E400F6614A /* PresentationStyle.swift */,
+				F0069C271CC5BE3900AD4607 /* ControllerFactory.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -1082,7 +1094,7 @@
 			children = (
 				F009AF3C1BDB1061007F38A9 /* ActivityStatsVC.swift */,
 				F009AF3D1BDB1061007F38A9 /* ActivityStatsVCConstraints.swift */,
-				F009AF411BDB1061007F38A9 /* ListOfActivitiesVC.swift */,
+				F009AF411BDB1061007F38A9 /* ActivitiesListViewController.swift */,
 				F0D9326A1DB284A200EA0274 /* ListOfActivitiesDataSource.swift */,
 				F009AF421BDB1061007F38A9 /* ListOfActivitiesVCConstraints.swift */,
 			);
@@ -1984,12 +1996,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F009AF921BDB1935007F38A9 /* TypeSelector.swift in Sources */,
+				F02F4CB41E05EE7200F6614A /* Router.swift in Sources */,
 				89BDDEC61DA01C4700703F5E /* ProfileEditingDataSource.swift in Sources */,
 				F0D8F5C01C384FE600D41C78 /* TextfieldView.swift in Sources */,
 				F009AE571BD9C5F8007F38A9 /* AppDelegate.swift in Sources */,
 				F0A5772F1D4D5E1200D2039A /* HomeViewController.swift in Sources */,
 				F0A613681D347E060051743C /* MotivationViewController.swift in Sources */,
-				F009AF4B1BDB1061007F38A9 /* ListOfActivitiesVC.swift in Sources */,
+				F009AF4B1BDB1061007F38A9 /* ActivitiesListViewController.swift in Sources */,
 				F0C2FF7C1DA06B9000CB79CB /* ProfileCountryCell.swift in Sources */,
 				F06A00571CFC89E70056EE93 /* EditActivityViewController.swift in Sources */,
 				89BDDEBE1DA00B8900703F5E /* JVFloatLabeledTextField.m in Sources */,
@@ -2014,6 +2027,7 @@
 				F0C2FF811DAE7C5900CB79CB /* ActivityCreator.swift in Sources */,
 				F0F9BBE01D3BD7D200920EF8 /* LifetimeStats.swift in Sources */,
 				F009AF851BDB1935007F38A9 /* DaySelector.swift in Sources */,
+				F02F4CBA1E06E7C200F6614A /* Destination.swift in Sources */,
 				F009AF901BDB1935007F38A9 /* TimeSaver.swift in Sources */,
 				F01084531DC5741800F802DA /* NotificationRegistrator.swift in Sources */,
 				F0D86D2C1C376A8200EFA971 /* UIFont+AppFonts.swift in Sources */,
@@ -2070,6 +2084,7 @@
 				F009AF461BDB1061007F38A9 /* ActivityStatsVC.swift in Sources */,
 				F0115F7C1D1737E900437E42 /* BasisOptionView.swift in Sources */,
 				F062A33A1D26CEBE00933E09 /* EditDurationCell.swift in Sources */,
+				F02F4CBC1E06E7E400F6614A /* PresentationStyle.swift in Sources */,
 				F093E24A1C7A437100E245C4 /* EditActivityNotificationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2083,6 +2098,7 @@
 				F0E0D38D1C67AF7F0087EC10 /* TextfieldViewTests.swift in Sources */,
 				F0115F781D17349300437E42 /* BasisSelectorTests.swift in Sources */,
 				896B84311C1714F100C786E7 /* FakeControllerWithTableView.swift in Sources */,
+				F02F4CB81E05F32600F6614A /* RouterTests.swift in Sources */,
 				F06A00591CFD040C0056EE93 /* EditActivityViewControllerTests.swift in Sources */,
 				F0E0D3911C67BCE50087EC10 /* FakeStoryboardLoader.swift in Sources */,
 				F0F20F321CCD430100F7DAA7 /* EditActivityBasisViewTests.swift in Sources */,

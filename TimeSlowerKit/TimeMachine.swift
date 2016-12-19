@@ -85,13 +85,14 @@ public struct TimeMachine {
      - returns: NSDate with passed time.
      */
     public func updatedTime(_ time: Date, forDate: Date) -> Date {
-        let oldDateComponents = (Calendar.current as NSCalendar).components([.hour, .minute], from: time)
-        var newDateComponents = (Calendar.current as NSCalendar).components([.month, .day, .year], from: forDate)
+        let calendar = Calendar.current
+        let oldDateComponents = calendar.dateComponents([.hour, .minute], from: time)
+        var newDateComponents = calendar.dateComponents([.month, .day, .year], from: forDate)
         
         newDateComponents.hour = oldDateComponents.hour
         newDateComponents.minute = oldDateComponents.minute
         
-        return Calendar.current.date(from: newDateComponents)!
+        return calendar.date(from: newDateComponents)!
     }
     
     /**

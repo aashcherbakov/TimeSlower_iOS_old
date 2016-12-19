@@ -246,3 +246,10 @@ class ActivityStatsVC: ActivityStatsVCConstraints {
     }
 
 }
+
+extension ActivityStatsVC: Instantiatable {
+    typealias SetupObject = Activity
+    func setup(with object: Activity) {
+        activity = object
+    }
+}

@@ -184,6 +184,8 @@ public struct Activity: Persistable {
         return Basis.basisFromWeekdays(days)
     }
     
+    // MARK: - Timing
+    
     public func isGoingNow(date: Date = Date()) -> Bool {
         let startsBefore = startsEarlierThen(date: date)
         let endsAfter = endsLaterThen(date: date)
@@ -228,6 +230,8 @@ public struct Activity: Persistable {
  - Goal:    Goal - activity that user wants to spend time on
  */
 public enum ActivityType: Int {
+
     case routine
     case goal
+
 }
