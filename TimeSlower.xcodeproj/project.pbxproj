@@ -45,7 +45,7 @@
 		89E9C7C41D934215008D18A0 /* StaticDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AB1D934215008D18A0 /* StaticDateFormatter.swift */; };
 		89E9C7C51D934215008D18A0 /* Estimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AC1D934215008D18A0 /* Estimates.swift */; };
 		89E9C7C71D934215008D18A0 /* SuccessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AE1D934215008D18A0 /* SuccessCalculator.swift */; };
-		89E9C7C91D934215008D18A0 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B01D934215008D18A0 /* TimeCalculator.swift */; };
+		89E9C7C91D934215008D18A0 /* Edtimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B01D934215008D18A0 /* Edtimator.swift */; };
 		89E9C7CB1D934215008D18A0 /* TimeMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B21D934215008D18A0 /* TimeMachine.swift */; };
 		89E9C7D11D934224008D18A0 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7CE1D934224008D18A0 /* Timing.swift */; };
 		89E9C7D51D93422D008D18A0 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7D31D93422D008D18A0 /* Weekday.swift */; };
@@ -61,7 +61,7 @@
 		89E9C7EF1D934422008D18A0 /* EstimatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AD1D934215008D18A0 /* EstimatesTests.swift */; };
 		89E9C7F21D934455008D18A0 /* BasisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7821D9341F5008D18A0 /* BasisTests.swift */; };
 		89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B31D934215008D18A0 /* TimeMachineTests.swift */; };
-		89E9C7F51D934474008D18A0 /* TimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B11D934215008D18A0 /* TimeCalculatorTests.swift */; };
+		89E9C7F51D934474008D18A0 /* EstimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7B11D934215008D18A0 /* EstimatorTests.swift */; };
 		89E9C7F61D93447C008D18A0 /* SuccessCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9C7AF1D934215008D18A0 /* SuccessCalculatorTests.swift */; };
 		89EA900D1DBA49CA0004464D /* ProfileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA900C1DBA49CA0004464D /* ProfileCreator.swift */; };
 		8C05CDC05DE2D74CDAF4D1E3 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C05CEF6F1F408813E74EFE7 /* Stats.swift */; };
@@ -262,6 +262,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		893C34C41E0EFBC500A43837 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F009AE521BD9C5F8007F38A9;
+			remoteInfo = TimeSlower;
+		};
 		89BDDEB61DA00AA600703F5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F009AE4B1BD9C5F8007F38A9 /* Project object */;
@@ -412,8 +419,8 @@
 		89E9C7AD1D934215008D18A0 /* EstimatesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimatesTests.swift; sourceTree = "<group>"; };
 		89E9C7AE1D934215008D18A0 /* SuccessCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCalculator.swift; sourceTree = "<group>"; };
 		89E9C7AF1D934215008D18A0 /* SuccessCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCalculatorTests.swift; sourceTree = "<group>"; };
-		89E9C7B01D934215008D18A0 /* TimeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
-		89E9C7B11D934215008D18A0 /* TimeCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCalculatorTests.swift; sourceTree = "<group>"; };
+		89E9C7B01D934215008D18A0 /* Edtimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edtimator.swift; sourceTree = "<group>"; };
+		89E9C7B11D934215008D18A0 /* EstimatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimatorTests.swift; sourceTree = "<group>"; };
 		89E9C7B21D934215008D18A0 /* TimeMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMachine.swift; sourceTree = "<group>"; };
 		89E9C7B31D934215008D18A0 /* TimeMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMachineTests.swift; sourceTree = "<group>"; };
 		89E9C7CE1D934224008D18A0 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
@@ -849,8 +856,8 @@
 		89E9C7F71D934486008D18A0 /* TimeMachine */ = {
 			isa = PBXGroup;
 			children = (
-				89E9C7B01D934215008D18A0 /* TimeCalculator.swift */,
-				89E9C7B11D934215008D18A0 /* TimeCalculatorTests.swift */,
+				89E9C7B01D934215008D18A0 /* Edtimator.swift */,
+				89E9C7B11D934215008D18A0 /* EstimatorTests.swift */,
 				89E9C7B21D934215008D18A0 /* TimeMachine.swift */,
 				89E9C7B31D934215008D18A0 /* TimeMachineTests.swift */,
 			);
@@ -1721,6 +1728,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				893C34C51E0EFBC500A43837 /* PBXTargetDependency */,
 				F009AEDA1BD9CEA4007F38A9 /* PBXTargetDependency */,
 			);
 			name = TimeSlowerKitTests;
@@ -2130,7 +2138,7 @@
 				89E9C7BC1D934215008D18A0 /* ProfileStatsCalculator.swift in Sources */,
 				F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */,
 				89E9C7C21D934215008D18A0 /* ResultConverter.swift in Sources */,
-				89E9C7C91D934215008D18A0 /* TimeCalculator.swift in Sources */,
+				89E9C7C91D934215008D18A0 /* Edtimator.swift in Sources */,
 				89E9C7B41D934215008D18A0 /* PastPeriod.swift in Sources */,
 				F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */,
 				89E9C7BF1D934215008D18A0 /* Result.swift in Sources */,
@@ -2173,7 +2181,7 @@
 				89E9C7F41D934470008D18A0 /* TimeMachineTests.swift in Sources */,
 				89E9C7EF1D934422008D18A0 /* EstimatesTests.swift in Sources */,
 				F0A76E6B1D9372240096208E /* FakeCoreDataStack.swift in Sources */,
-				89E9C7F51D934474008D18A0 /* TimeCalculatorTests.swift in Sources */,
+				89E9C7F51D934474008D18A0 /* EstimatorTests.swift in Sources */,
 				F0DB53251DB5B6FA00A48F01 /* TestHelper.swift in Sources */,
 				F0A76E641D9370580096208E /* ProfileStatsCalculatorTests.swift in Sources */,
 				89E9C7E91D9343E4008D18A0 /* TimingTests.swift in Sources */,
@@ -2236,6 +2244,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		893C34C51E0EFBC500A43837 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F009AE521BD9C5F8007F38A9 /* TimeSlower */;
+			targetProxy = 893C34C41E0EFBC500A43837 /* PBXContainerItemProxy */;
+		};
 		89BDDEB71DA00AA600703F5E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F0CDAA081D90C69F0090D7E3 /* TimeSlowerDataBase */;

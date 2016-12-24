@@ -51,7 +51,7 @@ public struct TimeMachine {
      - returns: NSDate N days before given date
      */
     public func startDateForPeriod(_ period: PastPeriod, sinceDate date: Date) -> Date {
-        var componentsFromToday = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute], from: date)
+        var componentsFromToday = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
         switch period {
         case .today: break
@@ -72,7 +72,7 @@ public struct TimeMachine {
      */
     public func numberOfDaysInPeriod(_ period: PastPeriod, fromDate date: Date) -> Int {
         let startDate = startDateForPeriod(period, sinceDate: date)
-        let components = (calendar as NSCalendar).components(NSCalendar.Unit.day, from: date, to: startDate, options: [])
+        let components = calendar.dateComponents([.day], from: date, to: startDate)
         return abs(components.day!)
     }
     
@@ -85,7 +85,6 @@ public struct TimeMachine {
      - returns: NSDate with passed time.
      */
     public func updatedTime(_ time: Date, forDate: Date) -> Date {
-        let calendar = Calendar.current
         let oldDateComponents = calendar.dateComponents([.hour, .minute], from: time)
         var newDateComponents = calendar.dateComponents([.month, .day, .year], from: forDate)
         

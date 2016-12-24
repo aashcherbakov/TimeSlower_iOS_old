@@ -81,7 +81,7 @@ public struct Activity: Persistable {
             totalResults: totalResults)
     }
     
-    public func update(withTiming newTiming: Timing) -> Activity {
+    public func update(with newTiming: Timing) -> Activity {
         return Activity(
             withEstimates: estimates,
             name: name,
@@ -117,6 +117,19 @@ public struct Activity: Persistable {
         }
         
         return resultsForToday.count > 0
+    }
+    
+    public func isGoingNow(date: Date = Date()) -> Bool {
+        let startsBefore = startsEarlierThen(date: date)
+        let endsAfter = endsLaterThen(date: date)
+        let notDoneYet = !isDone(forDate: date)
+        return startsBefore && endsAfter && notDoneYet
+    }
+    
+    public func isUnfinished(forDate date: Date = Date()) -> Bool {
+        let started = timing.manuallyStarted != nil
+        let pastDue = endsEarlierThen(date: date)
+        return started && pastDue
     }
     
     public func nextActionTime(forDate date: Date = Date()) -> Date {
@@ -184,31 +197,18 @@ public struct Activity: Persistable {
         return Basis.basisFromWeekdays(days)
     }
     
-    // MARK: - Timing
-    
-    public func isGoingNow(date: Date = Date()) -> Bool {
-        let startsBefore = startsEarlierThen(date: date)
-        let endsAfter = endsLaterThen(date: date)
-        let notDoneYet = !isDone(forDate: date)
-        return startsBefore && endsAfter && notDoneYet
-    }
-    
-    public func isUnfinished(forDate date: Date = Date()) -> Bool {
-        let started = timing.manuallyStarted != nil
-        let pastDue = endsEarlierThen(date: date)
-        return started && pastDue
-    }
-    
+    // MARK: - Comparing
+
     public func startsEarlierThen(date: Date) -> Bool {
-        return startTime(inDate: date).compare(date) == .orderedAscending || startTime(inDate: date).compare(date) == .orderedSame
+        return startTime(inDate: date) < date || startTime(inDate: date) == date
     }
     
     public func startsLaterThen(date: Date) -> Bool {
-        return startTime(inDate: date).compare(date) == .orderedDescending
-    }
+        return startTime(inDate: date) > date    }
     
     public func endsLaterThen(date: Date) -> Bool {
-        return finishTime(inDate: date).compare(date) == .orderedDescending
+        let finishTime = startTime(inDate: date).addingTimeInterval(timing.duration.seconds())
+        return finishTime > date
     }
     
     public func endsEarlierThen(date: Date) -> Bool {
@@ -222,6 +222,7 @@ public struct Activity: Persistable {
         return updatedStartTime.compare(otherStartTime) == .orderedAscending
     }
 }
+
 
 /**
  Enum that describes Activity Type - currently Routine or Goal

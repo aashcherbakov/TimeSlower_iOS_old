@@ -88,7 +88,7 @@ class ActivityTests: BaseDataStoreTest {
         let tuesday = shortTimeFormatter.date(from: "10/11/2016, 10:00 AM")!
         let alarmTime = shortTimeFormatter.date(from: "10/11/2016, 10:30 AM")!
         let timing = sut.updateTiming(withManuallyStarted: tuesday)
-        let startedActivity = sut.update(withTiming: timing)
+        let startedActivity = sut.update(with: timing)
         sut = startedActivity
         XCTAssertEqual(sut.alarmTime(inDate: tuesday), alarmTime)
         XCTAssertEqual(timing.manuallyStarted, tuesday)
@@ -111,7 +111,7 @@ class ActivityTests: BaseDataStoreTest {
         let tenForty = shortTimeFormatter.date(from: "10/11/2016, 10:40 PM")!
 
         let timing = Timing(withDuration: FakeActivityFactory.fakeEndurance(), startTime: tenForty, timeToSave: 15, alarmTime: tenForty)
-        sut = sut.update(withTiming: timing)
+        sut = sut.update(with: timing)
         let isGoingNow = sut.isGoingNow(date: elevenOcklock)
         XCTAssertTrue(isGoingNow)
     }
@@ -120,7 +120,7 @@ class ActivityTests: BaseDataStoreTest {
         let eightOcklock = shortTimeFormatter.date(from: "10/11/2016, 8:00 AM")!
         let eightTwanty = shortTimeFormatter.date(from: "10/11/2016, 8:20 AM")!
         let timing = Timing(withDuration: FakeActivityFactory.fakeEndurance(), startTime: sut.startTime(), timeToSave: 15, alarmTime: sut.startTime(), manuallyStarted: eightOcklock)
-        sut = sut.update(withTiming: timing)
+        sut = sut.update(with: timing)
         let isGoingNow = sut.isGoingNow(date: eightTwanty)
         XCTAssertTrue(isGoingNow)
     }

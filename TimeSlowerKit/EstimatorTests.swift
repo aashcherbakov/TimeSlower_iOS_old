@@ -1,6 +1,6 @@
 
 //
-//  TimeCalculatorTests.swift
+//  EstimatorTests.swift
 //  TimeSlower
 //
 //  Created by Oleksandr Shcherbakov on 7/17/16.

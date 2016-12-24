@@ -1,5 +1,5 @@
 //
-//  TimeCalculator.swift
+//  Edtimator.swift
 //  TimeSlower
 //
 //  Created by Oleksandr Shcherbakov on 7/10/16.
@@ -22,7 +22,7 @@ public struct Estimator {
      For example, 20 minutes every workday will be 14.2 minutes per day.
      
      - parameter originalDuration: Int for minutes
-     - parameter busyDays:         Int for number of days activity accurs in a week
+     - parameter busyDays:         Int for number of days activity occurs in a week
      
      - returns: Double for duration per day.
      */
@@ -31,11 +31,11 @@ public struct Estimator {
     }
     
     /**
-     Converts duration of single day acivity into total number of hours it will take in given amount of days
+     Converts duration of single day activity into total number of hours it will take in given amount of days
      
      - parameter days:     Total number of days you want to multiply single duration
      - parameter duration: Duration in minutes
-     - parameter busyDays: Int for number of days activity accurs in a week
+     - parameter busyDays: Int for number of days activity occurs in a week
      
      - returns: Double for amount of hours one will spend on activity in specified number of days
      */
@@ -45,11 +45,11 @@ public struct Estimator {
     }
 
     /**
-     Converts duration of single day acivity into total number of days it will take in given amount of days
+     Converts duration of single day activity into total number of days it will take in given amount of days
      
      - parameter days:     Total number of days you want to multiply single duration
      - parameter duration: Duration in minutes
-     - parameter busyDays: Int for number of days activity accurs in a week
+     - parameter busyDays: Int for number of days activity occurs in a week
      
      - returns: Double for amount of days one will spend on activity in specified number of days
      */
@@ -58,11 +58,11 @@ public struct Estimator {
     }
     
     /**
-     Converts duration of single day acivity into total number of months it will take in given amount of days
+     Converts duration of single day activity into total number of months it will take in given amount of days
      
      - parameter days:     Total number of days you want to multiply single duration
      - parameter duration: Duration in minutes
-     - parameter busyDays: Int for number of days activity accurs in a week
+     - parameter busyDays: Int for number of days activity occurs in a week
      
      - returns: Double for amount of months one will spend on activity in specified number of days
      */
@@ -71,11 +71,11 @@ public struct Estimator {
     }
     
     /**
-     Converts duration of single day acivity into total number of years it will take in given amount of days
+     Converts duration of single day activity into total number of years it will take in given amount of days
      
      - parameter days:     Total number of days you want to multiply single duration
      - parameter duration: Duration in minutes
-     - parameter busyDays: Int for number of days activity accurs in a week
+     - parameter busyDays: Int for number of days activity occurs in a week
      
      - returns: Double for amount of years one will spend on activity in specified number of days
      */

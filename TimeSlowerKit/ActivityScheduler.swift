@@ -77,7 +77,7 @@ public struct ActivityScheduler {
     /// - returns: Updated activity
     public func start(activity: Activity, time: Date = Date()) -> Activity {
         let newTiming = activity.updateTiming(withManuallyStarted: time)
-        let newActivity = activity.update(withTiming: newTiming)
+        let newActivity = activity.update(with: newTiming)
         let updatedActivity = dataStore.update(newActivity)
         return updatedActivity
     }
@@ -91,7 +91,7 @@ public struct ActivityScheduler {
     public func finish(activity: Activity, time: Date = Date()) -> Activity {
         let result = Result(withActivity: activity, factFinish: time)
         let newTiming = activity.updateTiming(withManuallyStarted: nil)
-        let newActivity = activity.update(withTiming: newTiming)
+        let newActivity = activity.update(with: newTiming)
         let updatedActivity = dataStore.update(newActivity)
         let _ = dataStore.create(result, withParent: updatedActivity)
         

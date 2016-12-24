@@ -16,7 +16,7 @@ public struct Estimates {
     public let sumMonths: Double
     public let sumYears: Double
     
-    private let timeCalculator = TimeCalculator()
+    private let estimator = Estimator()
     
     /**
      Function calculates hours, days, months and years spent on activity by multiplying minutes, busy days and totalDays
@@ -28,10 +28,10 @@ public struct Estimates {
      - returns: Stats instance
      */
     public init(withDuration minutes: Int, busyDays: Int, totalDays: Int) {
-        sumHours = timeCalculator.totalHours(inDays: totalDays, duration: minutes, busyDays: busyDays)
-        sumDays = timeCalculator.totalDays(inDays: totalDays, duration: minutes, busyDays: busyDays)
-        sumMonths = timeCalculator.totalMonths(inDays: totalDays, duration: minutes, busyDays: busyDays)
-        sumYears = timeCalculator.totalYears(inDays: totalDays, duration: minutes, busyDays: busyDays)
+        sumHours = estimator.totalHours(inDays: totalDays, duration: minutes, busyDays: busyDays)
+        sumDays = estimator.totalDays(inDays: totalDays, duration: minutes, busyDays: busyDays)
+        sumMonths = estimator.totalMonths(inDays: totalDays, duration: minutes, busyDays: busyDays)
+        sumYears = estimator.totalYears(inDays: totalDays, duration: minutes, busyDays: busyDays)
     }
     
     public init(hours: Double, days: Double, months: Double, years: Double) {

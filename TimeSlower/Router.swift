@@ -11,8 +11,6 @@ import TimeSlowerKit
 
 internal struct Router {
     
-    typealias EditActivity = (profile: Profile, activity: Activity?)
-    
     func route(to destination: Destination, style: PresentationStyle) {
         let destinationController = controller(for: destination)
         return route(to: destinationController, style: style)
