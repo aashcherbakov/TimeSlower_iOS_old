@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- *  Struct that allows you to find summs of minutes/days/months/years spent on current activity
+ *  Struct that allows you to find sums of minutes/days/months/years spent on current activity
  */
-public struct TimeCalculator {
+public struct Estimator {
     
     public init() { }
     
