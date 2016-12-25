@@ -54,7 +54,6 @@ internal final class ActivityCreator {
         let activity = Activity(
             withLifetimeDays: lifetimeDays,
             name: name,
-            type: .routine,
             days: days,
             timing: activityTiming,
             notifications: notifications)
@@ -85,20 +84,17 @@ internal final class ActivityCreator {
 
         let days = weekdaysWith(numbers: selectedDays)
         let activityTiming = timing(withStartTime: startTime, duration: duration, timeToSave: timeToSave)
-        let stats = Estimates(withDuration: timeToSave, busyDays: days.count, totalDays: totalDaysForProfile())
-        
+        let estimates = Estimates(withDuration: timeToSave, busyDays: days.count, totalDays: totalDaysForProfile())
+        let stats = Stats(averageSuccess: activity.stats.averageSuccess, totalTimeSaved: activity.stats.totalTimeSaved, totalResults: activity.stats.totalResults)
         let updatedActivity = Activity(
-            withEstimates: stats,
+            withEstimates: estimates,
             name: name,
-            type: activity.type,
             days: days,
             timing: activityTiming,
             notifications: notifications,
-            averageSuccess: activity.stats.averageSuccess,
             resourceId: activity.resourceId,
             results: activity.results,
-            totalResults: activity.stats.totalResults,
-            totalTimeSaved: activity.stats.totalTimeSaved)
+            stats: stats)
         
         return dataStore.update(updatedActivity)
     }

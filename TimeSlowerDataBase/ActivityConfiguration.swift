@@ -11,17 +11,15 @@ import Foundation
 public struct ActivityConfiguration: EntityConfiguration {
     
     public let name: String
-    public let type: Int
     public let days: [Int]
     public let timing: TimingData
-    public let stats: StatsData
+    public let stats: EstimationData
     public let notifications: Bool
     public let resourceId: String
 
     
-    public init(name: String, type: Int, days: [Int], timing: TimingData, stats: StatsData, notifications: Bool, resourceId: String) {
+    public init(name: String, days: [Int], timing: TimingData, stats: EstimationData, notifications: Bool, resourceId: String) {
         self.name = name
-        self.type = type
         self.days = days
         self.timing = timing
         self.stats = stats

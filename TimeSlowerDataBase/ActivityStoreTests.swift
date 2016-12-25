@@ -31,7 +31,7 @@ class ActivityStoreTests: BaseDataStoreTest {
         XCTAssertEqual(activity.averageSuccess, 0)
         XCTAssertEqual(activity.notifications, false)
         XCTAssertEqual(activity.timing.duration.value, 0)
-        XCTAssertEqual(activity.stats.summDays, 0)
+        XCTAssertEqual(activity.estimates.sumDays, 0)
     }
     
     func test_createEntity() {
@@ -74,7 +74,7 @@ class ActivityStoreTests: BaseDataStoreTest {
         XCTAssertEqual(updatedEntity.timing.finishTime, finishTime)
         XCTAssertEqual(updatedEntity.timing.duration.value, 40)
         XCTAssertEqual(updatedEntity.timing.alarmTime, startTime)
-        XCTAssertEqual(updatedEntity.stats.summDays, 5)
+        XCTAssertEqual(updatedEntity.estimates.sumDays, 5)
     }
     
     func test_deleteEntity() {
@@ -130,11 +130,10 @@ class ActivityStoreTests: BaseDataStoreTest {
         let duration = Continuation(value: 30, period: .minutes)
         
         let timing = TimingData(duration: duration, alarmTime: Date(), startTime: startTime, timeToSave: 10)
-        let stats = StatsData(days: 0, hours: 0, months: 0, years: 0)
+        let stats = EstimationData(days: 0, hours: 0, months: 0, years: 0)
         
         let configuration = ActivityConfiguration(
             name: "Shower",
-            type: 0,
             days: [1,2],
             timing: timing,
             stats: stats,
@@ -150,12 +149,11 @@ class ActivityStoreTests: BaseDataStoreTest {
         let startTime = shortTimeFormatter.date(from: "9/1/16, 10:30 AM")!
         let duration = Continuation(value: 40, period: .minutes)
         let timing = TimingData(duration: duration, alarmTime: startTime, startTime: startTime, timeToSave: 20)
-        let stats = StatsData(days: 5, hours: 5, months: 5, years: 5)
+        let stats = EstimationData(days: 5, hours: 5, months: 5, years: 5)
         
 
         return ActivityConfiguration(
             name: "Shower",
-            type: 1,
             days: [0, 6],
             timing: timing,
             stats: stats,

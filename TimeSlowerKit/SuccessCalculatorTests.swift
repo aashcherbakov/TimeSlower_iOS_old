@@ -56,21 +56,5 @@ class SuccessCalculatorTests: XCTestCase {
         let result = sut.successForRoutine(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
         XCTAssertEqual(result, 0, "it should have no success")
     }
-    
-    // MARK: - Success calculation for Goal
-    
-    func test_successForGoal_fullSuccess() {
-        let result = sut.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 30, goal: 10)
-        XCTAssertEqual(result, 100)
-    }
-    
-    func test_successForGoal_noSuccess() {
-        let result = sut.successForGoal(start: testStartDate, finish: testStartDate, maxDuration: 30, goal: 10)
-        XCTAssertEqual(result, 0)
-    }
-    
-    func test_successForGoal_superSuccess() {
-        let result = sut.successForGoal(start: testStartDate, finish: testFinishDate, maxDuration: 20, goal: 10)
-        XCTAssertEqual(result, 150)
-    }
+
 }

@@ -15,7 +15,7 @@ open class ActivityEntity: ManagedObject {
     @NSManaged open var type: NSNumber
     @NSManaged open var days: [Day]
     @NSManaged open var timing: TimingData
-    @NSManaged open var stats: StatsData
+    @NSManaged open var estimates: EstimationData
     @NSManaged open var notifications: NSNumber
     @NSManaged open var results: NSSet
     @NSManaged open var resourceId: String
@@ -38,11 +38,11 @@ extension ActivityEntity: ManagedObjectType {
     
     public func setDefaultPropertiesForObject() {
         name = "No name"
-        type = 1
+        type = 0 // for routine
         notifications = false
         days = []
         timing = TimingData(duration: Continuation(value: 0, period: .minutes), alarmTime: Date(), startTime: Date(), timeToSave: 0)
-        stats = StatsData(days: 0, hours: 0, months: 0, years: 0)
+        estimates = EstimationData(days: 0, hours: 0, months: 0, years: 0)
         averageSuccess = 0
         resourceId = ""
     }
@@ -53,11 +53,10 @@ extension ActivityEntity: ManagedObjectType {
         }
         
         name = configuration.name
-        type = NSNumber(value: configuration.type)
         notifications = configuration.notifications as NSNumber
         days = daysWithNumbers(configuration.days)
         timing = configuration.timing
-        stats = configuration.stats
+        estimates = configuration.stats
         if resourceId == "" {
             resourceId = configuration.resourceId
         }

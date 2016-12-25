@@ -137,6 +137,7 @@
 		F02F4CBA1E06E7C200F6614A /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CB91E06E7C200F6614A /* Destination.swift */; };
 		F02F4CBC1E06E7E400F6614A /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F4CBB1E06E7E400F6614A /* PresentationStyle.swift */; };
 		F0366A9B1D0CA8CB009EBF2B /* TextfieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */; };
+		F03748D41E1053F6006EA80D /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03748D31E1053F6006EA80D /* ActivityType.swift */; };
 		F037E9BC1DCF980E00852D18 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */; };
 		F037E9F01DD0108B00852D18 /* Mixpanel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F037E9E91DD0027A00852D18 /* Mixpanel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F037E9FF1DE7956000852D18 /* FakeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E9FE1DE7956000852D18 /* FakeFactory.swift */; };
@@ -513,6 +514,7 @@
 		F02F4CB91E06E7C200F6614A /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		F02F4CBB1E06E7E400F6614A /* PresentationStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		F0366A9A1D0CA8CB009EBF2B /* TextfieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldConfiguration.swift; sourceTree = "<group>"; };
+		F03748D31E1053F6006EA80D /* ActivityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
 		F037E9BB1DCF980E00852D18 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		F037E9E31DD0027900852D18 /* Mixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mixpanel.xcodeproj; path = "mixpanel-swift/Mixpanel.xcodeproj"; sourceTree = "<group>"; };
 		F037E9FE1DE7956000852D18 /* FakeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeFactory.swift; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 				89E9C79B1D934215008D18A0 /* PastPeriod.swift */,
 				89E9C7971D934200008D18A0 /* Gender.swift */,
 				89E9C79C1D934215008D18A0 /* Period.swift */,
+				F03748D31E1053F6006EA80D /* ActivityType.swift */,
 				89E9C7EE1D934410008D18A0 /* Profile */,
 				89E9C7D91D93426A008D18A0 /* Activity */,
 				89E9C7E81D9343DD008D18A0 /* Weekday */,
@@ -2137,6 +2140,7 @@
 				89E9C79A1D934200008D18A0 /* GenericAdapter.swift in Sources */,
 				89E9C7BC1D934215008D18A0 /* ProfileStatsCalculator.swift in Sources */,
 				F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */,
+				F03748D41E1053F6006EA80D /* ActivityType.swift in Sources */,
 				89E9C7C21D934215008D18A0 /* ResultConverter.swift in Sources */,
 				89E9C7C91D934215008D18A0 /* Edtimator.swift in Sources */,
 				89E9C7B41D934215008D18A0 /* PastPeriod.swift in Sources */,

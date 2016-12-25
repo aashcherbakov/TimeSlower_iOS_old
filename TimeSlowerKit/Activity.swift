@@ -18,7 +18,6 @@ public struct Activity: Persistable {
     // MARK: - Activity
 
     public let name: String
-    public let type: ActivityType
     public let days: [Weekday]
     public let notifications: Bool
     public let estimates: Estimates
@@ -27,73 +26,21 @@ public struct Activity: Persistable {
 
     // MARK: - Internal properties
 
-    private(set) public var results: Set<Result>
+    fileprivate(set) public var results: Set<Result>
 
     // MARK: - Private properties
 
     private let timeMachine = TimeMachine()
-
-    /// Initializer for creating activity from scratch
-    public init(withLifetimeDays
-        lifetimeDays: Int,
-        name: String,
-        type: ActivityType,
-        days: [Weekday],
-        timing: Timing,
-        notifications: Bool,
-        results: Set<Result> = []) {
-        
-        self.resourceId = UUID().uuidString
-        self.name = name
-        self.type = type
-        self.days = days
-        self.timing = timing
-        self.notifications = notifications
-        self.results = results
-        self.stats = Stats(averageSuccess: 0, totalTimeSaved: 0, totalResults: 0)
-        self.estimates = Estimates(withDuration: timing.timeToSave, busyDays: days.count, totalDays: lifetimeDays)
-    }
-    
-    /// Initializer for converting activity from Data Base
-    public init(withEstimates estimates: Estimates,
-                name: String,
-                type: ActivityType,
-                days: [Weekday],
-                timing: Timing,
-                notifications: Bool,
-                averageSuccess: Double,
-                resourceId: String,
-                results: Set<Result>,
-                totalResults: Int,
-                totalTimeSaved: Double) {
-        
-        self.resourceId = resourceId
-        self.name = name
-        self.type = type
-        self.days = days
-        self.timing = timing
-        self.notifications = notifications
-        self.estimates = estimates
-        self.results = results
-        self.stats = Stats(
-            averageSuccess: averageSuccess,
-            totalTimeSaved: totalTimeSaved,
-            totalResults: totalResults)
-    }
     
     public func update(with newTiming: Timing) -> Activity {
-        return Activity(
-            withEstimates: estimates,
-            name: name,
-            type: type,
-            days: days,
-            timing: newTiming,
-            notifications: notifications,
-            averageSuccess: stats.averageSuccess,
-            resourceId: resourceId,
-            results: results,
-            totalResults: stats.totalResults,
-            totalTimeSaved: stats.totalTimeSaved)
+        return Activity(withEstimates: estimates,
+                        name: name,
+                        days: days,
+                        timing: newTiming, 
+                        notifications: notifications, 
+                        resourceId: resourceId, 
+                        results: results, 
+                        stats: stats)
     }
     
     public func lastWeekResults() -> [Result] {
@@ -223,16 +170,58 @@ public struct Activity: Persistable {
     }
 }
 
+// MARK: - Convenience Initializers
 
-/**
- Enum that describes Activity Type - currently Routine or Goal
- 
- - Routine: Routine - daily activity on which user ought to save time
- - Goal:    Goal - activity that user wants to spend time on
- */
-public enum ActivityType: Int {
+extension Activity {
+    
+    /// Initializer for creating activity from scratch
+    public init(withLifetimeDays
+        lifetimeDays: Int,
+                name: String,
+                days: [Weekday],
+                timing: Timing,
+                notifications: Bool,
+                results: Set<Result> = []) {
+        
+        self.resourceId = UUID().uuidString
+        self.name = name
+        self.days = days
+        self.timing = timing
+        self.notifications = notifications
+        self.results = results
+        
+        self.stats = Stats(
+            averageSuccess: 0,
+            totalTimeSaved: 0,
+            totalResults: 0)
+        self.estimates = Estimates(
+            withDuration: timing.timeToSave,
+            busyDays: days.count,
+            totalDays: lifetimeDays)
+    }
 
-    case routine
-    case goal
+    
+    /// Initializer for converting activity from Data Base
+    public init(withEstimates estimates: Estimates,
+                name: String,
+                days: [Weekday],
+                timing: Timing,
+                notifications: Bool,
+                resourceId: String,
+                results: Set<Result>,
+                stats: Stats) {
+        
+        self.resourceId = resourceId
+        self.name = name
+        self.days = days
+        self.timing = timing
+        self.notifications = notifications
+        self.estimates = estimates
+        self.results = results
+        self.stats = stats
+    }
 
 }
+
+
+

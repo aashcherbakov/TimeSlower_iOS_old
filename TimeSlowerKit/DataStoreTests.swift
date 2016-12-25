@@ -87,7 +87,7 @@ class DataStoreTests: XCTestCase {
 
     func test_activitiesForDate() {
         // given
-        sut.create(fakeActivity)
+        let fakeOne = sut.create(fakeActivity)
         let monday = shortDateFormatter.date(from: "9/19/2016")!
         
         // when

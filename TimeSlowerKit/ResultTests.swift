@@ -44,7 +44,7 @@ class ResultTests: XCTestCase {
     // MARK: - Creation
     
     func test_init() {
-        let testActivity = Activity(withLifetimeDays: 18105, name: "Blah", type: .routine, days: [], timing: testTiming, notifications: false)
+        let testActivity = Activity(withLifetimeDays: 18105, name: "Blah", days: [], timing: testTiming, notifications: false)
         
         let result = Result(withActivity: testActivity, factFinish: testFinishDate)
         
@@ -60,7 +60,7 @@ class ResultTests: XCTestCase {
     // MARK: - Main success method
     
     func test_daySuccessForTiming() {
-        let success = Result.daySuccessForTiming(testTiming, activityType: .routine, startTime: testStartDate, finishTime: testFinishDate)
+        let success = Result.daySuccessForTiming(testTiming, startTime: testStartDate, finishTime: testFinishDate)
         XCTAssertEqual(success, 100, "it should have 100% success")
     }
     

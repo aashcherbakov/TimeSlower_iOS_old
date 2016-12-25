@@ -8,33 +8,33 @@
 
 import Foundation
 
-open class StatsData: NSObject {
+open class EstimationData: NSObject {
     
-    open let summDays: Double
-    open let summHours: Double
-    open let summMonths: Double
-    open let summYears: Double
+    open let sumDays: Double
+    open let sumHours: Double
+    open let sumMonths: Double
+    open let sumYears: Double
     
     public required init?(coder aDecoder: NSCoder) {
-        self.summDays = aDecoder.decodeDouble(forKey: "summDays")
-        self.summHours = aDecoder.decodeDouble(forKey: "summHours")
-        self.summMonths = aDecoder.decodeDouble(forKey: "summMonths")
-        self.summYears = aDecoder.decodeDouble(forKey: "summYears")
+        self.sumDays = aDecoder.decodeDouble(forKey: "sumDays")
+        self.sumHours = aDecoder.decodeDouble(forKey: "sumHours")
+        self.sumMonths = aDecoder.decodeDouble(forKey: "sumMonths")
+        self.sumYears = aDecoder.decodeDouble(forKey: "sumYears")
     }
     
     public init(days: Double, hours: Double, months: Double, years: Double) {
-        summDays = days
-        summMonths = months
-        summHours = hours
-        summYears = years
+        sumDays = days
+        sumMonths = months
+        sumHours = hours
+        sumYears = years
     }
 }
 
-extension StatsData: NSCoding {
+extension EstimationData: NSCoding {
     public func encode(with aCoder: NSCoder) {
-        aCoder.encode(summDays, forKey: "summDays")
-        aCoder.encode(summHours, forKey: "summHours")
-        aCoder.encode(summYears, forKey: "summYears")
-        aCoder.encode(summMonths, forKey: "summMonths")
+        aCoder.encode(sumDays, forKey: "sumDays")
+        aCoder.encode(sumHours, forKey: "sumHours")
+        aCoder.encode(sumYears, forKey: "sumYears")
+        aCoder.encode(sumMonths, forKey: "sumMonths")
     }
 }

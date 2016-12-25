@@ -11,30 +11,27 @@ import TimeSlowerDataBase
 internal struct ActivityConverter: PersistableConverter {
     
     func objectFromEntity(_ entity: ManagedObject, parentObject: Persistable?) -> Persistable {
-        guard let
-            entity = entity as? ActivityEntity,
-            let activityType = ActivityType(rawValue: entity.type.intValue)
-            else {
-                fatalError("Wrong type")
+        guard let entity = entity as? ActivityEntity else {
+            fatalError("Wrong type")
         }
         
         let days = weekdaysFromDays(entity.days)
         let timing = timingFromTimingData(entity.timing)
-        let stats = statsFromStatsData(entity.stats)
-        
+        let estimates = estimatesFrom(entity.estimates)
+        let stats = Stats(
+            averageSuccess: entity.averageSuccess.doubleValue,
+            totalTimeSaved: entity.totalTimeSaved.doubleValue,
+            totalResults: entity.totalResults.intValue)
         
         var activity = Activity(
-            withEstimates: stats,
+            withEstimates: estimates,
             name: entity.name,
-            type: activityType,
             days: days,
             timing: timing,
             notifications: entity.notifications.boolValue,
-            averageSuccess: entity.averageSuccess.doubleValue,
             resourceId: entity.resourceId,
             results: [],
-            totalResults: entity.totalResults.intValue,
-            totalTimeSaved: entity.totalTimeSaved.doubleValue)
+            stats: stats)
         
         let results = resultsFromEntities(resultEntities: entity.results as? Set<ResultEntity>, activity: activity)
         activity.updateWithResults(results: results)
@@ -49,10 +46,9 @@ internal struct ActivityConverter: PersistableConverter {
         
         return ActivityConfiguration(
             name: object.name, 
-            type: object.type.rawValue, 
             days: dayNumbersFromWeekdays(object.days), 
             timing: timingDataFromTiming(object.getTiming()),
-            stats: statsDataFromStats(object.estimates),
+            stats: estimatesData(object.estimates),
             notifications: object.notifications, 
             resourceId: object.resourceId)
     }
@@ -106,16 +102,16 @@ internal struct ActivityConverter: PersistableConverter {
             manuallyStarted: timing.manuallyStarted)
     }
     
-    fileprivate func statsFromStatsData(_ data: StatsData) -> Estimates {
+    fileprivate func estimatesFrom(_ data: EstimationData) -> Estimates {
         return Estimates(
-            hours: data.summHours,
-            days: data.summDays,
-            months: data.summMonths,
-            years: data.summYears)
+            hours: data.sumHours,
+            days: data.sumDays,
+            months: data.sumMonths,
+            years: data.sumYears)
     }
     
-    fileprivate func statsDataFromStats(_ stats: Estimates) -> StatsData {
-        return StatsData(
+    fileprivate func estimatesData(_ stats: Estimates) -> EstimationData {
+        return EstimationData(
             days: stats.sumDays,
             hours: stats.sumHours,
             months: stats.sumMonths,

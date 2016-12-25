@@ -32,7 +32,6 @@ class ActivityAdapterTests: BaseDataStoreTest {
         let activity: Activity = sut.retrieveObject(fakeActivity.resourceId)!
         
         XCTAssertEqual(activity.name, "Morning shower")
-        XCTAssertEqual(activity.type, ActivityType.routine)
         XCTAssertEqual(activity.notifications, false)
         XCTAssertEqual(activity.days, [.first, .second, .third])
         XCTAssertEqual(activity.stats.averageSuccess, 0)
