@@ -13,7 +13,7 @@ import Foundation
 /// Class that holds singletons to predefined static NSDateFormatter instances.
 public final class StaticDateFormatter {
     
-    fileprivate init() { } // This prevents others from using the default initializer
+    private init() { } // This prevents others from using the default initializer
     
     public static let shortDateNoTimeFromatter: DateFormatter = {
         let dateFormatter = DateFormatter()

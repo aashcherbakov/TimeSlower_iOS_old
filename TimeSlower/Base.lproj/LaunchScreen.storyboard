@@ -1,8 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Light.ttf">
+            <string>SourceSansPro-Light</string>
+        </array>
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -13,14 +26,57 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Starter_iPhone6Plus" translatesAutoresizingMaskIntoConstraints="NO" id="gWn-o0-fRl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The wisest are the most annoyed at the loss of time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oB-UPi">
+                                <rect key="frame" x="45" y="308.5" width="285" height="50.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon" translatesAutoresizingMaskIntoConstraints="NO" id="geP-ne-xGD">
+                                <rect key="frame" x="138" y="168.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Jwg-rX-4cn"/>
+                                    <constraint firstAttribute="height" constant="100" id="Oc5-Pn-wtw"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="– Dante Alighieri" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDj-Wy-whA">
+                                <rect key="frame" x="45" y="379" width="285" height="20.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gWn-o0-fRl" secondAttribute="trailing" id="2EI-JM-g8e"/>
+                            <constraint firstItem="gWn-o0-fRl" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="632-ap-fvg"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="gWn-o0-fRl" secondAttribute="bottom" id="7tv-yd-BOy"/>
+                            <constraint firstAttribute="trailing" secondItem="bDj-Wy-whA" secondAttribute="trailing" constant="45" id="Fhw-ro-Xzj"/>
+                            <constraint firstItem="aY8-oB-UPi" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="45" id="JEx-tm-9hy"/>
+                            <constraint firstItem="aY8-oB-UPi" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="N8V-e5-uyC"/>
+                            <constraint firstItem="gWn-o0-fRl" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Ne6-Ej-oyW"/>
+                            <constraint firstItem="aY8-oB-UPi" firstAttribute="top" secondItem="geP-ne-xGD" secondAttribute="bottom" constant="40" id="QEK-ay-bmY"/>
+                            <constraint firstItem="geP-ne-xGD" firstAttribute="centerX" secondItem="aY8-oB-UPi" secondAttribute="centerX" id="TdI-bN-39W"/>
+                            <constraint firstItem="bDj-Wy-whA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="45" id="cuB-Qk-doS"/>
+                            <constraint firstItem="aY8-oB-UPi" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ddY-yw-4QJ"/>
+                            <constraint firstItem="bDj-Wy-whA" firstAttribute="top" secondItem="aY8-oB-UPi" secondAttribute="bottom" constant="20" id="jgU-7b-XZC"/>
+                            <constraint firstAttribute="trailing" secondItem="aY8-oB-UPi" secondAttribute="trailing" constant="45" id="mgb-sW-zvp"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Starter_iPhone6Plus" width="414" height="736"/>
+        <image name="appIcon" width="512" height="512"/>
+    </resources>
 </document>

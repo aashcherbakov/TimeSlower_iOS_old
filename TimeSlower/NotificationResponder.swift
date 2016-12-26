@@ -43,7 +43,9 @@ internal final class NotificationResponder: NSObject {
         }
     }
     
-    fileprivate func startActivityFromResponse(response: UNNotificationResponse, completionHandler: @escaping () -> ()) {
+    fileprivate func startActivityFromResponse(
+        response: UNNotificationResponse, completionHandler: @escaping () -> ()) {
+        
         let userInfo = response.notification.request.content.userInfo
         if let resourceId = userInfo[kActivityResourceId] as? String {
             startActivity(withIdentifier: resourceId, completionHandler: completionHandler)

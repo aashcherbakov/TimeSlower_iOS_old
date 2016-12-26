@@ -10,18 +10,22 @@ import Foundation
 import UserNotifications
 import TimeSlowerKit
 
-
 internal class NotificationScheduler {
     
     private let notificationCenter = UNUserNotificationCenter.current()
     private let userDefaults = UserDefaultsStore()
+    private let notificationFactory = NotificationFactory()
     
     /// Schedules notification for activity of specified type
     ///
     /// - parameter activity:         Activity
     /// - parameter notificationType: NotificationType
-    func scheduleForActivity(activity: Activity, notificationType: NotificationType, completionHandler: (() -> ())? = nil) {
-        let requests = NotificationFactory().notificationRequests(forType: notificationType, activity: activity)
+    func scheduleForActivity(
+        activity: Activity,
+        notificationType: NotificationType,
+        completionHandler: (() -> ())? = nil) {
+        
+        let requests = notificationFactory.request(for: notificationType, activity: activity)
         
         for request in requests {
             scheduleWithRequest(request: request, completionHandler: completionHandler)
@@ -64,10 +68,8 @@ internal class NotificationScheduler {
     
     private func requestUserPermission(completion: @escaping (Bool) -> ()) {
         notificationCenter.requestAuthorization(options: [.alert, .sound]) { (success, error) in
-            if let error = error {
-                print("Uh oh! Error with notification scheduler: \(error)")
-            }
             
+            if let error = error { print("Uh oh! Error with notification scheduler: \(error)") }
             completion(success)
         }
     }
@@ -75,12 +77,8 @@ internal class NotificationScheduler {
     private func addRequest(request: UNNotificationRequest, completionHandler: (() -> ())? = nil) {
         notificationCenter.add(request) { [weak self] (error) in
             
-            if let error = error {
-                print("Uh oh! Error with notification scheduler: \(error)")
-            }
-            
+            if let error = error { print("Uh oh! Error with notification scheduler: \(error)") }
             self?.userDefaults.setHasScheduledLocalNotifications(value: true)
-            
             completionHandler?()
         }
     }
@@ -93,11 +91,12 @@ internal class NotificationScheduler {
                 let identifier = "\(activity.resourceId)+\(weekday.shortName)"
                 identifiers.append(identifier)
             }
-        default:
+        case .Finish:
             let finishIdentifer = "\(activity.resourceId)+finish"
             identifiers.append(finishIdentifer)
         }
         
         return identifiers
     }
+    
 }

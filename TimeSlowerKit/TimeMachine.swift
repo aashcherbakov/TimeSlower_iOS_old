@@ -106,8 +106,8 @@ public struct TimeMachine {
         let timeFromStartToFinish = start.timeIntervalSince(finish)
         return abs(timeFromStartToFinish) / 60
     }
-
-    public func intervalFromDay(_ fromDay: Int, toDay: Int) -> Double {
+    
+    internal func intervalFromDay(_ fromDay: Int, toDay: Int) -> Double {
         var difference: Double
         
         if toDay < fromDay {

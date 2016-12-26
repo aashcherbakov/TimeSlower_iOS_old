@@ -38,6 +38,5 @@ internal struct NotificationRegistrator {
     private func defaultCancelAction() -> UNNotificationAction {
         return UNNotificationAction(identifier: kCancelIdentifier, title: kCancelTitle, options: [])
     }
-
     
 }

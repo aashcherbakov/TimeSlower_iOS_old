@@ -25,7 +25,7 @@ internal struct FinishNotification: LocalNotification {
     }
     
     func body() -> String {
-        let time = String(format: "%.1f", activity.estimates.sumMonths)
+        let time = String(format: "%.0f", activity.estimates.sumMonths)
         return "If you finish now, you will save \(time) months of your life 🙄"
     }
     
@@ -38,7 +38,6 @@ internal struct FinishNotification: LocalNotification {
     }
     
     func notificationTrigger(forDate date: Date, repeats: Bool, type: NotificationType) -> UNNotificationTrigger {
-        
         let interval = date.timeIntervalSinceNow
         return UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
     }

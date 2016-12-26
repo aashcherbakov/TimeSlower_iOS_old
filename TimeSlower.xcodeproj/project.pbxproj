@@ -1411,8 +1411,8 @@
 		F0D932701DB2F3ED00EA0274 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
 				89E782641DC386EC007B017A /* NotificationConstants.swift */,
+				F0D9326C1DB2E36700EA0274 /* NotificationScheduler.swift */,
 				F0D932711DB2FD3200EA0274 /* NotificationResponder.swift */,
 				F01084521DC5741800F802DA /* NotificationRegistrator.swift */,
 				F0D9326E1DB2EA6500EA0274 /* NotificationFactory.swift */,

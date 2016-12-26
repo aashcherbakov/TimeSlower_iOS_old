@@ -17,7 +17,7 @@ internal enum NotificationType {
 
 internal struct NotificationFactory {
     
-    func notificationRequests(forType type: NotificationType, activity: Activity) -> [UNNotificationRequest] {
+    func request(for type: NotificationType, activity: Activity) -> [UNNotificationRequest] {
         let notifications = self.notifications(ofType: type, forActivity: activity)
         let requests = notifications.map { (notification) -> UNNotificationRequest in
             return notification.request
@@ -25,10 +25,14 @@ internal struct NotificationFactory {
         return requests
     }
     
+    // MARK: - Private Functions
+    
     private func notifications(ofType type: NotificationType, forActivity activity: Activity) -> [LocalNotification] {
         switch type {
-        case .Start: return startNotifications(forActivity: activity)
-        case .Finish: return [FinishNotification(withActivity: activity)]
+        case .Start:
+            return startNotifications(forActivity: activity)
+        case .Finish:
+            return [FinishNotification(withActivity: activity)]
         }
     }
     
@@ -47,9 +51,6 @@ internal struct NotificationFactory {
         return content
     }
 
-    
-    // MARK: - Private Functions
-
     private func startNotifications(forActivity activity: Activity) -> [StartNotification] {
         var notifications = [StartNotification]()
         for weekday in activity.days {
@@ -59,4 +60,5 @@ internal struct NotificationFactory {
         
         return notifications
     }
+    
 }
