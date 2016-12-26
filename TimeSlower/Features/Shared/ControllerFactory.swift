@@ -7,25 +7,29 @@
 //
 
 import Foundation
+import TimeSlowerKit
 
 /**
  *  Protocol that unites UIViewControllers and alows to use generics for creation
  */
-protocol Instantiatable { }
-
-extension UIViewController: Instantiatable { }
+protocol Instantiatable {
+    
+    associatedtype SetupObject
+    
+    func setup(with object: SetupObject)
+}
 
 /**
  *  Struct that alows simple creation of controllers using generics
  */
 struct ControllerFactory {
     
-    fileprivate struct Constants {
+    fileprivate struct Storyboard {
         static let activities = "Activities"
         static let menu = "Menu"
         static let profile = "Profile"
         static let main = "Main"
-        static let motivaton = "Motivation"
+        static let motivation = "Motivation"
         static let home = "Home"
     }
     
@@ -46,7 +50,20 @@ struct ControllerFactory {
         return controller 
     }
     
-    fileprivate static func storyboardForType<T>(_ type: T) -> UIStoryboard? {
+    static func createController<T>(_ type: T.Type) -> T where T: Instantiatable {
+        print(type)
+        guard let storyboard = storyboardForType(type) else {
+            fatalError("Controller \(String(describing: type)) should be instantiated")
+        }
+        
+        guard let controller = storyboard.instantiateViewController(withIdentifier: String(describing: type)) as? T else {
+            fatalError("Controller \(String(describing: type)) should be instantiated")
+        }
+        
+        return controller
+    }
+    
+    private static func storyboardForType<T>(_ type: T) -> UIStoryboard? {
         if let storyboardId = storyboardId(forType: type) {
             return UIStoryboard(name: storyboardId, bundle: nil)
         } else {
@@ -54,16 +71,16 @@ struct ControllerFactory {
         }
     }
     
-    fileprivate static func storyboardId<T>(forType type: T) -> String? {
+    private static func storyboardId<T>(forType type: T) -> String? {
         switch type {
-        case is MenuVC.Type: return Constants.menu
-        case is EditActivityVC.Type: return Constants.activities
-        case is ListOfActivitiesVC.Type: return Constants.activities
-        case is ProfileEditingVC.Type: return Constants.profile
-        case is ProfileStatsVC.Type: return Constants.profile
-        case is MotivationViewController.Type: return Constants.motivaton
-        case is HomeViewController.Type: return Constants.home
-        case is ActivityStatsVC.Type: return Constants.activities
+        case is MenuVC.Type: return Storyboard.menu
+        case is EditActivityVC.Type: return Storyboard.activities
+        case is ActivitiesList.Type: return Storyboard.activities
+        case is ProfileEditingVC.Type: return Storyboard.profile
+        case is ProfileStatsVC.Type: return Storyboard.profile
+        case is MotivationViewController.Type: return Storyboard.motivation
+        case is HomeViewController.Type: return Storyboard.home
+        case is ActivityStatsVC.Type: return Storyboard.activities
 
         default: return nil
         }

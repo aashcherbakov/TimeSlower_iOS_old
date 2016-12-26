@@ -44,7 +44,7 @@ public struct ActivityScheduler {
         }
                 
         for activity in unfinishedActivities {
-            if activity.startsLaterThen(date: date) {
+            if activity.startsLater(then: date) {
                 closestActivity = closestOfActivities(current: closestActivity, next: activity)
             }
         }
@@ -76,9 +76,9 @@ public struct ActivityScheduler {
     ///
     /// - returns: Updated activity
     public func start(activity: Activity, time: Date = Date()) -> Activity {
-        let newTiming = activity.updateTiming(withManuallyStarted: time)
-        let newActivity = activity.update(withTiming: newTiming)
-        let updatedActivity = dataStore.update(newActivity)
+        var startedActivity = activity
+        startedActivity.setManuallyStarted(to: time)
+        let updatedActivity = dataStore.update(startedActivity)
         return updatedActivity
     }
     
@@ -90,26 +90,23 @@ public struct ActivityScheduler {
     /// - returns: Updated activity
     public func finish(activity: Activity, time: Date = Date()) -> Activity {
         let result = Result(withActivity: activity, factFinish: time)
-        let newTiming = activity.updateTiming(withManuallyStarted: nil)
-        let newActivity = activity.update(withTiming: newTiming)
-        let updatedActivity = dataStore.update(newActivity)
+        var finishedActivity = activity
+        finishedActivity.setManuallyStarted(to: nil)
+        let updatedActivity = dataStore.update(finishedActivity)
         let _ = dataStore.create(result, withParent: updatedActivity)
         
         if let activityWithResults: Activity = dataStore.retrieve(updatedActivity.resourceId) {
             return activityWithResults
         }
         
-        
         return updatedActivity
     }
-    
-    
     
     // MARK: - Private 
     
     private func closestOfActivities(current: Activity?, next: Activity) -> Activity {
         if let closest = current {
-            return next.startsEarlierThen(activity: closest) ? next : closest
+            return next.startsEarlier(then: closest) ? next : closest
         } else {
             return next
         }

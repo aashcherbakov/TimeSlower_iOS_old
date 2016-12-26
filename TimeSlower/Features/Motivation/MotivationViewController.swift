@@ -146,3 +146,10 @@ extension MotivationViewController: ActivityShareDelegate {
         present(activityController, animated: true, completion: nil)
     }
 }
+
+extension MotivationViewController: Instantiatable {
+    typealias SetupObject = Activity
+    func setup(with object: Activity) {
+        activity = object
+    }
+}

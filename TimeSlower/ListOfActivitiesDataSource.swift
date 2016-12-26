@@ -11,7 +11,7 @@ import TimeSlowerKit
 
 internal final class ListOfActivitiesDataSource: NSObject {
     
-    typealias BasisToDisplay = ListOfActivitiesVC.BasisToDisplay
+    typealias BasisToDisplay = ActivitiesList.BasisToDisplay
     
     fileprivate struct Constants {
         static let defaultCellIdentifier = "ActivityCell"

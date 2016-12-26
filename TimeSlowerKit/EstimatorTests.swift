@@ -1,6 +1,6 @@
 
 //
-//  TimeCalculatorTests.swift
+//  EstimatorTests.swift
 //  TimeSlower
 //
 //  Created by Oleksandr Shcherbakov on 7/17/16.
@@ -12,11 +12,11 @@ import TimeSlowerKit
 
 class TimeCalculatorTests: XCTestCase {
     
-    var sut: TimeCalculator!
+    var sut: Estimator!
 
     override func setUp() {
         super.setUp()
-        sut = TimeCalculator()
+        sut = Estimator()
     }
     
     override func tearDown() {

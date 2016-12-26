@@ -495,3 +495,12 @@ extension EditActivityVC: UITableViewDataSource {
         }
     }
 }
+
+extension EditActivityVC: Instantiatable {
+    typealias SetupObject = (profile: Profile, activity: Activity?)
+    
+    func setup(with object: (profile: Profile, activity: Activity?)) {
+        userProfile = object.profile
+        activity.value = object.activity
+    }
+}

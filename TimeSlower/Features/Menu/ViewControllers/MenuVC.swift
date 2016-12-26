@@ -120,7 +120,7 @@ class MenuVC: UIViewController {
     }
     
     fileprivate func activityListController() -> UIViewController {
-        let listController: ListOfActivitiesVC = ControllerFactory.createController()
+        let listController: ActivitiesList = ControllerFactory.createController()
         return listController
     }
     
@@ -168,5 +168,14 @@ class MenuVC: UIViewController {
         avatarBackground.layer.borderColor = UIColor.darkRed().cgColor
         avatarImageView.layer.cornerRadius = (avatarBackgroundHeight.constant - 8) / 2
         avatarImageView.clipsToBounds = true
+    }
+}
+
+extension MenuVC: Instantiatable {
+    
+    typealias SetupObject = Profile
+    
+    func setup(with object: Profile) {
+        profile = object
     }
 }

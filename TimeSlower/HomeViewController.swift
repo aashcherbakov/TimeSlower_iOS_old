@@ -13,6 +13,8 @@ import MessageUI
 
 internal class HomeViewController: UIViewController {
     
+    fileprivate let router = Router()
+    
     fileprivate struct Constants {
         static let controlFlowButtonHeight: CGFloat = 48
         static let startNowButtonTitle = "Start now"
@@ -25,6 +27,8 @@ internal class HomeViewController: UIViewController {
         case Finish = "Finish now"
         case Create = "Create Activity"
     }
+    
+    var showStats: (Activity) -> () = { _ in }
     
     let transitionManager = MenuTransitionManager()
     let activityListTransitionManager = ListTransitionManager()
@@ -192,9 +196,8 @@ internal class HomeViewController: UIViewController {
     }
     
     private func showCreateNewActivity() {
-        let controller: EditActivityVC = ControllerFactory.createController()
-        controller.userProfile = profile.value
-        navigationController?.pushViewController(controller, animated: true)
+        router.route(to: .editActivity(profile: profile.value!, activity: nil),
+                     style: .push(navigationController: navigationController))
     }
 }
 
@@ -202,4 +205,14 @@ extension HomeViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+}
+
+extension HomeViewController: Instantiatable {
+    
+    typealias SetupObject = Profile
+    
+    func setup(with object: Profile) {
+        profile.value = object
+    }
+    
 }

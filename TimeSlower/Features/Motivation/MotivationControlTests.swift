@@ -19,10 +19,10 @@ class MotivationControlTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let hours = TimeCalculator().totalHours(inDays: 14600, duration: 20, busyDays: 7)
+        let hours = Estimator().totalHours(inDays: 14600, duration: 20, busyDays: 7)
         stats = LifetimeStats(withHours: NSNumber(value: hours))
         
-        let years = TimeCalculator().totalHours(inDays: 14600, duration: 120, busyDays: 7)
+        let years = Estimator().totalHours(inDays: 14600, duration: 120, busyDays: 7)
         yearStats = LifetimeStats(withHours: NSNumber(value: years))
         
         let controller: FakeControllerWithCustomViews = FakeStoryboardLoader.testViewController()

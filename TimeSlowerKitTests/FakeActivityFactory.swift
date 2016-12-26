@@ -36,7 +36,7 @@ public struct FakeActivityFactory {
         days: [Weekday] = [.first, .second, .third],
         timing: Timing = FakeActivityFactory.fakeTiming()) -> Activity {
         
-        return Activity(withLifetimeDays: 18105, name: name, type: .routine, days: days, timing: timing, notifications: false)
+        return Activity(withLifetimeDays: 18105, name: name, days: days, timing: timing, notifications: false)
     }
     
     func fakeActivity(startTime: Date) -> Activity {
@@ -77,7 +77,6 @@ public struct FakeActivityFactory {
     func fakeActivity() -> Activity {
         return Activity(withLifetimeDays: 18105,
                         name: "Morning shower",
-                        type: .routine,
                         days: [.first, .second, .third],
                         timing: FakeActivityFactory.fakeTiming(),
                         notifications: false)

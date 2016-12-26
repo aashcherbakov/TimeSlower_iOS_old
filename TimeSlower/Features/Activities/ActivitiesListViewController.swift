@@ -9,7 +9,7 @@
 import UIKit
 import TimeSlowerKit
 
-class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
+class ActivitiesList: ListOfActivitiesVCConstraints {
 
     enum TypeToDisplay: Int {
         case routines
@@ -78,7 +78,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
     }
     
     private func setupEvents() {
-        listTypeSelector.addTarget(self, action: #selector(ListOfActivitiesVC.basisDidChange(_:)), for: .valueChanged)
+        listTypeSelector.addTarget(self, action: #selector(ActivitiesList.basisDidChange(_:)), for: .valueChanged)
     }
     
     private func setupDesign() {
@@ -114,7 +114,7 @@ class ListOfActivitiesVC: ListOfActivitiesVCConstraints {
 
 
 // MARK: - Table view data source
-extension ListOfActivitiesVC: UITableViewDelegate {
+extension ActivitiesList: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -126,6 +126,12 @@ extension ListOfActivitiesVC: UITableViewDelegate {
         }
     }
 
-    
+}
 
+extension ActivitiesList: Instantiatable {
+    
+    typealias SetupObject = Profile
+    func setup(with object: Profile) {
+    }
+    
 }

@@ -8,6 +8,14 @@
 
 import Foundation
 
+public protocol Modem {
+    func dial(number: String) -> Bool
+    func disconnect() -> Bool
+    func send(message: String) -> Bool
+    func getConnectedPhoneNumber() -> String
+}
+
+
 /**
  *  Struct that describes single result for one given day in activity. Is created when activity is finished
  *  manually or automatically.
@@ -48,7 +56,7 @@ public struct Result: Persistable {
         startTime = activity.startTime(inDate: factFinish)
         finishTime = factFinish
         duration = timeMachine.minutesFromStart(startTime, toFinish: factFinish)
-        success = Result.daySuccessForTiming(timing, activityType: activity.type, startTime: startTime, finishTime: factFinish)
+        success = Result.daySuccessForTiming(timing, startTime: startTime, finishTime: factFinish)
         savedTime = Result.factSavedTimeForActivity(activity, factDuration: duration)
         stringDate = dateFormatter.string(from: factFinish)
         
@@ -98,19 +106,14 @@ public struct Result: Persistable {
      
      - returns: Double for % of achieved result
      */
-    static func daySuccessForTiming(_ timing: Timing, activityType: ActivityType, startTime: Date, finishTime: Date) -> Double {
-        let successCalculator = SuccessCalculator().successForActivityType(activityType)
+    static func daySuccessForTiming(_ timing: Timing, startTime: Date, finishTime: Date) -> Double {
         let duration = Double(timing.duration.minutes())
         let goal = timing.timeToSave
-        return successCalculator(startTime, finishTime, duration, Double(goal))
+        return SuccessCalculator().successForRoutine(start: startTime, finish: finishTime, maxDuration: duration, goal: Double(goal))
     }
     
     public static func factSavedTimeForActivity(_ activity: Activity, factDuration: Double) -> Double {
-        if activity.type == .routine {
-            return Double(activity.duration().minutes()) - factDuration
-        } else {
-            return factDuration
-        }
+        return Double(activity.duration().minutes()) - factDuration
     }
 
 }

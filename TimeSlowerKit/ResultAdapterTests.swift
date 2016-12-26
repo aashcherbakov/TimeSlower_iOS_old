@@ -49,7 +49,6 @@ class ResultAdapterTests: BaseDataStoreTest {
         return Activity(
             withLifetimeDays: 18105,
             name: "Morning shower",
-            type: .routine,
             days: [.first, .second, .third],
             timing: fakeTiming(),
             notifications: false)

@@ -286,3 +286,11 @@ extension ProfileEditingVC: UIImagePickerControllerDelegate, UINavigationControl
         dismiss(animated: true, completion: nil)
     }
 }
+
+extension ProfileEditingVC: Instantiatable {
+    typealias SetupObject = Profile?
+    
+    func setup(with object: Profile?) {
+        profile = object
+    }
+}
