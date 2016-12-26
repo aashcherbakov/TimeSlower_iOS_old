@@ -55,16 +55,20 @@ public struct Activity: Persistable {
         self.timing = timing
     }
     
+    /// Last 7 results.
+    ///
+    /// - Returns: array of ordered by finishtime results.
     public func lastWeekResults() -> [Result] {
         // TODO: find faster way to get last 7 results
-        let sortedResults = results.sorted {
-            $0.finishTime.compare($1.finishTime) == .orderedDescending
-        }
-        
+        let sortedResults = results.sorted { $0.finishTime > $1.finishTime }
         let firstSeven = Array(sortedResults.prefix(7))
         return firstSeven
     }
     
+    /// Determins if activity has a result for given date.
+    ///
+    /// - Parameter date: current date by default.
+    /// - Returns: True if there is a result for current date.
     public func isDone(forDate date: Date = Date()) -> Bool {
         let searchString = dateFormatter.string(from: date)
         let resultsForToday = results.filter { (result) -> Bool in
@@ -74,6 +78,10 @@ public struct Activity: Persistable {
         return resultsForToday.count > 0
     }
     
+    /// Determins if activity still going at given time.
+    ///
+    /// - Parameter date: current date by default.
+    /// - Returns: True if already started, not finished yet and is not done.
     public func isGoingNow(date: Date = Date()) -> Bool {
         let startsBefore = startsEarlier(then: date)
         let endsAfter = endsLater(then: date)
@@ -81,6 +89,11 @@ public struct Activity: Persistable {
         return startsBefore && endsAfter && notDoneYet
     }
     
+    /// Determins if activity is yet to be finished.
+    /// Different from -isGoingNow because activity has to be manually started in order to be finished.
+    ///
+    /// - Parameter date: current date by default.
+    /// - Returns: True if activity is manually started and ends later then provided date.
     public func isUnfinished(forDate date: Date = Date()) -> Bool {
         let started = timing.manuallyStarted != nil
         let pastDue = endsEarlier(then: date)
@@ -97,6 +110,12 @@ public struct Activity: Persistable {
         return days.contains(weekday) && !isOverdue
     }
     
+    /// Next action date for activity based on current date. It can be either finish time,
+    /// start time in current day, or if activity is done or passed due, method will return 
+    /// start time of next day activity occurs in.
+    ///
+    /// - Parameter date: current date by default.
+    /// - Returns: Date with next action time.
     public func nextActionTime(forDate date: Date = Date()) -> Date {
         if happensIn(date: date) && !isDone(forDate: date) {
             if isGoingNow(date: date) {
@@ -119,52 +138,50 @@ public struct Activity: Persistable {
         return timing.finishes(inDate: date)
     }
 
+    /// Returns activity alarm time in given date (today by default)
     public func alarmTime(inDate date: Date = Date()) -> Date {
         return timing.alarm(inDate: date)
     }
     
+    /// Convenience method to access timeToSave property of activity timing object.
     public func minutesToSave() -> Double {
         return Double(timing.timeToSave)
     }
 
+    /// Convenience method to access duration property of activity timing object.
     public func duration() -> Endurance {
         return timing.duration
     }
     
     /// Should only be used for copying object, not accessed directly
-    ///
-    /// - returns: Timing that is private property of Activity
     public func getTiming() -> Timing {
         return timing
     }
     
     /// Returns basis constructed of weekdays
-    ///
-    /// - returns: Basis instance
     public func basis() -> Basis {
         return Basis.basisFromWeekdays(days)
     }
     
-    // MARK: - Comparing
+    // MARK: - Internal functions
 
-    public func startsEarlier(then date: Date) -> Bool {
+    internal func startsEarlier(then date: Date) -> Bool {
         return startTime(inDate: date) < date || startTime(inDate: date) == date
     }
     
-    public func startsLater(then date: Date) -> Bool {
+    internal func startsLater(then date: Date) -> Bool {
         return startTime(inDate: date) > date
     }
     
-    public func endsLater(then date: Date) -> Bool {
+    internal func endsLater(then date: Date) -> Bool {
         return finishTime(inDate: date) > date
     }
     
-    public func endsEarlier(then date: Date) -> Bool {
+    internal func endsEarlier(then date: Date) -> Bool {
         return finishTime(inDate: date) < date
     }
     
-    public func startsEarlier(then activity: Activity) -> Bool {
-        let date = Date()
+    internal func startsEarlier(then activity: Activity, in date: Date = Date()) -> Bool {
         let otherStartTime = activity.startTime(inDate: date)
         let updatedStartTime = startTime(inDate: date)
         return updatedStartTime < otherStartTime
