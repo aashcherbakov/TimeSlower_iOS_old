@@ -22,25 +22,37 @@ public struct Activity: Persistable {
     public let notifications: Bool
     public let estimates: Estimates
     public let stats: Stats
-    public let timing: Timing
 
-    // MARK: - Internal properties
+    // MARK: - Mutable properties
 
     fileprivate(set) public var results: Set<Result>
+    fileprivate(set) public var timing: Timing
 
     // MARK: - Private properties
 
     private let timeMachine = TimeMachine()
+    private let dateFormatter = StaticDateFormatter.shortDateNoTimeFromatter
     
-    public func update(with newTiming: Timing) -> Activity {
-        return Activity(withEstimates: estimates,
-                        name: name,
-                        days: days,
-                        timing: newTiming, 
-                        notifications: notifications, 
-                        resourceId: resourceId, 
-                        results: results, 
-                        stats: stats)
+    /// Marks activity as manually started - assigns manuallyStarted property to 
+    /// timing object. Should be set to nil when activity is finished.
+    ///
+    /// - Parameter date: optional date.
+    public mutating func setManuallyStarted(to date: Date?) {
+        self.timing = timing.update(withManuallyStarted: date)
+    }
+    
+    /// Assigns passed Set to results property.
+    ///
+    /// - Parameter results: Set of results.
+    public mutating func update(with results: Set<Result>) {
+        self.results = results
+    }
+    
+    /// Assigns passed Timing object to timing property.
+    ///
+    /// - Parameter timing: Timing instance.
+    public mutating func update(with timing: Timing) {
+        self.timing = timing
     }
     
     public func lastWeekResults() -> [Result] {
@@ -53,12 +65,8 @@ public struct Activity: Persistable {
         return firstSeven
     }
     
-    public mutating func updateWithResults(results: Set<Result>) {
-        self.results = results
-    }
-    
     public func isDone(forDate date: Date = Date()) -> Bool {
-        let searchString = StaticDateFormatter.shortDateNoTimeFromatter.string(from: date)
+        let searchString = dateFormatter.string(from: date)
         let resultsForToday = results.filter { (result) -> Bool in
             return result.stringDate == searchString
         }
@@ -67,43 +75,40 @@ public struct Activity: Persistable {
     }
     
     public func isGoingNow(date: Date = Date()) -> Bool {
-        let startsBefore = startsEarlierThen(date: date)
-        let endsAfter = endsLaterThen(date: date)
+        let startsBefore = startsEarlier(then: date)
+        let endsAfter = endsLater(then: date)
         let notDoneYet = !isDone(forDate: date)
         return startsBefore && endsAfter && notDoneYet
     }
     
     public func isUnfinished(forDate date: Date = Date()) -> Bool {
         let started = timing.manuallyStarted != nil
-        let pastDue = endsEarlierThen(date: date)
+        let pastDue = endsEarlier(then: date)
         return started && pastDue
     }
     
+    /// Determins if activity takes place in given date.
+    ///
+    /// - Parameter date: current date by default.
+    /// - Returns: True if days array contains passed date's weekday.
+    public func happensIn(date: Date = Date()) -> Bool {
+        let weekday = Weekday.createFromDate(date)
+        let isOverdue = finishTime(inDate: date) < date
+        return days.contains(weekday) && !isOverdue
+    }
+    
     public func nextActionTime(forDate date: Date = Date()) -> Date {
-        if isDone(forDate: date) {
-            let nextDate = nextActionDay(fromDate: date)
-            return startTime(inDate: nextDate)
-        } else if isGoingNow() {
-            return finishTime()
+        if happensIn(date: date) && !isDone(forDate: date) {
+            if isGoingNow(date: date) {
+                return finishTime(inDate: date)
+            } else {
+                return startTime(inDate: date)
+            }
         } else {
-            return startTime()
+            return startTimeNextDay(from: date)
         }
     }
     
-    public func nextActionDay(fromDate date: Date = Date()) -> Date {
-        let currentDay = Weekday.createFromDate(date)
-        
-        let nextDayOptions = days.filter { (weekday) -> Bool in
-            return weekday.rawValue != currentDay.rawValue
-        }
-        
-        let nextDay = Weekday.closestDay(nextDayOptions, toDay: currentDay)
-        let daysInBetween = timeMachine.intervalFromDay(currentDay.rawValue, toDay: nextDay.rawValue)
-        let secondsInDay = 24 * 60 * 60
-        let nextActionDay = date.addingTimeInterval(daysInBetween * Double(secondsInDay))
-        return nextActionDay
-    }
-
     /// Returns activity start time in given date (today by default)
     public func startTime(inDate date: Date = Date()) -> Date {
         return timing.starts(inDate: date)
@@ -120,10 +125,6 @@ public struct Activity: Persistable {
     
     public func minutesToSave() -> Double {
         return Double(timing.timeToSave)
-    }
-    
-    public func updateTiming(withManuallyStarted started: Date?) -> Timing {
-        return timing.update(withManuallyStarted: started)
     }
 
     public func duration() -> Endurance {
@@ -146,28 +147,50 @@ public struct Activity: Persistable {
     
     // MARK: - Comparing
 
-    public func startsEarlierThen(date: Date) -> Bool {
+    public func startsEarlier(then date: Date) -> Bool {
         return startTime(inDate: date) < date || startTime(inDate: date) == date
     }
     
-    public func startsLaterThen(date: Date) -> Bool {
-        return startTime(inDate: date) > date    }
-    
-    public func endsLaterThen(date: Date) -> Bool {
-        let finishTime = startTime(inDate: date).addingTimeInterval(timing.duration.seconds())
-        return finishTime > date
+    public func startsLater(then date: Date) -> Bool {
+        return startTime(inDate: date) > date
     }
     
-    public func endsEarlierThen(date: Date) -> Bool {
-        return finishTime(inDate: date).compare(date) == .orderedAscending
+    public func endsLater(then date: Date) -> Bool {
+        return finishTime(inDate: date) > date
     }
     
-    public func startsEarlierThen(activity: Activity) -> Bool {
+    public func endsEarlier(then date: Date) -> Bool {
+        return finishTime(inDate: date) < date
+    }
+    
+    public func startsEarlier(then activity: Activity) -> Bool {
         let date = Date()
         let otherStartTime = activity.startTime(inDate: date)
         let updatedStartTime = startTime(inDate: date)
-        return updatedStartTime.compare(otherStartTime) == .orderedAscending
+        return updatedStartTime < otherStartTime
     }
+    
+    // MARK: - Private functions
+    
+    private func startTimeNextDay(from date: Date) -> Date {
+        let nextDate = nextActionDay(fromDate: date)
+        return startTime(inDate: nextDate)
+    }
+    
+    private func nextActionDay(fromDate date: Date = Date()) -> Date {
+        let currentDay = Weekday.createFromDate(date)
+        
+        let nextDayOptions = days.filter { (weekday) -> Bool in
+            return weekday.rawValue != currentDay.rawValue
+        }
+        
+        let nextDay = Weekday.closestDay(nextDayOptions, toDay: currentDay)
+        let daysInBetween = timeMachine.intervalFromDay(currentDay.rawValue, toDay: nextDay.rawValue)
+        let secondsInDay = 24 * 60 * 60
+        let nextActionDay = date.addingTimeInterval(daysInBetween * Double(secondsInDay))
+        return nextActionDay
+    }
+    
 }
 
 // MARK: - Convenience Initializers
@@ -222,6 +245,3 @@ extension Activity {
     }
 
 }
-
-
-

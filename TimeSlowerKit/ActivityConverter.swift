@@ -34,7 +34,7 @@ internal struct ActivityConverter: PersistableConverter {
             stats: stats)
         
         let results = resultsFromEntities(resultEntities: entity.results as? Set<ResultEntity>, activity: activity)
-        activity.updateWithResults(results: results)
+        activity.update(with: results)
         
         return activity
     }

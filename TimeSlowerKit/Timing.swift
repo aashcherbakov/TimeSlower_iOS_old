@@ -40,8 +40,8 @@ public struct Timing {
     }
     
     public func starts(inDate date: Date = Date()) -> Date {
-        let starts = manuallyStarted ?? startTime
-        return timeMachine.updatedTime(starts, forDate: date)
+        let updatedStartTime = timeMachine.updatedTime(startTime, forDate: date)
+        return manuallyStarted ?? updatedStartTime
     }
 
     public func finishes(inDate date: Date = Date()) -> Date {
