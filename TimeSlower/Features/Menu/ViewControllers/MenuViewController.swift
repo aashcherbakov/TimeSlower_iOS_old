@@ -1,5 +1,5 @@
 //
-//  MenuVC.swift
+//  MenuViewController.swift
 //  TimeSlower2
 //
 //  Created by Oleksandr Shcherbakov on 7/28/15.
@@ -10,7 +10,7 @@ import UIKit
 import TimeSlowerKit
 import MessageUI
 
-class MenuVC: UIViewController {
+class MenuViewController: UIViewController {
     
     fileprivate enum MenuOptions: Int {
         case profile = 1
@@ -171,7 +171,7 @@ class MenuVC: UIViewController {
     }
 }
 
-extension MenuVC: Instantiatable {
+extension MenuViewController: Instantiatable {
     
     typealias SetupObject = Profile
     

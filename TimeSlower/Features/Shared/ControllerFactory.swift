@@ -73,7 +73,7 @@ struct ControllerFactory {
     
     private static func storyboardId<T>(forType type: T) -> String? {
         switch type {
-        case is MenuVC.Type: return Storyboard.menu
+        case is MenuViewController.Type: return Storyboard.menu
         case is EditActivityVC.Type: return Storyboard.activities
         case is ActivitiesList.Type: return Storyboard.activities
         case is ProfileEditingVC.Type: return Storyboard.profile

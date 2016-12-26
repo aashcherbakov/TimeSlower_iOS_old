@@ -12,7 +12,7 @@ import UserNotifications
 
 internal struct FinishNotification: LocalNotification {
     
-    let type = NotificationType.Finish
+    let type = NotificationType.finish
     let activity: Activity
     let repeats = false
     

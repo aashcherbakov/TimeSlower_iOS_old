@@ -86,12 +86,12 @@ internal class NotificationScheduler {
     private func identifiersForActivity(activity: Activity, notificationType: NotificationType) -> [String] {
         var identifiers = [String]()
         switch notificationType {
-        case .Start:
+        case .start:
             for weekday in activity.days {
                 let identifier = "\(activity.resourceId)+\(weekday.shortName)"
                 identifiers.append(identifier)
             }
-        case .Finish:
+        case .finish:
             let finishIdentifer = "\(activity.resourceId)+finish"
             identifiers.append(finishIdentifer)
         }

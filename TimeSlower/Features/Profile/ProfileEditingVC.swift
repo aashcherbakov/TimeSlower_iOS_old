@@ -39,15 +39,15 @@ internal final class ProfileEditingVC: UIViewController {
     }
     
     enum Row: Int {
-        case Name
-        case Birthday
-        case Country
+        case name
+        case birthday
+        case country
         
         func cellHeight(_ expanded: Bool) -> CGFloat {
             switch self {
-            case .Name:
+            case .name:
                 return Constants.defaultCellHeight 
-            case .Birthday, .Country:
+            case .birthday, .country:
                 return expanded ? Constants.expandedCellHeight : Constants.defaultCellHeight
             }
         }

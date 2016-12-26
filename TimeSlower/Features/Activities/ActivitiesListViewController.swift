@@ -9,13 +9,7 @@
 import UIKit
 import TimeSlowerKit
 
-class ActivitiesList: ListOfActivitiesVCConstraints {
-
-    enum TypeToDisplay: Int {
-        case routines
-        case goals
-        case bothTypes
-    }
+internal final class ActivitiesList: ListOfActivitiesVCConstraints {
     
     enum BasisToDisplay: Int {
         case today
@@ -27,7 +21,6 @@ class ActivitiesList: ListOfActivitiesVCConstraints {
     @IBOutlet weak var tableView: UITableView!
     
     var presentedModally = false
-    var typeToDisplay: TypeToDisplay = .bothTypes
     var basisToDisplay: BasisToDisplay = .today
     
     fileprivate var dataSource: ListOfActivitiesDataSource!
@@ -58,15 +51,15 @@ class ActivitiesList: ListOfActivitiesVCConstraints {
         }
     }
     
-    @IBAction func onBackButton(_ sender: UIButton) {
+    @IBAction private func onBackButton(_ sender: UIButton) {
         dismissViewController()
     }
     
-    @IBAction func onEditButton(_ sender: UIButton) {
+    @IBAction private func onEditButton(_ sender: UIButton) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
     
-    @IBAction func onCreateActivityButton(_ sender: AnyObject) {
+    @IBAction private func onCreateActivityButton(_ sender: AnyObject) {
         showEditActivityVC()
     }
 
@@ -131,7 +124,6 @@ extension ActivitiesList: UITableViewDelegate {
 extension ActivitiesList: Instantiatable {
     
     typealias SetupObject = Profile
-    func setup(with object: Profile) {
-    }
+    func setup(with object: Profile) { }
     
 }

@@ -24,15 +24,15 @@ let kStartCategoryId = "startCategory"
 
 
 internal enum NotificationCategory: String {
-    case Finish = "finishCategory"
-    case Start = "startCategory"
+    case finish = "finishCategory"
+    case start = "startCategory"
     
     init(withNotificationType type: NotificationType) {
         switch type {
-        case .Start:
-            self = .Start
+        case .start:
+            self = .start
         default:
-            self = .Finish
+            self = .finish
         }
     }
 }

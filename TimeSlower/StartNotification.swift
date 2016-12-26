@@ -12,7 +12,7 @@ import UserNotifications
 
 internal struct StartNotification: LocalNotification {
     
-    let type = NotificationType.Start
+    let type = NotificationType.start
     let activity: Activity
     let repeats = true
     let weekday: Weekday

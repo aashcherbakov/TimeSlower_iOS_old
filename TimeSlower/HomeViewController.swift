@@ -23,9 +23,9 @@ internal class HomeViewController: UIViewController {
     }
     
     private enum ActionButtonState: String {
-        case Start = "Start now"
-        case Finish = "Finish now"
-        case Create = "Create Activity"
+        case start = "Start now"
+        case finish = "Finish now"
+        case create = "Create Activity"
     }
     
     var showStats: (Activity) -> () = { _ in }
@@ -73,9 +73,9 @@ internal class HomeViewController: UIViewController {
             return
         }
         switch buttonState {
-        case .Create: showCreateNewActivity()
-        case .Start: startActivity(closestActivity.value)
-        case .Finish: finishActivity(closestActivity.value)
+        case .create: showCreateNewActivity()
+        case .start: startActivity(closestActivity.value)
+        case .finish: finishActivity(closestActivity.value)
         }
     }
     
@@ -155,7 +155,7 @@ internal class HomeViewController: UIViewController {
         guard let activity = activity else { return }
         
         let startedActivity = scheduler.start(activity: activity)
-        notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .Finish)
+        notificationScheduler.scheduleForActivity(activity: startedActivity, notificationType: .finish)
         closestActivity.value = startedActivity
         setupClosestActvityDisplay()
         setupControlFlowButton()
@@ -165,7 +165,7 @@ internal class HomeViewController: UIViewController {
     private func finishActivity(_ activity: Activity?) {
         guard let activity = activity else { return }
         let finishedActivity = scheduler.finish(activity: activity)
-        notificationScheduler.cancelNotification(forActivity: finishedActivity, notificationType: .Finish)
+        notificationScheduler.cancelNotification(forActivity: finishedActivity, notificationType: .finish)
         showStatsControllerForActivity(finishedActivity)
     }
 
@@ -182,7 +182,7 @@ internal class HomeViewController: UIViewController {
     // MARK: - Private Function - Navigation
     
     private func showMenue() {
-        let menuVC: MenuVC = ControllerFactory.createController()
+        let menuVC: MenuViewController = ControllerFactory.createController()
         menuVC.transitioningDelegate = transitionManager
         menuVC.profile = profile.value
         transitionManager.menuViewController = menuVC

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--MenuVC-->
+        <!--Menu View Controller-->
         <scene sceneID="zUV-uN-0cy">
             <objects>
-                <viewController storyboardIdentifier="MenuVC" id="7iY-BD-XE2" customClass="MenuVC" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="7iY-BD-XE2" customClass="MenuViewController" customModule="TimeSlower" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g1x-Hl-Yt0"/>
                         <viewControllerLayoutGuide type="bottom" id="u9K-nZ-21v"/>
@@ -25,8 +28,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rS0-Fn-Zjv" userLabel="avatarBackground">
+                                <rect key="frame" x="74" y="64" width="106" height="106"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ud1-Va-Hj1"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ud1-Va-Hj1">
+                                        <rect key="frame" x="4" y="4" width="98" height="98"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -39,7 +45,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OLEKSANDR IBN SHCHERBAKOV JUNIOR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFO-Xm-b8M">
-                                <frame key="frameInset" minX="45" minY="178" width="166" height="43"/>
+                                <rect key="frame" x="45" y="178" width="166" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="222" id="2ge-tB-RrP"/>
                                 </constraints>
@@ -48,6 +54,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="United States" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKE-WX-kx4">
+                                <rect key="frame" x="93.5" y="221" width="67.5" height="15.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="222" id="wgq-L1-Ddt"/>
                                 </constraints>
@@ -56,10 +63,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="countryIcon" translatesAutoresizingMaskIntoConstraints="NO" id="1qa-cd-QQE">
-                                <frame key="frameInset" minX="82" minY="223" width="9" height="12"/>
+                                <rect key="frame" x="82" y="223" width="9" height="12"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="© 1lastDay, LLC.       All rights reserved" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liS-bO-JTd">
-                                <frame key="frameInset" minX="67" minY="542" width="120" height="38"/>
+                                <rect key="frame" x="67" y="542" width="120" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="ybc-r6-34H"/>
                                 </constraints>
@@ -68,11 +75,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etA-1m-HWJ">
-                                <frame key="frameInset" minX="44" minY="245" width="200" height="289"/>
+                                <rect key="frame" x="44" y="245" width="200" height="289"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38y-fU-THb">
+                                        <rect key="frame" x="0.0" y="22" width="200" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VwM-RP-mNK">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="  PROFILE" image="profileIcon">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,8 +102,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXc-BK-V9i">
+                                        <rect key="frame" x="0.0" y="63" width="200" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqn-b0-ebY">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="  CREATE ACTIVITY" image="addActivityIcon">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -114,8 +125,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fe0-IW-Rxa">
+                                        <rect key="frame" x="0.0" y="104" width="200" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMo-bs-4T5" userLabel="ALL ACTIVITIES">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="  ALL ACTIVITIES" image="allActivitiesIcon">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,8 +148,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEE-UK-LUm">
+                                        <rect key="frame" x="0.0" y="145" width="200" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sal-43-mlk">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="  RATE APP" image="rateIcon">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -156,8 +171,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PtG-Hc-fpV">
+                                        <rect key="frame" x="0.0" y="186" width="200" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fi-ra-mWR">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="  FEEDBACK" image="feedbackIcon">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -177,18 +194,22 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Db3-BI-KAi" userLabel="separator1">
+                                        <rect key="frame" x="0.0" y="62" width="200" height="1"/>
                                         <color key="backgroundColor" red="0.64705882349999999" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="4Mm-Q7-WAL"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEb-SO-BZZ" userLabel="separator2">
+                                        <rect key="frame" x="0.0" y="103" width="200" height="1"/>
                                         <color key="backgroundColor" red="0.64705882349999999" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYe-Ov-roY" userLabel="separator3">
+                                        <rect key="frame" x="0.0" y="144" width="200" height="1"/>
                                         <color key="backgroundColor" red="0.64705882349999999" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmt-YG-Xi8" userLabel="separator4">
+                                        <rect key="frame" x="0.0" y="185" width="200" height="1"/>
                                         <color key="backgroundColor" red="0.64705882349999999" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
@@ -232,7 +253,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3c-I1-2yz">
-                                <frame key="frameInset" minX="500" minY="20" width="100" height="580"/>
+                                <rect key="frame" x="500" y="20" width="100" height="580"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3qZ-MW-Qwn"/>
                                     <constraint firstAttribute="height" constant="80" id="k0m-eS-91y"/>

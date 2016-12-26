@@ -144,15 +144,15 @@ internal class EditActivityVC: UIViewController {
     
     private func scheduleStartNotification(forActivity activity: Activity) {
         let notificationScheduler = NotificationScheduler()
-        notificationScheduler.cancelNotification(forActivity: activity, notificationType: .Start)
+        notificationScheduler.cancelNotification(forActivity: activity, notificationType: .start)
         if activity.notifications {
-            notificationScheduler.scheduleForActivity(activity: activity, notificationType: .Start)
+            notificationScheduler.scheduleForActivity(activity: activity, notificationType: .start)
         }
     }
     
     private func createActivityAndMoveToStats() {
         if let activity = createActivity() {
-            NotificationScheduler().scheduleForActivity(activity: activity, notificationType: .Start)
+            NotificationScheduler().scheduleForActivity(activity: activity, notificationType: .start)
             showMotivation(forActivity: activity)
         } else {
             // present alert with missing data

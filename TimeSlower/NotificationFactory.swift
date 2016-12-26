@@ -11,8 +11,8 @@ import UserNotifications
 import TimeSlowerKit
 
 internal enum NotificationType {
-    case Start
-    case Finish
+    case start
+    case finish
 }
 
 internal struct NotificationFactory {
@@ -29,9 +29,9 @@ internal struct NotificationFactory {
     
     private func notifications(ofType type: NotificationType, forActivity activity: Activity) -> [LocalNotification] {
         switch type {
-        case .Start:
+        case .start:
             return startNotifications(forActivity: activity)
-        case .Finish:
+        case .finish:
             return [FinishNotification(withActivity: activity)]
         }
     }

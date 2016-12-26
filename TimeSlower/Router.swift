@@ -54,8 +54,8 @@ internal struct Router {
         return controller
     }
     
-    private func menu(with profile: Profile) -> MenuVC {
-        let controller: MenuVC = ControllerFactory.createController()
+    private func menu(with profile: Profile) -> MenuViewController {
+        let controller: MenuViewController = ControllerFactory.createController()
         controller.setup(with: profile)
         return controller
     }

@@ -81,7 +81,7 @@
 		F009AF1A1BDADE19007F38A9 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */; };
 		F009AF1B1BDADE19007F38A9 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */; };
 		F009AF1C1BDADE19007F38A9 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */; };
-		F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuVC.swift */; };
+		F009AF221BDAE39F007F38A9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF211BDAE39F007F38A9 /* MenuViewController.swift */; };
 		F009AF2F1BDAE61B007F38A9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */; };
 		F009AF311BDB0D60007F38A9 /* Float+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */; };
 		F009AF331BDB0E1D007F38A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009AF321BDB0E1D007F38A9 /* Constants.swift */; };
@@ -454,7 +454,7 @@
 		F009AF151BDADE19007F38A9 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Light.ttf"; path = "Fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		F009AF161BDADE19007F38A9 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Regular.ttf"; path = "Fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		F009AF171BDADE19007F38A9 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Semibold.ttf"; path = "Fonts/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
-		F009AF211BDAE39F007F38A9 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuVC.swift; path = Features/Menu/ViewControllers/MenuVC.swift; sourceTree = "<group>"; };
+		F009AF211BDAE39F007F38A9 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = Features/Menu/ViewControllers/MenuViewController.swift; sourceTree = "<group>"; };
 		F009AF2E1BDAE61B007F38A9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F009AF301BDB0D60007F38A9 /* Float+Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Double+Extension.swift"; sourceTree = "<group>"; };
 		F009AF321BDB0E1D007F38A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1029,7 +1029,7 @@
 			isa = PBXGroup;
 			children = (
 				F0F20F2C1CCC0FA600F7DAA7 /* Menu.storyboard */,
-				F009AF211BDAE39F007F38A9 /* MenuVC.swift */,
+				F009AF211BDAE39F007F38A9 /* MenuViewController.swift */,
 				F08B51C21C838FD4008C6E8B /* MenuTransitionManager.swift */,
 			);
 			name = Menu;
@@ -2063,7 +2063,7 @@
 				F0D71F3C1C7A234B00B8473C /* EditActivityStartTimeView.swift in Sources */,
 				F0DB532C1DBD8DB200A48F01 /* NotificationResponder.swift in Sources */,
 				F01B186B1DC6A32600A4CC44 /* Navigator.swift in Sources */,
-				F009AF221BDAE39F007F38A9 /* MenuVC.swift in Sources */,
+				F009AF221BDAE39F007F38A9 /* MenuViewController.swift in Sources */,
 				F009AF471BDB1061007F38A9 /* ActivityStatsVCConstraints.swift in Sources */,
 				F0EA8CBD1C712E9500B11252 /* Float+extension.swift in Sources */,
 				F05425A81C6FE95D001C81D0 /* UITableView+ReusableCell.swift in Sources */,
